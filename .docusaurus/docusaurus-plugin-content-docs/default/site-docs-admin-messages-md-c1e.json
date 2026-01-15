@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/messages.md",
   "sourceDirName": "admin",
   "slug": "/admin/messages",
-  "permalink": "/mhm-rentiva/docs/admin/messages",
+  "permalink": "/mhm-rentiva-docs/docs/admin/messages",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/messages.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "VehicleColumns (List Table) Notları",
-    "permalink": "/mhm-rentiva/docs/admin/list-table-overview"
+    "permalink": "/mhm-rentiva-docs/docs/admin/list-table-overview"
   },
   "next": {
     "title": "Reports Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/reports"
+    "permalink": "/mhm-rentiva-docs/docs/admin/reports"
   }
 }

@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/license.md",
   "sourceDirName": "admin",
   "slug": "/admin/license",
-  "permalink": "/mhm-rentiva/docs/admin/license",
+  "permalink": "/mhm-rentiva-docs/docs/admin/license",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/license.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Export Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/export"
+    "permalink": "/mhm-rentiva-docs/docs/admin/export"
   },
   "next": {
     "title": "VehicleColumns (List Table) Notları",
-    "permalink": "/mhm-rentiva/docs/admin/list-table-overview"
+    "permalink": "/mhm-rentiva-docs/docs/admin/list-table-overview"
   }
 }

@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/README.md",
   "sourceDirName": "admin",
   "slug": "/admin/",
-  "permalink": "/mhm-rentiva/docs/admin/",
+  "permalink": "/mhm-rentiva-docs/docs/admin/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/README.md",
@@ -15,6 +15,6 @@
   "sidebar": "tutorialSidebar",
   "next": {
     "title": "Additional Services Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/additional-services"
+    "permalink": "/mhm-rentiva-docs/docs/admin/additional-services"
   }
 }

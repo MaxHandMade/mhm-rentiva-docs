@@ -1,5 +1,5 @@
 {
-  "permalink": "/mhm-rentiva/blog/mdx-blog-post",
+  "permalink": "/mhm-rentiva-docs/blog/mdx-blog-post",
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2021-08-01-mdx-blog-post.mdx",
   "source": "@site/blog/2021-08-01-mdx-blog-post.mdx",
   "title": "MDX Blog Post",
@@ -9,7 +9,7 @@
     {
       "inline": false,
       "label": "Docusaurus",
-      "permalink": "/mhm-rentiva/blog/tags/docusaurus",
+      "permalink": "/mhm-rentiva-docs/blog/tags/docusaurus",
       "description": "Docusaurus tag description"
     }
   ],
@@ -21,7 +21,7 @@
       "title": "Docusaurus maintainer",
       "url": "https://sebastienlorber.com",
       "page": {
-        "permalink": "/mhm-rentiva/blog/authors/all-sebastien-lorber-articles"
+        "permalink": "/mhm-rentiva-docs/blog/authors/all-sebastien-lorber-articles"
       },
       "socials": {
         "x": "https://x.com/sebastienlorber",
@@ -46,10 +46,10 @@
   "unlisted": false,
   "prevItem": {
     "title": "Welcome",
-    "permalink": "/mhm-rentiva/blog/welcome"
+    "permalink": "/mhm-rentiva-docs/blog/welcome"
   },
   "nextItem": {
     "title": "Long Blog Post",
-    "permalink": "/mhm-rentiva/blog/long-blog-post"
+    "permalink": "/mhm-rentiva-docs/blog/long-blog-post"
   }
 }

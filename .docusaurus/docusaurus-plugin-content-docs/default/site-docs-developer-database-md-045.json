@@ -5,7 +5,7 @@
   "source": "@site/docs/developer/database.md",
   "sourceDirName": "developer",
   "slug": "/developer/database",
-  "permalink": "/mhm-rentiva/docs/developer/database",
+  "permalink": "/mhm-rentiva-docs/docs/developer/database",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/developer/database.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Payment Configuration",
-    "permalink": "/mhm-rentiva/docs/configuration/payments"
+    "permalink": "/mhm-rentiva-docs/docs/configuration/payments"
   },
   "next": {
     "title": "REST API Development Guide",
-    "permalink": "/mhm-rentiva/docs/developer/rest-api"
+    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api"
   }
 }

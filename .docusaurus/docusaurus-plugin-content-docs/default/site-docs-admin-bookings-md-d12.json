@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/bookings.md",
   "sourceDirName": "admin",
   "slug": "/admin/bookings",
-  "permalink": "/mhm-rentiva/docs/admin/bookings",
+  "permalink": "/mhm-rentiva-docs/docs/admin/bookings",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/bookings.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Additional Services Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/additional-services"
+    "permalink": "/mhm-rentiva-docs/docs/admin/additional-services"
   },
   "next": {
     "title": "Core Utilities ve Yardımcı Sayfalar",
-    "permalink": "/mhm-rentiva/docs/admin/core-utilities"
+    "permalink": "/mhm-rentiva-docs/docs/admin/core-utilities"
   }
 }

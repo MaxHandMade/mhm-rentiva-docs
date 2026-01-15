@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/list-table-overview.md",
   "sourceDirName": "admin",
   "slug": "/admin/list-table-overview",
-  "permalink": "/mhm-rentiva/docs/admin/list-table-overview",
+  "permalink": "/mhm-rentiva-docs/docs/admin/list-table-overview",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/list-table-overview.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "License Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/license"
+    "permalink": "/mhm-rentiva-docs/docs/admin/license"
   },
   "next": {
     "title": "Messages Sayfası",
-    "permalink": "/mhm-rentiva/docs/admin/messages"
+    "permalink": "/mhm-rentiva-docs/docs/admin/messages"
   }
 }

@@ -5,7 +5,7 @@
   "source": "@site/docs/usage/post-types.md",
   "sourceDirName": "usage",
   "slug": "/usage/post-types",
-  "permalink": "/mhm-rentiva/docs/usage/post-types",
+  "permalink": "/mhm-rentiva-docs/docs/usage/post-types",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/usage/post-types.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Troubleshooting",
-    "permalink": "/mhm-rentiva/docs/troubleshooting/"
+    "permalink": "/mhm-rentiva-docs/docs/troubleshooting/"
   },
   "next": {
     "title": "Shortcodes (Kısa Kodlar)",
-    "permalink": "/mhm-rentiva/docs/usage/shortcodes"
+    "permalink": "/mhm-rentiva-docs/docs/usage/shortcodes"
   }
 }

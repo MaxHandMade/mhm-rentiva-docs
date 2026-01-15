@@ -1,5 +1,5 @@
 {
-  "permalink": "/mhm-rentiva/blog/welcome",
+  "permalink": "/mhm-rentiva-docs/blog/welcome",
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2021-08-26-welcome/index.md",
   "source": "@site/blog/2021-08-26-welcome/index.md",
   "title": "Welcome",
@@ -9,19 +9,19 @@
     {
       "inline": false,
       "label": "Facebook",
-      "permalink": "/mhm-rentiva/blog/tags/facebook",
+      "permalink": "/mhm-rentiva-docs/blog/tags/facebook",
       "description": "Facebook tag description"
     },
     {
       "inline": false,
       "label": "Hello",
-      "permalink": "/mhm-rentiva/blog/tags/hello",
+      "permalink": "/mhm-rentiva-docs/blog/tags/hello",
       "description": "Hello tag description"
     },
     {
       "inline": false,
       "label": "Docusaurus",
-      "permalink": "/mhm-rentiva/blog/tags/docusaurus",
+      "permalink": "/mhm-rentiva-docs/blog/tags/docusaurus",
       "description": "Docusaurus tag description"
     }
   ],
@@ -33,7 +33,7 @@
       "title": "Docusaurus maintainer",
       "url": "https://sebastienlorber.com",
       "page": {
-        "permalink": "/mhm-rentiva/blog/authors/all-sebastien-lorber-articles"
+        "permalink": "/mhm-rentiva-docs/blog/authors/all-sebastien-lorber-articles"
       },
       "socials": {
         "x": "https://x.com/sebastienlorber",
@@ -49,7 +49,7 @@
       "title": "Ex-Meta Staff Engineer, Co-founder GreatFrontEnd",
       "url": "https://linkedin.com/in/yangshun",
       "page": {
-        "permalink": "/mhm-rentiva/blog/authors/yangshun"
+        "permalink": "/mhm-rentiva-docs/blog/authors/yangshun"
       },
       "socials": {
         "x": "https://x.com/yangshunz",
@@ -77,6 +77,6 @@
   "unlisted": false,
   "nextItem": {
     "title": "MDX Blog Post",
-    "permalink": "/mhm-rentiva/blog/mdx-blog-post"
+    "permalink": "/mhm-rentiva-docs/blog/mdx-blog-post"
   }
 }
