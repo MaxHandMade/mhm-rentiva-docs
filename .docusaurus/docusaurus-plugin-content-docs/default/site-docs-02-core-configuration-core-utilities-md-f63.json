@@ -1,0 +1,24 @@
+{
+  "id": "core-configuration/core-utilities",
+  "title": "Core Utilities ve Yardımcı Sayfalar",
+  "description": "Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa ekler. Bu sayfa, ilgili menülere nereden ulaşacağınızı ve ne işe yaradıklarını özetler.",
+  "source": "@site/docs/02-core-configuration/core-utilities.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/core-utilities",
+  "permalink": "/mhm-rentiva-docs/docs/core-configuration/core-utilities",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/core-utilities.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Kurulum Sihirbazı (Setup Wizard)",
+    "permalink": "/mhm-rentiva-docs/docs/getting-started/setup-wizard"
+  },
+  "next": {
+    "title": "Email Templates",
+    "permalink": "/mhm-rentiva-docs/docs/core-configuration/emails"
+  }
+}

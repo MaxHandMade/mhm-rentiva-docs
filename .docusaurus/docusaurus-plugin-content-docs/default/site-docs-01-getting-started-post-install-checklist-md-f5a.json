@@ -1,0 +1,24 @@
+{
+  "id": "getting-started/post-install-checklist",
+  "title": "Kurulum Sonrası Kontrol Listesi",
+  "description": "Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işaretleyin. Bu liste, canlıya çıkmadan önce temel fonksiyonların çalıştığını garanti altına alır.",
+  "source": "@site/docs/01-getting-started/post-install-checklist.md",
+  "sourceDirName": "01-getting-started",
+  "slug": "/getting-started/post-install-checklist",
+  "permalink": "/mhm-rentiva-docs/docs/getting-started/post-install-checklist",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/01-getting-started/post-install-checklist.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Kurulum ve İlk Ayarlar Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/getting-started/installation"
+  },
+  "next": {
+    "title": "Kurulum Sihirbazı (Setup Wizard)",
+    "permalink": "/mhm-rentiva-docs/docs/getting-started/setup-wizard"
+  }
+}

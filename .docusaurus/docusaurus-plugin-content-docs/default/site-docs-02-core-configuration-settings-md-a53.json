@@ -1,0 +1,24 @@
+{
+  "id": "core-configuration/settings",
+  "title": "Ayarlar (Settings)",
+  "description": "MHM Rentiva, eklentinin davranışını özelleştirmeniz için kapsamlı bir ayar paneli sunar. Ayarlara MHM Rentiva > Settings menüsünden ulaşabilirsiniz.",
+  "source": "@site/docs/02-core-configuration/settings.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/settings",
+  "permalink": "/mhm-rentiva-docs/docs/core-configuration/settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/settings.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Payment Configuration",
+    "permalink": "/mhm-rentiva-docs/docs/core-configuration/payments"
+  },
+  "next": {
+    "title": "Vehicle Settings Sayfası",
+    "permalink": "/mhm-rentiva-docs/docs/core-configuration/vehicle-settings"
+  }
+}

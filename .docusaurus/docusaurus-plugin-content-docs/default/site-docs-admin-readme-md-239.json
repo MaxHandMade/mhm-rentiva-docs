@@ -13,8 +13,8 @@
   "version": "current",
   "frontMatter": {},
   "sidebar": "tutorialSidebar",
-  "next": {
-    "title": "Additional Services Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/admin/additional-services"
+  "previous": {
+    "title": "Troubleshooting",
+    "permalink": "/mhm-rentiva-docs/docs/faq/"
   }
 }
