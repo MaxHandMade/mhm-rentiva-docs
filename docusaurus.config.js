@@ -93,7 +93,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/blog', label: 'Sürüm Notları', position: 'left' },
           {
             href: 'https://github.com/MaxHandMade/mhm-rentiva',
             label: 'GitHub',
