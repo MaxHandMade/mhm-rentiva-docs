@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog</id>
+    <title>MHM Rentiva Documentation Blog</title>
+    <updated>2026-01-15T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog"/>
+    <subtitle>MHM Rentiva Documentation Blog</subtitle>
+    <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/en/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[v4.5.5 Yayında! 🚀]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released"/>
+        <updated>2026-01-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.5.5 sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.5.5</strong> sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkanlar">🌟 Öne Çıkanlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released#-%C3%B6ne-%C3%A7%C4%B1kanlar" class="hash-link" aria-label="Direct link to 🌟 Öne Çıkanlar" title="Direct link to 🌟 Öne Çıkanlar" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Güvenlik &amp; Mimari:</strong> Plugin kaynak kodları artık Private bir repoda korunurken, dokümantasyon (bu site) Public bir repoda herkesin erişimine açık hale getirildi.</li>
+<li class=""><strong>Performans:</strong> Raporlama modülündeki SQL sorguları, <code>DATE()</code> fonksiyonu kaldırılarak indeks kullanımına uygun hale getirildi. Artık çok daha hızlı çalışıyor.</li>
+<li class=""><strong>Mobil Uyumluluk:</strong> Araç detay sayfaları mobilde artık taşma yapmıyor, butonlar ve görseller tam uyumlu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-düzeltmeler">🛠️ Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released#%EF%B8%8F-d%C3%BCzeltmeler" class="hash-link" aria-label="Direct link to 🛠️ Düzeltmeler" title="Direct link to 🛠️ Düzeltmeler" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Fixed:</strong> <code>Plugin.php</code> içindeki mükerrer kodlar temizlendi.</li>
+<li class=""><strong>Fixed:</strong> <code>ReportRepository</code> sınıfındaki yavaş sorgular optimize edildi.</li>
+<li class=""><strong>Fixed:</strong> Araç kıyaslama sayfasındaki hizalama sorunları giderildi.</li>
+<li class=""><strong>Fixed:</strong> "Hizmete Kapalı" (Out of Use) etiketi artık varyasyonlu ürünlerde de doğru çalışıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yükseltme">📦 Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released#-y%C3%BCkseltme" class="hash-link" aria-label="Direct link to 📦 Yükseltme" title="Direct link to 📦 Yükseltme" translate="no">​</a></h2>
+<p>WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun yaşarsanız lütfen GitHub üzerinden veya destek sayfamızdan bize ulaşın.</p>
+<p>Keyifli kiralamalar! 🚗💨</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="v4.5.5" term="v4.5.5"/>
+    </entry>
+</feed>
