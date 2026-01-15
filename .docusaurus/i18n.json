@@ -1,20 +1,31 @@
 {
-  "defaultLocale": "en",
+  "defaultLocale": "tr",
   "locales": [
+    "tr",
     "en"
   ],
   "path": "i18n",
-  "currentLocale": "en",
+  "currentLocale": "tr",
   "localeConfigs": {
+    "tr": {
+      "label": "Türkçe",
+      "direction": "ltr",
+      "htmlLang": "tr",
+      "calendar": "gregory",
+      "path": "tr",
+      "translate": false,
+      "url": "https://MaxHandMade.github.io",
+      "baseUrl": "/mhm-rentiva-docs/"
+    },
     "en": {
       "label": "English",
       "direction": "ltr",
       "htmlLang": "en",
       "calendar": "gregory",
       "path": "en",
-      "translate": false,
+      "translate": true,
       "url": "https://MaxHandMade.github.io",
-      "baseUrl": "/mhm-rentiva-docs/"
+      "baseUrl": "/mhm-rentiva-docs/en/"
     }
   }
 }

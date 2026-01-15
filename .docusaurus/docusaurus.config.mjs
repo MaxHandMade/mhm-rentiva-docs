@@ -34,12 +34,20 @@ export default {
   "projectName": "mhm-rentiva-docs",
   "onBrokenLinks": "throw",
   "i18n": {
-    "defaultLocale": "en",
+    "defaultLocale": "tr",
     "locales": [
+      "tr",
       "en"
     ],
-    "path": "i18n",
-    "localeConfigs": {}
+    "localeConfigs": {
+      "tr": {
+        "label": "Türkçe"
+      },
+      "en": {
+        "label": "English"
+      }
+    },
+    "path": "i18n"
   },
   "presets": [
     [
@@ -88,6 +96,12 @@ export default {
           "to": "/blog",
           "label": "Sürüm Notları",
           "position": "left"
+        },
+        {
+          "type": "localeDropdown",
+          "position": "right",
+          "dropdownItemsBefore": [],
+          "dropdownItemsAfter": []
         },
         {
           "href": "https://github.com/MaxHandMade/mhm-rentiva",

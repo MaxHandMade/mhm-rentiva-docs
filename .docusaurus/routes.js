@@ -3,6 +3,41 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
+    path: '/mhm-rentiva-docs/__docusaurus/debug',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug', 'd55'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/config',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/config', '326'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/content',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/content', '3d1'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/globalData',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/globalData', '339'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/metadata',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/metadata', '87a'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/registry',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/registry', 'cf4'),
+    exact: true
+  },
+  {
+    path: '/mhm-rentiva-docs/__docusaurus/debug/routes',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/routes', '241'),
+    exact: true
+  },
+  {
     path: '/mhm-rentiva-docs/blog',
     component: ComponentCreator('/mhm-rentiva-docs/blog', 'd16'),
     exact: true

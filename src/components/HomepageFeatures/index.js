@@ -2,35 +2,37 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+import Translate from '@docusaurus/Translate';
+
 const FeatureList = [
   {
-    title: 'Filo Yönetimi',
+    title: <Translate>Filo Yönetimi</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
-      <>
+      <Translate>
         Araçlarınızı detaylı özellik setleri, bakım takvimi ve fiyatlandırma
         kuralları ile tek bir merkezden yönetin.
-      </>
+      </Translate>
     ),
   },
   {
-    title: 'Güçlü Rezervasyon Altyapısı',
+    title: <Translate>Güçlü Rezervasyon Altyapısı</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
-      <>
+      <Translate>
         Esnek rezervasyon formları, Stripe/PayPal/PayTR entegrasyonları ve
         otomatik bildirim sistemi ile işinizi kolaylaştırın.
-      </>
+      </Translate>
     ),
   },
   {
-    title: 'Geliştirici Dostu',
+    title: <Translate>Geliştirici Dostu</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
-      <>
+      <Translate>
         Genişletilebilir mimari, REST API desteği ve zengin hook/filter
         altyapısı ile projenize özelleştirin.
-      </>
+      </Translate>
     ),
   },
 ];
