@@ -1,0 +1,24 @@
+{
+  "id": "admin/export",
+  "title": "Export Sayfası",
+  "description": "MHM Rentiva > Export, sistemdeki verileri dışa aktarmak için kullanılan araçtır. Rezervasyon, araç, müşteri, log gibi verileri CSV, JSON ve desteklenen diğer formatlarda indirebilirsiniz.",
+  "source": "@site/docs/admin/export.md",
+  "sourceDirName": "admin",
+  "slug": "/admin/export",
+  "permalink": "/mhm-rentiva/docs/admin/export",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/export.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Customers Sayfası",
+    "permalink": "/mhm-rentiva/docs/admin/customers"
+  },
+  "next": {
+    "title": "License Sayfası",
+    "permalink": "/mhm-rentiva/docs/admin/license"
+  }
+}

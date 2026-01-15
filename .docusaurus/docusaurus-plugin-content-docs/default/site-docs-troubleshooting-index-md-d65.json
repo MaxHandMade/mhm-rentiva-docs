@@ -1,0 +1,24 @@
+{
+  "id": "troubleshooting/index",
+  "title": "Troubleshooting",
+  "description": "Common issues and solutions (To be prepared).",
+  "source": "@site/docs/troubleshooting/index.md",
+  "sourceDirName": "troubleshooting",
+  "slug": "/troubleshooting/",
+  "permalink": "/mhm-rentiva/docs/troubleshooting/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/troubleshooting/index.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Kurulum Sihirbazı (Setup Wizard)",
+    "permalink": "/mhm-rentiva/docs/getting-started/setup-wizard"
+  },
+  "next": {
+    "title": "Araçlar (Vehicles)",
+    "permalink": "/mhm-rentiva/docs/usage/post-types"
+  }
+}

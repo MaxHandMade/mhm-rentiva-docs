@@ -1,0 +1,24 @@
+{
+  "id": "admin/list-table-overview",
+  "title": "VehicleColumns (List Table) Notları",
+  "description": "Bu notlar src/Admin/Vehicle/ListTable/VehicleColumns.php dosyasındaki ana fonksiyonları özetler. Dosya, araç listesi görünümünü geliştirmek ve ek arabirim bileşenleri eklemekten sorumludur.",
+  "source": "@site/docs/admin/list-table-overview.md",
+  "sourceDirName": "admin",
+  "slug": "/admin/list-table-overview",
+  "permalink": "/mhm-rentiva/docs/admin/list-table-overview",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/list-table-overview.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "License Sayfası",
+    "permalink": "/mhm-rentiva/docs/admin/license"
+  },
+  "next": {
+    "title": "Messages Sayfası",
+    "permalink": "/mhm-rentiva/docs/admin/messages"
+  }
+}

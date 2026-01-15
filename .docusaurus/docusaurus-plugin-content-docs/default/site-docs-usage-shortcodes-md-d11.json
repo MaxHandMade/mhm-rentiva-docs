@@ -1,0 +1,20 @@
+{
+  "id": "usage/shortcodes",
+  "title": "Shortcodes (Kısa Kodlar)",
+  "description": "MHM Rentiva, sitenizin çeşitli yerlerinde araç listeleri, formlar ve diğer özellikleri görüntülemek için kapsamlı bir kısa kod seti sunar. Aşağıda mevcut tüm kısa kodların bir listesi ve kullanım detayları bulunmaktadır.",
+  "source": "@site/docs/usage/shortcodes.md",
+  "sourceDirName": "usage",
+  "slug": "/usage/shortcodes",
+  "permalink": "/mhm-rentiva/docs/usage/shortcodes",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/usage/shortcodes.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Araçlar (Vehicles)",
+    "permalink": "/mhm-rentiva/docs/usage/post-types"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "admin/vehicles",
+  "title": "Vehicles Sayfası",
+  "description": "MHM Rentiva > Vehicles, filonuzdaki tüm araçları yönetebileceğiniz ana merkezdir. Varsayılan WordPress “post listesi” görünümü üzerine eklenen metrik kartları, aylık takvim ve hızlı düzenleme bileşenleri sayesinde hem durum takibini hem de düzenlemeleri tek noktadan yapabilirsiniz.",
+  "source": "@site/docs/admin/vehicles.md",
+  "sourceDirName": "admin",
+  "slug": "/admin/vehicles",
+  "permalink": "/mhm-rentiva/docs/admin/vehicles",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/vehicles.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Vehicle Settings Sayfası",
+    "permalink": "/mhm-rentiva/docs/admin/vehicle-settings"
+  },
+  "next": {
+    "title": "MHM Rentiva – Test Kontrol Listeleri",
+    "permalink": "/mhm-rentiva/docs/checklists/testing-checklists"
+  }
+}

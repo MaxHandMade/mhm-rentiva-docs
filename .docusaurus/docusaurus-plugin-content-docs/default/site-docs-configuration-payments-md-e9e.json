@@ -1,0 +1,24 @@
+{
+  "id": "configuration/payments",
+  "title": "Payment Configuration",
+  "description": "To be prepared.",
+  "source": "@site/docs/configuration/payments.md",
+  "sourceDirName": "configuration",
+  "slug": "/configuration/payments",
+  "permalink": "/mhm-rentiva/docs/configuration/payments",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/configuration/payments.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Email Templates",
+    "permalink": "/mhm-rentiva/docs/configuration/emails"
+  },
+  "next": {
+    "title": "Veritabanı Dokümantasyonu",
+    "permalink": "/mhm-rentiva/docs/developer/database"
+  }
+}
