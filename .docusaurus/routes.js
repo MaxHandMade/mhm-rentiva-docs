@@ -3,274 +3,274 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/mhm-rentiva/__docusaurus/debug',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug', '6f4'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug', 'd55'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/config',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/config', '5fb'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/config',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/config', '326'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/content',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/content', '30b'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/content',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/content', '3d1'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/globalData',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/globalData', '0aa'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/globalData',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/globalData', '339'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/metadata',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/metadata', '1b0'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/metadata',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/metadata', '87a'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/registry',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/registry', '9b3'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/registry',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/registry', 'cf4'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/__docusaurus/debug/routes',
-    component: ComponentCreator('/mhm-rentiva/__docusaurus/debug/routes', '274'),
+    path: '/mhm-rentiva-docs/__docusaurus/debug/routes',
+    component: ComponentCreator('/mhm-rentiva-docs/__docusaurus/debug/routes', '241'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog',
-    component: ComponentCreator('/mhm-rentiva/blog', '13d'),
+    path: '/mhm-rentiva-docs/blog',
+    component: ComponentCreator('/mhm-rentiva-docs/blog', '4e4'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/archive',
-    component: ComponentCreator('/mhm-rentiva/blog/archive', '944'),
+    path: '/mhm-rentiva-docs/blog/archive',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/archive', '8cc'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/authors',
-    component: ComponentCreator('/mhm-rentiva/blog/authors', '63d'),
+    path: '/mhm-rentiva-docs/blog/authors',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/authors', 'bd8'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/authors/all-sebastien-lorber-articles',
-    component: ComponentCreator('/mhm-rentiva/blog/authors/all-sebastien-lorber-articles', 'e35'),
+    path: '/mhm-rentiva-docs/blog/authors/all-sebastien-lorber-articles',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/authors/all-sebastien-lorber-articles', '86d'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/authors/yangshun',
-    component: ComponentCreator('/mhm-rentiva/blog/authors/yangshun', '923'),
+    path: '/mhm-rentiva-docs/blog/authors/yangshun',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/authors/yangshun', 'cc3'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/first-blog-post',
-    component: ComponentCreator('/mhm-rentiva/blog/first-blog-post', '490'),
+    path: '/mhm-rentiva-docs/blog/first-blog-post',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/first-blog-post', 'e33'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/long-blog-post',
-    component: ComponentCreator('/mhm-rentiva/blog/long-blog-post', 'f4f'),
+    path: '/mhm-rentiva-docs/blog/long-blog-post',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/long-blog-post', '4cb'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/mdx-blog-post',
-    component: ComponentCreator('/mhm-rentiva/blog/mdx-blog-post', '565'),
+    path: '/mhm-rentiva-docs/blog/mdx-blog-post',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/mdx-blog-post', '339'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/tags',
-    component: ComponentCreator('/mhm-rentiva/blog/tags', '424'),
+    path: '/mhm-rentiva-docs/blog/tags',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/tags', '12f'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/tags/docusaurus',
-    component: ComponentCreator('/mhm-rentiva/blog/tags/docusaurus', '550'),
+    path: '/mhm-rentiva-docs/blog/tags/docusaurus',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/tags/docusaurus', '7d9'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/tags/facebook',
-    component: ComponentCreator('/mhm-rentiva/blog/tags/facebook', '7d6'),
+    path: '/mhm-rentiva-docs/blog/tags/facebook',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/tags/facebook', '404'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/tags/hello',
-    component: ComponentCreator('/mhm-rentiva/blog/tags/hello', '5f7'),
+    path: '/mhm-rentiva-docs/blog/tags/hello',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/tags/hello', '994'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/tags/hola',
-    component: ComponentCreator('/mhm-rentiva/blog/tags/hola', 'e89'),
+    path: '/mhm-rentiva-docs/blog/tags/hola',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/tags/hola', '883'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/blog/welcome',
-    component: ComponentCreator('/mhm-rentiva/blog/welcome', 'f44'),
+    path: '/mhm-rentiva-docs/blog/welcome',
+    component: ComponentCreator('/mhm-rentiva-docs/blog/welcome', '898'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/markdown-page',
-    component: ComponentCreator('/mhm-rentiva/markdown-page', '831'),
+    path: '/mhm-rentiva-docs/markdown-page',
+    component: ComponentCreator('/mhm-rentiva-docs/markdown-page', '39d'),
     exact: true
   },
   {
-    path: '/mhm-rentiva/docs',
-    component: ComponentCreator('/mhm-rentiva/docs', '297'),
+    path: '/mhm-rentiva-docs/docs',
+    component: ComponentCreator('/mhm-rentiva-docs/docs', '3d9'),
     routes: [
       {
-        path: '/mhm-rentiva/docs',
-        component: ComponentCreator('/mhm-rentiva/docs', 'a72'),
+        path: '/mhm-rentiva-docs/docs',
+        component: ComponentCreator('/mhm-rentiva-docs/docs', '241'),
         routes: [
           {
-            path: '/mhm-rentiva/docs',
-            component: ComponentCreator('/mhm-rentiva/docs', 'c5a'),
+            path: '/mhm-rentiva-docs/docs',
+            component: ComponentCreator('/mhm-rentiva-docs/docs', '626'),
             routes: [
               {
-                path: '/mhm-rentiva/docs/admin/',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/', 'fc6'),
+                path: '/mhm-rentiva-docs/docs/admin/',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/', 'cc9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/additional-services',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/additional-services', 'd8f'),
+                path: '/mhm-rentiva-docs/docs/admin/additional-services',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/additional-services', 'fab'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/bookings',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/bookings', '044'),
+                path: '/mhm-rentiva-docs/docs/admin/bookings',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/bookings', 'ce6'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/core-utilities',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/core-utilities', 'f52'),
+                path: '/mhm-rentiva-docs/docs/admin/core-utilities',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/core-utilities', 'ef9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/customers',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/customers', 'f7f'),
+                path: '/mhm-rentiva-docs/docs/admin/customers',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/customers', '03a'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/export',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/export', 'fc8'),
+                path: '/mhm-rentiva-docs/docs/admin/export',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/export', '4a9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/license',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/license', 'ab0'),
+                path: '/mhm-rentiva-docs/docs/admin/license',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/license', 'fa2'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/list-table-overview',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/list-table-overview', '721'),
+                path: '/mhm-rentiva-docs/docs/admin/list-table-overview',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/list-table-overview', '6f3'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/messages',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/messages', '25e'),
+                path: '/mhm-rentiva-docs/docs/admin/messages',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/messages', '785'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/reports',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/reports', '0d1'),
+                path: '/mhm-rentiva-docs/docs/admin/reports',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/reports', '1e9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/settings',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/settings', '46c'),
+                path: '/mhm-rentiva-docs/docs/admin/settings',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/settings', 'a91'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/test-suite',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/test-suite', 'bcf'),
+                path: '/mhm-rentiva-docs/docs/admin/test-suite',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/test-suite', '93a'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/vehicle-settings',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/vehicle-settings', '7f5'),
+                path: '/mhm-rentiva-docs/docs/admin/vehicle-settings',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/vehicle-settings', '5f4'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/admin/vehicles',
-                component: ComponentCreator('/mhm-rentiva/docs/admin/vehicles', '3cb'),
+                path: '/mhm-rentiva-docs/docs/admin/vehicles',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/admin/vehicles', 'bb3'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/checklists/testing-checklists',
-                component: ComponentCreator('/mhm-rentiva/docs/checklists/testing-checklists', '046'),
+                path: '/mhm-rentiva-docs/docs/checklists/testing-checklists',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/checklists/testing-checklists', 'a40'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/configuration/emails',
-                component: ComponentCreator('/mhm-rentiva/docs/configuration/emails', '315'),
+                path: '/mhm-rentiva-docs/docs/configuration/emails',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/configuration/emails', '1e7'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/configuration/payments',
-                component: ComponentCreator('/mhm-rentiva/docs/configuration/payments', '401'),
+                path: '/mhm-rentiva-docs/docs/configuration/payments',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/configuration/payments', '2c5'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/developer/database',
-                component: ComponentCreator('/mhm-rentiva/docs/developer/database', '008'),
+                path: '/mhm-rentiva-docs/docs/developer/database',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/developer/database', '025'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/developer/rest-api',
-                component: ComponentCreator('/mhm-rentiva/docs/developer/rest-api', '0c3'),
+                path: '/mhm-rentiva-docs/docs/developer/rest-api',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/developer/rest-api', '797'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/getting-started/installation',
-                component: ComponentCreator('/mhm-rentiva/docs/getting-started/installation', 'ec0'),
+                path: '/mhm-rentiva-docs/docs/getting-started/installation',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/getting-started/installation', 'c0f'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/getting-started/post-install-checklist',
-                component: ComponentCreator('/mhm-rentiva/docs/getting-started/post-install-checklist', 'e15'),
+                path: '/mhm-rentiva-docs/docs/getting-started/post-install-checklist',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/getting-started/post-install-checklist', 'b7c'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/getting-started/setup-wizard',
-                component: ComponentCreator('/mhm-rentiva/docs/getting-started/setup-wizard', '9a1'),
+                path: '/mhm-rentiva-docs/docs/getting-started/setup-wizard',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/getting-started/setup-wizard', 'e80'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/troubleshooting/',
-                component: ComponentCreator('/mhm-rentiva/docs/troubleshooting/', 'a25'),
+                path: '/mhm-rentiva-docs/docs/troubleshooting/',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/troubleshooting/', 'f39'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/usage/post-types',
-                component: ComponentCreator('/mhm-rentiva/docs/usage/post-types', '2ce'),
+                path: '/mhm-rentiva-docs/docs/usage/post-types',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/usage/post-types', '5c2'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/mhm-rentiva/docs/usage/shortcodes',
-                component: ComponentCreator('/mhm-rentiva/docs/usage/shortcodes', '9f7'),
+                path: '/mhm-rentiva-docs/docs/usage/shortcodes',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/usage/shortcodes', 'd47'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               }
@@ -281,8 +281,8 @@ export default [
     ]
   },
   {
-    path: '/mhm-rentiva/',
-    component: ComponentCreator('/mhm-rentiva/', 'd79'),
+    path: '/mhm-rentiva-docs/',
+    component: ComponentCreator('/mhm-rentiva-docs/', '01c'),
     exact: true
   },
   {
