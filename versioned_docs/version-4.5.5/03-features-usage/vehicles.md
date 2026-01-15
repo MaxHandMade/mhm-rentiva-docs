@@ -43,7 +43,7 @@
 
 - [Vehicle Settings](vehicle-settings.md): Araç detay/özellik alanlarını açma/kapama, kısa kod sayfalarını belirleme.
 - [Vehicle Meta Yapısı](../getting-started/setup-wizard.md Araç kayıt ekranındaki meta alanlarının anlamı.
-- [Test Checklist](../checklists/testing-checklists.md): Araç yönetimi test senaryoları.
+- [Test Checklist](../04-developer/testing-checklists.md): Araç yönetimi test senaryoları.
 
 
 

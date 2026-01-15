@@ -59,8 +59,8 @@
 
 ## İlgili Dokümanlar
 - [Vehicles](vehicles.md): Rezervasyonların takvimde nasıl gösterildiği.
-- [Payment Konfigürasyonu](../configuration/payments.md) *(hazırlanacak)*: Online/offline ödeme akışları.
-- [Test Checklist](../checklists/testing-checklists.md#2-rezervasyon-akisi): Rezervasyon akışı test adımları.
+- [Payment Konfigürasyonu](../02-core-configuration/payments.md) *(hazırlanacak)*: Online/offline ödeme akışları.
+- [Test Checklist](../04-developer/testing-checklists.md#2-rezervasyon-akisi): Rezervasyon akışı test adımları.
 
 
 

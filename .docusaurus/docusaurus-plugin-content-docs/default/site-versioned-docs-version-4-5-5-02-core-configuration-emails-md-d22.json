@@ -1,0 +1,24 @@
+{
+  "id": "core-configuration/emails",
+  "title": "Email Templates",
+  "description": "To be prepared.",
+  "source": "@site/versioned_docs/version-4.5.5/02-core-configuration/emails.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/emails",
+  "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/emails",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/02-core-configuration/emails.md",
+  "tags": [],
+  "version": "4.5.5",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Core Utilities ve Yardımcı Sayfalar",
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/core-utilities"
+  },
+  "next": {
+    "title": "License Sayfası",
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/license"
+  }
+}

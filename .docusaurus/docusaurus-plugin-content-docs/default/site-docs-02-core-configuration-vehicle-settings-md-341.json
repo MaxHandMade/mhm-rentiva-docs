@@ -5,7 +5,7 @@
   "source": "@site/docs/02-core-configuration/vehicle-settings.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/vehicle-settings",
-  "permalink": "/mhm-rentiva-docs/docs/core-configuration/vehicle-settings",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/vehicle-settings",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/vehicle-settings.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Ayarlar (Settings)",
-    "permalink": "/mhm-rentiva-docs/docs/core-configuration/settings"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/settings"
   },
   "next": {
     "title": "Additional Services Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/additional-services"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/additional-services"
   }
 }

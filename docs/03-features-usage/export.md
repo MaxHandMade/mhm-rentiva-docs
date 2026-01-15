@@ -26,7 +26,7 @@
 
 - [Reports](reports.md): Aynı verilerin grafik formda sunumu.
 - [Settings > Performance](settings.md#performance-ve-cache-ayarlari): Export sırasında kullanılan cache ayarları.
-- [Checklist](../checklists/testing-checklists.md#7-raporlama-ve-export): Export süreçlerinin manuel testi.
+- [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Export süreçlerinin manuel testi.
 
 
 

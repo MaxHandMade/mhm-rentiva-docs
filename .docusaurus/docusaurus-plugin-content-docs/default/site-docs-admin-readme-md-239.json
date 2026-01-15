@@ -5,7 +5,7 @@
   "source": "@site/docs/admin/README.md",
   "sourceDirName": "admin",
   "slug": "/admin/",
-  "permalink": "/mhm-rentiva-docs/docs/admin/",
+  "permalink": "/mhm-rentiva-docs/docs/next/admin/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/README.md",
@@ -15,6 +15,6 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Troubleshooting",
-    "permalink": "/mhm-rentiva-docs/docs/faq/"
+    "permalink": "/mhm-rentiva-docs/docs/next/faq/"
   }
 }

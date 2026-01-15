@@ -5,7 +5,7 @@
   "source": "@site/docs/04-developer/list-table-overview.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/list-table-overview",
-  "permalink": "/mhm-rentiva-docs/docs/developer/list-table-overview",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/list-table-overview",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/list-table-overview.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Veritabanı Dokümantasyonu",
-    "permalink": "/mhm-rentiva-docs/docs/developer/database"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/database"
   },
   "next": {
     "title": "REST API Oluşturma Rehberi",
-    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api-tr"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/rest-api-tr"
   }
 }

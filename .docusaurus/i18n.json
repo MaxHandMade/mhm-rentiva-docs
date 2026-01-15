@@ -5,7 +5,7 @@
     "en"
   ],
   "path": "i18n",
-  "currentLocale": "tr",
+  "currentLocale": "en",
   "localeConfigs": {
     "tr": {
       "label": "Türkçe",

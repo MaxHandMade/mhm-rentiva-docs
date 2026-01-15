@@ -29,10 +29,10 @@ export default {
     "experimental_router": "browser"
   },
   "url": "https://MaxHandMade.github.io",
-  "baseUrl": "/mhm-rentiva-docs/",
+  "baseUrl": "/mhm-rentiva-docs/en/",
   "organizationName": "MaxHandMade",
   "projectName": "mhm-rentiva-docs",
-  "onBrokenLinks": "throw",
+  "onBrokenLinks": "warn",
   "i18n": {
     "defaultLocale": "tr",
     "locales": [
@@ -379,6 +379,18 @@ export default {
       "maxHeadingLevel": 3
     }
   },
+  "plugins": [
+    [
+      "C:\\xampp\\htdocs\\otokira\\wp-content\\plugins\\mhm-rentiva\\website\\node_modules\\@easyops-cn\\docusaurus-search-local\\dist\\server\\server\\index.js",
+      {
+        "hashed": true,
+        "language": [
+          "en",
+          "tr"
+        ]
+      }
+    ]
+  ],
   "baseUrlIssueBanner": true,
   "onBrokenAnchors": "warn",
   "onDuplicateRoutes": "warn",
@@ -386,7 +398,6 @@ export default {
     "static"
   ],
   "customFields": {},
-  "plugins": [],
   "themes": [],
   "scripts": [],
   "headTags": [],

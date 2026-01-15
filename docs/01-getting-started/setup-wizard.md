@@ -51,4 +51,4 @@ Rentiva’yı aktif eder etmez karşınıza çıkan Setup Wizard, eklentiyi birk
 
 Kurulumu tamamladıktan sonra bile ayarlarınızı sıfırlamak istemiyorsanız “Complete Setup” sonrası sihirbaz sadece rehber olarak açılır. Yeni bir sitede sıfırdan test etmek için eklentiyi devre dışı bırakıp tekrar etkinleştirebilir veya ilgili seçenekleri manuel olarak güncelleyebilirsiniz.
 
-Daha ayrıntılı test senaryoları için [Testing Checklist](../checklists/testing-checklists.md) dosyasına göz atmayı unutmayın. Ayrıca, eklentinin her bir yönetici sayfasının görev ve yeteneklerini görmek için [Yönetici Sayfaları rehberine](../admin/README.md) bakabilirsiniz.
+Daha ayrıntılı test senaryoları için [Testing Checklist](../04-developer/testing-checklists.md) dosyasına göz atmayı unutmayın. Ayrıca, eklentinin her bir yönetici sayfasının görev ve yeteneklerini görmek için [Yönetici Sayfaları rehberine](../intro.md) bakabilirsiniz.

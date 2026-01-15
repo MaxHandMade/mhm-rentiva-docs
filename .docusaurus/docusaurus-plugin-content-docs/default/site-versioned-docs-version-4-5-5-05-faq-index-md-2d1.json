@@ -1,0 +1,24 @@
+{
+  "id": "faq/index",
+  "title": "Troubleshooting",
+  "description": "Common issues and solutions (To be prepared).",
+  "source": "@site/versioned_docs/version-4.5.5/05-faq/index.md",
+  "sourceDirName": "05-faq",
+  "slug": "/faq/",
+  "permalink": "/mhm-rentiva-docs/en/docs/faq/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/05-faq/index.md",
+  "tags": [],
+  "version": "4.5.5",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "MHM Rentiva – Test Kontrol Listeleri",
+    "permalink": "/mhm-rentiva-docs/en/docs/developer/testing-checklists"
+  },
+  "next": {
+    "title": "Yönetici Sayfaları Rehberi",
+    "permalink": "/mhm-rentiva-docs/en/docs/admin/"
+  }
+}

@@ -17,7 +17,7 @@
 
 ## İlgili Dokümanlar
 
-- [Checklist](../checklists/testing-checklists.md) – Manuel test adımları.
+- [Checklist](./testing-checklists.md) – Manuel test adımları.
 - [Core Utilities](core-utilities.md) – Cron ve bakım araçları.
 - [Troubleshooting](../troubleshooting/) *(hazırlanacak)* – Hata giderme rehberi.
 

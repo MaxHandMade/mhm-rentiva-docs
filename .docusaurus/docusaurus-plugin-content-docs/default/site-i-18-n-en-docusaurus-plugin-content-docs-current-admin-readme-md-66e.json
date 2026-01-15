@@ -1,0 +1,20 @@
+{
+  "id": "admin/README",
+  "title": "Yönetici Sayfaları Rehberi",
+  "description": "Bu bölüm, Rentiva’nın WordPress yönetim paneline eklediği ana menülerin ve sayfaların ne işe yaradığını, hangi senaryolarda kullanılacağını ve kritik bileşenlerini açıklar. Her sayfa için kısa özetler, önemli alanlar ve ilgili diğer dokümanlara bağlantılar bulunur.",
+  "source": "@site/i18n/en/docusaurus-plugin-content-docs/current/admin/README.md",
+  "sourceDirName": "admin",
+  "slug": "/admin/",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/admin/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/admin/README.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Troubleshooting",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/faq/"
+  }
+}

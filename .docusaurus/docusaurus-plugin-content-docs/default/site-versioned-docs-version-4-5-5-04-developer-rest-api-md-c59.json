@@ -1,0 +1,24 @@
+{
+  "id": "developer/rest-api",
+  "title": "REST API Development Guide",
+  "description": "📁 REST API File Structure",
+  "source": "@site/versioned_docs/version-4.5.5/04-developer/rest-api.md",
+  "sourceDirName": "04-developer",
+  "slug": "/developer/rest-api",
+  "permalink": "/mhm-rentiva-docs/en/docs/developer/rest-api",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/04-developer/rest-api.md",
+  "tags": [],
+  "version": "4.5.5",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "REST API Oluşturma Rehberi",
+    "permalink": "/mhm-rentiva-docs/en/docs/developer/rest-api-tr"
+  },
+  "next": {
+    "title": "Test Suite Sayfası",
+    "permalink": "/mhm-rentiva-docs/en/docs/developer/test-suite"
+  }
+}

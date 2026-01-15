@@ -1,0 +1,24 @@
+{
+  "id": "features-usage/reports",
+  "title": "Reports Sayfası",
+  "description": "MHM Rentiva > Reports, işletmenizin performansını görselleştiren kontrol panelidir. Gelir, rezervasyon ve araç kullanım istatistikleri farklı grafikler ve tablolarda sunulur.",
+  "source": "@site/versioned_docs/version-4.5.5/03-features-usage/reports.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/reports",
+  "permalink": "/mhm-rentiva-docs/en/docs/features-usage/reports",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/03-features-usage/reports.md",
+  "tags": [],
+  "version": "4.5.5",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Araçlar (Vehicles)",
+    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/post-types"
+  },
+  "next": {
+    "title": "Shortcodes (Kısa Kodlar)",
+    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/shortcodes"
+  }
+}

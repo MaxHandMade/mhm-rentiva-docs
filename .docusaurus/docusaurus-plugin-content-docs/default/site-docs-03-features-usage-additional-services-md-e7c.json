@@ -5,7 +5,7 @@
   "source": "@site/docs/03-features-usage/additional-services.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/additional-services",
-  "permalink": "/mhm-rentiva-docs/docs/features-usage/additional-services",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/additional-services",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/additional-services.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Vehicle Settings Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/core-configuration/vehicle-settings"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/vehicle-settings"
   },
   "next": {
     "title": "Bookings Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/bookings"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/bookings"
   }
 }

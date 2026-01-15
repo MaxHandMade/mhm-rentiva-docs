@@ -1,0 +1,26 @@
+{
+  "id": "intro",
+  "title": "Documentation Home",
+  "description": "Welcome to the comprehensive documentation for the MHM Rentiva Vehicle Rental Plugin. Choose a category below to get started.",
+  "source": "@site/versioned_docs/version-4.5.5/intro.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/mhm-rentiva-docs/en/docs/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/intro.md",
+  "tags": [],
+  "version": "4.5.5",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "slug": "/",
+    "sidebar_position": 0,
+    "title": "Documentation Home",
+    "hide_table_of_contents": true
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Kurulum ve İlk Ayarlar Rehberi",
+    "permalink": "/mhm-rentiva-docs/en/docs/getting-started/installation"
+  }
+}

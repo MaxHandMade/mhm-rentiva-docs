@@ -42,28 +42,4 @@ Welcome to the comprehensive documentation for the MHM Rentiva Vehicle Rental Pl
   </div>
 </div>
 
-<style>
-  .cardContainer {
-    border: 1px solid var(--ifm-color-emphasis-200);
-    border-radius: var(--ifm-card-border-radius);
-    display: block;
-    height: 100%;
-    transition: all 0.2s ease;
-    text-decoration: none !important;
-    color: inherit !important;
-  }
-  .cardContainer:hover {
-    border-color: var(--ifm-color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  .cardTitle {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .cardDescription {
-    font-size: 0.9rem;
-    color: var(--ifm-color-emphasis-700);
-    margin-bottom: 0;
-  }
-</style>
+

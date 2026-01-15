@@ -5,7 +5,7 @@
   "source": "@site/docs/04-developer/rest-api.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/rest-api",
-  "permalink": "/mhm-rentiva-docs/docs/developer/rest-api",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/rest-api",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/rest-api.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "REST API Oluşturma Rehberi",
-    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api-tr"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/rest-api-tr"
   },
   "next": {
     "title": "Test Suite Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/developer/test-suite"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/test-suite"
   }
 }

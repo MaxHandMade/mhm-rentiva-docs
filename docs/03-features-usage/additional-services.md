@@ -31,9 +31,9 @@
 
 ## İlgili Dokümanlar
 
-- [Vehicle Settings](vehicle-settings.md): Araç detay formundaki addon alanlarının yönetimi.
+- [Vehicle Settings](../02-core-configuration/vehicle-settings.md): Araç detay formundaki addon alanlarının yönetimi.
 - [Bookings](bookings.md): Addon seçimlerinin rezervasyon formuna yansıması.
-- [Test Checklist](../checklists/testing-checklists.md#8-add-on-hizmetleri): Addon iş akışının manuel testi.
+- [Test Checklist](../04-developer/testing-checklists.md#8-add-on-hizmetleri): Addon iş akışının manuel testi.
 
 
 

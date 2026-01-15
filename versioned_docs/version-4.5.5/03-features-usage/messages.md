@@ -28,8 +28,8 @@
 
 ## İlgili Dokümanlar
 - [Customers](customers.md): Müşteri profillerinden mesajlara erişim.
-- [Email Templates](../configuration/emails.md) *(hazırlanacak)*: Mesaj yanıt e-posta şablonlarının yönetimi.
-- [Checklist](../checklists/testing-checklists.md#5-mesajlasma-ve-bildirimler): Mesaj sistemi test adımları.
+- [Email Templates](../02-core-configuration/emails.md) *(hazırlanacak)*: Mesaj yanıt e-posta şablonlarının yönetimi.
+- [Checklist](../04-developer/testing-checklists.md#5-mesajlasma-ve-bildirimler): Mesaj sistemi test adımları.
 
 
 

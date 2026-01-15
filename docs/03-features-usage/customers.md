@@ -34,7 +34,7 @@ Bir satıra tıkladığınızda sağ tarafta (veya ayrı bir pencerede) müşter
 - [Bookings](bookings.md): Müşteri rezervasyonlarının yönetimi.
 - [Messages](messages.md): Destek taleplerinin müşteri bazlı görüntülenmesi.
 - [Export](export.md): Müşteri verilerinin dışa aktarımı.
-- [Test Checklist](../checklists/testing-checklists.md#4-musteri-portali): Müşteri portalı ve admin işlemlerinin test adımları.
+- [Test Checklist](../04-developer/testing-checklists.md#4-musteri-portali): Müşteri portalı ve admin işlemlerinin test adımları.
 
 
 

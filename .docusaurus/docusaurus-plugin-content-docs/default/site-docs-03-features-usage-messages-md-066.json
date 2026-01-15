@@ -5,7 +5,7 @@
   "source": "@site/docs/03-features-usage/messages.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/messages",
-  "permalink": "/mhm-rentiva-docs/docs/features-usage/messages",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/messages",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/messages.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Export Sayfası",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/export"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/export"
   },
   "next": {
     "title": "Araçlar (Vehicles)",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/post-types"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/post-types"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "id": "developer/testing-checklists",
+  "title": "MHM Rentiva – Test Kontrol Listeleri",
+  "description": "Bu doküman, canlıya çıkmadan önce yapılacak lokal kabul testleri ve canlı ortamda uygulanacak hızlı doğrulama adımlarını tek dosyada toplar. Her adımı tamamladıkça checkbox’ları işaretleyerek ilerleyebilirsiniz.",
+  "source": "@site/versioned_docs/version-4.5.5/04-developer/testing-checklists.md",
+  "sourceDirName": "04-developer",
+  "slug": "/developer/testing-checklists",
+  "permalink": "/mhm-rentiva-docs/en/docs/developer/testing-checklists",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/04-developer/testing-checklists.md",
+  "tags": [],
+  "version": "4.5.5",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Test Suite Sayfası",
+    "permalink": "/mhm-rentiva-docs/en/docs/developer/test-suite"
+  },
+  "next": {
+    "title": "Troubleshooting",
+    "permalink": "/mhm-rentiva-docs/en/docs/faq/"
+  }
+}

@@ -44,7 +44,7 @@ Eklentinin çalışması için bazı sayfaların oluşturulması ve içine ilgil
 | **Teşekkür Sayfası** | `[rentiva_thank_you]` | `/rentiva/thank-you/` | Rezervasyon tamamlanınca yönlendirilecek sayfa. |
 | **Rezervasyon Onayı** | `[rentiva_booking_confirmation]` | `/rentiva/booking-confirmation/` | Ödeme sonrası özet ve durum bilgisi. |
 
-> **Not:** Detaylı kısa kod listesi için [Kısa Kodlar Kılavuzu](../usage/shortcodes.md)'na bakabilirsiniz.
+> **Not:** Detaylı kısa kod listesi için [Kısa Kodlar Kılavuzu](../03-features-usage/shortcodes.md)'na bakabilirsiniz.
 
 ## 5. Sayfaları Eklentiye Tanıtma
 

@@ -40,7 +40,7 @@ Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işar
 
 ## Ek Adımlar
 
-- [ ] [Lokal & Canlı Test checklist’i](../checklists/testing-checklists.md) ile kalan senaryolar işaretlendi.
+- [ ] [Lokal & Canlı Test checklist’i](../04-developer/testing-checklists.md) ile kalan senaryolar işaretlendi.
 - [ ] Gerekli tüm webhooks (Stripe, PayPal, PayTR) ilgili servislerde doğrulandı.
 - [ ] Varsayılan içerik (örnek araçlar vb.) temizlenip gerçek veriler eklenmeye hazır.
 

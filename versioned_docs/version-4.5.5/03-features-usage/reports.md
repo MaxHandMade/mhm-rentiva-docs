@@ -26,7 +26,7 @@
 
 - [Export](export.md): Raporlarda kullanılan ham verileri dışa aktarma.
 - [Settings](settings.md#performance-ve-cache-ayarlari): Rapor cache sürelerinin yönetimi.
-- [Checklist](../checklists/testing-checklists.md#7-raporlama-ve-export): Raporlama doğrulama adımları.
+- [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Raporlama doğrulama adımları.
 
 
 

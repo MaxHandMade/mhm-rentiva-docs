@@ -34,9 +34,9 @@
 
 ## İlgili Dokümanlar
 
-- [Vehicles Sayfası](vehicles.md): Alanlar araç listesi ve meta kutuları üzerinde nasıl görüntülenir.
-- [Zorunlu Sayfalar ve Kısa Kodlar](../getting-started/installation.md): Sayfa/kısa kod eşleşmelerinin tam listesi.
-- [Checklist](../checklists/testing-checklists.md#1-arac-yonetimi): Alan ayarları değiştirildiğinde yapılması gereken testler.
+- [Vehicles Sayfası](../03-features-usage/vehicles.md): Alanlar araç listesi ve meta kutuları üzerinde nasıl görüntülenir.
+- [Zorunlu Sayfalar ve Kısa Kodlar](../01-getting-started/installation.md): Sayfa/kısa kod eşleşmelerinin tam listesi.
+- [Checklist](../04-developer/testing-checklists.md#1-arac-yonetimi): Alan ayarları değiştirildiğinde yapılması gereken testler.
 
 
 
