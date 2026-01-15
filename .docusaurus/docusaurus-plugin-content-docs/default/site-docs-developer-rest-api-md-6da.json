@@ -14,8 +14,8 @@
   "frontMatter": {},
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Veritabanı Dokümantasyonu",
-    "permalink": "/mhm-rentiva-docs/docs/developer/database"
+    "title": "REST API Oluşturma Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api-tr"
   },
   "next": {
     "title": "Kurulum ve İlk Ayarlar Rehberi",

@@ -1,0 +1,24 @@
+{
+  "id": "developer/database-en",
+  "title": "Database Documentation",
+  "description": "This folder contains the database structure and meta keys documentation for the MHM Rentiva plugin.",
+  "source": "@site/docs/developer/database-en.md",
+  "sourceDirName": "developer",
+  "slug": "/developer/database-en",
+  "permalink": "/mhm-rentiva-docs/docs/developer/database-en",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/developer/database-en.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Payment Configuration",
+    "permalink": "/mhm-rentiva-docs/docs/configuration/payments"
+  },
+  "next": {
+    "title": "Veritabanı Dokümantasyonu",
+    "permalink": "/mhm-rentiva-docs/docs/developer/database"
+  }
+}

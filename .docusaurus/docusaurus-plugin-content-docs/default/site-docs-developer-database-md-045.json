@@ -14,11 +14,11 @@
   "frontMatter": {},
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Payment Configuration",
-    "permalink": "/mhm-rentiva-docs/docs/configuration/payments"
+    "title": "Database Documentation",
+    "permalink": "/mhm-rentiva-docs/docs/developer/database-en"
   },
   "next": {
-    "title": "REST API Development Guide",
-    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api"
+    "title": "REST API Oluşturma Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api-tr"
   }
 }

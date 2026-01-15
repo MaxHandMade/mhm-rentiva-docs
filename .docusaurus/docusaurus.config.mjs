@@ -86,7 +86,7 @@ export default {
         },
         {
           "to": "/blog",
-          "label": "Blog",
+          "label": "Sürüm Notları",
           "position": "left"
         },
         {

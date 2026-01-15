@@ -37,8 +37,16 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'tr',
+    locales: ['tr', 'en'],
+    localeConfigs: {
+      tr: {
+        label: 'Türkçe',
+      },
+      en: {
+        label: 'English',
+      },
+    },
   },
 
   presets: [
@@ -94,6 +102,10 @@ const config = {
             label: 'Documentation',
           },
           { to: '/blog', label: 'Sürüm Notları', position: 'left' },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
           {
             href: 'https://github.com/MaxHandMade/mhm-rentiva',
             label: 'GitHub',

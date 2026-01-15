@@ -101,8 +101,18 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "developer/database-en",
+              "path": "/mhm-rentiva-docs/docs/developer/database-en",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "developer/rest-api",
               "path": "/mhm-rentiva-docs/docs/developer/rest-api",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/rest-api-tr",
+              "path": "/mhm-rentiva-docs/docs/developer/rest-api-tr",
               "sidebar": "tutorialSidebar"
             },
             {

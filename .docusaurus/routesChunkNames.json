@@ -1,372 +1,226 @@
 {
-  "/mhm-rentiva-docs/__docusaurus/debug-d55": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
+  "/mhm-rentiva-docs/blog-d16": {
+    "__comp": "a6aa9e1f",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/config-326": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/content-3d1": {
-    "__comp": "__comp---theme-debug-contentba-8-ce7",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
+      "plugin": "36994c47"
     },
-    "__props": "__props---mhm-rentiva-docs-docusaurus-debug-contente-41-f73"
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/globalData-339": {
-    "__comp": "__comp---theme-debug-global-dataede-0fa",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/metadata-87a": {
-    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/registry-cf4": {
-    "__comp": "__comp---theme-debug-registry-679-501",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/__docusaurus/debug/routes-241": {
-    "__comp": "__comp---theme-debug-routes-946-699",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-docusaurus-debugb-38-5ca"
-    }
-  },
-  "/mhm-rentiva-docs/blog-4e4": {
-    "__comp": "__comp---theme-blog-list-pagea-6-a-7ba",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---mhm-rentiva-blog-766-db0"
-      },
-      {
-        "content": "content---mhm-rentiva-blogf-4-f-a58"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-871-7a6"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-925-69e"
+        "content": "f841f82d"
       }
     ],
-    "__props": "__props---mhm-rentiva-docs-blog-97-c-4b6"
+    "__props": "97c7f871"
   },
   "/mhm-rentiva-docs/blog/archive-8cc": {
-    "__comp": "__comp---theme-blog-archive-page-9-e-4-1d8",
+    "__comp": "9e4087bc",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "__props": "__props---mhm-rentiva-docs-blog-archive-07-f-975"
+    "__props": "07ffd8fb"
   },
   "/mhm-rentiva-docs/blog/authors-bd8": {
-    "__comp": "__comp---theme-blog-pages-blog-authors-list-page-621-70c",
+    "__comp": "621db11d",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "__props": "__props---mhm-rentiva-docs-blog-authors-307-178"
-  },
-  "/mhm-rentiva-docs/blog/authors/all-sebastien-lorber-articles-86d": {
-    "__comp": "__comp---theme-blog-pages-blog-authors-posts-page-33-f-bd5",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
-      },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "items": [
-      {
-        "content": "content---mhm-rentiva-blog-766-db0"
-      },
-      {
-        "content": "content---mhm-rentiva-blogf-4-f-a58"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-925-69e"
-      }
-    ],
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "__props": "__props---mhm-rentiva-docs-blog-authors-all-sebastien-lorber-articlesfe-7-7be"
-  },
-  "/mhm-rentiva-docs/blog/authors/yangshun-cc3": {
-    "__comp": "__comp---theme-blog-pages-blog-authors-posts-page-33-f-bd5",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
-      },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "items": [
-      {
-        "content": "content---mhm-rentiva-blog-766-db0"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-871-7a6"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-925-69e"
-      }
-    ],
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "__props": "__props---mhm-rentiva-docs-blog-authors-yangshune-5-e-76d"
-  },
-  "/mhm-rentiva-docs/blog/first-blog-post-e33": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
-      },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "content": "content---mhm-rentiva-blog-first-blog-poste-27-f91"
-  },
-  "/mhm-rentiva-docs/blog/long-blog-post-4cb": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
-      },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "content": "content---mhm-rentiva-blog-long-blog-post-736-1ed"
-  },
-  "/mhm-rentiva-docs/blog/mdx-blog-post-339": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
-      },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "content": "content---mhm-rentiva-blog-mdx-blog-post-593-18d"
+    "sidebar": "814f3328",
+    "__props": "30773512"
   },
   "/mhm-rentiva-docs/blog/tags-12f": {
-    "__comp": "__comp---theme-blog-tags-list-page-01-a-d0b",
+    "__comp": "01a85c17",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "__props": "__props---mhm-rentiva-docs-blog-tags-1-f-0-357"
+    "sidebar": "814f3328",
+    "__props": "1f0384ee"
   },
-  "/mhm-rentiva-docs/blog/tags/docusaurus-7d9": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+  "/mhm-rentiva-docs/blog/tags/release-77f": {
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---mhm-rentiva-blog-766-db0"
-      },
-      {
-        "content": "content---mhm-rentiva-blogf-4-f-a58"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-871-7a6"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-925-69e"
+        "content": "f841f82d"
       }
     ],
-    "__props": "__props---mhm-rentiva-docs-blog-tags-docusaurus-9-c-4-438"
+    "__props": "29dd2037"
   },
-  "/mhm-rentiva-docs/blog/tags/facebook-404": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+  "/mhm-rentiva-docs/blog/tags/update-2f7": {
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---mhm-rentiva-blog-766-db0"
+        "content": "f841f82d"
       }
     ],
-    "__props": "__props---mhm-rentiva-docs-blog-tags-facebook-5-e-0-3e4"
+    "__props": "7c9891b6"
   },
-  "/mhm-rentiva-docs/blog/tags/hello-994": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+  "/mhm-rentiva-docs/blog/tags/v-4-5-5-122": {
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---mhm-rentiva-blog-766-db0"
-      },
-      {
-        "content": "content---mhm-rentiva-blog-871-7a6"
+        "content": "f841f82d"
       }
     ],
-    "__props": "__props---mhm-rentiva-docs-blog-tags-hello-01-a-46c"
+    "__props": "7c751998"
   },
-  "/mhm-rentiva-docs/blog/tags/hola-883": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
-    "__context": {
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
-    },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "items": [
-      {
-        "content": "content---mhm-rentiva-blog-925-69e"
-      }
-    ],
-    "__props": "__props---mhm-rentiva-docs-blog-tags-hola-218-f74"
-  },
-  "/mhm-rentiva-docs/blog/welcome-898": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
+  "/mhm-rentiva-docs/blog/v4-5-5-released-f54": {
+    "__comp": "ccc49370",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---mhm-rentiva-blog-authorsace-dc8"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---mhm-rentiva-blog-369-7d4"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---mhm-rentiva-blog-814-752",
-    "content": "content---mhm-rentiva-blog-welcomed-9-f-1e0"
+    "sidebar": "814f3328",
+    "content": "7787832b"
   },
   "/mhm-rentiva-docs/markdown-page-39d": {
-    "__comp": "__comp---theme-mdx-page-1-f-3-b90",
+    "__comp": "1f391b9e",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-markdown-pagea-74-d0b"
+      "plugin": "a7456010"
     },
-    "content": "content---mhm-rentiva-markdown-page-393-59f"
+    "content": "393be207"
   },
-  "/mhm-rentiva-docs/docs-3d9": {
-    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+  "/mhm-rentiva-docs/docs-f5e": {
+    "__comp": "5e95c892",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-docsaba-3af"
+      "plugin": "aba21aa0"
     }
   },
-  "/mhm-rentiva-docs/docs-241": {
-    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---mhm-rentiva-docs-docsde-5-82a"
+  "/mhm-rentiva-docs/docs-92e": {
+    "__comp": "a7bd4aaa",
+    "__props": "de5fe0e6"
   },
-  "/mhm-rentiva-docs/docs-626": {
-    "__comp": "__comp---theme-doc-roota-94-67a"
+  "/mhm-rentiva-docs/docs-7db": {
+    "__comp": "a94703ab"
   },
   "/mhm-rentiva-docs/docs/admin/-cc9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-239-974"
+    "__comp": "17896441",
+    "content": "239a872d"
   },
   "/mhm-rentiva-docs/docs/admin/additional-services-fab": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-additional-services-5-f-1-128"
+    "__comp": "17896441",
+    "content": "5f19e5c5"
   },
   "/mhm-rentiva-docs/docs/admin/bookings-ce6": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-bookingsd-12-743"
+    "__comp": "17896441",
+    "content": "d125b98b"
   },
   "/mhm-rentiva-docs/docs/admin/core-utilities-ef9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-core-utilities-2-d-5-99d"
+    "__comp": "17896441",
+    "content": "2d5c4f85"
   },
   "/mhm-rentiva-docs/docs/admin/customers-03a": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-customers-9-b-6-ed1"
+    "__comp": "17896441",
+    "content": "9b6ee423"
   },
   "/mhm-rentiva-docs/docs/admin/export-4a9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-exportf-33-782"
+    "__comp": "17896441",
+    "content": "f330020b"
   },
   "/mhm-rentiva-docs/docs/admin/license-fa2": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-licensed-5-a-55f"
+    "__comp": "17896441",
+    "content": "d5a9baed"
   },
   "/mhm-rentiva-docs/docs/admin/list-table-overview-6f3": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-list-table-overview-8-a-1-3ee"
+    "__comp": "17896441",
+    "content": "8a11e6c8"
   },
   "/mhm-rentiva-docs/docs/admin/messages-785": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-messagesc-1-e-417"
+    "__comp": "17896441",
+    "content": "c1e6ab66"
   },
   "/mhm-rentiva-docs/docs/admin/reports-1e9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-reports-4-eb-ed3"
+    "__comp": "17896441",
+    "content": "4ebe18c0"
   },
   "/mhm-rentiva-docs/docs/admin/settings-a91": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-settingse-08-06e"
+    "__comp": "17896441",
+    "content": "e0843b1c"
   },
   "/mhm-rentiva-docs/docs/admin/test-suite-93a": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-test-suite-648-940"
+    "__comp": "17896441",
+    "content": "64831e60"
   },
   "/mhm-rentiva-docs/docs/admin/vehicle-settings-5f4": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-vehicle-settingsf-98-669"
+    "__comp": "17896441",
+    "content": "f986e1a6"
   },
   "/mhm-rentiva-docs/docs/admin/vehicles-bb3": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-admin-vehiclese-55-684"
+    "__comp": "17896441",
+    "content": "e55e1d74"
   },
   "/mhm-rentiva-docs/docs/checklists/testing-checklists-a40": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-checklists-testing-checklists-879-52b"
+    "__comp": "17896441",
+    "content": "87942c9a"
   },
   "/mhm-rentiva-docs/docs/configuration/emails-1e7": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-configuration-emailsfaf-8c4"
+    "__comp": "17896441",
+    "content": "faf849b5"
   },
   "/mhm-rentiva-docs/docs/configuration/payments-2c5": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-configuration-paymentse-9-e-5ac"
+    "__comp": "17896441",
+    "content": "e9e8ac4b"
   },
   "/mhm-rentiva-docs/docs/developer/database-025": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-developer-database-045-29a"
+    "__comp": "17896441",
+    "content": "0457bc40"
+  },
+  "/mhm-rentiva-docs/docs/developer/database-en-0ff": {
+    "__comp": "17896441",
+    "content": "33c770e6"
   },
   "/mhm-rentiva-docs/docs/developer/rest-api-797": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-developer-rest-api-6-da-ccf"
+    "__comp": "17896441",
+    "content": "6da2cfa3"
+  },
+  "/mhm-rentiva-docs/docs/developer/rest-api-tr-6e6": {
+    "__comp": "17896441",
+    "content": "27bf8d01"
   },
   "/mhm-rentiva-docs/docs/getting-started/installation-c0f": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-getting-started-installation-54-f-f38"
+    "__comp": "17896441",
+    "content": "54f44165"
   },
   "/mhm-rentiva-docs/docs/getting-started/post-install-checklist-b7c": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-getting-started-post-install-checklistd-2-c-c7e"
+    "__comp": "17896441",
+    "content": "d2c95f43"
   },
   "/mhm-rentiva-docs/docs/getting-started/setup-wizard-e80": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-getting-started-setup-wizard-75-f-d1c"
+    "__comp": "17896441",
+    "content": "75fdeea2"
   },
   "/mhm-rentiva-docs/docs/troubleshooting/-f39": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-troubleshooting-d-65-7df"
+    "__comp": "17896441",
+    "content": "d651e2ee"
   },
   "/mhm-rentiva-docs/docs/usage/post-types-5c2": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-usage-post-types-048-4bd"
+    "__comp": "17896441",
+    "content": "048e1050"
   },
   "/mhm-rentiva-docs/docs/usage/shortcodes-d47": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-usage-shortcodesd-11-c9f"
+    "__comp": "17896441",
+    "content": "d112ad27"
   },
   "/mhm-rentiva-docs/-01c": {
-    "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
+    "__comp": "c4f5d8e4",
     "__context": {
-      "plugin": "plugin---mhm-rentiva-markdown-pagea-74-d0b"
+      "plugin": "a7456010"
     },
-    "config": "config---mhm-rentiva-5-e-9-8a4"
+    "config": "5e9f5e1a"
   }
 }
