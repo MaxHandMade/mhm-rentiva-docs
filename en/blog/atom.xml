@@ -2,11 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-01-15T00:00:00.000Z</updated>
+    <updated>2026-01-16T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/en/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[v4.6.0 Yayında! 🚀]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released"/>
+        <updated>2026-01-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.0 sürümü yayınlandı! Bu sürüm, uzun zamandır beklenen VIP Transfer Modülü, gelişmiş rota yönetimi ve esnek fiyatlandırma motoru gibi büyük özellikler içeriyor.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.0</strong> sürümü yayınlandı! Bu sürüm, uzun zamandır beklenen <strong>VIP Transfer Modülü</strong>, gelişmiş rota yönetimi ve esnek fiyatlandırma motoru gibi büyük özellikler içeriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkanlar">🌟 Öne Çıkanlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#-%C3%B6ne-%C3%A7%C4%B1kanlar" class="hash-link" aria-label="Direct link to 🌟 Öne Çıkanlar" title="Direct link to 🌟 Öne Çıkanlar" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü-şoförlü-hizmet">🚀 VIP Transfer Modülü (Şoförlü Hizmet)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#-vip-transfer-mod%C3%BCl%C3%BC-%C5%9Fof%C3%B6rl%C3%BC-hizmet" class="hash-link" aria-label="Direct link to 🚀 VIP Transfer Modülü (Şoförlü Hizmet)" title="Direct link to 🚀 VIP Transfer Modülü (Şoförlü Hizmet)" translate="no">​</a></h3>
+<p>Artık sadece araç kiralama değil, <strong>VIP Transfer</strong> hizmeti de verebilirsiniz!</p>
+<ul>
+<li class=""><strong>Noktadan Noktaya Transfer:</strong> Belirli lokasyonlar arasında sabit veya mesafeye dayalı fiyatlandırma.</li>
+<li class=""><strong>Şoförlü Araç Kiralama:</strong> Saatlik veya günlük şoförlü araç opsiyonları.</li>
+<li class=""><strong>Ekstra Hizmetler:</strong> Karşılama, bebek koltuğu, ikramlar gibi ekstralar.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-rota-ve-lokasyon-yönetimi">🗺️ Rota ve Lokasyon Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#%EF%B8%8F-rota-ve-lokasyon-y%C3%B6netimi" class="hash-link" aria-label="Direct link to 🗺️ Rota ve Lokasyon Yönetimi" title="Direct link to 🗺️ Rota ve Lokasyon Yönetimi" translate="no">​</a></h3>
+<p>Admin panelinden detaylı <strong>Rota Yönetimi</strong> yapabilirsiniz.</p>
+<ul>
+<li class="">Kalkış ve Varış noktaları için özel fiyatlar tanımlayın.</li>
+<li class="">İki nokta arasındaki mesafeyi ve süreyi otomatik hesaplayın veya manuel girin.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-esnek-fiyatlandırma-motoru">💰 Esnek Fiyatlandırma Motoru<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#-esnek-fiyatland%C4%B1rma-motoru" class="hash-link" aria-label="Direct link to 💰 Esnek Fiyatlandırma Motoru" title="Direct link to 💰 Esnek Fiyatlandırma Motoru" translate="no">​</a></h3>
+<p>Transferler için gelişmiş fiyatlandırma seçenekleri:</p>
+<ul>
+<li class=""><strong>Sabit Fiyat:</strong> "Havalimanı -&gt; Şehir Merkezi: 500 TL" gibi sabit rotalar oluşturun.</li>
+<li class=""><strong>Mesafe Bazlı:</strong> KM başına ücretlendirme ile dinamik fiyatlar hesaplayın.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gelişmiş-transfer-arama">🔍 Gelişmiş Transfer Arama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#-geli%C5%9Fmi%C5%9F-transfer-arama" class="hash-link" aria-label="Direct link to 🔍 Gelişmiş Transfer Arama" title="Direct link to 🔍 Gelişmiş Transfer Arama" translate="no">​</a></h3>
+<p>Yeni <strong><code>[mhm_rentiva_transfer_search]</code></strong> kısa kodu ile web sitenize profesyonel bir transfer arama motoru ekleyin.</p>
+<ul>
+<li class="">Tarih, saat, kalkış ve varış noktası seçimi.</li>
+<li class="">Yolcu sayısı ve bagaj kapasitesine göre araç filtreleme.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-operasyonel-kontrol-buffer-time">🛡️ Operasyonel Kontrol (Buffer Time)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#%EF%B8%8F-operasyonel-kontrol-buffer-time" class="hash-link" aria-label="Direct link to 🛡️ Operasyonel Kontrol (Buffer Time)" title="Direct link to 🛡️ Operasyonel Kontrol (Buffer Time)" translate="no">​</a></h3>
+<p>Araçlarınızın temizliği ve hazırlığı için iki rezervasyon arasına otomatik <strong>Tampon Süre (Buffer Time)</strong> ekleyebilirsiniz. Artık araçlarınızın "Müsait" durumu daha gerçekçi yönetiliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-düzeltmeler-ve-i̇yileştirmeler">🛠️ Düzeltmeler ve İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/en/blog/v4-6-0-released#%EF%B8%8F-d%C3%BCzeltmeler-ve-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="Direct link to 🛠️ Düzeltmeler ve İyileştirmeler" title="Direct link to 🛠️ Düzeltmeler ve İyileştirmeler" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Cart &amp; Payment:</strong> WooCommerce sepet entegrasyonu "Depozito" veya "Tam Ödeme" seçenekleriyle güçlendirildi.</li>
+<li class=""><strong>Data Integrity:</strong> Transfer detayları (kalkış/varış, yolcu sayısı) artık sipariş notlarına ve meta verilerine eksiksiz kaydediliyor.</li>
+</ul>
+<hr>
+<p><strong>Nasıl Güncellerim?</strong>
+WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun yaşarsanız lütfen GitHub üzerinden veya destek sayfamızdan bize ulaşın.</p>
+<p>Keyifli sürüşler! 🏎️💨</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="v4.6.0" term="v4.6.0"/>
+        <category label="vip-transfer" term="vip-transfer"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[v4.5.5 Yayında! 🚀]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/en/blog/v4-5-5-released</id>
