@@ -126,6 +126,11 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "features-usage/vehicle-settings",
+              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "features-usage/vehicles",
               "path": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles",
               "sidebar": "tutorialSidebar"

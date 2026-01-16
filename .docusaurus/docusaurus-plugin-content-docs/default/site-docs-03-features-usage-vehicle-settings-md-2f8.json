@@ -1,0 +1,28 @@
+{
+  "id": "features-usage/vehicle-settings",
+  "title": "Vehicle Settings",
+  "description": "MHM Rentiva > Vehicle Settings, araçlarınızda hangi detayların, özelliklerin ve ekipmanların kullanılacağını yapılandırdığınız alandır. Bu panel sayesinde formlarda ve araç kartlarında gereksiz alanları gizleyebilir veya kendi özel alanlarınızı ekleyebilirsiniz.",
+  "source": "@site/docs/03-features-usage/vehicle-settings.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/vehicle-settings",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/vehicle-settings.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "vehicle-settings",
+    "title": "Vehicle Settings",
+    "sidebar_label": "Vehicle Settings"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Shortcodes (Kısa Kodlar)",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes"
+  },
+  "next": {
+    "title": "Vehicles Sayfası",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles"
+  }
+}

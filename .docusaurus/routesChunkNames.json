@@ -101,17 +101,17 @@
       "plugin": "138e0e15"
     }
   },
-  "/mhm-rentiva-docs/en/docs-ae6": {
+  "/mhm-rentiva-docs/en/docs-317": {
     "__comp": "5e95c892",
     "__context": {
       "plugin": "aba21aa0"
     }
   },
-  "/mhm-rentiva-docs/en/docs/next-ed5": {
+  "/mhm-rentiva-docs/en/docs/next-4da": {
     "__comp": "a7bd4aaa",
     "__props": "9aec45d0"
   },
-  "/mhm-rentiva-docs/en/docs/next-342": {
+  "/mhm-rentiva-docs/en/docs/next-465": {
     "__comp": "a94703ab"
   },
   "/mhm-rentiva-docs/en/docs/next/-772": {
@@ -209,6 +209,10 @@
   "/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes-480": {
     "__comp": "17896441",
     "content": "43ef4251"
+  },
+  "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings-4af": {
+    "__comp": "17896441",
+    "content": "2f8270d3"
   },
   "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles-732": {
     "__comp": "17896441",

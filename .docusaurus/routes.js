@@ -54,15 +54,15 @@ export default [
   },
   {
     path: '/mhm-rentiva-docs/en/docs',
-    component: ComponentCreator('/mhm-rentiva-docs/en/docs', 'ae6'),
+    component: ComponentCreator('/mhm-rentiva-docs/en/docs', '317'),
     routes: [
       {
         path: '/mhm-rentiva-docs/en/docs/next',
-        component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', 'ed5'),
+        component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '4da'),
         routes: [
           {
             path: '/mhm-rentiva-docs/en/docs/next',
-            component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '342'),
+            component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '465'),
             routes: [
               {
                 path: '/mhm-rentiva-docs/en/docs/next/',
@@ -205,6 +205,12 @@ export default [
               {
                 path: '/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes',
                 component: ComponentCreator('/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes', '480'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings',
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings', '4af'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
