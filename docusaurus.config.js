@@ -101,6 +101,11 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
+          {
+            type: 'docsVersionDropdown',
+            position: 'left',
+            dropdownActiveClassDisabled: true,
+          },
           { to: '/blog', label: 'Sürüm Notları', position: 'left' },
           {
             type: 'localeDropdown',
