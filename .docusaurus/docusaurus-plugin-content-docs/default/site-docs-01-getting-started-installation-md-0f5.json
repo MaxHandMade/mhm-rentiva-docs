@@ -1,24 +1,29 @@
 {
   "id": "getting-started/installation",
-  "title": "Kurulum ve İlk Ayarlar Rehberi",
+  "title": "Kurulum ve İlk Ayarlar",
   "description": "MHM Rentiva eklentisini kurmak ve işletmeye hazır hale getirmek için izlemeniz gereken adımlar aşağıdadır. Bu rehber, kurulumdan ilk rezervasyon denemesine kadar olan süreci kapsar.",
   "source": "@site/docs/01-getting-started/installation.md",
   "sourceDirName": "01-getting-started",
   "slug": "/getting-started/installation",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/getting-started/installation",
+  "permalink": "/mhm-rentiva-docs/docs/next/getting-started/installation",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/01-getting-started/installation.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "frontMatter": {
+    "id": "installation",
+    "title": "Kurulum ve İlk Ayarlar",
+    "sidebar_label": "Kurulum",
+    "slug": "/getting-started/installation"
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Documentation Home",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/"
+    "title": "Başlangıç Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/next/category/başlangıç-rehberi"
   },
   "next": {
-    "title": "Kurulum Sonrası Kontrol Listesi",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/getting-started/post-install-checklist"
+    "title": "Kontrol Listesi",
+    "permalink": "/mhm-rentiva-docs/docs/next/getting-started/checklist"
   }
 }

@@ -1,3 +1,10 @@
+---
+id: messages
+title: Mesajlaşma Sistemi
+sidebar_label: Mesajlar
+slug: /features-usage/messages
+---
+
 # Messages Sayfası
 
 `MHM Rentiva > Messages`, müşterilerinizle yaptığınız tüm iletişimi tek yerde toplayan destek merkezidir. Rezervasyonlar, ödemeler veya genel sorularla ilgili mesajlar bu ekranda listelenir; cevap, durum ve öncelik yönetimi buradan yapılır.

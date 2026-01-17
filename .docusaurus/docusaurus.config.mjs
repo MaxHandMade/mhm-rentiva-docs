@@ -29,7 +29,7 @@ export default {
     "experimental_router": "browser"
   },
   "url": "https://MaxHandMade.github.io",
-  "baseUrl": "/mhm-rentiva-docs/en/",
+  "baseUrl": "/mhm-rentiva-docs/",
   "organizationName": "MaxHandMade",
   "projectName": "mhm-rentiva-docs",
   "onBrokenLinks": "warn",
@@ -83,7 +83,8 @@ export default {
       "title": "MHM Rentiva",
       "logo": {
         "alt": "MHM Rentiva Logo",
-        "src": "img/logo.svg"
+        "src": "img/mhm-logo.png",
+        "srcDark": "img/mhm-logo-white.png"
       },
       "items": [
         {
@@ -91,6 +92,13 @@ export default {
           "sidebarId": "tutorialSidebar",
           "position": "left",
           "label": "Documentation"
+        },
+        {
+          "type": "docsVersionDropdown",
+          "position": "left",
+          "dropdownActiveClassDisabled": true,
+          "dropdownItemsBefore": [],
+          "dropdownItemsAfter": []
         },
         {
           "to": "/blog",
@@ -115,42 +123,58 @@ export default {
       "style": "dark",
       "links": [
         {
-          "title": "Docs",
+          "title": "Dökümantasyon",
           "items": [
             {
-              "label": "Getting Started",
+              "label": "Hızlı Başlangıç",
               "to": "/docs/getting-started/installation"
             },
             {
-              "label": "User Guide",
+              "label": "Kullanım Kılavuzu",
               "to": "/docs/usage/shortcodes"
+            },
+            {
+              "label": "Geliştirici Belgeleri",
+              "to": "/docs/developer/intro"
             }
           ]
         },
         {
-          "title": "Community",
+          "title": "Topluluk",
           "items": [
             {
-              "label": "WordPress Support",
+              "label": "WordPress Destek Forumu",
               "href": "https://wordpress.org/support/plugin/mhm-rentiva"
             },
             {
-              "label": "GitHub",
+              "label": "GitHub Deposu",
               "href": "https://github.com/MaxHandMade/mhm-rentiva"
+            },
+            {
+              "label": "Hata Bildir",
+              "href": "https://github.com/MaxHandMade/mhm-rentiva/issues"
+            },
+            {
+              "label": "YouTube Kanalı",
+              "href": "https://www.youtube.com/channel/UC3qBE6ZCCEc8ugFUYXwtcpA"
             }
           ]
         },
         {
-          "title": "More",
+          "title": "Diğer",
           "items": [
             {
-              "label": "Blog",
+              "label": "Sürüm Notları",
               "to": "/blog"
+            },
+            {
+              "label": "Resmi Web Sitesi",
+              "href": "https://maxhandmade.com"
             }
           ]
         }
       ],
-      "copyright": "Copyright © 2026 MHM Development. Built with Docusaurus."
+      "copyright": "Copyright © 2026 MHM Development. Docusaurus ile hazırlanmıştır."
     },
     "prism": {
       "theme": {

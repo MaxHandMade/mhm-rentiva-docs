@@ -1,0 +1,29 @@
+{
+  "id": "features-usage/customers",
+  "title": "Müşteri Yönetimi",
+  "description": "MHM Rentiva > Customers, kayıtlı kullanıcılarınızın (müşterilerin) tüm geçmişini ve durumunu izleyebileceğiniz yönetim panelidir. Rezervasyon, mesaj ve ödeme bilgileri tek ekranda toplanır; bu sayede sadakat yönetimi ve destek süreçleri kolaylaşır.",
+  "source": "@site/versioned_docs/version-4.6.0/03-features-usage/customers.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/customers",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/customers",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/customers.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "customers",
+    "title": "Müşteri Yönetimi",
+    "sidebar_label": "Müşteriler",
+    "slug": "/features-usage/customers"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Rezervasyonlar",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/bookings"
+  },
+  "next": {
+    "title": "Dışa Aktarım",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/export"
+  }
+}

@@ -1,3 +1,10 @@
-# Troubleshooting
+---
+id: common-issues
+title: Sıkça Sorulan Sorular
+sidebar_label: Genel Sorunlar
+slug: /faq/common-issues
+---
 
-Common issues and solutions (To be prepared).
+# Sıkça Sorulan Sorular ve Sorun Giderme
+
+Bu bölüm, eklenti kullanımı sırasında karşılaşabileceğiniz yaygın sorunların çözümlerini içerir. (Hazırlanma aşamasında)

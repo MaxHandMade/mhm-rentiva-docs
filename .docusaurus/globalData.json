@@ -1,158 +1,173 @@
 {
   "docusaurus-plugin-content-docs": {
     "default": {
-      "path": "/mhm-rentiva-docs/en/docs",
+      "path": "/mhm-rentiva-docs/docs",
       "versions": [
         {
           "name": "current",
           "label": "Next",
           "isLast": false,
-          "path": "/mhm-rentiva-docs/en/docs/next",
+          "path": "/mhm-rentiva-docs/docs/next",
           "mainDocId": "intro",
           "docs": [
             {
-              "id": "admin/README",
-              "path": "/mhm-rentiva-docs/en/docs/next/admin/",
-              "sidebar": "tutorialSidebar"
-            },
-            {
               "id": "core-configuration/core-utilities",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/core-utilities",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/utilities",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/emails",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/emails",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/emails",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/license",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/license",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/license",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/payments",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/payments",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/payments",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/settings",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/settings",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/settings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/vehicle-settings",
-              "path": "/mhm-rentiva-docs/en/docs/next/core-configuration/vehicle-settings",
+              "path": "/mhm-rentiva-docs/docs/next/core-configuration/vehicle-settings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/database",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/database",
+              "path": "/mhm-rentiva-docs/docs/next/developer/database",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "developer/database-en",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/database-en",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "developer/list-table-overview",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/list-table-overview",
+              "id": "developer/list-table",
+              "path": "/mhm-rentiva-docs/docs/next/developer/list-table",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/rest-api",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/rest-api",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "developer/rest-api-tr",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/rest-api-tr",
+              "path": "/mhm-rentiva-docs/docs/next/developer/rest-api",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/test-suite",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/test-suite",
+              "path": "/mhm-rentiva-docs/docs/next/developer/test-suite",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/testing-checklists",
-              "path": "/mhm-rentiva-docs/en/docs/next/developer/testing-checklists",
+              "path": "/mhm-rentiva-docs/docs/next/developer/testing-checklists",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "faq/index",
-              "path": "/mhm-rentiva-docs/en/docs/next/faq/",
+              "id": "faq/common-issues",
+              "path": "/mhm-rentiva-docs/docs/next/faq/common-issues",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/additional-services",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/additional-services",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/additional-services",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/bookings",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/bookings",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/bookings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/customers",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/customers",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/customers",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/export",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/export",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/export",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/messages",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/messages",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/messages",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/post-types",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/post-types",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/post-types",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/reports",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/reports",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/reports",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/shortcodes",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/shortcodes",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/vehicle-settings",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/vehicle-settings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/vehicles",
-              "path": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/vehicles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/vip-transfer",
+              "path": "/mhm-rentiva-docs/docs/next/features-usage/vip-transfer",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/installation",
-              "path": "/mhm-rentiva-docs/en/docs/next/getting-started/installation",
+              "path": "/mhm-rentiva-docs/docs/next/getting-started/installation",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/post-install-checklist",
-              "path": "/mhm-rentiva-docs/en/docs/next/getting-started/post-install-checklist",
+              "path": "/mhm-rentiva-docs/docs/next/getting-started/checklist",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/setup-wizard",
-              "path": "/mhm-rentiva-docs/en/docs/next/getting-started/setup-wizard",
+              "path": "/mhm-rentiva-docs/docs/next/getting-started/setup-wizard",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "intro",
-              "path": "/mhm-rentiva-docs/en/docs/next/",
+              "path": "/mhm-rentiva-docs/docs/next/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/başlangıç-rehberi",
+              "path": "/mhm-rentiva-docs/docs/next/category/başlangıç-rehberi",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/temel-yapılandırma",
+              "path": "/mhm-rentiva-docs/docs/next/category/temel-yapılandırma",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/özellikler-ve-kullanım",
+              "path": "/mhm-rentiva-docs/docs/next/category/özellikler-ve-kullanım",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/geliştirici-rehberi",
+              "path": "/mhm-rentiva-docs/docs/next/category/geliştirici-rehberi",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/sss",
+              "path": "/mhm-rentiva-docs/docs/next/category/sss",
               "sidebar": "tutorialSidebar"
             }
           ],
@@ -160,7 +175,185 @@
           "sidebars": {
             "tutorialSidebar": {
               "link": {
-                "path": "/mhm-rentiva-docs/en/docs/next/",
+                "path": "/mhm-rentiva-docs/docs/next/",
+                "label": "intro"
+              }
+            }
+          }
+        },
+        {
+          "name": "4.6.0",
+          "label": "4.6.0",
+          "isLast": true,
+          "path": "/mhm-rentiva-docs/docs",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "core-configuration/core-utilities",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/utilities",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "core-configuration/emails",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/emails",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "core-configuration/license",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/license",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "core-configuration/payments",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/payments",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "core-configuration/settings",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "core-configuration/vehicle-settings",
+              "path": "/mhm-rentiva-docs/docs/core-configuration/vehicle-settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/database",
+              "path": "/mhm-rentiva-docs/docs/developer/database",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/list-table",
+              "path": "/mhm-rentiva-docs/docs/developer/list-table",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/rest-api",
+              "path": "/mhm-rentiva-docs/docs/developer/rest-api",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/test-suite",
+              "path": "/mhm-rentiva-docs/docs/developer/test-suite",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/testing-checklists",
+              "path": "/mhm-rentiva-docs/docs/developer/testing-checklists",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "faq/common-issues",
+              "path": "/mhm-rentiva-docs/docs/faq/common-issues",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/additional-services",
+              "path": "/mhm-rentiva-docs/docs/features-usage/additional-services",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/bookings",
+              "path": "/mhm-rentiva-docs/docs/features-usage/bookings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/customers",
+              "path": "/mhm-rentiva-docs/docs/features-usage/customers",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/export",
+              "path": "/mhm-rentiva-docs/docs/features-usage/export",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/messages",
+              "path": "/mhm-rentiva-docs/docs/features-usage/messages",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/post-types",
+              "path": "/mhm-rentiva-docs/docs/features-usage/post-types",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/reports",
+              "path": "/mhm-rentiva-docs/docs/features-usage/reports",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/shortcodes",
+              "path": "/mhm-rentiva-docs/docs/features-usage/shortcodes",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/vehicle-settings-usage",
+              "path": "/mhm-rentiva-docs/docs/features-usage/vehicle-settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/vehicles",
+              "path": "/mhm-rentiva-docs/docs/features-usage/vehicles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "features-usage/vip-transfer",
+              "path": "/mhm-rentiva-docs/docs/features-usage/vip-transfer",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/installation",
+              "path": "/mhm-rentiva-docs/docs/getting-started/installation",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/post-install-checklist",
+              "path": "/mhm-rentiva-docs/docs/getting-started/checklist",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/setup-wizard",
+              "path": "/mhm-rentiva-docs/docs/getting-started/setup-wizard",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/mhm-rentiva-docs/docs/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/başlangıç-rehberi",
+              "path": "/mhm-rentiva-docs/docs/category/başlangıç-rehberi",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/temel-yapılandırma",
+              "path": "/mhm-rentiva-docs/docs/category/temel-yapılandırma",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/özellikler-ve-kullanım",
+              "path": "/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/geliştirici-rehberi",
+              "path": "/mhm-rentiva-docs/docs/category/geliştirici-rehberi",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/sss",
+              "path": "/mhm-rentiva-docs/docs/category/sss",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/mhm-rentiva-docs/docs/",
                 "label": "intro"
               }
             }
@@ -169,148 +362,148 @@
         {
           "name": "4.5.5",
           "label": "4.5.5",
-          "isLast": true,
-          "path": "/mhm-rentiva-docs/en/docs",
+          "isLast": false,
+          "path": "/mhm-rentiva-docs/docs/4.5.5",
           "mainDocId": "intro",
           "docs": [
             {
               "id": "admin/README",
-              "path": "/mhm-rentiva-docs/en/docs/admin/",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/admin/",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/core-utilities",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/core-utilities",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/core-utilities",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/emails",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/emails",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/emails",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/license",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/license",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/license",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/payments",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/payments",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/payments",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/settings",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/settings",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/settings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "core-configuration/vehicle-settings",
-              "path": "/mhm-rentiva-docs/en/docs/core-configuration/vehicle-settings",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/vehicle-settings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/database",
-              "path": "/mhm-rentiva-docs/en/docs/developer/database",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/database",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/database-en",
-              "path": "/mhm-rentiva-docs/en/docs/developer/database-en",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/database-en",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/list-table-overview",
-              "path": "/mhm-rentiva-docs/en/docs/developer/list-table-overview",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/list-table-overview",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/rest-api",
-              "path": "/mhm-rentiva-docs/en/docs/developer/rest-api",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/rest-api",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/rest-api-tr",
-              "path": "/mhm-rentiva-docs/en/docs/developer/rest-api-tr",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/rest-api-tr",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/test-suite",
-              "path": "/mhm-rentiva-docs/en/docs/developer/test-suite",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/test-suite",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "developer/testing-checklists",
-              "path": "/mhm-rentiva-docs/en/docs/developer/testing-checklists",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/developer/testing-checklists",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "faq/index",
-              "path": "/mhm-rentiva-docs/en/docs/faq/",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/faq/",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/additional-services",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/additional-services",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/additional-services",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/bookings",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/bookings",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/bookings",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/customers",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/customers",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/customers",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/export",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/export",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/export",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/messages",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/messages",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/messages",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/post-types",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/post-types",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/post-types",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/reports",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/reports",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/reports",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/shortcodes",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/shortcodes",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/shortcodes",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "features-usage/vehicles",
-              "path": "/mhm-rentiva-docs/en/docs/features-usage/vehicles",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/features-usage/vehicles",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/installation",
-              "path": "/mhm-rentiva-docs/en/docs/getting-started/installation",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/getting-started/installation",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/post-install-checklist",
-              "path": "/mhm-rentiva-docs/en/docs/getting-started/post-install-checklist",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/getting-started/post-install-checklist",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "getting-started/setup-wizard",
-              "path": "/mhm-rentiva-docs/en/docs/getting-started/setup-wizard",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/getting-started/setup-wizard",
               "sidebar": "tutorialSidebar"
             },
             {
               "id": "intro",
-              "path": "/mhm-rentiva-docs/en/docs/",
+              "path": "/mhm-rentiva-docs/docs/4.5.5/",
               "sidebar": "tutorialSidebar"
             }
           ],
@@ -318,7 +511,7 @@
           "sidebars": {
             "tutorialSidebar": {
               "link": {
-                "path": "/mhm-rentiva-docs/en/docs/",
+                "path": "/mhm-rentiva-docs/docs/4.5.5/",
                 "label": "intro"
               }
             }

@@ -1,0 +1,29 @@
+{
+  "id": "getting-started/setup-wizard",
+  "title": "Kurulum Sihirbazı",
+  "description": "Rentiva’yı aktif eder etmez karşınıza çıkan Setup Wizard, eklentiyi birkaç dakikada çalışır hâle getirmeniz için tasarlandı. Sistem gereksinimlerinden zorunlu sayfalara, e-posta ve ödeme ayarlarından ön yüzde gözükecek varsayılanlara kadar tüm kritik noktaları tek akışta tamamlamanıza yardım eder.",
+  "source": "@site/versioned_docs/version-4.6.0/01-getting-started/setup-wizard.md",
+  "sourceDirName": "01-getting-started",
+  "slug": "/getting-started/setup-wizard",
+  "permalink": "/mhm-rentiva-docs/docs/getting-started/setup-wizard",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/01-getting-started/setup-wizard.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "setup-wizard",
+    "title": "Kurulum Sihirbazı",
+    "sidebar_label": "Kurulum Sihirbazı",
+    "slug": "/getting-started/setup-wizard"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Kontrol Listesi",
+    "permalink": "/mhm-rentiva-docs/docs/getting-started/checklist"
+  },
+  "next": {
+    "title": "Temel Yapılandırma",
+    "permalink": "/mhm-rentiva-docs/docs/category/temel-yapılandırma"
+  }
+}

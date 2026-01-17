@@ -1,24 +1,29 @@
 {
   "id": "getting-started/setup-wizard",
-  "title": "Kurulum Sihirbazı (Setup Wizard)",
+  "title": "Kurulum Sihirbazı",
   "description": "Rentiva’yı aktif eder etmez karşınıza çıkan Setup Wizard, eklentiyi birkaç dakikada çalışır hâle getirmeniz için tasarlandı. Sistem gereksinimlerinden zorunlu sayfalara, e-posta ve ödeme ayarlarından ön yüzde gözükecek varsayılanlara kadar tüm kritik noktaları tek akışta tamamlamanıza yardım eder.",
   "source": "@site/docs/01-getting-started/setup-wizard.md",
   "sourceDirName": "01-getting-started",
   "slug": "/getting-started/setup-wizard",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/getting-started/setup-wizard",
+  "permalink": "/mhm-rentiva-docs/docs/next/getting-started/setup-wizard",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/01-getting-started/setup-wizard.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "frontMatter": {
+    "id": "setup-wizard",
+    "title": "Kurulum Sihirbazı",
+    "sidebar_label": "Kurulum Sihirbazı",
+    "slug": "/getting-started/setup-wizard"
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Kurulum Sonrası Kontrol Listesi",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/getting-started/post-install-checklist"
+    "title": "Kontrol Listesi",
+    "permalink": "/mhm-rentiva-docs/docs/next/getting-started/checklist"
   },
   "next": {
-    "title": "Core Utilities ve Yardımcı Sayfalar",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/core-utilities"
+    "title": "Temel Yapılandırma",
+    "permalink": "/mhm-rentiva-docs/docs/next/category/temel-yapılandırma"
   }
 }

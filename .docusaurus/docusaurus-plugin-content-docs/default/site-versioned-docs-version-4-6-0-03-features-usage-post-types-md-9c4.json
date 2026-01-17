@@ -1,0 +1,29 @@
+{
+  "id": "features-usage/post-types",
+  "title": "Kayıt Türleri (Post Types)",
+  "description": "MHM Rentiva, araç kiralama süreçlerini yönetmek için vehicle adında özel bir yazı türü (Custom Post Type) kullanır. Bu yazı türü, kiralık araçlarınızın tüm bilgilerini saklar ve yönetir.",
+  "source": "@site/versioned_docs/version-4.6.0/03-features-usage/post-types.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/post-types",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/post-types",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/post-types.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "post-types",
+    "title": "Kayıt Türleri (Post Types)",
+    "sidebar_label": "Kayıt Türleri",
+    "slug": "/features-usage/post-types"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Mesajlar",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/messages"
+  },
+  "next": {
+    "title": "Raporlar",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/reports"
+  }
+}

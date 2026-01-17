@@ -1,3 +1,10 @@
+---
+id: installation
+title: Kurulum ve İlk Ayarlar
+sidebar_label: Kurulum
+slug: /getting-started/installation
+---
+
 # Kurulum ve İlk Ayarlar Rehberi
 
 MHM Rentiva eklentisini kurmak ve işletmeye hazır hale getirmek için izlemeniz gereken adımlar aşağıdadır. Bu rehber, kurulumdan ilk rezervasyon denemesine kadar olan süreci kapsar.

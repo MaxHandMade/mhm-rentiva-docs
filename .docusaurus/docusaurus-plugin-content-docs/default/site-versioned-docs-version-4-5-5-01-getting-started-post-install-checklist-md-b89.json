@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.5.5/01-getting-started/post-install-checklist.md",
   "sourceDirName": "01-getting-started",
   "slug": "/getting-started/post-install-checklist",
-  "permalink": "/mhm-rentiva-docs/en/docs/getting-started/post-install-checklist",
+  "permalink": "/mhm-rentiva-docs/docs/4.5.5/getting-started/post-install-checklist",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/01-getting-started/post-install-checklist.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Kurulum ve İlk Ayarlar Rehberi",
-    "permalink": "/mhm-rentiva-docs/en/docs/getting-started/installation"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/getting-started/installation"
   },
   "next": {
     "title": "Kurulum Sihirbazı (Setup Wizard)",
-    "permalink": "/mhm-rentiva-docs/en/docs/getting-started/setup-wizard"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/getting-started/setup-wizard"
   }
 }

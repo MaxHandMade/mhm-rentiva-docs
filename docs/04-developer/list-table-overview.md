@@ -1,3 +1,10 @@
+---
+id: list-table
+title: Liste Tablo Notları
+sidebar_label: Liste Tablo Notları
+slug: /developer/list-table
+---
+
 # VehicleColumns (List Table) Notları
 
 Bu notlar `src/Admin/Vehicle/ListTable/VehicleColumns.php` dosyasındaki ana fonksiyonları özetler. Dosya, araç listesi görünümünü geliştirmek ve ek arabirim bileşenleri eklemekten sorumludur.

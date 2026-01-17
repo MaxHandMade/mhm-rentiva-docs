@@ -1,10 +1,12 @@
+```
 ---
-sidebar_position: 4
+id: vip-transfer
 title: VIP Transfer Modülü
-description: Şoförlü araç kiralama ve VIP transfer hizmetlerinin yönetimi.
+sidebar_label: VIP Transfer
+slug: /features-usage/vip-transfer
 ---
 
-# VIP Transfer Modülü
+# VIP Transfer Modülü (Yeni)
 
 MHM Rentiva v4.5.3 ile gelen **VIP Transfer Modülü**, kullanıcılarınızın A noktasından B noktasına şoförlü araç transferi hizmeti almasını ve rezervasyon yapmasını sağlar. Bu modül; mesafe bazlı veya sabit fiyatlandırma, araç kapasitesi yönetimi ve WooCommerce entegrasyonu ile esnek bir altyapı sunar.
 

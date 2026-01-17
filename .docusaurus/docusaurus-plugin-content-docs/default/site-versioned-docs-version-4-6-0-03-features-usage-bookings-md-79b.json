@@ -1,0 +1,29 @@
+{
+  "id": "features-usage/bookings",
+  "title": "Rezervasyon Yönetimi",
+  "description": "MHM Rentiva > Bookings, tüm rezervasyonların merkezi yönetim ekranıdır. Hem çevrim içi hem de manuel oluşturduğunuz rezervasyonlar burada listelenir; durum değişiklikleri, ödeme kontrolleri ve müşteri iletişimi bu sayfadan yürütülür.",
+  "source": "@site/versioned_docs/version-4.6.0/03-features-usage/bookings.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/bookings",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/bookings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/bookings.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "bookings",
+    "title": "Rezervasyon Yönetimi",
+    "sidebar_label": "Rezervasyonlar",
+    "slug": "/features-usage/bookings"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Ek Hizmetler",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/additional-services"
+  },
+  "next": {
+    "title": "Müşteriler",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/customers"
+  }
+}

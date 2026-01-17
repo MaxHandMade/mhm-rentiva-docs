@@ -1,3 +1,10 @@
+---
+id: shortcodes
+title: Kısa Kodlar (Shortcodes)
+sidebar_label: Kısa Kodlar
+slug: /features-usage/shortcodes
+---
+
 # Shortcodes (Kısa Kodlar)
 
 MHM Rentiva, sitenizin çeşitli yerlerinde araç listeleri, formlar ve diğer özellikleri görüntülemek için kapsamlı bir kısa kod seti sunar. Aşağıda mevcut tüm kısa kodların bir listesi ve kullanım detayları bulunmaktadır.

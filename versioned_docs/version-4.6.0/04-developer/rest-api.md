@@ -1,33 +1,40 @@
-# REST API Development Guide
+---
+id: rest-api
+title: REST API Rehberi
+sidebar_label: REST API
+slug: /developer/rest-api
+---
 
-## 📁 REST API File Structure
+# REST API Oluşturma Rehberi
 
-REST API endpoints are organized in the following folders:
+## 📁 REST API Dosya Yapısı
+
+REST API endpoint'leri şu klasörlerde organize edilir:
 
 ```
 src/Admin/REST/
-├── APIKeyManager.php        # API key management
-├── Availability.php          # Availability endpoint
-├── EndpointListHelper.php   # Endpoint list helper
-├── ErrorHandler.php          # Error handling
+├── APIKeyManager.php        # API anahtarı yönetimi
+├── Availability.php          # Müsaitlik endpoint'i
+├── EndpointListHelper.php   # Endpoint listesi helper'ı
+├── ErrorHandler.php          # Hata yönetimi
 ├── Helpers/
-│   ├── AuthHelper.php        # ✅ Uses RESTSettings
-│   ├── ValidationHelper.php  # Validation helpers
-│   └── SecureToken.php       # Token management
+│   ├── AuthHelper.php        # ✅ RESTSettings kullanıyor
+│   ├── ValidationHelper.php  # Validasyon helper'ları
+│   └── SecureToken.php       # Token yönetimi
 └── Settings/
-    └── RESTSettings.php      # ✅ REST Settings (configuration)
+    └── RESTSettings.php      # ✅ REST Settings (ayarlar)
 
 src/Admin/Payment/REST/
-├── Payments.php              # General payment endpoints (wrapper)
-├── Payments/                 # Payment endpoints
+├── Payments.php              # Genel ödeme endpoint'leri (wrapper)
+├── Payments/                 # Ödeme endpoint'leri
 │   ├── Payments.php
 │   ├── CreateIntent.php
 │   ├── Refund.php
 │   └── Helpers/
 │       ├── ResponseHelper.php
 │       └── Validation.php
-├── PayPal.php               # PayPal endpoints (wrapper)
-├── PayPal/                   # PayPal endpoints
+├── PayPal.php               # PayPal endpoint'leri (wrapper)
+├── PayPal/                   # PayPal endpoint'leri
 │   ├── PayPal.php
 │   ├── CreateOrder.php
 │   ├── CapturePayment.php
@@ -37,8 +44,8 @@ src/Admin/Payment/REST/
 │       ├── Auth.php
 │       ├── RateLimit.php
 │       └── Validation.php
-├── PayTR.php                # PayTR endpoints (wrapper)
-├── PayTR/                   # PayTR endpoints
+├── PayTR.php                # PayTR endpoint'leri (wrapper)
+├── PayTR/                   # PayTR endpoint'leri
 │   ├── CreateToken.php
 │   ├── Callback.php
 │   └── Helpers/
@@ -55,13 +62,13 @@ src/Admin/Payment/REST/
         └── SignatureVerifier.php
 
 src/Admin/Messages/REST/
-├── Messages.php             # Message endpoints (wrapper)
-├── Admin/                   # Admin message endpoints
+├── Messages.php             # Mesaj endpoint'leri (wrapper)
+├── Admin/                   # Admin mesaj endpoint'leri
 │   ├── GetMessages.php
 │   ├── GetMessage.php
 │   ├── UpdateStatus.php
 │   └── ReplyToMessage.php
-├── Customer/               # Customer message endpoints
+├── Customer/               # Müşteri mesaj endpoint'leri
 │   ├── GetMessages.php
 │   ├── SendMessage.php
 │   ├── GetThread.php
@@ -76,11 +83,11 @@ src/Admin/Messages/REST/
 
 ---
 
-## 🔨 Creating New REST API Endpoints
+## 🔨 Yeni REST API Endpoint Oluşturma
 
-### 1. Create New Endpoint File
+### 1. Yeni Endpoint Dosyası Oluştur
 
-Example: `src/Admin/REST/Vehicles.php`
+Örnek: `src/Admin/REST/Vehicles.php`
 
 ```php
 <?php declare(strict_types=1);
@@ -103,11 +110,11 @@ final class Vehicles
 
     public static function register_routes(): void
     {
-        // ✅ Security check using RESTSettings
+        // ✅ RESTSettings kullanarak güvenlik kontrolü
         register_rest_route('mhm-rentiva/v1', '/vehicles', [
             'methods' => 'GET',
             'callback' => [self::class, 'get_vehicles'],
-            'permission_callback' => [self::class, 'permission_check'], // ✅ Security check
+            'permission_callback' => [self::class, 'permission_check'], // ✅ Güvenlik kontrolü
             'args' => [
                 'page' => [
                     'type' => 'integer',
@@ -125,7 +132,7 @@ final class Vehicles
     }
 
     /**
-     * Permission callback - Security check using RESTSettings
+     * Permission callback - RESTSettings kullanarak güvenlik kontrolü
      */
     public static function permission_check(\WP_REST_Request $request): bool|\WP_Error
     {
@@ -139,9 +146,9 @@ final class Vehicles
         }
 
         // ✅ 2. Rate limiting check
-        // Note: get_client_ip() is private, so use AuthHelper or $_SERVER
+        // Not: get_client_ip() private olduğu için AuthHelper kullanın
         $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-        $identifier = $client_ip; // or user_id, token, etc.
+        $identifier = $client_ip; // veya user_id, token, vb.
         
         if (!RESTSettings::check_rate_limit($identifier, 'default')) {
             return new \WP_Error(
@@ -189,9 +196,9 @@ final class Vehicles
 
 ---
 
-### 2. Register in Plugin.php
+### 2. Plugin.php'ye Kaydet
 
-Add to `src/Plugin.php` in `initialize_rest_services()` or similar function:
+`src/Plugin.php` dosyasında `initialize_rest_services()` veya benzer bir fonksiyona ekleyin:
 
 ```php
 if (class_exists('MHMRentiva\Admin\REST\Vehicles')) {
@@ -201,21 +208,21 @@ if (class_exists('MHMRentiva\Admin\REST\Vehicles')) {
 
 ---
 
-## 🔐 RESTSettings Integration
+## 🔐 RESTSettings Entegrasyonu
 
-### Migrating Existing Endpoints to RESTSettings
+### Mevcut Endpoint'leri RESTSettings'e Geçirme
 
-**Example:** Update `Availability.php` file:
+**Örnek:** `Availability.php` dosyasını güncelle:
 
 ```php
-// ❌ OLD (uses RateLimiter):
+// ❌ ESKİ (RateLimiter kullanıyor):
 public static function permission_check(): bool
 {
     $client_ip = \MHMRentiva\Admin\Core\Utilities\RateLimiter::getClientIP();
     return \MHMRentiva\Admin\Core\Utilities\RateLimiter::check($client_ip, 'general');
 }
 
-// ✅ NEW (uses RESTSettings):
+// ✅ YENİ (RESTSettings kullanıyor):
 public static function permission_check(\WP_REST_Request $request): bool|\WP_Error
 {
     // 1. Security check
@@ -224,7 +231,7 @@ public static function permission_check(\WP_REST_Request $request): bool|\WP_Err
     }
 
     // 2. Rate limiting check
-    // Note: get_client_ip() is private, so use $_SERVER directly or AuthHelper
+    // Not: get_client_ip() private olduğu için doğrudan $_SERVER kullanın veya AuthHelper kullanın
     $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     if (!RESTSettings::check_rate_limit($client_ip, 'default')) {
         return new \WP_Error('rate_limit_exceeded', 'Too many requests', ['status' => 429]);
@@ -236,14 +243,14 @@ public static function permission_check(\WP_REST_Request $request): bool|\WP_Err
 
 ---
 
-## 📍 Available REST API Endpoints
+## 📍 Mevcut REST API Endpoint'leri
 
-### Active Endpoints:
+### Aktif Endpoint'ler:
 
 1. **Availability**
    - `GET/POST /wp-json/mhm-rentiva/v1/availability`
    - `GET/POST /wp-json/mhm-rentiva/v1/availability/with-alternatives`
-   - **Note:** This endpoint does not yet use RESTSettings (uses old RateLimiter)
+   - **Not:** Bu endpoint henüz RESTSettings kullanmıyor (eski RateLimiter kullanıyor)
 
 2. **Messages** (Admin)
    - `GET /wp-json/mhm-rentiva/v1/messages`
@@ -278,30 +285,30 @@ public static function permission_check(\WP_REST_Request $request): bool|\WP_Err
 
 ---
 
-## ✅ RESTSettings Integration Checklist
+## ✅ RESTSettings Entegrasyon Kontrol Listesi
 
-When creating new endpoints:
+Yeni endpoint oluştururken:
 
-- [ ] Is `RESTSettings::check_security($request)` being used?
-- [ ] Is `RESTSettings::check_rate_limit($identifier, $type)` being used?
-- [ ] Is `permission_callback` properly implemented?
-- [ ] Is error handling present?
-- [ ] Is response format standardized?
+- [ ] `RESTSettings::check_security($request)` kullanılıyor mu?
+- [ ] `RESTSettings::check_rate_limit($identifier, $type)` kullanılıyor mu?
+- [ ] `permission_callback` doğru implement edildi mi?
+- [ ] Error handling var mı?
+- [ ] Response format standart mı?
 
-**Important Notes:**
-- `RESTSettings::get_client_ip()` method is **private** and cannot be called directly
-- Use `$_SERVER['REMOTE_ADDR']` to get IP address or use `AuthHelper` class
-- `AuthHelper::verifyAuth()` method performs both security and rate limiting checks
+**Önemli Notlar:**
+- `RESTSettings::get_client_ip()` metodu **private** olduğu için doğrudan çağrılamaz
+- IP adresini almak için `$_SERVER['REMOTE_ADDR']` kullanın veya `AuthHelper` sınıfını kullanın
+- `AuthHelper::verifyAuth()` metodu hem güvenlik hem rate limiting kontrolü yapar
 
 ---
 
-## 🎯 Example: New Vehicles Endpoint
+## 🎯 Örnek: Yeni Vehicles Endpoint'i
 
-Complete working example:
+Tam çalışan örnek:
 
 ```php
 // src/Admin/REST/Vehicles.php
 ```
 
-Would you like to create this file?
+Bu dosyayı oluşturmak ister misiniz?
 

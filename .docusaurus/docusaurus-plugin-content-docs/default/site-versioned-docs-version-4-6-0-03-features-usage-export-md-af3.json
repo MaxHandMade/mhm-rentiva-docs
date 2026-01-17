@@ -1,0 +1,29 @@
+{
+  "id": "features-usage/export",
+  "title": "Dışa Aktarım (Export)",
+  "description": "MHM Rentiva > Export, sistemdeki verileri dışa aktarmak için kullanılan araçtır. Rezervasyon, araç, müşteri, log gibi verileri CSV, JSON ve desteklenen diğer formatlarda indirebilirsiniz.",
+  "source": "@site/versioned_docs/version-4.6.0/03-features-usage/export.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/export",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/export",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/export.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "export",
+    "title": "Dışa Aktarım (Export)",
+    "sidebar_label": "Dışa Aktarım",
+    "slug": "/features-usage/export"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Müşteriler",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/customers"
+  },
+  "next": {
+    "title": "Mesajlar",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/messages"
+  }
+}

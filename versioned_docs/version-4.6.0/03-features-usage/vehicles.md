@@ -1,3 +1,10 @@
+---
+id: vehicles
+title: Araç Yönetimi
+sidebar_label: Araçlar
+slug: /features-usage/vehicles
+---
+
 # Vehicles Sayfası
 
 `MHM Rentiva > Vehicles`, filonuzdaki tüm araçları yönetebileceğiniz ana merkezdir. Varsayılan WordPress “post listesi” görünümü üzerine eklenen metrik kartları, aylık takvim ve hızlı düzenleme bileşenleri sayesinde hem durum takibini hem de düzenlemeleri tek noktadan yapabilirsiniz.
@@ -42,7 +49,7 @@
 ## İlgili Dokümanlar
 
 - [Vehicle Settings](vehicle-settings.md): Araç detay/özellik alanlarını açma/kapama, kısa kod sayfalarını belirleme.
-- [Vehicle Meta Yapısı](../getting-started/setup-wizard.md Araç kayıt ekranındaki meta alanlarının anlamı.
+- [Vehicle Meta Yapısı](../01-getting-started/setup-wizard.md) Araç kayıt ekranındaki meta alanlarının anlamı.
 - [Test Checklist](../04-developer/testing-checklists.md): Araç yönetimi test senaryoları.
 
 

@@ -20,6 +20,9 @@ function HomepageHeader() {
         <p className="hero__subtitle">
           <Translate>WordPress Araç Kiralama Eklentisi</Translate>
         </p>
+        <div className="margin-bottom--lg">
+          <img src="img/header-cover.png" alt="MHM Rentiva Cover" style={{ maxWidth: '800px', width: '100%', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }} />
+        </div>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"

@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.5.5/03-features-usage/customers.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/customers",
-  "permalink": "/mhm-rentiva-docs/en/docs/features-usage/customers",
+  "permalink": "/mhm-rentiva-docs/docs/4.5.5/features-usage/customers",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/03-features-usage/customers.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Bookings Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/bookings"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/features-usage/bookings"
   },
   "next": {
     "title": "Export Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/export"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/features-usage/export"
   }
 }

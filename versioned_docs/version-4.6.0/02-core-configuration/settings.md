@@ -1,3 +1,10 @@
+---
+id: settings
+title: Genel Ayarlar
+sidebar_label: Genel Ayarlar
+slug: /core-configuration/settings
+---
+
 # Ayarlar (Settings)
 
 MHM Rentiva, eklentinin davranışını özelleştirmeniz için kapsamlı bir ayar paneli sunar. Ayarlara **MHM Rentiva > Settings** menüsünden ulaşabilirsiniz.

@@ -1,0 +1,29 @@
+{
+  "id": "core-configuration/vehicle-settings",
+  "title": "Araç Ayarları",
+  "description": "MHM Rentiva > Vehicle Settings, araç kayıt ekranında hangi alanların gösterileceğini, hangi özellik ve ekipmanların kullanılacağını ve kısa kod sayfalarının atanacağını yöneten kontrol panelidir. Filonuz büyüdükçe standart alanları sadeleştirmek veya yeni alanlar eklemek için bu menüyü kullanırsınız.",
+  "source": "@site/versioned_docs/version-4.6.0/02-core-configuration/vehicle-settings.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/vehicle-settings",
+  "permalink": "/mhm-rentiva-docs/docs/core-configuration/vehicle-settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/02-core-configuration/vehicle-settings.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "vehicle-settings",
+    "title": "Araç Ayarları",
+    "sidebar_label": "Araç Ayarları",
+    "slug": "/core-configuration/vehicle-settings"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Genel Ayarlar",
+    "permalink": "/mhm-rentiva-docs/docs/core-configuration/settings"
+  },
+  "next": {
+    "title": "Özellikler ve Kullanım",
+    "permalink": "/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım"
+  }
+}

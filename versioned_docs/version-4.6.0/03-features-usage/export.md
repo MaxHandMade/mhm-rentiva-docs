@@ -1,3 +1,10 @@
+---
+id: export
+title: Dışa Aktarım (Export)
+sidebar_label: Dışa Aktarım
+slug: /features-usage/export
+---
+
 # Export Sayfası
 
 `MHM Rentiva > Export`, sistemdeki verileri dışa aktarmak için kullanılan araçtır. Rezervasyon, araç, müşteri, log gibi verileri CSV, JSON ve desteklenen diğer formatlarda indirebilirsiniz.
@@ -25,7 +32,7 @@
 ## İlgili Dokümanlar
 
 - [Reports](reports.md): Aynı verilerin grafik formda sunumu.
-- [Settings > Performance](settings.md#performance-ve-cache-ayarlari): Export sırasında kullanılan cache ayarları.
+- [Settings > Performance](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Export sırasında kullanılan cache ayarları.
 - [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Export süreçlerinin manuel testi.
 
 

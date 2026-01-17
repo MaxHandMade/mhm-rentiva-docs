@@ -1,3 +1,10 @@
+---
+id: setup-wizard
+title: Kurulum Sihirbazı
+sidebar_label: Kurulum Sihirbazı
+slug: /getting-started/setup-wizard
+---
+
 # Kurulum Sihirbazı (Setup Wizard)
 
 Rentiva’yı aktif eder etmez karşınıza çıkan Setup Wizard, eklentiyi birkaç dakikada çalışır hâle getirmeniz için tasarlandı. Sistem gereksinimlerinden zorunlu sayfalara, e-posta ve ödeme ayarlarından ön yüzde gözükecek varsayılanlara kadar tüm kritik noktaları tek akışta tamamlamanıza yardım eder.

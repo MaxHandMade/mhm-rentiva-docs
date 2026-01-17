@@ -1,24 +1,29 @@
 {
   "id": "core-configuration/payments",
-  "title": "Payment Configuration",
-  "description": "To be prepared.",
+  "title": "Ödeme Yapılandırması",
+  "description": "Bu döküman hazırlanma aşamasındadır.",
   "source": "@site/docs/02-core-configuration/payments.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/payments",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/payments",
+  "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/payments",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/payments.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "frontMatter": {
+    "id": "payments",
+    "title": "Ödeme Yapılandırması",
+    "sidebar_label": "Ödeme Ayarları",
+    "slug": "/core-configuration/payments"
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "License Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/license"
+    "title": "Lisans Yönetimi",
+    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/license"
   },
   "next": {
-    "title": "Ayarlar (Settings)",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/settings"
+    "title": "Genel Ayarlar",
+    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/settings"
   }
 }

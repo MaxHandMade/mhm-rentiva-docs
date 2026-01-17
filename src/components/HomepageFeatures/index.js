@@ -7,7 +7,7 @@ import Translate from '@docusaurus/Translate';
 const FeatureList = [
   {
     title: <Translate>Filo Yönetimi</Translate>,
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    image: 'img/filo-yonetimi-docs-01.webp',
     description: (
       <Translate>
         Araçlarınızı detaylı özellik setleri, bakım takvimi ve fiyatlandırma
@@ -17,7 +17,7 @@ const FeatureList = [
   },
   {
     title: <Translate>Güçlü Rezervasyon Altyapısı</Translate>,
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    image: 'img/guclu-rezervasyon-altyapisi-02.webp',
     description: (
       <Translate>
         Esnek rezervasyon formları, Stripe/PayPal/PayTR entegrasyonları ve
@@ -27,7 +27,7 @@ const FeatureList = [
   },
   {
     title: <Translate>Geliştirici Dostu</Translate>,
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    image: 'img/gelistirici-dostu-03.webp',
     description: (
       <Translate>
         Genişletilebilir mimari, REST API desteği ve zengin hook/filter
@@ -37,11 +37,15 @@ const FeatureList = [
   },
 ];
 
-function Feature({ Svg, title, description }) {
+function Feature({ Svg, image, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {image ? (
+          <img src={image} className={styles.featureSvg} alt={title} style={{ objectFit: 'contain' }} />
+        ) : (
+          <Svg className={styles.featureSvg} role="img" />
+        )}
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>

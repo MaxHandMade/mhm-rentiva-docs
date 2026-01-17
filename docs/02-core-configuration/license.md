@@ -1,3 +1,10 @@
+---
+id: license
+title: Lisans Yönetimi
+sidebar_label: Lisans Yönetimi
+slug: /core-configuration/license
+---
+
 # License Sayfası
 
 `MHM Rentiva > License`, eklentinin lisans anahtarını yönetmek, aktivasyon durumu ve kullanım kısıtlarını görmek için kullanılır.
@@ -19,7 +26,7 @@
 
 - [Settings](settings.md) – Lisanslı özelliklerin aktif olduğu sekmeler.
 - [Core Utilities](core-utilities.md) – API anahtarı ve bakım araçları.
-- [Troubleshooting](../troubleshooting/) *(hazırlanacak)* – Lisans aktivasyon sorunları için rehber.
+- [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Lisans aktivasyon sorunları için rehber.
 
 
 

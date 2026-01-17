@@ -1,3 +1,10 @@
+---
+id: post-install-checklist
+title: Kurulum Sonrası Kontrol Listesi
+sidebar_label: Kontrol Listesi
+slug: /getting-started/checklist
+---
+
 # Kurulum Sonrası Kontrol Listesi
 
 Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işaretleyin. Bu liste, canlıya çıkmadan önce temel fonksiyonların çalıştığını garanti altına alır.

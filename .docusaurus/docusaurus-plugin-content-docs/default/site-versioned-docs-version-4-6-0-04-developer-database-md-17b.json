@@ -1,0 +1,29 @@
+{
+  "id": "developer/database",
+  "title": "Veritabanı Yapısı",
+  "description": "Bu klasör, MHM Rentiva eklentisi için veritabanı yapısı ve meta key dokümantasyonunu içerir.",
+  "source": "@site/versioned_docs/version-4.6.0/04-developer/database.md",
+  "sourceDirName": "04-developer",
+  "slug": "/developer/database",
+  "permalink": "/mhm-rentiva-docs/docs/developer/database",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/04-developer/database.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "database",
+    "title": "Veritabanı Yapısı",
+    "sidebar_label": "Veritabanı",
+    "slug": "/developer/database"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Geliştirici Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/category/geliştirici-rehberi"
+  },
+  "next": {
+    "title": "Liste Tablo Notları",
+    "permalink": "/mhm-rentiva-docs/docs/developer/list-table"
+  }
+}

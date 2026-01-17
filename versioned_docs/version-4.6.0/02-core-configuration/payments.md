@@ -1,3 +1,10 @@
-# Payment Configuration
+---
+id: payments
+title: Ödeme Yapılandırması
+sidebar_label: Ödeme Ayarları
+slug: /core-configuration/payments
+---
 
-To be prepared.
+# Ödeme Yapılandırması
+
+Bu döküman hazırlanma aşamasındadır.

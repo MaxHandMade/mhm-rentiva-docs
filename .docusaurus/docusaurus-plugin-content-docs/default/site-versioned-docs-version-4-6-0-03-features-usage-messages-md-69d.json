@@ -1,0 +1,29 @@
+{
+  "id": "features-usage/messages",
+  "title": "Mesajlaşma Sistemi",
+  "description": "MHM Rentiva > Messages, müşterilerinizle yaptığınız tüm iletişimi tek yerde toplayan destek merkezidir. Rezervasyonlar, ödemeler veya genel sorularla ilgili mesajlar bu ekranda listelenir; cevap, durum ve öncelik yönetimi buradan yapılır.",
+  "source": "@site/versioned_docs/version-4.6.0/03-features-usage/messages.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/messages",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/messages",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/messages.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {
+    "id": "messages",
+    "title": "Mesajlaşma Sistemi",
+    "sidebar_label": "Mesajlar",
+    "slug": "/features-usage/messages"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Dışa Aktarım",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/export"
+  },
+  "next": {
+    "title": "Kayıt Türleri",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/post-types"
+  }
+}

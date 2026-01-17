@@ -1,3 +1,10 @@
+---
+id: reports
+title: Raporlama
+sidebar_label: Raporlar
+slug: /features-usage/reports
+---
+
 # Reports Sayfası
 
 `MHM Rentiva > Reports`, işletmenizin performansını görselleştiren kontrol panelidir. Gelir, rezervasyon ve araç kullanım istatistikleri farklı grafikler ve tablolarda sunulur.
@@ -25,7 +32,7 @@
 ## İlgili Dokümanlar
 
 - [Export](export.md): Raporlarda kullanılan ham verileri dışa aktarma.
-- [Settings](settings.md#performance-ve-cache-ayarlari): Rapor cache sürelerinin yönetimi.
+- [Settings](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Rapor cache sürelerinin yönetimi.
 - [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Raporlama doğrulama adımları.
 
 

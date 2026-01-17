@@ -1,3 +1,10 @@
+---
+id: test-suite
+title: Test Araçları (Suite)
+sidebar_label: Test Araçları
+slug: /developer/test-suite
+---
+
 # Test Suite Sayfası
 
 `MHM Rentiva > Test Suite`, geliştirme veya kalite kontrol süreçlerinde kullanılan yerleşik test aracıdır. Yalnızca geliştirici modunda veya yetkili kullanıcılar için görünür.
@@ -19,7 +26,7 @@
 
 - [Checklist](./testing-checklists.md) – Manuel test adımları.
 - [Core Utilities](core-utilities.md) – Cron ve bakım araçları.
-- [Troubleshooting](../troubleshooting/) *(hazırlanacak)* – Hata giderme rehberi.
+- [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Hata giderme rehberi.
 
 
 

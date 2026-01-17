@@ -1,3 +1,10 @@
+---
+id: core-utilities
+title: Yardımcı Araçlar
+sidebar_label: Yardımcı Araçlar
+slug: /core-configuration/utilities
+---
+
 # Core Utilities ve Yardımcı Sayfalar
 
 Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa ekler. Bu sayfa, ilgili menülere nereden ulaşacağınızı ve ne işe yaradıklarını özetler.
@@ -31,7 +38,7 @@ Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa
 
 - [Settings](settings.md) – Yardımcı sayfalardaki ayarların kökeni.
 - [Test Suite](test-suite.md) – Tanılama için otomatik testler.
-- [Troubleshooting](../troubleshooting/) *(hazırlanacak)* – Sorun çözme rehberi.
+- [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Sorun çözme rehberi.
 
 
 

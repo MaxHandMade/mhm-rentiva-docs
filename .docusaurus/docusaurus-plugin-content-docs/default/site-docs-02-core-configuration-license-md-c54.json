@@ -1,24 +1,29 @@
 {
   "id": "core-configuration/license",
-  "title": "License Sayfası",
+  "title": "Lisans Yönetimi",
   "description": "MHM Rentiva > License, eklentinin lisans anahtarını yönetmek, aktivasyon durumu ve kullanım kısıtlarını görmek için kullanılır.",
   "source": "@site/docs/02-core-configuration/license.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/license",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/license",
+  "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/license",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/license.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "frontMatter": {
+    "id": "license",
+    "title": "Lisans Yönetimi",
+    "sidebar_label": "Lisans Yönetimi",
+    "slug": "/core-configuration/license"
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Email Templates",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/emails"
+    "title": "E-posta Ayarları",
+    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/emails"
   },
   "next": {
-    "title": "Payment Configuration",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/payments"
+    "title": "Ödeme Ayarları",
+    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/payments"
   }
 }

@@ -1,3 +1,10 @@
-# Email Templates
+---
+id: emails
+title: E-posta Şablonları
+sidebar_label: E-posta Ayarları
+slug: /core-configuration/emails
+---
 
-To be prepared.
+# E-posta Şablonları
+
+Bu döküman hazırlanma aşamasındadır.

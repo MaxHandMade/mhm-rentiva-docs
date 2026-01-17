@@ -1,3 +1,10 @@
+---
+id: vehicle-settings
+title: Araç Ayarları
+sidebar_label: Araç Ayarları
+slug: /core-configuration/vehicle-settings
+---
+
 # Vehicle Settings Sayfası
 
 `MHM Rentiva > Vehicle Settings`, araç kayıt ekranında hangi alanların gösterileceğini, hangi özellik ve ekipmanların kullanılacağını ve kısa kod sayfalarının atanacağını yöneten kontrol panelidir. Filonuz büyüdükçe standart alanları sadeleştirmek veya yeni alanlar eklemek için bu menüyü kullanırsınız.

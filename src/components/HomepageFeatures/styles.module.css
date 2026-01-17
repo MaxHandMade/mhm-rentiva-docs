@@ -6,6 +6,11 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+  border-radius: 8px;
+  /* Optional: adds a nice touch to banners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Optional: adds depth */
 }

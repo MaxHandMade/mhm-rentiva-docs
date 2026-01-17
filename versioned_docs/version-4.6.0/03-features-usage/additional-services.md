@@ -1,3 +1,10 @@
+---
+id: additional-services
+title: Ek Hizmetler
+sidebar_label: Ek Hizmetler
+slug: /features-usage/additional-services
+---
+
 # Additional Services Sayfası
 
 `MHM Rentiva > Additional Services`, araç kiralamalarına ek olarak sunabileceğiniz ekstra hizmetleri (addon) yönetmenizi sağlar. GPS, çocuk koltuğu, ek sürücü gibi ücretli/ücretsiz seçenekler bu ekrandan oluşturulur ve rezervasyon formuna bağlanır.

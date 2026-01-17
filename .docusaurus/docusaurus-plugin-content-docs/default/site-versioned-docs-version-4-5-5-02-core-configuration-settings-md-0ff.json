@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.5.5/02-core-configuration/settings.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/settings",
-  "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/settings",
+  "permalink": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/settings",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/02-core-configuration/settings.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Payment Configuration",
-    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/payments"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/payments"
   },
   "next": {
     "title": "Vehicle Settings Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/vehicle-settings"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/core-configuration/vehicle-settings"
   }
 }

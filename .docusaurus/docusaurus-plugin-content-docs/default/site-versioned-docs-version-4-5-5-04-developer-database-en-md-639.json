@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.5.5/04-developer/database-en.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/database-en",
-  "permalink": "/mhm-rentiva-docs/en/docs/developer/database-en",
+  "permalink": "/mhm-rentiva-docs/docs/4.5.5/developer/database-en",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/04-developer/database-en.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Vehicles Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/vehicles"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/features-usage/vehicles"
   },
   "next": {
     "title": "Veritabanı Dokümantasyonu",
-    "permalink": "/mhm-rentiva-docs/en/docs/developer/database"
+    "permalink": "/mhm-rentiva-docs/docs/4.5.5/developer/database"
   }
 }

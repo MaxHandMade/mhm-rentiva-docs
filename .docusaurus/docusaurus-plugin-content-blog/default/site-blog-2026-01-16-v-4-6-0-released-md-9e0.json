@@ -1,0 +1,61 @@
+{
+  "permalink": "/mhm-rentiva-docs/blog/v4-6-0-released",
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2026-01-16-v4-6-0-released.md",
+  "source": "@site/blog/2026-01-16-v4-6-0-released.md",
+  "title": "v4.6.0 Yayında! 🚀",
+  "description": "MHM Rentiva v4.6.0 sürümü yayınlandı! Bu sürüm, uzun zamandır beklenen VIP Transfer Modülü, gelişmiş rota yönetimi ve esnek fiyatlandırma motoru gibi büyük özellikler içeriyor.",
+  "date": "2026-01-16T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "release",
+      "permalink": "/mhm-rentiva-docs/blog/tags/release"
+    },
+    {
+      "inline": true,
+      "label": "update",
+      "permalink": "/mhm-rentiva-docs/blog/tags/update"
+    },
+    {
+      "inline": true,
+      "label": "v4.6.0",
+      "permalink": "/mhm-rentiva-docs/blog/tags/v-4-6-0"
+    },
+    {
+      "inline": true,
+      "label": "vip-transfer",
+      "permalink": "/mhm-rentiva-docs/blog/tags/vip-transfer"
+    }
+  ],
+  "readingTime": 1.17,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "MaxHandMade",
+      "title": "Maintainer",
+      "url": "https://github.com/MaxHandMade",
+      "imageURL": "https://github.com/MaxHandMade.png",
+      "key": "maxhandmade",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "v4-6-0-released",
+    "title": "v4.6.0 Yayında! 🚀",
+    "authors": [
+      "maxhandmade"
+    ],
+    "tags": [
+      "release",
+      "update",
+      "v4.6.0",
+      "vip-transfer"
+    ],
+    "date": "2026-01-16T00:00:00.000Z"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "v4.5.5 Yayında! 🚀",
+    "permalink": "/mhm-rentiva-docs/blog/v4-5-5-released"
+  }
+}

@@ -1,3 +1,10 @@
+---
+id: post-types
+title: Kayıt Türleri (Post Types)
+sidebar_label: Kayıt Türleri
+slug: /features-usage/post-types
+---
+
 # Araçlar (Vehicles)
 
 MHM Rentiva, araç kiralama süreçlerini yönetmek için `vehicle` adında özel bir yazı türü (Custom Post Type) kullanır. Bu yazı türü, kiralık araçlarınızın tüm bilgilerini saklar ve yönetir.

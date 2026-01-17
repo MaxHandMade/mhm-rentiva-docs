@@ -1,11 +1,11 @@
 {
   "id": "intro",
-  "title": "Documentation Home",
-  "description": "Welcome to the comprehensive documentation for the MHM Rentiva Vehicle Rental Plugin. Choose a category below to get started.",
+  "title": "Dokümantasyon Ana Sayfası",
+  "description": "MHM Rentiva Araç Kiralama Eklentisi'nin kapsamlı dokümantasyonuna hoş geldiniz. Başlamak için aşağıdaki kategorilerden birini seçin.",
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/",
+  "permalink": "/mhm-rentiva-docs/docs/next/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/intro.md",
@@ -15,12 +15,12 @@
   "frontMatter": {
     "slug": "/",
     "sidebar_position": 0,
-    "title": "Documentation Home",
+    "title": "Dokümantasyon Ana Sayfası",
     "hide_table_of_contents": true
   },
   "sidebar": "tutorialSidebar",
   "next": {
-    "title": "Kurulum ve İlk Ayarlar Rehberi",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/getting-started/installation"
+    "title": "Başlangıç Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/next/category/başlangıç-rehberi"
   }
 }

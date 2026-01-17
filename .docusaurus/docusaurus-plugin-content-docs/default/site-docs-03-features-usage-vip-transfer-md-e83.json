@@ -1,0 +1,24 @@
+{
+  "id": "features-usage/vip-transfer",
+  "title": "vip-transfer",
+  "description": "[mhmrentivatransfer_search]",
+  "source": "@site/docs/03-features-usage/vip-transfer.md",
+  "sourceDirName": "03-features-usage",
+  "slug": "/features-usage/vip-transfer",
+  "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vip-transfer",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/vip-transfer.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Araçlar",
+    "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vehicles"
+  },
+  "next": {
+    "title": "Geliştirici Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/next/category/geliştirici-rehberi"
+  }
+}

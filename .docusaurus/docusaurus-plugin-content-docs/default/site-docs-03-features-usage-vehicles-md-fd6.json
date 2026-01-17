@@ -1,24 +1,29 @@
 {
   "id": "features-usage/vehicles",
-  "title": "Vehicles Sayfası",
+  "title": "Araç Yönetimi",
   "description": "MHM Rentiva > Vehicles, filonuzdaki tüm araçları yönetebileceğiniz ana merkezdir. Varsayılan WordPress “post listesi” görünümü üzerine eklenen metrik kartları, aylık takvim ve hızlı düzenleme bileşenleri sayesinde hem durum takibini hem de düzenlemeleri tek noktadan yapabilirsiniz.",
   "source": "@site/docs/03-features-usage/vehicles.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/vehicles",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles",
+  "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vehicles",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/vehicles.md",
   "tags": [],
   "version": "current",
-  "frontMatter": {},
+  "frontMatter": {
+    "id": "vehicles",
+    "title": "Araç Yönetimi",
+    "sidebar_label": "Araçlar",
+    "slug": "/features-usage/vehicles"
+  },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Vehicle Settings",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings"
+    "title": "vehicle-settings",
+    "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vehicle-settings"
   },
   "next": {
-    "title": "Database Documentation",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/database-en"
+    "title": "vip-transfer",
+    "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vip-transfer"
   }
 }

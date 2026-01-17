@@ -1,11 +1,11 @@
 {
   "id": "features-usage/shortcodes",
-  "title": "Shortcodes (Kısa Kodlar)",
-  "description": "MHM Rentiva, sitenizin çeşitli yerlerinde araç listeleri, formlar ve diğer özellikleri görüntülemek için kapsamlı bir kısa kod seti sunar. Aşağıda mevcut tüm kısa kodların bir listesi ve kullanım detayları bulunmaktadır.",
+  "title": "shortcodes",
+  "description": "[rentivavehiclesgrid columns=\"4\" postsperpage=\"12\" show_filters=\"0\"]",
   "source": "@site/docs/03-features-usage/shortcodes.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/shortcodes",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/shortcodes",
+  "permalink": "/mhm-rentiva-docs/docs/next/features-usage/shortcodes",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/shortcodes.md",
@@ -14,11 +14,11 @@
   "frontMatter": {},
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Reports Sayfası",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/reports"
+    "title": "Raporlar",
+    "permalink": "/mhm-rentiva-docs/docs/next/features-usage/reports"
   },
   "next": {
-    "title": "Vehicle Settings",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings"
+    "title": "vehicle-settings",
+    "permalink": "/mhm-rentiva-docs/docs/next/features-usage/vehicle-settings"
   }
 }

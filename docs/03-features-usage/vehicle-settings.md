@@ -1,10 +1,12 @@
+```
 ---
-id: vehicle-settings
-title: Vehicle Settings
-sidebar_label: Vehicle Settings
+id: vehicle-settings-usage
+title: Araç Özellikleri
+sidebar_label: Araç Özellikleri
+slug: /features-usage/vehicle-settings
 ---
 
-# Vehicle Settings
+# Vehicle Settings Sayfası
 
 `MHM Rentiva > Vehicle Settings`, araçlarınızda hangi detayların, özelliklerin ve ekipmanların kullanılacağını yapılandırdığınız alandır. Bu panel sayesinde formlarda ve araç kartlarında gereksiz alanları gizleyebilir veya kendi özel alanlarınızı ekleyebilirsiniz.
 

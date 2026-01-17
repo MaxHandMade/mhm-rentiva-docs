@@ -1,3 +1,10 @@
+---
+id: database
+title: Veritabanı Yapısı
+sidebar_label: Veritabanı
+slug: /developer/database
+---
+
 # Veritabanı Dokümantasyonu
 
 Bu klasör, MHM Rentiva eklentisi için veritabanı yapısı ve meta key dokümantasyonunu içerir.

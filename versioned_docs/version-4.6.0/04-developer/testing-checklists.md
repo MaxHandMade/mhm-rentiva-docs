@@ -1,3 +1,10 @@
+---
+id: testing-checklists
+title: Test Kontrol Listeleri
+sidebar_label: Kontrol Listeleri
+slug: /developer/testing-checklists
+---
+
 # MHM Rentiva – Test Kontrol Listeleri
 
 Bu doküman, canlıya çıkmadan önce yapılacak **lokal kabul testleri** ve canlı ortamda uygulanacak **hızlı doğrulama** adımlarını tek dosyada toplar. Her adımı tamamladıkça checkbox’ları işaretleyerek ilerleyebilirsiniz.

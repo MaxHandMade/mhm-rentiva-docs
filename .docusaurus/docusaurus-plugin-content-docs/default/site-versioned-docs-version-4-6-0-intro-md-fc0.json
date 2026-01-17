@@ -1,0 +1,26 @@
+{
+  "id": "intro",
+  "title": "Dokümantasyon Ana Sayfası",
+  "description": "MHM Rentiva Araç Kiralama Eklentisi'nin kapsamlı dokümantasyonuna hoş geldiniz. Başlamak için aşağıdaki kategorilerden birini seçin.",
+  "source": "@site/versioned_docs/version-4.6.0/intro.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/mhm-rentiva-docs/docs/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/intro.md",
+  "tags": [],
+  "version": "4.6.0",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "slug": "/",
+    "sidebar_position": 0,
+    "title": "Dokümantasyon Ana Sayfası",
+    "hide_table_of_contents": true
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Başlangıç Rehberi",
+    "permalink": "/mhm-rentiva-docs/docs/category/başlangıç-rehberi"
+  }
+}
