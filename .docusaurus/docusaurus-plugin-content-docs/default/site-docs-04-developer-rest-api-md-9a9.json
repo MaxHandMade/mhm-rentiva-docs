@@ -1,29 +1,29 @@
 {
   "id": "developer/rest-api",
-  "title": "REST API Rehberi",
-  "description": "📁 REST API Dosya Yapısı",
+  "title": "REST API",
+  "description": "MHM Rentiva REST API Documentation",
   "source": "@site/docs/04-developer/rest-api.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/rest-api",
-  "permalink": "/mhm-rentiva-docs/docs/next/developer/rest-api",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/rest-api",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/rest-api.md",
   "tags": [],
   "version": "current",
+  "sidebarPosition": 2,
   "frontMatter": {
-    "id": "rest-api",
-    "title": "REST API Rehberi",
-    "sidebar_label": "REST API",
-    "slug": "/developer/rest-api"
+    "sidebar_position": 2,
+    "title": "REST API",
+    "description": "MHM Rentiva REST API Documentation"
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Liste Tablo Notları",
-    "permalink": "/mhm-rentiva-docs/docs/next/developer/list-table"
+    "title": "Geliştirici Rehberi",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/category/geliştirici-rehberi"
   },
   "next": {
-    "title": "Test Araçları",
-    "permalink": "/mhm-rentiva-docs/docs/next/developer/test-suite"
+    "title": "Veritabanı",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/database"
   }
 }

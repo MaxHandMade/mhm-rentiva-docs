@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.5.5/04-developer/test-suite.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/test-suite",
-  "permalink": "/mhm-rentiva-docs/docs/4.5.5/developer/test-suite",
+  "permalink": "/mhm-rentiva-docs/en/docs/4.5.5/developer/test-suite",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/04-developer/test-suite.md",
@@ -15,10 +15,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "REST API Development Guide",
-    "permalink": "/mhm-rentiva-docs/docs/4.5.5/developer/rest-api"
+    "permalink": "/mhm-rentiva-docs/en/docs/4.5.5/developer/rest-api"
   },
   "next": {
     "title": "MHM Rentiva – Test Kontrol Listeleri",
-    "permalink": "/mhm-rentiva-docs/docs/4.5.5/developer/testing-checklists"
+    "permalink": "/mhm-rentiva-docs/en/docs/4.5.5/developer/testing-checklists"
   }
 }

@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.6.0/03-features-usage/reports.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/reports",
-  "permalink": "/mhm-rentiva-docs/docs/features-usage/reports",
+  "permalink": "/mhm-rentiva-docs/en/docs/features-usage/reports",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/03-features-usage/reports.md",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Kayıt Türleri",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/post-types"
+    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/post-types"
   },
   "next": {
     "title": "Kısa Kodlar",
-    "permalink": "/mhm-rentiva-docs/docs/features-usage/shortcodes"
+    "permalink": "/mhm-rentiva-docs/en/docs/features-usage/shortcodes"
   }
 }

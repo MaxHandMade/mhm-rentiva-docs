@@ -29,7 +29,7 @@ export default {
     "experimental_router": "browser"
   },
   "url": "https://MaxHandMade.github.io",
-  "baseUrl": "/mhm-rentiva-docs/",
+  "baseUrl": "/mhm-rentiva-docs/en/",
   "organizationName": "MaxHandMade",
   "projectName": "mhm-rentiva-docs",
   "onBrokenLinks": "warn",

@@ -5,7 +5,7 @@
   "source": "@site/docs/05-faq/index.md",
   "sourceDirName": "05-faq",
   "slug": "/faq/common-issues",
-  "permalink": "/mhm-rentiva-docs/docs/next/faq/common-issues",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/faq/common-issues",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/05-faq/index.md",
@@ -20,6 +20,6 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "SSS",
-    "permalink": "/mhm-rentiva-docs/docs/next/category/sss"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/category/sss"
   }
 }

@@ -1,11 +1,11 @@
 {
   "id": "core-configuration/payments",
   "title": "Ödeme Yapılandırması",
-  "description": "Bu döküman hazırlanma aşamasındadır.",
+  "description": "Ödeme yapılandırması, rezervasyonların nasıl tahsil edileceğini ve hangi ödeme yöntemlerinin kullanılacağını belirler.",
   "source": "@site/docs/02-core-configuration/payments.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/payments",
-  "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/payments",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/payments",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/payments.md",
@@ -19,11 +19,11 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Lisans Yönetimi",
-    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/license"
+    "title": "Bakım ve Sistem Ayarları (Maintenance Settings)",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/maintenance"
   },
   "next": {
     "title": "Genel Ayarlar",
-    "permalink": "/mhm-rentiva-docs/docs/next/core-configuration/settings"
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/settings"
   }
 }

@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.6.0/intro.md",
   "sourceDirName": ".",
   "slug": "/",
-  "permalink": "/mhm-rentiva-docs/docs/",
+  "permalink": "/mhm-rentiva-docs/en/docs/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/intro.md",
@@ -21,6 +21,6 @@
   "sidebar": "tutorialSidebar",
   "next": {
     "title": "Başlangıç Rehberi",
-    "permalink": "/mhm-rentiva-docs/docs/category/başlangıç-rehberi"
+    "permalink": "/mhm-rentiva-docs/en/docs/category/başlangıç-rehberi"
   }
 }

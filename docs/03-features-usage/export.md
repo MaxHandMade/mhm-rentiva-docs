@@ -13,7 +13,7 @@ slug: /features-usage/export
 
 1. **Veri Tipi Seçimi:** “Data Type” alanından `Bookings`, `Vehicles`, `Customers`, `Logs` vb. seçeneklerden birini belirleyin.
 2. **Tarih / Durum Filtreleri:** Tarih aralığı, durum (ör. `Confirmed bookings`), araç veya müşteri gibi ek filtreler tanımlayın.
-3. **Format Seçimi:** CSV, JSON, Excel (pro sürüm), XML gibi formatlar arasından seçim yapın.
+3. **Format Seçimi:** İhtiyacınıza uygun olarak CSV (Standart) veya JSON (Pro sürüm) formatını seçin.
 4. **Alan Seçimi (Opsiyonel):** Dahil edilecek kolonları belirleyerek daha hafif dosyalar üretebilirsiniz.
 5. **Export İşlemi:** `Start Export` düğmesine basın; işlem tamamlandığında indirme bağlantısı sunulur. Büyük veri setleri için süreç arka planda çalışabilir ve “Export History” sekmesinden takip edilebilir.
 

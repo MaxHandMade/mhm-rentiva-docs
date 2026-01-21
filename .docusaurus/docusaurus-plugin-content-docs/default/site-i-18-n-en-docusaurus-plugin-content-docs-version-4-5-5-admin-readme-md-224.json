@@ -5,7 +5,7 @@
   "source": "@site/i18n/en/docusaurus-plugin-content-docs/version-4.5.5/admin/README.md",
   "sourceDirName": "admin",
   "slug": "/admin/",
-  "permalink": "/mhm-rentiva-docs/en/docs/admin/",
+  "permalink": "/mhm-rentiva-docs/en/docs/4.5.5/admin/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.5.5/admin/README.md",
@@ -15,6 +15,6 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Troubleshooting",
-    "permalink": "/mhm-rentiva-docs/en/docs/faq/"
+    "permalink": "/mhm-rentiva-docs/en/docs/4.5.5/faq/"
   }
 }

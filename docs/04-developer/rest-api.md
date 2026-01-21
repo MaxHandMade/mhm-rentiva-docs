@@ -1,314 +1,139 @@
 ---
-id: rest-api
-title: REST API Rehberi
-sidebar_label: REST API
-slug: /developer/rest-api
+sidebar_position: 2
+title: REST API
+description: MHM Rentiva REST API Documentation
 ---
 
-# REST API Oluşturma Rehberi
+# REST API Documentation
 
-## 📁 REST API Dosya Yapısı
+MHM Rentiva plugin offers a comprehensive REST API for vehicle availability checks, message management, and integration with third-party applications.
 
-REST API endpoint'leri şu klasörlerde organize edilir:
+## 🛡️ Security & Rate Limiting
 
-```
-src/Admin/REST/
-├── APIKeyManager.php        # API anahtarı yönetimi
-├── Availability.php          # Müsaitlik endpoint'i
-├── EndpointListHelper.php   # Endpoint listesi helper'ı
-├── ErrorHandler.php          # Hata yönetimi
-├── Helpers/
-│   ├── AuthHelper.php        # ✅ RESTSettings kullanıyor
-│   ├── ValidationHelper.php  # Validasyon helper'ları
-│   └── SecureToken.php       # Token yönetimi
-└── Settings/
-    └── RESTSettings.php      # ✅ REST Settings (ayarlar)
+:::warning Security Notice
+This API is protected by the **Integration Settings** configured in the WordPress Admin Panel (`Rentiva > Settings > Integration`).
+:::
 
-src/Admin/Payment/REST/
-├── Payments.php              # Genel ödeme endpoint'leri (wrapper)
-├── Payments/                 # Ödeme endpoint'leri
-│   ├── Payments.php
-│   ├── CreateIntent.php
-│   ├── Refund.php
-│   └── Helpers/
-│       ├── ResponseHelper.php
-│       └── Validation.php
-├── PayPal.php               # PayPal endpoint'leri (wrapper)
-├── PayPal/                   # PayPal endpoint'leri
-│   ├── PayPal.php
-│   ├── CreateOrder.php
-│   ├── CapturePayment.php
-│   ├── Refund.php
-│   ├── Webhook.php
-│   └── Helpers/
-│       ├── Auth.php
-│       ├── RateLimit.php
-│       └── Validation.php
-├── PayTR.php                # PayTR endpoint'leri (wrapper)
-├── PayTR/                   # PayTR endpoint'leri
-│   ├── CreateToken.php
-│   ├── Callback.php
-│   └── Helpers/
-│       ├── Auth.php
-│       ├── BookingQuery.php
-│       ├── RateLimit.php
-│       └── Validation.php
-├── StripeWebhook.php        # Stripe webhook (wrapper)
-└── StripeWebhook/          # Stripe webhook
-    ├── Webhook.php
-    └── Helpers/
-        ├── BookingQuery.php
-        ├── EventProcessor.php
-        └── SignatureVerifier.php
-
-src/Admin/Messages/REST/
-├── Messages.php             # Mesaj endpoint'leri (wrapper)
-├── Admin/                   # Admin mesaj endpoint'leri
-│   ├── GetMessages.php
-│   ├── GetMessage.php
-│   ├── UpdateStatus.php
-│   └── ReplyToMessage.php
-├── Customer/               # Müşteri mesaj endpoint'leri
-│   ├── GetMessages.php
-│   ├── SendMessage.php
-│   ├── GetThread.php
-│   ├── SendReply.php
-│   ├── GetBookings.php
-│   └── CloseMessage.php
-└── Helpers/
-    ├── Auth.php
-    ├── MessageFormatter.php
-    └── MessageQuery.php
-```
+*   **Rate Limiting:** IP-based rate limiting is active. Exceeding the configured limit (default: 60/min) will result in a `429 Too Many Requests` response.
+*   **IP Restrictions:** If the **IP Whitelist** or **IP Blacklist** is configured in the settings, requests from unauthorized IPs will be rejected with a `403 Forbidden` error.
+*   **HTTPS Enforcement:** If enabled, non-SSL requests will be rejected.
 
 ---
 
-## 🔨 Yeni REST API Endpoint Oluşturma
+## Availability Endpoints
 
-### 1. Yeni Endpoint Dosyası Oluştur
+These endpoints are **public** but strictly rate-limited and monitored. They are used for checking vehicle availability and price calculation.
 
-Örnek: `src/Admin/REST/Vehicles.php`
+### Check Availability
+Calculates price and availability for a specific vehicle.
 
-```php
-<?php declare(strict_types=1);
+*   **Endpoint:** `GET /mhm-rentiva/v1/availability`
+*   **Method:** `GET` or `POST`
+*   **Access:** Public (Rate Limited)
 
-namespace MHMRentiva\Admin\REST;
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `vehicle_id` | Integer | Yes | ID of the vehicle to check. |
+| `pickup_date` | String | Yes | Pickup date (YYYY-MM-DD). |
+| `pickup_time` | String | Yes | Pickup time (HH:mm). |
+| `dropoff_date` | String | Yes | Dropoff date (YYYY-MM-DD). |
+| `dropoff_time` | String | Yes | Dropoff time (HH:mm). |
 
-use MHMRentiva\Admin\REST\Settings\RESTSettings;
-use MHMRentiva\Admin\REST\Helpers\AuthHelper;
+### Check Availability (With Alternatives)
+Checks availability and suggests alternative vehicles if the selected one is unavailable.
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+*   **Endpoint:** `GET /mhm-rentiva/v1/availability/with-alternatives`
+*   **Method:** `GET` or `POST`
+*   **Access:** Public (Rate Limited)
 
-final class Vehicles
-{
-    public static function register(): void
-    {
-        add_action('rest_api_init', [self::class, 'register_routes']);
-    }
-
-    public static function register_routes(): void
-    {
-        // ✅ RESTSettings kullanarak güvenlik kontrolü
-        register_rest_route('mhm-rentiva/v1', '/vehicles', [
-            'methods' => 'GET',
-            'callback' => [self::class, 'get_vehicles'],
-            'permission_callback' => [self::class, 'permission_check'], // ✅ Güvenlik kontrolü
-            'args' => [
-                'page' => [
-                    'type' => 'integer',
-                    'default' => 1,
-                    'minimum' => 1,
-                ],
-                'per_page' => [
-                    'type' => 'integer',
-                    'default' => 10,
-                    'minimum' => 1,
-                    'maximum' => 100,
-                ],
-            ],
-        ]);
-    }
-
-    /**
-     * Permission callback - RESTSettings kullanarak güvenlik kontrolü
-     */
-    public static function permission_check(\WP_REST_Request $request): bool|\WP_Error
-    {
-        // ✅ 1. Security check (HTTPS, IP, User Agent)
-        if (!RESTSettings::check_security($request)) {
-            return new \WP_Error(
-                'rest_forbidden',
-                __('Access forbidden by security settings.', 'mhm-rentiva'),
-                ['status' => 403]
-            );
-        }
-
-        // ✅ 2. Rate limiting check
-        // Not: get_client_ip() private olduğu için AuthHelper kullanın
-        $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-        $identifier = $client_ip; // veya user_id, token, vb.
-        
-        if (!RESTSettings::check_rate_limit($identifier, 'default')) {
-            return new \WP_Error(
-                'rate_limit_exceeded',
-                __('Too many requests. Please try again later.', 'mhm-rentiva'),
-                ['status' => 429]
-            );
-        }
-
-        return true;
-    }
-
-    /**
-     * Get vehicles endpoint
-     */
-    public static function get_vehicles(\WP_REST_Request $request): \WP_REST_Response
-    {
-        $page = $request->get_param('page');
-        $per_page = $request->get_param('per_page');
-
-        // Vehicle query logic here
-        $vehicles = get_posts([
-            'post_type' => 'vehicle',
-            'posts_per_page' => $per_page,
-            'paged' => $page,
-        ]);
-
-        $data = array_map(function($vehicle) {
-            return [
-                'id' => $vehicle->ID,
-                'title' => $vehicle->post_title,
-                'content' => $vehicle->post_content,
-                // ... more fields
-            ];
-        }, $vehicles);
-
-        return new \WP_REST_Response([
-            'success' => true,
-            'data' => $data,
-            'total' => count($vehicles),
-        ], 200);
-    }
-}
-```
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `vehicle_id` | Integer | Yes | ID of the vehicle to check. |
+| `pickup_date` | String | Yes | Pickup date (YYYY-MM-DD). |
+| `pickup_time` | String | Yes | Pickup time (HH:mm). |
+| `dropoff_date` | String | Yes | Dropoff date (YYYY-MM-DD). |
+| `dropoff_time` | String | Yes | Dropoff time (HH:mm). |
+| `limit` | Integer | No | Max number of alternatives (Default: 5). |
 
 ---
 
-### 2. Plugin.php'ye Kaydet
+## Messaging Endpoints (Admin)
 
-`src/Plugin.php` dosyasında `initialize_rest_services()` veya benzer bir fonksiyona ekleyin:
+These endpoints allow administrators to manage customer messages. Requires `manage_options` capability (Admin).
 
-```php
-if (class_exists('MHMRentiva\Admin\REST\Vehicles')) {
-    \MHMRentiva\Admin\REST\Vehicles::register();
-}
-```
+### List Messages
+active list of messages.
 
----
+*   **Endpoint:** `GET /mhm-rentiva/v1/messages`
+*   **Access:** Admin
 
-## 🔐 RESTSettings Entegrasyonu
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `status` | String | No | Filter by status (new, read, replied, closed). |
+| `category` | String | No | Filter by category (general, booking, support). |
+| `per_page` | Integer | No | Items per page (Default: 20). |
+| `page` | Integer | No | Page number. |
 
-### Mevcut Endpoint'leri RESTSettings'e Geçirme
+### Get Message Details
+*   **Endpoint:** `GET /mhm-rentiva/v1/messages/{id}`
+*   **Access:** Admin
 
-**Örnek:** `Availability.php` dosyasını güncelle:
+### Reply to Message
+*   **Endpoint:** `POST /mhm-rentiva/v1/messages/{id}/reply`
+*   **Access:** Admin
 
-```php
-// ❌ ESKİ (RateLimiter kullanıyor):
-public static function permission_check(): bool
-{
-    $client_ip = \MHMRentiva\Admin\Core\Utilities\RateLimiter::getClientIP();
-    return \MHMRentiva\Admin\Core\Utilities\RateLimiter::check($client_ip, 'general');
-}
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `message` | String | Yes | The reply content. |
+| `close_thread` | Boolean | No | Close the thread after replying? (Default: false). |
 
-// ✅ YENİ (RESTSettings kullanıyor):
-public static function permission_check(\WP_REST_Request $request): bool|\WP_Error
-{
-    // 1. Security check
-    if (!RESTSettings::check_security($request)) {
-        return new \WP_Error('rest_forbidden', 'Access forbidden', ['status' => 403]);
-    }
+### Update Message Status
+*   **Endpoint:** `POST /mhm-rentiva/v1/messages/{id}/status`
+*   **Access:** Admin
 
-    // 2. Rate limiting check
-    // Not: get_client_ip() private olduğu için doğrudan $_SERVER kullanın veya AuthHelper kullanın
-    $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-    if (!RESTSettings::check_rate_limit($client_ip, 'default')) {
-        return new \WP_Error('rate_limit_exceeded', 'Too many requests', ['status' => 429]);
-    }
-
-    return true;
-}
-```
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `status` | String | Yes | New status (new, read, replied, closed). |
 
 ---
 
-## 📍 Mevcut REST API Endpoint'leri
+## Messaging Endpoints (Customer)
 
-### Aktif Endpoint'ler:
+These endpoints are for logged-in WordPress users (Customers).
 
-1. **Availability**
-   - `GET/POST /wp-json/mhm-rentiva/v1/availability`
-   - `GET/POST /wp-json/mhm-rentiva/v1/availability/with-alternatives`
-   - **Not:** Bu endpoint henüz RESTSettings kullanmıyor (eski RateLimiter kullanıyor)
+### Get Messages (My Messages)
+*   **Endpoint:** `GET /mhm-rentiva/v1/customer/messages`
+*   **Access:** Logged-in User
 
-2. **Messages** (Admin)
-   - `GET /wp-json/mhm-rentiva/v1/messages`
-   - `GET /wp-json/mhm-rentiva/v1/messages/{id}`
-   - `POST /wp-json/mhm-rentiva/v1/messages/{id}/status`
-   - `POST /wp-json/mhm-rentiva/v1/messages/{id}/reply`
+### Create New Message
+*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages`
+*   **Access:** Logged-in User
 
-3. **Messages** (Customer)
-   - `GET /wp-json/mhm-rentiva/v1/customer/messages`
-   - `POST /wp-json/mhm-rentiva/v1/customer/messages`
-   - `GET /wp-json/mhm-rentiva/v1/customer/messages/thread/{thread_id}`
-   - `POST /wp-json/mhm-rentiva/v1/customer/messages/reply`
-   - `GET /wp-json/mhm-rentiva/v1/customer/bookings`
-   - `POST /wp-json/mhm-rentiva/v1/customer/messages/close`
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `subject` | String | Yes | Message subject. |
+| `message` | String | Yes | Message content. |
+| `category` | String | Yes | Category (general, booking, support). |
+| `booking_id` | Integer | No | Associated booking ID. |
+| `priority` | String | No | normal, high, urgent. |
 
-4. **Payments**
-   - `POST /wp-json/mhm-rentiva/v1/payments/create-intent`
-   - `POST /wp-json/mhm-rentiva/v1/payments/refund`
+### Get Message Thread
+*   **Endpoint:** `GET /mhm-rentiva/v1/customer/messages/thread/{thread_id}`
+*   **Access:** Logged-in User
 
-5. **PayPal**
-   - `POST /wp-json/mhm-rentiva/v1/paypal/create-order`
-   - `POST /wp-json/mhm-rentiva/v1/paypal/capture-payment`
-   - `POST /wp-json/mhm-rentiva/v1/paypal/webhook`
-   - `POST /wp-json/mhm-rentiva/v1/paypal/refund`
+### Reply to Admin
+*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages/reply`
+*   **Access:** Logged-in User
 
-6. **PayTR**
-   - `POST /wp-json/mhm-rentiva/v1/paytr/create-token`
-   - `POST /wp-json/mhm-rentiva/v1/paytr/callback`
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `thread_id` | String | Yes | The thread ID to reply to. |
+| `message` | String | Yes | Reply content. |
 
-7. **Stripe**
-   - `POST /wp-json/mhm-rentiva/v1/stripe/webhook`
+### Close Message
+*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages/close`
+*   **Access:** Logged-in User
 
----
-
-## ✅ RESTSettings Entegrasyon Kontrol Listesi
-
-Yeni endpoint oluştururken:
-
-- [ ] `RESTSettings::check_security($request)` kullanılıyor mu?
-- [ ] `RESTSettings::check_rate_limit($identifier, $type)` kullanılıyor mu?
-- [ ] `permission_callback` doğru implement edildi mi?
-- [ ] Error handling var mı?
-- [ ] Response format standart mı?
-
-**Önemli Notlar:**
-- `RESTSettings::get_client_ip()` metodu **private** olduğu için doğrudan çağrılamaz
-- IP adresini almak için `$_SERVER['REMOTE_ADDR']` kullanın veya `AuthHelper` sınıfını kullanın
-- `AuthHelper::verifyAuth()` metodu hem güvenlik hem rate limiting kontrolü yapar
-
----
-
-## 🎯 Örnek: Yeni Vehicles Endpoint'i
-
-Tam çalışan örnek:
-
-```php
-// src/Admin/REST/Vehicles.php
-```
-
-Bu dosyayı oluşturmak ister misiniz?
-
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `thread_id` | String | Yes | The thread ID to close. |

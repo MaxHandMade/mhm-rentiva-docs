@@ -4,6 +4,6 @@ require("C:\\xampp\\htdocs\\otokira\\wp-content\\plugins\\mhm-rentiva\\website\\
 require("C:\\xampp\\htdocs\\otokira\\wp-content\\plugins\\mhm-rentiva\\website\\node_modules\\lunr-languages\\lunr.multi.js")(lunr);
 export const removeDefaultStopWordFilter = [];
 export const language = ["en","tr"];
-export const searchIndexUrl = "search-index{dir}.json?_=f1c28c03";
+export const searchIndexUrl = "search-index{dir}.json?_=a0c0443e";
 export const searchResultLimits = 8;
 export const fuzzyMatchingDistance = 1;

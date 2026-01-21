@@ -1,0 +1,24 @@
+{
+  "id": "core-configuration/maintenance",
+  "title": "Bakım ve Sistem Ayarları (Maintenance Settings)",
+  "description": "Sistem bakımı, veri temizliği ve kritik kaldırma işlemleri ayarları.",
+  "source": "@site/docs/02-core-configuration/maintenance.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/maintenance",
+  "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/maintenance",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/02-core-configuration/maintenance.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lisans Yönetimi",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/license"
+  },
+  "next": {
+    "title": "Ödeme Ayarları",
+    "permalink": "/mhm-rentiva-docs/en/docs/next/core-configuration/payments"
+  }
+}

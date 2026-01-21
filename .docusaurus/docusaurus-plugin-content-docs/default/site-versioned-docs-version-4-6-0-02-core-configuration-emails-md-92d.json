@@ -5,7 +5,7 @@
   "source": "@site/versioned_docs/version-4.6.0/02-core-configuration/emails.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/emails",
-  "permalink": "/mhm-rentiva-docs/docs/core-configuration/emails",
+  "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/emails",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/02-core-configuration/emails.md",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Yardımcı Araçlar",
-    "permalink": "/mhm-rentiva-docs/docs/core-configuration/utilities"
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/utilities"
   },
   "next": {
     "title": "Lisans Yönetimi",
-    "permalink": "/mhm-rentiva-docs/docs/core-configuration/license"
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/license"
   }
 }

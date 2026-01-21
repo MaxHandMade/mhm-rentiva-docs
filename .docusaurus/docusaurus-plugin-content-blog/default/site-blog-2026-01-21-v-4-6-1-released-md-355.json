@@ -1,0 +1,73 @@
+{
+  "permalink": "/mhm-rentiva-docs/en/blog/v4-6-1-released",
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2026-01-21-v4-6-1-released.md",
+  "source": "@site/blog/2026-01-21-v4-6-1-released.md",
+  "title": "v4.6.1 Yayında! 🛡️",
+  "description": "MHM Rentiva v4.6.1 sürümü yayınlandı! Bu sürüm, veri bütünlüğü, güvenlik ve WooCommerce entegrasyonu konularında kritik iyileştirmeler içeren bir güvenlik ve kararlılık güncellemesidir.",
+  "date": "2026-01-21T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "release",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/release"
+    },
+    {
+      "inline": true,
+      "label": "update",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/update"
+    },
+    {
+      "inline": true,
+      "label": "v4.6.1",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/v-4-6-1"
+    },
+    {
+      "inline": true,
+      "label": "security",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/security"
+    },
+    {
+      "inline": true,
+      "label": "critical",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/critical"
+    },
+    {
+      "inline": true,
+      "label": "woocommerce",
+      "permalink": "/mhm-rentiva-docs/en/blog/tags/woocommerce"
+    }
+  ],
+  "readingTime": 1.18,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "MaxHandMade",
+      "title": "Maintainer",
+      "url": "https://github.com/MaxHandMade",
+      "imageURL": "https://github.com/MaxHandMade.png",
+      "key": "maxhandmade",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "v4-6-1-released",
+    "title": "v4.6.1 Yayında! 🛡️",
+    "authors": [
+      "maxhandmade"
+    ],
+    "tags": [
+      "release",
+      "update",
+      "v4.6.1",
+      "security",
+      "critical",
+      "woocommerce"
+    ],
+    "date": "2026-01-21T00:00:00.000Z"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "v4.6.0 Yayında! 🚀",
+    "permalink": "/mhm-rentiva-docs/en/blog/v4-6-0-released"
+  }
+}

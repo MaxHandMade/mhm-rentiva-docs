@@ -14,7 +14,29 @@ slug: /core-configuration/license
 - **Lisans Anahtarı Girişi:** Satın alma sonrası aldığınız anahtarı girip “Activate” butonuyla doğrulama yapabilirsiniz.
 - **Aktivasyon Durumu:** Lisansın aktif/pasif bilgisi, destek süresi ve kalan gün sayısı gösterilir.
 - **Domain Yönetimi:** Lisans tek domain veya çoklu domain desteğine göre bağlı siteleri listeler; gerekirse “Deactivate” ile lisansı başka bir siteye taşıyabilirsiniz.
-- **Kısıtlamalar:** Lite sürümdeki araç/rezervasyon limitleri veya premium modül erişimi gibi sınırlamalar bu ekranda özetlenir.
+- **Kısıtlamalar:** Lite sürümdeki araç, rezervasyon ve modül limitleri bu ekranda özetlenir. Detaylar için aşağıdaki tabloya bakınız.
+
+## Lite ve Pro Sürüm Karşılaştırması
+
+Aşağıdaki tablo, MHM Rentiva'nın Lite (Ücretsiz) ve Pro (Ücretli) sürümleri arasındaki özellik farklarını ve limitleri göstermektedir.
+
+| Özellik | Lite (Ücretsiz) | Pro (Premium) |
+| :--- | :--- | :--- |
+| **Maksimum Araç** | 3 Araç | **Sınırsız** |
+| **Maksimum Rezervasyon** | 50 Rezervasyon | **Sınırsız** |
+| **Maksimum Müşteri** | 3 Müşteri | **Sınırsız** |
+| **Ek Hizmetler** | 4 Hizmet | **Sınırsız** |
+| **VIP Transfer Rotası** | 3 Rota | **Sınırsız** |
+| **Galeri Resmi** | 3 Resim / Araç | **Sınırsız** |
+| **Rapor Tarih Aralığı** | Son 30 Gün | **Sınırsız** |
+| **Rapor Satır Limiti** | 500 Satır | **Sınırsız** |
+| **Mesajlaşma Sistemi** | ❌ Yok | ✅ Var |
+| **Dışa Aktarım** | Sadece CSV | CSV, JSON |
+| **Ödeme Altyapısı** | WooCommerce | WooCommerce |
+| **REST API Erişimi** | Sınırlı | Tam Erişim |
+| **Gelişmiş Raporlar** | ❌ Sınırlı | ✅ Tam Erişim |
+
+> **Not:** Lite sürümü küçük işletmeler ve test amaçlı tasarlanmıştır. Sınırsız erişim ve gelişmiş özellikler için Pro sürüme geçiş yapın.
 
 ## En İyi Pratikler
 
