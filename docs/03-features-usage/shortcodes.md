@@ -131,6 +131,21 @@ Rezervasyon tamamlandıktan sonra gösterilen onay sayfası içeriğidir.
 **Parametreler:**
 *   `booking_id`: Onay detayları gösterilecek rezervasyon ID'si (URL parametresi olarak da alınabilir).
 
+### 9. Favori Araçlar (My Favorites)
+Müşterinin favoriye eklediği araçların listesini gösterir.
+
+**Kısa Kod:** `[rentiva_my_favorites]`
+
+**Parametreler:**
+*   `limit`: Gösterilecek araç sayısı. Varsayılan: `12`.
+*   `columns`: Sütun sayısı (masaüstü için). Varsayılan: `3`.
+*   `hide_nav`: Hesap navigasyon menüsünü gizle (`true` veya `false`). Varsayılan: `false`.
+
+**Örnek:**
+```
+[rentiva_my_favorites columns="4" limit="8"]
+```
+
 
 
 ## Diğer İşlevler
