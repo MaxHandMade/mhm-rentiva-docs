@@ -66,7 +66,7 @@ slug: /features-usage/bookings
 
 ## İlgili Dokümanlar
 - [Vehicles](vehicles.md): Rezervasyonların takvimde nasıl gösterildiği.
-- [Payment Konfigürasyonu](../02-core-configuration/payments.md) *(hazırlanacak)*: Online/offline ödeme akışları.
+- [Payment Konfigürasyonu](../02-core-configuration/payments.md): Online/offline ödeme akışları.
 - [Test Checklist](../04-developer/testing-checklists.md#2-rezervasyon-akisi): Rezervasyon akışı test adımları.
 
 

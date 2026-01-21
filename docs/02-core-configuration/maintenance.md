@@ -22,5 +22,22 @@ Bu bölümdeki ayarlar eklentinin veritabanı üzerindeki etkisini yönetir.
     - Tüm özel veritabanı tabloları (`wp_mhm_rentiva_*`).
     - Yapılan tüm ayarlar.
 
-> [!CAUTION]
 > **Bu işlem geri alınamaz!** Bu seçeneği etkinleştirmeden önce tüm verilerinizin yedeğini aldığınızdan emin olun. Geliştirme ortamları veya tam temizlik istenen durumlar dışında kapalı tutulması önerilir.
+
+## 🧹 Veritabanı Bakımı (Database Maintenance)
+
+Eklenti, veritabanınızı sağlıklı ve hızlı tutmak için yerleşik bir **Veritabanı Temizleyici (Database Cleaner)** aracı içerir. Bu araç, artık kullanılmayan "orphaned" (yetim) verileri tespit eder ve temizler.
+
+### Güvenli Temizlik (Safe Cleanup)
+Versiyon **4.6.1** itibariyle, temizlik aracı aşağıdaki verileri otomatik olarak koruma altına alır:
+
+- **Sistem Verileri:** Sipariş geçmişi, loglar, iptal politikaları.
+- **Rezervasyon Verileri:** `_mhm_` ile başlayan tüm rezervasyon detayları (tarihler, saatler, süreler).
+- **Müşteri Verileri:** İletişim bilgileri, IP adresleri.
+- **Finansal Veriler:** Fiyatlar, depozito tutarları, vergi hesaplamaları.
+- **Entegrasyon Verileri:** WooCommerce sipariş ID'leri ve ödeme ağ geçidi yanıtları.
+
+:::tip Güvenlik Notu
+`DatabaseCleaner` sınıfı, 40'tan fazla kritik meta anahtarını (`get_valid_meta_keys`) tanımlı bir "beyaz liste" (whitelist) içinde tutar. Temizlik işlemi sırasında bu listedeki hiçbir veri **asla silinmez**.
+:::
+
