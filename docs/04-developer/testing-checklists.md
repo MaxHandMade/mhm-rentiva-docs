@@ -39,7 +39,7 @@ Bu doküman, canlıya çıkmadan önce yapılacak **lokal kabul testleri** ve ca
 
 ### 4. Müşteri Portalı
 - [ ] Frontend’de yeni müşteri kaydı yap (veya rezervasyon sırasında açılan hesabı kullan).
-- [ ] `[rentiva_my_account]` panelinde rezervasyon geçmişi, favoriler, ödeme geçmişi ve mesaj fonksiyonlarını test et.
+- [ ] WooCommerce "Hesabım" sayfasında Rentiva sekmelerini (rezervasyon geçmişi, favoriler, ödeme geçmişi ve mesajlar) test et.
 - [ ] Profil bilgisi güncelle, şifre değiştir, çıkış/yeniden giriş yaparak doğrula.
 
 ### 5. Mesajlaşma ve Bildirimler
@@ -63,7 +63,7 @@ Bu doküman, canlıya çıkmadan önce yapılacak **lokal kabul testleri** ve ca
 
 ### 9. REST & Shortcode Senaryoları (Opsiyonel)
 - [ ] REST API endpoint’lerini (`/wp-json/mhm-rentiva/v1/...`) test token ile çağır; yetkilendirme ve cevap yapısını doğrula.
-- [ ] Temel shortcode’ları (`availability calendar`, `search`, `comparison`, `my account`) demo sayfalarında çalıştır.
+- [ ] Temel shortcode’ları (`availability calendar`, `search`, `comparison`) demo sayfalarında çalıştır.
 
 ### 10. Bakım ve Sistem Araçları
 - [ ] `Settings > Database Cleanup` sayfasında “dry-run” çalıştır, raporu incele; gerçek temizlikten önce yedek planını kontrol et.

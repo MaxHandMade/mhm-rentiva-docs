@@ -35,7 +35,7 @@ Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işar
 
 ## Müşteri Portalı
 
-- [ ] `[rentiva_my_account]` sayfasında rezervasyon, favori, mesaj sekmeleri çalışıyor.
+- [ ] WooCommerce "Hesabım" sayfasında Rentiva sekmeleri (Rezervasyon, Favoriler, Mesajlar) çalışıyor.
 - [ ] Müşteri hesabı ile giriş/çıkış test edildi.
 - [ ] Mesaj sistemi üzerinden örnek bir ileti oluşturulup yanıtlandı.
 

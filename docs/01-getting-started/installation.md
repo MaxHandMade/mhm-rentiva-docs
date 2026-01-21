@@ -47,7 +47,7 @@ Eklentinin çalışması için bazı sayfaların oluşturulması ve içine ilgil
 |-----------|----------------------|--------------|----------|
 | **Araç Arama / Listeleme** | `[rentiva_vehicle_search]` | `/rentiva/vehicle-search/` | Müşterilerin araçları göreceği ana sayfa. |
 | **Rezervasyon Formu** | `[rentiva_booking_form]` | `/rentiva/booking-form/` | Rezervasyon işlemlerinin yapıldığı sayfa. |
-| **Müşteri Paneli (Hesabım)**| `[rentiva_my_account]` | `/rentiva/account/dashboard/` | Müşterilerin giriş yapıp rezervasyonlarını göreceği yer. |
+| **Müşteri Paneli (Hesabım)**| WooCommerce "Hesabım" Sayfası | `/my-account/` | Müşterilerin giriş yapıp rezervasyonlarını göreceği yer (WooCommerce tarafından yönetilir). |
 | **Teşekkür Sayfası** | `[rentiva_thank_you]` | `/rentiva/thank-you/` | Rezervasyon tamamlanınca yönlendirilecek sayfa. |
 | **Rezervasyon Onayı** | `[rentiva_booking_confirmation]` | `/rentiva/booking-confirmation/` | Ödeme sonrası özet ve durum bilgisi. |
 
