@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-developer/technical-architecture" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">🏗️ Modül Mimarisi ve Teknik Harita | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture"><meta data-rh="true" property="og:locale" content="tr"><meta data-rh="true" name="docusaurus_locale" content="tr"><meta data-rh="true" name="docsearch:language" content="tr"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="🏗️ Modül Mimarisi ve Teknik Harita | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu"><meta data-rh="true" property="og:description" content="MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture" hreflang="tr"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Geliştirici Rehberi","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/category/geliştirici-rehberi"},{"@type":"ListItem","position":2,"name":"Modül Mimarisi","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/assets/css/styles.28d2815e.css">
+<script src="/mhm-rentiva-docs/assets/js/runtime~main.5048897c.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/assets/js/main.e0d23d9c.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/mhm-rentiva-docs/img/mhm-logo.png"><link rel="preload" as="image" href="/mhm-rentiva-docs/img/mhm-logo-white.png"><div role="region" aria-label="Ana içeriğe geç"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Ana içeriğe geç</a></div><nav aria-label="Ana menü" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Gezinme çubuğunu aç/kapat" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/mhm-rentiva-docs/"><div class="navbar__logo"><img src="/mhm-rentiva-docs/img/mhm-logo.png" alt="MHM Rentiva Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/mhm-rentiva-docs/img/mhm-logo-white.png" alt="MHM Rentiva Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">MHM Rentiva</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/mhm-rentiva-docs/docs/">Dokümantasyon</a><a class="navbar__item navbar__link" href="/mhm-rentiva-docs/blog">Sürüm Notları</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/MaxHandMade/mhm-rentiva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Karanlık ve aydınlık mod arasında geçiş yapın (şu anda system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Sayfa başına dön" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Belgeler kenar çubuğu" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/mhm-rentiva-docs/docs/"><span title="Dokümantasyon Ana Sayfası" class="linkLabel_WmDU">Dokümantasyon Ana Sayfası</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/mhm-rentiva-docs/docs/category/başlangıç-rehberi"><span title="Başlangıç Rehberi" class="categoryLinkLabel_W154">Başlangıç Rehberi</span></a><button aria-label="Kenar çubuğu kategorisini genişlet &#x27;Başlangıç Rehberi&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/mhm-rentiva-docs/docs/category/temel-yapılandırma"><span title="Temel Yapılandırma" class="categoryLinkLabel_W154">Temel Yapılandırma</span></a><button aria-label="Kenar çubuğu kategorisini genişlet &#x27;Temel Yapılandırma&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım"><span title="Özellikler ve Kullanım" class="categoryLinkLabel_W154">Özellikler ve Kullanım</span></a><button aria-label="Kenar çubuğu kategorisini genişlet &#x27;Özellikler ve Kullanım&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/mhm-rentiva-docs/docs/category/geliştirici-rehberi"><span title="Geliştirici Rehberi" class="categoryLinkLabel_W154">Geliştirici Rehberi</span></a><button aria-label="Kenar çubuğu kategorisini daralt &#x27;Geliştirici Rehberi&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/rest-api"><span title="REST API" class="linkLabel_WmDU">REST API</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/database"><span title="Veritabanı" class="linkLabel_WmDU">Veritabanı</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/framework-architecture"><span title="Mimari ve Özelleştirme" class="linkLabel_WmDU">Mimari ve Özelleştirme</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/list-table"><span title="Liste Tablo Notları" class="linkLabel_WmDU">Liste Tablo Notları</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/mhm-rentiva-docs/docs/developer/technical-architecture"><span title="Modül Mimarisi" class="linkLabel_WmDU">Modül Mimarisi</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/test-suite"><span title="Test Araçları" class="linkLabel_WmDU">Test Araçları</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/mhm-rentiva-docs/docs/developer/testing-checklists"><span title="Kontrol Listeleri" class="linkLabel_WmDU">Kontrol Listeleri</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/mhm-rentiva-docs/docs/category/sss"><span title="SSS" class="categoryLinkLabel_W154">SSS</span></a><button aria-label="Kenar çubuğu kategorisini genişlet &#x27;SSS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Gezinti yolu"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Ana sayfa" class="breadcrumbs__link" href="/mhm-rentiva-docs/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/mhm-rentiva-docs/docs/category/geliştirici-rehberi"><span>Geliştirici Rehberi</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Modül Mimarisi</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Bu sayfada</button></div><div class="theme-doc-markdown markdown"><header><h1>MHM Rentiva - Modül Mimarisi ve Teknik Dokümantasyon</h1></header>
+<p><img decoding="async" loading="lazy" src="https://img.shields.io/badge/version-4.6.2-blue.svg" alt="Version" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://img.shields.io/badge/modules-22-green.svg" alt="Modules" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://img.shields.io/badge/security-WPCS%20Compliant-brightgreen.svg" alt="Security" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://img.shields.io/badge/last%20audit-2026--01--21-blue.svg" alt="Last Audit" class="img_ev3q"></p>
+<blockquote>
+<p><strong>Teknik Anayasa</strong> - Bu belge, MHM Rentiva eklentisinin mimari referansı olup, 22 modülün tümünü, sorumluluklarını, ilişkilerini ve güvenlik durumlarını detaylandırır.</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-i̇çindekiler">📋 İçindekiler<a href="#-i̇çindekiler" class="hash-link" aria-label="📋 İçindekiler doğrudan bağlantı" title="📋 İçindekiler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="#mimari-genel-bakis" class="">Mimari Genel Bakış</a></li>
+<li class=""><a href="#modul-kategorileri" class="">Modül Kategorileri</a></li>
+<li class=""><a href="#-is-mantigi-modulleri" class="">İş Mantığı Modülleri</a></li>
+<li class=""><a href="#-kullanici-operasyonlari-modulleri" class="">Kullanıcı Operasyonları Modülleri</a></li>
+<li class=""><a href="#-sistem-altyapisi-modulleri" class="">Sistem Altyapısı Modülleri</a></li>
+<li class=""><a href="#-guvenlik-ve-api-modulleri" class="">Güvenlik ve API Modülleri</a></li>
+<li class=""><a href="#modul-iliskileri-grafigi" class="">Modül İlişkileri Grafiği</a></li>
+<li class=""><a href="#guvenlik-denetim-ozeti" class="">Güvenlik Denetim Özeti</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-mimari-genel-bakış">🏗️ Mimari Genel Bakış<a href="#️-mimari-genel-bakış" class="hash-link" aria-label="🏗️ Mimari Genel Bakış doğrudan bağlantı" title="🏗️ Mimari Genel Bakış doğrudan bağlantı" translate="no">​</a></h2>
+<p>MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı <strong>modüler monolit</strong> mimarisini takip eder:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">┌─────────────────────────────────────────────────────────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│                        WORDPRESS CORE                           │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├─────────────────────────────────────────────────────────────────┤</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│                     MHM RENTIVA PLUGIN                          │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  ┌─────────────────────────────────────────────────────────┐   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │                   BUSINESS LOGIC (İŞ MANTIĞI)            │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │   ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │   │ Booking │ │ Vehicle │ │Transfer │ │ Payment │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │   └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │        │           │           │           │             │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │        └───────────┴─────┬─────┴───────────┘             │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │                          │                                │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  ┌───────────────────────┴───────────────────────┐       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │              CORE INFRASTRUCTURE              │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │  Settings │ Emails │ Reports │ Utilities     │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  └───────────────────────────────────────────────┘       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │                          │                                │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  ┌───────────────────────┴───────────────────────┐       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │              USER OPERATIONS                  │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │  Customers │ Messages │ Frontend │ Account   │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  └───────────────────────────────────────────────┘       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │                          │                                │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  ┌───────────────────────┴───────────────────────┐       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │              SECURITY &amp; API                   │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  │   Auth │ Privacy │ Licensing │ REST │ Addons │       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  │  └───────────────────────────────────────────────┘       │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  └─────────────────────────────────────────────────────────┘   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├─────────────────────────────────────────────────────────────────┤</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│                    WOOCOMMERCE (Opsiyonel)                      │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└─────────────────────────────────────────────────────────────────┘</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-modül-kategorileri">📂 Modül Kategorileri<a href="#-modül-kategorileri" class="hash-link" aria-label="📂 Modül Kategorileri doğrudan bağlantı" title="📂 Modül Kategorileri doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kategori</th><th>Modül Sayısı</th><th>Açıklama</th></tr></thead><tbody><tr><td><strong>İş Mantığı</strong></td><td>4</td><td>Temel kiralama operasyonları (Booking, Vehicle, Transfer, Payment)</td></tr><tr><td><strong>Kullanıcı Operasyonları</strong></td><td>4</td><td>Müşteri odaklı özellikler (Customers, Messages, Frontend, Account)</td></tr><tr><td><strong>Sistem Altyapısı</strong></td><td>8</td><td>Arka uç servisleri (Settings, Emails, Reports, Utilities, Core, Setup, PostTypes, About)</td></tr><tr><td><strong>Güvenlik ve API</strong></td><td>6</td><td>Güvenlik ve entegrasyon (Auth, Privacy, Licensing, REST, Addons, Testing)</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-i̇ş-mantığı-modülleri">💼 İş Mantığı Modülleri<a href="#-i̇ş-mantığı-modülleri" class="hash-link" aria-label="💼 İş Mantığı Modülleri doğrudan bağlantı" title="💼 İş Mantığı Modülleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-booking-rezervasyon">📦 Booking (Rezervasyon)<a href="#-booking-rezervasyon" class="hash-link" aria-label="📦 Booking (Rezervasyon) doğrudan bağlantı" title="📦 Booking (Rezervasyon) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Booking/</code></li>
+<li class=""><strong>Tip:</strong> Çekirdek İş Mantığı</li>
+<li class=""><strong>Açıklama:</strong> Oluşturulmasından tamamlanmasına kadar; müsaitlik kontrolleri, fiyat hesaplamaları ve durum yönetimi dahil tüm rezervasyon yaşam döngüsünü yönetir.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Core/Handler.php</code> - Ana rezervasyon formu işleyicisi</li>
+<li class=""><code>Core/BookingManager.php</code> - Rezervasyon CRUD işlemleri</li>
+<li class=""><code>Actions/DepositManagementAjax.php</code> - Depozito ödeme yönetimi</li>
+<li class=""><code>Meta/BookingMeta.php</code> - Rezervasyon meta veri yönetimi</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 21 konum</li>
+<li class=""><strong>İlişkiler:</strong> Vehicle, Payment, Customers, WooCommerce, Emails</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vehicle-araç">📦 Vehicle (Araç)<a href="#-vehicle-araç" class="hash-link" aria-label="📦 Vehicle (Araç) doğrudan bağlantı" title="📦 Vehicle (Araç) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Vehicle/</code></li>
+<li class=""><strong>Tip:</strong> Çekirdek İş Mantığı</li>
+<li class=""><strong>Açıklama:</strong> Galeriler, teknik özellikler, müsaitlik kuralları ve fiyatlandırma katmanları dahil tam araç envanter yönetimi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Meta/VehicleMeta.php</code> - Araç meta veri işleyicisi</li>
+<li class=""><code>Meta/VehicleGallery.php</code> - Görsel galerisi yönetimi</li>
+<li class=""><code>Settings/VehicleSettings.php</code> - Araç yapılandırması</li>
+<li class=""><code>ListTable/VehicleColumns.php</code> - Admin listesi özelleştirme</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 12 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Frontend, PostTypes</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-transfer-vip">📦 Transfer (VIP)<a href="#-transfer-vip" class="hash-link" aria-label="📦 Transfer (VIP) doğrudan bağlantı" title="📦 Transfer (VIP) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Transfer/</code></li>
+<li class=""><strong>Tip:</strong> Çekirdek İş Mantığı</li>
+<li class=""><strong>Açıklama:</strong> Konum/rota yönetimi, mesafe bazlı fiyatlandırma ve araç seçimi ile noktadan noktaya şoförlü transfer hizmeti.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Frontend/TransferShortcodes.php</code> - Arama formu ve sonuçlar</li>
+<li class=""><code>Integration/TransferCartIntegration.php</code> - WooCommerce sepet köprüsü</li>
+<li class=""><code>TransferSearchEngine.php</code> - Rota ve araç eşleştirme</li>
+<li class=""><code>TransferAdmin.php</code> - Admin paneli yönetimi</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 7 konum</li>
+<li class=""><strong>İlişkiler:</strong> WooCommerce, Vehicle, Payment, Frontend</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-payment-ödeme">📦 Payment (Ödeme)<a href="#-payment-ödeme" class="hash-link" aria-label="📦 Payment (Ödeme) doğrudan bağlantı" title="📦 Payment (Ödeme) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Payment/</code></li>
+<li class=""><strong>Tip:</strong> Çekirdek İş Mantığı</li>
+<li class=""><strong>Açıklama:</strong> WooCommerce entegrasyonu, depozito sistemi, iadeler ve çoklu ödeme ağ geçidi desteği ile ödeme işlemleri.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>WooCommerce/WooCommerceBridge.php</code> - WooCommerce entegrasyonu</li>
+<li class=""><code>Refunds/Service.php</code> - İade işlemleri</li>
+<li class=""><code>DepositCalculator.php</code> - Depozito tutarı hesaplama</li>
+<li class=""><code>PaymentGatewayManager.php</code> - Ağ geçidi yönetimi</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 2 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Transfer, WooCommerce, Emails</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kullanıcı-operasyonları-modülleri">👥 Kullanıcı Operasyonları Modülleri<a href="#-kullanıcı-operasyonları-modülleri" class="hash-link" aria-label="👥 Kullanıcı Operasyonları Modülleri doğrudan bağlantı" title="👥 Kullanıcı Operasyonları Modülleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-customers-müşteriler">📦 Customers (Müşteriler)<a href="#-customers-müşteriler" class="hash-link" aria-label="📦 Customers (Müşteriler) doğrudan bağlantı" title="📦 Customers (Müşteriler) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Customers/</code></li>
+<li class=""><strong>Tip:</strong> Kullanıcı Operasyonları</li>
+<li class=""><strong>Açıklama:</strong> Profil yönetimi, rezervasyon geçmişi ve yönetim araçları ile müşteri yönetim sistemi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>CustomersPage.php</code> - Admin müşteri listesi</li>
+<li class=""><code>AddCustomerPage.php</code> - Müşteri oluşturma formu</li>
+<li class=""><code>CustomerProfile.php</code> - Profil yönetimi</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 3 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Messages, Frontend</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-messages-mesajlar">📦 Messages (Mesajlar)<a href="#-messages-mesajlar" class="hash-link" aria-label="📦 Messages (Mesajlar) doğrudan bağlantı" title="📦 Messages (Mesajlar) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Messages/</code></li>
+<li class=""><strong>Tip:</strong> Kullanıcı Operasyonları</li>
+<li class=""><strong>Açıklama:</strong> Konu takibi (thread) ve bildirimlerle müşteriler ve yöneticiler arası dahili mesajlaşma sistemi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Core/Messages.php</code> - Çekirdek mesajlaşma mantığı</li>
+<li class=""><code>Core/MessageUrlHelper.php</code> - URL oluşturma</li>
+<li class=""><code>Monitoring/MessageLogger.php</code> - Mesaj denetim logları</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 2 konum</li>
+<li class=""><strong>İlişkiler:</strong> Customers, Emails, Frontend</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-frontend-ön-yüz">📦 Frontend (Ön Yüz)<a href="#-frontend-ön-yüz" class="hash-link" aria-label="📦 Frontend (Ön Yüz) doğrudan bağlantı" title="📦 Frontend (Ön Yüz) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Frontend/</code></li>
+<li class=""><strong>Tip:</strong> Kullanıcı Operasyonları</li>
+<li class=""><strong>Açıklama:</strong> Shortcode&#x27;lar, hesap sayfaları, bloklar ve müşteri portalı dahil tüm ön yüz bileşenleri.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Shortcodes/BookingForm.php</code> - Rezervasyon formu shortcode&#x27;u</li>
+<li class=""><code>Shortcodes/VehiclesList.php</code> - Araç listesi ve puanlama</li>
+<li class=""><code>Shortcodes/VehicleRatingForm.php</code> - Müşteri puanlama sistemi</li>
+<li class=""><code>Account/AccountController.php</code> - Hesabım sayfası kontrolcüsü</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 18 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Vehicle, Customers, Messages, WooCommerce</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-account-hesap">📦 Account (Hesap)<a href="#-account-hesap" class="hash-link" aria-label="📦 Account (Hesap) doğrudan bağlantı" title="📦 Account (Hesap) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Frontend/Account/</code></li>
+<li class=""><strong>Tip:</strong> Kullanıcı Operasyonları</li>
+<li class=""><strong>Açıklama:</strong> Rezervasyon yönetimi, favoriler, profil düzenleme ve belge yükleme ile müşteri self-servis portalı.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>AccountController.php</code> - Ana hesap koordinatörü</li>
+<li class=""><code>Tabs/BookingsTab.php</code> - Rezervasyon geçmişi görünümü</li>
+<li class=""><code>Tabs/FavoritesTab.php</code> - Favori araçlar</li>
+<li class=""><code>Tabs/ProfileTab.php</code> - Profil düzenleme</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>İlişkiler:</strong> Frontend, Customers, Booking, Messages</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-sistem-altyapısı-modülleri">⚙️ Sistem Altyapısı Modülleri<a href="#️-sistem-altyapısı-modülleri" class="hash-link" aria-label="⚙️ Sistem Altyapısı Modülleri doğrudan bağlantı" title="⚙️ Sistem Altyapısı Modülleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-settings-ayarlar">📦 Settings (Ayarlar)<a href="#-settings-ayarlar" class="hash-link" aria-label="📦 Settings (Ayarlar) doğrudan bağlantı" title="📦 Settings (Ayarlar) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Settings/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Gruplandırılmış ayarlar, sanitizasyon ve validasyon ile merkezi yapılandırma yönetimi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Core/SettingsCore.php</code> - Çekirdek ayarlar API</li>
+<li class=""><code>SettingsHandler.php</code> - Ayarlar kaydetme/sıfırlama işleyicisi</li>
+<li class=""><code>Groups/*.php</code> - Gruplandırılmış ayar tanımları</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 4 konum</li>
+<li class=""><strong>İlişkiler:</strong> Tüm modüller (merkezi konfigürasyon)</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-emails-e-postalar">📦 Emails (E-postalar)<a href="#-emails-e-postalar" class="hash-link" aria-label="📦 Emails (E-postalar) doğrudan bağlantı" title="📦 Emails (E-postalar) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Emails/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Özelleştirilebilir HTML şablonları ve tetiklenen gönderimler ile otomatik e-posta bildirim sistemi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Core/EmailTemplates.php</code> - Şablon yönetimi</li>
+<li class=""><code>Sender/EmailSender.php</code> - E-posta gönderimi</li>
+<li class=""><code>Templates/*.php</code> - Bireysel e-posta şablonları</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 1 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Customers, Messages, Settings</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-reports-raporlar">📦 Reports (Raporlar)<a href="#-reports-raporlar" class="hash-link" aria-label="📦 Reports (Raporlar) doğrudan bağlantı" title="📦 Reports (Raporlar) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Reports/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Gelir, müşteri ve araç analizleri ile kapsamlı analiz panosu.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Reports.php</code> - Ana rapor koordinatörü</li>
+<li class=""><code>BusinessLogic/RevenueReport.php</code> - Gelir analizleri</li>
+<li class=""><code>BusinessLogic/BookingReport.php</code> - Rezervasyon istatistikleri</li>
+<li class=""><code>Charts.php</code> - Chart.js entegrasyonu</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 0 (form gönderimi yok)</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Vehicle, Payment, Settings</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-utilities-araçlar">📦 Utilities (Araçlar)<a href="#-utilities-araçlar" class="hash-link" aria-label="📦 Utilities (Araçlar) doğrudan bağlantı" title="📦 Utilities (Araçlar) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Utilities/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Dışa aktarma, veritabanı temizliği, cron izleme ve kaldırma işleyicileri dahil sistem bakım araçları.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Export/Export.php</code> - Veri dışa aktarma işlevi</li>
+<li class=""><code>Actions/Actions.php</code> - Yardımcı eylemler (log temizleme vb.)</li>
+<li class=""><code>Database/DatabaseCleanupPage.php</code> - Veritabanı bakımı</li>
+<li class=""><code>Cron/CronMonitorPage.php</code> - Zamanlanmış görev izleme</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 4 konum</li>
+<li class=""><strong>İlişkiler:</strong> Tüm modüller (bakım operasyonları)</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-core-çekirdek">📦 Core (Çekirdek)<a href="#-core-çekirdek" class="hash-link" aria-label="📦 Core (Çekirdek) doğrudan bağlantı" title="📦 Core (Çekirdek) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Core/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Soyut sınıflar, trait&#x27;ler, yardımcılar ve temel araçlar dahil paylaşılan altyapı bileşenleri.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Utilities/AbstractListTable.php</code> - Temel liste tablosu sınıfı</li>
+<li class=""><code>Traits/AdminHelperTrait.php</code> - Ortak admin yardımcıları</li>
+<li class=""><code>MetaBoxes/AbstractMetaBox.php</code> - Temel meta kutusu sınıfı</li>
+<li class=""><code>Helpers/Sanitizer.php</code> - Merkezi sanitizasyon araçları</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 3 konum</li>
+<li class=""><strong>İlişkiler:</strong> Tüm modüller (temel altyapı)</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-setup-kurulum">📦 Setup (Kurulum)<a href="#-setup-kurulum" class="hash-link" aria-label="📦 Setup (Kurulum) doğrudan bağlantı" title="📦 Setup (Kurulum) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Setup/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Eklenti kurulum sihirbazı ve ilk yapılandırma rehberliği.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>SetupWizard.php</code> - Adım adım kurulum</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 0</li>
+<li class=""><strong>İlişkiler:</strong> Settings, PostTypes</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-posttypes-yazı-tipleri">📦 PostTypes (Yazı Tipleri)<a href="#-posttypes-yazı-tipleri" class="hash-link" aria-label="📦 PostTypes (Yazı Tipleri) doğrudan bağlantı" title="📦 PostTypes (Yazı Tipleri) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/PostTypes/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Araçlar ve rezervasyonlar için custom post type ve taksonomi kaydı.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>VehiclePostType.php</code> - Araç CPT</li>
+<li class=""><code>BookingPostType.php</code> - Rezervasyon CPT</li>
+<li class=""><code>Taxonomies.php</code> - Özel taksonomiler</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 0</li>
+<li class=""><strong>İlişkiler:</strong> Vehicle, Booking</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-about-hakkında">📦 About (Hakkında)<a href="#-about-hakkında" class="hash-link" aria-label="📦 About (Hakkında) doğrudan bağlantı" title="📦 About (Hakkında) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/About/</code></li>
+<li class=""><strong>Tip:</strong> Sistem Altyapısı</li>
+<li class=""><strong>Açıklama:</strong> Sistem teşhisi, özellik özeti ve destek kaynakları ile eklenti bilgi sayfası.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>About.php</code> - Ana hakkında sayfası</li>
+<li class=""><code>SystemInfo.php</code> - Sistem teşhisi</li>
+<li class=""><code>Tabs/*.php</code> - Bilgi sekmeleri</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 1 konum</li>
+<li class=""><strong>İlişkiler:</strong> Settings, Licensing</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-güvenlik-ve-api-modülleri">🔒 Güvenlik ve API Modülleri<a href="#-güvenlik-ve-api-modülleri" class="hash-link" aria-label="🔒 Güvenlik ve API Modülleri doğrudan bağlantı" title="🔒 Güvenlik ve API Modülleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-auth-kimlik-doğrulama">📦 Auth (Kimlik Doğrulama)<a href="#-auth-kimlik-doğrulama" class="hash-link" aria-label="📦 Auth (Kimlik Doğrulama) doğrudan bağlantı" title="📦 Auth (Kimlik Doğrulama) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Auth/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Gelişmiş hesap güvenliği için İki Faktörlü Kimlik Doğrulama (2FA) sistemi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>TwoFactorManager.php</code> - 2FA uygulaması (TOTP)</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 3 konum</li>
+<li class=""><strong>İlişkiler:</strong> Customers, Frontend, Settings</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-privacy-gizlilik">📦 Privacy (Gizlilik)<a href="#-privacy-gizlilik" class="hash-link" aria-label="📦 Privacy (Gizlilik) doğrudan bağlantı" title="📦 Privacy (Gizlilik) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Privacy/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Veri dışa aktarma, silme ve rıza yönetimi dahil GDPR uyumluluk özellikleri.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>GDPRManager.php</code> - GDPR işlem yöneticisi</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 3 konum</li>
+<li class=""><strong>İlişkiler:</strong> Customers, Settings, Booking</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-licensing-lisanslama">📦 Licensing (Lisanslama)<a href="#-licensing-lisanslama" class="hash-link" aria-label="📦 Licensing (Lisanslama) doğrudan bağlantı" title="📦 Licensing (Lisanslama) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Licensing/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Pro özellik aktivasyonu ve doğrulaması için lisans anahtarı yönetimi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>LicenseManager.php</code> - Lisans API entegrasyonu</li>
+<li class=""><code>LicenseAdmin.php</code> - Admin lisans sayfası</li>
+<li class=""><code>Mode.php</code> - Pro/Lite mod tespiti</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 3 konum</li>
+<li class=""><strong>İlişkiler:</strong> Settings, About, Tüm Pro özellikler</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-rest-api">📦 REST (API)<a href="#-rest-api" class="hash-link" aria-label="📦 REST (API) doğrudan bağlantı" title="📦 REST (API) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/REST/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Üçüncü taraf entegrasyonlar ve mobil uygulamalar için tam kapsamlı REST API.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>VehicleEndpoint.php</code> - Araç API</li>
+<li class=""><code>BookingEndpoint.php</code> - Rezervasyon API</li>
+<li class=""><code>AuthEndpoint.php</code> - Kimlik Doğrulama API</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WordPress REST nonce sistemini kullanır)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 0 (WordPress REST kimlik doğrulamayı yönetir)</li>
+<li class=""><strong>İlişkiler:</strong> Tüm herkese açık modüller</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-addons-eklentiler">📦 Addons (Eklentiler)<a href="#-addons-eklentiler" class="hash-link" aria-label="📦 Addons (Eklentiler) doğrudan bağlantı" title="📦 Addons (Eklentiler) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Addons/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Fiyatlandırma ve entegrasyon ile rezervasyon eklentileri/ekstraları yönetimi.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>AddonManager.php</code> - Eklenti CRUD ve fiyatlandırma</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 2 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Payment, Vehicle</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testing-test">📦 Testing (Test)<a href="#-testing-test" class="hash-link" aria-label="📦 Testing (Test) doğrudan bağlantı" title="📦 Testing (Test) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Testing/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> Shortcode testi ve güvenlik doğrulaması için geliştirme ve QA araçları.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>ShortcodeTestHandler.php</code> - Shortcode testi</li>
+<li class=""><code>SecurityTest.php</code> - Güvenlik denetim araçları</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 1 konum</li>
+<li class=""><strong>İlişkiler:</strong> Frontend, Tüm shortcode modülleri</li>
+</ul>
+<hr>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-actions-eylemler">📦 Actions (Eylemler)<a href="#-actions-eylemler" class="hash-link" aria-label="📦 Actions (Eylemler) doğrudan bağlantı" title="📦 Actions (Eylemler) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Dizin:</strong> <code>src/Admin/Actions/</code></li>
+<li class=""><strong>Tip:</strong> Güvenlik ve API</li>
+<li class=""><strong>Açıklama:</strong> İadeler, log yönetimi ve sayfa oluşturma dahil global admin eylemleri.</li>
+<li class=""><strong>Kritik Dosyalar:</strong>
+<ul>
+<li class=""><code>Actions.php</code> - Global eylem işleyicileri</li>
+</ul>
+</li>
+<li class=""><strong>Güvenlik Durumu:</strong> ✅ Doğrulandı (v4.6.2 - WPCS &amp; Nonce Hardened)</li>
+<li class=""><strong>Nonce Yamaları:</strong> 1 konum</li>
+<li class=""><strong>İlişkiler:</strong> Booking, Payment, Settings, Utilities</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-modül-i̇lişkileri-grafiği">🔗 Modül İlişkileri Grafiği<a href="#-modül-i̇lişkileri-grafiği" class="hash-link" aria-label="🔗 Modül İlişkileri Grafiği doğrudan bağlantı" title="🔗 Modül İlişkileri Grafiği doğrudan bağlantı" translate="no">​</a></h2>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">                              ┌──────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                              │   SETTINGS   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                              └──────┬───────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                     │ (yapılandırır)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         ┌───────────────────────────┼───────────────────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         │                           │                           │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ┌────┴────┐                ┌─────┴─────┐              ┌──────┴─────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    │ VEHICLE │◄───────────────│  BOOKING  │──────────────►│  PAYMENT  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └────┬────┘                └─────┬─────┘              └──────┬─────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         │                           │                           │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         │    ┌──────────────────────┼──────────────────────┐   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         │    │                      │                      │   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         ▼    ▼                      ▼                      ▼   ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ┌─────────────┐            ┌───────────┐         ┌───────────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    │  FRONTEND   │◄───────────│ CUSTOMERS │────────►│  WOOCOMMERCE  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    │ (Shortcodes)│            └─────┬─────┘         └───────────────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └──────┬──────┘                  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">           │                         │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">           ▼                         ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ┌─────────────┐            ┌───────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    │  TRANSFER   │            │ MESSAGES  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    │   (VIP)     │            └─────┬─────┘</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └──────┬──────┘                  │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">           │                         ▼</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">           └────────────────────►┌───────────┐</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                 │  EMAILS   │</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                 └───────────┘</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güvenlik-denetim-özeti">🛡️ Güvenlik Denetim Özeti<a href="#️-güvenlik-denetim-özeti" class="hash-link" aria-label="🛡️ Güvenlik Denetim Özeti doğrudan bağlantı" title="🛡️ Güvenlik Denetim Özeti doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="v462-güvenlik-yamaları-21012026">v4.6.2 Güvenlik Yamaları (21.01.2026)<a href="#v462-güvenlik-yamaları-21012026" class="hash-link" aria-label="v4.6.2 Güvenlik Yamaları (21.01.2026) doğrudan bağlantı" title="v4.6.2 Güvenlik Yamaları (21.01.2026) doğrudan bağlantı" translate="no">​</a></h3>
+<table><thead><tr><th>Metrik</th><th>Değer</th></tr></thead><tbody><tr><td><strong>Denetlenen Toplam Modül</strong></td><td>22</td></tr><tr><td><strong>Düzenlenen Toplam Dosya</strong></td><td>59+</td></tr><tr><td><strong>Nonce Güçlendirme Yaması</strong></td><td>91</td></tr><tr><td><strong>WPCS Uyumluluğu</strong></td><td>%100</td></tr><tr><td><strong>Kritik Açıklar</strong></td><td>0</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="uygulanan-güvenlik-standartları">Uygulanan Güvenlik Standartları<a href="#uygulanan-güvenlik-standartları" class="hash-link" aria-label="Uygulanan Güvenlik Standartları doğrudan bağlantı" title="Uygulanan Güvenlik Standartları doğrudan bağlantı" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>Nonce Doğrulama</strong>: Tüm <code>wp_verify_nonce()</code> çağrıları <code>sanitize_text_field(wp_unslash())</code> ile sarmalandı</li>
+<li class=""><strong>Girdi Sanitizasyonu</strong>: <code>Sanitizer::text_field_safe()</code> yardımcısının tutarlı kullanımı</li>
+<li class=""><strong>SQL Enfeksiyonu Önleme</strong>: Tüm sorgular prepared statement kullanır</li>
+<li class=""><strong>XSS Önleme</strong>: Tüm çıktılar <code>esc_html()</code>, <code>esc_attr()</code>, <code>wp_kses_post()</code> ile düzgün şekilde kaçış karakterlerine alındı</li>
+<li class=""><strong>CSRF Koruması</strong>: Tüm formlar ve AJAX işleyiciler nonce ile korunmaktadır</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="modül-güvenlik-matrisi">Modül Güvenlik Matrisi<a href="#modül-güvenlik-matrisi" class="hash-link" aria-label="Modül Güvenlik Matrisi doğrudan bağlantı" title="Modül Güvenlik Matrisi doğrudan bağlantı" translate="no">​</a></h3>
+<table><thead><tr><th>Modül</th><th style="text-align:center">Nonce</th><th style="text-align:center">Sanitize</th><th style="text-align:center">Escape</th><th style="text-align:center">Prepared SQL</th></tr></thead><tbody><tr><td>Booking</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Vehicle</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Transfer</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Payment</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Customers</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Messages</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Frontend</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Settings</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Emails</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Reports</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Utilities</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Core</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Auth</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Privacy</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Licensing</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>REST</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Addons</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Testing</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Actions</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>About</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr><tr><td>Setup</td><td style="text-align:center">N/A</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">N/A</td></tr><tr><td>PostTypes</td><td style="text-align:center">N/A</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">N/A</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-belge-künyesi">📝 Belge Künyesi<a href="#-belge-künyesi" class="hash-link" aria-label="📝 Belge Künyesi doğrudan bağlantı" title="📝 Belge Künyesi doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Özellik</th><th>Değer</th></tr></thead><tbody><tr><td><strong>Belge Sürümü</strong></td><td>1.0.0</td></tr><tr><td><strong>Eklenti Sürümü</strong></td><td>4.6.2</td></tr><tr><td><strong>Son Güncelleme</strong></td><td>21.01.2026</td></tr><tr><td><strong>Yazar</strong></td><td>MHM Development Team</td></tr><tr><td><strong>Lisans</strong></td><td>GPL-2.0+</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/technical-architecture.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Bu sayfayı düzenle</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Dokümanlar sayfası"><a class="pagination-nav__link pagination-nav__link--prev" href="/mhm-rentiva-docs/docs/developer/list-table"><div class="pagination-nav__sublabel">Önceki</div><div class="pagination-nav__label">Liste Tablo Notları</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/mhm-rentiva-docs/docs/developer/test-suite"><div class="pagination-nav__sublabel">Sonraki</div><div class="pagination-nav__label">Test Araçları</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#-i̇çindekiler" class="table-of-contents__link toc-highlight">📋 İçindekiler</a></li><li><a href="#️-mimari-genel-bakış" class="table-of-contents__link toc-highlight">🏗️ Mimari Genel Bakış</a></li><li><a href="#-modül-kategorileri" class="table-of-contents__link toc-highlight">📂 Modül Kategorileri</a></li><li><a href="#-i̇ş-mantığı-modülleri" class="table-of-contents__link toc-highlight">💼 İş Mantığı Modülleri</a><ul><li><a href="#-booking-rezervasyon" class="table-of-contents__link toc-highlight">📦 Booking (Rezervasyon)</a></li><li><a href="#-vehicle-araç" class="table-of-contents__link toc-highlight">📦 Vehicle (Araç)</a></li><li><a href="#-transfer-vip" class="table-of-contents__link toc-highlight">📦 Transfer (VIP)</a></li><li><a href="#-payment-ödeme" class="table-of-contents__link toc-highlight">📦 Payment (Ödeme)</a></li></ul></li><li><a href="#-kullanıcı-operasyonları-modülleri" class="table-of-contents__link toc-highlight">👥 Kullanıcı Operasyonları Modülleri</a><ul><li><a href="#-customers-müşteriler" class="table-of-contents__link toc-highlight">📦 Customers (Müşteriler)</a></li><li><a href="#-messages-mesajlar" class="table-of-contents__link toc-highlight">📦 Messages (Mesajlar)</a></li><li><a href="#-frontend-ön-yüz" class="table-of-contents__link toc-highlight">📦 Frontend (Ön Yüz)</a></li><li><a href="#-account-hesap" class="table-of-contents__link toc-highlight">📦 Account (Hesap)</a></li></ul></li><li><a href="#️-sistem-altyapısı-modülleri" class="table-of-contents__link toc-highlight">⚙️ Sistem Altyapısı Modülleri</a><ul><li><a href="#-settings-ayarlar" class="table-of-contents__link toc-highlight">📦 Settings (Ayarlar)</a></li><li><a href="#-emails-e-postalar" class="table-of-contents__link toc-highlight">📦 Emails (E-postalar)</a></li><li><a href="#-reports-raporlar" class="table-of-contents__link toc-highlight">📦 Reports (Raporlar)</a></li><li><a href="#-utilities-araçlar" class="table-of-contents__link toc-highlight">📦 Utilities (Araçlar)</a></li><li><a href="#-core-çekirdek" class="table-of-contents__link toc-highlight">📦 Core (Çekirdek)</a></li><li><a href="#-setup-kurulum" class="table-of-contents__link toc-highlight">📦 Setup (Kurulum)</a></li><li><a href="#-posttypes-yazı-tipleri" class="table-of-contents__link toc-highlight">📦 PostTypes (Yazı Tipleri)</a></li><li><a href="#-about-hakkında" class="table-of-contents__link toc-highlight">📦 About (Hakkında)</a></li></ul></li><li><a href="#-güvenlik-ve-api-modülleri" class="table-of-contents__link toc-highlight">🔒 Güvenlik ve API Modülleri</a><ul><li><a href="#-auth-kimlik-doğrulama" class="table-of-contents__link toc-highlight">📦 Auth (Kimlik Doğrulama)</a></li><li><a href="#-privacy-gizlilik" class="table-of-contents__link toc-highlight">📦 Privacy (Gizlilik)</a></li><li><a href="#-licensing-lisanslama" class="table-of-contents__link toc-highlight">📦 Licensing (Lisanslama)</a></li><li><a href="#-rest-api" class="table-of-contents__link toc-highlight">📦 REST (API)</a></li><li><a href="#-addons-eklentiler" class="table-of-contents__link toc-highlight">📦 Addons (Eklentiler)</a></li><li><a href="#-testing-test" class="table-of-contents__link toc-highlight">📦 Testing (Test)</a></li><li><a href="#-actions-eylemler" class="table-of-contents__link toc-highlight">📦 Actions (Eylemler)</a></li></ul></li><li><a href="#-modül-i̇lişkileri-grafiği" class="table-of-contents__link toc-highlight">🔗 Modül İlişkileri Grafiği</a></li><li><a href="#️-güvenlik-denetim-özeti" class="table-of-contents__link toc-highlight">🛡️ Güvenlik Denetim Özeti</a><ul><li><a href="#v462-güvenlik-yamaları-21012026" class="table-of-contents__link toc-highlight">v4.6.2 Güvenlik Yamaları (21.01.2026)</a></li><li><a href="#uygulanan-güvenlik-standartları" class="table-of-contents__link toc-highlight">Uygulanan Güvenlik Standartları</a></li><li><a href="#modül-güvenlik-matrisi" class="table-of-contents__link toc-highlight">Modül Güvenlik Matrisi</a></li></ul></li><li><a href="#-belge-künyesi" class="table-of-contents__link toc-highlight">📝 Belge Künyesi</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Dökümantasyon</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/mhm-rentiva-docs/docs/getting-started/installation">Hızlı Başlangıç</a></li><li class="footer__item"><a class="footer__link-item" href="/mhm-rentiva-docs/docs/usage/shortcodes">Kullanım Kılavuzu</a></li><li class="footer__item"><a class="footer__link-item" href="/mhm-rentiva-docs/docs/developer/intro">Geliştirici Belgeleri</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Topluluk</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://wordpress.org/support/plugin/mhm-rentiva" target="_blank" rel="noopener noreferrer" class="footer__link-item">WordPress Destek Forumu<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/MaxHandMade/mhm-rentiva" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Deposu<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/MaxHandMade/mhm-rentiva/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Hata Bildir<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.youtube.com/channel/UC3qBE6ZCCEc8ugFUYXwtcpA" target="_blank" rel="noopener noreferrer" class="footer__link-item">YouTube Kanalı<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Diğer</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/mhm-rentiva-docs/blog">Sürüm Notları</a></li><li class="footer__item"><a href="https://maxhandmade.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Resmi Web Sitesi<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 MHM Development. Docusaurus ile hazırlanmıştır.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
+    <title>MHM Rentiva Documentation Blog</title>
+    <updated>2026-01-22T06:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
+    <subtitle>MHM Rentiva Documentation Blog</subtitle>
+    <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.2: Güvenlik Tahkimatı ve WPCS Uyumluluğu]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update"/>
+        <updated>2026-01-22T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.2 yayında! Bu sürüm, eklentinin tüm modüllerini kapsayan devasa bir güvenlik ve altyapı güçlendirme güncellemesidir. Yeni özellik eklemekten ziyade, mevcut sistemin aşılmaz bir kale haline getirilmesine odaklandık.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.2</strong> yayında! Bu sürüm, eklentinin tüm modüllerini kapsayan devasa bir güvenlik ve altyapı güçlendirme güncellemesidir. Yeni özellik eklemekten ziyade, mevcut sistemin <strong>aşılmaz bir kale</strong> haline getirilmesine odaklandık.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güvenlik-denetimi-özeti">🛡️ Güvenlik Denetimi Özeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#%EF%B8%8F-g%C3%BCvenlik-denetimi-%C3%B6zeti" class="hash-link" aria-label="🛡️ Güvenlik Denetimi Özeti doğrudan bağlantı" title="🛡️ Güvenlik Denetimi Özeti doğrudan bağlantı" translate="no">​</a></h2>
+<p>Son 24 saat içinde, MHM Rentiva'nın 22 farklı modülü üzerinde satır satır kod analizi gerçekleştirdik. Hedefimiz sadece "çalışan" bir eklenti değil, "en güvenli" kiralama eklentisi olmaktır.</p>
+<p>İşte bu güncellemenin karnesi:</p>
+<table><thead><tr><th>Metrik</th><th>Değer</th></tr></thead><tbody><tr><td><strong>Denetlenen Modüller</strong></td><td>22 (Tümü)</td></tr><tr><td><strong>Düzenlenen Dosyalar</strong></td><td>59+</td></tr><tr><td><strong>Nonce (CSRF) Yaması</strong></td><td>91+</td></tr><tr><td><strong>WPCS Uyumluluğu</strong></td><td>%100</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="neler-değişti">Neler Değişti?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#neler-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Neler Değişti? doğrudan bağlantı" title="Neler Değişti? doğrudan bağlantı" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-tam-kapsamlı-nonce-koruması">1. Tam Kapsamlı Nonce Koruması<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#1-tam-kapsaml%C4%B1-nonce-korumas%C4%B1" class="hash-link" aria-label="1. Tam Kapsamlı Nonce Koruması doğrudan bağlantı" title="1. Tam Kapsamlı Nonce Koruması doğrudan bağlantı" translate="no">​</a></h4>
+<p>WordPress'in güvenlik mekanizması olan <code>nonce</code> (number used once) kullanımı tüm form ve AJAX işlemlerinde standartlaştırıldı. Her bir doğrulama işlemi artık <code>sanitize_text_field(wp_unslash())</code> sarmalayıcısı ile ekstra bir temizlik katmanından geçiriliyor.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-rest-api-ve-rate-limiting">2. REST API ve Rate Limiting<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#2-rest-api-ve-rate-limiting" class="hash-link" aria-label="2. REST API ve Rate Limiting doğrudan bağlantı" title="2. REST API ve Rate Limiting doğrudan bağlantı" translate="no">​</a></h4>
+<p>API tarafında <strong>Hız Sınırlama (Rate Limiting)</strong> ve <strong>IP Kısıtlama</strong> mekanizmaları çekirdek yapıya daha sıkı entegre edildi. Artık <code>CoreSettings</code> yerine <code>RESTSettings</code> üzerinden yönetilen bu yapı, yetkisiz erişim denemelerini anında engelliyor.</p>
+<blockquote>
+<p>Detaylar için yenilenen <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/developer/rest-api">REST API Dokümantasyonu</a> sayfasını inceleyebilirsiniz.</p>
+</blockquote>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-kod-kalitesi-ve-php-84-uyumu">3. Kod Kalitesi ve PHP 8.4+ Uyumu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#3-kod-kalitesi-ve-php-84-uyumu" class="hash-link" aria-label="3. Kod Kalitesi ve PHP 8.4+ Uyumu doğrudan bağlantı" title="3. Kod Kalitesi ve PHP 8.4+ Uyumu doğrudan bağlantı" translate="no">​</a></h4>
+<p>Geleceğe hazırlık kapsamında, PHP 8.4 ve üzeri sürümlerde ortaya çıkabilecek "Implicit Nullable Parameter" uyarıları giderildi. Kod tabanı daha modern, temiz ve hatasız hale getirildi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yeni-teknik-dokümantasyon">🏗️ Yeni Teknik Dokümantasyon<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#%EF%B8%8F-yeni-teknik-dok%C3%BCmantasyon" class="hash-link" aria-label="🏗️ Yeni Teknik Dokümantasyon doğrudan bağlantı" title="🏗️ Yeni Teknik Dokümantasyon doğrudan bağlantı" translate="no">​</a></h2>
+<p>Modüler yapımızı daha iyi anlatabilmek ve geliştiricilere rehberlik etmek için dokümantasyonumuza yeni bir bölüm ekledik:</p>
+<ul>
+<li class=""><a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture"><strong>Modül Mimarisi ve Teknik Harita:</strong></a> Eklentinin 22 modülünün ilişkilerini, dosya yapısını ve güvenlik durumunu gösteren kapsamlı bir rehber.</li>
+</ul>
+<hr>
+<p>MHM Rentiva ile güvenli ve performanslı kiralamalar dileriz! 🚀</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="security" term="security"/>
+        <category label="wpcs" term="wpcs"/>
+        <category label="update" term="update"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v4.6.1 Yayında! 🛡️]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-1-released</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-1-released"/>
+        <updated>2026-01-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.1 sürümü yayınlandı! Bu sürüm, veri bütünlüğü, güvenlik ve WooCommerce entegrasyonu konularında kritik iyileştirmeler içeren bir güvenlik ve kararlılık güncellemesidir.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.1</strong> sürümü yayınlandı! Bu sürüm, <strong>veri bütünlüğü</strong>, <strong>güvenlik</strong> ve <strong>WooCommerce entegrasyonu</strong> konularında kritik iyileştirmeler içeren bir güvenlik ve kararlılık güncellemesidir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-kritik-güvenlik-ve-veri-koruma">🛡️ Kritik Güvenlik ve Veri Koruma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-kritik-g%C3%BCvenlik-ve-veri-koruma" class="hash-link" aria-label="🛡️ Kritik Güvenlik ve Veri Koruma doğrudan bağlantı" title="🛡️ Kritik Güvenlik ve Veri Koruma doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-databasecleaner-i̇yileştirmesi">🧹 DatabaseCleaner İyileştirmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-databasecleaner-i%CC%87yile%C5%9Ftirmesi" class="hash-link" aria-label="🧹 DatabaseCleaner İyileştirmesi doğrudan bağlantı" title="🧹 DatabaseCleaner İyileştirmesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Veritabanı temizleme aracımız, artık çok daha akıllı ve güvenli.</p>
+<ul>
+<li class=""><strong>Genişletilmiş Koruma:</strong> WooCommerce sipariş ID'leri, ödeme detayları ve müşteri meta verileri dahil olmak üzere <strong>40'tan fazla kritik meta anahtar</strong> (<code>_mhm_</code> prefixli) koruma listesine eklendi.</li>
+<li class=""><strong>Veri Kaybı Önleme:</strong> Bakım işlemleri sırasında yanlışlıkla veri silinmesinin önüne geçmek için koruma mekanizmaları güçlendirildi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sql-güvenliği-hardening">🔒 SQL Güvenliği (Hardening)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-sql-g%C3%BCvenli%C4%9Fi-hardening" class="hash-link" aria-label="🔒 SQL Güvenliği (Hardening) doğrudan bağlantı" title="🔒 SQL Güvenliği (Hardening) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Sistem genelinde SQL sorguları gözden geçirildi ve güvenlik seviyesi artırıldı.</p>
+<ul>
+<li class=""><strong>Prepared Statements:</strong> <code>BookingColumns</code> ve <code>ExportStats</code> sınıflarındaki dinamik sorgular, SQL Injection risklerine karşı <code>wpdb-&gt;prepare()</code> kullanılarak standardize edildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-woocommerce-ve-ödeme-i̇yileştirmeleri">🛍️ WooCommerce ve Ödeme İyileştirmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-woocommerce-ve-%C3%B6deme-i%CC%87yile%C5%9Ftirmeleri" class="hash-link" aria-label="🛍️ WooCommerce ve Ödeme İyileştirmeleri doğrudan bağlantı" title="🛍️ WooCommerce ve Ödeme İyileştirmeleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-atomik-çakışma-kilidi-atomic-overlap-lock">⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-atomik-%C3%A7ak%C4%B1%C5%9Fma-kilidi-atomic-overlap-lock" class="hash-link" aria-label="⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock) doğrudan bağlantı" title="⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yoğun rezervasyon trafiği olan siteler için hayati bir özellik eklendi.</p>
+<ul>
+<li class=""><strong>Çift Rezervasyon Önleme:</strong> WooCommerce üzerinden aynı saniyede gelen rezervasyon isteklerinde çakışmayı önlemek için veritabanı seviyesinde atomik kilit mekanizması devreye alındı.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vergi-hesaplama-düzeltmesi">💰 Vergi Hesaplama Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-vergi-hesaplama-d%C3%BCzeltmesi" class="hash-link" aria-label="💰 Vergi Hesaplama Düzeltmesi doğrudan bağlantı" title="💰 Vergi Hesaplama Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Doğru Vergi Matrahı:</strong> Depozito ödemelerinde verginin sadece ödenen depozito üzerinden değil, <strong>toplam rezervasyon tutarı</strong> üzerinden hesaplanması sağlandı. Bu sayede faturalandırma ve muhasebe süreçleri hatasız hale getirildi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kullanıcı-arayüzü">🎨 Kullanıcı Arayüzü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-kullan%C4%B1c%C4%B1-aray%C3%BCz%C3%BC" class="hash-link" aria-label="🎨 Kullanıcı Arayüzü doğrudan bağlantı" title="🎨 Kullanıcı Arayüzü doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Ödeme Ayarları Uyarısı:</strong> WooCommerce aktif olduğunda, kullanıcıların yanlış (lokal) ödeme ayarlarıyla vakit kaybetmesini önlemek için "Ödeme işlemleri WooCommerce tarafından yönetilmektedir" şeklinde bilgilendirici bir uyarı eklendi.</li>
+</ul>
+<hr>
+<p><strong>Nasıl Güncellerim?</strong>
+WordPress yönetim panelinizden <strong>Eklentiler</strong> sayfasını ziyaret ederek güncellemeyi tek tıkla yükleyebilirsiniz. Bu sürüm <strong>Kritik</strong> olarak işaretlenmiştir, tüm kullanıcıların en kısa sürede geçiş yapması önerilir.</p>
+<p>Güvenli ve keyifli kiralamalar! 🚗💨</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="v4.6.1" term="v4.6.1"/>
+        <category label="security" term="security"/>
+        <category label="critical" term="critical"/>
+        <category label="woocommerce" term="woocommerce"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v4.6.0 Yayında! 🚀]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-0-released</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-0-released"/>
+        <updated>2026-01-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.0 sürümü yayınlandı! Bu sürüm, uzun zamandır beklenen VIP Transfer Modülü, gelişmiş rota yönetimi ve esnek fiyatlandırma motoru gibi büyük özellikler içeriyor.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.0</strong> sürümü yayınlandı! Bu sürüm, uzun zamandır beklenen <strong>VIP Transfer Modülü</strong>, gelişmiş rota yönetimi ve esnek fiyatlandırma motoru gibi büyük özellikler içeriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkanlar">🌟 Öne Çıkanlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#-%C3%B6ne-%C3%A7%C4%B1kanlar" class="hash-link" aria-label="🌟 Öne Çıkanlar doğrudan bağlantı" title="🌟 Öne Çıkanlar doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü-şoförlü-hizmet">🚀 VIP Transfer Modülü (Şoförlü Hizmet)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#-vip-transfer-mod%C3%BCl%C3%BC-%C5%9Fof%C3%B6rl%C3%BC-hizmet" class="hash-link" aria-label="🚀 VIP Transfer Modülü (Şoförlü Hizmet) doğrudan bağlantı" title="🚀 VIP Transfer Modülü (Şoförlü Hizmet) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Artık sadece araç kiralama değil, <strong>VIP Transfer</strong> hizmeti de verebilirsiniz!</p>
+<ul>
+<li class=""><strong>Noktadan Noktaya Transfer:</strong> Belirli lokasyonlar arasında sabit veya mesafeye dayalı fiyatlandırma.</li>
+<li class=""><strong>Şoförlü Araç Kiralama:</strong> Saatlik veya günlük şoförlü araç opsiyonları.</li>
+<li class=""><strong>Ekstra Hizmetler:</strong> Karşılama, bebek koltuğu, ikramlar gibi ekstralar.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-rota-ve-lokasyon-yönetimi">🗺️ Rota ve Lokasyon Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#%EF%B8%8F-rota-ve-lokasyon-y%C3%B6netimi" class="hash-link" aria-label="🗺️ Rota ve Lokasyon Yönetimi doğrudan bağlantı" title="🗺️ Rota ve Lokasyon Yönetimi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Admin panelinden detaylı <strong>Rota Yönetimi</strong> yapabilirsiniz.</p>
+<ul>
+<li class="">Kalkış ve Varış noktaları için özel fiyatlar tanımlayın.</li>
+<li class="">İki nokta arasındaki mesafeyi ve süreyi otomatik hesaplayın veya manuel girin.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-esnek-fiyatlandırma-motoru">💰 Esnek Fiyatlandırma Motoru<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#-esnek-fiyatland%C4%B1rma-motoru" class="hash-link" aria-label="💰 Esnek Fiyatlandırma Motoru doğrudan bağlantı" title="💰 Esnek Fiyatlandırma Motoru doğrudan bağlantı" translate="no">​</a></h3>
+<p>Transferler için gelişmiş fiyatlandırma seçenekleri:</p>
+<ul>
+<li class=""><strong>Sabit Fiyat:</strong> "Havalimanı -&gt; Şehir Merkezi: 500 TL" gibi sabit rotalar oluşturun.</li>
+<li class=""><strong>Mesafe Bazlı:</strong> KM başına ücretlendirme ile dinamik fiyatlar hesaplayın.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gelişmiş-transfer-arama">🔍 Gelişmiş Transfer Arama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#-geli%C5%9Fmi%C5%9F-transfer-arama" class="hash-link" aria-label="🔍 Gelişmiş Transfer Arama doğrudan bağlantı" title="🔍 Gelişmiş Transfer Arama doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yeni <strong><code>[mhm_rentiva_transfer_search]</code></strong> kısa kodu ile web sitenize profesyonel bir transfer arama motoru ekleyin.</p>
+<ul>
+<li class="">Tarih, saat, kalkış ve varış noktası seçimi.</li>
+<li class="">Yolcu sayısı ve bagaj kapasitesine göre araç filtreleme.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-operasyonel-kontrol-buffer-time">🛡️ Operasyonel Kontrol (Buffer Time)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#%EF%B8%8F-operasyonel-kontrol-buffer-time" class="hash-link" aria-label="🛡️ Operasyonel Kontrol (Buffer Time) doğrudan bağlantı" title="🛡️ Operasyonel Kontrol (Buffer Time) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Araçlarınızın temizliği ve hazırlığı için iki rezervasyon arasına otomatik <strong>Tampon Süre (Buffer Time)</strong> ekleyebilirsiniz. Artık araçlarınızın "Müsait" durumu daha gerçekçi yönetiliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-düzeltmeler-ve-i̇yileştirmeler">🛠️ Düzeltmeler ve İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-0-released#%EF%B8%8F-d%C3%BCzeltmeler-ve-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="🛠️ Düzeltmeler ve İyileştirmeler doğrudan bağlantı" title="🛠️ Düzeltmeler ve İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Cart &amp; Payment:</strong> WooCommerce sepet entegrasyonu "Depozito" veya "Tam Ödeme" seçenekleriyle güçlendirildi.</li>
+<li class=""><strong>Data Integrity:</strong> Transfer detayları (kalkış/varış, yolcu sayısı) artık sipariş notlarına ve meta verilerine eksiksiz kaydediliyor.</li>
+</ul>
+<hr>
+<p><strong>Nasıl Güncellerim?</strong>
+WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun yaşarsanız lütfen GitHub üzerinden veya destek sayfamızdan bize ulaşın.</p>
+<p>Keyifli sürüşler! 🏎️💨</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="v4.6.0" term="v4.6.0"/>
+        <category label="vip-transfer" term="vip-transfer"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v4.5.5 Yayında! 🚀]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-5-5-released</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-5-5-released"/>
+        <updated>2026-01-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.5.5 sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.5.5</strong> sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkanlar">🌟 Öne Çıkanlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#-%C3%B6ne-%C3%A7%C4%B1kanlar" class="hash-link" aria-label="🌟 Öne Çıkanlar doğrudan bağlantı" title="🌟 Öne Çıkanlar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Güvenlik &amp; Mimari:</strong> Plugin kaynak kodları artık Private bir repoda korunurken, dokümantasyon (bu site) Public bir repoda herkesin erişimine açık hale getirildi.</li>
+<li class=""><strong>Performans:</strong> Raporlama modülündeki SQL sorguları, <code>DATE()</code> fonksiyonu kaldırılarak indeks kullanımına uygun hale getirildi. Artık çok daha hızlı çalışıyor.</li>
+<li class=""><strong>Mobil Uyumluluk:</strong> Araç detay sayfaları mobilde artık taşma yapmıyor, butonlar ve görseller tam uyumlu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-düzeltmeler">🛠️ Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#%EF%B8%8F-d%C3%BCzeltmeler" class="hash-link" aria-label="🛠️ Düzeltmeler doğrudan bağlantı" title="🛠️ Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Fixed:</strong> <code>Plugin.php</code> içindeki mükerrer kodlar temizlendi.</li>
+<li class=""><strong>Fixed:</strong> <code>ReportRepository</code> sınıfındaki yavaş sorgular optimize edildi.</li>
+<li class=""><strong>Fixed:</strong> Araç kıyaslama sayfasındaki hizalama sorunları giderildi.</li>
+<li class=""><strong>Fixed:</strong> "Hizmete Kapalı" (Out of Use) etiketi artık varyasyonlu ürünlerde de doğru çalışıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yükseltme">📦 Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#-y%C3%BCkseltme" class="hash-link" aria-label="📦 Yükseltme doğrudan bağlantı" title="📦 Yükseltme doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun yaşarsanız lütfen GitHub üzerinden veya destek sayfamızdan bize ulaşın.</p>
+<p>Keyifli kiralamalar! 🚗💨</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="v4.5.5" term="v4.5.5"/>
+    </entry>
+</feed>
