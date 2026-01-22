@@ -19,11 +19,11 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Araç Özellikleri",
+    "title": "vehicle-settings",
     "permalink": "/mhm-rentiva-docs/en/docs/features-usage/vehicle-settings"
   },
   "next": {
-    "title": "VIP Transfer",
+    "title": "vip-transfer",
     "permalink": "/mhm-rentiva-docs/en/docs/features-usage/vip-transfer"
   }
 }

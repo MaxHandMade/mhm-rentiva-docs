@@ -19,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Temel Yapılandırma",
-    "permalink": "/mhm-rentiva-docs/en/docs/category/temel-yapılandırma"
+    "title": "Rezervasyon Ayarları (Booking Settings)",
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/booking-settings"
   },
   "next": {
     "title": "E-posta Ayarları",

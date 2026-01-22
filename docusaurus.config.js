@@ -38,13 +38,10 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'tr',
-    locales: ['tr', 'en'],
+    locales: ['tr'],
     localeConfigs: {
       tr: {
         label: 'Türkçe',
-      },
-      en: {
-        label: 'English',
       },
     },
   },
@@ -100,18 +97,9 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Documentation',
-          },
-          {
-            type: 'docsVersionDropdown',
-            position: 'left',
-            dropdownActiveClassDisabled: true,
+            label: 'Dokümantasyon',
           },
           { to: '/blog', label: 'Sürüm Notları', position: 'left' },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
           {
             href: 'https://github.com/MaxHandMade/mhm-rentiva',
             label: 'GitHub',
@@ -187,7 +175,7 @@ const config = {
       require.resolve("@easyops-cn/docusaurus-search-local"),
       ({
         hashed: true,
-        language: ["en", "tr"],
+        language: ["tr"],
       }),
     ],
   ],

@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/payments",
   "title": "Ödeme Yapılandırması",
-  "description": "Bu döküman hazırlanma aşamasındadır.",
+  "description": "Ödeme yapılandırması, rezervasyonların nasıl tahsil edileceğini ve hangi ödeme yöntemlerinin kullanılacağını belirler.",
   "source": "@site/versioned_docs/version-4.6.0/02-core-configuration/payments.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/payments",
@@ -19,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Lisans Yönetimi",
-    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/license"
+    "title": "Bakım ve Sistem Ayarları (Maintenance Settings)",
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/maintenance"
   },
   "next": {
     "title": "Genel Ayarlar",

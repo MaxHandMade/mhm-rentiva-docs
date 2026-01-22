@@ -1,0 +1,24 @@
+{
+  "id": "core-configuration/booking-settings",
+  "title": "Rezervasyon Ayarları (Booking Settings)",
+  "description": "Rezervasyon süreci, kuralları ve zamanlama ayarları buradan yönetilir.",
+  "source": "@site/versioned_docs/version-4.6.0/02-core-configuration/booking-settings.md",
+  "sourceDirName": "02-core-configuration",
+  "slug": "/core-configuration/booking-settings",
+  "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/booking-settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/versioned_docs/version-4.6.0/02-core-configuration/booking-settings.md",
+  "tags": [],
+  "version": "4.6.0",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Temel Yapılandırma",
+    "permalink": "/mhm-rentiva-docs/en/docs/category/temel-yapılandırma"
+  },
+  "next": {
+    "title": "Yardımcı Araçlar",
+    "permalink": "/mhm-rentiva-docs/en/docs/core-configuration/utilities"
+  }
+}

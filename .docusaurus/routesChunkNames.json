@@ -219,7 +219,7 @@
       "plugin": "138e0e15"
     }
   },
-  "/mhm-rentiva-docs/en/docs-5c9": {
+  "/mhm-rentiva-docs/en/docs-c2f": {
     "__comp": "5e95c892",
     "__context": {
       "plugin": "aba21aa0"
@@ -344,16 +344,16 @@
     "__comp": "17896441",
     "content": "d5165304"
   },
-  "/mhm-rentiva-docs/en/docs/next-163": {
+  "/mhm-rentiva-docs/en/docs/next-81c": {
     "__comp": "a7bd4aaa",
     "__props": "9aec45d0"
   },
-  "/mhm-rentiva-docs/en/docs/next-52f": {
+  "/mhm-rentiva-docs/en/docs/next-163": {
     "__comp": "a94703ab"
   },
-  "/mhm-rentiva-docs/en/docs/next/-170": {
+  "/mhm-rentiva-docs/en/docs/next/-772": {
     "__comp": "17896441",
-    "content": "ba3140ed"
+    "content": "0e384e19"
   },
   "/mhm-rentiva-docs/en/docs/next/category/başlangıç-rehberi-3d9": {
     "__comp": "14eb3368",
@@ -495,11 +495,11 @@
     "__comp": "17896441",
     "content": "80312bc2"
   },
-  "/mhm-rentiva-docs/en/docs-cbc": {
+  "/mhm-rentiva-docs/en/docs-1d0": {
     "__comp": "a7bd4aaa",
     "__props": "270bf802"
   },
-  "/mhm-rentiva-docs/en/docs-51f": {
+  "/mhm-rentiva-docs/en/docs-f6c": {
     "__comp": "a94703ab"
   },
   "/mhm-rentiva-docs/en/docs/-da9": {
@@ -526,6 +526,10 @@
     "__comp": "14eb3368",
     "__props": "674c5a36"
   },
+  "/mhm-rentiva-docs/en/docs/core-configuration/booking-settings-cfb": {
+    "__comp": "17896441",
+    "content": "2b609771"
+  },
   "/mhm-rentiva-docs/en/docs/core-configuration/emails-cca": {
     "__comp": "17896441",
     "content": "92dcc30a"
@@ -533,6 +537,10 @@
   "/mhm-rentiva-docs/en/docs/core-configuration/license-c3d": {
     "__comp": "17896441",
     "content": "1c23c16c"
+  },
+  "/mhm-rentiva-docs/en/docs/core-configuration/maintenance-b22": {
+    "__comp": "17896441",
+    "content": "db318d53"
   },
   "/mhm-rentiva-docs/en/docs/core-configuration/payments-4b9": {
     "__comp": "17896441",
@@ -554,6 +562,10 @@
     "__comp": "17896441",
     "content": "17ba986d"
   },
+  "/mhm-rentiva-docs/en/docs/developer/framework-architecture-a2e": {
+    "__comp": "17896441",
+    "content": "bd639d65"
+  },
   "/mhm-rentiva-docs/en/docs/developer/list-table-8b0": {
     "__comp": "17896441",
     "content": "4b60525b"
@@ -561,6 +573,10 @@
   "/mhm-rentiva-docs/en/docs/developer/rest-api-0ba": {
     "__comp": "17896441",
     "content": "825788b0"
+  },
+  "/mhm-rentiva-docs/en/docs/developer/technical-architecture-0a9": {
+    "__comp": "17896441",
+    "content": "0686875c"
   },
   "/mhm-rentiva-docs/en/docs/developer/test-suite-d0e": {
     "__comp": "17896441",

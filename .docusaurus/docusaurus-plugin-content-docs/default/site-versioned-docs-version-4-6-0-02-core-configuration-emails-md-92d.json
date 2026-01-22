@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/emails",
   "title": "E-posta Şablonları",
-  "description": "Bu döküman hazırlanma aşamasındadır.",
+  "description": "MHM Rentiva, müşterilerinize ve yöneticilere gönderilen e-postaları detaylı bir şekilde yapılandırmanıza ve özelleştirmenize olanak tanır.",
   "source": "@site/versioned_docs/version-4.6.0/02-core-configuration/emails.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/emails",

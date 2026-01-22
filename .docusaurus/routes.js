@@ -94,7 +94,7 @@ export default [
   },
   {
     path: '/mhm-rentiva-docs/en/docs',
-    component: ComponentCreator('/mhm-rentiva-docs/en/docs', '5c9'),
+    component: ComponentCreator('/mhm-rentiva-docs/en/docs', 'c2f'),
     routes: [
       {
         path: '/mhm-rentiva-docs/en/docs/4.5.5',
@@ -278,15 +278,15 @@ export default [
       },
       {
         path: '/mhm-rentiva-docs/en/docs/next',
-        component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '163'),
+        component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '81c'),
         routes: [
           {
             path: '/mhm-rentiva-docs/en/docs/next',
-            component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '52f'),
+            component: ComponentCreator('/mhm-rentiva-docs/en/docs/next', '163'),
             routes: [
               {
                 path: '/mhm-rentiva-docs/en/docs/next/',
-                component: ComponentCreator('/mhm-rentiva-docs/en/docs/next/', '170'),
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/next/', '772'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -506,11 +506,11 @@ export default [
       },
       {
         path: '/mhm-rentiva-docs/en/docs',
-        component: ComponentCreator('/mhm-rentiva-docs/en/docs', 'cbc'),
+        component: ComponentCreator('/mhm-rentiva-docs/en/docs', '1d0'),
         routes: [
           {
             path: '/mhm-rentiva-docs/en/docs',
-            component: ComponentCreator('/mhm-rentiva-docs/en/docs', '51f'),
+            component: ComponentCreator('/mhm-rentiva-docs/en/docs', 'f6c'),
             routes: [
               {
                 path: '/mhm-rentiva-docs/en/docs/',
@@ -549,6 +549,12 @@ export default [
                 sidebar: "tutorialSidebar"
               },
               {
+                path: '/mhm-rentiva-docs/en/docs/core-configuration/booking-settings',
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/core-configuration/booking-settings', 'cfb'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
                 path: '/mhm-rentiva-docs/en/docs/core-configuration/emails',
                 component: ComponentCreator('/mhm-rentiva-docs/en/docs/core-configuration/emails', 'cca'),
                 exact: true,
@@ -557,6 +563,12 @@ export default [
               {
                 path: '/mhm-rentiva-docs/en/docs/core-configuration/license',
                 component: ComponentCreator('/mhm-rentiva-docs/en/docs/core-configuration/license', 'c3d'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/mhm-rentiva-docs/en/docs/core-configuration/maintenance',
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/core-configuration/maintenance', 'b22'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -591,6 +603,12 @@ export default [
                 sidebar: "tutorialSidebar"
               },
               {
+                path: '/mhm-rentiva-docs/en/docs/developer/framework-architecture',
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/developer/framework-architecture', 'a2e'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
                 path: '/mhm-rentiva-docs/en/docs/developer/list-table',
                 component: ComponentCreator('/mhm-rentiva-docs/en/docs/developer/list-table', '8b0'),
                 exact: true,
@@ -599,6 +617,12 @@ export default [
               {
                 path: '/mhm-rentiva-docs/en/docs/developer/rest-api',
                 component: ComponentCreator('/mhm-rentiva-docs/en/docs/developer/rest-api', '0ba'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/mhm-rentiva-docs/en/docs/developer/technical-architecture',
+                component: ComponentCreator('/mhm-rentiva-docs/en/docs/developer/technical-architecture', '0a9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },

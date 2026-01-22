@@ -19,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "REST API",
-    "permalink": "/mhm-rentiva-docs/en/docs/developer/rest-api"
+    "title": "Module Architecture",
+    "permalink": "/mhm-rentiva-docs/en/docs/developer/technical-architecture"
   },
   "next": {
     "title": "Kontrol Listeleri",
