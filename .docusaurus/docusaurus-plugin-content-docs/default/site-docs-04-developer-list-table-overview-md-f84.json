@@ -1,7 +1,7 @@
 {
   "id": "developer/list-table",
   "title": "Liste Tablo Notları",
-  "description": "Bu notlar src/Admin/Vehicle/ListTable/VehicleColumns.php dosyasındaki ana fonksiyonları özetler. Dosya, araç listesi görünümünü geliştirmek ve ek arabirim bileşenleri eklemekten sorumludur.",
+  "description": "Version Security Updated",
   "source": "@site/docs/04-developer/list-table-overview.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/list-table",

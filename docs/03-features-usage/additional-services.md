@@ -5,6 +5,8 @@ sidebar_label: Ek Hizmetler
 slug: /features-usage/additional-services
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Additional Services Sayfası
 
 `MHM Rentiva > Additional Services`, araç kiralamalarına ek olarak sunabileceğiniz ekstra hizmetleri (addon) yönetmenizi sağlar. GPS, çocuk koltuğu, ek sürücü gibi ücretli/ücretsiz seçenekler bu ekrandan oluşturulur ve rezervasyon formuna bağlanır.
@@ -41,6 +43,3 @@ slug: /features-usage/additional-services
 - [Vehicle Settings](../02-core-configuration/vehicle-settings.md): Araç detay formundaki addon alanlarının yönetimi.
 - [Bookings](bookings.md): Addon seçimlerinin rezervasyon formuna yansıması.
 - [Test Checklist](../04-developer/testing-checklists.md#8-add-on-hizmetleri): Addon iş akışının manuel testi.
-
-
-

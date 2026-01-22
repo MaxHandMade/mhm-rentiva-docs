@@ -283,7 +283,7 @@
       "plugin": "plugin---mhm-rentiva-docs-blog-369-93c"
     },
     "sidebar": "sidebar---mhm-rentiva-docs-blog-814-e53",
-    "content": "content---mhm-rentiva-docs-blog-2026-01-22-v-4-6-2-release-931-c9d"
+    "content": "content---mhm-rentiva-docs-blog-v-4-6-2-security-update-931-6be"
   },
   "/mhm-rentiva-docs/markdown-page-39d": {
     "__comp": "__comp---theme-mdx-page-1-f-3-b90",
@@ -298,22 +298,26 @@
       "plugin": "plugin---mhm-rentiva-docs-search-138-bd5"
     }
   },
-  "/mhm-rentiva-docs/docs-17d": {
+  "/mhm-rentiva-docs/docs-a88": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---mhm-rentiva-docs-docsaba-c44"
     }
   },
-  "/mhm-rentiva-docs/docs-2fb": {
+  "/mhm-rentiva-docs/docs-4bb": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---mhm-rentiva-docs-docsde-5-82a"
   },
-  "/mhm-rentiva-docs/docs-d9a": {
+  "/mhm-rentiva-docs/docs-85a": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/mhm-rentiva-docs/docs/-028": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-0-e-3-b6e"
+  },
+  "/mhm-rentiva-docs/docs/badge-standards-db6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---mhm-rentiva-docs-docs-badge-standards-5-aa-abc"
   },
   "/mhm-rentiva-docs/docs/category/başlangıç-rehberi-610": {
     "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
@@ -326,10 +330,6 @@
   "/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım-130": {
     "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
     "__props": "__props---mhm-rentiva-docs-docs-category-ozellikler-ve-kullanimef-1-e84"
-  },
-  "/mhm-rentiva-docs/docs/category/sss-4d9": {
-    "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
-    "__props": "__props---mhm-rentiva-docs-docs-category-sss-3-ec-6f8"
   },
   "/mhm-rentiva-docs/docs/category/temel-yapılandırma-98c": {
     "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
@@ -367,6 +367,10 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-core-configuration-vehicle-settings-341-074"
   },
+  "/mhm-rentiva-docs/docs/developer/dashboard-widgets-ba5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---mhm-rentiva-docs-docs-developer-dashboard-widgetsfe-6-b74"
+  },
   "/mhm-rentiva-docs/docs/developer/database-a5e": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-developer-database-183-837"
@@ -394,10 +398,6 @@
   "/mhm-rentiva-docs/docs/developer/testing-checklists-2b9": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-developer-testing-checklists-11-b-05d"
-  },
-  "/mhm-rentiva-docs/docs/faq/common-issues-4f6": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---mhm-rentiva-docs-docs-faq-common-issues-3-af-880"
   },
   "/mhm-rentiva-docs/docs/features-usage/additional-services-977": {
     "__comp": "__comp---theme-doc-item-178-a40",

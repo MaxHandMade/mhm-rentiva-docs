@@ -1,7 +1,7 @@
 {
   "id": "developer/database",
   "title": "Veritabanı Yapısı",
-  "description": "Bu klasör, MHM Rentiva eklentisi için veritabanı yapısı ve meta key dokümantasyonunu içerir.",
+  "description": "Version Security Updated",
   "source": "@site/docs/04-developer/database.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/database",
@@ -19,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "REST API",
-    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api"
+    "title": "Dashboard Widget'ları",
+    "permalink": "/mhm-rentiva-docs/docs/developer/dashboard-widgets"
   },
   "next": {
     "title": "Mimari ve Özelleştirme",

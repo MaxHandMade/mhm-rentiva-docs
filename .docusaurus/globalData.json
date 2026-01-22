@@ -11,6 +11,11 @@
           "mainDocId": "intro",
           "docs": [
             {
+              "id": "badge-standards",
+              "path": "/mhm-rentiva-docs/docs/badge-standards",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "core-configuration/booking-settings",
               "path": "/mhm-rentiva-docs/docs/core-configuration/booking-settings",
               "sidebar": "tutorialSidebar"
@@ -51,6 +56,11 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "developer/dashboard-widgets",
+              "path": "/mhm-rentiva-docs/docs/developer/dashboard-widgets",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "developer/database",
               "path": "/mhm-rentiva-docs/docs/developer/database",
               "sidebar": "tutorialSidebar"
@@ -83,11 +93,6 @@
             {
               "id": "developer/testing-checklists",
               "path": "/mhm-rentiva-docs/docs/developer/testing-checklists",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "faq/common-issues",
-              "path": "/mhm-rentiva-docs/docs/faq/common-issues",
               "sidebar": "tutorialSidebar"
             },
             {
@@ -183,11 +188,6 @@
             {
               "id": "/category/geliştirici-rehberi",
               "path": "/mhm-rentiva-docs/docs/category/geliştirici-rehberi",
-              "sidebar": "tutorialSidebar"
-            },
-            {
-              "id": "/category/sss",
-              "path": "/mhm-rentiva-docs/docs/category/sss",
               "sidebar": "tutorialSidebar"
             }
           ],

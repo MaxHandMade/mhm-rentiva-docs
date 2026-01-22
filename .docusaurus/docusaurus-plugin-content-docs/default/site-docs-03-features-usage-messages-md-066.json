@@ -1,7 +1,7 @@
 {
   "id": "features-usage/messages",
   "title": "Mesajlaşma Sistemi",
-  "description": "MHM Rentiva > Messages, müşterilerinizle yaptığınız tüm iletişimi tek yerde toplayan destek merkezidir. Rezervasyonlar, ödemeler veya genel sorularla ilgili mesajlar bu ekranda listelenir; cevap, durum ve öncelik yönetimi buradan yapılır.",
+  "description": "Version Security Updated",
   "source": "@site/docs/03-features-usage/messages.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/messages",

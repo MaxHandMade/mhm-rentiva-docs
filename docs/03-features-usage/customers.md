@@ -5,6 +5,8 @@ sidebar_label: Müşteriler
 slug: /features-usage/customers
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Customers Sayfası
 
 `MHM Rentiva > Customers`, kayıtlı kullanıcılarınızın (müşterilerin) tüm geçmişini ve durumunu izleyebileceğiniz yönetim panelidir. Rezervasyon, mesaj ve ödeme bilgileri tek ekranda toplanır; bu sayede sadakat yönetimi ve destek süreçleri kolaylaşır.
@@ -42,6 +44,3 @@ Bir satıra tıkladığınızda sağ tarafta (veya ayrı bir pencerede) müşter
 - [Messages](messages.md): Destek taleplerinin müşteri bazlı görüntülenmesi.
 - [Export](export.md): Müşteri verilerinin dışa aktarımı.
 - [Test Checklist](../04-developer/testing-checklists.md#4-musteri-portali): Müşteri portalı ve admin işlemlerinin test adımları.
-
-
-

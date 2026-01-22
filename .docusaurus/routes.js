@@ -139,19 +139,25 @@ export default [
   },
   {
     path: '/mhm-rentiva-docs/docs',
-    component: ComponentCreator('/mhm-rentiva-docs/docs', '17d'),
+    component: ComponentCreator('/mhm-rentiva-docs/docs', 'a88'),
     routes: [
       {
         path: '/mhm-rentiva-docs/docs',
-        component: ComponentCreator('/mhm-rentiva-docs/docs', '2fb'),
+        component: ComponentCreator('/mhm-rentiva-docs/docs', '4bb'),
         routes: [
           {
             path: '/mhm-rentiva-docs/docs',
-            component: ComponentCreator('/mhm-rentiva-docs/docs', 'd9a'),
+            component: ComponentCreator('/mhm-rentiva-docs/docs', '85a'),
             routes: [
               {
                 path: '/mhm-rentiva-docs/docs/',
                 component: ComponentCreator('/mhm-rentiva-docs/docs/', '028'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/mhm-rentiva-docs/docs/badge-standards',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/badge-standards', 'db6'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -170,12 +176,6 @@ export default [
               {
                 path: '/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım',
                 component: ComponentCreator('/mhm-rentiva-docs/docs/category/özellikler-ve-kullanım', '130'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/mhm-rentiva-docs/docs/category/sss',
-                component: ComponentCreator('/mhm-rentiva-docs/docs/category/sss', '4d9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
@@ -234,6 +234,12 @@ export default [
                 sidebar: "tutorialSidebar"
               },
               {
+                path: '/mhm-rentiva-docs/docs/developer/dashboard-widgets',
+                component: ComponentCreator('/mhm-rentiva-docs/docs/developer/dashboard-widgets', 'ba5'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
                 path: '/mhm-rentiva-docs/docs/developer/database',
                 component: ComponentCreator('/mhm-rentiva-docs/docs/developer/database', 'a5e'),
                 exact: true,
@@ -272,12 +278,6 @@ export default [
               {
                 path: '/mhm-rentiva-docs/docs/developer/testing-checklists',
                 component: ComponentCreator('/mhm-rentiva-docs/docs/developer/testing-checklists', '2b9'),
-                exact: true,
-                sidebar: "tutorialSidebar"
-              },
-              {
-                path: '/mhm-rentiva-docs/docs/faq/common-issues',
-                component: ComponentCreator('/mhm-rentiva-docs/docs/faq/common-issues', '4f6'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },

@@ -1,3 +1,5 @@
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Rezervasyon Ayarları (Booking Settings)
 
 Rezervasyon süreci, kuralları ve zamanlama ayarları buradan yönetilir.

@@ -1,3 +1,5 @@
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Bakım ve Sistem Ayarları (Maintenance Settings)
 
 Sistem bakımı, veri temizliği ve kritik kaldırma işlemleri ayarları.
@@ -40,4 +42,3 @@ Versiyon **4.6.1** itibariyle, temizlik aracı aşağıdaki verileri otomatik ol
 :::tip Güvenlik Notu
 `DatabaseCleaner` sınıfı, 40'tan fazla kritik meta anahtarını (`get_valid_meta_keys`) tanımlı bir "beyaz liste" (whitelist) içinde tutar. Temizlik işlemi sırasında bu listedeki hiçbir veri **asla silinmez**.
 :::
-

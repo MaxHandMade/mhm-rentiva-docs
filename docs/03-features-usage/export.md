@@ -5,6 +5,8 @@ sidebar_label: Dışa Aktarım
 slug: /features-usage/export
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Export Sayfası
 
 `MHM Rentiva > Export`, sistemdeki verileri dışa aktarmak için kullanılan araçtır. Rezervasyon, araç, müşteri, log gibi verileri CSV, JSON ve desteklenen diğer formatlarda indirebilirsiniz.
@@ -34,6 +36,3 @@ slug: /features-usage/export
 - [Reports](reports.md): Aynı verilerin grafik formda sunumu.
 - [Settings > Performance](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Export sırasında kullanılan cache ayarları.
 - [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Export süreçlerinin manuel testi.
-
-
-

@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/booking-settings",
-  "title": "Rezervasyon Ayarları (Booking Settings)",
-  "description": "Rezervasyon süreci, kuralları ve zamanlama ayarları buradan yönetilir.",
+  "title": "booking-settings",
+  "description": "Version Security Updated",
   "source": "@site/docs/02-core-configuration/booking-settings.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/booking-settings",

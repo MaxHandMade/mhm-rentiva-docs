@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/license",
   "title": "Lisans Yönetimi",
-  "description": "MHM Rentiva > License, eklentinin lisans anahtarını yönetmek, aktivasyon durumu ve kullanım kısıtlarını görmek için kullanılır.",
+  "description": "Version Security Updated",
   "source": "@site/docs/02-core-configuration/license.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/license",
@@ -23,7 +23,7 @@
     "permalink": "/mhm-rentiva-docs/docs/core-configuration/emails"
   },
   "next": {
-    "title": "Bakım ve Sistem Ayarları (Maintenance Settings)",
+    "title": "maintenance",
     "permalink": "/mhm-rentiva-docs/docs/core-configuration/maintenance"
   }
 }

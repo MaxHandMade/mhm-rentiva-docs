@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/settings",
   "title": "Genel Ayarlar",
-  "description": "MHM Rentiva, eklentinin davranışını özelleştirmeniz için kapsamlı bir ayar paneli sunar. Ayarlara MHM Rentiva > Settings menüsünden ulaşabilirsiniz.",
+  "description": "Version Security Updated",
   "source": "@site/docs/02-core-configuration/settings.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/settings",

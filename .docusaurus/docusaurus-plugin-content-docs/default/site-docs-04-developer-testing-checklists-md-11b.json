@@ -1,7 +1,7 @@
 {
   "id": "developer/testing-checklists",
   "title": "Test Kontrol Listeleri",
-  "description": "Bu doküman, canlıya çıkmadan önce yapılacak lokal kabul testleri ve canlı ortamda uygulanacak hızlı doğrulama adımlarını tek dosyada toplar. Her adımı tamamladıkça checkbox’ları işaretleyerek ilerleyebilirsiniz.",
+  "description": "Version Security Updated",
   "source": "@site/docs/04-developer/testing-checklists.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/testing-checklists",
@@ -14,7 +14,7 @@
   "frontMatter": {
     "id": "testing-checklists",
     "title": "Test Kontrol Listeleri",
-    "sidebar_label": "Kontrol Listeleri",
+    "sidebar_label": "Test Listeleri",
     "slug": "/developer/testing-checklists"
   },
   "sidebar": "tutorialSidebar",
@@ -23,7 +23,7 @@
     "permalink": "/mhm-rentiva-docs/docs/developer/test-suite"
   },
   "next": {
-    "title": "SSS",
-    "permalink": "/mhm-rentiva-docs/docs/category/sss"
+    "title": "Badge Standards",
+    "permalink": "/mhm-rentiva-docs/docs/badge-standards"
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "getting-started/setup-wizard",
   "title": "Kurulum Sihirbazı",
-  "description": "Rentiva’yı aktif eder etmez karşınıza çıkan Setup Wizard, eklentiyi birkaç dakikada çalışır hâle getirmeniz için tasarlandı. Sistem gereksinimlerinden zorunlu sayfalara, e-posta ve ödeme ayarlarından ön yüzde gözükecek varsayılanlara kadar tüm kritik noktaları tek akışta tamamlamanıza yardım eder.",
+  "description": "Version Security Updated",
   "source": "@site/docs/01-getting-started/setup-wizard.md",
   "sourceDirName": "01-getting-started",
   "slug": "/getting-started/setup-wizard",

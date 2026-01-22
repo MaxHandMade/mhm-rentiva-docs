@@ -5,6 +5,8 @@ sidebar_label: Yardımcı Araçlar
 slug: /core-configuration/utilities
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Core Utilities ve Yardımcı Sayfalar
 
 Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa ekler. Bu sayfa, ilgili menülere nereden ulaşacağınızı ve ne işe yaradıklarını özetler.
@@ -39,6 +41,3 @@ Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa
 - [Settings](settings.md) – Yardımcı sayfalardaki ayarların kökeni.
 - [Test Suite](test-suite.md) – Tanılama için otomatik testler.
 - [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Sorun çözme rehberi.
-
-
-

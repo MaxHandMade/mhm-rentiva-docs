@@ -1,7 +1,7 @@
 {
   "id": "features-usage/vehicles",
   "title": "Araç Yönetimi",
-  "description": "MHM Rentiva > Vehicles, filonuzdaki tüm araçları yönetebileceğiniz ana merkezdir. Varsayılan WordPress “post listesi” görünümü üzerine eklenen metrik kartları, aylık takvim ve hızlı düzenleme bileşenleri sayesinde hem durum takibini hem de düzenlemeleri tek noktadan yapabilirsiniz.",
+  "description": "Version Security Updated",
   "source": "@site/docs/03-features-usage/vehicles.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/vehicles",

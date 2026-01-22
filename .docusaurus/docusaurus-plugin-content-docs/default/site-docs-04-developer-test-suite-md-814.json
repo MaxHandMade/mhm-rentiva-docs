@@ -1,7 +1,7 @@
 {
   "id": "developer/test-suite",
   "title": "Test Araçları (Suite)",
-  "description": "MHM Rentiva > Test Suite, geliştirme veya kalite kontrol süreçlerinde kullanılan yerleşik test aracıdır. Yalnızca geliştirici modunda veya yetkili kullanıcılar için görünür.",
+  "description": "Version Security Updated",
   "source": "@site/docs/04-developer/test-suite.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/test-suite",
@@ -23,7 +23,7 @@
     "permalink": "/mhm-rentiva-docs/docs/developer/technical-architecture"
   },
   "next": {
-    "title": "Kontrol Listeleri",
+    "title": "Test Listeleri",
     "permalink": "/mhm-rentiva-docs/docs/developer/testing-checklists"
   }
 }

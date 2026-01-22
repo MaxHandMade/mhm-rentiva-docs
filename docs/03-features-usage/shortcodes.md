@@ -5,6 +5,8 @@ sidebar_label: Kısa Kodlar
 slug: /features-usage/shortcodes
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Shortcodes (Kısa Kodlar)
 
 MHM Rentiva, sitenizin çeşitli yerlerinde araç listeleri, formlar ve diğer özellikleri görüntülemek için kapsamlı bir kısa kod seti sunar. Aşağıda mevcut tüm kısa kodların bir listesi ve kullanım detayları bulunmaktadır.

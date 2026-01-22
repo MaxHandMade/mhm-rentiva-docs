@@ -5,6 +5,8 @@ sidebar_label: Test Araçları
 slug: /developer/test-suite
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Test Suite Sayfası
 
 `MHM Rentiva > Test Suite`, geliştirme veya kalite kontrol süreçlerinde kullanılan yerleşik test aracıdır. Yalnızca geliştirici modunda veya yetkili kullanıcılar için görünür.
@@ -27,6 +29,3 @@ slug: /developer/test-suite
 - [Checklist](./testing-checklists.md) – Manuel test adımları.
 - [Core Utilities](core-utilities.md) – Cron ve bakım araçları.
 - [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Hata giderme rehberi.
-
-
-

@@ -5,6 +5,8 @@ sidebar_label: Kontrol Listesi
 slug: /getting-started/checklist
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Kurulum Sonrası Kontrol Listesi
 
 Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işaretleyin. Bu liste, canlıya çıkmadan önce temel fonksiyonların çalıştığını garanti altına alır.
@@ -52,4 +54,3 @@ Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işar
 - [ ] Varsayılan içerik (örnek araçlar vb.) temizlenip gerçek veriler eklenmeye hazır.
 
 Bu listeyi tamamladıysanız, Rentiva canlı ortamda test edilmek için hazır demektir. Bir sonraki adım olarak ödeme ve e-posta senaryolarını canlı anahtarlarla doğrulayın.
-

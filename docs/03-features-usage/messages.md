@@ -5,6 +5,8 @@ sidebar_label: Mesajlar
 slug: /features-usage/messages
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Messages Sayfası
 
 `MHM Rentiva > Messages`, müşterilerinizle yaptığınız tüm iletişimi tek yerde toplayan destek merkezidir. Rezervasyonlar, ödemeler veya genel sorularla ilgili mesajlar bu ekranda listelenir; cevap, durum ve öncelik yönetimi buradan yapılır.
@@ -37,6 +39,3 @@ slug: /features-usage/messages
 - [Customers](customers.md): Müşteri profillerinden mesajlara erişim.
 - [Email Templates](../02-core-configuration/emails.md) *(hazırlanacak)*: Mesaj yanıt e-posta şablonlarının yönetimi.
 - [Checklist](../04-developer/testing-checklists.md#5-mesajlasma-ve-bildirimler): Mesaj sistemi test adımları.
-
-
-

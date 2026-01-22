@@ -5,6 +5,8 @@ sidebar_label: Liste Tablo Notları
 slug: /developer/list-table
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # VehicleColumns (List Table) Notları
 
 Bu notlar `src/Admin/Vehicle/ListTable/VehicleColumns.php` dosyasındaki ana fonksiyonları özetler. Dosya, araç listesi görünümünü geliştirmek ve ek arabirim bileşenleri eklemekten sorumludur.
@@ -39,6 +41,3 @@ Liste başındaki “All availability statuses” dropdown’ını oluşturur ve
 
 ## Diğer Dosyalar
 `VehicleMeta`, `VehicleSettings`, `Vehicle PostType` gibi dosyalar benzer şekilde fonksiyon açıklamalarına sahiptir. Önemli kısımlar için README’lerde özetler bulabilirsiniz.
-
-
-

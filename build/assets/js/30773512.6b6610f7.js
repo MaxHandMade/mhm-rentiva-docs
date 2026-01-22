@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwebsite=globalThis.webpackChunkwebsite||[]).push([[6737],{1741(a){a.exports=JSON.parse('{"authors":[{"name":"MaxHandMade","title":"Maintainer","url":"https://github.com/MaxHandMade","imageURL":"https://github.com/MaxHandMade.png","key":"maxhandmade","page":null,"count":4}]}')}}]);

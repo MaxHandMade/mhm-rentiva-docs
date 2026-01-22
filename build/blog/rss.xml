@@ -4,10 +4,43 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 21 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 22 Jan 2026 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.6.2: Güvenlik Tahkimatı ve WPCS Uyumluluğu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update</guid>
+            <pubDate>Thu, 22 Jan 2026 06:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.6.2 yayında! Bu sürüm, eklentinin tüm modüllerini kapsayan devasa bir güvenlik ve altyapı güçlendirme güncellemesidir. Yeni özellik eklemekten ziyade, mevcut sistemin aşılmaz bir kale haline getirilmesine odaklandık.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.6.2</strong> yayında! Bu sürüm, eklentinin tüm modüllerini kapsayan devasa bir güvenlik ve altyapı güçlendirme güncellemesidir. Yeni özellik eklemekten ziyade, mevcut sistemin <strong>aşılmaz bir kale</strong> haline getirilmesine odaklandık.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güvenlik-denetimi-özeti">🛡️ Güvenlik Denetimi Özeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#%EF%B8%8F-g%C3%BCvenlik-denetimi-%C3%B6zeti" class="hash-link" aria-label="🛡️ Güvenlik Denetimi Özeti doğrudan bağlantı" title="🛡️ Güvenlik Denetimi Özeti doğrudan bağlantı" translate="no">​</a></h2>
+<p>Son 24 saat içinde, MHM Rentiva'nın 22 farklı modülü üzerinde satır satır kod analizi gerçekleştirdik. Hedefimiz sadece "çalışan" bir eklenti değil, "en güvenli" kiralama eklentisi olmaktır.</p>
+<p>İşte bu güncellemenin karnesi:</p>
+<table><thead><tr><th>Metrik</th><th>Değer</th></tr></thead><tbody><tr><td><strong>Denetlenen Modüller</strong></td><td>22 (Tümü)</td></tr><tr><td><strong>Düzenlenen Dosyalar</strong></td><td>59+</td></tr><tr><td><strong>Nonce (CSRF) Yaması</strong></td><td>91+</td></tr><tr><td><strong>WPCS Uyumluluğu</strong></td><td>%100</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="neler-değişti">Neler Değişti?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#neler-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Neler Değişti? doğrudan bağlantı" title="Neler Değişti? doğrudan bağlantı" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-tam-kapsamlı-nonce-koruması">1. Tam Kapsamlı Nonce Koruması<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#1-tam-kapsaml%C4%B1-nonce-korumas%C4%B1" class="hash-link" aria-label="1. Tam Kapsamlı Nonce Koruması doğrudan bağlantı" title="1. Tam Kapsamlı Nonce Koruması doğrudan bağlantı" translate="no">​</a></h4>
+<p>WordPress'in güvenlik mekanizması olan <code>nonce</code> (number used once) kullanımı tüm form ve AJAX işlemlerinde standartlaştırıldı. Her bir doğrulama işlemi artık <code>sanitize_text_field(wp_unslash())</code> sarmalayıcısı ile ekstra bir temizlik katmanından geçiriliyor.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-rest-api-ve-rate-limiting">2. REST API ve Rate Limiting<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#2-rest-api-ve-rate-limiting" class="hash-link" aria-label="2. REST API ve Rate Limiting doğrudan bağlantı" title="2. REST API ve Rate Limiting doğrudan bağlantı" translate="no">​</a></h4>
+<p>API tarafında <strong>Hız Sınırlama (Rate Limiting)</strong> ve <strong>IP Kısıtlama</strong> mekanizmaları çekirdek yapıya daha sıkı entegre edildi. Artık <code>CoreSettings</code> yerine <code>RESTSettings</code> üzerinden yönetilen bu yapı, yetkisiz erişim denemelerini anında engelliyor.</p>
+<blockquote>
+<p>Detaylar için yenilenen <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/developer/rest-api">REST API Dokümantasyonu</a> sayfasını inceleyebilirsiniz.</p>
+</blockquote>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-kod-kalitesi-ve-php-84-uyumu">3. Kod Kalitesi ve PHP 8.4+ Uyumu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#3-kod-kalitesi-ve-php-84-uyumu" class="hash-link" aria-label="3. Kod Kalitesi ve PHP 8.4+ Uyumu doğrudan bağlantı" title="3. Kod Kalitesi ve PHP 8.4+ Uyumu doğrudan bağlantı" translate="no">​</a></h4>
+<p>Geleceğe hazırlık kapsamında, PHP 8.4 ve üzeri sürümlerde ortaya çıkabilecek "Implicit Nullable Parameter" uyarıları giderildi. Kod tabanı daha modern, temiz ve hatasız hale getirildi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yeni-teknik-dokümantasyon">🏗️ Yeni Teknik Dokümantasyon<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update#%EF%B8%8F-yeni-teknik-dok%C3%BCmantasyon" class="hash-link" aria-label="🏗️ Yeni Teknik Dokümantasyon doğrudan bağlantı" title="🏗️ Yeni Teknik Dokümantasyon doğrudan bağlantı" translate="no">​</a></h2>
+<p>Modüler yapımızı daha iyi anlatabilmek ve geliştiricilere rehberlik etmek için dokümantasyonumuza yeni bir bölüm ekledik:</p>
+<ul>
+<li class=""><a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/developer/technical-architecture"><strong>Modül Mimarisi ve Teknik Harita:</strong></a> Eklentinin 22 modülünün ilişkilerini, dosya yapısını ve güvenlik durumunu gösteren kapsamlı bir rehber.</li>
+</ul>
+<hr>
+<p>MHM Rentiva ile güvenli ve performanslı kiralamalar dileriz! 🚀</p>]]></content:encoded>
+            <category>release</category>
+            <category>security</category>
+            <category>wpcs</category>
+            <category>update</category>
+        </item>
         <item>
             <title><![CDATA[v4.6.1 Yayında! 🛡️]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-1-released</link>

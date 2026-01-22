@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/maintenance",
-  "title": "Bakım ve Sistem Ayarları (Maintenance Settings)",
-  "description": "Sistem bakımı, veri temizliği ve kritik kaldırma işlemleri ayarları.",
+  "title": "maintenance",
+  "description": "Version Security Updated",
   "source": "@site/docs/02-core-configuration/maintenance.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/maintenance",

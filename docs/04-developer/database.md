@@ -5,6 +5,8 @@ sidebar_label: Veritabanı
 slug: /developer/database
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Veritabanı Dokümantasyonu
 
 Bu klasör, MHM Rentiva eklentisi için veritabanı yapısı ve meta key dokümantasyonunu içerir.
@@ -139,4 +141,3 @@ update_post_meta($vehicle_id, '_mhm_vehicle_availability', 'active');
 1. Gereksiz meta key'leri temizleyin
 2. Meta key'leri doğru tiplerle tanımlayın
 3. Sanitize callback'lerini kullanın
-

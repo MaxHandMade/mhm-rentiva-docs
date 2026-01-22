@@ -1,7 +1,7 @@
 {
   "id": "features-usage/customers",
   "title": "Müşteri Yönetimi",
-  "description": "MHM Rentiva > Customers, kayıtlı kullanıcılarınızın (müşterilerin) tüm geçmişini ve durumunu izleyebileceğiniz yönetim panelidir. Rezervasyon, mesaj ve ödeme bilgileri tek ekranda toplanır; bu sayede sadakat yönetimi ve destek süreçleri kolaylaşır.",
+  "description": "Version Security Updated",
   "source": "@site/docs/03-features-usage/customers.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/customers",

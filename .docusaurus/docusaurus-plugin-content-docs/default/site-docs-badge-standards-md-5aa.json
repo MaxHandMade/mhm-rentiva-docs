@@ -1,0 +1,23 @@
+{
+  "id": "badge-standards",
+  "title": "Badge Standards Reference",
+  "description": "Current Badge Format (v4.6.2)",
+  "source": "@site/docs/badge-standards.md",
+  "sourceDirName": ".",
+  "slug": "/badge-standards",
+  "permalink": "/mhm-rentiva-docs/docs/badge-standards",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/badge-standards.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Badge Standards Reference",
+    "sidebar_label": "Badge Standards"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Test Listeleri",
+    "permalink": "/mhm-rentiva-docs/docs/developer/testing-checklists"
+  }
+}

@@ -5,6 +5,8 @@ sidebar_label: Lisans Yönetimi
 slug: /core-configuration/license
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # License Sayfası
 
 `MHM Rentiva > License`, eklentinin lisans anahtarını yönetmek, aktivasyon durumu ve kullanım kısıtlarını görmek için kullanılır.
@@ -49,6 +51,3 @@ Aşağıdaki tablo, MHM Rentiva'nın Lite (Ücretsiz) ve Pro (Ücretli) sürüml
 - [Settings](settings.md) – Lisanslı özelliklerin aktif olduğu sekmeler.
 - [Core Utilities](core-utilities.md) – API anahtarı ve bakım araçları.
 - [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Lisans aktivasyon sorunları için rehber.
-
-
-

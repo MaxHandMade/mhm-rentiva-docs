@@ -1,7 +1,7 @@
 {
   "id": "features-usage/vip-transfer",
   "title": "VIP Transfer Modülü",
-  "description": "MHM Rentiva v4.5.3 ile gelen VIP Transfer Modülü, kullanıcılarınızın A noktasından B noktasına şoförlü araç transferi hizmeti almasını ve rezervasyon yapmasını sağlar. Bu modül; mesafe bazlı veya sabit fiyatlandırma, araç kapasitesi yönetimi ve WooCommerce entegrasyonu ile esnek bir altyapı sunar.",
+  "description": "Version Security Updated",
   "source": "@site/docs/03-features-usage/vip-transfer.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/vip-transfer",

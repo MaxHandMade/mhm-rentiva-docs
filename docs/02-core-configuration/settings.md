@@ -5,6 +5,8 @@ sidebar_label: Genel Ayarlar
 slug: /core-configuration/settings
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Ayarlar (Settings)
 
 MHM Rentiva, eklentinin davranışını özelleştirmeniz için kapsamlı bir ayar paneli sunar. Ayarlara **MHM Rentiva > Settings** menüsünden ulaşabilirsiniz.
@@ -87,5 +89,3 @@ Ayrıca ayarlar sayfasında şu yardımcı araçlar da bulunabilir:
 *   **Veritabanı Temizliği:** Eski ve gereksiz verileri silme aracı.
 *   **Cron Monitörü:** Zamanlanmış görevlerin durumunu kontrol etme.
 *   **Ayarları Test Et:** Yapılandırmanızın doğruluğunu test etme aracı.
-
-

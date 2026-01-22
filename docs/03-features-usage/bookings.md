@@ -5,6 +5,8 @@ sidebar_label: Rezervasyonlar
 slug: /features-usage/bookings
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Bookings Sayfası
 
 `MHM Rentiva > Bookings`, tüm rezervasyonların merkezi yönetim ekranıdır. Hem çevrim içi hem de manuel oluşturduğunuz rezervasyonlar burada listelenir; durum değişiklikleri, ödeme kontrolleri ve müşteri iletişimi bu sayfadan yürütülür.
@@ -68,6 +70,3 @@ slug: /features-usage/bookings
 - [Vehicles](vehicles.md): Rezervasyonların takvimde nasıl gösterildiği.
 - [Payment Konfigürasyonu](../02-core-configuration/payments.md): Online/offline ödeme akışları.
 - [Test Checklist](../04-developer/testing-checklists.md#2-rezervasyon-akisi): Rezervasyon akışı test adımları.
-
-
-

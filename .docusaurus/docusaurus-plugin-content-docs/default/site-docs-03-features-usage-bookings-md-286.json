@@ -1,7 +1,7 @@
 {
   "id": "features-usage/bookings",
   "title": "Rezervasyon Yönetimi",
-  "description": "MHM Rentiva > Bookings, tüm rezervasyonların merkezi yönetim ekranıdır. Hem çevrim içi hem de manuel oluşturduğunuz rezervasyonlar burada listelenir; durum değişiklikleri, ödeme kontrolleri ve müşteri iletişimi bu sayfadan yürütülür.",
+  "description": "Version Security Updated",
   "source": "@site/docs/03-features-usage/bookings.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/bookings",

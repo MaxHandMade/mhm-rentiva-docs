@@ -5,6 +5,8 @@ sidebar_label: Raporlar
 slug: /features-usage/reports
 ---
 
+![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+
 # Reports Sayfası
 
 `MHM Rentiva > Reports`, işletmenizin performansını görselleştiren kontrol panelidir. Gelir, rezervasyon ve araç kullanım istatistikleri farklı grafikler ve tablolarda sunulur.
@@ -34,6 +36,3 @@ slug: /features-usage/reports
 - [Export](export.md): Raporlarda kullanılan ham verileri dışa aktarma.
 - [Settings](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Rapor cache sürelerinin yönetimi.
 - [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Raporlama doğrulama adımları.
-
-
-

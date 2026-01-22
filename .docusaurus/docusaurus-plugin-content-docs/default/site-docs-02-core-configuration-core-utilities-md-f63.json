@@ -1,7 +1,7 @@
 {
   "id": "core-configuration/core-utilities",
   "title": "Yardımcı Araçlar",
-  "description": "Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa ekler. Bu sayfa, ilgili menülere nereden ulaşacağınızı ve ne işe yaradıklarını özetler.",
+  "description": "Version Security Updated",
   "source": "@site/docs/02-core-configuration/core-utilities.md",
   "sourceDirName": "02-core-configuration",
   "slug": "/core-configuration/utilities",
@@ -19,7 +19,7 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Rezervasyon Ayarları (Booking Settings)",
+    "title": "booking-settings",
     "permalink": "/mhm-rentiva-docs/docs/core-configuration/booking-settings"
   },
   "next": {
