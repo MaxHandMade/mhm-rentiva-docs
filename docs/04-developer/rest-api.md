@@ -1,139 +1,121 @@
 ---
 sidebar_position: 2
 title: REST API
-description: MHM Rentiva REST API Documentation
+description: MHM Rentiva REST API Dokümantasyonu
 ---
 
-# REST API Documentation
+# REST API Dokümantasyonu
 
-MHM Rentiva plugin offers a comprehensive REST API for vehicle availability checks, message management, and integration with third-party applications.
+MHM Rentiva eklentisi; araç müsaitlik kontrolleri, mesaj yönetimi ve üçüncü parti uygulamalarla entegrasyon için kapsamlı bir REST API sunar.
 
-## 🛡️ Security & Rate Limiting
+## 🛡️ Güvenlik ve Hız Sınırlama (Rate Limiting)
 
-:::warning Security Notice
-This API is protected by the **Integration Settings** configured in the WordPress Admin Panel (`Rentiva > Settings > Integration`).
+:::warning Güvenlik Uyarısı
+Bu API, WordPress Yönetim Paneli'nde yapılandırılan **Entegrasyon Ayarları** (`Rentiva > Settings > Integration`) tarafından korunmaktadır.
 :::
 
-*   **Rate Limiting:** IP-based rate limiting is active. Exceeding the configured limit (default: 60/min) will result in a `429 Too Many Requests` response.
-*   **IP Restrictions:** If the **IP Whitelist** or **IP Blacklist** is configured in the settings, requests from unauthorized IPs will be rejected with a `403 Forbidden` error.
-*   **HTTPS Enforcement:** If enabled, non-SSL requests will be rejected.
+*   **Hız Sınırlama (Rate Limiting):** IP tabanlı hız sınırlaması aktiftir. Yapılandırılan limitin (varsayılan: 60/dakika) aşılması durumunda `429 Too Many Requests` yanıtı döner.
+*   **IP Kısıtlamaları:** Ayarlarda **IP Beyaz Listesi** veya **IP Kara Listesi** yapılandırılmışsa, yetkisiz IPlerden gelen istekler `403 Forbidden` hatası ile reddedilir.
+*   **HTTPS Zorunluluğu:** Etkinleştirilmişse, SSL olmayan istekler reddedilir.
 
 ---
 
-## Availability Endpoints
+## Müsaitlik Sorgu Noktaları (Availability Endpoints)
 
-These endpoints are **public** but strictly rate-limited and monitored. They are used for checking vehicle availability and price calculation.
+Bu uç noktalar **herkese açıktır (public)** ancak sıkı bir şekilde hız sınırlamasına tabidir ve izlenir. Araç müsaitlik kontrolü ve fiyat hesaplaması için kullanılırlar.
 
-### Check Availability
-Calculates price and availability for a specific vehicle.
+### Müsaitlik Kontrolü (Check Availability)
+Belirli bir araç için fiyat ve müsaitlik durumunu hesaplar.
 
 *   **Endpoint:** `GET /mhm-rentiva/v1/availability`
-*   **Method:** `GET` or `POST`
-*   **Access:** Public (Rate Limited)
+*   **Yöntem:** `GET` veya `POST`
+*   **Erişim:** Herkese Açık (Hız Sınırlı)
 
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `vehicle_id` | Integer | Yes | ID of the vehicle to check. |
-| `pickup_date` | String | Yes | Pickup date (YYYY-MM-DD). |
-| `pickup_time` | String | Yes | Pickup time (HH:mm). |
-| `dropoff_date` | String | Yes | Dropoff date (YYYY-MM-DD). |
-| `dropoff_time` | String | Yes | Dropoff time (HH:mm). |
+| `vehicle_id` | Integer | Evet | Kontrol edilecek aracın ID'si. |
+| `pickup_date` | String | Evet | Alış tarihi (YIL-AY-GÜN). |
+| `pickup_time` | String | Evet | Alış saati (SA:DK). |
+| `dropoff_date` | String | Evet | İade tarihi (YIL-AY-GÜN). |
+| `dropoff_time` | String | Evet | İade saati (SA:DK). |
 
-### Check Availability (With Alternatives)
-Checks availability and suggests alternative vehicles if the selected one is unavailable.
+### Müsaitlik Kontrolü (Alternatifli)
+Müsaitlik durumunu kontrol eder ve seçilen araç müsait değilse alternatif araçlar önerir.
 
 *   **Endpoint:** `GET /mhm-rentiva/v1/availability/with-alternatives`
-*   **Method:** `GET` or `POST`
-*   **Access:** Public (Rate Limited)
+*   **Yöntem:** `GET` veya `POST`
+*   **Erişim:** Herkese Açık (Hız Sınırlı)
 
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `vehicle_id` | Integer | Yes | ID of the vehicle to check. |
-| `pickup_date` | String | Yes | Pickup date (YYYY-MM-DD). |
-| `pickup_time` | String | Yes | Pickup time (HH:mm). |
-| `dropoff_date` | String | Yes | Dropoff date (YYYY-MM-DD). |
-| `dropoff_time` | String | Yes | Dropoff time (HH:mm). |
-| `limit` | Integer | No | Max number of alternatives (Default: 5). |
+| `vehicle_id` | Integer | Evet | Kontrol edilecek aracın ID'si. |
+| `pickup_date` | String | Evet | Alış tarihi (YIL-AY-GÜN). |
+| `pickup_time` | String | Evet | Alış saati (SA:DK). |
+| `dropoff_date` | String | Evet | İade tarihi (YIL-AY-GÜN). |
+| `dropoff_time` | String | Evet | İade saati (SA:DK). |
+| `limit` | Integer | Hayır | Maksimum alternatif sayısı (Varsayılan: 5). |
 
 ---
 
-## Messaging Endpoints (Admin)
+## Mesajlaşma Uç Noktaları (Yönetici)
 
-These endpoints allow administrators to manage customer messages. Requires `manage_options` capability (Admin).
+Bu uç noktalar, yöneticilerin müşteri mesajlarını yönetmesini sağlar. `manage_options` yetkisi (Admin) gerektirir.
 
-### List Messages
-active list of messages.
+### Mesajları Listele
+Mesajların aktif listesi.
 
 *   **Endpoint:** `GET /mhm-rentiva/v1/messages`
-*   **Access:** Admin
+*   **Erişim:** Admin
 
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `status` | String | No | Filter by status (new, read, replied, closed). |
-| `category` | String | No | Filter by category (general, booking, support). |
-| `per_page` | Integer | No | Items per page (Default: 20). |
-| `page` | Integer | No | Page number. |
+| `status` | String | Hayır | Duruma göre filtrele (new, read, replied, closed). |
+| `category` | String | Hayır | Kategoriye göre filtrele (general, booking, support). |
+| `per_page` | Integer | Hayır | Sayfa başına öğe (Varsayılan: 20). |
+| `page` | Integer | Hayır | Sayfa numarası. |
 
-### Get Message Details
+### Mesaj Detayını Getir
 *   **Endpoint:** `GET /mhm-rentiva/v1/messages/{id}`
-*   **Access:** Admin
+*   **Erişim:** Admin
 
-### Reply to Message
+### Mesaja Yanıt Ver
 *   **Endpoint:** `POST /mhm-rentiva/v1/messages/{id}/reply`
-*   **Access:** Admin
+*   **Erişim:** Admin
 
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `message` | String | Yes | The reply content. |
-| `close_thread` | Boolean | No | Close the thread after replying? (Default: false). |
+| `message` | String | Evet | Yanıt içeriği. |
+| `close_thread` | Boolean | Hayır | Yanıttan sonra konuyu kapat? (Varsayılan: false). |
 
-### Update Message Status
+### Mesaj Durumunu Güncelle
 *   **Endpoint:** `POST /mhm-rentiva/v1/messages/{id}/status`
-*   **Access:** Admin
+*   **Erişim:** Admin
 
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `status` | String | Yes | New status (new, read, replied, closed). |
+| `status` | String | Evet | Yeni durum (new, read, replied, closed). |
 
 ---
 
-## Messaging Endpoints (Customer)
+## Mesajlaşma Uç Noktaları (Müşteri)
 
-These endpoints are for logged-in WordPress users (Customers).
+Yetkili müşteriler için mesajlaşma işlemleri.
 
-### Get Messages (My Messages)
-*   **Endpoint:** `GET /mhm-rentiva/v1/customer/messages`
-*   **Access:** Logged-in User
+### Konu Oluştur (Create Thread)
+*   **Endpoint:** `POST /mhm-rentiva/v1/messages`
+*   **Erişim:** Giriş Yapmış Kullanıcı
 
-### Create New Message
-*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages`
-*   **Access:** Logged-in User
-
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `subject` | String | Yes | Message subject. |
-| `message` | String | Yes | Message content. |
-| `category` | String | Yes | Category (general, booking, support). |
-| `booking_id` | Integer | No | Associated booking ID. |
-| `priority` | String | No | normal, high, urgent. |
+| `subject` | String | Evet | Mesaj konusu. |
+| `message` | String | Evet | Mesaj içeriği. |
+| `category` | String | Hayır | Kategori (general, booking, support). |
+| `booking_id` | Integer | Hayır | İlgili rezervasyon ID'si. |
 
-### Get Message Thread
-*   **Endpoint:** `GET /mhm-rentiva/v1/customer/messages/thread/{thread_id}`
-*   **Access:** Logged-in User
+### Konuya Yanıt Ver
+*   **Endpoint:** `POST /mhm-rentiva/v1/messages/{id}/reply`
+*   **Erişim:** Konu Sahibi
 
-### Reply to Admin
-*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages/reply`
-*   **Access:** Logged-in User
-
-| Parameter | Type | Required | Description |
+| Parametre | Tip | Zorunlu | Açıklama |
 | :--- | :--- | :--- | :--- |
-| `thread_id` | String | Yes | The thread ID to reply to. |
-| `message` | String | Yes | Reply content. |
-
-### Close Message
-*   **Endpoint:** `POST /mhm-rentiva/v1/customer/messages/close`
-*   **Access:** Logged-in User
-
-| Parameter | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `thread_id` | String | Yes | The thread ID to close. |
+| `message` | String | Evet | Yanıt içeriği. |

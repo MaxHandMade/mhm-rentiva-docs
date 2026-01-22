@@ -1,4 +1,3 @@
-```
 ---
 id: shortcodes
 title: Kısa Kodlar (Shortcodes)

@@ -1,37 +1,37 @@
 ---
 id: technical-architecture
-title: 🏗️ Module Architecture and Technical Map
-sidebar_label: Module Architecture
-description: MHM Rentiva v4.6.2 Technical Module Structure and Security Status
+title: 🏗️ Modül Mimarisi ve Teknik Harita
+sidebar_label: Modül Mimarisi
+description: MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu
 ---
 
-# MHM Rentiva - Module Architecture and Technical Documentation
+# MHM Rentiva - Modül Mimarisi ve Teknik Dokümantasyon
 
 ![Version](https://img.shields.io/badge/version-4.6.2-blue.svg)
 ![Modules](https://img.shields.io/badge/modules-22-green.svg)
 ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-brightgreen.svg)
 ![Last Audit](https://img.shields.io/badge/last%20audit-2026--01--21-blue.svg)
 
-> **Technical Constitution** - This document serves as the architectural reference for MHM Rentiva plugin, detailing all 22 modules, their responsibilities, relationships, and security status.
+> **Teknik Anayasa** - Bu belge, MHM Rentiva eklentisinin mimari referansı olup, 22 modülün tümünü, sorumluluklarını, ilişkilerini ve güvenlik durumlarını detaylandırır.
 
 ---
 
-## 📋 Table of Contents
+## 📋 İçindekiler
 
-- [Architecture Overview](#architecture-overview)
-- [Module Categories](#module-categories)
-- [Business Logic Modules](#-business-logic-modules)
-- [User Operations Modules](#-user-operations-modules)
-- [System Infrastructure Modules](#-system-infrastructure-modules)
-- [Security & API Modules](#-security--api-modules)
-- [Module Relationships Graph](#module-relationships-graph)
-- [Security Audit Summary](#security-audit-summary)
+- [Mimari Genel Bakış](#mimari-genel-bakis)
+- [Modül Kategorileri](#modul-kategorileri)
+- [İş Mantığı Modülleri](#-is-mantigi-modulleri)
+- [Kullanıcı Operasyonları Modülleri](#-kullanici-operasyonlari-modulleri)
+- [Sistem Altyapısı Modülleri](#-sistem-altyapisi-modulleri)
+- [Güvenlik ve API Modülleri](#-guvenlik-ve-api-modulleri)
+- [Modül İlişkileri Grafiği](#modul-iliskileri-grafigi)
+- [Güvenlik Denetim Özeti](#guvenlik-denetim-ozeti)
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Mimari Genel Bakış
 
-MHM Rentiva follows a **modular monolith** architecture with clear separation of concerns:
+MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit** mimarisini takip eder:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -39,7 +39,7 @@ MHM Rentiva follows a **modular monolith** architecture with clear separation of
 ├─────────────────────────────────────────────────────────────────┤
 │                     MHM RENTIVA PLUGIN                          │
 │  ┌─────────────────────────────────────────────────────────┐   │
-│  │                   BUSINESS LOGIC                         │   │
+│  │                   BUSINESS LOGIC (İŞ MANTIĞI)            │   │
 │  │   ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │   │
 │  │   │ Booking │ │ Vehicle │ │Transfer │ │ Payment │       │   │
 │  │   └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘       │   │
@@ -62,357 +62,357 @@ MHM Rentiva follows a **modular monolith** architecture with clear separation of
 │  │  └───────────────────────────────────────────────┘       │   │
 │  └─────────────────────────────────────────────────────────┘   │
 ├─────────────────────────────────────────────────────────────────┤
-│                    WOOCOMMERCE (Optional)                       │
+│                    WOOCOMMERCE (Opsiyonel)                      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📂 Module Categories
+## 📂 Modül Kategorileri
 
-| Category | Modules | Description |
-|----------|---------|-------------|
-| **Business Logic** | 4 | Core rental operations (Booking, Vehicle, Transfer, Payment) |
-| **User Operations** | 4 | Customer-facing features (Customers, Messages, Frontend, Account) |
-| **System Infrastructure** | 8 | Backend services (Settings, Emails, Reports, Utilities, Core, Setup, PostTypes, About) |
-| **Security & API** | 6 | Security and integration (Auth, Privacy, Licensing, REST, Addons, Testing) |
-
----
-
-## 💼 Business Logic Modules
-
-### 📦 Booking
-* **Directory:** `src/Admin/Booking/`
-* **Type:** Core Business
-* **Description:** Manages the complete booking lifecycle from creation to completion, including availability checks, pricing calculations, and status management.
-* **Critical Files:**
-  - `Core/Handler.php` - Main booking form handler
-  - `Core/BookingManager.php` - Booking CRUD operations
-  - `Actions/DepositManagementAjax.php` - Deposit payment handling
-  - `Meta/BookingMeta.php` - Booking metadata management
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 21 locations
-* **Relationships:** Vehicle, Payment, Customers, WooCommerce, Emails
+| Kategori | Modül Sayısı | Açıklama |
+|----------|--------------|----------|
+| **İş Mantığı** | 4 | Temel kiralama operasyonları (Booking, Vehicle, Transfer, Payment) |
+| **Kullanıcı Operasyonları** | 4 | Müşteri odaklı özellikler (Customers, Messages, Frontend, Account) |
+| **Sistem Altyapısı** | 8 | Arka uç servisleri (Settings, Emails, Reports, Utilities, Core, Setup, PostTypes, About) |
+| **Güvenlik ve API** | 6 | Güvenlik ve entegrasyon (Auth, Privacy, Licensing, REST, Addons, Testing) |
 
 ---
 
-### 📦 Vehicle
-* **Directory:** `src/Admin/Vehicle/`
-* **Type:** Core Business
-* **Description:** Complete vehicle inventory management including galleries, specifications, availability rules, and pricing tiers.
-* **Critical Files:**
-  - `Meta/VehicleMeta.php` - Vehicle metadata handler
-  - `Meta/VehicleGallery.php` - Image gallery management
-  - `Settings/VehicleSettings.php` - Vehicle configuration
-  - `ListTable/VehicleColumns.php` - Admin list customization
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 12 locations
-* **Relationships:** Booking, Frontend, PostTypes
+## 💼 İş Mantığı Modülleri
+
+### 📦 Booking (Rezervasyon)
+* **Dizin:** `src/Admin/Booking/`
+* **Tip:** Çekirdek İş Mantığı
+* **Açıklama:** Oluşturulmasından tamamlanmasına kadar; müsaitlik kontrolleri, fiyat hesaplamaları ve durum yönetimi dahil tüm rezervasyon yaşam döngüsünü yönetir.
+* **Kritik Dosyalar:**
+  - `Core/Handler.php` - Ana rezervasyon formu işleyicisi
+  - `Core/BookingManager.php` - Rezervasyon CRUD işlemleri
+  - `Actions/DepositManagementAjax.php` - Depozito ödeme yönetimi
+  - `Meta/BookingMeta.php` - Rezervasyon meta veri yönetimi
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 21 konum
+* **İlişkiler:** Vehicle, Payment, Customers, WooCommerce, Emails
+
+---
+
+### 📦 Vehicle (Araç)
+* **Dizin:** `src/Admin/Vehicle/`
+* **Tip:** Çekirdek İş Mantığı
+* **Açıklama:** Galeriler, teknik özellikler, müsaitlik kuralları ve fiyatlandırma katmanları dahil tam araç envanter yönetimi.
+* **Kritik Dosyalar:**
+  - `Meta/VehicleMeta.php` - Araç meta veri işleyicisi
+  - `Meta/VehicleGallery.php` - Görsel galerisi yönetimi
+  - `Settings/VehicleSettings.php` - Araç yapılandırması
+  - `ListTable/VehicleColumns.php` - Admin listesi özelleştirme
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 12 konum
+* **İlişkiler:** Booking, Frontend, PostTypes
 
 ---
 
 ### 📦 Transfer (VIP)
-* **Directory:** `src/Admin/Transfer/`
-* **Type:** Core Business
-* **Description:** Point-to-point chauffeur service with location/route management, distance-based pricing, and vehicle selection.
-* **Critical Files:**
-  - `Frontend/TransferShortcodes.php` - Search form and results
-  - `Integration/TransferCartIntegration.php` - WooCommerce cart bridge
-  - `TransferSearchEngine.php` - Route and vehicle matching
-  - `TransferAdmin.php` - Admin panel management
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 7 locations
-* **Relationships:** WooCommerce, Vehicle, Payment, Frontend
+* **Dizin:** `src/Admin/Transfer/`
+* **Tip:** Çekirdek İş Mantığı
+* **Açıklama:** Konum/rota yönetimi, mesafe bazlı fiyatlandırma ve araç seçimi ile noktadan noktaya şoförlü transfer hizmeti.
+* **Kritik Dosyalar:**
+  - `Frontend/TransferShortcodes.php` - Arama formu ve sonuçlar
+  - `Integration/TransferCartIntegration.php` - WooCommerce sepet köprüsü
+  - `TransferSearchEngine.php` - Rota ve araç eşleştirme
+  - `TransferAdmin.php` - Admin paneli yönetimi
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 7 konum
+* **İlişkiler:** WooCommerce, Vehicle, Payment, Frontend
 
 ---
 
-### 📦 Payment
-* **Directory:** `src/Admin/Payment/`
-* **Type:** Core Business
-* **Description:** Payment processing with WooCommerce integration, deposit system, refunds, and multiple payment gateway support.
-* **Critical Files:**
-  - `WooCommerce/WooCommerceBridge.php` - WooCommerce integration
-  - `Refunds/Service.php` - Refund processing
-  - `DepositCalculator.php` - Deposit amount calculation
-  - `PaymentGatewayManager.php` - Gateway management
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 2 locations
-* **Relationships:** Booking, Transfer, WooCommerce, Emails
+### 📦 Payment (Ödeme)
+* **Dizin:** `src/Admin/Payment/`
+* **Tip:** Çekirdek İş Mantığı
+* **Açıklama:** WooCommerce entegrasyonu, depozito sistemi, iadeler ve çoklu ödeme ağ geçidi desteği ile ödeme işlemleri.
+* **Kritik Dosyalar:**
+  - `WooCommerce/WooCommerceBridge.php` - WooCommerce entegrasyonu
+  - `Refunds/Service.php` - İade işlemleri
+  - `DepositCalculator.php` - Depozito tutarı hesaplama
+  - `PaymentGatewayManager.php` - Ağ geçidi yönetimi
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 2 konum
+* **İlişkiler:** Booking, Transfer, WooCommerce, Emails
 
 ---
 
-## 👥 User Operations Modules
+## 👥 Kullanıcı Operasyonları Modülleri
 
-### 📦 Customers
-* **Directory:** `src/Admin/Customers/`
-* **Type:** User Operations
-* **Description:** Customer management system with profile handling, booking history, and administrative tools.
-* **Critical Files:**
-  - `CustomersPage.php` - Admin customer list
-  - `AddCustomerPage.php` - Customer creation form
-  - `CustomerProfile.php` - Profile management
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 3 locations
-* **Relationships:** Booking, Messages, Frontend
-
----
-
-### 📦 Messages
-* **Directory:** `src/Admin/Messages/`
-* **Type:** User Operations
-* **Description:** Internal messaging system between customers and administrators with thread management and notifications.
-* **Critical Files:**
-  - `Core/Messages.php` - Core messaging logic
-  - `Core/MessageUrlHelper.php` - URL generation
-  - `Monitoring/MessageLogger.php` - Message audit logs
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 2 locations
-* **Relationships:** Customers, Emails, Frontend
+### 📦 Customers (Müşteriler)
+* **Dizin:** `src/Admin/Customers/`
+* **Tip:** Kullanıcı Operasyonları
+* **Açıklama:** Profil yönetimi, rezervasyon geçmişi ve yönetim araçları ile müşteri yönetim sistemi.
+* **Kritik Dosyalar:**
+  - `CustomersPage.php` - Admin müşteri listesi
+  - `AddCustomerPage.php` - Müşteri oluşturma formu
+  - `CustomerProfile.php` - Profil yönetimi
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 3 konum
+* **İlişkiler:** Booking, Messages, Frontend
 
 ---
 
-### 📦 Frontend
-* **Directory:** `src/Admin/Frontend/`
-* **Type:** User Operations
-* **Description:** All frontend-facing components including shortcodes, account pages, blocks, and customer portal.
-* **Critical Files:**
-  - `Shortcodes/BookingForm.php` - Booking form shortcode
-  - `Shortcodes/VehiclesList.php` - Vehicle listing with ratings
-  - `Shortcodes/VehicleRatingForm.php` - Customer rating system
-  - `Account/AccountController.php` - My Account page controller
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 18 locations
-* **Relationships:** Booking, Vehicle, Customers, Messages, WooCommerce
+### 📦 Messages (Mesajlar)
+* **Dizin:** `src/Admin/Messages/`
+* **Tip:** Kullanıcı Operasyonları
+* **Açıklama:** Konu takibi (thread) ve bildirimlerle müşteriler ve yöneticiler arası dahili mesajlaşma sistemi.
+* **Kritik Dosyalar:**
+  - `Core/Messages.php` - Çekirdek mesajlaşma mantığı
+  - `Core/MessageUrlHelper.php` - URL oluşturma
+  - `Monitoring/MessageLogger.php` - Mesaj denetim logları
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 2 konum
+* **İlişkiler:** Customers, Emails, Frontend
 
 ---
 
-### 📦 Account
-* **Directory:** `src/Admin/Frontend/Account/`
-* **Type:** User Operations
-* **Description:** Customer self-service portal with booking management, favorites, profile editing, and document uploads.
-* **Critical Files:**
-  - `AccountController.php` - Main account coordinator
-  - `Tabs/BookingsTab.php` - Booking history view
-  - `Tabs/FavoritesTab.php` - Favorite vehicles
-  - `Tabs/ProfileTab.php` - Profile editing
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Relationships:** Frontend, Customers, Booking, Messages
+### 📦 Frontend (Ön Yüz)
+* **Dizin:** `src/Admin/Frontend/`
+* **Tip:** Kullanıcı Operasyonları
+* **Açıklama:** Shortcode'lar, hesap sayfaları, bloklar ve müşteri portalı dahil tüm ön yüz bileşenleri.
+* **Kritik Dosyalar:**
+  - `Shortcodes/BookingForm.php` - Rezervasyon formu shortcode'u
+  - `Shortcodes/VehiclesList.php` - Araç listesi ve puanlama
+  - `Shortcodes/VehicleRatingForm.php` - Müşteri puanlama sistemi
+  - `Account/AccountController.php` - Hesabım sayfası kontrolcüsü
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 18 konum
+* **İlişkiler:** Booking, Vehicle, Customers, Messages, WooCommerce
 
 ---
 
-## ⚙️ System Infrastructure Modules
-
-### 📦 Settings
-* **Directory:** `src/Admin/Settings/`
-* **Type:** System Infrastructure
-* **Description:** Centralized configuration management with grouped settings, sanitization, and validation.
-* **Critical Files:**
-  - `Core/SettingsCore.php` - Core settings API
-  - `SettingsHandler.php` - Settings save/reset handler
-  - `Groups/*.php` - Grouped settings definitions
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 4 locations
-* **Relationships:** All modules (central configuration)
+### 📦 Account (Hesap)
+* **Dizin:** `src/Admin/Frontend/Account/`
+* **Tip:** Kullanıcı Operasyonları
+* **Açıklama:** Rezervasyon yönetimi, favoriler, profil düzenleme ve belge yükleme ile müşteri self-servis portalı.
+* **Kritik Dosyalar:**
+  - `AccountController.php` - Ana hesap koordinatörü
+  - `Tabs/BookingsTab.php` - Rezervasyon geçmişi görünümü
+  - `Tabs/FavoritesTab.php` - Favori araçlar
+  - `Tabs/ProfileTab.php` - Profil düzenleme
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **İlişkiler:** Frontend, Customers, Booking, Messages
 
 ---
 
-### 📦 Emails
-* **Directory:** `src/Admin/Emails/`
-* **Type:** System Infrastructure
-* **Description:** Automated email notification system with customizable HTML templates and triggered sending.
-* **Critical Files:**
-  - `Core/EmailTemplates.php` - Template management
-  - `Sender/EmailSender.php` - Email dispatch
-  - `Templates/*.php` - Individual email templates
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 1 location
-* **Relationships:** Booking, Customers, Messages, Settings
+## ⚙️ Sistem Altyapısı Modülleri
+
+### 📦 Settings (Ayarlar)
+* **Dizin:** `src/Admin/Settings/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Gruplandırılmış ayarlar, sanitizasyon ve validasyon ile merkezi yapılandırma yönetimi.
+* **Kritik Dosyalar:**
+  - `Core/SettingsCore.php` - Çekirdek ayarlar API
+  - `SettingsHandler.php` - Ayarlar kaydetme/sıfırlama işleyicisi
+  - `Groups/*.php` - Gruplandırılmış ayar tanımları
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 4 konum
+* **İlişkiler:** Tüm modüller (merkezi konfigürasyon)
 
 ---
 
-### 📦 Reports
-* **Directory:** `src/Admin/Reports/`
-* **Type:** System Infrastructure
-* **Description:** Comprehensive analytics dashboard with revenue, customer, and vehicle insights.
-* **Critical Files:**
-  - `Reports.php` - Main reports coordinator
-  - `BusinessLogic/RevenueReport.php` - Revenue analytics
-  - `BusinessLogic/BookingReport.php` - Booking statistics
-  - `Charts.php` - Chart.js integration
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 0 (no form submissions)
-* **Relationships:** Booking, Vehicle, Payment, Settings
+### 📦 Emails (E-postalar)
+* **Dizin:** `src/Admin/Emails/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Özelleştirilebilir HTML şablonları ve tetiklenen gönderimler ile otomatik e-posta bildirim sistemi.
+* **Kritik Dosyalar:**
+  - `Core/EmailTemplates.php` - Şablon yönetimi
+  - `Sender/EmailSender.php` - E-posta gönderimi
+  - `Templates/*.php` - Bireysel e-posta şablonları
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 1 konum
+* **İlişkiler:** Booking, Customers, Messages, Settings
 
 ---
 
-### 📦 Utilities
-* **Directory:** `src/Admin/Utilities/`
-* **Type:** System Infrastructure
-* **Description:** System maintenance tools including export, database cleanup, cron monitoring, and uninstall handlers.
-* **Critical Files:**
-  - `Export/Export.php` - Data export functionality
-  - `Actions/Actions.php` - Utility actions (log purge, etc.)
-  - `Database/DatabaseCleanupPage.php` - DB maintenance
-  - `Cron/CronMonitorPage.php` - Scheduled task monitoring
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 4 locations
-* **Relationships:** All modules (maintenance operations)
+### 📦 Reports (Raporlar)
+* **Dizin:** `src/Admin/Reports/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Gelir, müşteri ve araç analizleri ile kapsamlı analiz panosu.
+* **Kritik Dosyalar:**
+  - `Reports.php` - Ana rapor koordinatörü
+  - `BusinessLogic/RevenueReport.php` - Gelir analizleri
+  - `BusinessLogic/BookingReport.php` - Rezervasyon istatistikleri
+  - `Charts.php` - Chart.js entegrasyonu
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 0 (form gönderimi yok)
+* **İlişkiler:** Booking, Vehicle, Payment, Settings
 
 ---
 
-### 📦 Core
-* **Directory:** `src/Admin/Core/`
-* **Type:** System Infrastructure
-* **Description:** Shared infrastructure components including abstract classes, traits, helpers, and base utilities.
-* **Critical Files:**
-  - `Utilities/AbstractListTable.php` - Base list table class
-  - `Traits/AdminHelperTrait.php` - Common admin helpers
-  - `MetaBoxes/AbstractMetaBox.php` - Base meta box class
-  - `Helpers/Sanitizer.php` - Central sanitization utilities
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 3 locations
-* **Relationships:** All modules (base infrastructure)
+### 📦 Utilities (Araçlar)
+* **Dizin:** `src/Admin/Utilities/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Dışa aktarma, veritabanı temizliği, cron izleme ve kaldırma işleyicileri dahil sistem bakım araçları.
+* **Kritik Dosyalar:**
+  - `Export/Export.php` - Veri dışa aktarma işlevi
+  - `Actions/Actions.php` - Yardımcı eylemler (log temizleme vb.)
+  - `Database/DatabaseCleanupPage.php` - Veritabanı bakımı
+  - `Cron/CronMonitorPage.php` - Zamanlanmış görev izleme
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 4 konum
+* **İlişkiler:** Tüm modüller (bakım operasyonları)
 
 ---
 
-### 📦 Setup
-* **Directory:** `src/Admin/Setup/`
-* **Type:** System Infrastructure
-* **Description:** Plugin installation wizard and initial configuration guidance.
-* **Critical Files:**
-  - `SetupWizard.php` - Step-by-step setup
-* **Security Status:** ✅ Verified (v4.6.2 - No nonce operations)
-* **Nonce Patches:** 0
-* **Relationships:** Settings, PostTypes
+### 📦 Core (Çekirdek)
+* **Dizin:** `src/Admin/Core/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Soyut sınıflar, trait'ler, yardımcılar ve temel araçlar dahil paylaşılan altyapı bileşenleri.
+* **Kritik Dosyalar:**
+  - `Utilities/AbstractListTable.php` - Temel liste tablosu sınıfı
+  - `Traits/AdminHelperTrait.php` - Ortak admin yardımcıları
+  - `MetaBoxes/AbstractMetaBox.php` - Temel meta kutusu sınıfı
+  - `Helpers/Sanitizer.php` - Merkezi sanitizasyon araçları
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 3 konum
+* **İlişkiler:** Tüm modüller (temel altyapı)
 
 ---
 
-### 📦 PostTypes
-* **Directory:** `src/Admin/PostTypes/`
-* **Type:** System Infrastructure
-* **Description:** Custom post type and taxonomy registration for vehicles and bookings.
-* **Critical Files:**
-  - `VehiclePostType.php` - Vehicle CPT
-  - `BookingPostType.php` - Booking CPT
-  - `Taxonomies.php` - Custom taxonomies
-* **Security Status:** ✅ Verified (v4.6.2 - No nonce operations)
-* **Nonce Patches:** 0
-* **Relationships:** Vehicle, Booking
+### 📦 Setup (Kurulum)
+* **Dizin:** `src/Admin/Setup/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Eklenti kurulum sihirbazı ve ilk yapılandırma rehberliği.
+* **Kritik Dosyalar:**
+  - `SetupWizard.php` - Adım adım kurulum
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)
+* **Nonce Yamaları:** 0
+* **İlişkiler:** Settings, PostTypes
 
 ---
 
-### 📦 About
-* **Directory:** `src/Admin/About/`
-* **Type:** System Infrastructure
-* **Description:** Plugin information page with system diagnostics, feature overview, and support resources.
-* **Critical Files:**
-  - `About.php` - Main about page
-  - `SystemInfo.php` - System diagnostics
-  - `Tabs/*.php` - Information tabs
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 1 location
-* **Relationships:** Settings, Licensing
+### 📦 PostTypes (Yazı Tipleri)
+* **Dizin:** `src/Admin/PostTypes/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Araçlar ve rezervasyonlar için custom post type ve taksonomi kaydı.
+* **Kritik Dosyalar:**
+  - `VehiclePostType.php` - Araç CPT
+  - `BookingPostType.php` - Rezervasyon CPT
+  - `Taxonomies.php` - Özel taksonomiler
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)
+* **Nonce Yamaları:** 0
+* **İlişkiler:** Vehicle, Booking
 
 ---
 
-## 🔒 Security & API Modules
-
-### 📦 Auth
-* **Directory:** `src/Admin/Auth/`
-* **Type:** Security & API
-* **Description:** Two-factor authentication system for enhanced account security.
-* **Critical Files:**
-  - `TwoFactorManager.php` - 2FA implementation (TOTP)
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 3 locations
-* **Relationships:** Customers, Frontend, Settings
-
----
-
-### 📦 Privacy
-* **Directory:** `src/Admin/Privacy/`
-* **Type:** Security & API
-* **Description:** GDPR compliance features including data export, deletion, and consent management.
-* **Critical Files:**
-  - `GDPRManager.php` - GDPR operations handler
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 3 locations
-* **Relationships:** Customers, Settings, Booking
+### 📦 About (Hakkında)
+* **Dizin:** `src/Admin/About/`
+* **Tip:** Sistem Altyapısı
+* **Açıklama:** Sistem teşhisi, özellik özeti ve destek kaynakları ile eklenti bilgi sayfası.
+* **Kritik Dosyalar:**
+  - `About.php` - Ana hakkında sayfası
+  - `SystemInfo.php` - Sistem teşhisi
+  - `Tabs/*.php` - Bilgi sekmeleri
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 1 konum
+* **İlişkiler:** Settings, Licensing
 
 ---
 
-### 📦 Licensing
-* **Directory:** `src/Admin/Licensing/`
-* **Type:** Security & API
-* **Description:** License key management for Pro features activation and validation.
-* **Critical Files:**
-  - `LicenseManager.php` - License API integration
-  - `LicenseAdmin.php` - Admin license page
-  - `Mode.php` - Pro/Lite mode detection
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 3 locations
-* **Relationships:** Settings, About, All Pro features
+## 🔒 Güvenlik ve API Modülleri
+
+### 📦 Auth (Kimlik Doğrulama)
+* **Dizin:** `src/Admin/Auth/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Gelişmiş hesap güvenliği için İki Faktörlü Kimlik Doğrulama (2FA) sistemi.
+* **Kritik Dosyalar:**
+  - `TwoFactorManager.php` - 2FA uygulaması (TOTP)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 3 konum
+* **İlişkiler:** Customers, Frontend, Settings
 
 ---
 
-### 📦 REST
-* **Directory:** `src/Admin/REST/`
-* **Type:** Security & API
-* **Description:** Complete REST API for third-party integrations and mobile applications.
-* **Critical Files:**
-  - `VehicleEndpoint.php` - Vehicle API
-  - `BookingEndpoint.php` - Booking API
-  - `AuthEndpoint.php` - Authentication API
-* **Security Status:** ✅ Verified (v4.6.2 - Uses WordPress REST nonce system)
-* **Nonce Patches:** 0 (WordPress REST handles authentication)
-* **Relationships:** All public-facing modules
+### 📦 Privacy (Gizlilik)
+* **Dizin:** `src/Admin/Privacy/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Veri dışa aktarma, silme ve rıza yönetimi dahil GDPR uyumluluk özellikleri.
+* **Kritik Dosyalar:**
+  - `GDPRManager.php` - GDPR işlem yöneticisi
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 3 konum
+* **İlişkiler:** Customers, Settings, Booking
 
 ---
 
-### 📦 Addons
-* **Directory:** `src/Admin/Addons/`
-* **Type:** Security & API
-* **Description:** Booking addons/extras management with pricing and integration.
-* **Critical Files:**
-  - `AddonManager.php` - Addon CRUD and pricing
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 2 locations
-* **Relationships:** Booking, Payment, Vehicle
+### 📦 Licensing (Lisanslama)
+* **Dizin:** `src/Admin/Licensing/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Pro özellik aktivasyonu ve doğrulaması için lisans anahtarı yönetimi.
+* **Kritik Dosyalar:**
+  - `LicenseManager.php` - Lisans API entegrasyonu
+  - `LicenseAdmin.php` - Admin lisans sayfası
+  - `Mode.php` - Pro/Lite mod tespiti
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 3 konum
+* **İlişkiler:** Settings, About, Tüm Pro özellikler
 
 ---
 
-### 📦 Testing
-* **Directory:** `src/Admin/Testing/`
-* **Type:** Security & API
-* **Description:** Development and QA tools for shortcode testing and security validation.
-* **Critical Files:**
-  - `ShortcodeTestHandler.php` - Shortcode testing
-  - `SecurityTest.php` - Security audit tools
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 1 location
-* **Relationships:** Frontend, All shortcode modules
+### 📦 REST (API)
+* **Dizin:** `src/Admin/REST/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Üçüncü taraf entegrasyonlar ve mobil uygulamalar için tam kapsamlı REST API.
+* **Kritik Dosyalar:**
+  - `VehicleEndpoint.php` - Araç API
+  - `BookingEndpoint.php` - Rezervasyon API
+  - `AuthEndpoint.php` - Kimlik Doğrulama API
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WordPress REST nonce sistemini kullanır)
+* **Nonce Yamaları:** 0 (WordPress REST kimlik doğrulamayı yönetir)
+* **İlişkiler:** Tüm herkese açık modüller
 
 ---
 
-### 📦 Actions
-* **Directory:** `src/Admin/Actions/`
-* **Type:** Security & API
-* **Description:** Global admin actions including refunds, log management, and page creation.
-* **Critical Files:**
-  - `Actions.php` - Global action handlers
-* **Security Status:** ✅ Verified (v4.6.2 - WPCS & Nonce Hardened)
-* **Nonce Patches:** 1 location
-* **Relationships:** Booking, Payment, Settings, Utilities
+### 📦 Addons (Eklentiler)
+* **Dizin:** `src/Admin/Addons/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Fiyatlandırma ve entegrasyon ile rezervasyon eklentileri/ekstraları yönetimi.
+* **Kritik Dosyalar:**
+  - `AddonManager.php` - Eklenti CRUD ve fiyatlandırma
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 2 konum
+* **İlişkiler:** Booking, Payment, Vehicle
 
 ---
 
-## 🔗 Module Relationships Graph
+### 📦 Testing (Test)
+* **Dizin:** `src/Admin/Testing/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** Shortcode testi ve güvenlik doğrulaması için geliştirme ve QA araçları.
+* **Kritik Dosyalar:**
+  - `ShortcodeTestHandler.php` - Shortcode testi
+  - `SecurityTest.php` - Güvenlik denetim araçları
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 1 konum
+* **İlişkiler:** Frontend, Tüm shortcode modülleri
+
+---
+
+### 📦 Actions (Eylemler)
+* **Dizin:** `src/Admin/Actions/`
+* **Tip:** Güvenlik ve API
+* **Açıklama:** İadeler, log yönetimi ve sayfa oluşturma dahil global admin eylemleri.
+* **Kritik Dosyalar:**
+  - `Actions.php` - Global eylem işleyicileri
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Nonce Yamaları:** 1 konum
+* **İlişkiler:** Booking, Payment, Settings, Utilities
+
+---
+
+## 🔗 Modül İlişkileri Grafiği
 
 ```
                               ┌──────────────┐
                               │   SETTINGS   │
                               └──────┬───────┘
-                                     │ (configures all)
+                                     │ (yapılandırır)
          ┌───────────────────────────┼───────────────────────────┐
          │                           │                           │
     ┌────┴────┐                ┌─────┴─────┐              ┌──────┴─────┐
@@ -440,30 +440,30 @@ MHM Rentiva follows a **modular monolith** architecture with clear separation of
 
 ---
 
-## 🛡️ Security Audit Summary
+## 🛡️ Güvenlik Denetim Özeti
 
-### v4.6.2 Security Patches (2026-01-21)
+### v4.6.2 Güvenlik Yamaları (21.01.2026)
 
-| Metric | Value |
+| Metrik | Değer |
 |--------|-------|
-| **Total Modules Audited** | 22 |
-| **Total Files Modified** | 59+ |
-| **Nonce Hardening Patches** | 91 |
-| **WPCS Compliance** | 100% |
-| **Critical Vulnerabilities** | 0 |
+| **Denetlenen Toplam Modül** | 22 |
+| **Düzenlenen Toplam Dosya** | 59+ |
+| **Nonce Güçlendirme Yaması** | 91 |
+| **WPCS Uyumluluğu** | %100 |
+| **Kritik Açıklar** | 0 |
 
-### Security Standards Applied
+### Uygulanan Güvenlik Standartları
 
-1. **Nonce Verification**: All `wp_verify_nonce()` calls wrapped with `sanitize_text_field(wp_unslash())`
-2. **Input Sanitization**: Consistent use of `Sanitizer::text_field_safe()` helper
-3. **SQL Injection Prevention**: All queries use prepared statements
-4. **XSS Prevention**: All output properly escaped with `esc_html()`, `esc_attr()`, `wp_kses_post()`
-5. **CSRF Protection**: All forms and AJAX handlers protected with nonces
+1. **Nonce Doğrulama**: Tüm `wp_verify_nonce()` çağrıları `sanitize_text_field(wp_unslash())` ile sarmalandı
+2. **Girdi Sanitizasyonu**: `Sanitizer::text_field_safe()` yardımcısının tutarlı kullanımı
+3. **SQL Enfeksiyonu Önleme**: Tüm sorgular prepared statement kullanır
+4. **XSS Önleme**: Tüm çıktılar `esc_html()`, `esc_attr()`, `wp_kses_post()` ile düzgün şekilde kaçış karakterlerine alındı
+5. **CSRF Koruması**: Tüm formlar ve AJAX işleyiciler nonce ile korunmaktadır
 
-### Module Security Matrix
+### Modül Güvenlik Matrisi
 
-| Module | Nonce | Sanitize | Escape | Prepared SQL |
-|--------|:-----:|:--------:|:------:|:------------:|
+| Modül | Nonce | Sanitize | Escape | Prepared SQL |
+|-------|:-----:|:--------:|:------:|:------------:|
 | Booking | ✅ | ✅ | ✅ | ✅ |
 | Vehicle | ✅ | ✅ | ✅ | ✅ |
 | Transfer | ✅ | ✅ | ✅ | ✅ |
@@ -489,12 +489,12 @@ MHM Rentiva follows a **modular monolith** architecture with clear separation of
 
 ---
 
-## 📝 Document Metadata
+## 📝 Belge Künyesi
 
-| Property | Value |
-|----------|-------|
-| **Document Version** | 1.0.0 |
-| **Plugin Version** | 4.6.2 |
-| **Last Updated** | 2026-01-21 |
-| **Author** | MHM Development Team |
-| **License** | GPL-2.0+ |
+| Özellik | Değer |
+|---------|-------|
+| **Belge Sürümü** | 1.0.0 |
+| **Eklenti Sürümü** | 4.6.2 |
+| **Son Güncelleme** | 21.01.2026 |
+| **Yazar** | MHM Development Team |
+| **Lisans** | GPL-2.0+ |

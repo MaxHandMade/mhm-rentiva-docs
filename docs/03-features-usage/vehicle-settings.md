@@ -1,4 +1,3 @@
-```
 ---
 id: vehicle-settings-usage
 title: Araç Özellikleri

@@ -1,4 +1,3 @@
-```
 ---
 id: vip-transfer
 title: VIP Transfer Modülü
