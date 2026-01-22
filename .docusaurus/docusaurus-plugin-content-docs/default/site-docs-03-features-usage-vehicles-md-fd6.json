@@ -5,7 +5,7 @@
   "source": "@site/docs/03-features-usage/vehicles.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/vehicles",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicles",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/vehicles",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/vehicles.md",
@@ -19,11 +19,11 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "vehicle-settings",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vehicle-settings"
+    "title": "Araç Özellikleri",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/vehicle-settings"
   },
   "next": {
-    "title": "vip-transfer",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/vip-transfer"
+    "title": "VIP Transfer",
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/vip-transfer"
   }
 }

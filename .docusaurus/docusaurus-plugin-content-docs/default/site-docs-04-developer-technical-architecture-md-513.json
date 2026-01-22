@@ -1,11 +1,11 @@
 {
   "id": "developer/technical-architecture",
-  "title": "🏗️ Module Architecture and Technical Map",
-  "description": "MHM Rentiva v4.6.2 Technical Module Structure and Security Status",
+  "title": "🏗️ Modül Mimarisi ve Teknik Harita",
+  "description": "MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu",
   "source": "@site/docs/04-developer/technical-architecture.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/technical-architecture",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/technical-architecture",
+  "permalink": "/mhm-rentiva-docs/docs/developer/technical-architecture",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/technical-architecture.md",
@@ -13,17 +13,17 @@
   "version": "current",
   "frontMatter": {
     "id": "technical-architecture",
-    "title": "🏗️ Module Architecture and Technical Map",
-    "sidebar_label": "Module Architecture",
-    "description": "MHM Rentiva v4.6.2 Technical Module Structure and Security Status"
+    "title": "🏗️ Modül Mimarisi ve Teknik Harita",
+    "sidebar_label": "Modül Mimarisi",
+    "description": "MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu"
   },
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Liste Tablo Notları",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/list-table"
+    "permalink": "/mhm-rentiva-docs/docs/developer/list-table"
   },
   "next": {
     "title": "Test Araçları",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/test-suite"
+    "permalink": "/mhm-rentiva-docs/docs/developer/test-suite"
   }
 }

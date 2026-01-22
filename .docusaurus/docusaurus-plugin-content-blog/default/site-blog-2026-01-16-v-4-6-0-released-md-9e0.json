@@ -1,5 +1,5 @@
 {
-  "permalink": "/mhm-rentiva-docs/en/blog/v4-6-0-released",
+  "permalink": "/mhm-rentiva-docs/blog/v4-6-0-released",
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2026-01-16-v4-6-0-released.md",
   "source": "@site/blog/2026-01-16-v4-6-0-released.md",
   "title": "v4.6.0 Yayında! 🚀",
@@ -9,22 +9,22 @@
     {
       "inline": true,
       "label": "release",
-      "permalink": "/mhm-rentiva-docs/en/blog/tags/release"
+      "permalink": "/mhm-rentiva-docs/blog/tags/release"
     },
     {
       "inline": true,
       "label": "update",
-      "permalink": "/mhm-rentiva-docs/en/blog/tags/update"
+      "permalink": "/mhm-rentiva-docs/blog/tags/update"
     },
     {
       "inline": true,
       "label": "v4.6.0",
-      "permalink": "/mhm-rentiva-docs/en/blog/tags/v-4-6-0"
+      "permalink": "/mhm-rentiva-docs/blog/tags/v-4-6-0"
     },
     {
       "inline": true,
       "label": "vip-transfer",
-      "permalink": "/mhm-rentiva-docs/en/blog/tags/vip-transfer"
+      "permalink": "/mhm-rentiva-docs/blog/tags/vip-transfer"
     }
   ],
   "readingTime": 1.17,
@@ -56,10 +56,10 @@
   "unlisted": false,
   "prevItem": {
     "title": "v4.6.1 Yayında! 🛡️",
-    "permalink": "/mhm-rentiva-docs/en/blog/v4-6-1-released"
+    "permalink": "/mhm-rentiva-docs/blog/v4-6-1-released"
   },
   "nextItem": {
     "title": "v4.5.5 Yayında! 🚀",
-    "permalink": "/mhm-rentiva-docs/en/blog/v4-5-5-released"
+    "permalink": "/mhm-rentiva-docs/blog/v4-5-5-released"
   }
 }

@@ -1,0 +1,61 @@
+{
+  "permalink": "/mhm-rentiva-docs/blog/v4.6.2-security-update",
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/blog/2026-01-22-v4.6.2-release.md",
+  "source": "@site/blog/2026-01-22-v4.6.2-release.md",
+  "title": "MHM Rentiva v4.6.2: Güvenlik Tahkimatı ve WPCS Uyumluluğu",
+  "description": "MHM Rentiva v4.6.2 yayında! Bu sürüm, eklentinin tüm modüllerini kapsayan devasa bir güvenlik ve altyapı güçlendirme güncellemesidir. Yeni özellik eklemekten ziyade, mevcut sistemin aşılmaz bir kale haline getirilmesine odaklandık.",
+  "date": "2026-01-22T06:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "release",
+      "permalink": "/mhm-rentiva-docs/blog/tags/release"
+    },
+    {
+      "inline": true,
+      "label": "security",
+      "permalink": "/mhm-rentiva-docs/blog/tags/security"
+    },
+    {
+      "inline": true,
+      "label": "wpcs",
+      "permalink": "/mhm-rentiva-docs/blog/tags/wpcs"
+    },
+    {
+      "inline": true,
+      "label": "update",
+      "permalink": "/mhm-rentiva-docs/blog/tags/update"
+    }
+  ],
+  "readingTime": 1.21,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "MaxHandMade",
+      "title": "Maintainer",
+      "url": "https://github.com/MaxHandMade",
+      "imageURL": "https://github.com/MaxHandMade.png",
+      "key": "maxhandmade",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "v4.6.2-security-update",
+    "title": "MHM Rentiva v4.6.2: Güvenlik Tahkimatı ve WPCS Uyumluluğu",
+    "authors": [
+      "maxhandmade"
+    ],
+    "tags": [
+      "release",
+      "security",
+      "wpcs",
+      "update"
+    ],
+    "date": "2026-01-22T06:00"
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "v4.6.1 Yayında! 🛡️",
+    "permalink": "/mhm-rentiva-docs/blog/v4-6-1-released"
+  }
+}

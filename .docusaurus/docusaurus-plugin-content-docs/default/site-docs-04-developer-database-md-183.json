@@ -5,7 +5,7 @@
   "source": "@site/docs/04-developer/database.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/database",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/database",
+  "permalink": "/mhm-rentiva-docs/docs/developer/database",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/database.md",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "REST API",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/rest-api"
+    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api"
   },
   "next": {
     "title": "Mimari ve Özelleştirme",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/framework-architecture"
+    "permalink": "/mhm-rentiva-docs/docs/developer/framework-architecture"
   }
 }

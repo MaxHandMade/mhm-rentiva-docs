@@ -1,11 +1,10 @@
 {
   "defaultLocale": "tr",
   "locales": [
-    "tr",
-    "en"
+    "tr"
   ],
   "path": "i18n",
-  "currentLocale": "en",
+  "currentLocale": "tr",
   "localeConfigs": {
     "tr": {
       "label": "Türkçe",
@@ -16,16 +15,6 @@
       "translate": false,
       "url": "https://MaxHandMade.github.io",
       "baseUrl": "/mhm-rentiva-docs/"
-    },
-    "en": {
-      "label": "English",
-      "direction": "ltr",
-      "htmlLang": "en",
-      "calendar": "gregory",
-      "path": "en",
-      "translate": true,
-      "url": "https://MaxHandMade.github.io",
-      "baseUrl": "/mhm-rentiva-docs/en/"
     }
   }
 }

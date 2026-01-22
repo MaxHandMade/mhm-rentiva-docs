@@ -30,8 +30,8 @@ const config = {
   organizationName: 'MaxHandMade', // Usually your GitHub org/user name.
   projectName: 'mhm-rentiva-docs', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'ignore',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you

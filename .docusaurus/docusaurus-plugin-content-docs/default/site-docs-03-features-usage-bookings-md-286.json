@@ -5,7 +5,7 @@
   "source": "@site/docs/03-features-usage/bookings.md",
   "sourceDirName": "03-features-usage",
   "slug": "/features-usage/bookings",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/bookings",
+  "permalink": "/mhm-rentiva-docs/docs/features-usage/bookings",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/03-features-usage/bookings.md",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Ek Hizmetler",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/additional-services"
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/additional-services"
   },
   "next": {
     "title": "Müşteriler",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/features-usage/customers"
+    "permalink": "/mhm-rentiva-docs/docs/features-usage/customers"
   }
 }

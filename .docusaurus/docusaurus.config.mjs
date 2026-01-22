@@ -29,22 +29,18 @@ export default {
     "experimental_router": "browser"
   },
   "url": "https://MaxHandMade.github.io",
-  "baseUrl": "/mhm-rentiva-docs/en/",
+  "baseUrl": "/mhm-rentiva-docs/",
   "organizationName": "MaxHandMade",
   "projectName": "mhm-rentiva-docs",
-  "onBrokenLinks": "warn",
+  "onBrokenLinks": "ignore",
   "i18n": {
     "defaultLocale": "tr",
     "locales": [
-      "tr",
-      "en"
+      "tr"
     ],
     "localeConfigs": {
       "tr": {
         "label": "Türkçe"
-      },
-      "en": {
-        "label": "English"
       }
     },
     "path": "i18n"
@@ -91,25 +87,12 @@ export default {
           "type": "docSidebar",
           "sidebarId": "tutorialSidebar",
           "position": "left",
-          "label": "Documentation"
-        },
-        {
-          "type": "docsVersionDropdown",
-          "position": "left",
-          "dropdownActiveClassDisabled": true,
-          "dropdownItemsBefore": [],
-          "dropdownItemsAfter": []
+          "label": "Dokümantasyon"
         },
         {
           "to": "/blog",
           "label": "Sürüm Notları",
           "position": "left"
-        },
-        {
-          "type": "localeDropdown",
-          "position": "right",
-          "dropdownItemsBefore": [],
-          "dropdownItemsAfter": []
         },
         {
           "href": "https://github.com/MaxHandMade/mhm-rentiva",
@@ -409,7 +392,6 @@ export default {
       {
         "hashed": true,
         "language": [
-          "en",
           "tr"
         ]
       }
@@ -442,7 +424,7 @@ export default {
       "maintainCase": false
     },
     "hooks": {
-      "onBrokenMarkdownLinks": "warn",
+      "onBrokenMarkdownLinks": "ignore",
       "onBrokenMarkdownImages": "throw"
     }
   }

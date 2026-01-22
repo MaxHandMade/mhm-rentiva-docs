@@ -5,7 +5,7 @@
   "source": "@site/docs/04-developer/list-table-overview.md",
   "sourceDirName": "04-developer",
   "slug": "/developer/list-table",
-  "permalink": "/mhm-rentiva-docs/en/docs/next/developer/list-table",
+  "permalink": "/mhm-rentiva-docs/docs/developer/list-table",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/list-table-overview.md",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Mimari ve Özelleştirme",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/framework-architecture"
+    "permalink": "/mhm-rentiva-docs/docs/developer/framework-architecture"
   },
   "next": {
-    "title": "Module Architecture",
-    "permalink": "/mhm-rentiva-docs/en/docs/next/developer/technical-architecture"
+    "title": "Modül Mimarisi",
+    "permalink": "/mhm-rentiva-docs/docs/developer/technical-architecture"
   }
 }
