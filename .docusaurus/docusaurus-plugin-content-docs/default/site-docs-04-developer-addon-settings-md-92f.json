@@ -1,0 +1,29 @@
+{
+  "id": "developer/addon-settings",
+  "title": "🛠️ AddonSettings Sınıf Mimarisi",
+  "description": "AddonSettings sınıfının teknik yapısı, önbellek yönetimi, kancalar ve güvenlik protokolleri.",
+  "source": "@site/docs/04-developer/addon-settings.md",
+  "sourceDirName": "04-developer",
+  "slug": "/developer/addon-settings",
+  "permalink": "/mhm-rentiva-docs/docs/developer/addon-settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/addon-settings.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "addon-settings",
+    "title": "🛠️ AddonSettings Sınıf Mimarisi",
+    "sidebar_label": "Addon Ayarları (Teknik)",
+    "description": "AddonSettings sınıfının teknik yapısı, önbellek yönetimi, kancalar ve güvenlik protokolleri."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "REST API",
+    "permalink": "/mhm-rentiva-docs/docs/developer/rest-api"
+  },
+  "next": {
+    "title": "Dashboard Widget'ları",
+    "permalink": "/mhm-rentiva-docs/docs/developer/dashboard-widgets"
+  }
+}

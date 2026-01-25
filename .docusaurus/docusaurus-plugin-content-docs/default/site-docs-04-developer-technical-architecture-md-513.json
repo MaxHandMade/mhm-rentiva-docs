@@ -19,8 +19,8 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Liste Tablo Notları",
-    "permalink": "/mhm-rentiva-docs/docs/developer/list-table"
+    "title": "Ödeme Ayarları (Teknik)",
+    "permalink": "/mhm-rentiva-docs/docs/developer/payment-settings"
   },
   "next": {
     "title": "Test Araçları",

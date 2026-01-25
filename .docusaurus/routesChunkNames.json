@@ -298,17 +298,17 @@
       "plugin": "plugin---mhm-rentiva-docs-search-138-bd5"
     }
   },
-  "/mhm-rentiva-docs/docs-a88": {
+  "/mhm-rentiva-docs/docs-291": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---mhm-rentiva-docs-docsaba-c44"
     }
   },
-  "/mhm-rentiva-docs/docs-4bb": {
+  "/mhm-rentiva-docs/docs-cc7": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---mhm-rentiva-docs-docsde-5-82a"
   },
-  "/mhm-rentiva-docs/docs-85a": {
+  "/mhm-rentiva-docs/docs-57a": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/mhm-rentiva-docs/docs/-028": {
@@ -367,6 +367,10 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-core-configuration-vehicle-settings-341-074"
   },
+  "/mhm-rentiva-docs/docs/developer/addon-settings-be5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---mhm-rentiva-docs-docs-developer-addon-settings-92-f-569"
+  },
   "/mhm-rentiva-docs/docs/developer/dashboard-widgets-ba5": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-developer-dashboard-widgetsfe-6-b74"
@@ -382,6 +386,10 @@
   "/mhm-rentiva-docs/docs/developer/list-table-b73": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---mhm-rentiva-docs-docs-developer-list-tablef-84-604"
+  },
+  "/mhm-rentiva-docs/docs/developer/payment-settings-7ae": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---mhm-rentiva-docs-docs-developer-payment-settingsd-65-e10"
   },
   "/mhm-rentiva-docs/docs/developer/rest-api-5e3": {
     "__comp": "__comp---theme-doc-item-178-a40",

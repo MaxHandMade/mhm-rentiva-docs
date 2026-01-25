@@ -1,0 +1,29 @@
+{
+  "id": "developer/payment-settings",
+  "title": "💳 PaymentSettings Sınıf Mimarisi",
+  "description": "PaymentSettings sınıfının teknik yapısı, WooCommerce entegrasyonu, yetki kontrolleri ve güvenlik protokolleri.",
+  "source": "@site/docs/04-developer/payment-settings.md",
+  "sourceDirName": "04-developer",
+  "slug": "/developer/payment-settings",
+  "permalink": "/mhm-rentiva-docs/docs/developer/payment-settings",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/docs/04-developer/payment-settings.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "payment-settings",
+    "title": "💳 PaymentSettings Sınıf Mimarisi",
+    "sidebar_label": "Ödeme Ayarları (Teknik)",
+    "description": "PaymentSettings sınıfının teknik yapısı, WooCommerce entegrasyonu, yetki kontrolleri ve güvenlik protokolleri."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Liste Tablo Notları",
+    "permalink": "/mhm-rentiva-docs/docs/developer/list-table"
+  },
+  "next": {
+    "title": "Modül Mimarisi",
+    "permalink": "/mhm-rentiva-docs/docs/developer/technical-architecture"
+  }
+}

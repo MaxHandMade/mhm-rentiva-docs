@@ -56,6 +56,11 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "developer/addon-settings",
+              "path": "/mhm-rentiva-docs/docs/developer/addon-settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "developer/dashboard-widgets",
               "path": "/mhm-rentiva-docs/docs/developer/dashboard-widgets",
               "sidebar": "tutorialSidebar"
@@ -73,6 +78,11 @@
             {
               "id": "developer/list-table",
               "path": "/mhm-rentiva-docs/docs/developer/list-table",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "developer/payment-settings",
+              "path": "/mhm-rentiva-docs/docs/developer/payment-settings",
               "sidebar": "tutorialSidebar"
             },
             {

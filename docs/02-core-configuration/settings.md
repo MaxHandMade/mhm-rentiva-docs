@@ -84,6 +84,15 @@ Sitenin ön yüzündeki görsel ayarlar.
 Dış servislerle entegrasyonlar.
 *   **REST API:** Mobil uygulamalar veya dış servisler için API ayarları, token yönetimi ve güvenlik kuralları.
 
+## 10. Ek Hizmet Ayarları (Additional Services Settings)
+Ek hizmetlerin (addons) görüntülenme ve davranış kurallarını yönetir.
+
+*   **Onay Gereksinimi:** Müşteriler ek hizmet seçtiğinde manuel yönetici onayı gerekip gerekmediği.
+*   **Takvimde Fiyatlar:** Ek hizmet fiyatlarının rezervasyon takviminde gösterilip gösterilmeyeceği.
+*   **Sıralama Düzeni:** Hizmetlerin müşteri panelinde hangi sırayla (A-Z, Fiyat vb.) listeleneceği.
+
+> [Teknik Detaylar (Geliştiriciler İçin)](../04-developer/addon-settings.md)
+
 ## Diğer Araçlar
 Ayrıca ayarlar sayfasında şu yardımcı araçlar da bulunabilir:
 *   **Veritabanı Temizliği:** Eski ve gereksiz verileri silme aracı.
