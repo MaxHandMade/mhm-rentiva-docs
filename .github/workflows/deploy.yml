@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main ]
     paths: [ '**' ]
+  # Allow manual runs from the Actions web UI
+  workflow_dispatch: {}
 
 permissions:
   contents: read
