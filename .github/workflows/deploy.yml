@@ -23,7 +23,8 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: package-lock.json
+          # Use package.json as fallback for caching when package-lock.json is not committed
+          cache-dependency-path: package.json
 
       - name: Install dependencies
         run: npm ci
