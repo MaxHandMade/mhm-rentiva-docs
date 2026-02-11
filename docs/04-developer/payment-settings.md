@@ -7,7 +7,7 @@ description: PaymentSettings sınıfının teknik yapısı, WooCommerce entegras
 
 # PaymentSettings Sınıfı - Teknik Dokümantasyon
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-24.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-24.01.2026-orange?style=flat-square)
 
 > **🎯 Amaç** - Bu belge, MHM Rentiva eklentisinin ödeme yapılandırmasını yöneten `PaymentSettings` sınıfının teknik mimarisini ve WooCommerce entegrasyon süreçlerini detaylandırır.
 
@@ -107,6 +107,6 @@ C: Admin panelinden manuel rezervasyonlar için çalışır, ancak frontend tara
 
 | Tarih | Değişiklik | Sürüm |
 | :--- | :--- | :--- |
-| 24.01.2026 | Docusaurus teknik standartlarına göre revize edildi. | 4.6.2 |
+| 24.01.2026 | Docusaurus teknik standartlarına göre revize edildi. | 4.9.8 |
 | 22.01.2026 | WooCommerce entegrasyon butonları modernize edildi. | 4.5.0 |
 | 15.01.2026 | İlk sürüm yayınlandı. | 4.0.0 |

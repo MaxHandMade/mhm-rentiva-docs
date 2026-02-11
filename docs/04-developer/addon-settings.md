@@ -7,7 +7,7 @@ description: AddonSettings sınıfının teknik yapısı, önbellek yönetimi, k
 
 # AddonSettings Sınıfı - Teknik Dokümantasyon
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-24.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-24.01.2026-orange?style=flat-square)
 
 > **🎯 Amaç** - Bu belge, MHM Rentiva eklentisindeki ek hizmetlerin (addons) davranışlarını yöneten `AddonSettings` sınıfının teknik mimarisini ve geliştirici dökümantasyonunu detaylandırır.
 
@@ -124,7 +124,7 @@ Geliştiricilerin ayarları genişletebilmesi için sağlanan filtreler:
 
 | Tarih | Değişiklik | Sürüm |
 | :--- | :--- | :--- |
-| 24.01.2026 | PHP 8.0 `match` ifadesi ve tip casting optimizasyonları yapıldı. | 4.6.2 |
-| 24.01.2026 | `init()` metodu ve merkezi `clear_cache` yapısı eklendi. | 4.6.2 |
+| 24.01.2026 | PHP 8.0 `match` ifadesi ve tip casting optimizasyonları yapıldı. | 4.9.8 |
+| 24.01.2026 | `init()` metodu ve merkezi `clear_cache` yapısı eklendi. | 4.9.8 |
 | 24.01.2026 | `is_callable` güvenliği ve fallback render metodu eklendi. | 4.6.1 |
 | 22.01.2026 | Çok katmanlı caching desteği eklendi. | 4.0.0 |

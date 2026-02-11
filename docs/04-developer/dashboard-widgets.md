@@ -7,7 +7,7 @@ description: MHM Rentiva dashboard widget'larının teknik yapısı, veri kaynak
 
 # Dashboard Widget'ları - Teknik Dokümantasyon
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
 
 > **🎯 Amaç** - Bu belge, MHM Rentiva dashboard widget'larının teknik mimarisini, veri kaynaklarını ve güvenlik önlemlerini detaylandırır.
 
@@ -32,7 +32,7 @@ MHM Rentiva, WordPress admin dashboard'una üç özel widget ekler:
 2. **Revenue Chart** - Gelir tablosu (Chart.js)
 3. **Upcoming Operations** - Yaklaşan operasyonlar
 
-**Önemli Değişiklikler (v4.6.2):**
+**Önemli Değişiklikler (v4.9.8):**
 - ✅ **Veri Kaynağı:** `wp_posts` → `mhm_bookings` (Özel tablo)
 - ✅ **Para Birimi:** Sabit "USD" → `wc_price()` ile WooCommerce entegrasyonu
 - ✅ **Yeni Widget:** "Yaklaşan Operasyonlar" (Kiralama + Transfer)
@@ -160,7 +160,7 @@ WHERE p.post_type = 'vehicle_booking'
 - Büyük veri setlerinde performans düşüklüğü
 - wp_posts yapısı için uygun değil
 
-### Yeni Mimari (v4.6.2)
+### Yeni Mimari (v4.9.8)
 
 ```sql
 -- Yeni: Özel mhm_bookings tablosu
@@ -702,7 +702,7 @@ echo '<span class="stat-label">' . esc_html__('Total Bookings', 'mhm-rentiva') .
 
 | Tarih | Değişiklik | Sürüm |
 |-------|------------|-------|
-| 22.01.2026 | Yeni "Upcoming Operations" widget eklendi | 4.6.2 |
-| 22.01.2026 | Veri kaynağı wp_posts → mhm_bookings | 4.6.2 |
-| 22.01.2026 | wc_price() entegrasyonu | 4.6.2 |
-| 22.01.2026 | Cache sistemi merkezileştirildi | 4.6.2 |
+| 22.01.2026 | Yeni "Upcoming Operations" widget eklendi | 4.9.8 |
+| 22.01.2026 | Veri kaynağı wp_posts → mhm_bookings | 4.9.8 |
+| 22.01.2026 | wc_price() entegrasyonu | 4.9.8 |
+| 22.01.2026 | Cache sistemi merkezileştirildi | 4.9.8 |

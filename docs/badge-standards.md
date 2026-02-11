@@ -5,10 +5,10 @@ sidebar_label: Badge Standards
 
 # Badge Standards - Reference
 
-## Current Badge Format (v4.6.2)
+## Current Badge Format (v4.9.8)
 
 ```markdown
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
 ```
 
 ## Badge Components
@@ -16,7 +16,7 @@ sidebar_label: Badge Standards
 ### Version Badge
 - **Color:** Blue
 - **Format:** `version-{version}`
-- **Example:** `version-4.6.2`
+- **Example:** `version-4.9.8`
 
 ### Security Badge
 - **Color:** Green
@@ -53,7 +53,7 @@ sidebar_label: Kurulum Sihirbazı
 slug: /getting-started/setup-wizard
 ---
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
 
 # Kurulum Sihirbazı (Setup Wizard)
 

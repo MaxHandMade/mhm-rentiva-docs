@@ -2,14 +2,14 @@
 id: technical-architecture
 title: 🏗️ Modül Mimarisi ve Teknik Harita
 sidebar_label: Modül Mimarisi
-description: MHM Rentiva v4.6.2 Teknik Modül Yapısı ve Güvenlik Durumu
+description: MHM Rentiva v4.9.8 Teknik Modül Yapısı ve Güvenlik Durumu
 ---
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-22.01.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
 
 # MHM Rentiva - Modül Mimarisi ve Teknik Dokümantasyon
 
-![Version](https://img.shields.io/badge/version-4.6.2-blue.svg)
+![Version](https://img.shields.io/badge/version-4.9.8-blue.svg)
 ![Modules](https://img.shields.io/badge/modules-22-green.svg)
 ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-brightgreen.svg)
 ![Last Audit](https://img.shields.io/badge/last%20audit-2026--01--21-blue.svg)
@@ -92,7 +92,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Core/BookingManager.php` - Rezervasyon CRUD işlemleri
   - `Actions/DepositManagementAjax.php` - Depozito ödeme yönetimi
   - `Meta/BookingMeta.php` - Rezervasyon meta veri yönetimi
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 21 konum
 * **İlişkiler:** Vehicle, Payment, Customers, WooCommerce, Emails
 
@@ -107,7 +107,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Meta/VehicleGallery.php` - Görsel galerisi yönetimi
   - `Settings/VehicleSettings.php` - Araç yapılandırması
   - `ListTable/VehicleColumns.php` - Admin listesi özelleştirme
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 12 konum
 * **İlişkiler:** Booking, Frontend, PostTypes
 
@@ -122,7 +122,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Integration/TransferCartIntegration.php` - WooCommerce sepet köprüsü
   - `TransferSearchEngine.php` - Rota ve araç eşleştirme
   - `TransferAdmin.php` - Admin paneli yönetimi
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 7 konum
 * **İlişkiler:** WooCommerce, Vehicle, Payment, Frontend
 
@@ -137,7 +137,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Refunds/Service.php` - İade işlemleri
   - `DepositCalculator.php` - Depozito tutarı hesaplama
   - `PaymentGatewayManager.php` - Ağ geçidi yönetimi
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 2 konum
 * **İlişkiler:** Booking, Transfer, WooCommerce, Emails
 
@@ -153,7 +153,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `CustomersPage.php` - Admin müşteri listesi
   - `AddCustomerPage.php` - Müşteri oluşturma formu
   - `CustomerProfile.php` - Profil yönetimi
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 3 konum
 * **İlişkiler:** Booking, Messages, Frontend
 
@@ -167,7 +167,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Core/Messages.php` - Çekirdek mesajlaşma mantığı
   - `Core/MessageUrlHelper.php` - URL oluşturma
   - `Monitoring/MessageLogger.php` - Mesaj denetim logları
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 2 konum
 * **İlişkiler:** Customers, Emails, Frontend
 
@@ -182,7 +182,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Shortcodes/VehiclesList.php` - Araç listesi ve puanlama
   - `Shortcodes/VehicleRatingForm.php` - Müşteri puanlama sistemi
   - `Account/AccountController.php` - Hesabım sayfası kontrolcüsü
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 18 konum
 * **İlişkiler:** Booking, Vehicle, Customers, Messages, WooCommerce
 
@@ -204,7 +204,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Tabs/BookingsTab.php` - Rezervasyon geçmişi görünümü
   - `Tabs/FavoritesTab.php` - Favori araçlar
   - `Tabs/ProfileTab.php` - Profil düzenleme
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **İlişkiler:** Frontend, Customers, Booking, Messages
 
 ---
@@ -219,7 +219,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Core/SettingsCore.php` - Çekirdek ayarlar API
   - `SettingsHandler.php` - Ayarlar kaydetme/sıfırlama işleyicisi
   - `Groups/*.php` - Gruplandırılmış ayar tanımları
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 4 konum
 * **İlişkiler:** Tüm modüller (merkezi konfigürasyon)
 
@@ -233,7 +233,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Core/EmailTemplates.php` - Şablon yönetimi
   - `Sender/EmailSender.php` - E-posta gönderimi
   - `Templates/*.php` - Bireysel e-posta şablonları
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 1 konum
 * **İlişkiler:** Booking, Customers, Messages, Settings
 
@@ -248,7 +248,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `BusinessLogic/RevenueReport.php` - Gelir analizleri
   - `BusinessLogic/BookingReport.php` - Rezervasyon istatistikleri
   - `Charts.php` - Chart.js entegrasyonu
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 0 (form gönderimi yok)
 * **İlişkiler:** Booking, Vehicle, Payment, Settings
 
@@ -263,7 +263,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Actions/Actions.php` - Yardımcı eylemler (log temizleme vb.)
   - `Database/DatabaseCleanupPage.php` - Veritabanı bakımı
   - `Cron/CronMonitorPage.php` - Zamanlanmış görev izleme
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 4 konum
 * **İlişkiler:** Tüm modüller (bakım operasyonları)
 
@@ -278,7 +278,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `Traits/AdminHelperTrait.php` - Ortak admin yardımcıları
   - `MetaBoxes/AbstractMetaBox.php` - Temel meta kutusu sınıfı
   - `Helpers/Sanitizer.php` - Merkezi sanitizasyon araçları
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 3 konum
 * **İlişkiler:** Tüm modüller (temel altyapı)
 
@@ -290,7 +290,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Açıklama:** Eklenti kurulum sihirbazı ve ilk yapılandırma rehberliği.
 * **Kritik Dosyalar:**
   - `SetupWizard.php` - Adım adım kurulum
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - Nonce işlemi yok)
 * **Nonce Yamaları:** 0
 * **İlişkiler:** Settings, PostTypes
 
@@ -304,7 +304,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `VehiclePostType.php` - Araç CPT
   - `BookingPostType.php` - Rezervasyon CPT
   - `Taxonomies.php` - Özel taksonomiler
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - Nonce işlemi yok)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - Nonce işlemi yok)
 * **Nonce Yamaları:** 0
 * **İlişkiler:** Vehicle, Booking
 
@@ -318,7 +318,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `About.php` - Ana hakkında sayfası
   - `SystemInfo.php` - Sistem teşhisi
   - `Tabs/*.php` - Bilgi sekmeleri
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 1 konum
 * **İlişkiler:** Settings, Licensing
 
@@ -332,7 +332,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Açıklama:** Gelişmiş hesap güvenliği için İki Faktörlü Kimlik Doğrulama (2FA) sistemi.
 * **Kritik Dosyalar:**
   - `TwoFactorManager.php` - 2FA uygulaması (TOTP)
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 3 konum
 * **İlişkiler:** Customers, Frontend, Settings
 
@@ -344,7 +344,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Açıklama:** Veri dışa aktarma, silme ve rıza yönetimi dahil GDPR uyumluluk özellikleri.
 * **Kritik Dosyalar:**
   - `GDPRManager.php` - GDPR işlem yöneticisi
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 3 konum
 * **İlişkiler:** Customers, Settings, Booking
 
@@ -358,7 +358,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `LicenseManager.php` - Lisans API entegrasyonu
   - `LicenseAdmin.php` - Admin lisans sayfası
   - `Mode.php` - Pro/Lite mod tespiti
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 3 konum
 * **İlişkiler:** Settings, About, Tüm Pro özellikler
 
@@ -372,7 +372,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
   - `VehicleEndpoint.php` - Araç API
   - `BookingEndpoint.php` - Rezervasyon API
   - `AuthEndpoint.php` - Kimlik Doğrulama API
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WordPress REST nonce sistemini kullanır)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WordPress REST nonce sistemini kullanır)
 * **Nonce Yamaları:** 0 (WordPress REST kimlik doğrulamayı yönetir)
 * **İlişkiler:** Tüm herkese açık modüller
 
@@ -384,7 +384,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Açıklama:** Fiyatlandırma ve entegrasyon ile rezervasyon eklentileri/ekstraları yönetimi.
 * **Kritik Dosyalar:**
   - `AddonManager.php` - Eklenti CRUD ve fiyatlandırma
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 2 konum
 * **İlişkiler:** Booking, Payment, Vehicle
 
@@ -397,7 +397,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Kritik Dosyalar:**
   - `ShortcodeTestHandler.php` - Shortcode testi
   - `SecurityTest.php` - Güvenlik denetim araçları
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 1 konum
 * **İlişkiler:** Frontend, Tüm shortcode modülleri
 
@@ -409,7 +409,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 * **Açıklama:** İadeler, log yönetimi ve sayfa oluşturma dahil global admin eylemleri.
 * **Kritik Dosyalar:**
   - `Actions.php` - Global eylem işleyicileri
-* **Güvenlik Durumu:** ✅ Doğrulandı (v4.6.2 - WPCS & Nonce Hardened)
+* **Güvenlik Durumu:** ✅ Doğrulandı (v4.9.8 - WPCS & Nonce Hardened)
 * **Nonce Yamaları:** 1 konum
 * **İlişkiler:** Booking, Payment, Settings, Utilities
 
@@ -451,7 +451,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 
 ## 🛡️ Güvenlik Denetim Özeti
 
-### v4.6.2 Güvenlik Yamaları (21.01.2026)
+### v4.9.8 Güvenlik Yamaları (21.01.2026)
 
 | Metrik | Değer |
 |--------|-------|
@@ -503,7 +503,7 @@ MHM Rentiva, sorumlulukların net bir şekilde ayrıldığı **modüler monolit*
 | Özellik | Değer |
 |---------|-------|
 | **Belge Sürümü** | 1.0.0 |
-| **Eklenti Sürümü** | 4.6.2 |
+| **Eklenti Sürümü** | 4.9.8 |
 | **Son Güncelleme** | 21.01.2026 |
 | **Yazar** | MHM Development Team |
 | **Lisans** | GPL-2.0+ |
