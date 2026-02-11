@@ -2,11 +2,171 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-01-22T06:00:00.000Z</updated>
+    <updated>2026-02-09T09:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.9.8: URL Tutarlılığı ve WooCommerce İyileştirmeleri]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary"/>
+        <updated>2026-02-09T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.9.8 sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.9.8</strong> sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛠️ Düzeltme</td><td>WooCommerce Hesabım uç noktalarında fiziksel sayfa kısa isimlerine (slug) mutlak öncelik verildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Entegre panel düzeni korundu; özel linklerde (örn. /favorilerim/) dışa yönlendirme sorunu giderildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>URL tutarlılığı için kalıcı linklerin (rewrite rules) otomatik yenilenmesi sağlandı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, kullanıcılarımızın "Hesabım" panelindeki deneyimini pürüzsüz hale getirmeye odaklanıyor. Özellikle özel sayfa yapısı kullanan temalarda yaşanan yönlendirme sorunları giderilerek sistem daha kararlı hale getirildi.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="woocommerce" term="woocommerce"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.9.7: Gutenberg UI/UX Standardizasyonu]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.7-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.7-release-summary"/>
+        <updated>2026-02-08T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.9.7 sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.9.7</strong> sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Gutenberg blok kenar çubukları (InspectorControls) tutarlı UI/UX için standartlaştırıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Blok editöründeki konsol uyarıları giderilerek kararlılık artırıldı.</td></tr><tr><td>⚡ İyileştirme</td><td>Proje dokümantasyonu ve kuralları güncellendi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.7-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Editör tarafındaki kullanıcı deneyimini iyileştirmek adına Gutenberg blok kontrolleri daha düzenli hale getirildi. Arka planda çalışan scriptlerdeki ufak hatalar giderilerek temiz bir çalışma ortamı sağlandı.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="gutenberg" term="gutenberg"/>
+        <category label="ui-ux" term="ui-ux"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.9.6: Transfer Modülü ve Büyük Bakım]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary"/>
+        <updated>2026-02-02T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.9.6 sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.9.6</strong> sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Transfer Modülü: Ön ek standardizasyonu (rentiva_) ve veritabanı taşıma mantığı tamamlandı.</td></tr><tr><td>⚡ Performans</td><td>Genel kod optimizasyonu ve performans iyileştirmeleri yapıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Müsaitlik Takvimi için HTML yapısı daha iyi erişilebilirlik için güncellendi.</td></tr><tr><td>🎨 Stil</td><td>Daha iyi bakım için CSS mimarisi temizlendi ve yeniden yapılandırıldı.</td></tr><tr><td>🌐 i18n</td><td>Yeni çeviri dosyaları eklendi ve mevcut çeviriler iyileştirildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yüksek performanslı bir altyapı için CSS ve PHP tarafında büyük çaplı temizlik yapıldı. Transfer modülünün veritabanı yapısı standartlara uygun hale getirilerek sistem kararlılığı artırıldı.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="transfer" term="transfer"/>
+        <category label="performance" term="performance"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.7: Güvenlik ve Performans Optimizasyonu]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary"/>
+        <updated>2026-02-01T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.7 sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.7</strong> sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Yönlendirme güvenliğini artırmak için <code>wp_safe_redirect</code> kullanımına geçildi.</td></tr><tr><td>🛡️ Güvenlik</td><td><code>SecurityHelper::safe_output()</code> metodu bağlam doğrulaması ve JSON desteğiyle modernize edildi.</td></tr><tr><td>⚡ Performans</td><td>SQL transient silme işlemi, native <code>delete_transient()</code> fonksiyonuna çevrildi.</td></tr><tr><td>🎨 Stil</td><td>Satır içi CSS kodları <code>wp_add_inline_style</code> API'sine taşınarak standartlaştırıldı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Eklentinin çekirdek fonksiyonları daha güvenli ve performanslı hale getirildi. Özellikle yönlendirme ve veri çıktı işlemleri WordPress'in en güncel güvenlik protokollerine göre optimize edildi.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="security" term="security"/>
+        <category label="performance" term="performance"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.6: Rezervasyon Formu ve Fiyatlandırma İyileştirmeleri]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary"/>
+        <updated>2026-01-28T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.6 sürümü yayınlandı! Bu güncelleme, rezervasyon formundaki görsel hataları giderir ve yeni bir fiyatlandırma detayı ekler.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.6</strong> sürümü yayınlandı! Bu güncelleme, rezervasyon formundaki görsel hataları giderir ve yeni bir fiyatlandırma detayı ekler.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛠️ Düzeltme</td><td>Rezervasyon formundaki araç özellik ikonlarının (yakıt, vites vb.) kaybolma sorunu giderildi.</td></tr><tr><td>🛠️ Düzeltme</td><td>Araç özellik verilerinin işlenmesi sırasında oluşan mantıksal hatalar düzeltildi.</td></tr><tr><td>✨ Özellik</td><td>Rezervasyon formu fiyat detayına 'Hafta Sonu Farkı' gösterimi eklendi.</td></tr><tr><td>⚡ İyileştirme</td><td>Rezervasyon formu görselleştirmesi ve ikon boyutlandırmaları optimize edildi.</td></tr><tr><td>🧹 Temizlik</td><td>Çakışan eski CSS kodları temizlendi ve modern yapıya geçildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Kullanıcı deneyimini iyileştirmek adına rezervasyon formundaki ikon sorunları çözüldü ve fiyatlandırma şeffaflığı için hafta sonu farkı detayı eklendi. CSS yapısı daha sade ve hızlı hale getirildi.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="interface" term="interface"/>
+        <category label="booking" term="booking"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.5: WPCS Uyumluluğu ve Kod Standartları]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary"/>
+        <updated>2026-01-26T15:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.5 sürümü yayınlandı! Bu büyük ölçekli altyapı güncellemesi ile 110.000+ satır kod WordPress standartlarına (WPCS) uyumlu hale getirildi.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.5</strong> sürümü yayınlandı! Bu büyük ölçekli altyapı güncellemesi ile 110.000+ satır kod WordPress standartlarına (WPCS) uyumlu hale getirildi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>50+ WPCS güvenlik uyarısı çözüldü (Girdi Sanitizasyonu &amp; DB İnterpolasyonu).</td></tr><tr><td>🛡️ Güvenlik</td><td>Handler.php ve AccountController.php XSS'e karşı güçlendirildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>Eski <code>error_log</code> yapısı modern <code>AdvancedLogger</code> mimarisiyle değiştirildi.</td></tr><tr><td>⚡ İyileştirme</td><td>110.000+ WordPress Kodlama Standartları (WPCS) uyumsuzluğu otomatik düzeltildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu güncelleme eklentimizin gelecekteki gelişimini sağlam bir temele oturtmaktadır. Geniş çaplı kod standartları denetimi ile hem güvenlik hem de bakım kolaylığı en üst düzeye çıkarıldı.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="security" term="security"/>
+        <category label="refactoring" term="refactoring"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.4: Veri Bütünlüğü ve Çıktı Güvenliği]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary"/>
+        <updated>2026-01-26T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.4 sürümü yayınlandı! Bu sürümde yönetici paneli çıktı güvenliği ve para birimi sembollerindeki tutarlılık hataları giderildi.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.4</strong> sürümü yayınlandı! Bu sürümde yönetici paneli çıktı güvenliği ve para birimi sembollerindeki tutarlılık hataları giderildi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Admin sekmelerinde <code>esc_html</code> ve <code>wp_kses_post</code> kullanılarak çıktı kaçırma işlemleri güçlendirildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>AddonManager ve Rezervasyon Meta Kutularındaki fiyat/ID alanları için sanitizasyon iyileştirildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Rezervasyon Düzenleme ekranlarındaki hardcoded para birimi sembol sorunları giderildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Araç kolonları ve sistem bilgisi sayfalarındaki SQL sorguları optimize edildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Manuel rezarvasyon ve araç yönetiminde kalan bazı Türkçe dizeler İngilizce'ye çevrildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yönetici panelindeki veri giriş ve çıkış noktalarında güvenlik standartları artırıldı. Özellikle fiyatlandırma alanlarındaki sanitizasyon iyileştirmeleri veri bütünlüğünü garanti altına almaktadır.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="security" term="security"/>
+        <category label="data-integrity" term="data-integrity"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.6.3: SQL Güvenliği ve REST API Kararlılığı]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.3-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.3-release-summary"/>
+        <updated>2026-01-25T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.6.3 sürümü yayınlandı! Bu güncelleme, SQL Injection koruması ve AJAX güvenilirliği üzerine önemli iyileştirmeler içermektedir.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.3</strong> sürümü yayınlandı! Bu güncelleme, SQL Injection koruması ve AJAX güvenilirliği üzerine önemli iyileştirmeler içermektedir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.3-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Mesaj arama sorguları prepared statements kullanılarak SQL Injection'a karşı güçlendirildi.</td></tr><tr><td>🛡️ Güvenlik</td><td>REST API entegrasyon ayarlarının backend mimarisi, AJAX buton güvenilirliğini artıracak şekilde güncellendi.</td></tr><tr><td>⚙️ Kararlılık</td><td>Asenkron isteklerde '-1' hatasını önlemek için AJAX hook kayıt sistemi iyileştirildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>REST ayarlarında IP listesi sanitizasyon hataları giderildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Proje kaynak kodu dokümantasyonu WPCS uyumluluğu için tamamen İngilizce'ye çevrildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.3-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürümle birlikte mesajlaşma sistemindeki arama fonksiyonları ve AJAX tabanlı ayar kaydediciler daha güvenli ve kararlı hale getirildi. Özellikle geliştiriciler için kod tabanındaki yorum satırları dünya standartlarına (WPCS) uygun hale getirildi.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="security" term="security"/>
+        <category label="rest-api" term="rest-api"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.6.2: Güvenlik Tahkimatı ve WPCS Uyumluluğu]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.2-security-update</id>
