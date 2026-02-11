@@ -2,13 +2,13 @@ name: Deploy Documentation
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**'
+    branches: [ main ]
+    paths: [ '**' ]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -23,7 +23,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          # Use package.json as fallback for caching when package-lock.json is not committed
           cache-dependency-path: package.json
 
       - name: Install dependencies
@@ -32,8 +31,13 @@ jobs:
       - name: Build website
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          path: ./build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
