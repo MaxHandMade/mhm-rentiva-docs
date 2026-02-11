@@ -53,10 +53,9 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Edit this page link points to the docs repo
           editUrl:
-            'https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/',
+            'https://github.com/MaxHandMade/mhm-rentiva-docs/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -64,10 +63,9 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Edit this page link points to the docs repo
           editUrl:
-            'https://github.com/MaxHandMade/mhm-rentiva/tree/main/website/',
+            'https://github.com/MaxHandMade/mhm-rentiva-docs/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
