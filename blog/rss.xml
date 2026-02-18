@@ -4,10 +4,30 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 09 Feb 2026 09:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 18 Feb 2026 09:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.10.0: Block/Shortcode Parity Stabilizasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.10.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.10.0-release-summary</guid>
+            <pubDate>Wed, 18 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.10.0 sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.10.0</strong> sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.10.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🎯 Eşlik (Parity)</td><td>Block ↔ Shortcode tam eşliği sağlandı — 19/19 deterministic yüzey doğrulandı.</td></tr><tr><td>🔗 Eşleme (Mapping)</td><td><code>vehicle-comparison</code>, <code>booking-form</code> ve <code>testimonials</code> blokları için deterministik alias eşlemesi eklendi.</td></tr><tr><td>🔄 Dönüşüm (Transform)</td><td><code>showFeatures</code> değer dönüşümü kapsam izolasyonuyla stabilize edildi (boolean → <code>all</code>/<code>basic</code>).</td></tr><tr><td>🛡️ Güvenlik</td><td>Booking form dinamik varsayılan koruması eklendi (<code>defaultDays</code>/<code>minDays</code>/<code>maxDays</code> statik override engellendi).</td></tr><tr><td>📋 Denetim</td><td>19/19 Light Parity Audit tam kanıt zinciriyle tamamlandı.</td></tr><tr><td>✅ Kalite Kapıları</td><td>PHPCS, Plugin Check, PHPUnit — 0 hata, tam suite geçişi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.10.0-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, MHM Rentiva'nın blok ve kısa kod çıktılarını birbirinin aynısı haline getiren kapsamlı bir stabilizasyon çalışmasının ürünüdür. Artık aynı içerik hem Gutenberg bloğu hem de <code>[mhm_rentiva_*]</code> kısa kodu olarak eklendiğinde birebir aynı HTML çıktısı ve davranış elde edilmektedir.</p>
+<p>Kalite kapıları post-bump olarak doğrulandı:</p>
+<table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS</td><td>✅ 0 hata</td></tr><tr><td>Plugin Check</td><td>✅ PASS (exit code 0)</td></tr><tr><td>PHPUnit</td><td>✅ 216 test, 0 başarısızlık</td></tr></tbody></table>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>gutenberg</category>
+            <category>blocks</category>
+            <category>shortcode</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.9.8: URL Tutarlılığı ve WooCommerce İyileştirmeleri]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary</link>
