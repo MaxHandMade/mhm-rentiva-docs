@@ -1,0 +1,13 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720' viewBox='0 0 1280 720'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#f8fafc'/>
+      <stop offset='100%' stop-color='#e2e8f0'/>
+    </linearGradient>
+  </defs>
+  <rect width='1280' height='720' fill='url(#bg)'/>
+  <rect x='120' y='120' width='1040' height='480' rx='16' fill='#ffffff' stroke='#94a3b8' stroke-width='2'/>
+  <text x='640' y='300' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='44' fill='#0f172a'>Görsel Placeholder</text>
+  <text x='640' y='360' text-anchor='middle' font-family='Consolas, monospace' font-size='28' fill='#334155'>layout-pipeline-sequence</text>
+  <text x='640' y='420' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='22' fill='#64748b'>MHM Rentiva Docs - Görsel sonradan güncellenecek</text>
+</svg>
