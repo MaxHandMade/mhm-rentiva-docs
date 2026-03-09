@@ -2,7 +2,7 @@
 id: payout-webhook-auth
 title: Payout Webhook Kimlik Doğrulama
 sidebar_label: Payout Webhook Auth
-slug: /developer/api/payout-webhook-auth
+slug: /api/v1/payout-webhook-auth
 ---
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
@@ -38,4 +38,5 @@ Bu sayfa, `PayoutWebhookAuth` ve ilgili callback güvenlik modelini özetler.
 | Tarih | Sürüm | Not |
 |---|---|---|
 | 26.02.2026 | 4.21.0-docs | `PayoutWebhookAuth` dokümanı eklendi. |
+
 

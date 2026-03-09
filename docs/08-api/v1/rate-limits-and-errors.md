@@ -2,7 +2,7 @@
 id: rate-limits-and-errors
 title: API Rate Limit ve Hata Kodları
 sidebar_label: Rate Limit ve Hata Kodları
-slug: /developer/api/rate-limits-and-errors
+slug: /api/v1/rate-limits-and-errors
 ---
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
@@ -40,4 +40,5 @@ Bu sayfa, API Rate Limit ve Hata Kodları konusunu teknik ve operasyonel açıda
 | Tarih | Sürüm | Not |
 |---|---|---|
 | 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+
 

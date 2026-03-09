@@ -1,29 +1,29 @@
-ï»¿---
+---
 sidebar_position: 2
 title: REST API
-description: MHM Rentiva REST API dokÃ¼mantasyonu
-slug: /developer/api/rest-api
+description: MHM Rentiva REST API dokümantasyonu
+slug: /api/v1/rest-api
 ---
 
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-:::info AmaÃ§
-Bu sayfa, Rentiva REST API uÃ§ noktalarÄ±nÄ±n kullanÄ±m ve gÃ¼venlik Ã§erÃ§evesini aÃ§Ä±klar.
+:::info Amaç
+Bu sayfa, Rentiva REST API uç noktalarının kullanım ve güvenlik çerçevesini açıklar.
 :::
 
-# REST API DokÃ¼mantasyonu
+# REST API Dokümantasyonu
 
-## Ä°Ã§indekiler
-- GÃ¼venlik
+## İçindekiler
+- Güvenlik
 - Availability Endpoints
-- MesajlaÅŸma Endpoints (Admin)
-- MesajlaÅŸma Endpoints (MÃ¼ÅŸteri)
+- Mesajlaşma Endpoints (Admin)
+- Mesajlaşma Endpoints (Müşteri)
 
-## GÃ¼venlik
+## Güvenlik
 - Rate limiting
 - IP whitelist/blacklist
-- HTTPS zorunluluÄŸu
-- Yetki kontrolÃ¼
+- HTTPS zorunluluğu
+- Yetki kontrolü
 
 ## Availability Endpoints
 ### `GET /mhm-rentiva/v1/availability`
@@ -38,22 +38,23 @@ Parametreler:
 Ek parametre:
 - `limit`
 
-## MesajlaÅŸma Endpoints (Admin)
+## Mesajlaşma Endpoints (Admin)
 - `GET /mhm-rentiva/v1/messages`
 - `GET /mhm-rentiva/v1/messages/{id}`
 - `POST /mhm-rentiva/v1/messages/{id}/reply`
 - `POST /mhm-rentiva/v1/messages/{id}/status`
 
-## MesajlaÅŸma Endpoints (MÃ¼ÅŸteri)
+## Mesajlaşma Endpoints (Müşteri)
 - `POST /mhm-rentiva/v1/messages`
 - `POST /mhm-rentiva/v1/messages/{id}/reply`
 
-## BÃ¶lÃ¼m Sonu Ã–zeti
-- API kullanÄ±mÄ±nda hÄ±z limiti ve yetki modeli birlikte ele alÄ±nmalÄ±dÄ±r.
-- UÃ§ noktalar, servis katmanÄ± kurallarÄ±yla uyumlu kullanÄ±lmalÄ±dÄ±r.
+## Bölüm Sonu Özeti
+- API kullanımında hız limiti ve yetki modeli birlikte ele alınmalıdır.
+- Uç noktalar, servis katmanı kurallarıyla uyumlu kullanılmalıdır.
 
-## DeÄŸiÅŸiklik GÃ¼nlÃ¼ÄŸÃ¼
-| Tarih | SÃ¼rÃ¼m | Not |
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek ÅŸablon standardÄ±na normalize edildi. |
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+
 

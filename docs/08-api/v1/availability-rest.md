@@ -2,7 +2,7 @@
 id: availability-rest
 title: Availability REST Endpointi
 sidebar_label: Availability REST
-slug: /developer/api/availability-rest
+slug: /api/v1/availability-rest
 ---
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
@@ -48,4 +48,5 @@ Bu sayfa, `Admin\REST\Availability` endpointinin giriş/çıkış sözleşmesini
 | Tarih | Sürüm | Not |
 |---|---|---|
 | 26.02.2026 | 4.21.0-docs | Availability REST teknik dokümanı eklendi. |
+
 

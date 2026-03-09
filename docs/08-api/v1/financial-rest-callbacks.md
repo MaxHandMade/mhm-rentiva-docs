@@ -2,7 +2,7 @@
 id: financial-rest-callbacks
 title: Payout Callback API
 sidebar_label: Payout Callback API
-slug: /developer/api/financial-rest-callbacks
+slug: /api/v1/financial-rest-callbacks
 ---
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
@@ -48,4 +48,5 @@ Endpoint: `POST /mhm-rentiva/v1/payouts/{id}/callback`
 | Tarih | Sürüm | Not |
 |---|---|---|
 | 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+
 

@@ -2,7 +2,7 @@
 id: messages-rest-endpoints
 title: Mesajlaşma REST Endpointleri
 sidebar_label: Mesajlaşma REST
-slug: /developer/api/messages-rest-endpoints
+slug: /api/v1/messages-rest-endpoints
 ---
 ![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
@@ -51,3 +51,4 @@ Kayıt noktası: `Admin\Messages\REST\Messages::register()`
 | Tarih | Sürüm | Not |
 |---|---|---|
 | 26.02.2026 | 4.21.0-docs | Mesajlaşma REST endpointleri teknik dokümanı eklendi. |
+
