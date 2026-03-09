@@ -4,42 +4,31 @@ title: Ek Hizmetler
 sidebar_label: Ek Hizmetler
 slug: /features-usage/additional-services
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Ek Hizmetler konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
-# Additional Services Sayfası
+# Additional Services
 
-`MHM Rentiva > Additional Services`, araç kiralamalarına ek olarak sunabileceğiniz ekstra hizmetleri (addon) yönetmenizi sağlar. GPS, çocuk koltuğu, ek sürücü gibi ücretli/ücretsiz seçenekler bu ekrandan oluşturulur ve rezervasyon formuna bağlanır.
+## İçindekiler
+- Kapsam
+- Toplu İşlemler
 
-## Arayüz Öğeleri
+## Kapsam
+GPS, Çocuk koltuğu, ek sürücü gibi ek hizmetlerin fiyat ve görünürlük yönetimi.
 
-- **Addon Listesi:** Hizmet adı, fiyat, durum (Active/Inactive) ve kısa açıklama sütunlarından oluşur.
-- **Hızlı Filtreler:** Durum veya kategoriye göre addon’ları listeleyebilirsiniz.
-- **Bulk Actions:** Seçili hizmetleri “Enable”, “Disable” veya “Delete” işlemlerine tabi tutar.
+## Toplu İşlemler
+- Enable
+- Disable
+- Delete
 
-## Yeni Hizmet Ekleme
+## Bölüm Sonu Özeti
+- Ek Hizmetler sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-`Add New Service` butonu ile açılan formda:
-- **Başlık & Açıklama:** Rezervasyon formunda gösterilecek bilgiler.
-- **Fiyatlandırma:** Sabit fiyat, günlük fiyat veya ücretsiz seçenekleri belirleyebilirsiniz.
-- **KDV / Para Birimi:** Genel ayarlardan gelen para birimi kullanılır; vergi dahil/dahil değil ayarı `Settings > Pricing` sekmesinden yönetilir.
-- **Görsel:** (Opsiyonel) Hizmete ait ikon veya görseller.
-- **Durum:** Aktif olmayan hizmetler rezervasyon formunda görülmez.
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-## Rezervasyon Entegrasyonu
-
-- `[rentiva_booking_form]` kısa kodu ve admin formu, burada tanımlanan aktif addon’ları otomatik listeler.
-- Manuel rezervasyon oluştururken (Bookings > Add New) aynı hizmet listesi kullanılabilir.
-- Fiyat hesaplaması addon fiyatlarını toplam tutara ekler; bu tutar ödeme kayıtlarına yansır.
-
-## İpuçları
-
-- **Hizmet Grupları:** Benzer addon’lar için kategori/etiket kullanımı müşterinin seçim yapmasını kolaylaştırır.
-- **Stok/Sayısı:** Gelişmiş sürümlerde bir addon’ın maksimum adetini belirleyebilirsiniz (örn. en fazla 2 çocuk koltuğu).
-- **Çeviri:** Hizmet adlarının çoklu dil desteği için standard WordPress çeviri mekanizmasını kullanın (`__()` fonksiyonları).
-
-## İlgili Dokümanlar
-
-- [Vehicle Settings](../02-core-configuration/vehicle-settings.md): Araç detay formundaki addon alanlarının yönetimi.
-- [Bookings](bookings.md): Addon seçimlerinin rezervasyon formuna yansıması.
-- [Test Checklist](../04-developer/testing-checklists.md#8-add-on-hizmetleri): Addon iş akışının manuel testi.

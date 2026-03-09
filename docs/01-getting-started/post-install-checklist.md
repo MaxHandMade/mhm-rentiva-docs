@@ -4,10 +4,22 @@ title: Kurulum Sonrası Kontrol Listesi
 sidebar_label: Kontrol Listesi
 slug: /getting-started/checklist
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Kurulum Sonrası Kontrol Listesi konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Kurulum Sonrası Kontrol Listesi
+
+## İçindekiler
+- Genel
+- Sayfalar & Kısa Kodlar
+- Ödeme ve E-posta
+- Araç & Rezervasyon
+- Müşteri Portalı
+- Raporlama & Bakım
+- Ek Adımlar
 
 Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işaretleyin. Bu liste, canlıya çıkmadan önce temel fonksiyonların çalıştığını garanti altına alır.
 
@@ -49,8 +61,17 @@ Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işar
 
 ## Ek Adımlar
 
-- [ ] [Lokal & Canlı Test checklist’i](../04-developer/testing-checklists.md) ile kalan senaryolar işaretlendi.
+- [ ] [Lokal & Canlı Test checklist'i](../04-developer/testing-checklists.md) ile kalan senaryolar işaretlendi.
 - [ ] Gerekli tüm webhooks (Stripe, PayPal, PayTR) ilgili servislerde doğrulandı.
 - [ ] Varsayılan içerik (örnek araçlar vb.) temizlenip gerçek veriler eklenmeye hazır.
 
 Bu listeyi tamamladıysanız, Rentiva canlı ortamda test edilmek için hazır demektir. Bir sonraki adım olarak ödeme ve e-posta senaryolarını canlı anahtarlarla doğrulayın.
+
+## Bölüm Sonu Özeti
+- Kurulum Sonrası Kontrol Listesi sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+

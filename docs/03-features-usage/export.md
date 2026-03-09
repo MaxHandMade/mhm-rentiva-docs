@@ -1,38 +1,35 @@
 ---
 id: export
-title: Dışa Aktarım (Export)
+title: Dışa Aktarım
 sidebar_label: Dışa Aktarım
 slug: /features-usage/export
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Dışa Aktarım konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Export Sayfası
 
-`MHM Rentiva > Export`, sistemdeki verileri dışa aktarmak için kullanılan araçtır. Rezervasyon, araç, müşteri, log gibi verileri CSV, JSON ve desteklenen diğer formatlarda indirebilirsiniz.
+## İçindekiler
+- Adımlar
+- Not
 
-## Adım Adım Kullanım
+## Adımlar
+1. Veri tipini seçin
+2. Filtreleri belirleyin
+3. Formatı seçin
+4. Export başlatın
 
-1. **Veri Tipi Seçimi:** “Data Type” alanından `Bookings`, `Vehicles`, `Customers`, `Logs` vb. seçeneklerden birini belirleyin.
-2. **Tarih / Durum Filtreleri:** Tarih aralığı, durum (ör. `Confirmed bookings`), araç veya müşteri gibi ek filtreler tanımlayın.
-3. **Format Seçimi:** İhtiyacınıza uygun olarak CSV (Standart) veya JSON (Pro sürüm) formatını seçin.
-4. **Alan Seçimi (Opsiyonel):** Dahil edilecek kolonları belirleyerek daha hafif dosyalar üretebilirsiniz.
-5. **Export İşlemi:** `Start Export` düğmesine basın; işlem tamamlandığında indirme bağlantısı sunulur. Büyük veri setleri için süreç arka planda çalışabilir ve “Export History” sekmesinden takip edilebilir.
+## Not
+Büyük veri setlerinde çıktı geçmişini kullanarak işlemi takip edin.
 
-## Export History
+## Bölüm Sonu Özeti
+- Dışa Aktarım sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-- Daha önce gerçekleştirdiğiniz export işlemlerini listeler.
-- İstenirse aynı export tekrar indirilebilir veya silinebilir.
-- İşlem süresi ve satır sayısı gibi performans bilgilerini görüntüleyebilirsiniz.
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-## En İyi Pratikler
-
-- **Filtre Kullanımı:** Büyük veri setlerinde filtre kullanarak dosya boyutunu düşürün; aksi halde sunucu süresi aşılabilir.
-- **UTF-8/Excel Uyumu:** CSV export’larını Excel’de açarken UTF-8 kodlamasını korumak için “Data Import” özelliğini kullanın.
-- **Planlı Export:** API entegrasyonu yerine periyodik raporlar için export history kaydını kullanarak otomasyona gidebilirsiniz (örn. cron + WP-CLI).
-
-## İlgili Dokümanlar
-
-- [Reports](reports.md): Aynı verilerin grafik formda sunumu.
-- [Settings > Performance](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Export sırasında kullanılan cache ayarları.
-- [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Export süreçlerinin manuel testi.

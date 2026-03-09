@@ -1,44 +1,32 @@
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+---
+id: maintenance
+title: Bakım ve Sistem Ayarları
+sidebar_label: Bakım
+slug: /core-configuration/maintenance
+---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-# Bakım ve Sistem Ayarları (Maintenance Settings)
+:::info Amaç
+Bu sayfa, Bakım ve Sistem Ayarları konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
-Sistem bakımı, veri temizliği ve kritik kaldırma işlemleri ayarları.
+# Bakım ve Sistem Ayarları
+
+## İçindekiler
+- Sistem Temizliği
+- Kritik Uyarı
 
 ## Sistem Temizliği
+Bakım araçlarıyla log ve geçici verileri kontrollü temizleyebilirsiniz.
 
-Bu bölümdeki ayarlar eklentinin veritabanı üzerindeki etkisini yönetir.
+## Kritik Uyarı
+Kalıcı silme adımları geri alınamaz. Üretim öncesinde mutlaka yedek alın.
 
-| Ayar Adı | Açıklama | Tip | Varsayılan |
-|----------|----------|-----|------------|
-| **Kaldırma Sırasında Verileri Temizle** | Eklenti silindiğinde tüm verilerin kalıcı olarak silinmesini sağlar. | Checkbox | Kapalı (0) |
+## Bölüm Sonu Özeti
+- Bakım ve Sistem Ayarları sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-## ⚠️ Tehlikeli İşlemler: Veri Temizleme
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-"Kaldırma Sırasında Verileri Temizle" (`mhm_rentiva_uninstall_on_delete`) ayarı etkinleştirildiğinde:
-
-1.  Eklentiyi WordPress yönetim panelinden sildiğinizde (**Eklentiler > Yüklü Eklentiler > Sil**), MHM Rentiva'ya ait tüm veriler silinir.
-2.  **Neler Silinir?**
-    - Tüm araç verileri ve galeriler.
-    - Tüm rezervasyon geçmişi ve ödeme kayıtları.
-    - Müşteri verileri ve mesajlar.
-    - Tüm özel veritabanı tabloları (`wp_mhm_rentiva_*`).
-    - Yapılan tüm ayarlar.
-
-> **Bu işlem geri alınamaz!** Bu seçeneği etkinleştirmeden önce tüm verilerinizin yedeğini aldığınızdan emin olun. Geliştirme ortamları veya tam temizlik istenen durumlar dışında kapalı tutulması önerilir.
-
-## 🧹 Veritabanı Bakımı (Database Maintenance)
-
-Eklenti, veritabanınızı sağlıklı ve hızlı tutmak için yerleşik bir **Veritabanı Temizleyici (Database Cleaner)** aracı içerir. Bu araç, artık kullanılmayan "orphaned" (yetim) verileri tespit eder ve temizler.
-
-### Güvenli Temizlik (Safe Cleanup)
-Versiyon **4.6.1** itibariyle, temizlik aracı aşağıdaki verileri otomatik olarak koruma altına alır:
-
-- **Sistem Verileri:** Sipariş geçmişi, loglar, iptal politikaları.
-- **Rezervasyon Verileri:** `_mhm_` ile başlayan tüm rezervasyon detayları (tarihler, saatler, süreler).
-- **Müşteri Verileri:** İletişim bilgileri, IP adresleri.
-- **Finansal Veriler:** Fiyatlar, depozito tutarları, vergi hesaplamaları.
-- **Entegrasyon Verileri:** WooCommerce sipariş ID'leri ve ödeme ağ geçidi yanıtları.
-
-:::tip Güvenlik Notu
-`DatabaseCleaner` sınıfı, 40'tan fazla kritik meta anahtarını (`get_valid_meta_keys`) tanımlı bir "beyaz liste" (whitelist) içinde tutar. Temizlik işlemi sırasında bu listedeki hiçbir veri **asla silinmez**.
-:::

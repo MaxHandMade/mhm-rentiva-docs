@@ -1,0 +1,6 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720' viewBox='0 0 1280 720'>
+  <rect width='1280' height='720' fill='#f8fafc'/>
+  <rect x='100' y='100' width='1080' height='520' rx='12' fill='#ffffff' stroke='#94a3b8' stroke-width='2'/>
+  <text x='640' y='300' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='46' fill='#0f172a'>Görsel Placeholder</text>
+  <text x='640' y='365' text-anchor='middle' font-family='Consolas, monospace' font-size='28' fill='#334155'>features-reading-map</text>
+</svg>

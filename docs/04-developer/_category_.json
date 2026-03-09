@@ -1,8 +1,8 @@
 {
-    "label": "Geliştirici Rehberi",
-    "position": 4,
-    "link": {
-        "type": "generated-index",
-        "description": "Veritabanı şeması, REST API ve test süreçleri."
-    }
+  "label": "Geli\u015ftirici Rehberi",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Veritaban\u0131 \u015femas\u0131, REST API ve test s\u00fcre\u00e7leri."
+  }
 }

@@ -31,7 +31,11 @@ const config = {
   projectName: 'mhm-rentiva-docs', // Usually your repo name.
 
   onBrokenLinks: 'ignore',
-  onBrokenMarkdownLinks: 'ignore',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'ignore',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -117,11 +121,11 @@ const config = {
               },
               {
                 label: 'Kullanım Kılavuzu',
-                to: '/docs/usage/shortcodes',
+                to: '/docs/features-usage/shortcodes',
               },
               {
                 label: 'Geliştirici Belgeleri',
-                to: '/docs/developer/intro',
+                to: '/docs/developer/technical-architecture',
               },
             ],
           },

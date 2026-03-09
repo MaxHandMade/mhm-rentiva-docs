@@ -3,8 +3,18 @@ title: Öne Çıkan Araçlar Modülü
 description: Ana sayfa veya diğer sayfalarda öne çıkan araçları kaydırılabilir bir slider ile gösterir.
 sidebar_position: 3
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+:::info Amaç
+Bu sayfa, Öne Çıkan Araçlar Modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # 🚗 Öne Çıkan Araçlar (Featured Vehicles)
+
+## İçindekiler
+- Kullanım
+- Özellikler
+- Geliştirici Notları
 
 Öne Çıkan Araçlar modülü, Rentiva platformundaki araçları belirli kriterlere göre (örneğin: `secili-araclar`, `kategori`, `son-eklenenler`) ana sayfanızda şık bir kaydırıcı (slider) veya ızgara (grid) düzeninde sunmanıza olanak tanır.
 
@@ -49,3 +59,12 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-featured-wrapper` sınıfı ile başlar.
 - **Özelleştirme:** `assets/css/frontend/featured-vehicles.css` dosyası üzerinden stiller ezilebilir. CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+
+## Bölüm Sonu Özeti
+- Öne Çıkan Araçlar Modülü sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+

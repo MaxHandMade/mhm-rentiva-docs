@@ -4,57 +4,31 @@ title: Kayıt Türleri (Post Types)
 sidebar_label: Kayıt Türleri
 slug: /features-usage/post-types
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Kayıt Türleri (Post Types) konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
-# Araçlar (Vehicles)
+# Kayıt Türleri
 
-MHM Rentiva, araç kiralama süreçlerini yönetmek için `vehicle` adında özel bir yazı türü (Custom Post Type) kullanır. Bu yazı türü, kiralık araçlarınızın tüm bilgilerini saklar ve yönetir.
+## İçindekiler
+- Temel Post Type'lar
+- Not
 
-## Özellikler
+## Temel Post Type'lar
+- `vehicle`
+- `vehicle_booking`
+- `mhm_message` (proje yapılandırmasına bağlı)
 
-*   **Yazı Türü (Slug):** `vehicle`
-*   **Desteklenen Alanlar:**
-    *   Başlık (Title)
-    *   İçerik Editörü (Editor) - Araç açıklaması için
-    *   Öne Çıkan Görsel (Thumbnail) - Araç ana görseli
-    *   Özet (Excerpt) - Kısa açıklama
-    *   Yorumlar (Comments) - Araç değerlendirmeleri için
+## Not
+Özel alanlar ve ilişkiler servis katmanı kurallarına göre yönetilmelidir.
 
-## Meta Alanları (Custom Fields)
+## Bölüm Sonu Özeti
+- Kayıt Türleri (Post Types) sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-Araçlar için aşağıdaki özel alanlar kullanılır:
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-### Temel Bilgiler
-*   `_mhm_rentiva_plate`: Plaka
-*   `_mhm_rentiva_brand`: Marka
-*   `_mhm_rentiva_model`: Model
-*   `_mhm_rentiva_year`: Model Yılı
-*   `_mhm_rentiva_color`: Renk
-
-### Teknik Detaylar
-*   `_mhm_rentiva_transmission`: Vites Tipi (Manuel/Otomatik)
-*   `_mhm_rentiva_fuel_type`: Yakıt Tipi (Benzin/Dizel/Elektrik/Hibrit)
-*   `_mhm_rentiva_engine_power`: Motor Gücü
-*   `_mhm_rentiva_seats`: Koltuk Sayısı
-*   `_mhm_rentiva_doors`: Kapı Sayısı
-*   `_mhm_rentiva_mileage`: Kilometre
-
-### Fiyatlandırma
-*   `_mhm_rentiva_price_per_day`: Günlük Fiyat
-*   `_mhm_rentiva_deposit`: Depozito Tutarı
-
-## Sınıflandırmalar (Taxonomies)
-
-Araçları gruplandırmak için aşağıdaki taksonomiler kullanılır:
-
-1.  **Araç Kategorileri (`vehicle_category`):**
-    *   Örn: Ekonomi, Lüks, SUV, Minivan
-
-2.  **Araç Özellikleri (`vehicle_feature`):**
-    *   Örn: Klima, Bluetooth, Navigasyon, Deri Koltuk
-
-## İlişkili Post Type'lar
-
-*   **Rezervasyonlar (`vehicle_booking`):** Her rezervasyon bir `vehicle` ile ilişkilidir.
-*   **Ek Hizmetler (`vehicle_addon`):** Araçlara eklenebilecek opsiyonel hizmetler (örn: Bebek koltuğu, GPS).

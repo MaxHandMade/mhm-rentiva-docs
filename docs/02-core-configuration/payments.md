@@ -4,10 +4,18 @@ title: Ödeme Yapılandırması
 sidebar_label: Ödeme Ayarları
 slug: /core-configuration/payments
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Ödeme Yapılandırması konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Ödeme Yapılandırması
+
+## İçindekiler
+- Genel Bakış
+- Ödeme Yöntemleri
+- Manuel Rezervasyonlar
 
 Ödeme yapılandırması, rezervasyonların nasıl tahsil edileceğini ve hangi ödeme yöntemlerinin kullanılacağını belirler.
 
@@ -32,3 +40,12 @@ Mevcut sürümde (v4.6.1), frontend üzerinden yapılan rezervasyonlar için **W
 
 ## Manuel Rezervasyonlar
 Yönetim panelinden (**Rentiva > Bookings > Add New**) oluşturulan manuel rezervasyonlarda, yönetici fiziksel "Offline" veya "Nakit" tahsilat kaydı girebilir. Bu işlem WooCommerce'den bağımsız çalışır.
+
+## Bölüm Sonu Özeti
+- Ödeme Yapılandırması sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+

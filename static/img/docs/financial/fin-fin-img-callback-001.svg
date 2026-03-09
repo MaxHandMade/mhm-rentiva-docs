@@ -1,0 +1,26 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <style>
+    .t{font:700 24px Arial;fill:#111827}.s{font:500 15px Arial;fill:#1f2937}.b{fill:#ecfeff;stroke:#0f766e;stroke-width:2}.a{stroke:#0f766e;stroke-width:2;marker-end:url(#m)}
+  </style>
+  <defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/></marker></defs>
+  <text x="40" y="50" class="t">Payout Callback API - Güvenlik ve Idempotency</text>
+
+  <rect x="40" y="110" width="240" height="90" class="b"/><text x="70" y="155" class="s">Header kontrolü</text><text x="70" y="178" class="s">X-MHM-Timestamp / Signature</text>
+  <rect x="340" y="110" width="260" height="90" class="b"/><text x="365" y="155" class="s">HMAC verify</text><text x="365" y="178" class="s">sha256(ts.raw_body, secret)</text>
+  <rect x="660" y="110" width="220" height="90" class="b"/><text x="690" y="155" class="s">Replay guard</text><text x="690" y="178" class="s">±300s tolerans</text>
+  <rect x="940" y="110" width="220" height="90" class="b"/><text x="975" y="155" class="s">Rate limit</text><text x="975" y="178" class="s">20 / 60 sn</text>
+
+  <rect x="340" y="300" width="260" height="90" class="b"/><text x="380" y="350" class="s">401 / 429 / 400</text>
+  <rect x="660" y="300" width="500" height="90" class="b"/><text x="690" y="350" class="s">Idempotency: _mhm_payout_status doluysa 200 (skip)</text>
+
+  <rect x="120" y="500" width="320" height="100" class="b"/><text x="160" y="555" class="s">confirmed -> meta güncelle</text>
+  <rect x="520" y="500" width="560" height="100" class="b"/><text x="550" y="555" class="s">failed -> Ledger payout_reversal (+) + meta failed</text>
+
+  <line x1="280" y1="155" x2="340" y2="155" class="a"/>
+  <line x1="600" y1="155" x2="660" y2="155" class="a"/>
+  <line x1="880" y1="155" x2="940" y2="155" class="a"/>
+  <line x1="760" y1="200" x2="760" y2="300" class="a"/>
+  <line x1="520" y1="200" x2="470" y2="300" class="a"/>
+  <line x1="760" y1="390" x2="760" y2="500" class="a"/>
+  <line x1="660" y1="390" x2="280" y2="500" class="a"/>
+</svg>

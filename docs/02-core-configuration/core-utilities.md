@@ -4,40 +4,37 @@ title: Yardımcı Araçlar
 sidebar_label: Yardımcı Araçlar
 slug: /core-configuration/utilities
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Yardımcı Araçlar konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Core Utilities ve Yardımcı Sayfalar
 
-Rentiva, yönetim paneline bakım ve tanılama amaçlı birkaç yardımcı sayfa ekler. Bu sayfa, ilgili menülere nereden ulaşacağınızı ve ne işe yaradıklarını özetler.
+## İçindekiler
+- Cron Monitor
+- Database Cleanup
+- API Keys
+- System Info
 
 ## Cron Monitor
-- Bulunacağı yer: `MHM Rentiva > Settings > Cron Monitor` veya ayrı alt menü (sürüme bağlı).
-- Amaç: WordPress cron görevlerinin durumunu, son çalışma zamanını ve bir sonraki tetiklemeyi gösterir.
-- Kullanım: Cron görevi tıkanmışsa burada “Run Now” veya “Clear” seçenekleriyle manuel müdahale yapabilirsiniz.
+Zamanlanmış görevlerin çalışmasını izler ve manuel tetikleme sağlar.
 
 ## Database Cleanup
-- Bulunacağı yer: `MHM Rentiva > Settings > Database Cleanup`.
-- Amaç: Eski rezervasyon logları, yetim meta kayıtları, cache tablolarını temizlemek.
-- Özellikler: “Dry Run” ile temizlik öncesi rapor, “Execute” ile kalıcı temizlik. İşlem öncesi yedek almak tavsiye edilir.
+Yetim ve gereksiz kayıtları analiz eder, kontrollü temizlik sunar.
 
-## API Keys / Integration
-- Bulunacağı yer: `MHM Rentiva > Settings > API Keys` (beta/opsiyonel).
-- Amaç: Dış sistemlerle entegrasyon için API anahtarı üretmek, iptal etmek.
-- Yetkilendirme: Yalnızca yönetici yetkisi olan kullanıcılar anahtar oluşturabilir.
+## API Keys
+Entegrasyon anahtarlarının Üretim ve iptal yönetimini sağlar.
 
 ## System Info
-- Bulunacağı yer: `MHM Rentiva > About > System Info` veya ilgili panel.
-- Amaç: Site URL, PHP/WordPress versiyonları, aktif eklentiler gibi teknik bilgileri tek ekranda toplar.
-- Kullanım: Destek talebi açarken bu bilgiler kopyalanarak paylaşılabilir.
+Destek ve teşhis süreçleri için ortam özetini sunar.
 
-## Uninstall / Reset
-- Bulunacağı yer: `MHM Rentiva > Settings > Uninstall`.
-- Amaç: Eklentiyi kaldırırken veritabanı tablolarını temizlemek veya sıfırlamak.
-- Uyarı: Geri döndürülemez işlemler içerir; yalnızca test veya yeni kurulum öncesi kullanılmalıdır.
+## Bölüm Sonu Özeti
+- Yardımcı Araçlar sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-## İlgili Dokümanlar
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-- [Settings](settings.md) – Yardımcı sayfalardaki ayarların kökeni.
-- [Test Suite](test-suite.md) – Tanılama için otomatik testler.
-- [Troubleshooting](../05-faq/index.md) *(hazırlanacak)* – Sorun çözme rehberi.

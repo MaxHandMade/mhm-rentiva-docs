@@ -4,35 +4,31 @@ title: Raporlama
 sidebar_label: Raporlar
 slug: /features-usage/reports
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Raporlama konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Reports Sayfası
 
-`MHM Rentiva > Reports`, işletmenizin performansını görselleştiren kontrol panelidir. Gelir, rezervasyon ve araç kullanım istatistikleri farklı grafikler ve tablolarda sunulur.
+## İçindekiler
+- Kapsam
+- Doğrulama
 
-## Ana Bölümler
+## Kapsam
+- Gelir trendi
+- Rezervasyon durum dağılımı
+- Araç kullanım metrikleri
 
-- **Tarih Seçici:** Üst kısımdaki filtre ile günlük, haftalık, aylık veya özel tarih aralığı seçebilirsiniz.
-- **Gelir Grafiği:** Seçilen dönem için toplam gelir, ödeme yöntemi kırılımı ve trend yüzdeleri.
-- **Rezervasyon Durum Grafiği:** Pending, Confirmed, Completed, Cancelled gibi statülerin oranları.
-- **Araç Performansı:** En çok kiralanan araçlar, gelir bazında sıralama ve doluluk yüzdesi.
-- **Müşteri Segmentasyonu:** Yeni müşteri, sadık müşteri, VIP gibi segmentlere ait istatistikler (lite/pro sürüme göre değişebilir).
+## Doğrulama
+Filtre değişimlerinde tarih aralığı ve cache etkisini birlikte kontrol edin.
 
-## Veri Kaynakları
+## Bölüm Sonu Özeti
+- Raporlama sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-- Grafik verileri doğrudan rezervasyon kayıtlarından ve ödeme metalarından üretilir.
-- İyi performans için grafik verileri kısa süreli önbelleğe alınır; `Settings > Performance` bölümünden TTL değerlerini ayarlayabilirsiniz.
-- Raporlar, yalnızca “publish” durumundaki rezervasyonları dikkate alır.
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-## İpuçları
-
-- **Filtreleri Kullanma:** Tarih aralığını daraltarak belirli kampanya dönemlerini analiz edebilirsiniz.
-- **CSV/Export:** Ayrıntılı veri gerekiyorsa `Export` sayfasından aynı tarih aralığında CSV çekin.
-- **Önbellek Temizliği:** Raporlarda güncel bilgiler görünmüyorsa `Settings > Performance` altındaki “Reset cache” seçeneklerini kullanın.
-
-## İlgili Dokümanlar
-
-- [Export](export.md): Raporlarda kullanılan ham verileri dışa aktarma.
-- [Settings](../02-core-configuration/settings.md#performance-ve-cache-ayarlari): Rapor cache sürelerinin yönetimi.
-- [Checklist](../04-developer/testing-checklists.md#7-raporlama-ve-export): Raporlama doğrulama adımları.

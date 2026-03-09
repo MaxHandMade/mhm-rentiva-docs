@@ -4,97 +4,33 @@ title: Genel Ayarlar
 sidebar_label: Genel Ayarlar
 slug: /core-configuration/settings
 ---
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+:::info Amaç
+Bu sayfa, Genel Ayarlar konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Ayarlar (Settings)
 
-MHM Rentiva, eklentinin davranışını özelleştirmeniz için kapsamlı bir ayar paneli sunar. Ayarlara **MHM Rentiva > Settings** menüsünden ulaşabilirsiniz.
+## İçindekiler
+- Bölümler
+- Operasyon Önerisi
 
-Aşağıda her bir ayar sekmesinin ve içerdiği seçeneklerin detaylı açıklamaları bulunmaktadır.
+## Bölümler
+- Genel ayarlar
+- Rezervasyon ayarları
+- Ödeme ayarları
+- E-posta ayarları
+- Performans ve bakım
 
-## 1. Genel Ayarlar (General Settings)
-Eklentinin temel yapılandırma seçeneklerini içerir.
+## Operasyon Önerisi
+Ayar değişikliklerinden sonra bir test rezervasyonu ile uçtan uca doğrulama yapın.
 
-:::info 📸 EKRAN GÖRÜNTÜSÜ GEREKLİ
-Bu alana `Genel Ayarlar` panelinin güncel halini gösteren bir ekran görüntüsü eklenmeli.
-(Dosya adı önerisi: `assets/images/settings-general-clean.png`)
-:::
+## Bölüm Sonu Özeti
+- Genel Ayarlar sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
 
-*   **Para Birimi:** Kiralama işlemlerinde kullanılacak para birimi.
-*   **Marka Adı:** E-postalarda ve belgelerde görünecek marka adı.
-*   **Destek Bilgileri:** Müşteri desteği için e-posta, telefon ve saat bilgileri. (Not: İletişim telefonu varsayılan olarak boş gelir, doldurulmalıdır).
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
 
-## 2. Araç Yönetimi (Vehicle Management)
-Araçların listelenmesi ve fiyatlandırılmasıyla ilgili ayarlar.
-*   **Kiralama Süreleri:** Minimum ve maksimum kiralama gün sayıları.
-*   **Fiyatlandırma Ayarları:**
-    *   **Mevsimsel Fiyatlar:** Belirli dönemler (Yaz, Kış vb.) için fiyat çarpanları.
-    *   **İndirimler:** Uzun süreli kiralamalar veya erken rezervasyonlar için indirim kuralları.
-*   **Depozito Ayarları:** Depozito alma kuralları, tutarları ve ödeme yöntemleri.
-*   **Görünüm Ayarları:** Araç listelerinde ve detay sayfalarında hangi bilgilerin gösterileceği (Yakıt tipi, vites vb.).
-
-## 3. Rezervasyon Yönetimi (Booking Management)
-Rezervasyon süreci ve kuralları.
-*   **Rezervasyon Onayı:** Rezervasyonların otomatik mi yoksa manuel mi onaylanacağı.
-*   **Varsayılan Kiralama Süresi:** Rezervasyon formunda varsayılan olarak seçili gelecek gün sayısı.
-*   **İptal Politikası:** İptal süreleri ve kesinti kuralları.
-*   **Müsaitlik Kontrolü:** Çakışma kontrolü ve tampon süre (iki kiralama arası temizlik süresi) ayarları.
-
-> [Detaylı Rezervasyon Ayarları Dokümantasyonu](./booking-settings.md)
-
-## 4. Müşteri Yönetimi (Customer Management)
-Müşteri kayıt ve hesap işlemleri.
-*   **Kayıt Zorunluluğu:** Rezervasyon için üyelik şartı olup olmadığı.
-*   **Doğrulama:** Telefon veya e-posta doğrulama gereksinimleri.
-*   **KVKK/GDPR:** Veri onayı ve gizlilik sözleşmesi metinleri.
-
-## 5. Ödeme Ayarları (Payment Settings)
-Ödeme yöntemleri ve entegrasyonlar.
-*   **Ödeme Yöntemleri:** Kredi kartı, havale, kapıda ödeme seçenekleri.
-*   **WooCommerce Entegrasyonu:** WooCommerce ödeme altyapısının kullanımı ile ilgili ayarlar.
-*   **Ödeme Alma Zamanı:** Rezervasyon anında mı yoksa araç tesliminde mi ödeme alınacağı.
-
-## 6. E-posta ve Bildirimler (Email & Notifications)
-Otomatik gönderilen e-postaların yönetimi ve şablonların düzenlenmesi.
-
-*   **Yönetici Bildirimleri:** Hangi durumlarda site yöneticisine e-posta gönderileceği.
-*   **Müşteri Bildirimleri:** Rezervasyon alındı, onaylandı, iptal edildi gibi durumlarda müşteriye gidecek e-postalar.
-*   **Şablon Düzenleyici:** "Notification Templates" sekmesinden tüm bildirim metinlerini ve konularını düzenleyebilirsiniz.
-*   **Sıfırlama Seçeneği:** Ayarları varsayılana döndürmek için her sekmede bulunan "Reset to Defaults" butonunu kullanabilirsiniz.
-
-> [Detaylı E-posta ve Şablon Dokümantasyonu](./emails.md)
-
-## 7. Sistem ve Performans (System & Performance)
-Eklentinin teknik altyapısı ve bakım işlemleri.
-*   **Önnbellek (Cache):** Müsaitlik ve fiyat sorguları için önbellek ayarları.
-*   **Log Kayıtları:** Sistem hatalarının ve işlem kayıtlarının tutulması.
-*   **Veritabanı Bakımı:** Geçici verilerin temizlenmesi ve veritabanı optimizasyonu.
-*   **Kaldırma Sırasında Verileri Temizle:** Eklenti silindiğinde tüm verilerin kalıcı olarak silinmesi (Dikkat: Geri alınamaz!).
-*   **Güvenlik:** IP kısıtlamaları ve güvenli işlem ayarları.
-
-> [Detaylı Bakım Ayarları Dokümantasyonu](./maintenance.md)
-
-## 8. Frontend ve Görünüm (Frontend & Display)
-Sitenin ön yüzündeki görsel ayarlar.
-*   **Renkler ve Stiller:** Buton renkleri, form stilleri gibi görsel tercihler.
-*   **Metinler ve Etiketler:** Buton metinleri, form etiketleri ve uyarı mesajlarının özelleştirilmesi.
-
-## 9. Entegrasyon Ayarları (Integration Settings)
-Dış servislerle entegrasyonlar.
-*   **REST API:** Mobil uygulamalar veya dış servisler için API ayarları, token yönetimi ve güvenlik kuralları.
-
-## 10. Ek Hizmet Ayarları (Additional Services Settings)
-Ek hizmetlerin (addons) görüntülenme ve davranış kurallarını yönetir.
-
-*   **Onay Gereksinimi:** Müşteriler ek hizmet seçtiğinde manuel yönetici onayı gerekip gerekmediği.
-*   **Takvimde Fiyatlar:** Ek hizmet fiyatlarının rezervasyon takviminde gösterilip gösterilmeyeceği.
-*   **Sıralama Düzeni:** Hizmetlerin müşteri panelinde hangi sırayla (A-Z, Fiyat vb.) listeleneceği.
-
-> [Teknik Detaylar (Geliştiriciler İçin)](../04-developer/addon-settings.md)
-
-## Diğer Araçlar
-Ayrıca ayarlar sayfasında şu yardımcı araçlar da bulunabilir:
-*   **Veritabanı Temizliği:** Eski ve gereksiz verileri silme aracı.
-*   **Cron Monitörü:** Zamanlanmış görevlerin durumunu kontrol etme.
-*   **Ayarları Test Et:** Yapılandırmanızın doğruluğunu test etme aracı.

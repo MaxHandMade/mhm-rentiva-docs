@@ -1,6 +1,15 @@
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+:::info Amaç
+Bu sayfa, Rezervasyon Ayarları (Booking Settings) konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::
 
 # Rezervasyon Ayarları (Booking Settings)
+
+## İçindekiler
+- Temel Rezervasyon Ayarları
+- Zaman Yönetimi Ayarları
+- Bildirim Ayarları
 
 Rezervasyon süreci, kuralları ve zamanlama ayarları buradan yönetilir.
 
@@ -26,3 +35,12 @@ Bu bölüm, genel rezervasyon davranışlarını yapılandırmak için kullanıl
 - **Onay E-postası Gönder:** Rezervasyon onaylandığında müşteriye bilgi gönder.
 - **Hatırlatıcı E-postası Gönder:** Kiralama öncesi müşteriye hatırlatıcı gönder.
 - **Yönetici Bildirimleri:** Yeni rezervasyon oluştuğunda yöneticiye e-posta gönder.
+
+## Bölüm Sonu Özeti
+- Rezervasyon Ayarları (Booking Settings) sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+

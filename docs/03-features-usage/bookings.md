@@ -1,72 +1,63 @@
----
+﻿---
 id: bookings
 title: Rezervasyon Yönetimi
 sidebar_label: Rezervasyonlar
 slug: /features-usage/bookings
 ---
 
-![Version](https://img.shields.io/badge/version-4.9.8-blue?style=flat-square) ![Security](https://img.shields.io/badge/security-WPCS%20Compliant-green?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-11.02.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+:::info Amaç
+Bu sayfa, rezervasyon operasyonlarını tek ekrandan yönetme akışını anlatır.
+:::
 
 # Bookings Sayfası
 
-`MHM Rentiva > Bookings`, tüm rezervasyonların merkezi yönetim ekranıdır. Hem çevrim içi hem de manuel oluşturduğunuz rezervasyonlar burada listelenir; durum değişiklikleri, ödeme kontrolleri ve müşteri iletişimi bu sayfadan yürütülür.
+## İçindekiler
+- Görünüm
+- Üst Araçlar
+- Rezervasyon Detayı
+- Manuel Rezervasyon Oluşturma
+- Operasyon Kontrolleri
 
-## Görünüm ve Kolonlar
-- **Status:** Rezervasyon durumu (`Pending`, `Confirmed`, `Active/In Progress`, `Completed`, `Cancelled`, `Refunded` vb.)
-- **Customer / Vehicle / Dates:** Müşteri bilgisi, araç seçimi ve kiralama tarihleri.
-- **Total / Payment Status:** Toplam tutar, alınan depozito, bekleyen bakiye, ödeme yöntemi.
-- **Actions:** Detay ekranına gitme, hızlı statü değişikliği, makbuz onaylama gibi butonlar.
+## Görünüm
+- Durum
+- Müşteri
+- Araç
+- Tarih aralığı
+- Ödeme durumu
+- Aksiyonlar
 
 ## Üst Araçlar
-- **Status Filtresi:** Belirli bir durumdaki rezervasyonları getirmek için kullanılır.
-- **Takvim Görünümü:** “Calendar” alt menüsü aylık görünüm sunar; hücre renkleri rezervasyon durumlarına göre değişir.
-- **Bulk Actions:** Birden fazla rezervasyonu aynı anda “Confirm”, “Cancel” veya “Recycle Bin”e taşıma.
+- Durum filtresi
+- Takvim görünümü
+- Toplu işlemler (`Confirm`, `Cancel`, `Recycle Bin`)
 
-## Rezervasyon Detay Ekranı
-- **Genel Bilgiler:** Müşteri kontak, araç, tarih ve fiyat kırılımı.
-- **Ödeme Bilgisi:** Online/offline ödemeler, depozito ve kalan tutar.
-- **Notlar ve Loglar:** Otomatik e-posta logları, manuel notlar.
-- **Durum Değiştirme Paneli:** Confirm, Complete, Cancel, Refund gibi aksiyonlar.
-- **Mesajlaşma:** Rezervasyonla ilişkilendirilmiş müşteri mesajlarına hızlı erişim.
-
-### Versiyon 4.4.4 Yeni Özellikler
-
-**Rezervasyon Referans Numarası:**
-- Her rezervasyon için benzersiz bir referans numarası otomatik oluşturulur (format: `BK-00001`).
-- Bu numara rezervasyon detay ekranında görüntülenir ve müşteri ile iletişimde kullanılabilir.
-
-**Rezervasyon Tipi:**
-- Rezervasyonlar artık "Online" veya "Manuel" olarak işaretlenir.
-- Online rezervasyonlar: Müşteri tarafından web sitesi üzerinden oluşturulan rezervasyonlar.
-- Manuel rezervasyonlar: Admin tarafından manuel olarak oluşturulan rezervasyonlar.
-
-**Özel Notlar / Talepler:**
-- Rezervasyon detay ekranında "Özel Notlar / Talepler" alanı eklendi.
-- Bu alan müşteri talepleri, özel istekler veya notlar için kullanılabilir.
-- Hem admin hem de müşteri tarafından görüntülenebilir ve düzenlenebilir.
-
-**Araç Seçimi (Düzenlenebilir):**
-- Rezervasyon düzenleme ekranında araç alanı artık düzenlenebilir.
-- Araç seçiminde plaka numarası da gösterilir, böylece benzer isimli araçlar arasında karışıklık önlenir.
-- Araç değişikliği yapıldığında fiyatlar otomatik olarak yeniden hesaplanır.
-
-**WooCommerce İade Entegrasyonu:**
-- WooCommerce'de iade yapıldığında rezervasyon durumu otomatik olarak güncellenir.
-- İade tutarı rezervasyon meta verilerine kaydedilir.
-- İade işlemi için e-posta bildirimleri otomatik gönderilir.
+## Rezervasyon Detayı
+- Genel bilgiler
+- Ödeme bilgileri
+- Notlar ve loglar
+- Durum güncelleme
+- Mesajlaşma akışı
 
 ## Manuel Rezervasyon Oluşturma
-- Ekranın üst kısmındaki `Add New Booking` butonuyla açılan form sayesinde:
-  - Müşteri seçebilir veya yeni müşteri oluşturabilirsiniz.
-  - Araç, tarih aralığı, addon hizmetleri belirleyip fiyatı otomatik hesaplayabilirsiniz.
-  - Online/offline ödeme kaydı yapmadan rezervasyon oluşturabilir, durumu daha sonra güncelleyebilirsiniz.
+`Add New Booking` ile:
+- Müşteri seçimi/oluşturma
+- Araç ve tarih seçimi
+- Ek hizmet ve fiyat hesaplama
+- Durum yönetimi
 
-## Önerilen Kontroller
-- Rezervasyon “Pending” durumunda uzun süre kalıyorsa otomatik iptal süresini (`Settings > Booking > Auto cancel`) kontrol edin.
-- Offline ödeme makbuzları geldiğinde “Payments” sekmesi üzerinden onaylayın; aksi halde rezervasyon “Pending” veya “Awaiting Payment”ta kalır.
-- Her statü değişikliğinde ilgili e-posta şablonunun tetiklendiğini (Email Logs) kontrol etmek iyi bir pratiktir.
+## Operasyon Kontrolleri
+- Uzun süren `Pending` kayıtlarını otomatik iptal ayarı ile kontrol edin.
+- Offline ödeme sonrası makbuz onayı yapın.
+- Statü değişiminde tetiklenen e-posta loglarını doğrulayın.
 
-## İlgili Dokümanlar
-- [Vehicles](vehicles.md): Rezervasyonların takvimde nasıl gösterildiği.
-- [Payment Konfigürasyonu](../02-core-configuration/payments.md): Online/offline ödeme akışları.
-- [Test Checklist](../04-developer/testing-checklists.md#2-rezervasyon-akisi): Rezervasyon akışı test adımları.
+## Bölüm Sonu Özeti
+- Rezervasyon ekranı, operasyonun merkezidir.
+- Toplu işlem ve durum disiplini, destek yükünü azaltır.
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+
