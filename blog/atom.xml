@@ -2,11 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-02-18T09:00:00.000Z</updated>
+    <updated>2026-03-11T16:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.21.2: Vendor Yönetimi ve Finansal Mimari Devrimi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary"/>
+        <updated>2026-03-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva v4.21.2 sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.21.2</strong> sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu güncelleme, MHM Rentiva'yı sadece bir rezervasyon motoru olmaktan çıkarıp, tam teşekküllü bir pazaryeri (marketplace) ve transfer yönetim platformuna dönüştürüyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-tedarikçi-yönetimi">🏢 Vendor (Tedarikçi) Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-vendor-tedarik%C3%A7i-y%C3%B6netimi" class="hash-link" aria-label="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" title="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Artık platformunuzda birden fazla tedarikçiyi yönetebilirsiniz. Her tedarikçi kendi araçlarını, fiyatlandırmasını ve rezervasyonlarını kontrol edebilir.</p>
+<ul>
+<li class=""><strong>Tedarikçi Paneli:</strong> Özelleştirilmiş admin arayüzü.</li>
+<li class=""><strong>Performans Takibi:</strong> Tedarikçi bazlı doluluk ve gelir raporları.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-finansal-mimari">💰 Yeni Finansal Mimari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-yeni-finansal-mimari" class="hash-link" aria-label="💰 Yeni Finansal Mimari doğrudan bağlantı" title="💰 Yeni Finansal Mimari doğrudan bağlantı" translate="no">​</a></h3>
+<p>Ödeme yönetimi ve komisyon hesaplamaları tamamen standardize edildi.</p>
+<ul>
+<li class=""><strong>Commission Management:</strong> Esnek komisyon oranları ve otomatik hesaplama.</li>
+<li class=""><strong>Ledger System:</strong> Tüm finansal hareketlerin şeffaf bir şekilde kaydedildiği muhasebe defteri.</li>
+<li class=""><strong>Payouts:</strong> Tedarikçi ödemelerinin merkezi takibi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü">🚐 VIP Transfer Modülü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-vip-transfer-mod%C3%BCl%C3%BC" class="hash-link" aria-label="🚐 VIP Transfer Modülü doğrudan bağlantı" title="🚐 VIP Transfer Modülü doğrudan bağlantı" translate="no">​</a></h3>
+<p>Noktadan noktaya rota bazlı fiyatlandırma ve rezervasyon sistemi.</p>
+<ul>
+<li class=""><strong>Rota Bazlı Fiyatlandırma:</strong> Mesafe veya rota bazlı dinamik fiyat tanımlama.</li>
+<li class=""><strong>Transfer Rezervasyonu:</strong> Araç kiralama akışından bağımsız, optimize edilmiş transfer deneyimi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler-ve-güvenlik">🛠️ Teknik İyileştirmeler ve Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler-ve-g%C3%BCvenlik" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" translate="no">​</a></h2>
+<p>Sadece özellik değil, altyapı olarak da güçlendik:</p>
+<ul>
+<li class=""><strong>Hardened REST API:</strong> <code>SecurityHelper</code> ve <code>AuthHelper</code> ile API uç noktaları daha güvenli hale getirildi.</li>
+<li class=""><strong>WP 6.7+ Uyumlu:</strong> En son WordPress sürümleriyle tam uyumluluk ve performans optimizasyonu.</li>
+<li class=""><strong>Modern Gereksinimler:</strong> Minimum PHP 8.1+ ve WP 6.7+ standartlarına geçiş yapıldı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni Modül</td><td>Vendor Yönetim Sistemi (Multi-vendor desteği).</td></tr><tr><td>💸 Finans</td><td>Gelişmiş finansal mimari, komisyon ve defter (ledger) sistemi.</td></tr><tr><td>🛫 Transfer</td><td>VIP Transfer modülü ve rota bazlı fiyatlandırma motoru.</td></tr><tr><td>🛡️ Güvenlik</td><td>REST API güvenlik katmanları (<code>AuthHelper</code> entegrasyonu).</td></tr><tr><td>🚀 Performans</td><td>PHP 8.1+ optimizasyonu ve autoloader iyileştirmeleri.</td></tr><tr><td>🧹 Paketleme</td><td><code>.distignore</code> ile optimize edilmiş, tertemiz eklenti paketi yapısı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, <code>mhm-rentiva</code> ekosisteminde bugüne kadar yapılmış en kapsamlı modüler genişletmedir. Modüller arası veri bütünlüğü <code>Util::has_overlap()</code> ve <code>DepositCalculator</code> gibi merkezi sınıflar üzerinden garanti altına alınmıştır.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="vendor" term="vendor"/>
+        <category label="finance" term="finance"/>
+        <category label="payment" term="payment"/>
+        <category label="vip-transfer" term="vip-transfer"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.10.0: Block/Shortcode Parity Stabilizasyonu]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.10.0-release-summary</id>
