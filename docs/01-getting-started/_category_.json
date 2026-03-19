@@ -2,7 +2,7 @@
   "label": "Ba\u015flang\u0131\u00e7 Rehberi",
   "position": 1,
   "link": {
-    "type": "generated-index",
-    "description": "MHM Rentiva kurulum ve ilk yap\u0131land\u0131rma rehberi."
+    "type": "doc",
+    "id": "01-getting-started/reading-order"
   }
 }

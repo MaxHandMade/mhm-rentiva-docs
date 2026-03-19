@@ -2,7 +2,7 @@
     "label": "Vendor Ecosystem",
     "position": 5,
     "link": {
-        "type": "generated-index",
-        "description": "Vendor marketplace onboarding, analytics, payouts, and security documentation."
+        "type": "doc",
+        "id": "05-vendor/vendor-overview"
     }
 }

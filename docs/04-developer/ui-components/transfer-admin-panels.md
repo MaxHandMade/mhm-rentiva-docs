@@ -1,53 +1,74 @@
 ---
 id: transfer-admin-panels
-title: Transfer Admin Panelleri
+title: Transfer Admin Panelleri (UI & Dashboards)
 sidebar_label: Transfer Admin Panelleri
-slug: /developer/ui-components/transfer-admin-panels
+sidebar_position: 7
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, transfer modülündeki admin ekranlarının sorumluluklarını ve doğru kullanım modelini açıklar.
+Bu sayfa, Rentiva'nın araç transferi (Havalimanı VIP, Şehirlerarası vb.) operasyonlarını yöneten admin arayüzlerinin teknik mimarisini ve veri giriş kurallarını açıklar.
 :::
 
-# Transfer Admin Panelleri
+# 🛣️ Transfer Admin Panelleri
 
-## İçindekiler
-- Ekranlar
-- Veri Girişi Kuralları
-- Export/Import
-- UX Notları
-- Bölüm Sonu Özeti
-- Değişiklik Günlüğü
+Transfer modülü, standart araç kiralamadan farklı olarak lokasyon bazlı bir ağ yapısı üzerinde çalışır. `TransferAdmin` sınıfı, bu ağın yönetildiği ekranları (Locations, Routes, Stats) merkezi olarak kontrol eder.
 
-## Ekranlar
-- Transfer Locations
-- Transfer Routes
-- Transfer Settings
-- Transfer araç meta alanları
+---
 
-## Veri Girişi Kuralları
-- Konum adları benzersiz ve normalize edilmelidir.
-- Rota tanımında origin/destination çifti net olmalıdır.
-- Mesafe/süre/fiyat alanları tip doğrulaması ile kaydedilmelidir.
+## 🏗️ Mimari Bileşenler
 
-## Export/Import
-`TransferExportImport` bileşeni, transfer yapılandırmasının taşınmasını sağlar.
+Modül, veri girişi ve görselleştirme için üç ana bileşen kullanır:
+1.  **Stats Cards:** Lokasyon, rota ve son işlem verilerini gösteren üst panel.
+2.  **Location Manager:** Havalimanı, Otel, Liman gibi transfer noktalarının tanımı.
+3.  **Route Configurator:** İki lokasyon arasındaki mesafe, süre ve fiyatlandırma kuralları.
 
-- Import öncesi şema doğrulaması yapılmalıdır.
-- Üretim ortamında import işlemi sonrası örnek arama testi zorunludur.
+---
 
-## UX Notları
-- Operatör hatasını azaltmak için alan yardım metinleri açık olmalıdır.
-- Kritik değişikliklerde onay ekranı gösterilmelidir.
+## 📊 Transfer İstatistik Kartları (Stats)
 
-![Placeholder: transfer-admin-screen-map](/img/docs/placeholders/transfer-admin-screen-map.svg)
+Admin panelinin üst kısmında yer alan `render_transfer_stats()` metodu, anlık operasyonel veriyi sunar:
+
+- **Total Locations:** `rentiva_transfer_locations` tablosundaki aktif transfer noktaları.
+- **Active Routes:** Tanımlanmış ve fiyatlandırılmış geçerli rotalar.
+- **Latest Operation:** En son yapılan `transfer` tipindeki rezervasyonun tarihi.
+
+---
+
+## 📍 Lokasyon Tipleri (Location Types)
+
+Sistem aşağıdaki dâhili tipleri destekler ve bu tipler Dashboard üzerinde ikonografiyi değiştirir:
+- 🛫 **Airport:** Havalimanı noktaları.
+- 🏨 **Hotel:** Konaklama tesisleri.
+- 🚢 **Port:** Liman ve Cruise terminalleri.
+- 🚉 **Station:** Tren ve Otobüs terminalleri.
+- 🏙️ **City Center:** Şehir merkezi noktaları.
+
+---
+
+## ⚡ Veri Kaydı ve Güvenlik
+
+Tüm form işlemleri `admin_post` kancaları üzerinden asenkron ve güvenli (Nonce-protected) olarak işlenir:
+
+```php
+// Örnek: Rota kaydı sırasında tetiklenen kancalar
+add_action('admin_post_mhm_save_route', array(self::class, 'handle_save_route'));
+add_action('admin_post_mhm_delete_route', array(self::class, 'handle_delete_route'));
+```
+
+---
+
+## 📦 Veritabanı Geri Uyumluluğu (DB Fallback)
+
+Transfer tabloları, modern `rentiva_` öneki ile çalışır ancak eski sistemlerden gelen `mhm_` tablolarını da `resolve_table_name()` metoduyla otomatik olarak tespit edip veriyi korur.
 
 ## Bölüm Sonu Özeti
-- Transfer admin panelleri veri kalitesini doğrudan etkiler.
-- Input doğrulama + import kontrolü olmadan canlıya çıkılmamalıdır.
+- Transfer panelleri **Stats-first** yaklaşımıyla tasarlanmıştır.
+- Tüm veri girişleri `TransferAdmin` sınıfı üzerinden atomik olarak yapılır.
+- Görsel tasarımda `stats-cards.css` bileşenleri kullanılır.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Transfer admin panelleri teknik sayfası eklendi. |
+| 19.03.2026 | 4.21.2 | Sayfa, TransferAdmin stats cards ve modern lokasyon yapısına göre güncellendi. |

@@ -2,50 +2,67 @@
 id: payments
 title: Ödeme Yapılandırması
 sidebar_label: Ödeme Ayarları
+sidebar_position: 4
 slug: /core-configuration/payments
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Ödeme Yapılandırması konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+
+MHM Rentiva, finansal işlemlerini dünyanın en popüler e-ticaret altyapısı olan **WooCommerce** üzerine inşa eder. Bu sayede yüzlerce ödeme ağ geçidini (Stripe, PayPal, iyzico vb.) ek bir geliştirme yapmadan kullanabilirsiniz.
+
+---
+
+## 💳 Ödeme Akış Senaryoları
+
+Sistem, ödemeleri iki temel kanal üzerinden yönetir:
+
+### 1. Frontend (Müşteri) Ödemeleri
+Web siteniz üzerinden müşterilerin yaptığı tüm kiralama işlemleri **WooCommerce** sepeti üzerinden döner.
+- **Süreç:** Müşteri aracı seçer > Tarih belirler > "Hemen Kirala" der > Ürün sepete eklenir > Ödeme sayfasında kart bilgileri girilir.
+- **Kritik Not:** Müşteri ödemeyi tamamladığında WooCommerce siparişi "Processing" veya "Completed" olur; buna bağlı olarak Rentiva rezervasyonu da otomatik "Confirmed" olur.
+
+### 2. Backend (Yönetici) ve Offline Ödemeler
+Yönetim panelinden manuel oluşturulan rezervasyonlar için kullanılır.
+- **Elden Tahsilat:** Aracı teslim ederken nakit ödeme alıyorsanız, rezervasyon detayından "Offline Payment" olarak işaretleyebilirsiniz.
+- **Banka Havalesi:** WooCommerce üzerindeki "BACS" (Banka Havalesi) yöntemiyle entegre çalışır.
+
+---
+
+## 💰 Depozito Sistemi
+
+MHM Rentiva, gelişmiş bir depozito (ön ödeme) mantığına sahiptir. 
+- **Ayarlama:** Araç bazında veya genel ayarlarda "% X oranında depozito al" seçeneği aktiftir.
+- **Çalışma Biçimi:** Araç toplam kirası 1000 TL ise ve %20 depozito aktifse, WooCommerce sepetine sadece 200 TL yansıtılır. Kalan 800 TL "Kalan Ödeme" (Due Balance) olarak dökümlerde görünür.
+
+:::tip Geliştirici Notu
+Depozito hesaplamaları için `DepositCalculator::calculate_deposit()` sınıfı kullanılır. Bu sınıf, ekstraları ve vergileri de hesaba katar.
 :::
 
-# Ödeme Yapılandırması
+---
 
-## İçindekiler
-- Genel Bakış
-- Ödeme Yöntemleri
-- Manuel Rezervasyonlar
+## 🛠️ Desteklenen Ödeme Yöntemleri
 
-Ödeme yapılandırması, rezervasyonların nasıl tahsil edileceğini ve hangi ödeme yöntemlerinin kullanılacağını belirler.
+WooCommerce ile uyumlu tüm eklentiler Rentiva ile çalışır. En sık kullanılanlar:
+- **Global:** Stripe, PayPal, Square.
+- **Yerel (Türkiye):** iyzico, PayTR, Param.
 
-## Genel Bakış
+---
 
-MHM Rentiva, ödemeleri iki senaryoya göre yönetir:
-1.  **Frontend (Müşteri) Rezervasyonları:** Tamamen **WooCommerce** entegrasyonu üzerinden işlenir (Online veya Havale/Kapıda Ödeme dahil).
-2.  **Backend (Yönetici) Rezervasyonları:** Yöneticiler manuel olarak "Offline" (Nakit/Havale) tahsilat kaydı oluşturabilir.
+### 🖼️ GÖRSEL: ÖDEME AYARLARI EKRANI
+*(MHM Rentiva > Ayarlar > Ödeme sekmesindeki depozito ve diğer ayarları gösteren ekran)*
 
-## Ödeme Yöntemleri
+---
 
-### WooCommerce ile Ödeme (Önerilen)
-MHM Rentiva, tüm ödeme işlemlerini yönetmek için güçlü **WooCommerce** altyapısını kullanır. WooCommerce aktif olduğunda:
+---
 
-1.  **Kredi Kartı:** Iyzico, Stripe gibi sanal POS eklentilerini kullanabilirsiniz.
-2.  **Banka Havalesi (Offline):** WooCommerce'in yerleşik "Banka Havalesi (BACS)" yöntemini aktif ederek "Offline" ödeme alabilirsiniz.
-3.  **Kapıda Ödeme (Offline):** "Kapıda Ödeme" yöntemi ile nakit tahsilat yapabilirsiniz.
+### Bölüm Özeti
+- Frontend ödemeleri için **WooCommerce zorunludur**.
+- **Depozito** özelliği ile ön ödeme alabilirsiniz.
+- Manuel rezervasyonlar için **Offline** ödeme desteği mevcuttur.
 
-:::warning Önemli
-Mevcut sürümde (v4.6.1), frontend üzerinden yapılan rezervasyonlar için **WooCommerce zorunludur**. Eklentinin kendi içinde yerleşik (standalone) bir ödeme alma formu bulunmamaktadır. "Offline" ödeme almak isteseniz bile bunu WooCommerce ödeme yöntemleri üzerinden yapmanız gerekir.
-:::
-
-## Manuel Rezervasyonlar
-Yönetim panelinden (**Rentiva > Bookings > Add New**) oluşturulan manuel rezervasyonlarda, yönetici fiziksel "Offline" veya "Nakit" tahsilat kaydı girebilir. Bu işlem WooCommerce'den bağımsız çalışır.
-
-## Bölüm Sonu Özeti
-- Ödeme Yapılandırması sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
-
-## Değişiklik Günlüğü
+### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
-|---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+| :--- | :--- | :--- |
+| 18.03.2026 | 4.21.2 | İçerik hibrit modele göre güncellendi. |
+| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

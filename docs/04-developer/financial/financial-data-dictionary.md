@@ -1,51 +1,81 @@
 ---
 id: financial-data-dictionary
-title: Finansal Veri Sözlüğü
+title: Finansal Veri Sözlüğü (Data Dictionary)
 sidebar_label: Finansal Veri Sözlüğü
-slug: /developer/financial/financial-data-dictionary
+sidebar_position: 6
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, Finansal Veri Sözlüğü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+Bu sayfa, MHM Rentiva finansal modülünde kullanılan tüm anahtar kelimelerin, veritabanı alanlarının ve teknik tanımların standart referans dökümantasyonudur.
 :::
 
-# Finansal Veri Sözlüğü
+# 📖 Finansal Veri Sözlüğü
 
-## İçindekiler
-- Option Anahtarları
-- User Meta
-- Payout Post Meta
-- Capability
+Finansal veriler Rentiva ekosisteminde üç ana katmanda saklanır: **Global Ayarlar (Options)**, **Kullanıcı Bilgileri (User Meta)** ve **İşlem Detayları (Payout/Booking Meta)**.
 
-## Option Anahtarları
-- `mhm_min_payout_amount`
-- `mhm_rentiva_global_payout_freeze`
-- `mhm_rentiva_payout_webhook_secret`
-- `mhm_rentiva_commission_tiers`
+## ⚙️ Global Ayarlar (Options)
+`wp_options` tablosunda saklanan sistem geneli finansal konfigürasyonlar:
 
-## User Meta
-- `_mhm_vendor_commission_rate`
-- `_mhm_vendor_payout_freeze`
+| Anahtar (Key) | Tip | Açıklama |
+| :--- | :--- | :--- |
+| `mhm_min_payout_amount` | `float` | Bir satıcının ödeme talep edebilmesi için gereken minimum bakiye. |
+| `mhm_rentiva_global_payout_freeze` | `bool` | Sistem genelinde tüm ödemeleri durduran acil durum anahtarı. |
+| `mhm_rentiva_payout_webhook_secret`| `string` | Payout bildirimleri için kullanılan HMAC imzalı secret key. |
+| `mhm_rentiva_commission_tiers` | `json` | Satış hacmine göre indirim oranlarını belirleyen eşik değerleri. |
 
-## Payout Post Meta
-- `_mhm_payout_amount`
-- `_mhm_payout_status`
-- `_mhm_payout_external_ref`
-- `_mhm_payout_rejection_reason`
+---
 
-## Capability
-- `mhm_rentiva_approve_payout`
-- `mhm_rentiva_freeze_payouts`
-- `mhm_rentiva_view_financial_audit`
+## 👤 Kullanıcı Finansal Verileri (User Meta)
+`wp_usermeta` tablosunda satıcı (Vendor) bazlı saklanan veriler:
 
-![Diyagram: financial-data-dictionary](/img/docs/financial/fin-fin-img-dict-001.svg)
+| Anahtar (Key) | Tip | Açıklama |
+| :--- | :--- | :--- |
+| `_mhm_vendor_commission_rate` | `float` | Satıcıya özel tanımlanmış sabit komisyon oranı (Override). |
+| `_mhm_vendor_payout_freeze` | `bool` | Sadece bu satıcının ödeme almasını engelleyen blokaj durumu. |
+| `_mhm_vendor_tier_id` | `string` | Satıcının şu an dahil olduğu performans kategorisi. |
+
+---
+
+## 💰 Payout (Ödeme) Verileri (Post Meta)
+`mhm_rentiva_payout` post type altında saklanan meta veriler:
+
+| Anahtar (Key) | Tip | Açıklama |
+| :--- | :--- | :--- |
+| `_mhm_payout_amount` | `float` | Talep edilen veya ödenen net tutar. |
+| `_mhm_payout_status` | `string` | Durum: `pending`, `processing`, `completed`, `rejected`. |
+| `_mhm_payout_external_ref` | `string` | Banka veya ödeme geçidi (Stripe vb.) referans numarası. |
+| `_mhm_payout_rejection_reason` | `string` | Reddedilen talepler için girilen açıklama metni. |
+
+---
+
+## 🔑 Yetkilendirme (Capabilities)
+Finansal işlemleri yönetmek için gerekli WordPress yetkileri:
+
+- **`mhm_rentiva_approve_payout`**: Ödeme taleplerini onaylama yetkisi.
+- **`mhm_rentiva_freeze_payout`**: Ödemeleri durdurma/blokaj uygulama yetkisi.
+- **`mhm_rentiva_view_financial_audit`**: Audit loglarını ve Ledger detaylarını görme yetkisi.
+
+---
+
+## 🔄 Veri İlişki Haritası
+
+```mermaid
+graph LR
+    U[User Meta] -- overrides --> P[Policy]
+    O[Options] -- defines --> P
+    P -- resolves --> C[Commission]
+    C -- records --> L[Ledger]
+    L -- sums to --> PM[Payout Meta]
+```
+
+## Bölüm Sonu Özeti
+- Tüm finansal anahtarlar `_mhm_` ön eki ile (private meta) saklanır.
+- Kritik işlemler (Örn: `payout_status`) sadece yetkili (Capabilities) kullanıcılar tarafından değiştirilebilir.
+- Ledger tablosundaki alanlar için [Ledger Modeli](./ledger-model) sayfasına bakınız.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 2026-02-26 | 4.21.0-docs | Karakter/encoding düzeltmesi ve içerik standardizasyonu. |
-
-## Bölüm Sonu Özeti
-- Finansal Veri Sözlüğü sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
-
+| 19.03.2026 | 4.21.2 | Sayfa, eklentinin güncel Meta ve Option anahtarlarına göre güncellendi. |

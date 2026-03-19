@@ -2,7 +2,7 @@
   "label": "Temel Yap\u0131land\u0131rma",
   "position": 2,
   "link": {
-    "type": "generated-index",
-    "description": "Genel ayarlar, \u00f6deme y\u00f6ntemleri ve lisans yap\u0131land\u0131rmas\u0131."
+    "type": "doc",
+    "id": "02-core-configuration/reading-order"
   }
 }

@@ -1,44 +1,81 @@
 ---
 id: rate-limits-and-errors
-title: API Rate Limit ve Hata Kodları
+title: API Hata Yönetimi ve İstek Limitleri (Rate Limiting)
 sidebar_label: Rate Limit ve Hata Kodları
-slug: /api/v1/rate-limits-and-errors
+sidebar_position: 90
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, API Rate Limit ve Hata Kodları konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+MHM Rentiva API servislerinin sürekliliğini sağlamak ve hatalı durumları standart bir dille raporlamak için kullanılan kurallar kümesidir.
 :::
 
-# API Rate Limit ve Hata Kodları
+# 🚦 API Hata Yönetimi ve İstek Limitleri
 
-## İçindekiler
-- Rate limit
-- Yaygın kodlar
-- Loglama
+Sistem, hem kötü niyetli saldırıları (Brute-force, DoS) engellemek hem de istemcilere tutarlı hata mesajları dönmek için `RateLimiter` ve `ErrorHandler` sınıflarını kullanır.
 
-## Rate limit
-- Varsayılan limit: ortam ayarına göre dakika bazlı istek limiti.
-- Aşım durumunda: `429 Too Many Requests`.
+---
 
-## Yaygın kodlar
-- `400`: Geçersiz parametre
-- `401`: Kimlik doğrulama eksik/hatalı
-- `403`: Yetkisiz işlem
-- `404`: Kaynak bulunamadı
-- `409`: Durum çakışması
-- `500`: Sunucu hatası
+## 🛑 1. İstek Limitleri (Rate Limiting)
 
-## Loglama
-- Her hata için correlation id üretin.
-- Hata gövdesinde kullanıcıya güvenli, geliştiriciye anlamlı mesaj döndürün.
+İstek limitleri, API anahtarı (v1) veya IP adresi (Public) bazlı olarak uygulanır.
+
+| Katman | Limit (İstek/Dakika) | Aşım Sonucu |
+|---|---|---|
+| **Public API** | 30 | HTTP 429 |
+| **Authenticated (API Key)** | 60 | HTTP 429 |
+| **Admin/internal** | 120 | HTTP 429 |
+
+**Korumalar:**
+- **`RateLimiter::check()`:** Belirlinen zaman pencerelerinde (Sliding Window) istek limitini denetler.
+- **Loglama:** Limit aşımları `AdvancedLogger` üzerinde `SECURITY_WARNING` seviyesinde kaydedilir.
+
+---
+
+## ❌ 2. Standart Hata Kodları
+
+Tüm API yanıtlarında standart HTTP durum kodları ve özel uygulama hata kodları kullanılır.
+
+| HTTP Kod | Uygulama Kodu | Açıklama |
+|---|---|---|
+| **400** | `INVALID_PARAMS` | Eksik veya hatalı formatta parametre. |
+| **401** | `AUTH_REQUIRED` | Kimlik doğrulama başlığı eksik veya hatalı. |
+| **403** | `PERMISSION_DENIED` | Kullanıcı veya anahtarın bu işlem için yetkisi yok. |
+| **404** | `RESOURCE_NOT_FOUND` | Belirtilen ID'ye sahip kayıt mevcut değil. |
+| **409** | `STATE_CONFLICT` | İşlem, kaynağın mevcut durumuyla uyumsuz (Örn: Dolu aracı kiralama). |
+| **429** | `RATE_LIMIT_EXCEEDED` | Dakikalık istek sınırı aşıldı. |
+| **500** | `INTERNAL_ERROR` | Beklenmedik bir sunucu hatası oluştu. |
+
+---
+
+## 🛠️ 3. Loglama ve Correlation ID
+
+Sistem, her hata yanıtı ile birlikte bir **Correlation ID** (Örn: `req_abc123`) üretir:
+- **Geliştirici İpucu:** Hata gövdesinde sorunun teknik detayı (Stack trace vb.) asla dönülmez; bunun yerine günlüklerdeki (logs) ilgili kaydı bulmaya yarayan ID dönülür.
+- **`ErrorHandler::format_error()`:** Tüm hataları merkezi olarak yakalar, loglar ve istemciye güvenli JSON formatında servis eder.
+
+---
+
+## 📤 4. Örnek Hata Yanıtı
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "PERMISSION_DENIED",
+    "message": "Bu işlem için 'rentiva_vendor' yetkisi gereklidir.",
+    "correlation_id": "err_1773849524"
+  }
+}
+```
 
 ## Bölüm Sonu Özeti
-- API Rate Limit ve Hata Kodları sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+- `RateLimiter` sistemi korur, `ErrorHandler` iletişimi standartlaştırır.
+- Hatalar asla ham PHP hatası olarak değil, formatlanmış JSON olarak döner.
+- Correlation ID ile canlı ortamdaki hatalar kolayca takip edilebilir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
-
-
+| 19.03.2026 | 4.21.2 | Rate limit katmanları, Uygulama Hata Kodları ve Correlation ID detayları eklendi. |

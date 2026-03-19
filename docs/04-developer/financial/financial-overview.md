@@ -2,57 +2,75 @@
 id: financial-overview
 title: Finansal Sistem Genel Bakış
 sidebar_label: Finansal Genel Bakış
-slug: /developer/financial/financial-overview
+sidebar_position: 1
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa finansal çekirdeğin bileşenlerini, veri akışını ve mimari invariantlarını özetler.
+Bu sayfa, MHM Rentiva'nın finansal çekirdeğini (Financial Core), komisyon hesaplama mantığını ve veri güvenliği standartlarını özetler.
 :::
 
-## İçindekiler
-- Kapsam
-- Çekirdek bileşenler
-- Komisyon çözümleme sırası
-- Mimari invariantlar
+# 💰 Finansal Sistem Genel Bakış
 
-# Finansal Sistem Genel Bakış
+MHM Rentiva'nın kalbi olan finansal sistem, yüksek hassasiyetli hesaplamalar ve denetlenebilir (Auditable) bir veri yapısı üzerine kurulmuştur. Sistem, her işlemi **Immutable Ledger (Değiştirilemez Defter)** mantığıyla kayıt altına alır.
 
-## Kapsam
-- Komisyon hesaplama hiyerarşisi
-- Immutable ledger modeli
-- Payout yaşam döngüsü
-- Governance kontrolleri
-- Analytics metrikleri
+## 🏗️ Çekirdek Bileşenler
 
-## Çekirdek Bileşenler
-- `CommissionResolver`
-- `PolicyService` / `PolicyRepository`
-- `TierService`
-- `Ledger` / `LedgerEntry`
-- `PayoutService` / `AtomicPayoutService`
-- `GovernanceService`
-- `AnalyticsService`
+Finansal operasyonlar şu motorlar üzerinden yönetilir:
 
-## Komisyon Çözümleme Sırası
-1. Araç override
-2. Vendor override
-3. Tier indirimi
-4. Global policy oranı
+| Bileşen | Görev |
+| :--- | :--- |
+| `CommissionResolver` | Rezervasyon için en uygun komisyon politikasını belirleyen karar motoru. |
+| `Ledger` | Tüm parasal hareketleri `wp_mhm_rentiva_ledger` tablosuna atomik olarak yazan servis. |
+| `PayoutService` | Vendor hak edişlerini hesaplayan ve ödeme taleplerini yöneten katman. |
+| `GovernanceService` | Finansal limitleri, risk kontrollerini ve yetkilendirmeleri denetler. |
+| `PolicyRepository` | Versiyonlanmış komisyon politikalarını ve kurumsal anlaşmaları saklar. |
 
-## Mimari İnvariantlar
-- Ledger üzerinde sadece `INSERT`.
-- Callback idempotent.
-- Audit append-only.
-- Finansal raporlamada tek kaynak ledger.
+---
 
-![Diyagram: financial-overview](/img/docs/financial/fin-fin-img-overview-001.svg)
+## 🔄 Finansal Veri Akışı
+
+Bir rezervasyon tamamlandığında finansal sistem şu sırayla tetiklenir:
+
+```mermaid
+graph TD
+    A[Rezervasyon Tamamlandı] --> B[CommissionResolver]
+    B --> C{Politika Bul?}
+    C -- Evet --> D[Komisyon Hesapla]
+    D --> E[Ledger::record]
+    E --> F[Finansal Defter Kaydı]
+    F --> G[Vendor Bakiyesi Güncelle]
+    G --> H[Payout Talebi Oluşturulabilir]
+```
+
+---
+
+## 📉 Komisyon Çözümleme Hiyerarşisi (Decision Order)
+
+Sistem, bir rezervasyon için hangi oranın uygulanacağına şu öncelik sırasına göre karar verir:
+
+1.  **Araç Bazlı (Vehicle Override):** Araç ayarlarında özel bir komisyon oranı tanımlanmışsa o kullanılır.
+2.  **Vendor Bazlı (Vendor Override):** Satıcıya özel bir anlaşma varsa uygulanır.
+3.  **Tier Sistemi (Tier Discount):** Vendor'un performansına göre bir indirim/artış uygulanabilir.
+4.  **Global Politika (Global Policy):** Hiçbir kural eşleşmezse sistemin genel ayarlarındaki varsayılan oran uygulanır.
+
+---
+
+## 🛡️ Finansal Güvenlik Prensipleri (Invariantlar)
+
+- **Immutability:** `ledger` tablosundaki bir kayıt asla silinmez veya `UPDATE` edilmez. Yanlış işlemler "Ters Kayıt" (Offsetting Entry) ile düzeltilir.
+- **Atomic Operations:** Komisyon hesaplama ve deftere yazma işlemi bir bütün (Atomic Transaction) olarak gerçekleşir.
+- **Audit Trail:** Her finansal hareket, işlemi yapan kullanıcı ve zaman mührü (Timestamp) ile imzalanır.
+- **Idempotency:** Aynı rezervasyon için mükerrer komisyon kaydı oluşması uygulama seviyesinde engellenmiştir.
 
 ## Bölüm Sonu Özeti
-- Finansal çekirdeğin modüler sınırları ve karar sırası netleştirildi.
+- Finansal sistem **Ledger-first** (Önce Defter) prensibiyle çalışır.
+- Kararlar modüler `CommissionResolver` tarafından hiyerarşik olarak verilir.
+- Tüm veriler mali denetime (Audit) uygun şekilde saklanır.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 2026-02-26 | 4.21.0-docs | Karakter/encoding düzeltmesi ve içerik standardizasyonu. |
+| 19.03.2026 | 4.21.2 | Finansal genel bakış, v1.9 hiyerarşisi ve Ledger mimarisine göre güncellendi. |
 

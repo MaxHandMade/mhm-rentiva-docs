@@ -1,58 +1,66 @@
 ---
 id: transfer-api-and-webhooks
-title: Transfer API ve Webhook Akışları
+title: Transfer Servisleri ve Webhook Akışları
 sidebar_label: Transfer API ve Webhook
-slug: /api/v1/transfer-api-and-webhooks
+sidebar_position: 100
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, transfer rezervasyon akışındaki API temas noktaları ve payout callback webhook güvenliğini özetler.
+Bu sayfa, Transfer modülünün asenkron çalışma yapısını, sepete ekleme süreçlerini ve dış servislerle olan webhook haberleşme trafiğini açıklar.
 :::
 
-# Transfer API ve Webhook Akışları
+# 🛣️ Transfer Servisleri ve Webhook Akışları
 
-## İçindekiler
-- Transfer Uç Noktaları
-- Payout Callback
-- Health Endpoint
-- Rate Limiting
-- Bölüm Sonu Özeti
-- Değişiklik Günlüğü
+Transfer modülü, kiralama modülünden farklı olarak noktadan noktaya (Point-to-Point) fiyatlandırma ve özel rota hesaplamaları içerir. Bu süreçler AJAX ve REST API üzerinden hibrit bir şekilde yönetilir.
 
-## Transfer Uç Noktaları
-Transfer modülü frontend tarafında kısa kod + AJAX yaklaşımıyla çalışır.
+---
 
-- AJAX aksiyonu: `rentiva_transfer_add_to_cart`
-- Nonce doğrulaması: `rentiva_transfer_nonce`
-- Sepet veri modeli: `booking_type=transfer`
+## 🛒 1. Transfer Rezervasyon Akışı (Frontend)
 
-## Payout Callback
-`PayoutCallbackController` ödeme sağlayıcı callback'ini alır.
+Müşteri tarafındaki etkileşimler yüksek performans için AJAX tabanlı yürütülür:
 
-- Route: `/mhm-rentiva/v1/payouts/{id}/callback`
-- Kimlik doğrulama: imza tabanlı doğrulama
-- Replay/rate koruması: `WebhookRateLimiter`
-- Idempotent işleme: aynı callback tekrarında veri bütünlüğü korunur
+- **Aksiyon:** `rentiva_transfer_add_to_cart`
+- **Güvenlik:** `rentiva_transfer_nonce` kontrolü zorunludur.
+- **Veri Modeli:** `booking_type=transfer` etiketi ile WooCommerce sepetine eklenir.
+- **İş Akışı:** Seçilen araç tipi, kişi sayısı ve rota bilgileri `TransferPricingEngine` tarafından doğrulanarak sepete yansıtılır.
 
-## Health Endpoint
-`HealthController` servis sağlık durumunu döner.
+---
 
-- Route: `/mhm-rentiva/v1/health`
-- Kullanım: monitoring, smoke test, deploy sonrası canlılık kontrolü
+## 📡 2. Webhook ve Callback Mekanizması
 
-## Rate Limiting
-- REST tarafında genel hız sınırları `RateLimiter` ile uygulanır.
-- Callback tarafında ayrı kimlik tabanlı limit stratejisi kullanılır.
+Dış ödeme sağlayıcıları ve transfer partnerleri ile olan iletişim REST uç noktaları üzerinden sağlanır.
 
-![Placeholder: webhook-security-flow](/img/docs/placeholders/webhook-security-flow.svg)
+### Payout ve Rezervasyon Callback
+- **Route:** `/mhm-rentiva/v1/payouts/{id}/callback`
+- **Doğrulama:** `HMAC-SHA256` tabanlı imza kontrolü.
+- **İşleyiş:** Ödeme servisinden gelen "Başarılı" sinyali sonrası `TransferService` rezervasyonu onaylar ve ilgili taraflara (Müşteri/Tedarikçi) bildirim gönderir.
+
+---
+
+## 🏥 3. Sistem Sağlık Denetimi (Health Endpoint)
+
+Sistemin dışarıdan izlenebilirliğini (Monitoring) sağlar.
+
+- **URL:** `/wp-json/mhm-rentiva/v1/health`
+- **Kullanım Alanları:** Uptime izleme, Smoke Test ve CI/CD sonrası canlılık kontrolü.
+- **Dönen Veri:** Veritabanı tablolarının durumu, `/tmp` dizini yazma izinleri ve PHP sürüm uyumluluğu.
+
+---
+
+## 🛡️ 4. Güvenlik ve Hız Sınırları (Rate Limiting)
+
+- **Genel Sınır:** Transfer arama uç noktaları için dakikada 30 istek.
+- **Callback Sınırı:** IP bazlı değil, servis sağlayıcı kimliği (PSP Identity) bazlı özel limitler uygulanır.
+- **Idempotency:** Aynı bildirim ID'sine sahip tekrarlı istekler işlem görmez, ancak `200 OK` dönülür.
 
 ## Bölüm Sonu Özeti
-- Transfer ve finans callback akışları farklı güvenlik katmanlarıyla korunur.
-- Webhook güvenliği için imza + rate + idempotency birlikte zorunludur.
+- Transfer modülü, AJAX (Frontend) ve REST (Backend/External) katmanlarını bir arada kullanır.
+- Tüm finansal etkileşimler imza tabanlı (`HMAC`) doğrulamaya tabidir.
+- `Health` endpointi ile sistemin operasyonel durumu anlık takip edilebilir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Transfer API ve webhook teknik sayfası eklendi. |
-
+| 19.03.2026 | 4.21.2 | TransferPricingEngine entegrasyonu, Health endpoint detayları ve HMAC doğrulama akışı eklendi. |

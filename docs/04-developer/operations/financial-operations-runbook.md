@@ -1,33 +1,69 @@
 ---
 id: financial-operations-runbook
-title: Finansal Operasyon Runbook
+title: Finansal Operasyon Runbook (L1/L2)
 sidebar_label: Operasyon Runbook
-slug: /developer/operations/financial-operations-runbook
+sidebar_position: 1
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, Finansal Operasyon Runbook konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+Bu rehber, Rentiva finansal operasyon ekibi ve sistem yöneticileri için günlük rutinleri ve kritik müdahale adımlarını tanımlar.
 :::
 
-# Finansal Operasyon Runbook
+# 📖 Finansal Operasyon Runbook
 
-## İçindekiler
-- Genel Bakış
+Finansal operasyonlar, sistemin nakit akışını ve veri bütünlüğünü korumak için tasarlanmış sıralı adımlardan oluşur.
 
-1. Pending payout listesini kontrol et.
-2. Bakiye ve talep tutarını doğrula.
-3. Freeze bayraklarını kontrol et.
-4. Onay sonrası audit kaydını doğrula.
-5. Callback sonrası reversal etkisini doğrula.
+---
 
-![Diyagram: financial-operations-runbook](/img/docs/financial/fin-fin-img-runbook-001.svg)
+## 🕒 Günlük Mutabakat (Reconciliation)
+
+Her iş günü başında aşağıdaki kontroller yapılmalıdır:
+1. **Pending Payouts:** `Payout List Table` üzerinden bekleyen taleplerin yaşlandırmasını (Aging) kontrol edin. 48 saati geçen talepleri incelemeye alın.
+2. **Ledger Balance:** Ledger tablolarındaki toplam giren/çıkan bakiyenin, sistemin raporladığı toplam `Net Balance` ile tutarlılığını test edin.
+3. **Failed Webhooks:** `WebhookLog` tablosunu tarayarak başarılı olmayan ödeme bildirimlerini tespit edin.
+
+---
+
+## ⚖️ Governance Operasyonları
+
+Kritik durumlarda `GovernanceService` üzerinden müdahale prosedürleri:
+
+### ❄️ Satıcı Dondurma (Freeze)
+Riskli aktivite tespit edildiğinde:
+- Satıcı ID'sini `Governance` paneline girin.
+- **Freeze** bayrağını aktif edin.
+- Bu işlem, satıcının tüm bekleyen payout'larını askıya alır ve yeni talep oluşturmasını engeller.
+
+### 🔓 Payout Onay Döngüsü (Maker-Checker)
+- **Maker:** Operasyon sorumlusu talebi inceler ve listeler.
+- **Checker:** Finans yöneticisi, operasyon sorumlusunun kendi hesabına payout yapmadığından emin olduktan sonra `Bulk Approve` işlemini gerçekleştirir.
+
+---
+
+## 📝 Audit Log Doğrulama
+
+Herhangi bir finansal itiraz durumunda:
+1. `mhm_rentiva_ledger` tablosundan işlem ID'sini bulun.
+2. `GovernanceService::log_decision()` tarafından oluşturulan audit kaydıyla eşleştiğini doğrulayın.
+3. Timestamp ve IP adresi tutarlılığını kontrol ederek adli (Forensic) bütünlüğü onaylayın.
+
+---
+
+## 🔄 Reversal (Ters İşlem) Yönetimi
+
+Hatalı veya mükerrer ödemelerde:
+- `Ledger::record_reversal()` metodunu kullanarak yeni bir "Reversal" satırı ekleyin.
+- **Asla** mevcut bir Ledger kaydını silmeyin veya güncellemeyin.
 
 ## Bölüm Sonu Özeti
-- Finansal Operasyon Runbook sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+- Operasyonel adımlarda "Silme" (Delete) yetkisi hiçbir kademede yoktur.
+- Her müdahale mutlaka bir audit kaydı bırakmalıdır.
+- Günlük mutabakat, sistemin finansal sağlığı için zorunludur.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+| 19.03.2026 | 4.21.2 | Sayfa, mutabakat ve Governance operasyonel adımlarıyla güncellendi. |
 

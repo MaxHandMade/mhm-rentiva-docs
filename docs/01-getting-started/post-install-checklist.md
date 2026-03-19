@@ -2,76 +2,62 @@
 id: post-install-checklist
 title: Kurulum Sonrası Kontrol Listesi
 sidebar_label: Kontrol Listesi
+sidebar_position: 4
 slug: /getting-started/checklist
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Kurulum Sonrası Kontrol Listesi konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
-:::
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
 
-# Kurulum Sonrası Kontrol Listesi
+Kurulum adımlarını ve sihirbazı tamamladıktan sonra, sitenizin tam işlevsel olduğundan emin olmak için aşağıdaki kontrol listesini takip edin. Bu liste, canlı rezervasyon almaya başlamadan önceki son emniyet kilididir.
 
-## İçindekiler
-- Genel
-- Sayfalar & Kısa Kodlar
-- Ödeme ve E-posta
-- Araç & Rezervasyon
-- Müşteri Portalı
-- Raporlama & Bakım
-- Ek Adımlar
+---
 
-Kurulum adımlarını tamamladıktan sonra aşağıdaki maddeleri sırayla işaretleyin. Bu liste, canlıya çıkmadan önce temel fonksiyonların çalıştığını garanti altına alır.
+### 🛠️ Yapılandırma Kontrolü
+- [ ] **Ayarlar Kaydedildi:** `MHM Rentiva > Settings` sayfasındaki tüm sekmeler kontrol edildi ve kaydedildi.
+- [ ] **Para Birimi:** `General Settings` sekmesinde para birimi ve sembolü doğru görünüyor.
+- [ ] **Tarih & Saat:** Sitenizin zaman dilimi (`Settings > General`) işletmenizin lokasyonuyla uyumlu.
+- [ ] **Lisans:** `License` sayfasında anahtarınızın "Active" olduğu doğrulandı.
 
-## Genel
+### 📄 Sayfalar ve Kısa Kodlar (Shortcodes)
+- [ ] **Sayfa Eşleşmeleri:** `Settings > Shortcode Pages` sekmesinde her fonksiyon (Arama, Liste, Detay, Ödeme, Hesabım) doğru bir sayfaya atanmış.
+- [ ] **Görünüm Testi:** Oluşturulan bu sayfalar frontend tarafında şık ve hatasız açılıyor.
+- [ ] **Menü Entegrasyonu:** Müşteri paneli (Hesabım) ve Arama sayfası ana menüye eklendi.
 
-- [ ] `MHM Rentiva > Settings` içinde tüm zorunlu alanlar dolduruldu.
-- [ ] Para birimi, tarih ve saat formatı işletmenize uygun.
-- [ ] Lisans anahtarı (Varsa) doğrulandı ve etkinleştirildi.
+### 💰 Ödeme ve Finans
+- [ ] **Ödeme Ağ Geçitleri:** WooCommerce ödeme yöntemleri (Stripe, PayPal, Havale vb.) aktif edildi.
+- [ ] **Test Ödemesi:** Sandbox/Test modunda en az bir başarılı rezervasyon ödemesi gerçekleştirildi.
+- [ ] **Fiyat Hesaplama:** Araç günlük fiyatları ve ekstralar sepete doğru yansıyor.
 
-## Sayfalar & Kısa Kodlar
+### 📧 Bildirim Sistemi
+- [ ] **Test E-postası:** `Settings > Email Templates` üzerinden bir deneme e-postası gönderildi.
+- [ ] **SMTP Doğrulaması:** E-postalar "Spam" klasörüne düşmeden alıcıya ulaşıyor (SMTP kullanımı önerilir).
+- [ ] **Admin Bildirimleri:** Yeni bir rezervasyon geldiğinde admin e-postasına bildirim düşüyor.
 
-- [ ] Zorunlu sayfalar oluşturuldu ve ilgili kısa kodlar eklendi.
-- [ ] `Settings > Shortcode Pages` sekmesinde her kısa kod doğru sayfaya bağlandı.
-- [ ] Ana menü ve müşteri paneli bağlantıları test edildi.
+### 🚗 Araç ve Stok Yönetimi
+- [ ] **Örnek Araç:** En az bir adet gerçek özellikli araç sisteme eklendi.
+- [ ] **Kategoriler:** Araçlar sınıflarına (Ekonomik, SUV, VIP vb.) göre ayrıldı.
+- [ ] **Takvim Kontrolü:** Araç müsaitlik takvimi rezervasyon sonrası doğru şekilde güncelleniyor.
 
-## Ödeme ve E-posta
+---
 
-- [ ] Stripe/PayPal/PayTR sandbox anahtarları girildi, test ödemesi başarıyla tamamlandı.
-- [ ] Offline ödeme talimatları düzenlendi ve makbuz yükleme senaryosu denendi.
-- [ ] `Email Templates` sekmesinden test e-postası gönderildi; SMTP hatası alınmadı.
+## Teknik Doğrulama (Geliştiriciler İçin)
 
-## Araç & Rezervasyon
+Eğer teknik bir sorun yaşıyorsanız, aşağıdaki noktaları kontrol edin:
 
-- [ ] En az bir araç kategorisi ve örnek araç kaydedildi.
-- [ ] Araç galerisi ve özel alanlar (Vehicle Settings üzerinden) sorunsuz görüntüleniyor.
-- [ ] Frontend üzerinden rezervasyon oluşturuldu; admin panelinde doğru statü ile göründü.
+1. **Permalinks:** `Settings > Permalinks` sayfasını ziyaret edip "Save Changes" butonuna basarak rotaları yenileyin (`flush_rewrite_rules`).
+2. **WooCommerce Sync:** Rentiva'nın WooCommerce sepetine veri gönderip göndermediğini `WooCommerceBridge` loglarından takip edin.
+3. **Database Check:** `wp_mhm_rentiva_sessions` tablosunda aktif oturum verisi olup olmadığını PHPMyAdmin üzerinden doğrulayabilirsiniz.
 
-## Müşteri Portalı
+---
 
-- [ ] WooCommerce "Hesabım" sayfasında Rentiva sekmeleri (Rezervasyon, Favoriler, Mesajlar) çalışıyor.
-- [ ] Müşteri hesabı ile giriş/çıkış test edildi.
-- [ ] Mesaj sistemi üzerinden örnek bir ileti oluşturulup yanıtlandı.
+### Bölüm Özeti
+- Kontrol listesi **5 ana kategoriden** oluşur.
+- **Canlıya çıkmadan önce** test ödemesi yapılması kritiktir.
+- **Permalink yenileme** birçok sayfa hatasını çözer.
 
-## Raporlama & Bakım
-
-- [ ] Dashboard grafikleri veri oluşturduktan sonra güncelleniyor.
-- [ ] `Export` sayfasından CSV çıktısı alınabildi.
-- [ ] `Settings > Database Cleanup` sayfasında dry-run çalıştırıldı, hata alınmadı.
-
-## Ek Adımlar
-
-- [ ] [Lokal & Canlı Test checklist'i](../04-developer/testing-checklists.md) ile kalan senaryolar işaretlendi.
-- [ ] Gerekli tüm webhooks (Stripe, PayPal, PayTR) ilgili servislerde doğrulandı.
-- [ ] Varsayılan içerik (örnek araçlar vb.) temizlenip gerçek veriler eklenmeye hazır.
-
-Bu listeyi tamamladıysanız, Rentiva canlı ortamda test edilmek için hazır demektir. Bir sonraki adım olarak ödeme ve e-posta senaryolarını canlı anahtarlarla doğrulayın.
-
-## Bölüm Sonu Özeti
-- Kurulum Sonrası Kontrol Listesi sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
-
-## Değişiklik Günlüğü
+### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
-|---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
+| :--- | :--- | :--- |
+| 18.03.2026 | 4.21.2 | Checklist yapısı modern ikonlar ve kategorilerle yenilendi. |
+| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

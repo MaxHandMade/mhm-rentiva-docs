@@ -1,51 +1,90 @@
 ---
 id: financial-ledger-model
-title: Ledger Veri Modeli
+title: Ledger Veri Modeli (Schema & Logic)
 sidebar_label: Ledger Modeli
-slug: /developer/financial/financial-ledger-model
+sidebar_position: 11
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa ledger tablosunun alanlarını, tiplerini ve finansal etki kurallarını tanımlar.
+Bu sayfa, Rentiva finansal sisteminin temeli olan Değişmez Defter (Immutable Ledger) veri şemasını, depolama kurallarını ve finansal mantığını detaylandırır.
 :::
 
-# Ledger Veri Modeli
+# 🧾 Ledger Veri Modeli
 
-## İçindekiler
-- Kritik Alanlar
-- Ledger Tipleri
-- Domain Kuralları
+`wp_mhm_rentiva_ledger` tablosu, tüm finansal olayların nihai kayıt yeridir. Bu tablo **Append-Only** (Sadece Ekleme) yapısındadır; mevcut satırlar asla güncellenmez veya silinmez.
 
-Tablo: `${wpdb->prefix}mhm_rentiva_ledger`
+---
 
-## Kritik Alanlar
-- `transaction_uuid` (UNIQUE)
-- `vendor_id`
-- `type`
-- `amount`
-- `status`
-- `created_at` (UTC)
-- `policy_id`, `policy_version_hash`
+## 🏗️ SQL Şeması (Technical Schema)
 
-## Ledger Tipleri
-- `commission_credit`
-- `commission_refund`
-- `payout_debit`
-- `payout_reversal`
+Sistemde kullanılan ana tablo yapısı aşağıdadır. Hassas finansal hesaplamalar için `DECIMAL(12,2)` kullanılmaktadır.
 
-## Domain Kuralları
-- `payout_debit` negatif tutar.
-- `payout_reversal` pozitif tutarla ters kayıt üretir.
-- Bakiye hesabı sadece `status='cleared'` kayıtları ile yapılır.
+```sql
+CREATE TABLE wp_mhm_rentiva_ledger (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    tenant_id BIGINT UNSIGNED NOT NULL DEFAULT 1,
+    transaction_uuid CHAR(36) NOT NULL, -- Idempotency Key
+    vendor_id BIGINT UNSIGNED NOT NULL,
+    booking_id BIGINT UNSIGNED NULL,
+    order_id BIGINT UNSIGNED NULL,
+    type VARCHAR(30) NOT NULL,          -- İşlem Türü
+    amount DECIMAL(12,2) NOT NULL,      -- Net Etki Tutarı
+    gross_amount DECIMAL(12,2) NULL,    -- WC Sipariş Toplamı
+    status VARCHAR(30) NOT NULL,        -- 'cleared', 'pending', 'void'
+    policy_id BIGINT UNSIGNED NULL,     -- İlişkili Policy ID
+    policy_version_hash CHAR(64) NULL,  -- Denetim için Policy Hash
+    created_at DATETIME NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (transaction_uuid),      -- Mükerrer Kayıt Engeli
+    INDEX (vendor_id, status, created_at)
+) ENGINE=InnoDB;
+```
 
-![Diyagram: financial-ledger-model](/img/docs/financial/fin-fin-img-ledger-001.svg)
+---
+
+## 🔄 İşlem Türleri ve Bakiye Etkisi
+
+`type` kolonu, işlemin satıcı bakiyesine nasıl etki edeceğini belirler:
+
+| İşlem Türü (`type`) | Bakiye Etkisi | Açıklama |
+| :--- | :--- | :--- |
+| `commission_credit` | **Pozitif (+)** | Tamamlanan bir satıştan gelen hakediş. |
+| `commission_refund` | **Negatif (-)** | İade edilen bir siparişin ters kaydı. |
+| `payout_debit` | **Negatif (-)** | Satıcıya yapılan başarılı ödeme (Çıkış). |
+| `payout_reversal` | **Pozitif (+)** | Başarısız/Geri dönen bir ödemenin iadesi. |
+
+---
+
+## 🛡️ Domain Kuralları ve Güvenlik
+
+### 1. Immutability (Değişmezlik)
+Finansal denetim (Audit) standartları gereği, bu tabloda `UPDATE` veya `DELETE` işlemi yapılması kesinlikle yasaktır. Bir hata düzeltilmesi gerekiyorsa, hatayı nötralize eden yeni bir ters kayıt (Correction/Refund) eklenmelidir.
+
+### 2. Transaction UUID (Idempotency)
+Her finansal olay (Sipariş ödemesi, Payout onayı), kaynağında bir UUID üretir. Veritabanı seviyesindeki `UNIQUE` kısıtlaması, sistemin aynı olayı yanlışlıkla iki kez işlemesini donanım seviyesinde engeller.
+
+### 3. Zamanlama (Temporal Audit)
+Tüm işlemler `created_at` kolonu üzerinden UTC olarak damgalanır. `policy_id` ve `policy_version_hash` alanları sayesinde, işlemin yapıldığı tarihteki komisyon politikası ile tutarlılığı 2 yıl sonra bile doğrulanabilir.
+
+---
+
+## 📊 Bakiye Hesaplama Mantığı
+
+Satıcının güncel bakiyesi her zaman tüm "cleared" satırların toplanmasıyla bulunur:
+
+```sql
+SELECT SUM(amount) FROM wp_mhm_rentiva_ledger 
+WHERE vendor_id = %d AND status = 'cleared';
+```
 
 ## Bölüm Sonu Özeti
-- Ledger tablosu immutable ve denetlenebilir bir kayıt katmanıdır.
+- Veri tipi her zaman **DECIMAL**'dır (Float yasaktır).
+- Tablo yapısı **Append-Only** ve **Tenant-Isolated**'dır.
+- Her kaydın benzersiz bir **UUID**'si vardır.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 2026-02-26 | 4.21.0-docs | Karakter/encoding düzeltmesi ve içerik standardizasyonu. |
-
+| 19.03.2026 | 4.21.2 | Sayfa, LedgerMigration şeması ve bakiye etkisi matrisi ile güncellendi. |

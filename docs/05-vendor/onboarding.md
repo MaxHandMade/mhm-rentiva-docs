@@ -1,219 +1,98 @@
 ---
 id: vendor-onboarding
-title: Vendor Onboarding & Application Lifecycle
+title: Tedarikçi Katılımı (Vendor Onboarding)
 sidebar_label: Onboarding
-slug: /developer/vendor/onboarding
+sidebar_position: 2
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-09.03.2026-orange?style=flat-square)
 
-:::info Purpose
-This page documents the complete vendor onboarding lifecycle — from the initial application form to admin review, approval, and role assignment.
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+
+:::info Amaç
+Bu sayfa, bir kullanıcının tedarikçi olma sürecini; başvuru formundan admin onayına, rol atamasından veri senkronizasyonuna kadar teknik olarak açıklar.
 :::
 
-## Table of Contents
-- Overview
-- Application Form & Shortcode
-- Eligibility Checks
-- Application Data Storage
-- Admin Review & Approval
-- Role Assignment & Meta Sync
-- Action Hooks
-- Pro-Gating
+# 🚀 Tedarikçi Katılım Süreci
+
+Rentiva onboarding modülü, kontrollü bir pazar yeri (Marketplace) yapısını garanti etmek için **iki aşamalı onay mekanizması** kullanır.
 
 ---
 
-## Overview
+## 📝 1. Başvuru Formu ve Kısa Kod
 
-The Vendor Onboarding module provides a **two-stage approval process** for users who want to become vehicle rental vendors on the platform. Users submit an application through a frontend form; administrators review and approve or reject applications from the WordPress admin panel.
+Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen bir form üzerinden alınır.
 
-**Pro-Gating:** All vendor marketplace features are controlled by:
+### Teknik Uygulama
+- **Sınıf:** `MHMRentiva\Admin\Frontend\Shortcodes\Vendor\VendorApply`
+- **AJAX İşleyici:** `mhm_vendor_apply` eylemi üzerinden `handle_ajax()` metoduyla çalışır.
+- **Güvenlik:** Her başvuru için `wp_create_nonce('mhm_vendor_apply_nonce')` ile CSRF koruması sağlanır.
 
+### Zorunlu Alanlar
+| Alan | Meta Anahtarı | Tip | Şifreleme |
+|---|---|---|---|
+| Ad Soyad | `_vendor_full_name` | Metin | Hayır |
+| Telefon | `_vendor_phone` | Metin | Hayır |
+| Şehir / Bölge | `_vendor_city` | Seçim | Hayır |
+| **IBAN** | `_vendor_iban` | Metin | **Evet (AES-256)** |
+| Kimlik/Ehliyet | `_vendor_doc_id` | Dosya | Hayır |
+
+---
+
+## 🛡️ 2. Uygunluk Kontrolleri (`Eligibility`)
+
+Bir kullanıcı başvuru yapmadan önce `VendorApplicationManager::can_apply()` ile şu kurallar denetlenir:
+1. Kullanıcı zaten `rentiva_vendor` rolüne sahip olmamalıdır.
+2. Mevcut bir "Pending" (Beklemede) başvurusu olmamalıdır.
+3. `Mode::canUseVendorMarketplace()` kontrolü ile lisansın bu özelliği desteklediği doğrulanmalıdır.
+
+---
+
+## 🔒 3. Veri Saklama ve Güvenlik
+
+Başvurular `mhm_vendor_app` CPT'si olarak saklanır.
+
+### IBAN Şifreleme Protokolü
+IBAN bilgileri veritabanına asla düz metin olarak yazılmaz:
 ```php
-\MHMRentiva\Admin\Licensing\Mode::canUseVendorMarketplace()
+// VendorApplicationManager::encrypt_iban()
+$key = substr(hash('sha256', AUTH_KEY . SECURE_AUTH_SALT), 0, 32);
+$iv  = openssl_random_pseudo_bytes(16);
+$cipher = openssl_encrypt($raw_iban, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+return base64_encode($iv . $cipher);
 ```
-
-If the license does not support the vendor marketplace, the entire onboarding flow is disabled.
+**Not:** `AUTH_KEY` veya `SECURE_AUTH_SALT` değişirse eski şifrelenmiş IBAN'lar çözülemez.
 
 ---
 
-## Application Form & Shortcode
+## ⚙️ 4. Admin Onay ve Rol Atama
 
-The application form is rendered by the `[rentiva_vendor_apply]` shortcode, implemented in:
+### Onay Akışı (`Approve`)
+Admin panelinden "Approve" tıklandığında `VendorOnboardingController::approve()` şu işlemleri sırasıyla yapar:
+1. **Rol Yükseltme:** Kullanıcıya `rentiva_vendor` rolü atanır.
+2. **Meta Sync:** Başvuru postundaki veriler (`_vendor_*`) kullanıcı meta tablolarına (`_rentiva_vendor_*`) kopyalanır.
+3. **Loglama:** Onay tarihi ve onaylayan admin ID'si kaydedilir.
+4. **Bildirim:** `mhm_rentiva_vendor_approved` kancası tetiklenir.
 
-```
-src/Admin/Frontend/Shortcodes/Vendor/VendorApply.php
-```
-
-### Form Fields
-
-| Field | Meta Key | Type | Required |
-|-------|----------|------|----------|
-| Full Name | `_vendor_full_name` | Text | ✅ |
-| Phone | `_vendor_phone` | Tel | ✅ |
-| City | `_vendor_city` | Text | ✅ |
-| Service Areas | `_vendor_service_areas` | Checkbox Array | ✅ |
-| IBAN | `_vendor_iban` | Text (encrypted) | ✅ |
-| Tax Number | `_vendor_tax_number` | Text | ❌ |
-| Bio | `_vendor_bio` | Textarea | ❌ |
-| Documents | `_vendor_documents` | File Upload | ❌ |
-
-### AJAX Submission
-
-The form submits via AJAX through `VendorApply::handle_ajax()`:
-
-```php
-add_action('wp_ajax_mhm_vendor_apply', [VendorApply::class, 'handle_ajax']);
-```
+### Red Akışı (`Reject`)
+Admin reddettiğinde:
+1. Başvuru statüsü `trash` (çöp) durumuna alınır.
+2. `_vendor_rejection_note` içine red gerekçesi yazılır.
+3. `mhm_rentiva_vendor_rejected` kancası tetiklenir.
 
 ---
 
-## Eligibility Checks
+## 📧 5. E-posta Bildirimleri
 
-Before a user can submit an application, `VendorApplicationManager::can_apply()` performs the following checks:
+Tedarikçi döngüsündeki tüm statü değişiklikleri `VendorNotifications` sınıfı tarafından dinlenir:
+- **Başvuru Alındı:** Adaya onaya alındığı bilgisi gider.
+- **Onaylandı:** Hoş geldin mesajı ve panel erişim bilgileri gönderilir.
+- **Reddedildi:** Red gerekçesiyle birlikte bilgilendirme yapılır.
 
-```php
-public static function can_apply(int $user_id): bool
-{
-    // 1. User must NOT already have the 'rentiva_vendor' role
-    // 2. User must NOT have a pending application (post_status = 'pending')
-    // Returns true only if both conditions are satisfied
-}
-```
+## Bölüm Sonu Özeti
+- Onboarding süreci tamamen AJAX tabanlıdır ve sayfa yenileme gerektirmez.
+- Hassas finansal veriler (IBAN) donanım/sunucu seviyesinde şifrelenir.
+- Rol ve meta senkronizasyonu atomik bir işlem olarak yürütülür.
 
-**Prevented Scenarios:**
-- Existing vendors cannot re-apply
-- Users with a pending (unreviewed) application cannot submit duplicates
-
----
-
-## Application Data Storage
-
-Applications are stored as `mhm_vendor_application` Custom Post Type entries:
-
-| Field | Storage | Notes |
-|-------|---------|-------|
-| Post Author | `post_author` | The applicant's `user_id` |
-| Post Status | `post_status` | `pending` → `publish` (approved) or `trash` (rejected) |
-| IBAN | `_vendor_iban` (post meta) | **AES-256-CBC encrypted** before storage |
-| Other Fields | Post meta | Sanitized and stored as `_vendor_*` meta keys |
-
-### IBAN Encryption at Application Time
-
-```php
-$encrypted = VendorApplicationManager::encrypt_iban($raw_iban);
-// Uses openssl_encrypt with AES-256-CBC
-// Key: AUTH_KEY constant
-// IV:  derived from SECURE_AUTH_SALT
-// Returns empty string on failure — plain text is NEVER stored
-```
-
----
-
-## Admin Review & Approval
-
-Administrators manage applications from the **Vendor Management** admin page:
-
-```
-Admin Menu → MHM Rentiva → Vendor Management → Pending Applications tab
-```
-
-### Application Detail View
-
-The admin sees:
-- Applicant name, email, phone, city
-- Service areas and bio
-- Uploaded documents
-- **Masked IBAN** (e.g., `TR12******5678`) — full IBAN is never shown in the list view
-
-### Approval Flow
-
-```
-┌──────────────┐    Admin clicks     ┌─────────────────┐
-│   Pending    │ ──────────────────► │ VendorOnboarding │
-│  Application │    "Approve"        │  Controller      │
-└──────────────┘                     │  ::approve()     │
-                                     └────────┬────────┘
-                                              │
-                              ┌───────────────┼───────────────┐
-                              ▼               ▼               ▼
-                     Assign Role      Sync Meta Data    Fire Hook
-                   'rentiva_vendor'   to User Meta    'mhm_rentiva_
-                                                     vendor_approved'
-```
-
-### Meta Sync on Approval
-
-When approved, `VendorOnboardingController::approve()` copies application meta to **user meta**:
-
-```php
-// Application post meta → User meta mapping
-'_vendor_phone'         → '_rentiva_vendor_phone'
-'_vendor_city'          → '_rentiva_vendor_city'
-'_vendor_iban'          → '_rentiva_vendor_iban'        // stays encrypted
-'_vendor_service_areas' → '_rentiva_vendor_service_areas'
-'_vendor_bio'           → '_rentiva_vendor_bio'
-'_vendor_tax_number'    → '_rentiva_vendor_tax_number'
-```
-
----
-
-## Role Assignment
-
-### Vendor Role Registration
-
-```php
-// Registered in Plugin::register_vendor_role() at init priority 20
-add_role('rentiva_vendor', __('Rentiva Vendor', 'mhm-rentiva'), [
-    'read'                   => true,
-    'edit_posts'             => true,
-    'upload_files'           => true,
-    'edit_published_posts'   => true,
-    'delete_posts'           => true,
-]);
-```
-
-### Suspension
-
-Administrators can suspend vendors via `VendorOnboardingController::suspend()`:
-- Removes `rentiva_vendor` role
-- Adds `customer` role
-- Sets `_rentiva_vendor_status` meta to `suspended`
-
----
-
-## Action Hooks
-
-| Hook | Parameters | Fired When |
-|------|-----------|------------|
-| `mhm_rentiva_vendor_application_submitted` | `(int $user_id)` | User submits application form |
-| `mhm_rentiva_vendor_approved` | `(int $user_id, int $application_id)` | Admin approves application |
-| `mhm_rentiva_vendor_rejected` | `(int $user_id, int $application_id, string $reason)` | Admin rejects application |
-
-### Email Notifications
-
-All hooks are consumed by `VendorNotifications` class which sends transactional emails:
-
-```php
-// Registered in VendorNotifications::register()
-add_action('mhm_rentiva_vendor_approved', [self::class, 'on_vendor_approved'], 10, 2);
-add_action('mhm_rentiva_vendor_rejected', [self::class, 'on_vendor_rejected'], 10, 3);
-```
-
----
-
-## Key Source Files
-
-| File | Responsibility |
-|------|---------------|
-| `src/Admin/Vendor/VendorApplicationManager.php` | CRUD, eligibility, IBAN encryption |
-| `src/Admin/Vendor/VendorOnboardingController.php` | Approve, reject, suspend logic |
-| `src/Admin/Vendor/AdminVendorApplicationsPage.php` | Admin UI tabs and form handlers |
-| `src/Admin/Frontend/Shortcodes/Vendor/VendorApply.php` | Frontend application form shortcode |
-| `src/Admin/Emails/Notifications/VendorNotifications.php` | Transactional email handlers |
-
----
-
-## Changelog
-| Date | Version | Note |
-|------|---------|------|
-| 2026-03-09 | 4.21.0-docs | Initial vendor onboarding documentation created. |
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 19.03.2026 | 4.21.2 | Sayfa, HMAC şifreleme ve meta senkronizasyon detaylarıyla güncellendi. |

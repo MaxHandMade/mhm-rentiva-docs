@@ -2,66 +2,78 @@
 id: vip-transfer
 title: VIP Transfer Modülü
 sidebar_label: VIP Transfer
+sidebar_position: 10
 slug: /features-usage/vip-transfer
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, VIP Transfer modülünün işletme tarafı kurulumunu, kullanıcı akışını ve temel teknik davranışlarını açıklar.
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+
+VIP Transfer modülü, standart araç kiralamadan farklı olarak, şoförlü ulaşım hizmetlerini (Havalimanı transferi, şehirlerarası ulaşım vb.) yönetmek için tasarlanmıştır. Bu modül, rota bazlı fiyatlandırma ve kapasite kontrolü üzerine inşa edilmiştir.
+
+---
+
+## 🗺️ Transfer Güzergahları (Routes)
+
+Hizmet vereceğiniz noktaları ve bu noktalar arasındaki fiyatları tanımlamak için **MHM Rentiva > Transfer Güzergahları** menüsünü kullanın.
+
+### 1. Konum Tanımlama (Locations)
+Transferin başlayacağı veya biteceği noktaları (Havalimanı, Otel, Şehir Merkezi vb.) oluşturun.
+- **İpucu:** Harita entegrasyonu için konumların koordinatlarını girmeyi unutmayın.
+
+### 2. Rota ve Fiyatlandırma
+İki konum arasındaki ana rotayı belirleyin.
+- **Sabit Fiyat:** Rota başına net bir ücret belirleyebilirsiniz.
+- **Kilometre Bazlı:** Mesafe arttıkça değişen dinamik fiyatlandırma.
+
+---
+
+## 👥 Kapasite ve Araç Uyumluluğu
+
+Transfer rezervasyonlarında en kritik nokta yolcu ve bagaj sayısıdır.
+- **Yolcu Sayısı:** Aracın ruhsatındaki koltuk kapasitesine göre filtreleme yapılır.
+- **Bagaj Kapasitesi:** Rezervasyon formunda belirtilen bagaj adedi, aracın bagaj hacmiyle karşılaştırılır.
+
+:::warning Önemli
+Eğer bir araç "VIP Minibüs" ise ve 8 yolcu kapasitesine sahipse, 10 kişilik bir grup arama yaptığında bu araç sonuçlarda görünmeyecektir.
 :::
 
-# VIP Transfer Modülü
+---
 
-## İçindekiler
-- Genel Bakış
-- Kurulum Adımları
-- Kullanım Akışı
-- İş Kuralları
-- Teknik Notlar
-- Bölüm Sonu Özeti
-- Değişiklik Günlüğü
+## 🛒 Kullanıcı Akışı ve Rezervasyon
 
-## Genel Bakış
-VIP Transfer modülü, A noktasından B noktasına şoförlü transfer rezervasyonu üretmek için tasarlanmıştır.
+1. **Arama:** Kullanıcı başlangıç ve bitiş noktasını, tarih-saati ve kişi sayısını seçer.
+2. **Araç Seçimi:** Kapasiteye uygun araçlar listelenir.
+3. **Ödeme:** WooCommerce üzerinden ödeme tamamlanır.
+4. **Onay:** Yönetici paneline "Transfer" tipinde bir rezervasyon düşer.
 
-- Rota bazlı fiyatlandırma (`fixed` / mesafe bazlı)
-- Yolcu ve bagaj kapasitesine göre araç eşleme
-- WooCommerce sepet/ödeme akışıyla tam entegrasyon
+<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
+  <strong>📸 Görsel Bekleniyor: Transfer Arama Formu</strong><br/>
+  <em>Frontend taraftaki transfer arama motoru görünümü.</em>
+</div>
 
-## Kurulum Adımları
-1. `MHM Rentiva > Transfer Locations` altında konumları tanımlayın.
-2. `MHM Rentiva > Transfer Routes` altında rota ve fiyat modelini belirleyin.
-3. `MHM Rentiva > Settings > Transfer` altında ödeme politikasını ayarlayın.
+---
 
-## Kullanım Akışı
-1. Frontend arama formunda rota + tarih + yolcu/bagaj bilgisi girilir.
-2. Sistem uygun araçları listeler.
-3. Kullanıcı aracı sepete ekler.
-4. Checkout sonrası transfer meta alanları rezervasyona kaydedilir.
+## 🛠️ Teknik Not: Hook ve Filtreler
 
-Kullanılan shortcode:
+Geliştiriciler için transfer fiyatlandırmasını manipüle etmek veya ek kurallar eklemek mümkündür:
 
-```html
-[rentiva_transfer_search]
+```php
+// Transfer fiyatını filtrelemek için:
+add_filter('mhm_rentiva_transfer_price', function($price, $route_id) {
+    // Özel kampanya mantığı
+    return $price * 0.9; 
+}, 10, 2);
 ```
 
-![Placeholder: transfer-search-flow](/img/docs/placeholders/transfer-search-flow.svg)
+---
 
-## İş Kuralları
-- Çakışma kontrolü rezervasyon saat aralığı ve buffer mantığı ile yapılır.
-- Araç kapasitesi yolcu/bagaj puanına göre filtrelenir.
-- Depozito veya tam ödeme politikası ayarlardan okunur.
+### Bölüm Özeti
+- **Transfer**, rota ve kapasite odaklı bir modüldür.
+- **Fiyatlandırma** sabit veya mesafe bazlı olabilir.
+- **Kapasite limitleri** (yolcu/bagaj) sistem tarafından otomatik denetlenir.
 
-## Teknik Notlar
-- Rota/konum verileri transfer tablolarından alınır.
-- Sepete ekleme transfere özel AJAX akışı ile yürütülür.
-- Rezervasyon tipi `transfer` olarak işaretlenir.
-
-## Bölüm Sonu Özeti
-- VIP Transfer akışı, rota + kapasite + ödeme politikası üçlüsüyle çalışır.
-- Operasyonel doğruluk için rota verisi ve ayarların güncel tutulması kritiktir.
-
-## Değişiklik Günlüğü
+### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
-|---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa güncel transfer modülü davranışına göre yeniden yazıldı. |
+| :--- | :--- | :--- |
+| 18.03.2026 | 4.21.2 | İçerik hibrit modele göre güncellendi. |
+| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

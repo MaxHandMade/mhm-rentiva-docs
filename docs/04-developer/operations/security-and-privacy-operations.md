@@ -1,54 +1,76 @@
 ---
 id: security-and-privacy-operations
-title: Güvenlik ve Privacy Operasyonları
+title: Güvenlik & Gizlilik (Security & Privacy)
 sidebar_label: Güvenlik ve Privacy
-slug: /developer/operations/security-and-privacy-operations
+sidebar_position: 4
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, güvenlik ve veri gizliliği operasyonlarının canlı ortamda nasıl yönetileceğini özetler.
+Bu rehber, Rentiva altyapısındaki verilerin korunması, GDPR/KVKK uyumluluğu ve olası güvenlik olaylarına müdahale süreçlerini kapsar.
 :::
 
-# Güvenlik ve Privacy Operasyonları
+# 🔒 Güvenlik & Gizlilik Operasyonları
 
-## İçindekiler
-- Güvenlik Bileşenleri
-- Privacy Bileşenleri
-- Operasyon Kontrolleri
-- Olay Müdahalesi
-- Bölüm Sonu Özeti
-- Değişiklik Günlüğü
+Rentiva, "Security by Design" prensibiyle veriyi toplama anından imha anına kadar sıkı denetim altında tutar.
 
-## Güvenlik Bileşenleri
-- `SecurityManager`
-- `WafManager`
-- `LockoutManager`
-- `SessionManager`
-- `RateLimiter`
+---
 
-## Privacy Bileşenleri
-- `GDPRManager`
-- `DataRetentionManager`
+## 🛡️ Güvenlik Katmanları ve Araçlar
 
-## Operasyon Kontrolleri
-- Başarısız giriş denemeleri ve lockout logları izlenmelidir.
-- WAF engellemeleri yanlış pozitif açısından periyodik gözden geçirilmelidir.
-- Veri saklama/anonymization işleri zamanlanmış görevlerle doğrulanmalıdır.
+### 🔑 Erişim Kontrolü (`AuthHelper`)
+Tüm admin ve API erişimleri `AuthHelper::verify_request()` üzerinden geçer.
+- **Capability Checks:** Operasyonel işlemler `manage_options` yerine özel `rentiva_financial_manager` yetkisiyle kısıtlanabilir.
+- **API Key Rotation:** Sızma ihtimaline karşı API anahtarlarının 90 günde bir yenilenmesi önerilir.
 
-## Olay Müdahalesi
-1. Olay türünü sınıflandırın (auth, abuse, data-retention).
-2. Etkilenen hesap/endpointleri izole edin.
-3. İlgili log ve audit çıktısını dışa alın.
-4. Kalıcı düzeltme sonrası smoke test çalıştırın.
+### 🛡️ Girdi Güvenliği (`SecurityHelper`)
+Veritabanına giren her veri `SecurityHelper::validate_*` metodlarından geçer:
+- **XSS Koruması:** HTML içerikler `wp_kses` ile beyaz liste (Whitelist) süzgecine alınır.
+- **SQLi Koruması:** Ham SQL yasaktır; tüm sorgular `$wpdb->prepare()` ile parametrize edilir.
 
-![Placeholder: security-incident-flow](/img/docs/placeholders/security-incident-flow.svg)
+---
+
+## ⚖️ Veri Gizliliği (Privacy & GDPR)
+
+### 🧹 Veri Anonimleştirme (Anonymization)
+Kullanıcı hesabı silindiğinde veya yasal saklama süresi dolduğunda:
+- `PrivacyManager::anonymize_user_data()` tetiklenerek isim, e-posta ve IP adresleri `deleted_u_{id}` şeklinde maskelenir.
+- **Kural:** Finansal `Ledger` kayıtları anonimleştirilir ancak muhasebe bütünlüğü için silinmez.
+
+### 📅 Veri Saklama Politikası
+- **Web Logları:** 30 gün sonra otomatik temizlenir.
+- **Audit Logları:** Yasal zorunluluk gereği 2 yıl boyunca salt-okunur (Read-only) saklanır.
+
+---
+
+## 🚨 Olay Müdahale Protokolü (Incident Response)
+
+Bir veri ihlali veya anomali tespit edildiğinde:
+1. **İzolasyon:** Etkilenen IP adresleri `RateLimiter` üzerinden global olarak engellenir.
+2. **Snapshot:** Veritabanının o anki durumu adli inceleme (Forensic) için yedeklenir.
+3. **Analiz:** `AdvancedLogger` kayıtları taranarak sızıntının kapsamı belirlenir.
+4. **Bildirim:** Yasal süre içinde (GDPR için 72 saat) etkilenen kullanıcılara ve makamlara bilgi verilir.
+
+---
+
+## 🔄 Güvenlik Akış Şeması
+
+```mermaid
+graph TD
+    A[İstek] --> B{AuthHelper?}
+    B -- Red --> C[403 Forbidden]
+    B -- Onay --> D{SecurityHelper?}
+    D -- Temiz --> E[İşlem]
+    D -- Zararlı --> F[WAF Block & Log]
+```
 
 ## Bölüm Sonu Özeti
-- Güvenlik ve privacy operasyonları yalnız kod değil süreç disiplini gerektirir.
-- Canlı ortam için lockout, WAF, retention ve audit kontrolleri birlikte işletilmelidir.
+- Güvenlik operasyonları "En Az Yetki" (Least Privilege) prensibiyle yürütülür.
+- `Ledger` verileri sistemin en mahrem kısmıdır; doğrudan müdahale yasaktır.
+- Gizlilik ve güvenlik, sürekli izleme (Monitoring) ile garanti altına alınır.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Güvenlik ve privacy operasyon rehberi eklendi. |
+| 19.03.2026 | 4.21.2 | Sayfa, SecurityHelper ve anonimleştirme protokolleriyle güncellendi. |

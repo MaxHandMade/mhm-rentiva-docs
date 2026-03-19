@@ -1,85 +1,88 @@
 ---
-title: Badge Standards Reference
+id: badge-standards
+title: Rozet Standartları ve Kullanım Kılavuzu
 sidebar_label: Badge Standards
+sidebar_position: 120
 ---
-# Badge Standards - Reference
 
-## İçindekiler
-- Current Badge Format (v4.9.8)
-- Badge Components
-- Style Parameters
-- Usage Rules
-- Example Implementation
-- Files Requiring Badge Updates
-
-## Current Badge Format (v4.9.8)
-
-```markdown
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
-```
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-standard_v2-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, Badge Standards Reference konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+Bu kılavuz, MHM Rentiva dökümantasyon sayfalarında kullanılan görsel rozetlerin (badges) standartlarını, renk kodlarını ve kullanım kurallarını tanımlar.
 :::
 
-## Badge Components
+# 🏷️ Rozet Standartları ve Kullanım Kılavuzu
 
-### Version Badge
-- **Color:** Blue
-- **Format:** `version-{version}`
-- **Example:** `version-4.9.8`
+Dökümantasyonun güncelliğini ve teknik seviyesini hızlıca görselleştirmek için `Shields.io` tabanlı rozetler kullanılır.
 
-### Security Badge
-- **Color:** Green
-- **Format:** `security-{status}`
-- **Possible Values:** 
-  - `WPCS Compliant`
-  - `Nonce Hardened`
-  - `SQL Safe`
+---
 
-### Updated Badge
-- **Color:** Orange
-- **Format:** `last updated-{date}`
-- **Date Format:** DD.MM.YYYY
-- **Example:** `last updated-22.01.2026`
+## 🔝 1. Güncel Rozet Formatı (v4.21.2)
 
-## Style Parameters
-- `style=flat-square` - Makes badges square with flat design
-- All badges use the same style for consistency
+Her sayfanın başında bulunması gereken standart dizilim:
 
-## Usage Rules
+```markdown
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+```
 
-1. **Placement:** Add badges immediately after the frontmatter (YAML block)
-2. **Order:** Version → Security → Updated
-3. **Spacing:** No extra spaces between badges
-4. **Date:** Always use current date when updating
+---
 
-## Example Implementation
+## 🏛️ 2. Rozet Bileşenleri
+
+### Versiyon Rozeti (Version)
+- **Renk:** Mavi (`blue`)
+- **Format:** `version-{plugin_version}`
+- **Kullanım:** Eklentinin hangi ana sürümüyle uyumlu olduğunu belirtir.
+
+### Güvenlik ve Uyum Rozetleri (Security/Compliance)
+- **Renk:** Yeşil (`green`) veya Koyu Yeşil (`0f766e`)
+- **Değerler:**
+  - `WPCS Compliant`: WordPress Kod Standartlarına uygunluk.
+  - `Security Hardened`: Güvenlik sıkılaştırması yapılmış.
+  - `SQL Safe`: SQL Injection korumalı.
+
+### Güncelleme Rozeti (Updated)
+- **Renk:** Turuncu (`orange`)
+- **Format:** `last updated-DD.MM.YYYY`
+- **Kullanım:** Sayfanın en son ne zaman incelendiğini veya güncellendiğini gösterir.
+
+---
+
+## 🎨 3. Stil Parametreleri
+
+Tüm rozetler görsel bütünlük için şu parametreleri kullanmalıdır:
+- **`style=flat-square`**: Köşeli ve modern bir görünüm sağlar.
+- **`logo=...`**: Gerekli durumlarda marka logoları eklenebilir.
+
+---
+
+## 📏 4. Kullanım Kuralları
+
+1. **Konum:** Rozetler, YAML meta verilerinden (frontmatter) hemen sonra, ana başlıktan (`#`) önce eklenmelidir.
+2. **Sıralama:** Standart sıra; **Versiyon** → **Döküman Tipi/Güvenlik** → **Son Güncelleme** şeklindedir.
+3. **Boşluk:** Rozetler arasında birer boşluk bırakılmalıdır.
+4. **Doğruluk:** Güncelleme tarihi her zaman işlemin yapıldığı günün tarihi olmalıdır.
+
+---
+
+## 📝 5. Örnek Uygulama
 
 ```markdown
 ---
-id: setup-wizard
-title: Kurulum Sihirbazı
-sidebar_label: Kurulum Sihirbazı
-slug: /getting-started/setup-wizard
+id: sample-page
+title: Örnek Sayfa
 ---
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
-
-# Kurulum Sihirbazı (Setup Wizard)
-
-Content starts here...
+# Örnek Başlık
+İçerik buraya gelir...
 ```
 
-## Files Requiring Badge Updates
-
-All `.md` files in `website/docs/` directory should have this badge format applied.
-
 ## Bölüm Sonu Özeti
-- Badge Standards Reference sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+- Standart rozet kullanımı, dökümantasyonun profesyonel görünmesini sağlar.
+- v4.21.2 ile tüm sayfalar yeni formatta normalize edilmiştir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
-
+| 19.03.2026 | 4.21.2 | Sürüm v4.21.2 standartları ve yeni renk kodları eklendi. |

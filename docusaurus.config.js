@@ -32,6 +32,7 @@ const config = {
 
   onBrokenLinks: 'ignore',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'ignore',
     },
@@ -172,6 +173,7 @@ const config = {
       },
     }),
 
+  themes: ['@docusaurus/theme-mermaid'],
   plugins: [
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),

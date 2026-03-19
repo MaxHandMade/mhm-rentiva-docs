@@ -1,68 +1,77 @@
 ---
-id: security-validate-date
+id: date-validation
 title: Tarih Doğrulama (SecurityHelper::validate_date)
 sidebar_label: Tarih Doğrulama
-slug: /developer/ui-components/date-validation
+sidebar_position: 3
 ---
-## İçindekiler
-- Amaç
-- Davranış
-- Örnekler
-- Öneriler
-- İlgili
 
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, Tarih Doğrulama (SecurityHelper::validate_date) konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+Bu döküman, `SecurityHelper::validate_date` metodunun çalışma prensiplerini ve Rentiva ekosistemindeki tarih normalizasyonu standartlarını açıklar.
 :::
 
-Bu doküman `MHMRentiva\Admin\Core\SecurityHelper::validate_date` metodunun davranışını ve kullanılmasını açıklar.
+# 📅 Tarih Doğrulama ve Normalizasyon
 
-## Amaç
-Gelen tarih değerlerini güvenli biçimde doğrulayıp ISO (YYYY-MM-DD) formatına dönüştürür. Kullanıcıdan veya üçüncü taraflardan gelen farklı ayracı olan tarihleri destekler.
+Rentiva'da tarihler farklı formatlarda (UI, API, DatePicker) gelebilir. `SecurityHelper::validate_date` metodu, tüm bu girdileri standart **ISO (YYYY-MM-DD)** formatına dönüştüren "Güvenli Kapı" görevini görür.
 
-## Davranış
-- Öncelikle boş veya geçersiz girişlerde `InvalidArgumentException` fırlatılır.
-- ISO formatı (`YYYY-MM-DD`) doğrudan kabul edilir.
-- WordPress'in `date_format` ayarına göre yerel format (`d/m/Y` gibi) parse edilir ve ISO'ya dönüştürülür.
-- Yaygın formatlar (`d/m/Y`, `m/d/Y`, `d-m-Y`, `Y/m/d`) denenir.
-- Son çare olarak `strtotime` kullanılır; önce `/`, `.`, ve boşluk karakterleri `-` ile normalleştirilir (ör: `2026.01.28` -> `2026-01-28`).
+---
 
-:::warning
-`strtotime` sunucu ayarlarına (locale/timezone) bağlı farklı sonuçlar verebilir. Mümkünse ISO (`YYYY-MM-DD`) veya açık WP formatı kullanın.
-:::
+## 🛠️ Doğrulama Hiyerarşisi
 
-## Örnekler
+Metod, gelen veriyi aşağıdaki sırayla normalize etmeye çalışır:
+
+1.  **ISO Kontrolü:** Eğer veri halihazırda `YYYY-MM-DD` formatındaysa doğrudan döner.
+2.  **WP Date Format:** WordPress ayarlarındaki `date_format` (örn: `d/m/Y`) değerine göre parse etmeye çalışır.
+3.  **Yaygın Formatlar:** `d/m/Y`, `m/d/Y`, `d-m-Y`, `Y/m/d` formatlarını döngüye sokarak denemeler yapar.
+4.  **Normalizasyon & Fallback:** Seperatörleri (`.`, `/`, ` `) `-` karakterine dönüştürerek `strtotime` ile son bir deneme yapar.
+
+---
+
+## 🔄 Akış Diyagramı
+
+```mermaid
+graph TD
+    A[Girdi: 20/03/2026] --> B{ISO mu?}
+    B -- Hayır --> C{WP Format?}
+    C -- Hayır --> D{Common Format Loop?}
+    D -- Hayır --> E[Normalize: 20-03-2026]
+    E --> F[strtotime]
+    F --> G[Çıktı: 2026-03-20]
+```
+
+---
+
+## 💻 Kullanım Örneği
+
 ```php
 use MHMRentiva\Admin\Core\SecurityHelper;
 
 try {
-    // ISO
-    $iso = SecurityHelper::validate_date('2026-01-28'); // returns '2026-01-28'
-
-    // WP yerel format (ör. d/m/Y)
-    $iso2 = SecurityHelper::validate_date('28/01/2026'); // returns '2026-01-28'
-
-    // Nokta ile ayrılmış tarih (normalize edilir)
-    $iso3 = SecurityHelper::validate_date('2026.01.28'); // returns '2026-01-28'
+    // Farklı formatlarda doğrulama
+    $date1 = SecurityHelper::validate_date('2026-01-01'); // Returns '2026-01-01'
+    $date2 = SecurityHelper::validate_date('31/12/2025'); // Returns '2025-12-31'
+    $date3 = SecurityHelper::validate_date('2025.05.20'); // Returns '2025-05-20'
 } catch (\InvalidArgumentException $e) {
-    // Hatalı format
+    // Hatalı format yönetimi
+    AdvancedLogger::error('Geçersiz tarih denemesi: ' . $e->getMessage());
 }
 ```
 
-## Öneriler
-- API veya frontend tarafında tarihleri ISO formatında kabul edip gönderin.
-- Kullanıcı girişinde tarih picker kullanarak format karışıklığını önleyin.
+---
 
-## İlgili
-- `src/Admin/Core/SecurityHelper.php` — `validate_date` metodu
+## 🛡️ Güvenlik ve Hata Yönetimi
+
+-   **Strict Validation:** Eğer hiçbir format eşleşmezse metot bir `InvalidArgumentException` fırlatır.
+-   **Null Safety:** Girdi boş veya null ise `sanitize_text_field_safe` üzerinden temizlenerek hata fırlatılır.
+-   **Timezone:** Son çıktı her zaman `gmdate('Y-m-d')` üzerinden UTC bazlı üretilir.
 
 ## Bölüm Sonu Özeti
-- Tarih Doğrulama (SecurityHelper::validate_date) sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+-   Tüm tarih girdileri `validate_date` süzgecinden geçirilmelidir.
+-   Çıktı her zaman **ISO (YYYY-MM-DD)** formatında bir string'dir.
+-   Hata durumunda uygulama akışını kesen `Exception` fırlatılır.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Sayfa, tek şablon standardına normalize edildi. |
-
+| 19.03.2026 | 4.21.2 | SecurityHelper::validate_date normalizasyon ve fallback mantığına göre güncellendi. |

@@ -1,48 +1,95 @@
 ---
 id: locations-rest
-title: Locations REST Endpointi
+title: Konum Servisleri (Locations REST)
 sidebar_label: Locations REST
-slug: /api/v1/locations-rest
+sidebar_position: 60
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.02.2026-orange?style=flat-square)
+
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
 
 :::info Amaç
-Bu sayfa, `Admin\REST\Locations` endpointinin konum servisleme davranışını özetler.
+Bu uç nokta (endpoint), sistemde tanımlı olan kiralama ve transfer konumlarını (Havalimanları, Oteller, Şehir Merkezleri vb.) listelemek için kullanılır.
 :::
 
-# Locations REST Endpointi
+# 📍 Konum Servisleri Endpointi
 
-## İçindekiler
-- Endpoint Tanımı
-- Filtreleme Modeli
-- Rate ve Güvenlik
-- Operasyon Notları
-- Bölüm Sonu Özeti
-- Değişiklik Günlüğü
+Konum verileri, hem "Rent-a-Car" (Kiralama) hem de "Transfer" modülleri için merkezi bir kaynaktan beslenir. `LocationProvider` sınıfı, bu endpoint üzerinden gelen verileri işleyerek UI bileşenlerini doldurur.
 
-## Endpoint Tanımı
-- Kaynak: `Admin\REST\Locations`
-- Amaç: Aktif konumların frontend ve entegrasyonlara güvenli şekilde servis edilmesi
+---
 
-## Filtreleme Modeli
-- Servis tipi (`rental`, `transfer`, `both`) bazlı filtreleme
-- Aktif/pasif konum ayrımı
-- Gerektiğinde cache katmanı ile hızlandırma
+## 📍 Endpoint Bilgileri
+- **URL:** `/wp-json/mhm-rentiva/v1/locations`
+- **Metot:** `GET`
+- **Yetki:** Public
 
-## Rate ve Güvenlik
-- İstek başına rate kontrolü uygulanır.
-- Parametre doğrulaması ve güvenli çıktı standarttır.
+---
 
-## Operasyon Notları
-- Konum veri kalitesi rota sonuçlarını doğrudan etkiler.
-- Konum değişikliği sonrası arama senaryoları yeniden test edilmelidir.
+## 🔍 1. Filtreleme ve Sorgu Parametreleri
+
+İhtiyaca göre konum listesini daraltmak için şu parametreler kullanılabilir:
+
+| Parametre | Tip | Değerler | Açıklama |
+|---|---|---|---|
+| `type` | `string` | `rental`, `transfer`, `both` | Servis tipine göre filtreleme yapar. |
+| `class` | `string` | `airport`, `city`, `hotel` | Konum kategorisine göre filtreleme. |
+| `active_only` | `bool` | `0`, `1` | Sadece yayında olan konumları getirir (Varsayılan: `1`). |
+| `search` | `string` | Serbest metin | Konum adı veya kodu içinde arama yapar. |
+
+---
+
+## 📤 2. Yanıt Yapısı Örneği
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 101,
+      "title": "İstanbul Havalimanı (IST)",
+      "type": "both",
+      "class": "airport",
+      "coordinates": {
+        "lat": 41.2752,
+        "lng": 28.7519
+      },
+      "code": "IST"
+    },
+    {
+      "id": 102,
+      "title": "Sabiha Gökçen Havalimanı (SAW)",
+      "type": "both",
+      "class": "airport",
+      "coordinates": {
+        "lat": 40.8986,
+        "lng": 29.3092
+      },
+      "code": "SAW"
+    }
+  ]
+}
+```
+
+---
+
+## ⚡ 3. Performans ve Önbellekleme
+
+Konum listesi sık değişmeyen bir veri yapısı olduğu için:
+- **`MetricCacheManager`:** Konum listesini 1 saat boyunca önbellekte tutar.
+- **`LocationProvider`:** Veriyi dönerken sadece gerekli alanları (ID, Başlık, Koordinat) seçerek JSON boyutunu minimize eder.
+
+---
+
+## 🚀 4. Operasyonel Notlar
+- **Coğrafi Veri:** Koordinatlar, harita üzerinde seçim yapılmasına olanak tanır.
+- **Transfer Entegrasyonu:** Transfer mesafesi ve fiyat hesaplamaları, bu endpoint'ten gelen ID'ler üzerinden yürütülür.
+- **SEO Uyumlu:** `title` ve `code` alanları, arama formlarında kullanıcı dostu arama yapılmasına imkan verir.
 
 ## Bölüm Sonu Özeti
-- Locations endpointi, arama ve transfer deneyiminin temel veri kaynağıdır.
+- Locations endpointi, tüm lokasyon bazlı modüllerin temelidir.
+- Tip ve sınıf bazlı esnek filtreleme sunar.
+- Yüksek performans için `MetricCacheManager` ile optimize edilmiştir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 26.02.2026 | 4.21.0-docs | Locations REST teknik dokümanı eklendi. |
-
-
+| 19.03.2026 | 4.21.2 | Koordinat desteği, servis tipi filtreleri ve önbellekleme detayları eklendi. |
