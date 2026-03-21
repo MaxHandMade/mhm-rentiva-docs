@@ -24,3 +24,10 @@ yarn.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs & Debug
+*.log
+*.txt
+build_log.txt
+build_output.log
+build_log_fixed.txt
