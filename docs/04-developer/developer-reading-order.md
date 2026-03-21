@@ -7,7 +7,7 @@ slug: /developer/reading-order
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-21.03.2026-orange?style=flat-square)
 
 # 💻 Geliştirici Rehberi Yol Haritası
 
@@ -41,14 +41,14 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💰 3. Finansal Motor</h3>
       <p className="cardDescription">Ledger modeli, Komisyon politikaları, Payout yönetimi ve Audit kripto bütünlüğü.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/financial/financial-governance-controls">Finansal Mimari</a>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/financial/governance-controls">Finansal Mimari</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Test & Operasyon</h3>
       <p className="cardDescription">Unit test stratejileri, Webhook simülasyonları ve Go-Live kontrolleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/testing/test-suite">Test Rehberi</a>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/testing/controller-audit">Test Rehberi</a>
     </div>
   </div>
 </div>
@@ -71,4 +71,5 @@ Geliştiricilerin sıkça başvurduğu diğer dökümanlar:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 21.03.2026 | 4.21.3 | Kırık linkler (Finansal Mimari, Test Rehberi) doğru rotalara güncellendi. |
 | 19.03.2026 | 4.21.2 | Geliştirici Rehberi için premium kart tasarımlı yol haritası oluşturuldu. |
