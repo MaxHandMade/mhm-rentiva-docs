@@ -7,7 +7,7 @@ slug: /features-usage/reading-order
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-21.03.2026-orange?style=flat-square)
 
 # 🚗 Özellikler ve Kullanım Yol Haritası
 
@@ -91,4 +91,5 @@ graph TD
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 21.03.2026 | 4.21.3 | Tüm kart linkleri (Araçlar, Rezervasyonlar, Ekstra Hizmetler vb.) relative path olarak düzeltildi. |
 | 19.03.2026 | 4.21.2 | Özellikler ve Kullanım için premium kart tasarımlı yol haritası oluşturuldu. |
