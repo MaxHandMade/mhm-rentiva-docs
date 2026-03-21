@@ -46,7 +46,7 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Geliştirici Rehberi</h3>
       <p className="cardDescription">Eklentiyi özelleştirmek isteyenler için REST API referansları, Hook/Filter listeleri ve veritabanı şeması.</p>
-      <a className="button button--secondary button--block" href="./04-developer/developer-reading-order">Teknik Detaylar</a>
+      <a className="button button--secondary button--block" href="./04-developer/core/technical-architecture">Teknik Detaylar</a>
     </div>
   </div>
 </div>
@@ -59,7 +59,7 @@ Hızlı çözüm mü arıyorsunuz? En çok ziyaret edilen konulara göz atın:
 - 💳 [WooCommerce Ödeme Entegrasyonu](./02-core-configuration/payments)
 - 📧 [E-posta Şablonlarını Özelleştirme](./02-core-configuration/emails)
 - 🏎️ [Araç Ekleme ve Müsaitlik Takvimi](./03-features-usage/vehicles)
-- 🧩 [Kısa Kod (Shortcode) Listesi](./03-features-usage/shortcodes/shortcodes-overview)
+- 🧩 [Kısa Kod (Shortcode) Listesi](./03-features-usage/shortcodes/overview)
 - 🛠️ [Sorun Giderme Rehberi](./06-faq/common-issues)
 
 ---
