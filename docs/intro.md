@@ -60,8 +60,8 @@ Hızlı çözüm mü arıyorsunuz? En çok ziyaret edilen konulara göz atın:
 - 📧 [E-posta Şablonlarını Özelleştirme](./core-configuration/emails)
 - 🏎️ [Araç Ekleme ve Müsaitlik Takvimi](./features-usage/vehicles)
 - 🧩 [Kısa Kod (Shortcode) Listesi](./features-usage/shortcodes/overview)
-- ✅ [Kurulum Sonrası Kontrol Listesi](./getting-started/checklist)
-- ➕ [Ek Hizmet Yönetimi](./features-usage/additional-services)
+- ✅ [Kurulum Sonrası Kontrol Listesi](./getting-started/post-install-checklist)
+- ➕ [Ek Hizmet Yönetimi](./features-usage/additional-services-usage)
 - 🛠️ [Sorun Giderme Rehberi](./faq/common-issues)
 
 ---
@@ -72,17 +72,17 @@ Geliştiriciler için derinlemesine teknik dökümanlar:
 - 🧱 [Modül Mimarisi](./developer/core/technical-architecture)
 - 💰 [Finansal Yönetişim](./developer/financial/governance-controls)
 - 🧾 [Ledger Veri Modeli](./developer/financial/financial-ledger-model)
-- 🧪 [Test Denetimi (Controller Audit)](./developer/testing/controller-audit)
+- 🧪 [Test Denetimi (Controller Audit)](./developer/testing/test-suite)
 - 🧠 [REST API Mimarisi](./api/overview)
 - 🌐 [v1 REST API Referansı](./api/v1/rest-api-v1)
 
 ---
 
 ## 🤝 Tedarikçi (Vendor) Ekosistemi
-- 🚀 [Vendor Oryantasyonu](./vendor/onboarding)
-- 💳 [Payout & Ledger Sistemi](./vendor/payouts-ledger)
-- 📊 [Analiz ve Performans](./vendor/analytics)
-- 🛡️ [Güvenlik ve Gizlilik](./vendor/security-privacy)
+- 🚀 [Vendor Oryantasyonu](./vendor/vendor-onboarding)
+- 💳 [Payout & Ledger Sistemi](./vendor/vendor-payouts-ledger)
+- 📊 [Analiz ve Performans](./vendor/vendor-analytics)
+- 🛡️ [Güvenlik ve Gizlilik](./vendor/vendor-security-privacy)
 
 ---
 
@@ -96,6 +96,6 @@ Geliştiriciler için derinlemesine teknik dökümanlar:
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 21.03.2026 | 4.21.5 | Tüm rota ID'leri ve kategori eşleşmeleri %100 doğrulandı. |
 | 21.03.2026 | 4.21.4 | Bozuk linkler relative link yapısıyla kökten çözüldü. |
-| 21.03.2026 | 4.21.3 | Tüm döküman linkleri rota kimliklerine (Route ID) göre düzeltildi. |
 | 18.03.2026 | 4.21.2 | Ana sayfa tasarımı tamamen yenilendi. |
