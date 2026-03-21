@@ -22,14 +22,14 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Başlangıç Rehberi</h3>
       <p className="cardDescription">Sistemi dakikalar içinde kurun. Gereksinimler, aktivasyon ve ilk ayarlar için adım adım yol haritası.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/getting-started/reading-order">Hemen Başla</a>
+      <a className="button button--secondary button--block" href="./getting-started/reading-order">Hemen Başla</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">⚙️ Temel Yapılandırma</h3>
       <p className="cardDescription">Genel ayarlar, WooCommerce ödeme ağ geçitleri, vergi yapılandırması ve e-posta bildirim sistemleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/settings">Ayarları Yapılandır</a>
+      <a className="button button--secondary button--block" href="./core-configuration/settings">Ayarları Yapılandır</a>
     </div>
   </div>
 </div>
@@ -39,14 +39,14 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🚗 Özellikler ve Kullanım</h3>
       <p className="cardDescription">Araç yönetimi, rezervasyon takibi, müşteri portalı ve raporlama modüllerini en verimli şekilde kullanın.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/features-usage/vehicles">Kullanım Kılavuzu</a>
+      <a className="button button--secondary button--block" href="./features-usage/vehicles">Kullanım Kılavuzu</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Geliştirici Rehberi</h3>
       <p className="cardDescription">Eklentiyi özelleştirmek isteyenler için REST API referansları, Hook/Filter listeleri ve veritabanı şeması.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/technical-architecture">Teknik Detaylar</a>
+      <a className="button button--secondary button--block" href="./developer/technical-architecture">Teknik Detaylar</a>
     </div>
   </div>
 </div>
@@ -56,11 +56,11 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
 ## 🔝 Popüler Başlıklar
 Hızlı çözüm mü arıyorsunuz? En çok ziyaret edilen konulara göz atın:
 
-- 💳 [WooCommerce Ödeme Entegrasyonu](/mhm-rentiva-docs/docs/core-configuration/payments)
-- 📧 [E-posta Şablonlarını Özelleştirme](/mhm-rentiva-docs/docs/core-configuration/emails)
-- 🏎️ [Araç Ekleme ve Müsaitlik Takvimi](/mhm-rentiva-docs/docs/features-usage/vehicles)
-- 🧩 [Kısa Kod (Shortcode) Listesi](/mhm-rentiva-docs/docs/features-usage/shortcodes)
-- 🛠️ [Sorun Giderme Rehberi](/mhm-rentiva-docs/docs/faq/common-issues)
+- 💳 [WooCommerce Ödeme Entegrasyonu](./core-configuration/payments)
+- 📧 [E-posta Şablonlarını Özelleştirme](./core-configuration/emails)
+- 🏎️ [Araç Ekleme ve Müsaitlik Takvimi](./features-usage/vehicles)
+- 🧩 [Kısa Kod (Shortcode) Listesi](./features-usage/shortcodes)
+- 🛠️ [Sorun Giderme Rehberi](./faq/common-issues)
 
 ---
 
