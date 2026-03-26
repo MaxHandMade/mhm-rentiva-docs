@@ -4,10 +4,76 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 11 Mar 2026 16:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.23.0: Vendor Transfer Mimarisi & Dashboard Denetimi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary</guid>
+            <pubDate>Thu, 26 Mar 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.23.0 sürümü yayınlandı! Bu sürüm, vendor'ların transfer hizmetlerini şehir bazlı yönetebilmesini sağlayan yeni bir mimari, kapsamlı Dashboard widget denetimi ve onlarca hata düzeltmesi getiriyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.23.0</strong> sürümü yayınlandı! Bu sürüm, vendor'ların transfer hizmetlerini şehir bazlı yönetebilmesini sağlayan yeni bir mimari, kapsamlı Dashboard widget denetimi ve onlarca hata düzeltmesi getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-vendor-transfer-lokasyon-sistemi">🏗️ Vendor Transfer Lokasyon Sistemi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#%EF%B8%8F-vendor-transfer-lokasyon-sistemi" class="hash-link" aria-label="🏗️ Vendor Transfer Lokasyon Sistemi doğrudan bağlantı" title="🏗️ Vendor Transfer Lokasyon Sistemi doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.23.0'ın en büyük yeniliği, <strong>Şehir → Nokta hiyerarşisi</strong> ile vendor'ların transfer operasyonlarını yönetebilmesidir:</p>
+<ul>
+<li class=""><strong>Şehir bazlı filtreleme:</strong> Her lokasyona bir şehir alanı eklendi. Vendor'lar yalnızca kendi şehirlerindeki lokasyonları ve rotaları görebilir.</li>
+<li class=""><strong>Rota bazlı fiyatlandırma:</strong> Admin'in belirlediği <code>min_price</code> — <code>max_price</code> aralığında her vendor kendi rota fiyatını belirleyebilir.</li>
+<li class=""><strong>Transfer arama motoru:</strong> Rota bazlı araç filtreleme ve vendor fiyatı desteği ile yeniden yapılandırıldı. Vendor fiyatı yoksa rotanın <code>base_price</code> değeri fallback olarak kullanılır.</li>
+<li class=""><strong>Veritabanı:</strong> <code>DatabaseMigrator v3.4.0</code> ile lokasyonlara <code>city</code> sütunu, rotalara <code>max_price</code> sütunu eklendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-dashboard-widget-denetimi-11-düzeltme">📊 Dashboard Widget Denetimi (11 Düzeltme)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-dashboard-widget-denetimi-11-d%C3%BCzeltme" class="hash-link" aria-label="📊 Dashboard Widget Denetimi (11 Düzeltme) doğrudan bağlantı" title="📊 Dashboard Widget Denetimi (11 Düzeltme) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Dashboard widget'larında kapsamlı bir denetim yapıldı:</p>
+<ul>
+<li class=""><strong>Timezone tutarlılığı:</strong> Geri sayım ve operasyon widget'ları WordPress timezone ayarına uyumlu hale getirildi.</li>
+<li class=""><strong>Cache invalidation:</strong> İstatistik cache key prefix uyumsuzluğu düzeltildi.</li>
+<li class=""><strong>WC email görselleri:</strong> Rezervasyon onay e-postalarında araç görseli artık doğru gösteriliyor.</li>
+<li class=""><strong>Tasarım iyileştirmeleri:</strong> 2x2 grid istatistik kartları, yerelleştirilmiş gelir grafiği, mesajlar widget'ı yeniden tasarlandı.</li>
+<li class=""><strong>Lite gating:</strong> Gelir Grafiği ve Yaklaşan Operasyonlar widget'ları artık Pro-only.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-arama-ve-filtreleme-düzeltmeleri">🔎 Arama ve Filtreleme Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-arama-ve-filtreleme-d%C3%BCzeltmeleri" class="hash-link" aria-label="🔎 Arama ve Filtreleme Düzeltmeleri doğrudan bağlantı" title="🔎 Arama ve Filtreleme Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>strtotime('') hatası:</strong> Boş tarih parametresi bugünün tarihini döndürüyordu, aktif booking'li araçlar hatalı filtreleniyordu. Guard eklendi.</li>
+<li class=""><strong>Lokasyon filtresi:</strong> Radio butonlardan checkbox'a dönüştürüldü; birden fazla lokasyon seçilebilir.</li>
+<li class=""><strong>Transfer tab doğrulama:</strong> Transfer alanları (<code>origin_id</code>, <code>destination_id</code>, <code>date</code>, <code>luggage_*</code>) hardcoded required olarak ayarlandı.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-dışa-aktarım-4-düzeltme">📤 Dışa Aktarım (4 Düzeltme)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-d%C4%B1%C5%9Fa-aktar%C4%B1m-4-d%C3%BCzeltme" class="hash-link" aria-label="📤 Dışa Aktarım (4 Düzeltme) doğrudan bağlantı" title="📤 Dışa Aktarım (4 Düzeltme) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class="">Ödeme günlükleri post_type uyumsuzluğu giderildi.</li>
+<li class="">Kayıt sayısı daima 0 dönen sorgu hatası düzeltildi.</li>
+<li class="">Geçmiş silme işlevi artık çalışıyor (transient tabanlı).</li>
+<li class="">Araç CSV/JSON PHP 8 strict types fatal error'ı giderildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-i̇yileştirmeleri">👤 Vendor İyileştirmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-vendor-i%CC%87yile%C5%9Ftirmeleri" class="hash-link" aria-label="👤 Vendor İyileştirmeleri doğrudan bağlantı" title="👤 Vendor İyileştirmeleri doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araç ruhsat doğrulama:</strong> Vendor araç ekleme formunda ruhsat bilgisi doğrulanıyor.</li>
+<li class=""><strong>Düzenleme formu:</strong> Vendor araç düzenlemesinde yeniden inceleme (re-review) mekanizması.</li>
+<li class=""><strong>Vendor rozeti:</strong> Vendor araçlarında tedarikçi rozeti görüntüleniyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-diğer-i̇yileştirmeler">⚙️ Diğer İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#%EF%B8%8F-di%C4%9Fer-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="⚙️ Diğer İyileştirmeler doğrudan bağlantı" title="⚙️ Diğer İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Engellli tarihler:</strong> "Tümüne Uygula" AJAX düzeltmesi; tarayıcı verisi payload'da gönderiliyor.</li>
+<li class=""><strong>Elementor:</strong> 7 widget'ta attribute kontrol sayısı artırıldı (VehicleComparison, MyBookings, MyFavorites, VehicleDetails, Testimonials, VehiclesGrid, FeaturedVehicles).</li>
+<li class=""><strong>Ayarlar:</strong> Cache tekrarı, ölü ayarlar temizliği, SetupWizard sayfa listesi ve AssetManager guard düzeltmeleri.</li>
+<li class=""><strong>Çeviri:</strong> 15+ yeni Türkçe çeviri, WP 6.5+ <code>.l10n.php</code> dosyası yenilendi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🏗️ Mimari</td><td>Vendor Transfer Lokasyon sistemi: Şehir→Nokta hiyerarşisi.</td></tr><tr><td>💰 Fiyatlama</td><td>Vendor rota bazlı fiyatlandırma (min/max aralığı).</td></tr><tr><td>🔍 Arama</td><td>Transfer arama motoru rota bazlı filtreleme + vendor fiyatı.</td></tr><tr><td>🗄️ Veritabanı</td><td>v3.4.0 migration: city + max_price sütunları.</td></tr><tr><td>📊 Dashboard</td><td>11 hata düzeltmesi: timezone, cache, WC email, tasarım, Lite gating.</td></tr><tr><td>🔎 Filtre</td><td>strtotime hatası, lokasyon checkbox, transfer tab doğrulama.</td></tr><tr><td>📅 Engelli Tarihler</td><td>"Tümüne Uygula" AJAX düzeltmesi.</td></tr><tr><td>📤 Dışa Aktarım</td><td>4 kritik hata düzeltmesi.</td></tr><tr><td>👤 Vendor</td><td>Ruhsat doğrulama, yeniden inceleme, vendor rozeti.</td></tr><tr><td>🎨 Elementor</td><td>7 widget attribute iyileştirmesi.</td></tr><tr><td>⚙️ Ayarlar</td><td>Cache, ölü ayarlar, SetupWizard, AssetManager düzeltmeleri.</td></tr><tr><td>🌐 Çeviri</td><td>15+ yeni Türkçe çeviri, .l10n.php yenilendi.</td></tr><tr><td>✅ Test</td><td>567 test, 2036 assertion.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, MHM Rentiva'nın vendor transfer mimarisini temelden yeniden yapılandırmıştır. Şehir bazlı lokasyon filtresi, rota bazlı fiyatlandırma ve Dashboard widget denetimi ile platform daha kararlı ve zengin bir yapıya kavuşmuştur.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>transfer</category>
+            <category>dashboard</category>
+            <category>export</category>
+            <category>search</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.21.2: Vendor Yönetimi ve Finansal Mimari Devrimi]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary</link>
