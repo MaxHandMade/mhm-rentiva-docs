@@ -6,7 +6,7 @@ sidebar_position: 2
 slug: /features-usage/dashboard
 ---
 
-![Version](https://img.shields.io/badge/version-4.6.3-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
 
 Kontrol Paneli, MHM Rentiva'nın kalbidir. İşletmenizin anlık durumunu, finansal performansını ve bekleyen operasyonel görevleri tek bir ekranda görmenizi sağlar. **MHM Rentiva > Kontrol Paneli** menüsünden ulaşılır.
 
@@ -66,6 +66,29 @@ Kontrol Paneli kullanıcı deneyimi için şu hızlı araçları sunar:
 
 ---
 
+## v4.23.0 Widget Denetimi ve İyileştirmeler
+
+v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileştirme yapılmıştır:
+
+### Düzeltilen Hatalar
+- **Timezone tutarlılığı:** Geri sayım ve yaklaşan operasyon widget'larında `time()` yerine `current_time('timestamp')` kullanılarak WordPress timezone ayarına uyum sağlandı.
+- **Cache invalidation:** İstatistik widget'ı cache key prefix uyumsuzluğu düzeltildi (`mhm_dashboard_stats` → `mhm_rentiva_dashboard_stats`).
+- **Status senkronizasyonu:** `updated_post_meta` + `added_post_meta` hook'ları eklenerek meta güncellemelerinde durum tutarlılığı sağlandı.
+- **WooCommerce email görselleri:** Rezervasyon onay e-postalarında araç görseli artık doğru şekilde gösteriliyor.
+- **Takvim popup saat bilgisi:** Rezervasyon detay popup'ında teslim alma/iade saatleri eklendi.
+- **ID uyumsuzluğu:** WooCommerce order ID ile rezervasyon ID eşleştirmesi düzeltildi.
+
+### Tasarım İyileştirmeleri
+- **İstatistik kartları:** 2x2 grid, ikonlar ve renk kodlaması ile yeniden tasarlandı.
+- **Gelir grafiği:** Tarih formatı yerelleştirildi, iptal edilen rezervasyonlar kırmızı kesikli dataset olarak eklendi.
+- **Mesajlar widget'ı:** Self-contained inline CSS, badge, avatar initials ve "ne kadar önce" zaman gösterimi.
+- **Yaklaşan operasyonlar:** Saat bilgisi, display ID ve tıklanabilir link desteği.
+
+### Lite Kısıtlamaları
+- **Gelir Grafiği** ve **Yaklaşan Operasyonlar** widget'ları artık sadece Pro sürümde kullanılabilir (`Mode::canUseAdvancedReports()`).
+
+---
+
 ### Bölüm Özeti
 - **Dashboard** ile filonuzun 30 günlük projeksiyonunu izleyin.
 - **Renk Kodları** ile hangi aracın hangi tarihte müsait olduğunu anında anlayın.
@@ -74,4 +97,5 @@ Kontrol Paneli kullanıcı deneyimi için şu hızlı araçları sunar:
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 26.03.2026 | 4.23.0 | 11 widget hata düzeltmesi, timezone tutarlılığı, cache fix, tasarım iyileştirmeleri ve Lite gating eklendi. |
 | 19.03.2026 | 4.6.3 | Kontrol Paneli rehberi gerçek arayüz metrikleri ve takvim detaylarıyla güncellendi. |

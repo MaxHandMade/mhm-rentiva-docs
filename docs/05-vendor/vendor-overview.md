@@ -6,7 +6,7 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
 
 # 🤝 Vendor Ekonomisi ve Yönetimi
 
@@ -67,4 +67,5 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 26.03.2026 | 4.23.0 | Versiyon rozeti güncellendi; v4.23.0 transfer lokasyon mimarisi referansları. |
 | 19.03.2026 | 4.21.2 | Vendor kategorisi için premium kart tasarımlı Genel Bakış sayfası oluşturuldu. |

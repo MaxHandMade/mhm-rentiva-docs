@@ -5,7 +5,7 @@ sidebar_label: Vendor Yönetimi
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Rentiva, merkezi bir araç kiralama sisteminden çoklu tedarikçili (Multi-Vendor) bir pazar yerine dönüşebilir. Bu doküman, tedarikçi döngüsünü teknik detaylarıyla açıklar.
@@ -67,12 +67,38 @@ graph LR
     E --> F[Araç Ekleme Yetkisi]
 ```
 
+---
+
+## 🚐 5. Vendor Transfer Lokasyon ve Rota Yönetimi (v4.23.0)
+
+v4.23.0 ile birlikte vendor'lar, transfer hizmetleri için lokasyon ve rota seçimi yapabilir:
+
+### Şehir Bazlı Filtreleme
+Vendor araç ekleme formunda (`[rentiva_vehicle_submit]`), yalnızca vendor'un başvurusunda belirttiği **şehirdeki lokasyonlar** ve **rotalar** listelenir. Bu, **Şehir → Nokta** hiyerarşisinin bir parçasıdır.
+
+### Rota Bazlı Fiyatlandırma
+- Vendor, hizmet vermek istediği rotaları seçer.
+- Her rota için admin'in belirlediği `min_price` — `max_price` aralığında kendi fiyatını girer.
+- Kapasite bilgileri (yolcu, bagaj) araç düzeyinde tanımlanır.
+
+### Meta Yapısı
+- `_mhm_rentiva_transfer_locations`: Vendor'un hizmet verdiği lokasyonlar (array)
+- `_mhm_rentiva_transfer_routes`: Vendor'un hizmet verdiği rotalar (array)
+- `_mhm_rentiva_transfer_route_prices`: Rota bazlı vendor fiyatları (JSON)
+
+### Admin Görünümü
+Admin araç düzenleme ekranında (`VehicleTransferMetaBox`), vendor'un şehir bilgisi ve seçtiği lokasyon/rotalar görüntülenir.
+
+---
+
 ## Bölüm Sonu Özeti
 - `VendorOwnershipEnforcer` ile veri izolasyonu garanti altına alınmıştır.
 - Tüm kritik başvuru verileri şifrelenmiş olarak saklanır.
 - `rentiva_vendor` yetkileri sadece kendi mülkiyetindeki postlar için geçerlidir.
+- Vendor'lar yalnızca kendi şehirlerindeki lokasyonlara ve rotalara erişebilir. *(v4.23.0)*
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 26.03.2026 | 4.23.0 | Vendor Transfer Lokasyon/Rota yönetimi, Şehir→Nokta hiyerarşisi ve rota bazlı fiyatlandırma eklendi. |
 | 19.03.2026 | 4.21.2 | CPT, Enforcer ve Onboarding detayları eklendi. |
