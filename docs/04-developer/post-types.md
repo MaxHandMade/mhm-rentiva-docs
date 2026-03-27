@@ -5,7 +5,7 @@ sidebar_label: Kayıt Türleri
 sidebar_position: 10
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Rentiva, karmaşık iş mantığını (Business Logic) yönetmek için standart WordPress tablolarını Custom Post Type (CPT) mimarisiyle genişletir.
@@ -46,19 +46,34 @@ Sistem hatalarını, kritik API çağrılarını ve denetim izlerini (Audit Trai
 
 ---
 
-## 🚗 4. Sektörel Kayıt Türleri (Dış Bağımlılıklar)
+## 4. Sektorel Kayıt Turleri
 
-Eklenti, aşağıdaki CPT'ler ile entegre çalışır:
-- **`vehicle`:** Kiralık araç portföyü.
-- **`vehicle_booking`:** Rezervasyon kayıtları ve takvimi.
+Eklenti, asagidaki CPT'ler ile çalışır:
+- **`vehicle`:** Kiralik araç portfoyu.
+- **`vehicle_booking`:** Rezervasyon kayıtlari ve takvimi.
+- **`vehicle_addon`:** Araç ek hizmetleri (cocuk koltugu, GPS, sigorta vb.).
+
+---
+
+## 5. Vendor Marketplace Kayıt Turleri (Pro)
+
+### `mhm_vendor_app` (Vendor Başvurulari)
+Vendor marketplace kapsaminda satici başvurularini yonetir.
+- **CPT Slug:** `mhm_vendor_app` (14 karakter — WordPress 20 karakter limitine uygun). **NOT:** `mhm_vendor_application` DEGiL.
+- **Kullanim:** Vendor onboarding süreci (başvuru, onay, red, askıya alma) bu CPT üzerinden yurutulur.
+- **Yönetim:** `VendorApplicationManager` ile CRUD işlemleri, `VendorOnboardingController` ile durum geçişleri (approve/reject/suspend).
+- **Güvenlik:** IBAN bilgileri AES-256-CBC ile şifrelenir (`OPENSSL_RAW_DATA` flag). OpenSSL yoksa bos string doner (plain text ASLA saklanmaz).
+- **Dosya:** `src/Admin/Vendor/PostType/VendorApplication.php`
 
 ## Bölüm Sonu Özeti
-- CPT'ler, veritabanı yükünü hafifletmek için `no_found_rows` ve limitli meta sorgularıyla optimize edilmiştir.
-- Finansal kayıtlar (`mhm_payout`) asla direkt veritabanından silinmez; statü değişikliği ile arşivlenir.
-- Loglar (`mhm_app_log`) performans için düzenli olarak temizlenir.
+- CPT'ler, veritabanı yukunu hafifletmek için `no_found_rows` ve limitli meta sorgulariyla optimize edilmiştir.
+- Finansal kayıtlar (`mhm_payout`) asla direkt veritabanından silinmez; statu degisikligi ile arsivlenir.
+- Loglar (`mhm_app_log`) performans için duzenli olarak temizlenir.
+- Vendor başvurulari `mhm_vendor_app` CPT'sinde saklanir (14 karakter, WP 20-char limiti).
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | mhm_payout, mhm_message ve LogRetention detayları eklendi. |
+| 27.03.2026 | 4.23.0 | `vehicle_addon` ve `mhm_vendor_app` CPT'leri, vendor marketplace detaylari eklendi. |
+| 19.03.2026 | 4.21.2 | mhm_payout, mhm_message ve LogRetention detaylari eklendi. |
 

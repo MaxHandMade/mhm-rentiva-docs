@@ -6,7 +6,7 @@ sidebar_position: 12
 slug: /core-configuration/frontend-display
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 Ön Yüz ve Ekran sekmesi, eklentinin kullanıcı tarafındaki (frontend) görünümünü, buton metinlerini, uyarı mesajlarını ve sayfa bağlantılarını (URL) özelleştirdiğiniz kapsamlı bir yönetim alanıdır. **MHM Rentiva > Ayarlar > Ön Yüz ve Ekran** altından ulaşılır.
 
@@ -18,7 +18,10 @@ Araç listeleme sayfalarındaki görsel hiyerarşiyi buradan kontrol edebilirsin
 
 - **Sayfa Başına Araç Sayısı:** Tek bir sayfada listelenecek maksimum araç sayısı (Örn: 12).
 - **Varsayılan Sıralama:** Listeleme sayfasının ilk açılışta hangi kritere göre dizileceği (Fiyata göre artan, Yıla göre azalan vb.).
-- **Görsel Kontrolleri:** Araç resimlerinin, teknik özelliklerin ve müsaitlik durumunun listede görünüp görünmeyeceğini belirleyen onay kutuları.
+
+:::note Kaldirilan Ayarlar (v4.22.1)
+Daha önceki sürümlerde bulunan **Araç Resimlerini Göster** (`mhm_rentiva_vehicle_show_images`), **Özellikleri Göster** (`mhm_rentiva_vehicle_show_features`) ve **Müsaitlik Durumunu Göster** (`mhm_rentiva_vehicle_show_availability`) ayarlari kodda hicbir yerde kullanilmadigi için v4.22.1 ile kaldirilmistir. Bu görüntüleme kontrolleri artik dogrudan kisa kod (shortcode) parametreleri üzerinden yönetilmektedir (`show_features`, `show_badges` vb.).
+:::
 
 ---
 
@@ -59,4 +62,5 @@ Eğer bu alanları boş bırakırsanız, sistem ilgili kısa kodun bulunduğu sa
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 27.03.2026 | 4.22.1 | Kullanilmayan görsel kontrol ayarlari (`show_images`, `show_features`, `show_availability`) kaldırıldı notu eklendi. |
 | 19.03.2026 | 4.21.2 | Ön Yüz ve Ekran dökümanı tüm etiket grupları ve URL yapılandırmasıyla oluşturuldu. |

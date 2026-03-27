@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /features-usage/vehicles
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 Araçlar, MHM Rentiva sisteminin temel yapı taşlarıdır. **MHM Rentiva > Araçlar** menüsü, filonuzdaki tüm araçların listelendiği, durumlarının takip edildiği ve yeni araç girişlerinin yapıldığı ana yönetim ekranıdır.
 
@@ -70,14 +70,32 @@ MHM Rentiva, klasik kiralamanın dışında VIP Transfer operasyonlarını da de
 
 ---
 
+## 📅 Bloklu Tarihler (Blocked Dates)
+
+Aracın belirli tarihlerde kiralanmasını engellemek için **Bloklu Tarihler** meta kutusu kullanılır. v4.23.0 ile "Tumune Uygula" (Apply to All) işlevi duzeltilmistir:
+
+- **Eski davranis:** JS yalnızca `vehicle_id` gonderiyordu, PHP tarafinda DB'den okuma yapiliyordu (henuz kaydedilmemis veriler için calismiyordu).
+- **Yeni davranis (v4.23.0):** JS artik `dates` + `notes` verilerini JSON payload olarak gonderir. PHP, oncelikle payload'tan okur; bulamazsa DB'ye duser (fallback).
+- **Ilgili dosyalar:** `BlockedDatesMetaBox.php`, `assets/js/admin/blocked-dates.js`
+
+---
+
+## ⚡ AssetManager Admin Kapsami
+
+v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admin sayfalarında çalışır (`is_rentiva_admin_page()` guard). v4.22.1 ile `vehicle`, `vehicle_booking` ve `vehicle_addon` post type'lari da guard'a eklenmiştir. Bu sayede CSS degiskenleri (`css-variables.css`) dogru sekilde yüklenir ve KPI kartlari bozulmaz.
+
+---
+
 ### Bölüm Özeti
-- Araçlar **CPT** (Custom Post Type) olarak saklanır ve her araç kendine özel meta alanlara sahiptir.
-- **Hızlı Düzenleme** ile operasyonel hız kazanın.
-- **VIP Modülü** ile transfer kapasitelerini ve fiyat çarpanlarını yönetin.
+- Araclar **CPT** (Custom Post Type) olarak saklanir ve her araç kendine ozel meta alanlara sahiptir.
+- **Hizli Düzenleme** ile operasyonel hiz kazanin.
+- **VIP Modulu** ile transfer kapasitelerini ve fiyat carpanlarini yonetin.
+- **Bloklu Tarihler** artik "Tumune Uygula" işlevinde JSON payload kullanir.
 
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Araç detayları, özellikler, ekipmanlar ve VIP modülü gerçek arayüze göre güncellendi. |
+| 27.03.2026 | 4.23.0 | Bloklu Tarihler "Tumune Uygula" fix, AssetManager admin guard dokumante edildi. |
+| 19.03.2026 | 4.21.2 | Araç detaylari, özellikler, ekipmanlar ve VIP modulu gerçek arayuze gore güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

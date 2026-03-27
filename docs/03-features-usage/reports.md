@@ -4,20 +4,28 @@ title: Raporlama
 sidebar_position: 11
 slug: /features-usage/reports
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
-Raporlar, MHM Rentiva'nın tüm operasyonel verilerini finansal ve istatistiksel çıktılara dönüştüren gelişmiş analiz merkezidir. **MHM Rentiva > Raporlar** menüsü üzerinden işletmenizin büyüme trendlerini ve verimliliğini izleyebilirsiniz.
+Raporlar, MHM Rentiva'nin tum operasyonel verilerini finansal ve istatistiksel çıktılara dönüşturen gelişmiş analiz merkezidir. **MHM Rentiva > Raporlar** menusu üzerinden işletmenizin buyume trendlerini ve verimliligini izleyebilirsiniz.
+
+:::caution Lite / Pro Farki
+**Gelir Grafigi** ve **Yaklasan Operasyonlar** widget'lari yalnızca Pro sürümde kullanilabilir. Lite sürümde bu widget'lar gorunmez. Guard: `Mode::canUseAdvancedReports()`.
+:::
 
 ---
 
-## 📈 Global Performans Metrikleri
+## Global Performans Metrikleri (İstatistik Widget'i)
 
-Sayfanın en üstünde, seçilen tarih aralığına göre güncellenen 4 ana performans göstergesi yer alır:
+Sayfanin en üstünde, secilen tarih araligina gore güncellenen 4 ana performans gostergesi **2x2 grid** duzende, ikon ve renklerle zenginlestirilmis olarak yer alir:
 
-- **Toplam Rezervasyonlar:** Belirlenen aralıktaki tüm işlemler.
-- **Bu Ayın Geliri:** Mevcut ayın toplam cirosu (Para birimi simgesiyle).
-- **Aktif Rezervasyonlar:** Şu an devam eden (Müşteride olan) araç sayısı.
-- **Doluluk Oranı (%):** Filonuzun kapasite kullanım yüzdesi.
+- **Toplam Rezervasyonlar:** Belirlenen araliktaki tum işlemler.
+- **Bu Ayin Geliri:** Mevcut ayin toplam cirosu (Para birimi simgesiyle).
+- **Aktif Rezervasyonlar:** Su an devam eden (Müşteride olan) araç sayısı.
+- **Doluluk Orani (%):** Filonuzun kapasite kullanim yuzdesi.
+
+:::info Teknik Not
+İstatistik widget'i `mhm_rentiva_dashboard_stats` cache key prefix'i ile önbelleklenir. Tum tarih hesaplamalari WordPress timezone'unu kullanir (`wp_date`).
+:::
 
 ---
 
@@ -28,11 +36,12 @@ MHM Rentiva, veriyi 5 farklı perspektiften işlemenize olanak tanır:
 ### 1. Genel Bakış (Overview)
 Tüm raporların bir "özet panosu" (Snapshot) halidir. Gelir, Rezervasyon, Müşteri ve Araç analizlerini tek ekranda karşılaştırmalı grafiklerle sunar.
 
-### 2. Gelir Raporu (Revenue)
-Finansal sağlığınızı detaylandırır.
-- **Gelir Analitiği:** Günlük ciro ortalaması ve toplam kazanç.
-- **Gelir Eğilimi:** Haftalık bazda (Pzt-Paz) hangi günlerin daha karlı olduğunu gösteren bar grafikler.
-- **Günlük Detaylar:** Tarih bazlı şeffaf gelir listesi.
+### 2. Gelir Raporu (Revenue) — Yalnızca Pro
+Finansal sagliginizi detaylandirir.
+- **Gelir Analitigi:** Günlük ciro ortalamasi ve toplam kazanc.
+- **Gelir Egilimi:** Haftalik bazda (Pzt-Paz) hangi gunlerin daha karli olduğunu gosteren bar grafikler. Tarih formati `date_i18n(get_option('date_format'))` ile yerellestirilerek gosterilir.
+- **Iptal Dataset'i:** Iptal edilen rezervasyonlar kırmızı kesikli cizgiyle ayri bir dataset olarak grafige yansitilir.
+- **Günlük Detaylar:** Tarih bazli seffaf gelir listesi.
 
 ### 3. Rezervasyon Şikayeti (Distribution)
 Rezervasyonların durum dağılımını ve iptal oranlarını analiz eder.
@@ -71,6 +80,7 @@ Müşteri sadakatini ve harcama alışkanlıklarını takip eder.
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Raporlar sayfası 5 farklı sekme ve tüm grafik detaylarıyla gerçek arayüze göre güncellendi. |
+| 27.03.2026 | 4.23.0 | Lite/Pro gating (Gelir Grafigi + Yaklasan Ops), stats widget 2x2 grid tasarimi, timezone düzeltmeleri (`wp_date`), iptal dataset'i, cache key prefix düzeltmesi dokumante edildi. |
+| 19.03.2026 | 4.21.2 | Raporlar sayfası 5 farkli sekme ve tum grafik detaylariyla gerçek arayuze gore güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

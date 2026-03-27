@@ -3,7 +3,7 @@ title: Search results
 description: Search results modülünün kullanım kılavuzu ve teknik detayları.
 sidebar_position: 14
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, Search results modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
@@ -67,10 +67,21 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Sidebar Filtreleri
+
+### Lokasyon Filtresi (Çoklu Seçim)
+
+v4.22.1 itibariyla lokasyon filtresi **radio buton** yerine **checkbox** kullanir. Bu sayede kullanıcılar ayni anda birden fazla lokasyon secebilir. Secilen lokasyonlar `IN()` SQL clause'u ile sorgulanir.
+
+- Tekli seçim: Bir lokasyon secildiginde sadece o lokasyondaki araclar listelenir.
+- Çoklu seçim: Birden fazla lokasyon isaretlendiginde, secilen lokasyonlarin herhangi birinde bulunan araclar gosterilir.
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-search-results-wrapper` sınıfı ile başlar.
 - **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **Musaitlik Sorgusu:** `QueryHelper::get_availability_subquery()` bos tarih parametrelerine karsi korumalıdir. `strtotime('')` PHP'de `false` yerine bugunun timestamp'ini dondurur; bu durum v4.22.1'de duzeltilmistir. Bos tarih gonderildiginde musaitlik filtresi devre disi kalir.
+- **Lokasyon Sorgusu:** `QueryHelper::get_location_subquery()` hem tekli (`int`) hem de çoklu (`array`) lokasyon ID'lerini kabul eder.
 
 ## Bölüm Sonu Özeti
 - Search results sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
@@ -78,4 +89,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 27.03.2026 | 4.22.1 | Lokasyon filtresi radio -> checkbox (çoklu seçim). Musaitlik sorgusu bos tarih koruması. Geliştirici notlarına QueryHelper bilgileri eklendi. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

@@ -3,7 +3,7 @@ title: Unified search
 description: Unified search modülünün kullanım kılavuzu ve teknik detayları.
 sidebar_position: 18
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, Unified search modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
@@ -54,8 +54,19 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `layout` | `horizontal` | Modülün **general** davranışını kontrol eder. |
 | `search_layout` | `(boş)` | Modülün **layout** davranışını kontrol eder. |
 | `style` | `glass` | Modülün **layout** davranışını kontrol eder. |
+| `location_required` | `0` | Lokasyon seçiminin zorunlu olup olmadigini kontrol eder. `1` (Zorunlu) veya `0` (Opsiyonel). |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 
+### Alan Zorunluluğu Davranışı
+
+Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik gösterir:
+
+- **Kiralama (Rental) sekmesi:** Alan zorunluluğu `mhm_rentiva_fields_required` genel ayarina bağlı olarak koşullu çalışır. Varsayılan değer `0` (zorunlu değil).
+- **Transfer sekmesi:** Transfer alanları (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) her zaman zorunludur (hardcoded `required`). Transfer rota-bazli bir servis olduğu için bu alanlar bos birakilamaz.
+
+:::tip Ayar Yönetimi
+`mhm_rentiva_fields_required` değeri **MHM Rentiva > Ayarlar** üzerinden degistirilebilir. Bu ayar yalnızca kiralama sekmesini etkiler; transfer sekmesi daima zorunlu kalir.
+:::
 
 ## Özellikler
 
@@ -79,4 +90,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 27.03.2026 | 4.22.1 | `location_required` parametresi eklendi. Alan zorunluluğu (fields_required) davranışı belgelendi: rental koşullu, transfer daima zorunlu. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

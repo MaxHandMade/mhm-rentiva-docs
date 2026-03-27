@@ -5,15 +5,19 @@ sidebar_label: Müşteriler
 sidebar_position: 10
 slug: /features-usage/customers
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 Müşteri Yönetimi, sadık müşteri kitlesi oluşturmak ve rezervasyon geçmişini takip etmek için kullanılan merkezi bölümdür. **MHM Rentiva > Müşteriler** menüsü üzerinden tüm müşteri veritabanına erişebilirsiniz.
 
 ---
 
-## 📊 Müşteri Analitiği (Top Metrics)
+## 📊 Müşteri Analitigi (Top Metrics)
 
-Sayfanın üst kısmında, müşteri tabanınızın büyümesini ve aktifliğini gösteren 4 ana kart yer alır:
+Sayfanin ust kisminda, müşteri tabaninizin buyumesini ve aktifligini gosteren 4 ana kart yer alir:
+
+:::info Lite Bildirim Konumu (v4.22.2)
+Lite sürümde gosterilen limit bildirimi artik KPI kartlarinin **altında**, liste baslamadan **once** konumlandirmistir. Bu standartlastirma `VehicleColumns`, `BookingColumns`, `CustomersPage` ve `TransferAdmin` için geçerlidir.
+:::
 
 - **Toplam Müşteri:** Sisteme kayıtlı tüm kullanıcıların sayısı.
 - **Aktif Müşteriler:** Son 30 gün içinde rezervasyon yapmış veya sisteme giriş yapmış kullanıcılar.
@@ -63,6 +67,7 @@ Operasyonel hız için manuel müşteri kaydı açma ekranı basitleştirilmişt
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartları ve kayıt formu gerçek arayüze göre güncellendi. |
+| 27.03.2026 | 4.23.0 | Lite bildirim konumu (KPI kartlari altında) dokumante edildi. |
+| 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartlari ve kayıt formu gerçek arayuze gore güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

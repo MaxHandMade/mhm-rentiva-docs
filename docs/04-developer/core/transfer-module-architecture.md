@@ -5,7 +5,7 @@ sidebar_label: Transfer Mimarisi
 sidebar_position: 5
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, transfer modülünün çekirdek sınıflarını, rota bazlı fiyatlandırma motorunu ve veri akışını açıklar.
@@ -19,12 +19,13 @@ Transfer modülü, araç kiralama modülünden farklı olarak "Zaman + Konum" ta
 
 Transfer operasyonları şu temel sınıflar tarafından yönetilir:
 
-| Sınıf | Görevi |
+| Sinif | Gorevi |
 | :--- | :--- |
-| `TransferSearchEngine` | Rota, kapasite, müsaitlik ve bagaj skoru filtrelerini uygulayan ana motor. |
-| `TransferShortcodes` | Frontend arama formları ve sonuç listelerini (`[rentiva_transfer_search]`) yönetir. |
-| `TransferCartIntegration` | Seçilen transfer hizmetini WooCommerce sepetine entegre eder. |
-| `TransferBookingHandler` | Checkout sonrası transfer detaylarını (Rota ID, KM, Süre) rezervasyona kaydeder. |
+| `TransferSearchEngine` | Rota bazli araç filtreleme, vendor fiyatlandırmasi ve bagaj skoru filtrelerini uygulayan ana motor. |
+| `LocationProvider` | Lokasyon sorgulama servisi; `get_by_city()` metodu ile şehir bazli filtreleme destekler. |
+| `TransferShortcodes` | Frontend arama formlari ve sonuc listelerini (`[rentiva_transfer_search]`) yonetir. |
+| `TransferCartIntegration` | Secilen transfer hizmetini WooCommerce sepetine entegre eder. |
+| `TransferBookingHandler` | Checkout sonrası transfer detaylarini (Rota ID, KM, Sure) rezervasyona kaydeder. |
 
 ---
 
@@ -52,11 +53,18 @@ sequenceDiagram
 
 ## 🔍 Fiyatlandırma ve Kapasite Mantığı
 
-### 1. Rota Bazlı Fiyatlandırma
-Transfer fiyatları `wp_mhm_rentiva_transfer_routes` tablosundaki kurallara göre hesaplanır:
-- **Sabit (Fixed):** Belirlenen `base_price` doğrudan uygulanır.
-- **Mesafe (Distance):** `base_price * distance_km` formülü kullanılır. Opsiyonel olarak `min_price` alt sınırı eklenebilir.
-- **Çarpan (Multiplier):** Araç bazlı çarpan (`_mhm_transfer_price_multiplier`) ile VIP araçlar için fiyat otomatik artırılabilir.
+### 1. Rota Bazli Fiyatlandırma
+Transfer fiyatlari `wp_rentiva_transfer_routes` tablosundaki kurallara gore hesaplanir:
+- **Sabit (Fixed):** Belirlenen `base_price` dogrudan uygulanır.
+- **Mesafe (Distance):** `base_price * distance_km` formulu kullanılır. Opsiyonel olarak `min_price` alt siniri eklenebilir.
+- **Carpan (Multiplier):** Araç bazli carpan (`_mhm_transfer_price_multiplier`) ile VIP araclar için fiyat otomatik arttirilabilir.
+
+### 1a. Vendor Fiyatlandırmasi (v4.23.0)
+Vendor marketplace entegrasyonunda fiyatlandırma su sekilde çalışır:
+- Admin her rota için `min_price` ve `max_price` araligi belirler.
+- Vendor, kendi aracına rota bazında fiyat atar (`_mhm_rentiva_transfer_route_prices` JSON meta).
+- `TransferSearchEngine` once vendor fiyatini kontrol eder; yoksa rota `base_price` değerine fallback yapar.
+- Vendor fiyati admin araliginin disindaysa gecersiz sayilir.
 
 ### 2. Bagaj Skoru Hesaplama
 Sistem, araçların bagaj kapasitesini şu matematiksel modelle hesaplar:
@@ -71,12 +79,36 @@ Arama sırasında istenen bagaj yükü, aracın `_mhm_transfer_max_luggage_score
 - **Sepete Ekleme:** `rentiva_transfer_add_to_cart` - Transfer verilerini meta alanlarıyla sepete yollar.
 - **Sipariş Oluşturma:** `woocommerce_checkout_create_order_line_item` - Rota detaylarını kalıcı sipariş kaydına dönüştürür.
 
+## Şehir Bazli Filtreleme (v4.23.0)
+
+`LocationProvider::get_by_city()` metodu, vendor'in kayıtli olduğu şehirdeki lokasyonlari sorgular. Bu yapi su akilsa kullanılır:
+
+1. Vendor araç ekleme formunda (`VehicleSubmit.php`) sadece kendi sehrindeki lokasyonlar ve rotalar gosterilir.
+2. Admin panelinde `VehicleTransferMetaBox` vendor şehir bilgisini goruntular.
+
+---
+
+## Araç Meta Yapısı
+
+Transfer modulu asagidaki meta key'leri kullanir:
+
+| Meta Key | Tip | Açıklama |
+|---|---|---|
+| `_mhm_rentiva_transfer_locations` | array | Aracın hizmet verdiği lokasyon ID'leri |
+| `_mhm_rentiva_transfer_routes` | array | Aracın hizmet verdiği rota ID'leri |
+| `_mhm_rentiva_transfer_route_prices` | JSON | Rota bazında vendor fiyatlari (`{route_id: price}`) |
+
+---
+
 ## Bölüm Sonu Özeti
-- Transfer modülü, rota tabanlı çalışan bağımsız bir fiyatlama motorudur.
+- Transfer modulu, rota tabanlı calisan bagimsiz bir fiyatlama motorudur.
+- **Vendor fiyatlandırmasi:** Admin `min_price`/`max_price` araligi belirler, vendor kendi fiyatini set eder.
+- **Şehir filtreleme:** `LocationProvider::get_by_city()` ile vendor sadece kendi sehrindeki rotalari gorur.
 - **Bagaj Skoru** ve **Yolcu Kapasitesi** en kritik veri filtreleridir.
-- Rezervasyon çakışmaları `Util::has_overlap()` üzerinden çekirdek sistemle ortak kontrol edilir.
+- Rezervasyon cakismalari `Util::has_overlap()` üzerinden cekirdek sistemle ortak kontrol edilir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Transfer mimarisi, rota bazlı fiyatlandırma ve bagaj yönetimi detaylarıyla güncellendi. |
+| 27.03.2026 | 4.23.0 | Vendor fiyatlandırmasi, LocationProvider::get_by_city(), şehir bazli filtreleme, araç meta key'leri eklendi. |
+| 19.03.2026 | 4.21.2 | Transfer mimarisi, rota bazli fiyatlandırma ve bagaj yönetimi detaylariyla güncellendi. |

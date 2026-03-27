@@ -5,7 +5,7 @@ sidebar_label: Veritabanı
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, MHM Rentiva'nın hibrit veritabanı yapısını (WP Core + Native Custom Tables), tablo şemalarını ve veri bütünlüğü standartlarını açıklar.
@@ -75,18 +75,56 @@ erDiagram
 
 ---
 
-## 🛠️ Bakım ve Geliştirme
+## Transfer Tabloları
 
-- **Migrations:** Veritabanı şeması `src/Core/Database/Migrations/` altında tanımlanmıştır. `MultiTenantMigration` ve `LedgerMigration` sınıfları `dbDelta` kullanarak güvenli güncelleme yapar.
-- **Audit Tool:** Veritabanı tutarlılığı `wp mhm-rentiva audit` CLI komutları ile doğrulanabilir.
+Transfer modulu için iki ozel tablo kullanılır:
+
+| Tablo Adi | Amac | Kritik Alanlar |
+| :--- | :--- | :--- |
+| `wp_rentiva_transfer_locations` | Transfer noktalari (havalimani, otel, liman vb.) | `name`, `type`, `city`, `lat`, `lng` |
+| `wp_rentiva_transfer_routes` | Iki lokasyon arasındaki rota tanımlari | `origin_id`, `destination_id`, `base_price`, `min_price`, `max_price`, `distance_km` |
+
+### DatabaseMigrator v3.4.0 Değişiklikleri
+- `city` VARCHAR(100) kolonu `rentiva_transfer_locations` tablosuna eklendi (vendor marketplace şehir bazli filtreleme için)
+- `max_price` DECIMAL(10,2) kolonu `rentiva_transfer_routes` tablosuna eklendi (vendor fiyat araligi ust siniri)
+
+---
+
+## Bakim ve Gelistirme
+
+- **Migrations:** Veritabanı semasi `src/Core/Database/Migrations/` altında tanımlanmıştir. `MultiTenantMigration` ve `LedgerMigration` siniflari `dbDelta` kullanarak guvenli güncelleme yapar.
+- **Audit Tool:** Veritabanı tutarliligi `wp mhm-rentiva audit` CLI komutlari ile dogrulanabilir.
+
+---
+
+## Uninstaller Tablo Listesi
+
+Eklenti kaldırıldıginda asagidaki tablolar temizlenir:
+
+| Tablo | Kategori |
+|---|---|
+| `wp_mhm_rentiva_ledger` | Finans |
+| `wp_mhm_rentiva_commission_policy` | Finans |
+| `wp_mhm_rentiva_tenants` | SaaS |
+| `wp_mhm_rentiva_usage_metrics` | SaaS |
+| `wp_mhm_notification_queue` | Sistem |
+| `wp_mhm_payment_log` | Sistem |
+| `wp_mhm_sessions` | Sistem |
+| `wp_rentiva_transfer_locations` | Transfer |
+| `wp_rentiva_transfer_routes` | Transfer |
+
+Legacy `mhm_rentiva_transfer_*` tabloları da varsa temizlenir.
 
 ## Bölüm Sonu Özeti
-- Kritik finans verileri **Custom Tables** üzerinde SQL gücüyle yönetilir.
-- Esnek veriler **WP Meta** sisteminde saklanır.
-- **Multi-tenancy** yapısı `tenant_id` parametresiyle tüm katmanlara yayılmıştır.
+- Kritik finans verileri **Custom Tables** uzerinde SQL gucuyle yonetilir.
+- Transfer tabloları `city` ve `max_price` kolonlariyla vendor marketplace'i destekler.
+- Esnek veriler **WP Meta** sisteminde saklanir.
+- **Multi-tenancy** yapısı `tenant_id` parametresiyle tum katmanlara yayılmıştır.
+- Uninstaller 9 ozel tablo + legacy tabloları temizler.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 19.03.2026 | 4.23.0 | Veritabanı dökümantasyonu SaaS ve Finans mimarisine göre baştan yazıldı. |
+| 27.03.2026 | 4.23.0 | Transfer tabloları (locations + routes), DatabaseMigrator v3.4.0 değişiklikleri (city, max_price), Uninstaller tablo listesi (9 tablo + legacy) eklendi. |
+| 19.03.2026 | 4.23.0 | Veritabanı dokumantasyonu SaaS ve Finans mimarisine gore bastan yazildi. |
 

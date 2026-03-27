@@ -3,7 +3,7 @@ title: Vendor vehicle submission
 description: Vendor vehicle submission modülünün kullanım kılavuzu ve teknik detayları.
 sidebar_position: 25
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, Vendor vehicle submission modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
@@ -43,24 +43,51 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 ## Özellikler
 
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
+### 📱 Responsive Tasarim
+- **Mobil:** Tek sutun düzeni.
+- **Tablet (782px alti):** Optimize edilmis gorunum.
+- **Masaustu:** Ayarlanan sutun veya genislikte tam gorunum.
 
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+### 🚀 Performans Odakli
+- **Akilli Önbellek:** Veritabanı sorgulari sistem tarafından optimize edilerek onbellege alınır.
+- **Koşullu Yükleme:** Statik dosyalar sadece modulun kullanildigi sayfalarda yüklenir.
+
+### 🚗 Transfer Lokasyon ve Rota Seçimi (v4.23.0)
+
+v4.23.0 ile araç ekleme formuna transfer modulune ozel alanlar eklenmiştir:
+
+#### Şehir-Filtrelenms Lokasyon Seçimi
+Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari otomatik filtrelenir. `LocationProvider::get_by_city()` ile sorgulama yapilir. Vendor yalnızca kendi sehrine ait lokasyonlari gorebilir ve secebilir.
+
+- **Meta key:** `_mhm_rentiva_transfer_locations` (array)
+- **Meta key:** `_mhm_rentiva_transfer_routes` (array)
+
+#### Rota Basi Fiyat Girişi
+Her secilen rota için vendor, admin tarafından belirlenen `min_price` / `max_price` araligi dahilinde kendi fiyatini girebilir. Aralik disinda fiyat kabul edilmez.
+
+- **Meta key:** `_mhm_rentiva_transfer_route_prices` (JSON)
+- **Fallback:** Vendor fiyati yoksa rotanin `base_price` değeri kullanılır.
+
+#### Yolcu ve Bagaj Kapasitesi
+- **Yolcu kapasitesi:** Aracın tasiyabilecegi maksimum yolcu sayısı.
+- **Buyuk bagaj:** Maksimum buyuk valiz kapasitesi.
+- **Kucuk bagaj:** Maksimum kucuk valiz/canta kapasitesi.
+
+#### Araç Belgesi (Ruhsat) Yükleme
+Vendor, araç ruhsat belgesini form üzerinden yukleyebilir. Bu belge admin tarafından doğrulama için incelenir.
 
 ## Geliştirici Notları
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-vehicle-submit-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **HTML Yapısı:** Tum kapsayıcılar `.mhm-rentiva-vehicle-submit-wrapper` sınıfı ile başlar.
+- **Ozellestirme:** CSS degiskenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **Transfer alanları:** Hizmet turu "Transfer" veya "Her Ikisi" secildiginde JS ile gosterilir/gizlenir (hide/show toggle).
 
 ## Bölüm Sonu Özeti
-- Vendor vehicle submission sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+- Vendor araç ekleme formu, temel araç bilgilerinin yaninda transfer lokasyon/rota seçimi, rota basi fiyatlandırma ve kapasite alanlarıni icerir.
+- Şehir bazli filtreleme ile vendor yalnızca kendi bolgesindeki lokasyonlari gorebilir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
+| 27.03.2026 | 4.23.0 | Şehir-filtrelenmiş transfer lokasyon/rota seçimi, rota basi fiyatlandırma, kapasite alanları, ruhsat yükleme dokumante edildi. |
+| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak siralandi ve görsel yer tutucusu eklendi. |

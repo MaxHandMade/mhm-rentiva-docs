@@ -6,7 +6,7 @@ sidebar_position: 6
 slug: /features-usage/bookings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 Rezervasyonlar, MHM Rentiva sisteminin operasyonel ve finansal kalbidir. **MHM Rentiva > Rezervasyonlar** menüsü üzerinden tüm rezervasyon trafiğini izleyebilir, yeni kayıtlar açabilir ve finansal akışları yönetebilirsiniz.
 
@@ -33,7 +33,7 @@ Merkezi takvim, araçlarınızın doluluk oranını görselleştirir.
 - <span style={{color: '#22c55e'}}>●</span> **Tamamlandı:** Kiralama süreci başarıyla bitmiş ve araç teslim alınmış rezervasyonlar.
 - <span style={{color: '#ef4444'}}>●</span> **İptal Edildi:** Müşteri veya sistem tarafından iptal edilmiş geçersiz kayıtlar.
 
-*İpucu: Takvim üzerindeki bir kayda tıkladığınızda müşteri ve araç detaylarını içeren hızlı bir özet paneli açılır.*
+*Ipucu: Takvim uzerindeki bir kayda tikladiginizda müşteri ve araç detaylarini iceren hizli bir ozet paneli acilir. v4.23.0 itibariyla popup'ta `_mhm_start_time` ve `_mhm_end_time` meta değerleri ile **saat bilgisi** de gosterilmektedir.*
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
   <strong>📸 GÖRSEL: REZERVASYON TAKVİMİ VE ÖZET POPUP</strong><br/>
@@ -72,13 +72,30 @@ Rezervasyonun oluşturulmasından, ödemelerin alınmasına ve durum değişikli
 
 ---
 
+---
+
+## 🆔 Gorunum ID'si (Display ID)
+
+v4.23.0 itibariyla rezervasyon listelerinde ve widget'larda `mhm_rentiva_get_display_id()` fonksiyonu kullanılmaktadır. WooCommerce entegrasyonu aktifse, bu fonksiyon WC siparis ID'sini dondurur; değilse standart post ID gosterilir. Bu sayede müşteriye iletilen ID ile admin panelindeki ID tutarli olur.
+
+---
+
+## 🔄 Durum Degisikligi Hook'lari
+
+Rezervasyon durumu degistiginde `update_post_meta` cagrilari standart `save_post` hook'unu tetiklemez. v4.23.0 ile `updated_post_meta` ve `added_post_meta` hook'lari dinlenerek dashboard widget'lari ve istatistiklerin anlik güncellenmesi saglanmistir.
+
+---
+
 ### Bölüm Özeti
-- **Dashboard** ile anlık doluluk oranını izleyin.
-- **Zaman Çizelgesi** ile her operasyonel adımı denetleyin.
-- **Finansal Panel** ile ödeme ve kalan bakiye takibini hatasız yapın.
+- **Dashboard** ile anlik doluluk oranini izleyin.
+- **Zaman Cizelgesi** ile her operasyonel adimi denetleyin.
+- **Finansal Panel** ile odeme ve kalan bakiye takibini hatasiz yapin.
+- **Takvim popup'i** artik saat bilgisi gösterir.
+- **Display ID** ile WC siparis ID'si tutarliligi saglanir.
 
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Rezervasyon listesi, takvim, manuel kayıt ve ödeme yönetimi gerçek arayüze göre baştan yazıldı. |
+| 27.03.2026 | 4.23.0 | Takvim popup saat bilgisi, Display ID, durum hook'lari dokumante edildi. |
+| 19.03.2026 | 4.21.2 | Rezervasyon listesi, takvim, manuel kayıt ve odeme yönetimi gerçek arayuze gore bastan yazildi. |
 | 18.03.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

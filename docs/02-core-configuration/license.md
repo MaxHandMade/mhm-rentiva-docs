@@ -6,7 +6,7 @@ sidebar_position: 8
 slug: /core-configuration/license
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 MHM Rentiva, tüm özelliklerin (VIP Transfer, Mesajlaşma, Gelişmiş Raporlar vb.) tam performansta çalışabilmesi için geçerli bir lisans anahtarı gerektirir. **MHM Rentiva > Lisans** menüsü üzerinden anahtarınızı yönetebilirsiniz.
 
@@ -41,16 +41,19 @@ Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) oldu
 
 | Özellik | Lite (Sınır) | Pro (Limitsiz) |
 | :--- | :--- | :--- |
-| **Maksimum Araç Sayısı** | 3 Araç | Sınırsız |
+| **Maksimum Araç Sayısı** | 5 Araç | Sınırsız |
 | **Rezervasyon Kapasitesi** | 50 Rezervasyon | Sınırsız |
-| **Müşteri Veritabanı** | 3 Müşteri | Sınırsız |
+| **Müşteri Veritabanı** | 10 Müşteri | Sınırsız |
 | **Ek Hizmetler (Eklentiler)** | 4 Ek hizmet | Sınırsız |
 | **VIP Transfer Güzergahları**| 3 Güzergah | Sınırsız |
-| **Galeri Resimleri** | 3 Araç/Görseli | Sınırsız |
+| **Galeri Resimleri** | 5 Araç/Görseli | Sınırsız |
 | **Gelişmiş Raporlar** | 30 Gün (Maks 500 satır) | Sınırsız Tarih & Satır |
 | **Dışa Aktarım Biçimleri** | Sadece CSV | CSV, JSON |
-| **Mesajlaşma & Vendor Sistemi**| Mevcut değil | Mevcut |
+| **Mesajlaşma Sistemi** | Mevcut değil | Mevcut |
+| **Vendor & Payout** | Mevcut değil | Mevcut |
 | **REST API Erişimi** | Sınırlı | Tam REST API |
+| **GDPR Uyumluluk Araçları** | Mevcut değil | Mevcut |
+| **E-posta Bildirimleri** | Mevcut değil | Mevcut |
 
 ---
 
@@ -62,5 +65,6 @@ Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) oldu
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 27.03.2026 | 4.23.0 | Lite limitleri güncellendi (araç: 3→5, müşteri: 3→10, galeri: 3→5). Pro-only özellikler ayrıştı: Vendor & Payout, GDPR, E-posta Bildirimleri. |
 | 19.03.2026 | 4.21.2 | Lisans yönetimi rehberi görseller ve teknik notlarla modernize edildi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

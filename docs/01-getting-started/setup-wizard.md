@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /getting-started/setup-wizard
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 MHM Rentiva'yı ilk kez etkinleştirdiğinizde, sizi temel yapılandırma adımlarında yönlendiren interaktif bir **Kurulum Sihirbazı** karşılar. Bu sihirbaz, eklentinin sitenizle kusursuz uyum sağlaması için kritik ayarları dakikalar içinde yapmanıza olanak tanır.
 
@@ -31,8 +31,9 @@ Eklentinin Pro özelliklerini (Online ödemeler, gelişmiş raporlar vb.) kullan
 
 ### 3. Gerekli Sayfaların Oluşturulması
 Eklenti, araç listeleme, rezervasyon detayı, ödeme ve müşteri paneli gibi işlevler için özel sayfalara ihtiyaç duyar.
-- **Tek tıkla** tüm zorunlu sayfaları kısa kodları (shortcodes) ile birlikte otomatik oluşturabilirsiniz.
+- **Tek tıkla** tüm zorunlu sayfaları kısa kodları (shortcodes) ile birlikte otomatik oluşturabilirsiniz. Toplam **6 zorunlu sayfa** kontrol edilir: Rezervasyon Formu, Birlesik Arama, Arama Sonuçları, Araç Detaylari, Araç Listesi ve Iletisim Formu.
 - Eğer bu sayfalar zaten varsa, sihirbaz bunları algılar ve "Mevcut" olarak işaretler.
+- **Not:** Araçlar Tablosu (`rentiva_vehicles_grid`) ve Araç Karşılaştırması (`rentiva_vehicle_comparison`) sayfaları opsiyoneldir ve sihirbaz tarafından zorunlu tutulmaz.
 
 ### 4. E-posta ve Bildirimler
 Rezervasyon onayları ve müşteri bilgilendirmeleri için gönderici bilgilerini ayarlarsınız.
@@ -82,6 +83,7 @@ $is_completed = get_option('mhm_rentiva_setup_completed'); // '1' ise tamamlanm�
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 27.03.2026 | 4.22.1 | Zorunlu sayfa listesi güncellendi: `rentiva_vehicle_details` eklendi, `rentiva_vehicles_grid` ve `rentiva_vehicle_comparison` kaldırıldı (opsiyonel). 7 -> 6 sayfa. |
 | 18.03.2026 | 4.21.2 | İçerik hibrit modele (kullanıcı + teknik) göre güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

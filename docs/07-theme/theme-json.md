@@ -4,7 +4,7 @@ title: Theme Configuration (theme.json)
 sidebar_label: theme.json
 slug: /theme/theme-json
 ---
-![Version](https://img.shields.io/badge/version-v3-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-09.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 :::info Purpose
 `theme.json` is the configuration hub for global styles, settings, and behavior. It defines the color palette, typography hierarchy, spacing scales, and global block styles.
@@ -77,10 +77,14 @@ The theme uses proportional spacing steps from `3xs` to `3xl`:
 }
 ```
 
-### Layout Constraints
+### Duzen Kısıtlamaları
 
-- **Content Size**: `1280px` (standard width).
-- **Wide Size**: `1440px` (used for full-bleed or wide-alignment sections).
+- **Content Size**: `1280px` (standart genislik).
+- **Wide Size**: `1440px` (tam genislik veya genis hizalama bölümleri için).
+
+:::info v0.3.0 Değişiklik
+`page.html` şablonu `content-narrow` yerine artik `content-wide` kullanmaktadir. `3-layout.css` dosyasındaki `max-width` değeri `var(--wp--style--global--content-size, 1280px)` ile `theme.json`'a senkronize edilmiştir. Bu sayede tema editoru üzerinden content-size degistirildiginde eklenti sayfaları da otomatik olarak güncellenir.
+:::
 
 ---
 
@@ -104,7 +108,8 @@ By centralizing all design tokens in `theme.json`, the `mhm-rentiva` plugin can 
 
 ---
 
-## Changelog
-| Date | Version | Note |
-|------|---------|------|
-| 2026-03-09 | 4.21.0-docs | Initial theme configuration documentation created. |
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|-------|-------|-----|
+| 27.03.2026 | v0.3.0 | `content-wide` düzeni ve CSS degisken senkronizasyonu dokumante edildi. |
+| 09.03.2026 | 4.21.0-docs | Tema yapilandirma dokumantasyonu oluşturuldu. |

@@ -5,7 +5,7 @@ sidebar_label: Kurulum Sihirbazı
 sidebar_position: 15
 slug: /features-usage/setup-wizard
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
 
 Kurulum Sihirbazı, yeni bir WordPress kurulumunda MHM Rentiva'yı hazırlamak ve ayarları yapılandırmak için izlenen adımlardır. Bu sihirbazı daha sonra **MHM Rentiva > Kurulum Sihirbazı** menüsünden dilediğiniz zaman yeniden açabilirsiniz. Sihirbaz ekranının üst kısmında, sistemde çözülmesi gereken bildirimler veya hatalar (Örn: Harekete geçirici Eylem Planlayıcı mesajları) sürekli olarak gösterilir.
 
@@ -43,10 +43,13 @@ Rentiva; rezervasyon, onay ve müşteri hesabı ekranları için WordPress taraf
 1. **Rezervasyon Formu** (`[rentiva_booking_form]`) -> `/rentiva/booking-form/`
 2. **Birleşik Arama** (`[rentiva_unified_search]`) -> `/rentiva/search/`
 3. **Arama Sonuçları** (`[rentiva_search_results]`) -> `/rentiva/search-results/`
-4. **Araç Listesi** (`[rentiva_vehicles_list]`) -> `/rentiva/vehicles/`
-5. **Araçlar Tablosu** (`[rentiva_vehicles_grid]`) -> `/rentiva/vehicles-grid/`
-6. **Araç Karşılaştırması** (`[rentiva_vehicle_comparison]`) -> `/rentiva/compare/`
-7. **İletişim Formu** (`[rentiva_contact]`) -> `/rentiva/contact/`
+4. **Araç Detayları** (`[rentiva_vehicle_details]`) -> `/rentiva/vehicle/`
+5. **Araç Listesi** (`[rentiva_vehicles_list]`) -> `/rentiva/vehicles/`
+6. **İletişim Formu** (`[rentiva_contact]`) -> `/rentiva/contact/`
+
+:::info Opsiyonel Sayfalar
+**Araçlar Tablosu** (`[rentiva_vehicles_grid]`) ve **Araç Karşılaştırması** (`[rentiva_vehicle_comparison]`) sayfaları opsiyoneldir ve sihirbaz tarafından zorunlu tutulmaz. Bu sayfaları ihtiyacınıza göre manuel olarak oluşturabilirsiniz.
+:::
 
 Tüm sayfaların karşısında anlık mevcut "Durum" bilgisi bulunur ve "Düzenle" linki ile ilgili sayfaya yönlendirir.
 
@@ -77,11 +80,17 @@ Rezervasyon formlarında ve araç kartlarında müşteri (Frontend) tarafında y
 - **Varsayılan Kiralama Günleri:** Kullanıcı tarihsiz arama yaptığında formlarda varsayılan kaç günlük kira süresi dolacağı (Örn: 1).
 - **Minimum Kiralama Süresi:** Sistemin kabul edeceği en alt gün limiti (Örn: 1).
 - **Maksimum Kiralama Gün Sayısı:** Daha uzun süreli kiralamaları önleyen limit (Örn: 30).
-- **Araç Kartları Sviçleri:** Araçların küçük katalog görünümlerinde **Özellik rozetlerini göster** (Kapı, koltuk vb.) ve **Müsaitlik rozetini göster** aktif/pasif seçenekleri.
+- ~~**Araç Kartları Sviçleri:**~~ v4.22.1 ile kaldırıldı. Daha once burada bulunan "Özellik rozetlerini goster" ve "Musaitlik rözetini goster" ayarlari kodda kullanilmadigi için cikarilmistir. Bu kontroller artik dogrudan kisa kod parametreleri (`show_features`, `show_badges` vb.) üzerinden yonetilir.
 
 ---
 
 ### Bölüm Özeti
 - Kurulum Sihirbazı (Setup Wizard); PHP sistem gereksinimlerinden başlayıp, WooCommerce altyapısını senkronize ederek sorunsuz bir temel hazırlar. 
 - Sihirbaz tamamlandığında gerekli sayfalar, kısa kodları ve mail otomasyonu hazır hale gelir. İlerleyen günlerde herhangi bir altyapısal değişikliği bu ekranlardan "Mevcut değer / Tavsiye edilen" şeklinde analiz edebilirsiniz.
+
+### Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+| :--- | :--- | :--- |
+| 27.03.2026 | 4.22.1 | Zorunlu sayfa listesi güncellendi: `rentiva_vehicle_details` eklendi, `rentiva_vehicles_grid` ve `rentiva_vehicle_comparison` kaldırıldı (opsiyonel). 7 -> 6 sayfa. |
+| 19.03.2026 | 4.21.2 | Kullanim kilavuzu oluşturuldu. |
 
