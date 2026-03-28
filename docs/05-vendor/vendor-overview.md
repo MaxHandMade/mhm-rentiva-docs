@@ -6,7 +6,7 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
 
 # 🤝 Vendor Ekonomisi ve Yönetimi
 
@@ -64,8 +64,9 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
 - Bu alan, Admin ve Vendor arasındaki ticari ve teknik köprüyü tanımlar.
 - Tüm finansal işlemler **MHM Ledger** modeli üzerinden kriptografik olarak denetlenir.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Degisiklik Gunlugu
+| Tarih | Surum | Not |
 |---|---|---|
-| 26.03.2026 | 4.23.0 | Versiyon rozeti güncellendi; v4.23.0 transfer lokasyon mimarisi referansları. |
-| 19.03.2026 | 4.21.2 | Vendor kategorisi için premium kart tasarımlı Genel Bakış sayfası oluşturuldu. |
+| 28.03.2026 | 4.23.1 | Versiyon rozeti guncellendi; v4.23.1 vendor form yeniden tasarimi ve SelectWoo migrasyonu referanslari. |
+| 26.03.2026 | 4.23.0 | Versiyon rozeti guncellendi; v4.23.0 transfer lokasyon mimarisi referanslari. |
+| 19.03.2026 | 4.21.2 | Vendor kategorisi icin premium kart tasarimli Genel Bakis sayfasi olusturuldu. |

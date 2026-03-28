@@ -5,7 +5,7 @@ sidebar_label: Onboarding
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.23.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, bir kullanıcının tedarikçi olma sürecini; başvuru formundan admin onayına, rol atamasından veri senkronizasyonuna kadar teknik olarak açıklar.
@@ -27,16 +27,29 @@ Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen b
 - **Güvenlik:** Her başvuru için `wp_create_nonce('mhm_vendor_apply_nonce')` ile CSRF koruması sağlanır.
 
 ### Zorunlu Alanlar
-| Alan | Meta Anahtarı | Tip | Şifreleme |
+| Alan | Meta Anahtari | Tip | Sifreleme |
 |---|---|---|---|
 | Ad Soyad | `_vendor_full_name` | Metin | Hayir |
 | Telefon | `_vendor_phone` | Metin | Hayir |
-| Şehir / Bolge | `_vendor_city` | Seçim | Hayir |
+| Sehir / Bolge | `_vendor_city` | SelectWoo | Hayir |
 | **IBAN** | `_vendor_iban` | Metin | **Evet (AES-256)** |
+| **Hesap Sahibi** | `_vendor_account_holder` | Metin | Hayir |
 | Kimlik Belgesi | `_vendor_doc_id` | Dosya | Hayir |
 | Ehliyet | `_vendor_doc_license` | Dosya | Hayir |
 | Adres Belgesi | `_vendor_doc_address` | Dosya | Hayir |
-| Sigorta Belgesi | `_vendor_doc_insurance` | Dosya | Hayir |
+
+### Opsiyonel Alanlar
+| Alan | Meta Anahtari | Tip | Not |
+|---|---|---|---|
+| Vergi Dairesi | `_vendor_tax_office` | Metin | v4.23.1 ile eklendi |
+
+:::info v4.23.1 Form Degisiklikleri
+- **Hizmet Alanlari (Service Areas):** Checkbox bolumu kaldirildi, yerine bilgi notu eklendi.
+- **Arac Sigortasi:** Basvuru formundan kaldirildi, arac ekleme formuna (`[rentiva_vehicle_submit]`) tasindi.
+- **Sehir Secimi:** Metin girisi (`<datalist>`) yerine `<select>` + WooCommerce SelectWoo bilesenine donusturuldu (`CityHelper::render_select()`).
+- **Hesap Sahibi:** Yeni zorunlu alan — banka hesap sahibi bilgisi.
+- **Vergi Dairesi:** Yeni opsiyonel alan.
+:::
 
 ---
 
@@ -68,12 +81,12 @@ return base64_encode($iv . $cipher);
 
 ## ⚙️ 4. Admin Onay ve Rol Atama
 
-### Onay Akışı (`Approve`)
-Admin panelinden "Approve" tıklandığında `VendorOnboardingController::approve()` şu işlemleri sırasıyla yapar:
-1. **Rol Yükseltme:** Kullanıcıya `rentiva_vendor` rolü atanır.
-2. **Meta Sync:** Başvuru postundaki veriler (`_vendor_*`) kullanıcı meta tablolarına (`_rentiva_vendor_*`) kopyalanır.
+### Onay Akisi (`Approve`)
+Admin panelinden "Approve" tiklandiginda `VendorOnboardingController::approve()` su islemleri sirasiyla yapar:
+1. **Rol Yukseltme:** Kullaniciya `rentiva_vendor` rolu atanir.
+2. **Meta Sync:** Basvuru postundaki veriler (`_vendor_*`) kullanici meta tablolarina (`_rentiva_vendor_*`) kopyalanir. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanlari da senkronize edilir.
 3. **Loglama:** Onay tarihi ve onaylayan admin ID'si kaydedilir.
-4. **Bildirim:** `mhm_rentiva_vendor_approved` kancası tetiklenir.
+4. **Bildirim:** `mhm_rentiva_vendor_approved` kancasi tetiklenir.
 
 ### Red Akışı (`Reject`)
 Admin reddettiğinde:
@@ -106,8 +119,11 @@ Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlan
 - **Yolcu kapasitesi:** Maksimum yolcu sayısı.
 - **Bagaj limitleri:** Buyuk ve kucuk bagaj kapasiteleri.
 
-### Araç Belgesi (Ruhsat) Yükleme
-Vendor, araç ruhsat belgesini form üzerinden yukleyebilir. Bu belge admin tarafından doğrulama için incelenir.
+### Arac Belgesi (Ruhsat) Yukleme
+Vendor, arac ruhsat belgesini form uzerinden yukleyebilir. Bu belge admin tarafindan dogrulama icin incelenir.
+
+### Arac Sigorta Belgesi Yukleme (v4.23.1)
+Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhm_rentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
 
 ### Düzenleme ve Yeniden Inceleme
 Vendor, aracında kritik alan degisikligi yaptiginda (marka, model, plaka vb.) araç otomatik olarak yeniden inceleme kuyuguna alınır (`VendorVehicleReviewManager`). Minor değişiklikler (fiyat, açıklama) aninda yayinlanir.
@@ -121,11 +137,13 @@ Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
 - Onboarding süreci tamamen AJAX tabanldir ve sayfa yenileme gerektirmez.
 - Hassas finansal veriler (IBAN) donanim/sunucu seviyesinde şifrelenir.
 - Rol ve meta senkronizasyonu atomik bir işlem olarak yurutulur.
-- Başvuru formu 4 farkli belge yüklemesini destekler (kimlik, ehliyet, adres, sigorta).
-- Araç ekleme formu şehir-filtrelenmiş lokasyon/rota seçimi ve rota basi fiyatlandırma icerir.
+- Basvuru formu 3 farkli belge yuklemesini destekler (kimlik, ehliyet, adres). Sigorta belgesi v4.23.1 ile arac ekleme formuna tasindi.
+- Arac ekleme formu sehir-filtrelenmis lokasyon/rota secimi, rota basi fiyatlandirma ve sigorta belgesi yukleme icerir.
+- Sehir secimi tum formlarda SelectWoo bileseni uzerinden yapilir (v4.23.1).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Degisiklik Gunlugu
+| Tarih | Surum | Not |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | Belge yüklemeleri (4 tip), araç ekleme süreci, şehir-filtrelenmiş rota seçimi, rota fiyatlandırma, kapasite alanları, yeniden inceleme mekanizmasi eklendi. |
-| 19.03.2026 | 4.21.2 | Sayfa, HMAC şifreleme ve meta senkronizasyon detaylariyla güncellendi. |
+| 28.03.2026 | 4.23.1 | Basvuru formu: Hizmet Alanlari ve Arac Sigortasi kaldirildi. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Sehir secimi SelectWoo'ya donusturuldu. Arac sigorta belgesi arac ekleme formuna tasindi. Meta senkronizasyonu guncellendi. |
+| 27.03.2026 | 4.23.0 | Belge yuklemeleri (4 tip), arac ekleme sureci, sehir-filtrelenmis rota secimi, rota fiyatlandirma, kapasite alanlari, yeniden inceleme mekanizmasi eklendi. |
+| 19.03.2026 | 4.21.2 | Sayfa, HMAC sifreleme ve meta senkronizasyon detaylariyla guncellendi. |

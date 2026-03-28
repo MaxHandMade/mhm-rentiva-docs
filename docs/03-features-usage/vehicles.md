@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /features-usage/vehicles
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.24.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
 
 Araçlar, MHM Rentiva sisteminin temel yapı taşlarıdır. **MHM Rentiva > Araçlar** menüsü, filonuzdaki tüm araçların listelendiği, durumlarının takip edildiği ve yeni araç girişlerinin yapıldığı ana yönetim ekranıdır.
 
@@ -63,14 +63,30 @@ MHM Rentiva, klasik kiralamanın dışında VIP Transfer operasyonlarını da de
 
 ---
 
-## 🖼️ Galeri ve Görsel Yönetimi
+## Galeri ve Gorsel Yonetimi
 
-- **Araç Görüntüsü:** Arama sonuçlarında görünecek ana profil fotoğrafı.
-- **Araç Galerisi:** Aracın iç ve dış detaylarını gösteren maksimum 10 adet fotoğraf.
+- **Arac Goruntusu:** Arama sonuclarinda gorunecek ana profil fotografi.
+- **Arac Galerisi:** Aracin ic ve dis detaylarini gosteren maksimum 10 adet fotograf.
 
 ---
 
-## 📅 Bloklu Tarihler (Blocked Dates)
+## Arac Belgeleri (v4.23.1)
+
+Arac ekleme formunda (`[rentiva_vehicle_submit]`) iki belge yukleme alani bulunur:
+
+### Arac Ruhsati (Vehicle Registration Document)
+Vendor, arac ruhsat belgesini form uzerinden yukler. Admin tarafindan dogrulama icin incelenir.
+
+### Arac Sigortasi (Vehicle Insurance Document)
+v4.23.1 ile eklenmistir. Arac ruhsatindan hemen sonra gelen bu bolum, aracin sigorta belgesinin yuklenmesini saglar.
+
+- **Meta key:** `_mhm_rentiva_vehicle_insurance_doc`
+- **Islem:** VehicleSubmit.php AJAX handler tarafindan islenir ve WordPress Media Library'de saklanir.
+- **Gecmis:** Bu alan onceden vendor basvuru formunda bulunuyordu. v4.23.1 ile her araca ozel sigorta belgesi yuklenebilmesi icin arac ekleme formuna tasindi.
+
+---
+
+## Bloklu Tarihler (Blocked Dates)
 
 Aracın belirli tarihlerde kiralanmasını engellemek için **Bloklu Tarihler** meta kutusu kullanılır. v4.23.0 ile "Tumune Uygula" (Apply to All) işlevi duzeltilmistir:
 
@@ -92,10 +108,11 @@ v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admi
 - **VIP Modulu** ile transfer kapasitelerini ve fiyat carpanlarini yonetin.
 - **Bloklu Tarihler** artik "Tumune Uygula" işlevinde JSON payload kullanir.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Degisiklik Gunlugu
+| Tarih | Surum | Not |
 | :--- | :--- | :--- |
+| 28.03.2026 | 4.23.1 | Arac sigorta belgesi yukleme bolumu eklendi. Sehir secimi SelectWoo'ya donusturuldu. |
 | 27.03.2026 | 4.23.0 | Bloklu Tarihler "Tumune Uygula" fix, AssetManager admin guard dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Araç detaylari, özellikler, ekipmanlar ve VIP modulu gerçek arayuze gore güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
+| 19.03.2026 | 4.21.2 | Arac detaylari, ozellikler, ekipmanlar ve VIP modulu gercek arayuze gore guncellendi. |
+| 26.02.2026 | 4.21.0 | Ilk surum olusturuldu. |
 
