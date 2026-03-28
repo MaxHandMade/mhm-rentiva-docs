@@ -4,10 +4,146 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 26 Mar 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 28 Mar 2026 20:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.24.0: Araç Yaşam Döngüsü Yönetimi & Vendor Self-Servis]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary</guid>
+            <pubDate>Sat, 28 Mar 2026 20:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.24.0 sürümü yayınlandı! Bu sürüm, araçların tüm ömrü boyunca yönetilebileceği tam durum makinesi, vendor'ların araçlarını kendi kendine yönetebileceği AJAX self-servis uç noktaları ve adil rekabeti koruyan anti-gaming mekanizmaları getiriyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.24.0</strong> sürümü yayınlandı! Bu sürüm, araçların tüm ömrü boyunca yönetilebileceği tam durum makinesi, vendor'ların araçlarını kendi kendine yönetebileceği AJAX self-servis uç noktaları ve adil rekabeti koruyan anti-gaming mekanizmaları getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-yaşam-döngüsü-durum-makinesi">🚀 Araç Yaşam Döngüsü Durum Makinesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-ara%C3%A7-ya%C5%9Fam-d%C3%B6ng%C3%BCs%C3%BC-durum-makinesi" class="hash-link" aria-label="🚀 Araç Yaşam Döngüsü Durum Makinesi doğrudan bağlantı" title="🚀 Araç Yaşam Döngüsü Durum Makinesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.24.0'ın ana özelliği: araçların <strong>Aktif → Duraklatılmış → Süresi Dolmuş → Geri Çekilmiş</strong> durumları arasındaki geçişlerini yöneten tam durum makinesi.</p>
+<ul>
+<li class=""><strong>5 Durum:</strong> <code>pending_review</code>, <code>active</code>, <code>paused</code>, <code>expired</code>, <code>withdrawn</code> — her geçiş kurallarla korunuyor.</li>
+<li class=""><strong>Geçiş kuralları:</strong> Hangi durumdan hangi duruma geçileceği <code>VehicleLifecycleManager</code> tarafından zorunlu kılınır.</li>
+<li class=""><strong>Admin UI:</strong> Araç listesinde yaşam döngüsü sütunu, araç düzenleme ekranında meta kutu.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-90-günlük-listeleme-süresi">⏱️ 90 Günlük Listeleme Süresi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#%EF%B8%8F-90-g%C3%BCnl%C3%BCk-listeleme-s%C3%BCresi" class="hash-link" aria-label="⏱️ 90 Günlük Listeleme Süresi doğrudan bağlantı" title="⏱️ 90 Günlük Listeleme Süresi doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class="">Araçlar yayınlandıktan <strong>90 gün</strong> sonra otomatik olarak süresi dolar.</li>
+<li class="">Sona ermeden <strong>10 gün</strong> ve <strong>3 gün</strong> önce vendor'a uyarı e-postaları gönderilir.</li>
+<li class="">Günlük cron ile kontrol edilir; süresi dolan araçlar <code>expired</code> durumuna geçer.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-self-servis-ajax-uç-noktaları">🎮 Vendor Self-Servis AJAX Uç Noktaları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-vendor-self-servis-ajax-u%C3%A7-noktalar%C4%B1" class="hash-link" aria-label="🎮 Vendor Self-Servis AJAX Uç Noktaları doğrudan bağlantı" title="🎮 Vendor Self-Servis AJAX Uç Noktaları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'lar artık araçlarını admin müdahalesi olmadan yönetebilir:</p>
+<table><thead><tr><th>İşlem</th><th>Açıklama</th></tr></thead><tbody><tr><td><strong>Duraklat</strong></td><td>Aktif araç geçici olarak pasife alınır</td></tr><tr><td><strong>Devam Et</strong></td><td>Duraklatılmış araç tekrar aktifleştirilir</td></tr><tr><td><strong>Geri Çek</strong></td><td>Araç platformdan kalıcı olarak çekilir (ceza uygulanabilir)</td></tr><tr><td><strong>Yenile</strong></td><td>Süresi dolmuş araç yeniden aktifleştirilir</td></tr><tr><td><strong>Yeniden Listele</strong></td><td>Geri çekilmiş araç tekrar yayınlanır</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-artan-geri-çekme-ceza-sistemi">💸 Artan Geri Çekme Ceza Sistemi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-artan-geri-%C3%A7ekme-ceza-sistemi" class="hash-link" aria-label="💸 Artan Geri Çekme Ceza Sistemi doğrudan bağlantı" title="💸 Artan Geri Çekme Ceza Sistemi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'ların sık sık araç geri çekmesini önleyen kademeli ceza mekanizması:</p>
+<ul>
+<li class=""><strong>1. geri çekme:</strong> Ücretsiz — ceza yok.</li>
+<li class=""><strong>2. geri çekme:</strong> Aylık ortalama gelirin <strong>%10</strong>'u kesilir.</li>
+<li class=""><strong>3. ve sonrası:</strong> Aylık ortalama gelirin <strong>%25</strong>'i kesilir.</li>
+<li class=""><strong>12 aylık kayan pencere:</strong> Ceza sayacı 12 ay geçince sıfırlanır.</li>
+<li class="">Kesintiler doğrudan ledger'a kaydedilir, payout hesabından düşülür.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-anti-gaming-bloklu-tarih-koruması">🛡️ Anti-Gaming: Bloklu Tarih Koruması<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#%EF%B8%8F-anti-gaming-bloklu-tarih-korumas%C4%B1" class="hash-link" aria-label="🛡️ Anti-Gaming: Bloklu Tarih Koruması doğrudan bağlantı" title="🛡️ Anti-Gaming: Bloklu Tarih Koruması doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'ların fiyat manipülasyonunu önlemek için:</p>
+<ul>
+<li class="">Vendor iptal ettiği rezervasyonun tarihleri <strong>30 gün boyunca yeniden bloklanır</strong>.</li>
+<li class="">Vendor düşük fiyatla almak için iptal edip daha yüksek fiyata satamaz.</li>
+<li class=""><code>AntiGamingBlocker</code> sınıfı bu tarih blokajlarını yönetir.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-güvenilirlik-puanı">⭐ Vendor Güvenilirlik Puanı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-vendor-g%C3%BCvenilirlik-puan%C4%B1" class="hash-link" aria-label="⭐ Vendor Güvenilirlik Puanı doğrudan bağlantı" title="⭐ Vendor Güvenilirlik Puanı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tüm platformda vendor kalitesini ölçen 0-100 arası puan sistemi:</p>
+<ul>
+<li class=""><strong>Günlük cron</strong> ile yeniden hesaplama.</li>
+<li class=""><strong>Formül:</strong> İptal oranı, geri çekme sıklığı, duraklatma geçmişi ve tamamlanan rezervasyon sayısı bazlı.</li>
+<li class="">Admin kullanıcı listesinde vendor güvenilirlik sütunu eklendi.</li>
+<li class="">Araç kartlarında vendor badge olarak gösterilmeye hazır.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-9-yeni-e-posta-şablonu">📧 9 Yeni E-posta Şablonu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-9-yeni-e-posta-%C5%9Fablonu" class="hash-link" aria-label="📧 9 Yeni E-posta Şablonu doğrudan bağlantı" title="📧 9 Yeni E-posta Şablonu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yaşam döngüsünün her adımı için ayrı e-posta şablonları:</p>
+<table><thead><tr><th>Şablon</th><th>Tetikleyici</th></tr></thead><tbody><tr><td>Araç Aktifleştirildi</td><td>Araç <code>active</code> durumuna geçtiğinde</td></tr><tr><td>Araç Duraklatıldı</td><td>Vendor veya admin duraklattığında</td></tr><tr><td>Duraklatma Devam Etti</td><td>Araç yeniden aktifleştirildiğinde</td></tr><tr><td>Araç Geri Çekildi</td><td>Vendor geri çekme işlemi yaptığında</td></tr><tr><td>Listeleme Süresi Doldu</td><td>90. gün sonunda otomatik</td></tr><tr><td>10 Gün Uyarısı</td><td>Süre dolumundan 10 gün önce</td></tr><tr><td>3 Gün Uyarısı</td><td>Süre dolumundan 3 gün önce</td></tr><tr><td>Araç Yenilendi</td><td>Süresi dolmuş araç yenilendiğinde</td></tr><tr><td>Araç Yeniden Listelendi</td><td>Geri çekilmiş araç tekrar yayınlandığında</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler">🛠️ Teknik İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Aktif Filtre:</strong> 6 frontend shortcode artık <code>MetaQueryHelper</code> aracılığıyla bakımdaki/pasif araçları filtreler — müşteriler geçersiz araçları göremez.</li>
+<li class=""><strong>Veritabanı:</strong> <code>DatabaseMigrator v3.5.0</code> — mevcut tüm aktif araçlar için yaşam döngüsü durumu otomatik migrate edildi.</li>
+<li class=""><strong>Login Yönlendirme:</strong> <code>wp-login.php</code> erişimi WooCommerce hesap sayfasına yönlendirildi.</li>
+<li class=""><strong>Lisans Check-in:</strong> Haftalık cron ile instance check-in.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🚀 Durum Makinesi</td><td>5 durum, geçiş kuralları, VehicleLifecycleManager.</td></tr><tr><td>⏱️ Listeleme Süresi</td><td>90 gün, cron tabanlı, 10/3 gün uyarı e-postaları.</td></tr><tr><td>🎮 Self-Servis</td><td>Duraklat, devam et, geri çek, yenile, yeniden listele AJAX.</td></tr><tr><td>💸 Ceza Sistemi</td><td>%0/%10/%25 kademeli, 12 aylık kayan pencere, ledger entegrasyonu.</td></tr><tr><td>🛡️ Anti-Gaming</td><td>İptal edilen tarihler 30 gün bloklanır.</td></tr><tr><td>⭐ Güvenilirlik</td><td>Vendor skoru 0-100, günlük cron yeniden hesaplama.</td></tr><tr><td>📧 Bildirimler</td><td>9 yeni yaşam döngüsü e-posta şablonu.</td></tr><tr><td>📊 Admin UI</td><td>Yaşam döngüsü sütunu, meta kutu, vendor güvenilirlik sütunu.</td></tr><tr><td>🔍 Aktif Filtre</td><td>6 shortcode MetaQueryHelper ile pasif araçları filtreler.</td></tr><tr><td>🗄️ Veritabanı</td><td>v3.5.0 migration, mevcut araçlar migrate edildi.</td></tr><tr><td>✅ Test</td><td>665 test, 2248 assertion (567/2036'dan artış).</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.24.0, MHM Rentiva'nın araç yönetim altyapısını kökten güçlendiriyor. Artık araçlar yalnızca "aktif/pasif" değil; tam bir yaşam döngüsüne sahip. Vendor'lar araçlarını kendi kendine yönetirken platform, adil rekabeti ceza sistemi ve anti-gaming mekanizmalarıyla koruyor. Güvenilirlik puanı ise kaliteli vendor'ların öne çıkmasını sağlayan yeni bir rekabet boyutu ekliyor.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>lifecycle</category>
+            <category>reliability</category>
+            <category>notifications</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.23.1: Vendor Form Yeniden Tasarimi & Sehir SelectWoo Migrasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary</guid>
+            <pubDate>Sat, 28 Mar 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.23.1 surumu yayinlandi! Bu surum, vendor ayarlar sayfasinin tamamen yeniden tasarlanmasini, basvuru formundaki alan degisikliklerini, sehir secici bilesenlerin SelectWoo'ya donusturulmesini ve arac sigorta belgesi yukleme ozelligini icerir.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.23.1</strong> surumu yayinlandi! Bu surum, vendor ayarlar sayfasinin tamamen yeniden tasarlanmasini, basvuru formundaki alan degisikliklerini, sehir secici bilesenlerin SelectWoo'ya donusturulmesini ve arac sigorta belgesi yukleme ozelligini icerir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="onemli-yenilikler">Onemli Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#onemli-yenilikler" class="hash-link" aria-label="Onemli Yenilikler doğrudan bağlantı" title="Onemli Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-ayarlar-sayfasi-yeniden-tasarimi">Vendor Ayarlar Sayfasi Yeniden Tasarimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#vendor-ayarlar-sayfasi-yeniden-tasarimi" class="hash-link" aria-label="Vendor Ayarlar Sayfasi Yeniden Tasarimi doğrudan bağlantı" title="Vendor Ayarlar Sayfasi Yeniden Tasarimi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor ayarlar sayfasi (<code>vendor-settings.php</code>) sifirdan yeniden yazildi:</p>
+<ul>
+<li class=""><strong>Inline stil temizligi:</strong> Tum inline CSS kaldirildi, <code>.mhm-vendor-form__*</code> CSS sinif yapisi ile <code>vendor-forms.css</code> dosyasina tasinarak bakim kolayligi saglandi.</li>
+<li class=""><strong>Yeni alanlar:</strong> Hesap Sahibi (Account Holder) ve Vergi Dairesi (Tax Office) alanlari eklendi.</li>
+<li class=""><strong>Bildirim sistemi:</strong> Bildirimler artik <code>mhm-vendor-notice</code> siniflariyla gosteriliyor.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="basvuru-formu-guncellemeleri">Basvuru Formu Guncellemeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#basvuru-formu-guncellemeleri" class="hash-link" aria-label="Basvuru Formu Guncellemeleri doğrudan bağlantı" title="Basvuru Formu Guncellemeleri doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor basvuru formunda onemli alan degisiklikleri yapildi:</p>
+<ul>
+<li class=""><strong>Hizmet Alanlari kaldirildi:</strong> Checkbox olarak sunulan Hizmet Alanlari (Service Areas) bolumu kaldirildi; yerine bilgi notu eklendi.</li>
+<li class=""><strong>Arac Sigortasi tasinidi:</strong> Basvuru formundan kaldirilip arac ekleme formuna (<code>[rentiva_vehicle_submit]</code>) tasindi.</li>
+<li class=""><strong>Yeni finansal alanlar:</strong> Hesap Sahibi (zorunlu) ve Vergi Dairesi (opsiyonel) alanlari eklendi.</li>
+<li class=""><strong>Meta senkronizasyonu:</strong> <code>VendorApplicationManager</code> ve <code>VendorOnboardingController</code> onay akisinda yeni alanlarin senkronizasyonu saglandi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sehir-selectwoo-migrasyonu">Sehir SelectWoo Migrasyonu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#sehir-selectwoo-migrasyonu" class="hash-link" aria-label="Sehir SelectWoo Migrasyonu doğrudan bağlantı" title="Sehir SelectWoo Migrasyonu doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tum sehir metin girisleri (<code>&lt;datalist&gt;</code>) modern bir secim bilesenine donusturuldu:</p>
+<ul>
+<li class=""><strong>Yeni mimari:</strong> <code>&lt;select&gt;</code> + WooCommerce selectWoo ile aranabilir, kullanici dostu sehir secimi.</li>
+<li class=""><strong>Yeni metot:</strong> <code>CityHelper::render_select()</code> — tum sehir secicilerde tek kaynak (SSOT).</li>
+<li class=""><strong>Guncellenen formlar:</strong> vendor-settings.php, VendorApply.php, VehicleSubmit.php, TransferAdmin.php.</li>
+<li class=""><strong>CSS/JS enqueue:</strong> UserDashboard.php, VendorApply.php ve VehicleSubmit.php dosyalarina SelectWoo asset'leri eklendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arac-sigorta-belgesi-yukleme">Arac Sigorta Belgesi Yukleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#arac-sigorta-belgesi-yukleme" class="hash-link" aria-label="Arac Sigorta Belgesi Yukleme doğrudan bağlantı" title="Arac Sigorta Belgesi Yukleme doğrudan bağlantı" translate="no">​</a></h3>
+<p>Arac ekleme formuna yeni bir belge yukleme bolumu eklendi:</p>
+<ul>
+<li class="">Arac ruhsatindan sonra sigorta belgesi (<code>_mhm_rentiva_vehicle_insurance_doc</code>) yuklenebilir.</li>
+<li class="">VehicleSubmit.php AJAX handler'i sigorta dosyasi isleme destegi ile guncellendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arac-yasam-dongusu-yonetimi-tasarim">Arac Yasam Dongusu Yonetimi (Tasarim)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#arac-yasam-dongusu-yonetimi-tasarim" class="hash-link" aria-label="Arac Yasam Dongusu Yonetimi (Tasarim) doğrudan bağlantı" title="Arac Yasam Dongusu Yonetimi (Tasarim) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Kapsamli bir tasarim dokumani olusturuldu (<code>docs/plans/2026-03-28-vehicle-lifecycle-management-design.md</code>):</p>
+<ul>
+<li class=""><strong>Durumlar:</strong> Aktif / Duraklatildi / Geri Cekildi / Suresi Doldu</li>
+<li class=""><strong>Listeleme suresi:</strong> 90 gun, yenileme mekanizmasi ile</li>
+<li class=""><strong>Iptal ceza sistemi:</strong> Kademeli ceza puanlari</li>
+<li class=""><strong>Guvenilirlik skoru:</strong> 0-100 arasi performans degerlendirmesi</li>
+<li class=""><strong>Soguma suresi:</strong> Geri cekilmeden sonra 7 gun bekleme</li>
+<li class=""><strong>Tarih engelleme:</strong> Kotu niyetli kullanima karsi onlem</li>
+<li class=""><strong>8 fazli uygulama plani</strong> hazirlandı</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kesfedilen-hatalar-henuz-duzeltilmedi">Kesfedilen Hatalar (Henuz Duzeltilmedi)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#kesfedilen-hatalar-henuz-duzeltilmedi" class="hash-link" aria-label="Kesfedilen Hatalar (Henuz Duzeltilmedi) doğrudan bağlantı" title="Kesfedilen Hatalar (Henuz Duzeltilmedi) doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Hata</th><th>Detay</th></tr></thead><tbody><tr><td>Arac durumu arama filtresi</td><td><code>_mhm_vehicle_status</code> arama sorgularinda kontrol edilmiyor — bakimdaki araclar arama sonuclarinda gorunuyor.</td></tr><tr><td>Vendor askiya alma</td><td><code>VendorOnboardingController::suspend()</code> vendor'un araclarini yayindan kaldirmiyor.</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="degisiklik-kaydi">Degisiklik Kaydi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#degisiklik-kaydi" class="hash-link" aria-label="Degisiklik Kaydi doğrudan bağlantı" title="Degisiklik Kaydi doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tur</th><th>Aciklama</th></tr></thead><tbody><tr><td>Vendor Ayarlar</td><td>Sayfa tamamen yeniden tasarlandi; inline stiller CSS sinif yapisina tasindi.</td></tr><tr><td>Vendor Ayarlar</td><td>Hesap Sahibi ve Vergi Dairesi alanlari eklendi.</td></tr><tr><td>Basvuru Formu</td><td>Hizmet Alanlari ve Arac Sigortasi alanlari kaldirildi/tasindi.</td></tr><tr><td>Basvuru Formu</td><td>Hesap Sahibi (zorunlu) ve Vergi Dairesi (opsiyonel) eklendi.</td></tr><tr><td>Sehir Secici</td><td>Tum datalist sehir girisleri SelectWoo bilesenine donusturuldu.</td></tr><tr><td>Arac Formu</td><td>Sigorta belgesi yukleme bolumu eklendi.</td></tr><tr><td>Tasarim</td><td>Arac Yasam Dongusu Yonetimi tasarim dokumani olusturuldu.</td></tr><tr><td>Hata Kesfedilen</td><td>2 hata tespiti: arac durumu filtresi, vendor askiya alma.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="surum-notlari">Surum Notlari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.23.1-release-summary#surum-notlari" class="hash-link" aria-label="Surum Notlari doğrudan bağlantı" title="Surum Notlari doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu surum, vendor formlarinin modernizasyonu, sehir secici bilesenlerinin WooCommerce SelectWoo'ya tasınması ve arac sigorta belgesi yukleme destegi ile vendor deneyimini onemli olcude iyilestirmistir. Arac Yasam Dongusu Yonetimi tasarim dokumani gelecek surumler icin yol haritasi saglamaktadir.</p>
+<hr>
+<p>MHM Rentiva hakkinda daha fazla bilgi ve dokumantasyon icin <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Dokuman Sayfamizi</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>forms</category>
+            <category>selectwoo</category>
+            <category>vehicle</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.23.0: Vendor Transfer Mimarisi & Dashboard Denetimi]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.23.0-release-summary</link>
