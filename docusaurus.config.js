@@ -122,11 +122,11 @@ const config = {
               },
               {
                 label: 'Kullanım Kılavuzu',
-                to: '/docs/features-usage/shortcodes',
+                to: '/docs/features-usage/shortcodes/shortcodes-overview',
               },
               {
                 label: 'Geliştirici Belgeleri',
-                to: '/docs/developer/technical-architecture',
+                to: '/docs/developer/core/technical-architecture',
               },
             ],
           },
