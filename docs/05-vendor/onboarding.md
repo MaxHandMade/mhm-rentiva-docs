@@ -5,7 +5,7 @@ sidebar_label: Onboarding
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.24.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-01.04.2026-orange?style=flat-square)
 
 :::info Amaç
 Bu sayfa, bir kullanıcının tedarikçi olma sürecini; başvuru formundan admin onayına, rol atamasından veri senkronizasyonuna kadar teknik olarak açıklar.
@@ -125,7 +125,11 @@ Vendor, arac ruhsat belgesini form uzerinden yukleyebilir. Bu belge admin tarafi
 ### Arac Sigorta Belgesi Yukleme (v4.23.1)
 Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhm_rentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
 
-### Düzenleme ve Yeniden Inceleme
+### Ücretli İlan Kapısı (v4.24.1)
+
+Admin ücretli ilan sistemini etkinleştirdiyse, vendor araç formu gönderildiğinde araç **taslak** olarak kaydedilir ve vendor WooCommerce ödeme sayfasına yönlendirilir. Ödeme tamamlandığında araç otomatik olarak "İnceleme Bekliyor" durumuna geçer. Detaylar için [Ücretli İlan Sistemi](/mhm-rentiva-docs/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241) bölümüne bakın.
+
+### Düzenleme ve Yeniden İnceleme
 Vendor, aracında kritik alan degisikligi yaptiginda (marka, model, plaka vb.) araç otomatik olarak yeniden inceleme kuyuguna alınır (`VendorVehicleReviewManager`). Minor değişiklikler (fiyat, açıklama) aninda yayinlanir.
 
 ### Vendor Badge
@@ -138,12 +142,14 @@ Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
 - Hassas finansal veriler (IBAN) donanim/sunucu seviyesinde şifrelenir.
 - Rol ve meta senkronizasyonu atomik bir işlem olarak yurutulur.
 - Basvuru formu 3 farkli belge yuklemesini destekler (kimlik, ehliyet, adres). Sigorta belgesi v4.23.1 ile arac ekleme formuna tasindi.
-- Arac ekleme formu sehir-filtrelenmis lokasyon/rota secimi, rota basi fiyatlandirma ve sigorta belgesi yukleme icerir.
-- Sehir secimi tum formlarda SelectWoo bileseni uzerinden yapilir (v4.23.1).
+- Araç ekleme formu şehir-filtrelenmiş lokasyon/rota seçimi, rota başı fiyatlandırma ve sigorta belgesi yükleme içerir.
+- Şehir seçimi tüm formlarda SelectWoo bileşeni üzerinden yapılır (v4.23.1).
+- Ücretli ilan etkinse araç formu gönderildiğinde WC ödeme sayfasına yönlendirme yapılır (v4.24.1).
 
-## Degisiklik Gunlugu
-| Tarih | Surum | Not |
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
 |---|---|---|
-| 28.03.2026 | 4.23.1 | Basvuru formu: Hizmet Alanlari ve Arac Sigortasi kaldirildi. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Sehir secimi SelectWoo'ya donusturuldu. Arac sigorta belgesi arac ekleme formuna tasindi. Meta senkronizasyonu guncellendi. |
-| 27.03.2026 | 4.23.0 | Belge yuklemeleri (4 tip), arac ekleme sureci, sehir-filtrelenmis rota secimi, rota fiyatlandirma, kapasite alanlari, yeniden inceleme mekanizmasi eklendi. |
-| 19.03.2026 | 4.21.2 | Sayfa, HMAC sifreleme ve meta senkronizasyon detaylariyla guncellendi. |
+| 01.04.2026 | 4.24.1 | Ücretli ilan kapısı: araç ekleme → taslak → WC ödeme → inceleme bekliyor akışı eklendi. |
+| 28.03.2026 | 4.23.1 | Başvuru formu: Hizmet Alanları ve Araç Sigortası kaldırıldı. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Şehir seçimi SelectWoo'ya dönüştürüldü. Araç sigorta belgesi araç ekleme formuna taşındı. Meta senkronizasyonu güncellendi. |
+| 27.03.2026 | 4.23.0 | Belge yüklemeleri (4 tip), araç ekleme süreci, şehir-filtrelenmiş rota seçimi, rota fiyatlandırma, kapasite alanları, yeniden inceleme mekanizması eklendi. |
+| 19.03.2026 | 4.21.2 | Sayfa, HMAC şifreleme ve meta senkronizasyon detaylarıyla güncellendi. |

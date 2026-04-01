@@ -5,7 +5,7 @@ sidebar_label: Vendor Yönetimi
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.24.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-01.04.2026-orange?style=flat-square)
 
 :::info Amaç
 Rentiva, merkezi bir araç kiralama sisteminden çoklu tedarikçili (Multi-Vendor) bir pazar yerine dönüşebilir. Bu doküman, tedarikçi döngüsünü teknik detaylarıyla açıklar.
@@ -104,26 +104,118 @@ Admin araç düzenleme ekranında (`VehicleTransferMetaBox`), vendor'un şehir b
 
 ---
 
-## Arac Yasam Dongusu Yonetimi (Tasarim — v4.23.1)
+## 🔄 Araç Yaşam Döngüsü Yönetimi (v4.24.0)
 
-v4.23.1 ile kapsamli bir tasarim dokumani hazirlanmistir (`docs/plans/2026-03-28-vehicle-lifecycle-management-design.md`). Planladigi yapilar:
+v4.24.0 ile kapsamlı araç yaşam döngüsü sistemi uygulanmıştır:
 
-| Ozellik | Detay |
+| Özellik | Detay |
 |---------|-------|
-| **Durumlar** | Aktif / Duraklatildi / Geri Cekildi / Suresi Doldu |
-| **Listeleme suresi** | 90 gun, vendor tarafindan yenilenebilir |
-| **Iptal ceza sistemi** | Kademeli ceza puanlari |
-| **Guvenilirlik skoru** | 0-100 arasi performans degerlendirmesi |
-| **Soguma suresi** | Geri cekilmeden sonra 7 gun bekleme |
-| **Anti-gaming** | Tarih engelleme sistemi |
+| **Durumlar** | Aktif / Duraklatıldı / Geri Çekildi / Süresi Doldu / İnceleme Bekliyor |
+| **Listeleme süresi** | 90 gün (admin ayarlanabilir), vendor tarafından yenilenebilir |
+| **İptal ceza sistemi** | Kademeli ceza puanları (2. çekilme %10, 3.+ %25) |
+| **Güvenilirlik skoru** | 0-100 arası performans değerlendirmesi |
+| **Soğuma süresi** | Geri çekilmeden sonra 7 gün bekleme |
+| **Anti-gaming** | İptal edilen rezervasyon tarihlerinin 30 gün engellenmesi |
 
-:::caution Henuz Uygulanmadi
-Bu ozellik su anda tasarim asamasindadir. 8 fazli uygulama plani bulunmaktadir.
-:::
+### Vendor Araç Kartlarında Kalan Süre Gösterimi (v4.24.1)
+
+Vendor panelindeki araç listesinde her araç kartında kalan listeleme süresi gösterilir:
+
+| Durum | Gösterim | Renk |
+|-------|----------|------|
+| > %50 süre kaldı | "Kalan: X gün" | 🟢 Yeşil |
+| %20–%50 süre kaldı | "Kalan: X gün" | 🟡 Sarı |
+| < %20 süre kaldı | "Kalan: X gün" | 🔴 Kırmızı |
+| Süresi dolmuş | "Süresi Doldu" rozeti | — |
+
+**CSS sınıfları:** `.mhm-vendor-listing-card__remaining` ve `.is-green`, `.is-yellow`, `.is-red` varyantları.
 
 ---
 
-## Bilinen Sorunlar (v4.23.1 Kesfedilen)
+## 💰 Ücretli İlan Sistemi (v4.24.1)
+
+Vendor'ların araç ilanı yayınlaması için WooCommerce üzerinden ödeme yapması gerekebilir. Bu özellik admin tarafından açılıp kapatılabilir.
+
+### Admin Ayarları (Ayarlar → Vendor Marketplace → İlan Ücreti)
+
+| Ayar | Tip | Varsayılan | Açıklama |
+|------|-----|-----------|----------|
+| İlan Ücretini Etkinleştir | Checkbox | Kapalı | Ücretli ilan sistemini aç/kapat |
+| Ücret Modeli | Select | Tek Seferlik | `one_time` (tek seferlik) veya `per_period` (her 90 günlük dönem) |
+| İlan Ücreti Tutarı | Sayı | 0 | Mağaza para biriminde ücret tutarı |
+
+### Ödeme Akışı
+
+```mermaid
+graph TD
+    A[Vendor: Araç Ekle / Yenile / Yeniden Listele] --> B{İlan Ücreti Etkin mi?}
+    B -- Hayır --> C[Mevcut ücretsiz akış]
+    B -- Evet --> D[Araç taslak olarak kaydedilir]
+    D --> E[WC sepetine ilan ücreti ürünü eklenir]
+    E --> F[WC Ödeme sayfasına yönlendirme]
+    F --> G{Ödeme tamamlandı?}
+    G -- Evet --> H[Araç: İnceleme Bekliyor / Yenilendi]
+    G -- Hayır --> I[Araç taslak kalır, vendor tekrar deneyebilir]
+```
+
+### Tetik Noktaları
+
+| Eylem | Ücretsiz Akış | Ücretli Akış |
+|-------|---------------|-------------|
+| **Yeni Araç** | Form → İnceleme Bekliyor | Form → Taslak → WC Ödeme → İnceleme Bekliyor |
+| **Yenileme** (süresi dolmuş) | AJAX → Yaşam döngüsü yenileme | AJAX → WC Ödeme → Yaşam döngüsü yenileme |
+| **Yeniden Listeleme** (geri çekilmiş) | AJAX → Yaşam döngüsü yeniden listeleme | AJAX → WC Ödeme → Yaşam döngüsü yeniden listeleme |
+
+### WooCommerce Ürünü
+
+- **Tip:** `WC_Product_Simple` (sanal, gizli)
+- **SKU:** `mhm-rentiva-listing-fee`
+- **Görünürlük:** Mağazada gizli (shop/arama sonuçlarında gösterilmez)
+- **Fiyat:** Admin ayarlarından dinamik olarak okunur
+- **Sepet meta:** `_mhm_listing_vehicle_id`, `_mhm_listing_action` (new/renew/relist)
+- **Otomatik oluşturma:** Özellik ilk etkinleştirildiğinde otomatik oluşturulur
+
+### Büyükbaba Kuralı (Grandfather Rule)
+
+- Özellik etkinleştirildiğinde mevcut aktif araçlar etkilenmez
+- 90 günlük listeleme süreleri dolduğunda yenileme ödemesi gerekir
+- Geriye dönük ücret uygulanmaz
+
+### Komisyon İlişkisi
+
+İlan ücreti ve komisyon **birbirinden bağımsızdır:**
+- Vendor, ilan ücreti öder (ön ödeme, ilan başına)
+- Vendor, komisyon öder (yüzde, rezervasyon başına)
+- İkisi arasında indirim veya mahsup yoktur
+
+### Teknik Sınıf
+
+**`ListingFeeManager`** (`src/Admin/Vehicle/ListingFeeManager.php`):
+- `is_enabled()` — Özellik aktif mi kontrol eder
+- `requires_payment(string $action)` — Belirtilen eylem için ödeme gerekiyor mu
+- `get_or_create_product()` — WC ürünü oluşturur veya mevcut olanı döner
+- `add_to_cart(int $vehicle_id, string $action)` — Sepete ekler, ödeme URL'si döner
+- `on_order_completed()` — Sipariş tamamlandığında aracı yayına alır
+
+---
+
+## 🔗 WooCommerce Hesabım — Satıcı Paneli Menü Linki (v4.24.1)
+
+Vendor rolündeki kullanıcılar WooCommerce Hesabım sayfasında sidebar'da **"Satıcı Paneli"** menü linkini görür. Bu link `/panel/` sayfasına yönlendirir.
+
+| Kullanıcı Rolü | Menü Öğesi | URL |
+|----------------|------------|-----|
+| `rentiva_vendor` | Satıcı Paneli | `/panel/` |
+| Diğer roller (customer, vb.) | Satıcı Olun | `/hesabim/vendor-apply/` |
+
+**Teknik Detay:**
+- `WooCommerceIntegration::add_menu_items()` — Vendor rolü kontrolü ile menü öğesi değiştirilir
+- `WooCommerceIntegration::vendor_panel_endpoint_url()` — `vendor-panel` endpoint'ini `/panel/` sayfasına yönlendirir
+- Vendor başvuru URL slug'ı `_x()` fonksiyonu ile çevrilebilir (SEO uyumlu)
+
+---
+
+## Bilinen Sorunlar (v4.23.1 Keşfedilen)
 
 | Sorun | Detay | Durum |
 |-------|-------|-------|
@@ -132,17 +224,23 @@ Bu ozellik su anda tasarim asamasindadir. 8 fazli uygulama plani bulunmaktadir.
 
 ---
 
-## Bolum Sonu Ozeti
-- `VendorOwnershipEnforcer` ile veri izolasyonu garanti altina alinmistir.
-- Tum kritik basvuru verileri sifrelenmis olarak saklanir.
-- `rentiva_vendor` yetkileri sadece kendi mulkiyetindeki postlar icin gecerlidir.
-- Vendor'lar yalnizca kendi sehirlerindeki lokasyonlara ve rotalara erisebilir. *(v4.23.0)*
-- Vendor ayarlar sayfasi BEM-benzeri CSS sinif yapisi ile yeniden tasarlandi. *(v4.23.1)*
-- Sehir secimi tum formlarda SelectWoo bileseni ile yapilir. *(v4.23.1)*
+## Bölüm Sonu Özeti
+- `VendorOwnershipEnforcer` ile veri izolasyonu garanti altına alınmıştır.
+- Tüm kritik başvuru verileri şifrelenmiş olarak saklanır.
+- `rentiva_vendor` yetkileri sadece kendi mülkiyetindeki postlar için geçerlidir.
+- Vendor'lar yalnızca kendi şehirlerindeki lokasyonlara ve rotalara erişebilir. *(v4.23.0)*
+- Vendor ayarlar sayfası BEM-benzeri CSS sınıf yapısı ile yeniden tasarlandı. *(v4.23.1)*
+- Şehir seçimi tüm formlarda SelectWoo bileşeni ile yapılır. *(v4.23.1)*
+- Araç yaşam döngüsü sistemi (90 gün listeleme, duraklatma, yenileme, geri çekilme) uygulandı. *(v4.24.0)*
+- Ücretli ilan sistemi: WooCommerce checkout tabanlı ödeme kapısı, admin ayarlanabilir. *(v4.24.1)*
+- Vendor araç kartlarında kalan süre gösterimi (renk kodlu). *(v4.24.1)*
+- WC Hesabım menüsünde vendor'lar için "Satıcı Paneli" linki eklendi. *(v4.24.1)*
 
-## Degisiklik Gunlugu
-| Tarih | Surum | Not |
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
 |---|---|---|
-| 28.03.2026 | 4.23.1 | Vendor ayarlar sayfasi yeniden tasarimi, Hesap Sahibi ve Vergi Dairesi alanlari, sehir SelectWoo migrasyonu, arac yasam dongusu tasarim dokumani, 2 hata kesfedildi. |
-| 26.03.2026 | 4.23.0 | Vendor Transfer Lokasyon/Rota yonetimi, Sehir→Nokta hiyerarsisi ve rota bazli fiyatlandirma eklendi. |
-| 19.03.2026 | 4.21.2 | CPT, Enforcer ve Onboarding detaylari eklendi. |
+| 01.04.2026 | 4.24.1 | Ücretli ilan sistemi (ListingFeeManager), kalan süre gösterimi, WC Hesabım "Satıcı Paneli" menü linki, 18 yeni test. |
+| 29.03.2026 | 4.24.0 | Araç yaşam döngüsü sistemi uygulandı (Faz 0-4, 6-7). Duraklatma, yenileme, geri çekilme, güvenilirlik skoru. |
+| 28.03.2026 | 4.23.1 | Vendor ayarlar sayfası yeniden tasarımı, Hesap Sahibi ve Vergi Dairesi alanları, şehir SelectWoo migrasyonu. |
+| 26.03.2026 | 4.23.0 | Vendor Transfer Lokasyon/Rota yönetimi, Şehir→Nokta hiyerarşisi ve rota bazlı fiyatlandırma eklendi. |
+| 19.03.2026 | 4.21.2 | CPT, Enforcer ve Onboarding detayları eklendi. |
