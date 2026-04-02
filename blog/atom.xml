@@ -2,11 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-03-28T20:00:00.000Z</updated>
+    <updated>2026-04-01T09:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.25.0: Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary"/>
+        <updated>2026-04-01T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.25.0, vendor bildirimleri için yönetici panelinden düzenlenebilir e-posta şablonları getiriyor. 22 vendor bildirim şablonu artık Ayarlar ekranından özelleştirilebilir. Ayrıca Site Instance Check-in cron'u Cron İş Monitörü'ne eklendi ve weekly WP cron interval'inin güvenilir kaydı garanti altına alındı.]]></summary>
+        <content type="html"><![CDATA[<p>v4.25.0, vendor bildirimleri için yönetici panelinden düzenlenebilir e-posta şablonları getiriyor. 22 vendor bildirim şablonu artık Ayarlar ekranından özelleştirilebilir. Ayrıca Site Instance Check-in cron'u Cron İş Monitörü'ne eklendi ve <code>weekly</code> WP cron interval'inin güvenilir kaydı garanti altına alındı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yönetici-tarafından-düzenlenebilir-vendor-e-posta-şablonları">✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#%EF%B8%8F-y%C3%B6netici-taraf%C4%B1ndan-d%C3%BCzenlenebilir-vendor-e-posta-%C5%9Fablonlar%C4%B1" class="hash-link" aria-label="✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları doğrudan bağlantı" title="✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları doğrudan bağlantı" translate="no">​</a></h3>
+<p>22 vendor bildirim şablonu artık doğrudan admin panelinden düzenlenebilir: <strong>Ayarlar → Bildirim Şablonları → Vendor Bildirimleri</strong> sekmesi.</p>
+<p>Şablonlar 4 bölüme ayrılmış durumda:</p>
+<table><thead><tr><th>Bölüm</th><th>Şablon Sayısı</th></tr></thead><tbody><tr><td>Vendor Hesap (kayıt, onay, ret, askı)</td><td>5</td></tr><tr><td>Araç İnceleme (onay, ret, düzenleme, yeniden inceleme)</td><td>4</td></tr><tr><td>Araç Yaşam Döngüsü (duraklatma, devam, sona erme vb.)</td><td>9</td></tr><tr><td>Finansal E-postalar (ödeme, iade, fatura)</td><td>4</td></tr></tbody></table>
+<p><strong>Akıllı Fallback Sistemi:</strong></p>
+<ul>
+<li class="">Konu alanı boş bırakılırsa → varsayılan konu metni gösterilir (admin ne gönderileceğini görür)</li>
+<li class="">Gövde alanı boş = Gold Standard HTML dosya fallback — özelleştirme yapılmadığında profesyonel tasarım korunur</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-çeviri-desteği">🌐 Çeviri Desteği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-%C3%A7eviri-deste%C4%9Fi" class="hash-link" aria-label="🌐 Çeviri Desteği doğrudan bağlantı" title="🌐 Çeviri Desteği doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor e-posta admin arayüzü için <strong>56 yeni Türkçe çeviri</strong> eklendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler">🛠️ Teknik İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gold-standard-e-posta-şablonu-gradient-düzeltmesi">🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-gold-standard-e-posta-%C5%9Fablonu-gradient-d%C3%BCzeltmesi" class="hash-link" aria-label="🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi doğrudan bağlantı" title="🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Header başlığında gerçek renk geçişi artık doğru üretiliyor — önceki sürümde gradient oluşturma hesaplama hatası vardı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-erişilebilirlik-cta-buton-kontrast-oranı">♿ Erişilebilirlik: CTA Buton Kontrast Oranı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-eri%C5%9Filebilirlik-cta-buton-kontrast-oran%C4%B1" class="hash-link" aria-label="♿ Erişilebilirlik: CTA Buton Kontrast Oranı doğrudan bağlantı" title="♿ Erişilebilirlik: CTA Buton Kontrast Oranı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Araç yeniden inceleme admin e-postasındaki amber CTA butonunun kontrast oranı <strong>2.97:1'den 6.8:1'e</strong> yükseltildi. WCAG AA standardını karşılıyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-site-instance-check-in-cron-görünürlüğü">🔧 Site Instance Check-in Cron Görünürlüğü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-site-instance-check-in-cron-g%C3%B6r%C3%BCn%C3%BCrl%C3%BC%C4%9F%C3%BC" class="hash-link" aria-label="🔧 Site Instance Check-in Cron Görünürlüğü doğrudan bağlantı" title="🔧 Site Instance Check-in Cron Görünürlüğü doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>mhm_rentiva_instance_checkin</code> cron görevi artık <strong>Cron İş Monitörü</strong>'nde görünüyor ve "Şimdi Çalıştır" butonu ile manuel tetiklenebiliyor. Bu sayede Lite site instance'larının lisans sunucusuna kaydı izlenebilir.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-weekly-cron-interval-garantisi">🔧 Weekly Cron Interval Garantisi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-weekly-cron-interval-garantisi" class="hash-link" aria-label="🔧 Weekly Cron Interval Garantisi doğrudan bağlantı" title="🔧 Weekly Cron Interval Garantisi doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>weekly</code> WP cron interval'i artık eklenti tarafından açıkça kayıt ediliyor — WooCommerce gibi harici eklentilere bağımlılık kaldırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni</td><td>22 vendor bildirim şablonu admin panelinden düzenlenebilir</td></tr><tr><td>✨ Yeni</td><td>4 bölüm: Hesap (5), İnceleme (4), Yaşam Döngüsü (9), Finansal (4)</td></tr><tr><td>✨ Yeni</td><td>Boş konu → varsayılan göster; boş gövde → Gold Standard HTML fallback</td></tr><tr><td>🎨 İyileştirme</td><td>Gold Standard gradient üretimi düzeltildi</td></tr><tr><td>♿ Erişilebilirlik</td><td>Amber CTA kontrast oranı 2.97:1 → 6.8:1 (WCAG AA)</td></tr><tr><td>🌐 Çeviri</td><td>56 yeni Türkçe çeviri (vendor e-posta admin UI)</td></tr><tr><td>🐛 Düzeltme</td><td>Site Instance Check-in cron Cron Monitörü'nde görünür oldu</td></tr><tr><td>🐛 Düzeltme</td><td>weekly interval artık eklenti tarafından garantili kayıt ediliyor</td></tr></tbody></table>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="update" term="update"/>
+        <category label="vendor" term="vendor"/>
+        <category label="email" term="email"/>
+        <category label="accessibility" term="accessibility"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.24.0: Araç Yaşam Döngüsü Yönetimi & Vendor Self-Servis]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.24.0-release-summary</id>
