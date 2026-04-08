@@ -4,10 +4,60 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 01 Apr 2026 09:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 07 Apr 2026 09:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.0: Depozito Rezervasyonlarında Kalan Ödeme]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</guid>
+            <pubDate>Tue, 07 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilik">🚀 Öne Çıkan Yenilik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilik" class="hash-link" aria-label="🚀 Öne Çıkan Yenilik doğrudan bağlantı" title="🚀 Öne Çıkan Yenilik doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kalan-ödeme--depozito-rezervasyonları-için">💳 Kalan Ödeme — Depozito Rezervasyonları için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-kalan-%C3%B6deme--depozito-rezervasyonlar%C4%B1-i%C3%A7in" class="hash-link" aria-label="💳 Kalan Ödeme — Depozito Rezervasyonları için doğrudan bağlantı" title="💳 Kalan Ödeme — Depozito Rezervasyonları için doğrudan bağlantı" translate="no">​</a></h3>
+<p>Depozito ile rezervasyon oluşturulduğunda kalan bakiye daha önce yalnızca manuel takip ya da operatörle iletişim gerektiriyordu. v4.26.0 ile müşteriler bu adımı tamamen kendi başlarına tamamlayabiliyor.</p>
+<p><strong>Nasıl çalışır:</strong></p>
+<ol>
+<li class="">Müşteri <strong>Hesabım → Rezervasyon Detayı</strong> sayfasına gider</li>
+<li class="">Kalan bakiye &gt; 0 ise <strong>"Kalan Ödemeyi Yap"</strong> butonu görünür</li>
+<li class="">Butona tıklandığında tam tutar için minimal bir WC siparişi arka planda oluşturulur</li>
+<li class="">Müşteri WooCommerce'in native order-pay sayfasına yönlendirilir</li>
+<li class="">Ödeme başarılı olduğunda rezervasyon güncellenir: kalan bakiye sıfırlanır, durum onaylanır</li>
+</ol>
+<p><strong>Teknik özellikler:</strong></p>
+<ul>
+<li class=""><code>RemainingPaymentHandler</code> — AJAX endpoint, nonce + sahiplik doğrulaması</li>
+<li class=""><strong>Tekrar sipariş koruması:</strong> Bekleyen kalan ödeme siparişi varsa yeni sipariş oluşturulmaz, mevcut sipariş yeniden kullanılır (<code>_mhm_remaining_order_id</code> meta)</li>
+<li class=""><strong>HPOS uyumlu:</strong> Tüm WC sipariş işlemleri <code>$order-&gt;update_meta_data() + $order-&gt;save()</code> ile yapılır</li>
+<li class=""><code>WooCommerceBridge</code>: processing durumunda <code>_mhm_is_remaining_payment</code> bayrağı varsa <code>_mhm_remaining_amount</code> sıfırlanır</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-hata-düzeltmeleri">🛠️ Hata Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#%EF%B8%8F-hata-d%C3%BCzeltmeleri" class="hash-link" aria-label="🛠️ Hata Düzeltmeleri doğrudan bağlantı" title="🛠️ Hata Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="css-kapsam-düzeltmesi">CSS Kapsam Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#css-kapsam-d%C3%BCzeltmesi" class="hash-link" aria-label="CSS Kapsam Düzeltmesi doğrudan bağlantı" title="CSS Kapsam Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tüm genel hesap sayfası sınıfları (<code>.btn</code>, <code>.booking-item</code>, <code>.stat-card</code> vb.) artık <code>.mhm-rentiva-account-page</code> sarmalayıcısı altına alındı. Bu değişiklik WoodMart, Flatsome gibi premium temalarla yaşanan görsel çakışmaları engelliyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wc-hesabım-izgara-düzeni">WC Hesabım Izgara Düzeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#wc-hesab%C4%B1m-izgara-d%C3%BCzeni" class="hash-link" aria-label="WC Hesabım Izgara Düzeni doğrudan bağlantı" title="WC Hesabım Izgara Düzeni doğrudan bağlantı" translate="no">​</a></h3>
+<p>Entegre modda ızgara tabanlı temalarda yaşanan <code>grid-column</code> düzeni sorunu giderildi (<code>grid-column: 1/-1</code>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni</td><td>Kalan ödeme butonu — Hesabım → Rezervasyon Detayı</td></tr><tr><td>✨ Yeni</td><td><code>RemainingPaymentHandler</code> sınıfı (AJAX + doğrulama)</td></tr><tr><td>✨ Yeni</td><td>Tekrar sipariş koruması (<code>_mhm_remaining_order_id</code> meta)</td></tr><tr><td>🐛 Düzeltme</td><td>CSS kapsam — tüm sınıflar <code>.mhm-rentiva-account-page</code> altına alındı</td></tr><tr><td>🐛 Düzeltme</td><td>WC Hesabım ızgara düzeni (grid-column: 1/-1)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="📁 Değiştirilen Dosyalar doğrudan bağlantı" title="📁 Değiştirilen Dosyalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>src/Admin/Payment/WooCommerce/RemainingPaymentHandler.php</code> <em>(yeni)</em></li>
+<li class=""><code>src/Admin/Payment/WooCommerce/WooCommerceBridge.php</code></li>
+<li class=""><code>src/Admin/Frontend/Account/AccountController.php</code></li>
+<li class=""><code>templates/account/booking-detail.php</code></li>
+<li class=""><code>mhm-rentiva.php</code> <em>(versiyon güncelleme)</em></li>
+</ul>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>payment</category>
+            <category>woocommerce</category>
+            <category>deposit</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.25.0: Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.25.0-release-summary</link>
