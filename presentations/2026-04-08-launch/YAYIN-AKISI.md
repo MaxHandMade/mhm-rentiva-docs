@@ -94,6 +94,6 @@
 
 ## Önemli Notlar
 
-- Test sayısı: **683 test, 2277 senaryo** — slayttaki ve söyleyeceğin sayı bu
+- Test sayısı: **720 test, 2277+ senaryo** — slayttaki ve söyleyeceğin sayı bu
 - Sürüm: **v4.26.0** — en son sürüm
 - GitHub: **github.com/MaxHandMade/mhm-rentiva** — PUBLIC repo
