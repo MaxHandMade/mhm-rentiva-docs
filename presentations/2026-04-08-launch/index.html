@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHM Rentiva — Lansman Sunumu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <style>
+    :root {
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --warn: #ff6b6b;
+      --pro: #f7b731;
+    }
+
+    .reveal { font-family: 'Segoe UI', system-ui, sans-serif; }
+
+    /* Slayt başlıkları */
+    .reveal h1 { font-size: 2.2em; color: var(--accent2); text-transform: none; }
+    .reveal h2 { font-size: 1.7em; color: var(--accent2); text-transform: none; border-bottom: 2px solid var(--accent); padding-bottom: 12px; }
+    .reveal h3 { font-size: 1.2em; color: #ccc; text-transform: none; }
+
+    /* Badge */
+    .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.6em; font-weight:700; vertical-align:middle; margin-left:8px; }
+    .badge.pro  { background:var(--pro); color:#333; }
+    .badge.free { background:var(--accent2); color:#111; }
+    .badge.new  { background:var(--warn); color:#fff; }
+
+    /* Kart grid */
+    .card-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:20px; }
+    .card-grid.two { grid-template-columns: repeat(2,1fr); }
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: left;
+    }
+    .card .icon { font-size:2em; margin-bottom:8px; display:block; }
+    .card h4 { margin:0 0 6px; font-size:0.95em; color: var(--accent2); }
+    .card p  { margin:0; font-size:0.75em; color:#aaa; line-height:1.5; }
+
+    /* Menü listesi */
+    .menu-list { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .menu-list li {
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius:6px;
+      padding: 10px 14px;
+      font-size: 0.8em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .menu-list li .num { color:var(--accent); font-weight:700; min-width:22px; }
+
+    /* Büyük stat sayıları */
+    .stat-row { display:flex; justify-content:center; gap:50px; margin:30px 0; }
+    .stat { text-align:center; }
+    .stat .num { font-size:3em; font-weight:900; color:var(--accent2); }
+    .stat .lbl { font-size:0.7em; color:#888; margin-top:4px; }
+
+    /* Yol haritası */
+    .roadmap { display:flex; gap:0; margin-top:30px; }
+    .roadmap-step {
+      flex:1;
+      text-align:center;
+      padding: 20px 12px;
+      position:relative;
+    }
+    .roadmap-step:not(:last-child)::after {
+      content:'→';
+      position:absolute;
+      right:-14px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:1.5em;
+      color:var(--accent);
+    }
+    .roadmap-step.active { background:rgba(108,99,255,0.2); border:1px solid var(--accent); border-radius:10px; }
+    .roadmap-step .ep { font-size:0.65em; color:#888; }
+    .roadmap-step .title { font-size:0.85em; margin-top:6px; font-weight:600; }
+
+    /* Fiyatlandırma */
+    .pricing { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
+    .plan {
+      border-radius:12px;
+      padding:24px;
+      text-align:center;
+    }
+    .plan.lite { background:rgba(255,255,255,0.07); border:1px solid #444; }
+    .plan.pro  { background:rgba(247,183,49,0.12); border:2px solid var(--pro); }
+    .plan h3   { font-size:1.2em; margin:0 0 6px; }
+    .plan .price { font-size:2.5em; font-weight:900; margin:10px 0; }
+    .plan ul { list-style:none; padding:0; margin:12px 0 0; font-size:0.78em; text-align:left; }
+    .plan ul li { padding:4px 0; color:#ccc; }
+    .plan ul li::before { content:'✓ '; color:var(--accent2); }
+    .plan ul li.limit::before { content:'⚠ '; color:var(--warn); }
+
+    /* Callout */
+    .callout {
+      background: rgba(108,99,255,0.15);
+      border: 1px solid var(--accent);
+      border-radius:10px;
+      padding: 16px 20px;
+      font-size:0.85em;
+      margin-top:20px;
+    }
+    .callout.green { background:rgba(0,212,170,0.1); border-color:var(--accent2); }
+
+    /* Alt bilgi */
+    .footer-note { position:fixed; bottom:20px; right:20px; font-size:0.55em; color:#555; }
+
+    /* Highlight */
+    .hl { color:var(--accent2); font-weight:700; }
+    .hl-pro { color:var(--pro); font-weight:700; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ─── KAPAK ─── -->
+<section data-background-gradient="radial-gradient(ellipse at center, #1a1040 0%, #0d0d1a 70%)">
+  <br><br>
+  <h1 style="font-size:3em; margin-bottom:0;">🚗 MHM Rentiva</h1>
+  <h3 style="color:#888; margin-top:12px;">WordPress Araç Kiralama Eklentisi</h3>
+  <br>
+  <p style="font-size:0.9em; color:#aaa;">Lansman Yayını — 8 Nisan 2026</p>
+  <p style="font-size:0.75em; color:#666;">by MaxHandMade</p>
+  <div class="footer-note">youtube.com/@MaxHandMade</div>
+</section>
+
+<!-- ─── BUGÜN NE YAPACAĞIZ ─── -->
+<section>
+  <h2>📋 Bugün Ne Yapacağız?</h2>
+  <div class="roadmap">
+    <div class="roadmap-step active">
+      <div class="ep">Yayın 1 — Bugün</div>
+      <div class="title">🎉 Lansman<br>Eklenti Nedir?<br>Menü Turu</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="ep">Yayın 2</div>
+      <div class="title">⚙️ Ayarlar<br>Detaylı<br>Yapılandırma</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="ep">Yayın 3</div>
+      <div class="title">🌐 Canlı Kurulum<br>Gerçek Site'de<br>Veri Girişi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SORUN ─── -->
+<section>
+  <h2>🤔 Bir Sorundan Başlayalım</h2>
+  <br>
+  <div class="card-grid">
+    <div class="card">
+      <span class="icon">📋</span>
+      <h4>Manuel Excel Takibi</h4>
+      <p>Araç müsaitlik durumunu Excel ile takip etmek, çakışmaları kaçırmak, müşteri iletişimini telefonda yönetmek...</p>
+    </div>
+    <div class="card">
+      <span class="icon">💸</span>
+      <h4>Pahalı Yazılımlar</h4>
+      <p>Özel kiralama yazılımları yüzlerce dolar aylık lisans ücreti istiyor. WordPress üzerine kurulmuyor.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h4>Eksik Çözümler</h4>
+      <p>Mevcut WP eklentileri ya çok basit ya da sadece tek kiralama tipine odaklanmış.</p>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:24px; text-align:center;">
+    <strong>MHM Rentiva</strong> — WordPress'e eksiksiz bir araç kiralama sistemi getiriyor.
+  </div>
+</section>
+
+<!-- ─── MHM RENTİVA NEDİR ─── -->
+<section>
+  <h2>🚗 MHM Rentiva Nedir?</h2>
+  <br>
+  <div class="card-grid">
+    <div class="card">
+      <span class="icon">🔌</span>
+      <h4>WordPress Eklentisi</h4>
+      <p>Mevcut WordPress sitenize kurun — hosting değiştirmenize, yeni yazılım almanıza gerek yok.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🛒</span>
+      <h4>WooCommerce Entegrasyonu</h4>
+      <p>Ödemeler WooCommerce üzerinden geçer. Mevcut ödeme altyapınız çalışmaya devam eder.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <h4>Tam Özelleştirilebilir</h4>
+      <p>23 shortcode, 19 Gutenberg bloğu, 20 Elementor widget. Her tema ile çalışır.</p>
+    </div>
+  </div>
+  <br>
+  <p class="hl" style="text-align:center; font-size:1.1em;">Araç kiralama → Transfer hizmetleri → Vendor marketplace</p>
+</section>
+
+<!-- ─── KİM KULLANIR ─── -->
+<section>
+  <h2>👥 Kim Kullanır?</h2>
+  <br>
+  <div class="card-grid">
+    <div class="card">
+      <span class="icon">🚗</span>
+      <h4>Araç Kiralama Firmaları</h4>
+      <p>Filolarını online yönetmek, rezervasyon almak, müşteri takibi yapmak isteyen işletmeler.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🚌</span>
+      <h4>Transfer Servisleri</h4>
+      <p>Havalimanı transferi, şehirlerarası güzergah hizmetleri sunan operatörler.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏪</span>
+      <h4>Vendor Marketplace</h4>
+      <p class="">Birden fazla araç sahibinin ürünlerini tek platformda sunduğu pazaryeri modeli. <span class="badge pro">PRO</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ÖZELLIKLER GENEL BAKIŞ ─── -->
+<section>
+  <h2>✨ Neler Yapabilirsiniz?</h2>
+  <div class="card-grid" style="margin-top:16px;">
+    <div class="card">
+      <span class="icon">📅</span>
+      <h4>Online Rezervasyon</h4>
+      <p>Takvim bazlı rezervasyon, tarih engelleme, depozito + tam ödeme desteği.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🚙</span>
+      <h4>Araç Yönetimi</h4>
+      <p>Fotoğraf galerisi, kategori, yıllık model, otomatik müsaitlik takibi.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📍</span>
+      <h4>Lokasyon Sistemi</h4>
+      <p>Teslim alma / bırakma noktaları, transfer güzergahları, şehir hiyerarşisi.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🎁</span>
+      <h4>Ek Hizmetler</h4>
+      <p>Araç sigortası, bebek koltuğu, GPS — rezervasyona eklenebilir servisler.</p>
+    </div>
+    <div class="card">
+      <span class="icon">👤</span>
+      <h4>Müşteri Paneli</h4>
+      <p>Rezervasyon geçmişi, favori araçlar, mesajlaşma, kalan ödeme butonu.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📊</span>
+      <h4>Raporlar & İhracat</h4>
+      <p>Gelir raporları, araç kullanım istatistikleri, CSV/Excel dışa aktarım. <span class="badge pro">PRO</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RAKAMLAR ─── -->
+<section data-background-gradient="radial-gradient(ellipse at center, #0d2040 0%, #0d0d1a 70%)">
+  <h2>📊 Rakamlarla MHM Rentiva</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="num">23</div><div class="lbl">Shortcode</div></div>
+    <div class="stat"><div class="num">19</div><div class="lbl">Gutenberg Block</div></div>
+    <div class="stat"><div class="num">20</div><div class="lbl">Elementor Widget</div></div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="num">683</div><div class="lbl">Otomatik Test</div></div>
+    <div class="stat"><div class="num">2277</div><div class="lbl">Test Senaryosu</div></div>
+    <div class="stat"><div class="num">4.26</div><div class="lbl">Mevcut Sürüm</div></div>
+  </div>
+  <div class="callout" style="text-align:center; margin-top:10px;">
+    Her sürümde 6 farklı PHP + WordPress kombinasyonunda otomatik test çalışır
+  </div>
+</section>
+
+<!-- ─── MENÜ TURU — GİRİŞ ─── -->
+<section>
+  <h2>🗺️ Yönetim Paneli — Menü Turu</h2>
+  <p style="color:#888; font-size:0.85em;">WordPress Admin → MHM Rentiva menüsü altında bulunan tüm bölümler</p>
+  <ul class="menu-list">
+    <li><span class="num">1</span> 📊 Dashboard</li>
+    <li><span class="num">2</span> 🚗 Araçlar (Vehicles)</li>
+    <li><span class="num">3</span> 🏷️ Araç Kategorileri</li>
+    <li><span class="num">4</span> ⚙️ Araç Ayarları</li>
+    <li><span class="num">5</span> 📅 Rezervasyonlar</li>
+    <li><span class="num">6</span> 📍 Lokasyonlar</li>
+    <li><span class="num">7</span> 🛣️ Transfer Güzergahları</li>
+    <li><span class="num">8</span> 🎁 Ek Hizmetler</li>
+    <li><span class="num">9</span> 👥 Müşteriler</li>
+    <li><span class="num">10</span> 📈 Raporlar <span class="badge pro">PRO</span></li>
+    <li><span class="num">11</span> 💬 Mesajlar <span class="badge pro">PRO</span></li>
+    <li><span class="num">12</span> 📤 Dışa Aktarım</li>
+  </ul>
+</section>
+
+<!-- ─── DASHBOARD ─── -->
+<section>
+  <h2>📊 1 — Dashboard</h2>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">📈</span>
+      <h4>Anlık İstatistikler</h4>
+      <p>Bugünkü rezervasyonlar, toplam gelir, aktif araç sayısı tek ekranda.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📋</span>
+      <h4>Son Aktiviteler</h4>
+      <p>En son rezervasyonlar ve ödemeler — panele girince ilk gördüğünüz şey.</p>
+    </div>
+    <div class="card">
+      <span class="icon">⚠️</span>
+      <h4>Uyarı Sistemi</h4>
+      <p>Lite sürümde limit yaklaşınca renkli bildirimler gösterir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARAÇLAR ─── -->
+<section>
+  <h2>🚗 2 — Araçlar (Vehicles)</h2>
+  <div class="card-grid two" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">🖼️</span>
+      <h4>Fotoğraf Galerisi</h4>
+      <p>Her araca birden fazla fotoğraf ekleyin. Galeri slider olarak öne çıkar.</p>
+    </div>
+    <div class="card">
+      <span class="icon">💰</span>
+      <h4>Günlük Fiyat</h4>
+      <p>Fiyat girilir, sistem kiralama süresine göre otomatik hesaplar.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📅</span>
+      <h4>Takvim & Müsaitlik</h4>
+      <p>Onaylanan rezervasyonlar otomatik bloke eder. Manuel engelleme de eklenebilir.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔄</span>
+      <h4>Yaşam Döngüsü</h4>
+      <p>Aktif / bakımda / pasif durumları. Araç geçmişi ve durum geçişleri.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REZERVASYONLAR ─── -->
+<section>
+  <h2>📅 5 — Rezervasyonlar</h2>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h4>Gelişmiş Filtreleme</h4>
+      <p>Duruma, tarihe, araca, müşteriye göre filtrele ve ara.</p>
+    </div>
+    <div class="card">
+      <span class="icon">💳</span>
+      <h4>Depozito Desteği</h4>
+      <p>Önce depozito, sonra kalan ödeme. Müşteri panelinden "Kalan Ödemeyi Tamamla" butonu.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📧</span>
+      <h4>Otomatik E-posta</h4>
+      <p>Rezervasyon onayı, iptal, ödeme bildirimi — özelleştirilebilir şablonlar.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:16px;">
+    <strong>v4.26.0 yeni:</strong> Depozito ödemeli rezervasyonlarda kalan ödeme tamamlama özelliği eklendi. <span class="badge new">YENİ</span>
+  </div>
+</section>
+
+<!-- ─── LOKASYONLAR & TRANSFER ─── -->
+<section>
+  <h2>📍 6-7 — Lokasyonlar & Transfer</h2>
+  <div class="card-grid two" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">🏙️</span>
+      <h4>Lokasyon Hiyerarşisi</h4>
+      <p>Şehir → Nokta yapısı. Havalimanı, otel, terminal gibi teslim noktaları tanımlanır.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🗺️</span>
+      <h4>Transfer Güzergahları</h4>
+      <p>A noktasından B noktasına güzergah tanımlayın, fiyatlandırın, araç atayın.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔎</span>
+      <h4>Akıllı Arama Motoru</h4>
+      <p>Müşteri çıkış/varış noktası seçer, sistem uygun araçları listeler.</p>
+    </div>
+    <div class="card">
+      <span class="icon">👨‍💼</span>
+      <h4>Vendor Fiyatlandırması</h4>
+      <p>Her vendor kendi rota fiyatını belirler (admin min/max aralığında). <span class="badge pro">PRO</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MÜŞTERILER ─── -->
+<section>
+  <h2>👥 9 — Müşteriler</h2>
+  <div class="card-grid two" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">📄</span>
+      <h4>Müşteri Profili</h4>
+      <p>Tüm rezervasyon geçmişi, toplam harcama, iletişim bilgileri tek sayfada.</p>
+    </div>
+    <div class="card">
+      <span class="icon">❤️</span>
+      <h4>Favori Araçlar</h4>
+      <p>Müşteriler beğendikleri araçları favorilere ekleyebilir ve panelden takip edebilir.</p>
+    </div>
+    <div class="card">
+      <span class="icon">💬</span>
+      <h4>Mesajlaşma</h4>
+      <p>Müşteri ↔ İşletme dahili mesajlaşma sistemi. <span class="badge pro">PRO</span></p>
+    </div>
+    <div class="card">
+      <span class="icon">⭐</span>
+      <h4>Değerlendirmeler</h4>
+      <p>Kiralama sonrası müşteri yorumları, araç sayfasında slider olarak gösterilir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VENDOR MARKETPLACE ─── -->
+<section>
+  <h2>🏪 Vendor Marketplace <span class="badge pro">PRO</span></h2>
+  <br>
+  <div class="card-grid" style="margin-top:10px;">
+    <div class="card">
+      <span class="icon">📝</span>
+      <h4>Vendor Başvurusu</h4>
+      <p>Araç sahipleri platformunuza başvurur, siz onaylarsınız. Shortcode ile herhangi bir sayfaya eklenebilir.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🎛️</span>
+      <h4>Vendor Paneli</h4>
+      <p>Her vendor kendi araçlarını, rezervasyonlarını, gelirini ve müşteri mesajlarını yönetir.</p>
+    </div>
+    <div class="card">
+      <span class="icon">💰</span>
+      <h4>Ödeme & Komisyon</h4>
+      <p>Platform komisyon oranı, otomatik ödeme takibi, vendor ödeme talepleri.</p>
+    </div>
+  </div>
+  <div class="callout" style="text-align:center; margin-top:16px; font-size:0.8em;">
+    Güvenilirlik puanı sistemi, liste ücreti modeli, puan geçmişi takibi dahil.
+  </div>
+</section>
+
+<!-- ─── LITE vs PRO ─── -->
+<section>
+  <h2>🆓 Lite vs 💎 Pro</h2>
+  <div class="pricing">
+    <div class="plan lite">
+      <h3>🆓 Lite</h3>
+      <div class="price" style="color:var(--accent2);">Ücretsiz</div>
+      <ul>
+        <li>Tam araç yönetimi</li>
+        <li>Online rezervasyon</li>
+        <li>Depozito desteği</li>
+        <li>Ek hizmetler</li>
+        <li>Shortcode / Block / Elementor</li>
+        <li class="limit">Araç limiti (küçük filo)</li>
+        <li class="limit">Rezervasyon limiti</li>
+        <li class="limit">Raporlar kısıtlı</li>
+      </ul>
+    </div>
+    <div class="plan pro">
+      <h3>💎 Pro</h3>
+      <div class="price" style="color:var(--pro);">Pro Lisans</div>
+      <ul>
+        <li>Sınırsız araç & rezervasyon</li>
+        <li>Vendor Marketplace</li>
+        <li>Mesajlaşma sistemi</li>
+        <li>Gelişmiş raporlar</li>
+        <li>Tam REST API</li>
+        <li>JSON dışa aktarım</li>
+        <li>GDPR araçları</li>
+        <li>Öncelikli destek</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEKNIK ─── -->
+<section>
+  <h2>🔧 Teknik Altyapı</h2>
+  <div class="card-grid" style="margin-top:20px;">
+    <div class="card">
+      <span class="icon">🧪</span>
+      <h4>683 Otomatik Test</h4>
+      <p>2277 senaryo. PHP 8.1/8.2/8.3 × WP 6.7/latest matrix CI. Her commit'te çalışır.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <h4>Modern PHP Mimarisi</h4>
+      <p>PSR-4 autoloading, dependency injection, service provider pattern, SOLID prensipler.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔒</span>
+      <h4>Güvenlik</h4>
+      <p>Nonce doğrulama, capability kontrolleri, sanitize/escape, HMAC-SHA256 lisans doğrulama.</p>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:16px; text-align:center; font-size:0.8em;">
+    WooCommerce HPOS (High Performance Order Storage) uyumlu · WordPress 6.0+ · PHP 8.0+
+  </div>
+</section>
+
+<!-- ─── AYARLAR ÖNIZLEME ─── -->
+<section>
+  <h2>⚙️ Bir Sonraki Yayın: Ayarlar</h2>
+  <br>
+  <div class="card-grid two">
+    <div class="card">
+      <span class="icon">🌐</span>
+      <h4>Genel Ayarlar</h4>
+      <p>Para birimi, saat dilimi, varsayılan kiralama modeli, sayfa atamaları.</p>
+    </div>
+    <div class="card">
+      <span class="icon">💰</span>
+      <h4>Fiyatlandırma</h4>
+      <p>Günlük oran çarpanları, sezonluk fiyatlar, depozito oranları.</p>
+    </div>
+    <div class="card">
+      <span class="icon">📧</span>
+      <h4>E-posta Şablonları</h4>
+      <p>Onay, iptal, ödeme bildirimleri — her şablon özelleştirilebilir.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🔑</span>
+      <h4>Lisans</h4>
+      <p>Pro lisans aktivasyonu, Lite limit göstergeleri, özellik kilit/açma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── KAPANIŞ ─── -->
+<section data-background-gradient="radial-gradient(ellipse at center, #1a1040 0%, #0d0d1a 70%)">
+  <h2 style="margin-top:40px;">🎉 Hadi Başlayalım!</h2>
+  <br>
+  <div class="stat-row" style="margin:20px 0;">
+    <div class="stat"><div class="num" style="font-size:2em;">🆓</div><div class="lbl">GitHub'dan İndir</div></div>
+    <div class="stat"><div class="num" style="font-size:2em;">📚</div><div class="lbl">Dokümantasyon</div></div>
+    <div class="stat"><div class="num" style="font-size:2em;">💬</div><div class="lbl">Soru Sor</div></div>
+  </div>
+  <div class="callout green" style="text-align:center;">
+    <strong>github.com/MaxHandMade/mhm-rentiva</strong><br>
+    <span style="font-size:0.85em; color:#888;">⭐ Star atarsanız çok mutlu olurum!</span>
+  </div>
+  <br>
+  <p style="font-size:0.8em; color:#666;">Bir sonraki yayın: <strong>Ayarlar & Yapılandırma</strong></p>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    plugins: []
+  });
+</script>
+</body>
+</html>
