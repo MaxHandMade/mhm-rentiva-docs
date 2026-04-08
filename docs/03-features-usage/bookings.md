@@ -62,6 +62,21 @@ Sistem; **Toplam Tutar**, **Depozito Miktarı** ve **Kalan Miktar** verilerini a
 - **Ödeme Durumu:** "Ödeme Bekleniyor", "Ödendi" veya "İptal Edildi" olarak güncellenebilir.
 - **İptal Politikası:** Belirlenen son iptal tarihine (Deadline) göre işlemin iptal edilebilir olup olmadığını gösterir.
 
+### Kalan Ödeme (Pay Remaining) — v4.26.0
+
+Depozito ile yapılmış rezervasyonlarda müşteriler kalan bakiyeyi doğrudan **Hesabım → Rezervasyon Detayı** sayfasından ödeyebilir.
+
+**Nasıl Çalışır:**
+1. Müşteri "Kalan Ödemeyi Yap" butonuna tıklar.
+2. Sistem, kalan tutar için minimal bir WooCommerce siparişi oluşturur.
+3. Müşteri WooCommerce'in native `order-pay` sayfasına yönlendirilir.
+4. Sitede aktif olan herhangi bir ödeme yöntemiyle ödeme tamamlanır.
+
+**Teknik Detaylar:**
+- `_mhm_is_remaining_payment` flag'i ile kalan ödeme siparişleri tanımlanır.
+- `_mhm_remaining_order_id` meta'sı ile duplicate sipariş koruması sağlanır — bekleyen sipariş varsa yeni sipariş oluşturulmaz.
+- Herhangi bir ek entegrasyon veya ödeme eklentisi gerektirmez.
+
 ### Para Yatırma Geçmişi (Timeline)
 Rezervasyonun oluşturulmasından, ödemelerin alınmasına ve durum değişikliklerine kadar her adım bir zaman çizelgesi (Log) olarak kaydedilir. Bu, hatalı işlemlerin takibi için kritiktir.
 
@@ -87,11 +102,12 @@ Rezervasyon durumu degistiginde `update_post_meta` cagrilari standart `save_post
 ---
 
 ### Bölüm Özeti
-- **Dashboard** ile anlik doluluk oranini izleyin.
-- **Zaman Cizelgesi** ile her operasyonel adimi denetleyin.
-- **Finansal Panel** ile odeme ve kalan bakiye takibini hatasiz yapin.
-- **Takvim popup'i** artik saat bilgisi gösterir.
-- **Display ID** ile WC siparis ID'si tutarliligi saglanir.
+- **Dashboard** ile anlık doluluk oranını izleyin.
+- **Zaman Çizelgesi** ile her operasyonel adımı denetleyin.
+- **Finansal Panel** ile ödeme ve kalan bakiye takibini hatasız yapın.
+- **Kalan Ödeme** ile depozito müşterilerine self-servis ödeme imkânı sunun.
+- **Takvim popup'ı** artık saat bilgisi gösterir.
+- **Display ID** ile WC sipariş ID'si tutarlılığı sağlanır.
 
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
