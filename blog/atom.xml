@@ -74,6 +74,62 @@
         <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.26.1: Araç Detayları, Rezervasyon, Ödeme ve Sepet Görsel Cilası]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary"/>
+        <updated>2026-04-08T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.]]></summary>
+        <content type="html"><![CDATA[<p>v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-detayları-kenar-çubuğu">🎨 Araç Detayları Kenar Çubuğu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-ara%C3%A7-detaylar%C4%B1-kenar-%C3%A7ubu%C4%9Fu" class="hash-link" aria-label="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" title="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Özellik etiketleri taşma sorunu:</strong> Vites, yakıt, koltuk sayısı gibi spec chip'leri dar ekranlarda kart kenarından taşıyordu. Artık kart sınırları içinde kalıyor ve uzun etiketler doğru şekilde sarmalanıyor.</li>
+<li class=""><strong>Hibrit yakıt ikonu:</strong> Yakıt türü "hybrid" seçili araçlarda yanlış ikon gösteriliyordu. Doğru simgeyle değiştirildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-takvim">📅 Takvim<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-takvim" class="hash-link" aria-label="📅 Takvim doğrudan bağlantı" title="📅 Takvim doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Boş satır kaldırıldı:</strong> Takvim bileşeninin altında fazladan bir boş satır render ediliyordu — kaldırıldı.</li>
+<li class=""><strong>Kutu içinde kutu görünümü:</strong> Kenar çubuğunda takvim widget'ının kendi arka planı ile dış kart arka planı iç içe iki kutu izlenimi yaratıyordu. İç kaynağın arka planı nötrleştirildi, artık tek bir kart olarak görünüyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-rezervasyon-formu">📝 Rezervasyon Formu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-rezervasyon-formu" class="hash-link" aria-label="📝 Rezervasyon Formu doğrudan bağlantı" title="📝 Rezervasyon Formu doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araç görseli görünürlüğü:</strong> Form başlığındaki araç görseli açık arka planlarda düşük kontrasta sahipti. Altına bir degrade arka plan eklenerek araç her zaman görünür durumda tutuluyor.</li>
+<li class=""><strong>Kart başlık stili birleşimi:</strong> Rezervasyon formunun farklı bölümleri (tarih, müşteri bilgisi, ek hizmetler, fiyat özeti) birbirinden farklı başlık stillerine sahipti. Tüm bölümler artık aynı başlık tipografisi ve padding değerlerini kullanıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ödeme-sayfası">💳 Ödeme Sayfası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-%C3%B6deme-sayfas%C4%B1" class="hash-link" aria-label="💳 Ödeme Sayfası doğrudan bağlantı" title="💳 Ödeme Sayfası doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Ödeme yöntemleri dikey:</strong> Çoklu ödeme yöntemi (kart, havale, kapıda ödeme) etkin olduğunda seçenekler yatay olarak sıralanıyor ve mobilde taşıyordu. Artık tek sütun, dikey stack — her ekran genişliğinde tutarlı.</li>
+<li class=""><strong>Kupon alanı ikon:</strong> "Kupon kodunuz var mı?" uyarı satırındaki ikon belirli tema kombinasyonlarında bozuk (kare/?) görünüyordu. İkon emoji ile değiştirildi, her temada render oluyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sepet">🛒 Sepet<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-sepet" class="hash-link" aria-label="🛒 Sepet doğrudan bağlantı" title="🛒 Sepet doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rezervasyon meta satırlarında yeniden düzen:</strong> Rezervasyon detayları (tarih aralığı, ek hizmetler, teslim lokasyonu) daha önce tek bir cümle içinde virgülle ayrılmış şekilde gösteriliyordu — okunması zor. Artık her bilgi <code>Etiket: Değer</code> formatında ayrı satırlar halinde gösteriliyor.</li>
+<li class=""><strong>Ödemeye git butonu hover:</strong> Buton üzerine gelindiğinde yazı rengi arka planla aynı tonda kalıp okunamıyordu. Hover state rengi düzeltildi, yazı her durumda okunur.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Alan</th><th>Açıklama</th></tr></thead><tbody><tr><td>🔧 Araç Detayları</td><td>Spec chip taşma + hibrit yakıt ikonu</td></tr><tr><td>🔧 Takvim</td><td>Fazladan boş satır + kutu içinde kutu görünümü</td></tr><tr><td>🔧 Rezervasyon Formu</td><td>Araç görseli degrade arka plan + kart başlık birleştirme</td></tr><tr><td>🔧 Ödeme</td><td>Dikey ödeme yöntemleri + kupon ikon emoji</td></tr><tr><td>🔧 Sepet</td><td>Meta etiket/değer satırları + ödemeye git hover</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.1-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.1 <strong>yalnızca CSS ve şablon düzeltmeleri</strong> içerir — fonksiyonel değişiklik, DB şema güncellemesi veya yeni ayar yoktur. v4.26.0'dan güncellemek için herhangi bir işlem gerekmez:</p>
+<ul>
+<li class="">WordPress admin → Eklentiler → Güncelle</li>
+<li class="">Veya <code>wp plugin update mhm-rentiva --allow-root</code></li>
+</ul>
+<p>Özel tema override'ları yapmadıysanız güncelleme sonrası ek adım gerekmez. Child theme ile <code>cart.php</code>, <code>checkout/form.php</code> veya rezervasyon formu şablonlarını override ettiyseniz, yeni sürümle uyumluluk için şablonlarınızı karşılaştırmanızı öneririz.</p>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="patch" term="patch"/>
+        <category label="ui" term="ui"/>
+        <category label="checkout" term="checkout"/>
+        <category label="cart" term="cart"/>
+        <category label="booking" term="booking"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.26.0: Depozito Rezervasyonlarında Kalan Ödeme]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</id>
         <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary"/>
@@ -759,36 +815,5 @@ WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun y
         <category label="update" term="update"/>
         <category label="v4.6.0" term="v4.6.0"/>
         <category label="vip-transfer" term="vip-transfer"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[v4.5.5 Yayında! 🚀]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-5-5-released</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-5-5-released"/>
-        <updated>2026-01-15T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva v4.5.5 sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.5.5</strong> sürümü yayınlandı! Bu sürüm, kararlılık iyileştirmeleri, kritik performans düzeltmeleri ve dokümantasyon altyapısında büyük yenilikler içeriyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkanlar">🌟 Öne Çıkanlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#-%C3%B6ne-%C3%A7%C4%B1kanlar" class="hash-link" aria-label="🌟 Öne Çıkanlar doğrudan bağlantı" title="🌟 Öne Çıkanlar doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Güvenlik &amp; Mimari:</strong> Plugin kaynak kodları artık Private bir repoda korunurken, dokümantasyon (bu site) Public bir repoda herkesin erişimine açık hale getirildi.</li>
-<li class=""><strong>Performans:</strong> Raporlama modülündeki SQL sorguları, <code>DATE()</code> fonksiyonu kaldırılarak indeks kullanımına uygun hale getirildi. Artık çok daha hızlı çalışıyor.</li>
-<li class=""><strong>Mobil Uyumluluk:</strong> Araç detay sayfaları mobilde artık taşma yapmıyor, butonlar ve görseller tam uyumlu.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-düzeltmeler">🛠️ Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#%EF%B8%8F-d%C3%BCzeltmeler" class="hash-link" aria-label="🛠️ Düzeltmeler doğrudan bağlantı" title="🛠️ Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Fixed:</strong> <code>Plugin.php</code> içindeki mükerrer kodlar temizlendi.</li>
-<li class=""><strong>Fixed:</strong> <code>ReportRepository</code> sınıfındaki yavaş sorgular optimize edildi.</li>
-<li class=""><strong>Fixed:</strong> Araç kıyaslama sayfasındaki hizalama sorunları giderildi.</li>
-<li class=""><strong>Fixed:</strong> "Hizmete Kapalı" (Out of Use) etiketi artık varyasyonlu ürünlerde de doğru çalışıyor.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yükseltme">📦 Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-5-5-released#-y%C3%BCkseltme" class="hash-link" aria-label="📦 Yükseltme doğrudan bağlantı" title="📦 Yükseltme doğrudan bağlantı" translate="no">​</a></h2>
-<p>WordPress panelinizden otomatik güncelleme yapabilirsiniz. Herhangi bir sorun yaşarsanız lütfen GitHub üzerinden veya destek sayfamızdan bize ulaşın.</p>
-<p>Keyifli kiralamalar! 🚗💨</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="update" term="update"/>
-        <category label="v4.5.5" term="v4.5.5"/>
     </entry>
 </feed>
