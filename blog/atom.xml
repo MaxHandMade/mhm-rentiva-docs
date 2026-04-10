@@ -2,11 +2,77 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-07T09:00:00.000Z</updated>
+    <updated>2026-04-10T09:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.26.2: Tam Kaldırma Temizliği ve CLI Bootstrap Güçlendirmesi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary"/>
+        <updated>2026-04-10T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.26.2, eklenti kaldırıldığında arkada kalan tüm tabloların silinmesini sağlıyor, wp-cli bootstrap sırasındaki fatal hatayı gideriyor ve şema migration'ların artık sürüm değişikliğinde otomatik çalışmasını garantiliyor. Üç düzeltme de üretim ortamlarındaki sessiz sorunları hedefliyor.]]></summary>
+        <content type="html"><![CDATA[<p>v4.26.2, eklenti kaldırıldığında arkada kalan tüm tabloların silinmesini sağlıyor, wp-cli bootstrap sırasındaki fatal hatayı gideriyor ve şema migration'ların artık sürüm değişikliğinde otomatik çalışmasını garantiliyor. Üç düzeltme de üretim ortamlarındaki sessiz sorunları hedefliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kaldırma-temizliği--artık-27-tablonun-hepsi">🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#-kald%C4%B1rma-temizli%C4%9Fi--art%C4%B1k-27-tablonun-hepsi" class="hash-link" aria-label="🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi doğrudan bağlantı" title="🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Önceden eklenti "verileri temizle" seçeneği ile silindiğinde 14 alt sistem tablosu veritabanında yetim kalıyordu: <code>ledger</code>, <code>key_registry</code>, <code>commission_policy</code>, <code>payout_audit</code>, <code>tenants</code>, <code>usage_metrics</code> ve eski alert/payment alt sistemlerine ait artık kullanılmayan tablolar. Bu v4.26.2 ile tamamen çözüldü.</p>
+<p><strong>Yapılan iyileştirmeler:</strong></p>
+<ul>
+<li class=""><strong>Tam liste:</strong> 27 özel tablonun tamamı kaldırma sırasında siliniyor</li>
+<li class=""><strong>Pattern güvenlik ağı:</strong> Listede olmayan ama <code>mhm_rentiva_*</code> önekiyle başlayan herhangi bir yetim tablo da otomatik yakalanıp siliniyor — gelecekte eklenen tablolar için güvence</li>
+<li class=""><strong>Kurtarma tablosu temizliği:</strong> <code>DatabaseCleaner</code> tarafından oluşturulan <code>postmeta_backup_invalid_*</code> geçici tabloları da kaldırma sırasında temizleniyor</li>
+<li class=""><strong>Tek kaynak prensibi:</strong> Silme listesi ve istatistik sayacı artık aynı kaynaktan okuyor — sayaç ile gerçek temizlik birbirinden uzaklaşamaz</li>
+<li class=""><strong>Savunma mekanizmaları:</strong> <code>uninstall.php</code> ve taksonomi temizleme adımı artık bozuk bir ayar kaydı veya eksik taksonomi nedeniyle sessizce durmuyor — hata yakalanıyor ve kalan adımlar çalışmaya devam ediyor</li>
+</ul>
+<p><strong>Doğrulama:</strong> DemoSeed Docker ortamında v4.26.2 kaldırma testi → <strong>0 tablo, 0 post, 0 ayar</strong> artık geride kalıyor. Tam temiz kaldırma garantili.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-cli-bootstrap-fatal-error-düzeltmesi">🔧 CLI Bootstrap Fatal Error Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#-cli-bootstrap-fatal-error-d%C3%BCzeltmesi" class="hash-link" aria-label="🔧 CLI Bootstrap Fatal Error Düzeltmesi doğrudan bağlantı" title="🔧 CLI Bootstrap Fatal Error Düzeltmesi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Önceden belirli koşullarda wp-cli komutları <code>TypeError</code> veya <code>is_user_logged_in() undefined function</code> hatasıyla çöküyordu. Kök nedeni iki yerde yatıyordu:</p>
+<ul>
+<li class=""><code>SettingsCore::get()</code> ve <code>has()</code> bir ayar kaydının dizi olmadığı durumda <code>TypeError</code> fırlatıyordu</li>
+<li class=""><code>AdvancedLogger::log()</code> WordPress tam yüklenmeden (örneğin early bootstrap'te) çağrıldığında <code>is_user_logged_in()</code>'i çağırıyordu ama bu fonksiyon o aşamada tanımlı değildi</li>
+</ul>
+<p><strong>Çözüm:</strong></p>
+<ul>
+<li class=""><code>SettingsCore::get()</code>/<code>has()</code> artık dizi olmayan bir ayar değerini tolere ediyor ve güvenli varsayılana düşüyor</li>
+<li class=""><code>AdvancedLogger::log()</code> <code>plugins_loaded</code> hook'u çalışmadan önce çağrıldığında erken return ediyor — log atlanır ama bootstrap çökmez</li>
+</ul>
+<p><strong>Etkisi:</strong> <code>wp plugin activate mhm-rentiva</code>, <code>wp mhm-rentiva *</code> subkomutları ve diğer wp-cli akışları artık bozuk bir ayar kaydı ya da early-bootstrap log denemesi ile çökmüyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-otomatik-şema-migrationları">🔄 Otomatik Şema Migration'ları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#-otomatik-%C5%9Fema-migrationlar%C4%B1" class="hash-link" aria-label="🔄 Otomatik Şema Migration'ları doğrudan bağlantı" title="🔄 Otomatik Şema Migration'ları doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.2 ile şema migration'ları artık <strong>eklenti dosya sürümü değiştiğinde otomatik çalışıyor</strong>, WordPress aktivasyon hook'u çağrılmasa bile. Bu; manuel ZIP yükleme, FTP ile güncelleme ve <code>wp-cli plugin update</code> akışlarını kapsar.</p>
+<p><strong>Önceki durum:</strong> Yeni tabloları oluşturmak için eklentiyi pasifleştirip tekrar etkinleştirmek gerekiyordu. Kullanıcıların çoğu bunu bilmediğinden "yeni özellik çalışmıyor" raporu geliyordu.</p>
+<p><strong>Yeni durum:</strong> <code>DB_VERSION</code> sabiti değişir değişmez migration'lar sessizce ve tek seferlik çalışır. Aktivasyon hook'u hala destekleniyor — sadece artık zorunlu değil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🧹 Kaldırma</td><td>Tüm 27 özel tablo (ledger, key_registry, commission_policy, payout_audit, tenants, usage_metrics + eski alt sistem tabloları)</td></tr><tr><td>🛡️ Kaldırma</td><td>Pattern tabanlı güvenlik ağı (<code>mhm_rentiva_*</code> öneki)</td></tr><tr><td>🧹 Kaldırma</td><td><code>postmeta_backup_invalid_*</code> kurtarma tabloları</td></tr><tr><td>🔧 Kaldırma</td><td>Silme listesi ve istatistik sayacı tek kaynaktan</td></tr><tr><td>🛡️ Kaldırma</td><td><code>uninstall.php</code> ve taksonomi temizliğinde savunma mekanizmaları</td></tr><tr><td>🔄 Güncelleme</td><td>Şema migration'ları sürüm değişikliğinde otomatik çalışıyor</td></tr><tr><td>🐛 Düzeltme</td><td><code>SettingsCore::get()</code>/<code>has()</code> dizi olmayan değerleri tolere ediyor</td></tr><tr><td>🐛 Düzeltme</td><td><code>AdvancedLogger::log()</code> WordPress yüklenmeden güvenli dönüş</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="📁 Değiştirilen Dosyalar doğrudan bağlantı" title="📁 Değiştirilen Dosyalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>uninstall.php</code> <em>(defensive is_array guard + tam tablo listesi)</em></li>
+<li class=""><code>src/Admin/Core/Utilities/DatabaseCleaner.php</code> <em>(27 tablo + pattern wildcard)</em></li>
+<li class=""><code>src/Admin/Core/Utilities/DatabaseMigrator.php</code> <em>(otomatik migration tetikleme)</em></li>
+<li class=""><code>src/Admin/Core/SettingsCore.php</code> <em>(non-array toleransı)</em></li>
+<li class=""><code>src/Admin/Core/Logging/AdvancedLogger.php</code> <em>(plugins_loaded guard)</em></li>
+<li class=""><code>mhm-rentiva.php</code> <em>(versiyon güncelleme)</em></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.2-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.2 tamamen geriye dönük uyumlu bir patch sürümüdür — DB şemasında yeni tablo, kolon veya veri değişikliği <strong>yoktur</strong>. Güncelleme sonrası ek bir işlem gerekmez. Eklentiyi normal yollarla güncellemeniz yeterli:</p>
+<ul>
+<li class="">WordPress admin → Eklentiler → Güncelle</li>
+<li class="">Veya <code>wp plugin update mhm-rentiva --allow-root</code></li>
+<li class="">Veya manuel ZIP yükleme (artık otomatik migration tetiklenir)</li>
+</ul>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="patch" term="patch"/>
+        <category label="uninstall" term="uninstall"/>
+        <category label="cli" term="cli"/>
+        <category label="migration" term="migration"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.26.0: Depozito Rezervasyonlarında Kalan Ödeme]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</id>
