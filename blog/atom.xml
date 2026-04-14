@@ -2,11 +2,60 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-11T09:00:00.000Z</updated>
+    <updated>2026-04-15T09:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.26.4: Parite Denetimi Fix'leri ve Transfer Widget UX Cilası]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary"/>
+        <updated>2026-04-15T09:00:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.26.4, tüm 18 core "kısa kod ↔ Gutenberg bloğu ↔ Elementor widget'ı" üçlüsü üzerinde yapılan ayar paritesi denetiminde ortaya çıkan üç sessiz sorunu gideriyor: Arama Sonuçları bloğuna kopya-yapıştır ile sızmış üç hayalet attribute, Birleşik Arama bloğundaki duplicate genişlik attribute'ları ve Transfer Arama Elementor widget'ında otomatik üretilmiş ham etiketli control'ler. Üçü de kullanıcının gözünden kaçan ama panelde anlamsız görünen UX çürümeleriydi.]]></summary>
+        <content type="html"><![CDATA[<p>v4.26.4, tüm 18 core "kısa kod ↔ Gutenberg bloğu ↔ Elementor widget'ı" üçlüsü üzerinde yapılan ayar paritesi denetiminde ortaya çıkan üç sessiz sorunu gideriyor: Arama Sonuçları bloğuna kopya-yapıştır ile sızmış üç hayalet attribute, Birleşik Arama bloğundaki duplicate genişlik attribute'ları ve Transfer Arama Elementor widget'ında otomatik üretilmiş ham etiketli control'ler. Üçü de kullanıcının gözünden kaçan ama panelde anlamsız görünen UX çürümeleriydi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-parite-denetimi-neden-gerekli">🔍 Parite Denetimi Neden Gerekli?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-parite-denetimi-neden-gerekli" class="hash-link" aria-label="🔍 Parite Denetimi Neden Gerekli? doğrudan bağlantı" title="🔍 Parite Denetimi Neden Gerekli? doğrudan bağlantı" translate="no">​</a></h2>
+<p>MHM Rentiva'nın "Render Parity Rule" kuralına göre <strong>her blok</strong>, render zamanında <code>do_shortcode()</code> ile karşılık gelen kısa koda delege eder. Yani blokların kendi mantığı yoktur — sadece kısa koda argüman geçiren ince bir kabuktur. Elementor widget'ları da aynı prensiple çalışır.</p>
+<p>Bu mimari güçlü bir garanti sağlar: <strong>kısa kodda çalışan her şey blokta ve widget'ta da çalışır</strong>. Ama tersi de doğru olmalı — <strong>kısa kodun bilmediği bir attribute, blokta veya widget'ta da olmamalı</strong>. Aksi halde kullanıcı panel arayüzünde bir toggle açar, bir şey yazar, render'da hiçbir değişiklik olmaz. Hata yok, uyarı yok, sessiz no-op.</p>
+<p>Bu v4.26.4'te giderilen üç sorun da tam olarak bu sınıftan:</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-1-arama-sonuçları-bloğu--hayalet-attribute-sızıntısı">🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-1-arama-sonu%C3%A7lar%C4%B1-blo%C4%9Fu--hayalet-attribute-s%C4%B1z%C4%B1nt%C4%B1s%C4%B1" class="hash-link" aria-label="🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı doğrudan bağlantı" title="🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>assets/blocks/search-results/block.json</code> dosyasına, zamanında <code>transfer-search</code> bloğundan kopya-yapıştır ile türetildiği sırada üç attribute sızmıştı:</p>
+<ul>
+<li class=""><code>button_text</code></li>
+<li class=""><code>show_pickup</code></li>
+<li class=""><code>show_dropoff</code></li>
+</ul>
+<p>Arama Sonuçları bloğunda <strong>buton yok</strong>, <strong>pickup/dropoff alanları yok</strong> — bu attribute'lar anlamsız. Ama Gutenberg inspector panelinde görünüyorlardı, otomatik üretilen Elementor widget'ına da geçiyorlardı. Kullanıcı açar, değer girer, render'da hiçbir şey olmaz.</p>
+<p><strong>Çözüm:</strong> <code>block.json</code>'dan üçü de silindi. Otomatik parite mekanizması (<code>register_parity_controls_from_block</code>) block.json'u kaynak kabul ettiği için widget'tan da otomatik düştüler.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-2-birleşik-arama-bloğu--duplicate-genişlik-attributeları">🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-2-birle%C5%9Fik-arama-blo%C4%9Fu--duplicate-geni%C5%9Flik-attributelar%C4%B1" class="hash-link" aria-label="🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları doğrudan bağlantı" title="🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>assets/blocks/unified-search/block.json</code>'da iki duplicate attribute vardı:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token property" style="color:#36acaa">"min_width"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> ... </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token property" style="color:#36acaa">"max_width"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> ... </span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>CAM (Canonical Attribute Mapper) pipeline'ı snake_case ayraçlarını kaldırır ve kanonik isimler <code>minwidth</code> / <code>maxwidth</code> olarak render'a ulaşır. <code>min_width</code> / <code>max_width</code> ayrı birer alan olarak DB'ye yazılıyor, ama render aşamasında aynı değere map'leniyordu — iki kontrol aynı şeyi yapıyor, biri de render'da hiçbir zaman okunmuyordu.</p>
+<p><strong>Çözüm:</strong> Snake_case varyantlar silindi. Tek kanonik <code>minwidth</code> / <code>maxwidth</code> kaldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-3-transfer-arama-widgetı--ham-etiketli-controller">🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-3-transfer-arama-widget%C4%B1--ham-etiketli-controller" class="hash-link" aria-label="🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler doğrudan bağlantı" title="🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Base Elementor widget sınıfımızda <code>register_parity_controls_from_block()</code> adlı bir metod var. Bu metod, block.json'daki attribute'ları tarayıp widget'ta manuel tanımlanmamış olanlar için otomatik Elementor control'leri üretir. <strong>Amacı:</strong> yeni bir block.json attribute'u eklendiğinde Elementor widget'ının geride kalmamasını sağlamak. Bir güvenlik ağı.</p>
+<p>Ama güvenlik ağı <strong>tasarım aracı değil</strong>. Otomatik üretilen control'ler ham attribute name'leri label olarak kullanır: <code>showPickup</code> → "ShowPickup", <code>buttonText</code> → "ButtonText". Placeholder yok, doğru default yok, ayrı bir bölümde gösteriliyor. Transfer Search widget'ında tam olarak bu oluyordu.</p>
+<p><strong>Çözüm:</strong> Üç user-facing attribute için manuel <code>add_control()</code> çağrıları eklendi:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('buttonText', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'       =&gt; __('Button Text', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'        =&gt; Controls_Manager::TEXT,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'     =&gt; '',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'placeholder' =&gt; __('Search Transfers', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('showPickup', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'        =&gt; __('Show Pickup Location', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'         =&gt; Controls_Manager::SWITCHER,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'return_value' =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'      =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('showDropoff', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'        =&gt; __('Show Dropoff Location', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'         =&gt; Controls_Manager::SWITCHER,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'return_value' =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'      =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span></code></pre></div></div>
+<p><code>register_parity_controls_from_block()</code> manuel tanımlı control'leri otomatik olarak atlar (<code>in_array($attr_name, $existing_controls)</code>), dolayısıyla duplicate çıkmaz. Ama artık panel ismini doğru, placeholder'lı, mantıklı default'larla gösteriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-çıkarılan-ders">📖 Çıkarılan Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-%C3%A7%C4%B1kar%C4%B1lan-ders" class="hash-link" aria-label="📖 Çıkarılan Ders doğrudan bağlantı" title="📖 Çıkarılan Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>Otomatik parite mekanizması güvenlik ağıdır, UI değil.</strong> Her user-facing attribute manuel <code>add_control()</code> ile tanımlanmalı: doğru label, placeholder, default. Otomatik mekanizma gelecekte eklenecek attribute'lar için arka planda bekleyen regresyon kalkanı olarak kalır.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>720 test · 2470 assertion · 6 skipped — tam yeşil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.4-release-summary#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.26.4" target="_blank" rel="noopener noreferrer" class="">GitHub Releases</a> üzerinden <code>mhm-rentiva.4.26.4.zip</code> dosyasını indirin ve WordPress Eklentiler → Yeni Ekle → Eklenti Yükle ekranından yükleyin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="patch" term="patch"/>
+        <category label="elementor" term="elementor"/>
+        <category label="blocks" term="blocks"/>
+        <category label="parity" term="parity"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.26.3: Araç Kartı Görsel Kalitesi, Admin Toast Kesilmesi ve ZIP Chart.js Düzeltmesi]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary</id>
@@ -805,53 +854,5 @@
         <category label="security" term="security"/>
         <category label="wpcs" term="wpcs"/>
         <category label="update" term="update"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[v4.6.1 Yayında! 🛡️]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-1-released</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4-6-1-released"/>
-        <updated>2026-01-21T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva v4.6.1 sürümü yayınlandı! Bu sürüm, veri bütünlüğü, güvenlik ve WooCommerce entegrasyonu konularında kritik iyileştirmeler içeren bir güvenlik ve kararlılık güncellemesidir.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.1</strong> sürümü yayınlandı! Bu sürüm, <strong>veri bütünlüğü</strong>, <strong>güvenlik</strong> ve <strong>WooCommerce entegrasyonu</strong> konularında kritik iyileştirmeler içeren bir güvenlik ve kararlılık güncellemesidir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-kritik-güvenlik-ve-veri-koruma">🛡️ Kritik Güvenlik ve Veri Koruma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-kritik-g%C3%BCvenlik-ve-veri-koruma" class="hash-link" aria-label="🛡️ Kritik Güvenlik ve Veri Koruma doğrudan bağlantı" title="🛡️ Kritik Güvenlik ve Veri Koruma doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-databasecleaner-i̇yileştirmesi">🧹 DatabaseCleaner İyileştirmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-databasecleaner-i%CC%87yile%C5%9Ftirmesi" class="hash-link" aria-label="🧹 DatabaseCleaner İyileştirmesi doğrudan bağlantı" title="🧹 DatabaseCleaner İyileştirmesi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Veritabanı temizleme aracımız, artık çok daha akıllı ve güvenli.</p>
-<ul>
-<li class=""><strong>Genişletilmiş Koruma:</strong> WooCommerce sipariş ID'leri, ödeme detayları ve müşteri meta verileri dahil olmak üzere <strong>40'tan fazla kritik meta anahtar</strong> (<code>_mhm_</code> prefixli) koruma listesine eklendi.</li>
-<li class=""><strong>Veri Kaybı Önleme:</strong> Bakım işlemleri sırasında yanlışlıkla veri silinmesinin önüne geçmek için koruma mekanizmaları güçlendirildi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sql-güvenliği-hardening">🔒 SQL Güvenliği (Hardening)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-sql-g%C3%BCvenli%C4%9Fi-hardening" class="hash-link" aria-label="🔒 SQL Güvenliği (Hardening) doğrudan bağlantı" title="🔒 SQL Güvenliği (Hardening) doğrudan bağlantı" translate="no">​</a></h3>
-<p>Sistem genelinde SQL sorguları gözden geçirildi ve güvenlik seviyesi artırıldı.</p>
-<ul>
-<li class=""><strong>Prepared Statements:</strong> <code>BookingColumns</code> ve <code>ExportStats</code> sınıflarındaki dinamik sorgular, SQL Injection risklerine karşı <code>wpdb-&gt;prepare()</code> kullanılarak standardize edildi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-woocommerce-ve-ödeme-i̇yileştirmeleri">🛍️ WooCommerce ve Ödeme İyileştirmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-woocommerce-ve-%C3%B6deme-i%CC%87yile%C5%9Ftirmeleri" class="hash-link" aria-label="🛍️ WooCommerce ve Ödeme İyileştirmeleri doğrudan bağlantı" title="🛍️ WooCommerce ve Ödeme İyileştirmeleri doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-atomik-çakışma-kilidi-atomic-overlap-lock">⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#%EF%B8%8F-atomik-%C3%A7ak%C4%B1%C5%9Fma-kilidi-atomic-overlap-lock" class="hash-link" aria-label="⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock) doğrudan bağlantı" title="⚛️ Atomik Çakışma Kilidi (Atomic Overlap Lock) doğrudan bağlantı" translate="no">​</a></h3>
-<p>Yoğun rezervasyon trafiği olan siteler için hayati bir özellik eklendi.</p>
-<ul>
-<li class=""><strong>Çift Rezervasyon Önleme:</strong> WooCommerce üzerinden aynı saniyede gelen rezervasyon isteklerinde çakışmayı önlemek için veritabanı seviyesinde atomik kilit mekanizması devreye alındı.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vergi-hesaplama-düzeltmesi">💰 Vergi Hesaplama Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-vergi-hesaplama-d%C3%BCzeltmesi" class="hash-link" aria-label="💰 Vergi Hesaplama Düzeltmesi doğrudan bağlantı" title="💰 Vergi Hesaplama Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Doğru Vergi Matrahı:</strong> Depozito ödemelerinde verginin sadece ödenen depozito üzerinden değil, <strong>toplam rezervasyon tutarı</strong> üzerinden hesaplanması sağlandı. Bu sayede faturalandırma ve muhasebe süreçleri hatasız hale getirildi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kullanıcı-arayüzü">🎨 Kullanıcı Arayüzü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4-6-1-released#-kullan%C4%B1c%C4%B1-aray%C3%BCz%C3%BC" class="hash-link" aria-label="🎨 Kullanıcı Arayüzü doğrudan bağlantı" title="🎨 Kullanıcı Arayüzü doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Ödeme Ayarları Uyarısı:</strong> WooCommerce aktif olduğunda, kullanıcıların yanlış (lokal) ödeme ayarlarıyla vakit kaybetmesini önlemek için "Ödeme işlemleri WooCommerce tarafından yönetilmektedir" şeklinde bilgilendirici bir uyarı eklendi.</li>
-</ul>
-<hr>
-<p><strong>Nasıl Güncellerim?</strong>
-WordPress yönetim panelinizden <strong>Eklentiler</strong> sayfasını ziyaret ederek güncellemeyi tek tıkla yükleyebilirsiniz. Bu sürüm <strong>Kritik</strong> olarak işaretlenmiştir, tüm kullanıcıların en kısa sürede geçiş yapması önerilir.</p>
-<p>Güvenli ve keyifli kiralamalar! 🚗💨</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="update" term="update"/>
-        <category label="v4.6.1" term="v4.6.1"/>
-        <category label="security" term="security"/>
-        <category label="critical" term="critical"/>
-        <category label="woocommerce" term="woocommerce"/>
     </entry>
 </feed>
