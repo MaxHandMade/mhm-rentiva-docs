@@ -30,4 +30,5 @@ Thumbs.db
 *.txt
 build_log.txt
 build_output.log
-build_log_fixed.txt*.m4a
+build_log_fixed.txt
+*.m4a
