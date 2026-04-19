@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MHM Rentiva — Sıradaki Sürümler Yol Haritası</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <style>
+  /* ═══════════════════════════════════════
+     DESIGN TOKENS
+  ═══════════════════════════════════════ */
+  :root {
+    --bg:        #07070f;
+    --surface:   rgba(255,255,255,0.042);
+    --surface-2: rgba(255,255,255,0.072);
+    --border:    rgba(255,255,255,0.08);
+    --border-hi: rgba(255,255,255,0.16);
+    --blue:      #1e6bf5;
+    --blue-lo:   rgba(30,107,245,0.15);
+    --blue-lg:   #60a5fa;
+    --purple:    #8b5cf6;
+    --purple-lo: rgba(139,92,246,0.15);
+    --purple-lg: #a78bfa;
+    --cyan:      #22d3ee;
+    --cyan-lo:   rgba(34,211,238,0.12);
+    --cyan-lg:   #67e8f9;
+    --gold:      #f59e0b;
+    --gold-lo:   rgba(245,158,11,0.15);
+    --green:     #10b981;
+    --green-lo:  rgba(16,185,129,0.13);
+    --red:       #f87171;
+    --red-lo:    rgba(248,113,113,0.13);
+    --t1:        #f8fafc;
+    --t2:        #94a3b8;
+    --t3:        #475569;
+  }
+
+  /* ═══════════════════════════════════════
+     BASE
+  ═══════════════════════════════════════ */
+  .reveal {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+  }
+
+  .reveal .slides section {
+    text-align: left;
+    padding: 36px 52px 28px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+
+  /* glow variants */
+  .reveal .slides section.blue-glow {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30,107,245,0.20) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 100%, rgba(34,211,238,0.10) 0%, transparent 60%),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: auto, auto, 28px 28px;
+  }
+  .reveal .slides section.gold-glow {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(245,158,11,0.14) 0%, transparent 70%),
+      radial-gradient(rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: auto, 28px 28px;
+  }
+  .reveal .slides section.purple-glow {
+    background-image:
+      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(139,92,246,0.22) 0%, transparent 70%),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: auto, 28px 28px;
+  }
+  .reveal .slides section.green-glow {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 50% -5%, rgba(16,185,129,0.18) 0%, transparent 70%),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: auto, 28px 28px;
+  }
+
+  /* ═══════════════════════════════════════
+     TYPOGRAPHY
+  ═══════════════════════════════════════ */
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal p, .reveal li {
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+    letter-spacing: -0.015em;
+  }
+
+  .reveal h1 {
+    font-size: 2.9em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--blue-lg) 55%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.08;
+    margin: 0 0 10px;
+  }
+
+  .reveal h2 {
+    font-size: 1.48em;
+    font-weight: 800;
+    color: var(--t1);
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .reveal h3 {
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--t2);
+    margin: 0;
+  }
+
+  .reveal p { margin: 0; }
+
+  /* ═══════════════════════════════════════
+     BADGES
+  ═══════════════════════════════════════ */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 0.5em;
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 7px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge.pro    { background: var(--gold-lo);  color: var(--gold);  border: 1px solid rgba(245,158,11,0.35); }
+  .badge.free   { background: var(--green-lo); color: var(--green); border: 1px solid rgba(16,185,129,0.35); }
+  .badge.new    { background: var(--blue-lo);  color: var(--blue-lg); border: 1px solid rgba(30,107,245,0.35); }
+  .badge.wip    { background: var(--gold-lo);  color: var(--gold);  border: 1px solid rgba(245,158,11,0.35); }
+  .badge.planned { background: rgba(139,92,246,0.12); color: var(--purple-lg); border: 1px solid rgba(139,92,246,0.3); }
+  .badge.v      { background: var(--cyan-lo);  color: var(--cyan);  border: 1px solid rgba(34,211,238,0.35); }
+
+  /* ═══════════════════════════════════════
+     CARD SYSTEM
+  ═══════════════════════════════════════ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .card-grid.two  { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.four { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 15px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    opacity: 0.55;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card .icon {
+    font-size: 1.45em;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .card h4 {
+    margin: 0 0 5px;
+    font-size: 0.84em;
+    font-weight: 700;
+    color: var(--t1);
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 0.71em;
+    color: var(--t2);
+    line-height: 1.46;
+    margin: 0;
+  }
+
+  /* accent variants */
+  .card.blue   { border-color: rgba(30,107,245,0.28);  background: var(--blue-lo); }
+  .card.purple { border-color: rgba(139,92,246,0.28); background: var(--purple-lo); }
+  .card.cyan   { border-color: rgba(34,211,238,0.28); background: var(--cyan-lo); }
+  .card.gold   { border-color: rgba(245,158,11,0.28);  background: var(--gold-lo); }
+  .card.green  { border-color: rgba(16,185,129,0.28);  background: var(--green-lo); }
+
+  .card.blue::after   { background: var(--blue); }
+  .card.purple::after { background: var(--purple); }
+  .card.cyan::after   { background: var(--cyan); }
+  .card.gold::after   { background: var(--gold); }
+  .card.green::after  { background: var(--green); }
+
+  /* ═══════════════════════════════════════
+     STAT ROW
+  ═══════════════════════════════════════ */
+  .stat-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin: 18px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 18px 12px;
+    position: relative;
+  }
+
+  .stat + .stat { border-left: 1px solid var(--border); }
+
+  .stat .num {
+    font-size: 2.5em;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--blue-lg) 0%, var(--cyan-lg) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat .lbl {
+    font-size: 0.62em;
+    color: var(--t3);
+    margin-top: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  /* ═══════════════════════════════════════
+     CALLOUT
+  ═══════════════════════════════════════ */
+  .callout {
+    background: var(--blue-lo);
+    border: 1px solid rgba(30,107,245,0.28);
+    border-radius: 10px;
+    padding: 12px 17px;
+    font-size: 0.77em;
+    margin-top: 14px;
+    color: var(--t1);
+    line-height: 1.5;
+  }
+  .callout.purple { background: var(--purple-lo); border-color: rgba(139,92,246,0.28); }
+  .callout.green  { background: var(--green-lo);  border-color: rgba(16,185,129,0.28); }
+  .callout.cyan   { background: var(--cyan-lo);   border-color: rgba(34,211,238,0.28); }
+  .callout.gold   { background: var(--gold-lo);   border-color: rgba(245,158,11,0.28); }
+
+  /* ═══════════════════════════════════════
+     LIST
+  ═══════════════════════════════════════ */
+  .feat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feat-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 7px;
+    padding: 9px 14px;
+    font-size: 0.76em;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--t1);
+    line-height: 1.45;
+  }
+
+  .feat-list li.purple { border-left-color: var(--purple); }
+  .feat-list li.cyan   { border-left-color: var(--cyan); }
+  .feat-list li.gold   { border-left-color: var(--gold); }
+  .feat-list li.green  { border-left-color: var(--green); }
+
+  .feat-list li .em {
+    font-weight: 700;
+    color: var(--blue-lg);
+  }
+  .feat-list li.purple .em { color: var(--purple-lg); }
+  .feat-list li.cyan   .em { color: var(--cyan-lg); }
+  .feat-list li.gold   .em { color: var(--gold); }
+  .feat-list li.green  .em { color: var(--green); }
+
+  .feat-list li sub {
+    font-size: 0.8em;
+    color: var(--t3);
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ═══════════════════════════════════════
+     ROADMAP TIMELINE
+  ═══════════════════════════════════════ */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .tl-ver {
+    font-size: 0.78em;
+    font-weight: 800;
+    color: var(--t1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 10px;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+
+  .tl-ver.active {
+    background: var(--blue-lo);
+    border-color: rgba(30,107,245,0.4);
+    color: var(--blue-lg);
+  }
+
+  .tl-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .tl-title {
+    font-size: 0.83em;
+    font-weight: 700;
+    color: var(--t1);
+  }
+
+  .tl-desc {
+    font-size: 0.68em;
+    color: var(--t2);
+    line-height: 1.4;
+  }
+
+  /* ═══════════════════════════════════════
+     CODE BLOCK
+  ═══════════════════════════════════════ */
+  .code-block {
+    background: rgba(0,0,0,0.45);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.68em;
+    color: var(--cyan-lg);
+    line-height: 1.6;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .code-block .cm { color: var(--t3); }
+  .code-block .kw { color: #f97316; }
+  .code-block .fn { color: var(--blue-lg); }
+  .code-block .st { color: #86efac; }
+  .code-block .nu { color: var(--gold); }
+
+  /* ═══════════════════════════════════════
+     MOCKUP (wireframe style)
+  ═══════════════════════════════════════ */
+  .mockup {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--border-hi);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 10px;
+    font-size: 0.7em;
+  }
+
+  .mockup-bar {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+    color: var(--t2);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--blue-lo);
+    border: 1px solid rgba(30,107,245,0.3);
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    color: var(--blue-lg);
+    font-weight: 600;
+  }
+
+  .chip.purple { background: var(--purple-lo); border-color: rgba(139,92,246,0.3); color: var(--purple-lg); }
+  .chip.cyan   { background: var(--cyan-lo);   border-color: rgba(34,211,238,0.3);  color: var(--cyan-lg); }
+  .chip.gold   { background: var(--gold-lo);   border-color: rgba(245,158,11,0.3);  color: var(--gold); }
+
+  .chip .x {
+    font-size: 0.8em;
+    opacity: 0.7;
+    cursor: pointer;
+    font-weight: 400;
+  }
+
+  /* route card mockup */
+  .route-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+
+  .route-card .rc-city {
+    font-size: 0.68em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--t3);
+    margin-bottom: 3px;
+  }
+
+  .route-card .rc-route {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--t1);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .route-card .rc-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 0.72em;
+    color: var(--t2);
+    margin-bottom: 8px;
+  }
+
+  .route-card .rc-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .route-card .rc-price .amount {
+    font-size: 1.25em;
+    font-weight: 900;
+    color: var(--blue-lg);
+  }
+
+  .route-card .rc-price .label {
+    font-size: 0.68em;
+    color: var(--t3);
+  }
+
+  /* compare bar mockup */
+  .compare-bar {
+    position: relative;
+    background: rgba(15,17,21,0.95);
+    border: 1px solid var(--border-hi);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.73em;
+    margin-top: 10px;
+  }
+
+  .compare-bar .cmp-slot {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: var(--t2);
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .compare-bar .cmp-slot.filled {
+    background: var(--blue-lo);
+    border-color: rgba(30,107,245,0.3);
+    color: var(--t1);
+  }
+
+  .compare-bar .cmp-btn {
+    margin-left: auto;
+    background: var(--blue);
+    border-radius: 6px;
+    padding: 5px 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+
+  /* ═══════════════════════════════════════
+     COVER SPECIFICS
+  ═══════════════════════════════════════ */
+  .cover-version-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 6px;
+  }
+
+  .ver-pill {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    border: 1px solid;
+  }
+
+  .ver-pill.delivered { background: var(--green-lo);  color: var(--green); border-color: rgba(16,185,129,0.35); }
+  .ver-pill.next1     { background: var(--blue-lo);   color: var(--blue-lg); border-color: rgba(30,107,245,0.35); }
+  .ver-pill.next2     { background: var(--purple-lo); color: var(--purple-lg); border-color: rgba(139,92,246,0.35); }
+  .ver-pill.next3     { background: var(--gold-lo);   color: var(--gold);  border-color: rgba(245,158,11,0.35); }
+  .ver-pill.future    { background: var(--cyan-lo);   color: var(--cyan);  border-color: rgba(34,211,238,0.35); }
+
+  /* ═══════════════════════════════════════
+     REVEAL BASE OVERRIDES
+  ═══════════════════════════════════════ */
+  .reveal .progress span { background: var(--blue); }
+  .reveal .controls button { color: var(--blue); }
+  .reveal .slide-number { font-size: 0.7em; color: var(--t3); }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 1: COVER
+  ═══════════════════════════════════════ -->
+  <section class="blue-glow">
+    <h3 style="color:var(--blue-lg); font-size:0.78em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px;">
+      MHM Rentiva · 2026-04-15
+    </h3>
+
+    <h1>Sıradaki Durağımız</h1>
+    <p style="font-size:0.98em; color:var(--t2); margin-top:10px; max-width:620px; line-height:1.55;">
+      v4.26.6 bugün teslim edildi. Bundan sonra ne geliyor?<br>
+      Üç sürümün planı, kararları ve tasarımları.
+    </p>
+
+    <div class="cover-version-row">
+      <span class="ver-pill delivered">✅ v4.26.6 — Teslim Edildi</span>
+      <span class="ver-pill next1">🔵 v4.26.8 — Arama UX</span>
+      <span class="ver-pill next2">🟣 v4.26.9 — Popüler Rotalar</span>
+      <span class="ver-pill next3">🟡 v4.27.0 — Bayi Rapor Sistemi</span>
+    </div>
+
+    <div class="stat-row" style="margin-top:22px;">
+      <div class="stat">
+        <div class="num">720</div>
+        <div class="lbl">PHPUnit Test</div>
+      </div>
+      <div class="stat">
+        <div class="num">23</div>
+        <div class="lbl">Aktif Shortcode</div>
+      </div>
+      <div class="stat">
+        <div class="num">19</div>
+        <div class="lbl">Gutenberg Block</div>
+      </div>
+      <div class="stat">
+        <div class="num">20</div>
+        <div class="lbl">Elementor Widget</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 2: v4.26.6 recap
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">✅</span>
+      v4.26.6 — Bugün Teslim
+      <span class="badge v">patch</span>
+    </h2>
+
+    <div class="card-grid">
+      <div class="card blue">
+        <span class="icon">💰</span>
+        <h4>Fiyat Sıralaması Düzeltmesi</h4>
+        <p>named meta_query clause → <strong>meta_key + meta_value_num</strong>. ASC/DESC artık doğru çalışıyor.</p>
+      </div>
+      <div class="card cyan">
+        <span class="icon">⚡</span>
+        <h4>Önbellek Mantığı Onarıldı</h4>
+        <p>Her zaman devre dışıydı. Üretimde aktif, yalnızca debug modda kapalı.</p>
+      </div>
+      <div class="card purple">
+        <span class="icon">🧹</span>
+        <h4>9 Blok Sıralama Enjeksiyonu</h4>
+        <p>Bloklar CAM pipeline'ın sort_by'ını sessizce geçersiz kılıyordu. Kaldırıldı.</p>
+      </div>
+      <div class="card green">
+        <span class="icon">🔗</span>
+        <h4>view_all_url — Yeni Özellik</h4>
+        <p>Araç Izgarası altbilgisinde "Tümünü Gör" butonu. Shortcode + Block + Elementor.</p>
+      </div>
+      <div class="card gold">
+        <span class="icon">🏷️</span>
+        <h4>Servis Tipi Rozeti</h4>
+        <p>Araç kartında Transfer Only / Transfer + Rental badge'i.</p>
+      </div>
+      <div class="card blue">
+        <span class="icon">👁️</span>
+        <h4>Swiper Flash Giderildi</h4>
+        <p>opacity:0 + :not(.swiper-initialized) → sıfır CLS, 0.2s fade-in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 3: ROADMAP OVERVIEW
+  ═══════════════════════════════════════ -->
+  <section class="blue-glow">
+    <h2>
+      <span class="slide-icon">🗺️</span>
+      Yol Haritası — Sıradaki 3 Sürüm
+    </h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-ver active">v4.26.8</div>
+        <div class="tl-body">
+          <div class="tl-title">Arama Sonuçları UX İyileştirmeleri</div>
+          <div class="tl-desc">URL pushState · Aktif filtre chip'leri · Karşılaştırma çubuğu · Mobil filtre drawer'ı</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-ver" style="background:var(--purple-lo); border-color:rgba(139,92,246,0.35); color:var(--purple-lg);">v4.26.9</div>
+        <div class="tl-body">
+          <div class="tl-title">Popüler Transfer Rotaları Shortcode</div>
+          <div class="tl-desc">Ana sayfada İstanbul Havalimanı → Taksim gibi A→B rota kartları · Lite + Pro · Block + Elementor</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-ver" style="background:var(--gold-lo); border-color:rgba(245,158,11,0.35); color:var(--gold);">v4.27.0</div>
+        <div class="tl-body">
+          <div class="tl-title">Bayi Rapor / İtiraz Sistemi</div>
+          <div class="tl-desc">Rezervasyon sorunu · Ceza itirazı · Araç aksiyonu itirazı · Admin çözüm paneli · E-posta bildirimleri</div>
+        </div>
+      </div>
+      <div class="tl-item" style="opacity:0.45;">
+        <div class="tl-ver" style="font-size:0.7em;">v4.26.7<br><span style="font-size:0.8em; color:var(--t3);">Atlandı</span></div>
+        <div class="tl-body">
+          <div class="tl-desc">4.26.8 fix'leri daha kapsamlıydı — doğrudan 4.26.8 oldu.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <strong>v4.26.8 backlog'dan</strong> gelenler: Swiper loop modu düzeltmesi ve FeaturedVehicles için view_all_url da bu sürümde planlanıyor.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 4: v4.26.8 OVERVIEW
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">🔍</span>
+      v4.26.8 — Arama UX
+      <span class="badge new">Sıradaki</span>
+    </h2>
+
+    <div class="card-grid two" style="gap:14px;">
+      <div class="card blue">
+        <span class="icon">🔗</span>
+        <h4>1. URL State (history.replaceState)</h4>
+        <p>Filtreler URL'e yansıyor. Paylaşılabilir arama linki. Sayfa yenilemede durum korunuyor.</p>
+      </div>
+      <div class="card cyan">
+        <span class="icon">🏷️</span>
+        <h4>2. Aktif Filtre Chip'leri</h4>
+        <p>Her aktif filtre kaldırılabilir chip olarak görünüyor. "×" ile tek tek silinebilir.</p>
+      </div>
+      <div class="card purple">
+        <span class="icon">⚖️</span>
+        <h4>3. Karşılaştırma Floating Bar</h4>
+        <p>2-4 araç seçip karşılaştır. Sayfa altında sabit çubuk. "Karşılaştır" ile sonuç sayfası.</p>
+      </div>
+      <div class="card gold">
+        <span class="icon">📱</span>
+        <h4>4. Mobil Filtre Drawer</h4>
+        <p>Mobilde filtreler sol kenardan açılan drawer/panel. Overlay + kaydırma. Uygula / Temizle butonları.</p>
+      </div>
+    </div>
+
+    <div class="callout cyan" style="margin-top:14px; font-size:0.73em;">
+      <strong>Ayrıca bu sürümde:</strong> FeaturedVehicles view_all_url (VehiclesGrid'deki aynı pattern) · Swiper loop modu düzeltmesi (limit &lt; columns×2 koşulu)
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 5: URL STATE
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">🔗</span>
+      v4.26.8 · URL State
+    </h2>
+
+    <div class="card-grid two" style="gap:14px; align-items:start;">
+      <div>
+        <ul class="feat-list">
+          <li class="blue">
+            <span>🔴</span>
+            <span><span class="em">Şu an:</span> Kullanıcı BMW + İstanbul + Fiyat artan filtreler, linki paylaşır — karşı taraf tüm araçları görür.
+            <sub>Filtreler URL'e hiç yansımıyor.</sub></span>
+          </li>
+          <li class="blue">
+            <span>🟢</span>
+            <span><span class="em">v4.26.8:</span> Her filtre ve sıralama değişikliği URL'e yazılır.
+            <sub>Sayfayı yenile → aynı durum. Link paylaş → aynı sonuç.</sub></span>
+          </li>
+          <li class="cyan">
+            <span>📌</span>
+            <span><span class="em">replaceState:</span> Her değişiklik yeni history entry oluşturmaz — geri tuşu çalışmaya devam eder.
+            <sub>pushState değil; tek entry, sürekli güncellenen URL.</sub></span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:0.65em; color:var(--t3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">Örnek URL</div>
+        <div class="mockup-bar" style="font-size:0.78em; word-break:break-all; color:var(--cyan-lg);">
+          /araclar/?brand=BMW&location=istanbul&orderby=price&order=ASC
+        </div>
+        <div class="code-block">
+<span class="cm">// search-results.js — reloadResults() içinde</span>
+<span class="kw">const</span> params = <span class="kw">new</span> <span class="fn">URLSearchParams</span>(
+  <span class="fn">getCurrentFilters</span>($scope)
+);
+history.<span class="fn">replaceState</span>(
+  <span class="kw">null</span>, <span class="st">''</span>,
+  <span class="st">'?'</span> + params.<span class="fn">toString</span>()
+);
+        </div>
+        <div class="callout" style="margin-top:10px; font-size:0.7em;">
+          Sayfa yüklenişinde URL params → form elemanlarına yansıtılıyor (PHP zaten yapıyor, AJAX re-render sonrası JS de yapacak).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 6: FILTER CHIPS
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">🏷️</span>
+      v4.26.8 · Aktif Filtre Chip'leri
+    </h2>
+
+    <div style="font-size:0.75em; color:var(--t2); margin-bottom:14px;">
+      Aktif filtreler artık görünür ve tek tek kaldırılabilir — "Tüm Filtreleri Temizle" sayacına ek olarak.
+    </div>
+
+    <!-- mockup -->
+    <div class="mockup">
+      <div style="font-size:0.72em; color:var(--t3); margin-bottom:8px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;">Arama Sonuçları — Aktif Filtreler</div>
+
+      <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:10px;">
+        <span style="font-size:0.75em; color:var(--t3); font-weight:600;">Aktif:</span>
+        <span class="chip">BMW <span class="x">×</span></span>
+        <span class="chip purple">İstanbul <span class="x">×</span></span>
+        <span class="chip cyan">Fiyat: Artan <span class="x">×</span></span>
+        <span class="chip gold">SUV <span class="x">×</span></span>
+        <span style="font-size:0.72em; color:var(--t3); margin-left:4px; cursor:pointer; text-decoration:underline;">Tümünü Temizle</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.8em;">
+          <div style="color:var(--t3); font-size:0.75em;">BMW X5</div>
+          <div style="color:var(--t1); font-weight:700;">₺3.500/gün</div>
+        </div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.8em;">
+          <div style="color:var(--t3); font-size:0.75em;">BMW 5 Serisi</div>
+          <div style="color:var(--t1); font-weight:700;">₺2.800/gün</div>
+        </div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:8px; font-size:0.8em; opacity:0.4;">
+          <div style="color:var(--t3); font-size:0.75em;">+ 3 daha...</div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="feat-list" style="margin-top:12px; gap:6px;">
+      <li class="blue">
+        <span>📍</span>
+        <span>Her chip, o filtreyi URL'den <span class="em">silip AJAX'ı yeniden tetikler</span> — tam sayfa yenileme yok.</span>
+      </li>
+      <li class="cyan">
+        <span>🔢</span>
+        <span>Chip yoksa satır hiç gösterilmez. <span class="em">Filtre yoksa gürültü yok.</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 7: COMPARE BAR + MOBILE DRAWER
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">⚖️</span>
+      v4.26.8 · Karşılaştırma + Mobil Drawer
+    </h2>
+
+    <div class="card-grid two" style="gap:14px; align-items:start;">
+      <div>
+        <div style="font-size:0.75em; font-weight:700; color:var(--purple-lg); margin-bottom:8px;">⚖️ Karşılaştırma Floating Bar</div>
+        <ul class="feat-list" style="gap:6px;">
+          <li class="purple"><span>🖱️</span><span>Her araç kartında "Karşılaştır" checkbox'ı — seçince sabit çubuk beliriyor.</span></li>
+          <li class="purple"><span>🔢</span><span>2–4 araç seçilince "Karşılaştır" aktif olur.</span></li>
+          <li class="purple"><span>📊</span><span>Karşılaştırma sayfasına yönlendirir (mevcut <code style="font-size:0.9em; background:var(--surface); padding:1px 5px; border-radius:3px;">/karsilastir/</code>).</span></li>
+        </ul>
+        <div class="compare-bar">
+          <div class="cmp-slot filled">🚗 BMW X5 <span style="opacity:0.5; font-size:0.8em;">×</span></div>
+          <div class="cmp-slot filled">🚗 Mercedes GLE <span style="opacity:0.5; font-size:0.8em;">×</span></div>
+          <div class="cmp-slot">+ Araç Ekle</div>
+          <div class="cmp-btn">Karşılaştır →</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.75em; font-weight:700; color:var(--gold); margin-bottom:8px;">📱 Mobil Filtre Drawer</div>
+        <ul class="feat-list" style="gap:6px;">
+          <li class="gold"><span>☰</span><span>Mobilde "Filtrele" butonu — sol kenardan drawer açılır.</span></li>
+          <li class="gold"><span>🖤</span><span>Overlay + body scroll lock + focus trap.</span></li>
+          <li class="gold"><span>✅</span><span>Drawer içinde "Uygula" ve "Temizle" butonları.</span></li>
+        </ul>
+        <div class="mockup" style="margin-top:10px; display:flex; gap:10px; align-items:stretch;">
+          <!-- phone mockup simplified -->
+          <div style="background:var(--surface-2); border:1px solid var(--border-hi); border-radius:8px; padding:8px; min-width:90px; font-size:0.7em;">
+            <div style="background:var(--blue); color:#fff; border-radius:4px; padding:3px 6px; font-size:0.8em; margin-bottom:6px; text-align:center;">☰ Filtrele</div>
+            <div style="background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:5px; color:var(--t2); font-size:0.75em; margin-bottom:4px;">Araç 1</div>
+            <div style="background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:5px; color:var(--t2); font-size:0.75em;">Araç 2</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.5); border:1px solid var(--border-hi); border-radius:8px; padding:8px; flex:1; font-size:0.7em;">
+            <div style="color:var(--t3); font-size:0.7em; margin-bottom:5px;">← Filtreler</div>
+            <div style="background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:4px 7px; color:var(--t2); font-size:0.8em; margin-bottom:4px;">Marka</div>
+            <div style="background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:4px 7px; color:var(--t2); font-size:0.8em; margin-bottom:8px;">Lokasyon</div>
+            <div style="display:flex; gap:5px;">
+              <div style="background:var(--blue); color:#fff; border-radius:4px; padding:3px 8px; font-size:0.8em; font-weight:700;">Uygula</div>
+              <div style="background:var(--surface); border:1px solid var(--border); color:var(--t2); border-radius:4px; padding:3px 8px; font-size:0.8em;">Temizle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 8: v4.26.9 OVERVIEW
+  ═══════════════════════════════════════ -->
+  <section class="purple-glow">
+    <h2>
+      <span class="slide-icon">🗺️</span>
+      v4.26.9 — Popüler Transfer Rotaları
+      <span class="badge planned">Planlandı</span>
+    </h2>
+
+    <div style="font-size:0.8em; color:var(--t2); margin-bottom:16px; max-width:680px;">
+      Yeni shortcode: <code style="color:var(--cyan-lg); background:var(--surface); padding:1px 6px; border-radius:4px;">[rentiva_transfer_routes]</code> — Ana sayfada
+      <strong style="color:var(--t1);">A→B rota kartları</strong>, süre, mesafe ve başlangıç fiyatıyla. "Biz transfer yapıyoruz" mesajını landing page'de güçlü veriyor.
+    </div>
+
+    <div class="card-grid" style="gap:12px;">
+      <!-- sample route card 1 -->
+      <div class="route-card">
+        <div class="rc-city">İSTANBUL ✈️</div>
+        <div class="rc-route">İstanbul Havalimanı → Taksim</div>
+        <div class="rc-meta">
+          <span>⏱ ~45 dk</span>
+          <span>📍 ~36 km</span>
+        </div>
+        <div class="rc-price">
+          <span class="amount">₺850</span>
+          <span class="label">başlayan fiyatlarla</span>
+        </div>
+      </div>
+
+      <!-- sample route card 2 -->
+      <div class="route-card">
+        <div class="rc-city">İSTANBUL 🚢</div>
+        <div class="rc-route">Sabiha Gökçen → Kadıköy</div>
+        <div class="rc-meta">
+          <span>⏱ ~30 dk</span>
+          <span>📍 ~12 km</span>
+        </div>
+        <div class="rc-price">
+          <span class="amount">₺650</span>
+          <span class="label">başlayan fiyatlarla</span>
+        </div>
+      </div>
+
+      <!-- + more indicator -->
+      <div class="route-card" style="display:flex; align-items:center; justify-content:center; opacity:0.45; border-style:dashed;">
+        <div style="text-align:center; font-size:0.8em; color:var(--t2);">
+          <div style="font-size:1.8em; margin-bottom:4px;">+</div>
+          <div>Tümünü Gör →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout purple" style="margin-top:14px; font-size:0.73em;">
+      <strong>Mevcut altyapıya bağlanıyor:</strong> <code style="background:var(--surface); padding:1px 5px; border-radius:3px;">rentiva_transfer_routes</code> + <code style="background:var(--surface); padding:1px 5px; border-radius:3px;">rentiva_transfer_locations</code> tabloları zaten var.
+      Yeni: <code style="background:var(--surface); padding:1px 5px; border-radius:3px;">is_featured</code> kolonu · <code style="background:var(--surface); padding:1px 5px; border-radius:3px;">TransferRouteProvider</code> repository · Block + Elementor widget
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 9: v4.26.9 DETAILS
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">🗺️</span>
+      v4.26.9 · Kart Anatomisi &amp; Kararlar
+    </h2>
+
+    <div class="card-grid two" style="gap:14px; align-items:start;">
+      <div>
+        <div style="font-size:0.7em; color:var(--t3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Kart Alanları → Veri Kaynağı</div>
+        <ul class="feat-list" style="gap:5px;">
+          <li class="purple"><span>🏙️</span><span><span class="em">Şehir + İkon</span> → <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">origin.city + origin.type</code><sub>airport ✈️, train 🚆, hotel 🏨, marina ⛵</sub></span></li>
+          <li class="purple"><span>🔤</span><span><span class="em">Başlık</span> → <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">origin.name → destination.name</code></span></li>
+          <li class="purple"><span>⏱️</span><span><span class="em">Süre</span> → <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">route.duration_min</code><sub>"Ortalama ~45dk · Trafiğe göre değişebilir"</sub></span></li>
+          <li class="purple"><span>📍</span><span><span class="em">Mesafe</span> → <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">route.distance_km</code></span></li>
+          <li class="purple"><span>💰</span><span><span class="em">Fiyat</span> → fixed: <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">base_price</code>, calculated: <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">min_price</code></span></li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-size:0.7em; color:var(--t3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Önemli Kararlar (2026-04-15)</div>
+        <ul class="feat-list" style="gap:5px;">
+          <li class="cyan"><span>✅</span><span><span class="em">Light theme</span> — Beyaz kart, ince gri border, mavi accent.</span></li>
+          <li class="cyan"><span>✅</span><span><span class="em">Lite + Pro</span> — Lite max 3 rota (natural limit, notice yok).</span></li>
+          <li class="cyan"><span>✅</span><span><span class="em">is_featured</span> kolonu — Admin "Vitrine Koy" checkbox'ı. <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">dbDelta</code> otomatik migration.</span></li>
+          <li class="cyan"><span>✅</span><span><span class="em">"Tümünü Gör"</span> → transfer arama sayfasına yönlendirir.</span></li>
+          <li class="gold"><span>⏸️</span><span><span class="em">Araç tipi etiketi YOK</span> — Lokasyon odaklı deneyim, araç listesi değil.</span></li>
+          <li class="gold"><span>⏸️</span><span><span class="em">WC Currency Switcher ertelendi</span> — v4.27.x'e bırakıldı.</span></li>
+        </ul>
+        <div style="margin-top:10px; font-size:0.68em; color:var(--t3); background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:7px 10px;">
+          📦 ~14 dosya · Tahmini ~10 saat
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 10: v4.27.0 OVERVIEW
+  ═══════════════════════════════════════ -->
+  <section class="gold-glow">
+    <h2>
+      <span class="slide-icon">📋</span>
+      v4.27.0 — Bayi Rapor &amp; İtiraz Sistemi
+      <span class="badge planned">Planlandı</span>
+    </h2>
+
+    <div style="font-size:0.79em; color:var(--t2); margin-bottom:16px; max-width:680px;">
+      Bayilerin rezervasyon sorunlarını, ceza itirazlarını ve araç aksiyonlarını yöneticiye iletmesi için yapılandırılmış tek bir altyapı.
+    </div>
+
+    <div class="card-grid" style="gap:12px;">
+      <div class="card gold">
+        <span class="icon">📝</span>
+        <h4>Rezervasyon Sorun Bildirimi</h4>
+        <p>Müşteri gelmedi, araç hasarı, uygunsuz iptal. Onayla/Reddet kaldırıldı — bu kanal onun yerine.</p>
+      </div>
+      <div class="card gold">
+        <span class="icon">⚖️</span>
+        <h4>Ceza / Puan İtirazı</h4>
+        <p>Otomatik ceza veya güvenilirlik puanı düşüşüne itiraz. "Haksız işlem" kanalı.</p>
+      </div>
+      <div class="card gold">
+        <span class="icon">🚗</span>
+        <h4>Araç Aksiyonu İtirazı</h4>
+        <p>Otomatik duraklatma / çekme kararına itiraz. suspend_pending_report hook entegrasyonu.</p>
+      </div>
+    </div>
+
+    <div class="card-grid two" style="margin-top:12px; gap:12px;">
+      <div class="card">
+        <h4>🖥️ Admin Paneli</h4>
+        <p>Rapor listesi · Detay görünümü · Çözüm (kabul/ret/eskalasyon) · Durum takibi</p>
+      </div>
+      <div class="card">
+        <h4>📧 E-posta Bildirimleri</h4>
+        <p>Bayi → Admin (yeni rapor) + Admin cevabı → Bayi. i18n dahil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 11: v4.27.0 DETAILS
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">📋</span>
+      v4.27.0 · Teknik Altyapı
+    </h2>
+
+    <div class="card-grid two" style="gap:14px; align-items:start;">
+      <div>
+        <div style="font-size:0.7em; color:var(--t3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Yeni Veritabanı Tablosu</div>
+        <div class="code-block" style="margin-top:0;">
+<span class="cm">-- wp_mhm_rentiva_vendor_reports</span>
+id              bigint  AUTO_INCREMENT
+vendor_id       bigint  → user.ID
+report_type     enum    <span class="st">'booking'|'penalty'|'vehicle'|'general'</span>
+context_type    enum    <span class="st">'booking'|'penalty'|'vehicle'|NULL</span>
+context_id      bigint  <span class="cm">-- ilgili kayıt ID'si</span>
+subject         varchar(<span class="nu">200</span>)
+body            text
+status          enum    <span class="st">'open'|'reviewing'|'resolved'|'rejected'</span>
+admin_note      text
+resolved_by     bigint  → user.ID
+created_at      datetime
+updated_at      datetime
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.7em; color:var(--t3); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Kapsam</div>
+        <ul class="feat-list" style="gap:5px;">
+          <li class="gold"><span>✅</span><span>Custom tablo + <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">dbDelta</code> migration</span></li>
+          <li class="gold"><span>✅</span><span>Repository + Service + AJAX handler</span></li>
+          <li class="gold"><span>✅</span><span>Bayi panel modal (paylaşılan JS — her bağlamdan tetiklenebilir)</span></li>
+          <li class="gold"><span>✅</span><span>Güvenilirlik puan sistemine <code style="font-size:0.85em; background:var(--surface); padding:1px 4px; border-radius:3px;">suspend_pending_report</code> hook entegrasyonu</span></li>
+          <li class="gold"><span>✅</span><span>Min. 12 PHPUnit test</span></li>
+          <li class="gold"><span>🔴</span><span>Dosya eki upload, chat-tarzı thread — <strong>kapsam dışı</strong></span></li>
+        </ul>
+        <div class="callout gold" style="margin-top:10px; font-size:0.7em;">
+          Tahmini efor: <strong>3–4 saat</strong> · 8-10 yeni dosya
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 12: BACKLOG ITEMS
+  ═══════════════════════════════════════ -->
+  <section>
+    <h2>
+      <span class="slide-icon">📌</span>
+      Backlog — Sıraya Giren Küçükler
+    </h2>
+
+    <div style="font-size:0.76em; color:var(--t2); margin-bottom:14px;">
+      Bu maddeler aktif planlama dışında; boşluk buldukça ilgili sürüme girebilir.
+    </div>
+
+    <div class="card-grid" style="gap:10px;">
+      <div class="card">
+        <span class="icon">🔄</span>
+        <h4>Swiper Loop Modu</h4>
+        <p><code>loop: limit > columns * 2</code> koşulu. Az araçla Swiper'ın kırılmasını önler.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🔗</span>
+        <h4>FeaturedVehicles view_all</h4>
+        <p>VehiclesGrid'deki view_all_url / view_all_text pattern'ını Öne Çıkan Araçlar'a taşı.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🔎</span>
+        <h4>Gutenberg View All Test</h4>
+        <p>Blok editör JS kodu var, tarayıcıda canlı ortamda doğrulanmadı.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🔀</span>
+        <h4>Farklı Lokasyona Bırak</h4>
+        <p>Transfer / kiralama formlarında farklı teslim noktası toggle'ı.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📋</span>
+        <h4>default_tab Attribute</h4>
+        <p>Unified Search için varsayılan aktif sekme seçimi (Kiralık / Transfer).</p>
+      </div>
+      <div class="card">
+        <span class="icon">✅</span>
+        <h4>Transfer Form Validasyon</h4>
+        <p>Inline özel hata mesajları — HTML5 default validasyonun yetersiz kaldığı alanlar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SLIDE 13: OUTRO
+  ═══════════════════════════════════════ -->
+  <section class="blue-glow">
+    <h3 style="color:var(--blue-lg); font-size:0.78em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px;">
+      MHM Rentiva · Sürüm Yol Haritası
+    </h3>
+
+    <h1 style="font-size:2.5em;">Her sürüm bir parça daha güçlü.</h1>
+
+    <p style="font-size:0.9em; color:var(--t2); margin-top:10px; max-width:600px; line-height:1.6;">
+      Bugün: <strong style="color:var(--t1);">v4.26.6</strong> teslim.<br>
+      Sırada: Arama UX → Popüler Rotalar → Bayi Rapor Sistemi.
+    </p>
+
+    <div class="stat-row" style="margin-top:24px;">
+      <div class="stat">
+        <div class="num" style="font-size:1.8em;">v4.26.8</div>
+        <div class="lbl">Arama UX · URL State + Chip + Compare + Drawer</div>
+      </div>
+      <div class="stat">
+        <div class="num" style="font-size:1.8em;">v4.26.9</div>
+        <div class="lbl">Popüler Rotalar Shortcode · A→B Rota Kartları</div>
+      </div>
+      <div class="stat">
+        <div class="num" style="font-size:1.8em;">v4.27.0</div>
+        <div class="lbl">Bayi Rapor Sistemi · İtiraz Mekanizması</div>
+      </div>
+    </div>
+
+    <div style="margin-top:22px; font-size:0.7em; color:var(--t3);">
+      GitHub: MaxHandMade/mhm-rentiva &nbsp;·&nbsp; 720 test, her sürümde artıyor
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    autoPlayMedia: false,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+  });
+</script>
+</body>
+</html>

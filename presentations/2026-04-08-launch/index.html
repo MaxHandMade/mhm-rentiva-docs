@@ -3,382 +3,1011 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MHM Rentiva — Lansman Sunumu</title>
+  <title>MHM Rentiva v4.26 — Lansman Sunumu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
   <style>
-    :root {
-      --accent: #6c63ff;
-      --accent2: #00d4aa;
-      --warn: #ff6b6b;
-      --pro: #f7b731;
-    }
+  /* ══════════════════════════════════════
+     DESIGN TOKENS
+  ══════════════════════════════════════ */
+  :root {
+    --bg:          #07070f;
+    --surface:     rgba(255,255,255,0.042);
+    --surface-2:   rgba(255,255,255,0.072);
+    --border:      rgba(255,255,255,0.08);
+    --border-hi:   rgba(255,255,255,0.16);
+    --purple:      #8b5cf6;
+    --purple-lo:   rgba(139,92,246,0.18);
+    --purple-lg:   #a78bfa;
+    --cyan:        #22d3ee;
+    --cyan-lo:     rgba(34,211,238,0.13);
+    --cyan-lg:     #67e8f9;
+    --gold:        #f59e0b;
+    --gold-lo:     rgba(245,158,11,0.15);
+    --green:       #10b981;
+    --green-lo:    rgba(16,185,129,0.13);
+    --red:         #f87171;
+    --red-lo:      rgba(248,113,113,0.13);
+    --t1:          #f8fafc;
+    --t2:          #94a3b8;
+    --t3:          #475569;
+  }
 
-    .reveal { font-family: 'Segoe UI', system-ui, sans-serif; }
+  /* ══════════════════════════════════════
+     BASE
+  ══════════════════════════════════════ */
+  .reveal {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+  }
 
-    /* Slayt başlıkları */
-    .reveal h1 { font-size: 2.2em; color: var(--accent2); text-transform: none; }
-    .reveal h2 { font-size: 1.7em; color: var(--accent2); text-transform: none; border-bottom: 2px solid var(--accent); padding-bottom: 12px; }
-    .reveal h3 { font-size: 1.2em; color: #ccc; text-transform: none; }
+  .reveal .slides section {
+    text-align: left;
+    padding: 36px 48px 28px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    /* dot-grid background */
+    background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
 
-    /* Badge */
-    .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.6em; font-weight:700; vertical-align:middle; margin-left:8px; }
-    .badge.pro  { background:var(--pro); color:#333; }
-    .badge.free { background:var(--accent2); color:#111; }
-    .badge.new  { background:var(--warn); color:#fff; }
+  /* special bg overrides on cover/stats/outro */
+  .reveal .slides section.dark-glow {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(139,92,246,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(34,211,238,0.12) 0%, transparent 60%),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: auto, auto, 28px 28px;
+  }
 
-    /* Kart grid */
-    .card-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:20px; }
-    .card-grid.two { grid-template-columns: repeat(2,1fr); }
-    .card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: left;
-    }
-    .card .icon { font-size:2em; margin-bottom:8px; display:block; }
-    .card h4 { margin:0 0 6px; font-size:0.95em; color: var(--accent2); }
-    .card p  { margin:0; font-size:0.75em; color:#aaa; line-height:1.5; }
+  .reveal .slides section.gold-glow {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(245,158,11,0.14) 0%, transparent 70%),
+      radial-gradient(rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: auto, 28px 28px;
+  }
 
-    /* Menü listesi */
-    .menu-list { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .menu-list li {
-      background: rgba(255,255,255,0.06);
-      border-left: 3px solid var(--accent);
-      border-radius:6px;
-      padding: 10px 14px;
-      font-size: 0.8em;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .menu-list li .num { color:var(--accent); font-weight:700; min-width:22px; }
+  /* ══════════════════════════════════════
+     TYPOGRAPHY
+  ══════════════════════════════════════ */
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal p, .reveal li {
+    font-family: 'Inter', sans-serif;
+    text-transform: none;
+    letter-spacing: -0.015em;
+  }
 
-    /* Büyük stat sayıları */
-    .stat-row { display:flex; justify-content:center; gap:50px; margin:30px 0; }
-    .stat { text-align:center; }
-    .stat .num { font-size:3em; font-weight:900; color:var(--accent2); }
-    .stat .lbl { font-size:0.7em; color:#888; margin-top:4px; }
+  .reveal h1 {
+    font-size: 3em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--purple-lg) 55%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.08;
+    margin: 0 0 10px;
+  }
 
-    /* Yol haritası */
-    .roadmap { display:flex; gap:0; margin-top:30px; }
-    .roadmap-step {
-      flex:1;
-      text-align:center;
-      padding: 20px 12px;
-      position:relative;
-    }
-    .roadmap-step:not(:last-child)::after {
-      content:'→';
-      position:absolute;
-      right:-14px;
-      top:50%;
-      transform:translateY(-50%);
-      font-size:1.5em;
-      color:var(--accent);
-    }
-    .roadmap-step.active { background:rgba(108,99,255,0.2); border:1px solid var(--accent); border-radius:10px; }
-    .roadmap-step .ep { font-size:0.65em; color:#888; }
-    .roadmap-step .title { font-size:0.85em; margin-top:6px; font-weight:600; }
+  .reveal h2 {
+    font-size: 1.52em;
+    font-weight: 800;
+    color: var(--t1);
+    margin: 0 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
 
-    /* Fiyatlandırma */
-    .pricing { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
-    .plan {
-      border-radius:12px;
-      padding:24px;
-      text-align:center;
-    }
-    .plan.lite { background:rgba(255,255,255,0.07); border:1px solid #444; }
-    .plan.pro  { background:rgba(247,183,49,0.12); border:2px solid var(--pro); }
-    .plan h3   { font-size:1.2em; margin:0 0 6px; }
-    .plan .price { font-size:2.5em; font-weight:900; margin:10px 0; }
-    .plan ul { list-style:none; padding:0; margin:12px 0 0; font-size:0.78em; text-align:left; }
-    .plan ul li { padding:4px 0; color:#ccc; }
-    .plan ul li::before { content:'✓ '; color:var(--accent2); }
-    .plan ul li.limit::before { content:'⚠ '; color:var(--warn); }
+  .reveal h2 .slide-icon {
+    font-size: 0.85em;
+    flex-shrink: 0;
+  }
 
-    /* Callout */
-    .callout {
-      background: rgba(108,99,255,0.15);
-      border: 1px solid var(--accent);
-      border-radius:10px;
-      padding: 16px 20px;
-      font-size:0.85em;
-      margin-top:20px;
-    }
-    .callout.green { background:rgba(0,212,170,0.1); border-color:var(--accent2); }
+  .reveal h3 {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--t2);
+    margin: 0;
+  }
 
-    /* Alt bilgi */
-    .footer-note { position:fixed; bottom:20px; right:20px; font-size:0.55em; color:#555; }
+  .reveal p { margin: 0; }
 
-    /* Highlight */
-    .hl { color:var(--accent2); font-weight:700; }
-    .hl-pro { color:var(--pro); font-weight:700; }
+  /* ══════════════════════════════════════
+     BADGES
+  ══════════════════════════════════════ */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 0.52em;
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 7px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge.pro   { background: var(--gold-lo);  color: var(--gold);  border: 1px solid rgba(245,158,11,0.35); }
+  .badge.free  { background: var(--green-lo); color: var(--green); border: 1px solid rgba(16,185,129,0.35); }
+  .badge.new   { background: var(--red-lo);   color: var(--red);   border: 1px solid rgba(248,113,113,0.35); }
+  .badge.v     { background: var(--cyan-lo);  color: var(--cyan);  border: 1px solid rgba(34,211,238,0.35); }
+
+  /* ══════════════════════════════════════
+     CARD SYSTEM
+  ══════════════════════════════════════ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+  }
+  .card-grid.two  { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.four { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    opacity: 0.55;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card .icon {
+    font-size: 1.55em;
+    line-height: 1;
+    margin-bottom: 9px;
+    display: block;
+  }
+
+  .card h4 {
+    margin: 0 0 5px;
+    font-size: 0.86em;
+    font-weight: 700;
+    color: var(--t1);
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 0.72em;
+    color: var(--t2);
+    line-height: 1.46;
+    margin: 0;
+  }
+
+  /* accent variants */
+  .card.purple { border-color: rgba(139,92,246,0.28); background: var(--purple-lo); }
+  .card.cyan   { border-color: rgba(34,211,238,0.28); background: var(--cyan-lo); }
+  .card.gold   { border-color: rgba(245,158,11,0.28);  background: var(--gold-lo); }
+  .card.green  { border-color: rgba(16,185,129,0.28);  background: var(--green-lo); }
+
+  .card.purple::after { background: var(--purple); }
+  .card.cyan::after   { background: var(--cyan); }
+  .card.gold::after   { background: var(--gold); }
+  .card.green::after  { background: var(--green); }
+
+  /* ══════════════════════════════════════
+     STAT ROW
+  ══════════════════════════════════════ */
+  .stat-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin: 18px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 20px 12px;
+    position: relative;
+  }
+
+  .stat + .stat {
+    border-left: 1px solid var(--border);
+  }
+
+  .stat .num {
+    font-size: 2.6em;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--purple-lg) 0%, var(--cyan-lg) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat .lbl {
+    font-size: 0.65em;
+    color: var(--t3);
+    margin-top: 7px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  /* ══════════════════════════════════════
+     CALLOUT
+  ══════════════════════════════════════ */
+  .callout {
+    background: var(--purple-lo);
+    border: 1px solid rgba(139,92,246,0.28);
+    border-radius: 10px;
+    padding: 13px 18px;
+    font-size: 0.79em;
+    margin-top: 16px;
+    color: var(--t1);
+    line-height: 1.5;
+  }
+  .callout.green { background: var(--green-lo); border-color: rgba(16,185,129,0.28); }
+  .callout.cyan  { background: var(--cyan-lo);  border-color: rgba(34,211,238,0.28); }
+  .callout.gold  { background: var(--gold-lo);  border-color: rgba(245,158,11,0.28); }
+
+  /* ══════════════════════════════════════
+     MENU LIST
+  ══════════════════════════════════════ */
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .menu-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: 7px;
+    padding: 9px 13px;
+    font-size: 0.76em;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--t1);
+  }
+
+  .menu-list li .num {
+    color: var(--purple-lg);
+    font-weight: 800;
+    min-width: 18px;
+    font-size: 0.88em;
+  }
+
+  /* ══════════════════════════════════════
+     ROADMAP
+  ══════════════════════════════════════ */
+  .roadmap {
+    display: flex;
+    gap: 8px;
+    margin-top: 22px;
+    align-items: stretch;
+  }
+
+  .roadmap-step {
+    flex: 1;
+    text-align: center;
+    padding: 20px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .roadmap-step.active {
+    background: var(--purple-lo);
+    border-color: rgba(139,92,246,0.4);
+    box-shadow: 0 0 24px rgba(139,92,246,0.1);
+  }
+
+  .roadmap-step .ep {
+    font-size: 0.58em;
+    color: var(--t3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .roadmap-step.active .ep {
+    color: var(--purple-lg);
+  }
+
+  .roadmap-step .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 0.8em;
+    font-weight: 800;
+    background: var(--surface-2);
+    border: 1px solid var(--border-hi);
+    color: var(--t2);
+  }
+
+  .roadmap-step.active .step-num {
+    background: var(--purple-lo);
+    border-color: var(--purple);
+    color: var(--purple-lg);
+  }
+
+  .roadmap-step .step-title {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--t1);
+    line-height: 1.5;
+  }
+
+  .roadmap-connector {
+    display: flex;
+    align-items: center;
+    color: var(--t3);
+    font-size: 1.1em;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════════
+     PRICING
+  ══════════════════════════════════════ */
+  .pricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 16px;
+  }
+
+  .plan {
+    border-radius: 12px;
+    padding: 20px 20px;
+    text-align: left;
+  }
+
+  .plan.lite {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .plan.pro {
+    background: var(--gold-lo);
+    border: 1px solid rgba(245,158,11,0.35);
+    box-shadow: 0 0 40px rgba(245,158,11,0.06);
+  }
+
+  .plan-name {
+    font-size: 0.95em;
+    font-weight: 800;
+    color: var(--t1);
+    margin-bottom: 4px;
+  }
+
+  .plan .price {
+    font-size: 1.8em;
+    font-weight: 900;
+    line-height: 1;
+    margin: 8px 0 14px;
+    letter-spacing: -0.04em;
+  }
+
+  .plan.lite .price { color: var(--cyan); }
+  .plan.pro  .price { color: var(--gold); }
+
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.73em;
+  }
+
+  .plan ul li {
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--t2);
+    line-height: 1.4;
+  }
+
+  .plan ul li .ico { flex-shrink: 0; margin-top: 1px; }
+
+  .plan ul li.ok   .ico { color: var(--green); }
+  .plan ul li.warn .ico { color: var(--gold); }
+  .plan ul li.off  .ico { color: var(--t3); }
+
+  /* ══════════════════════════════════════
+     COVER DECORATIONS
+  ══════════════════════════════════════ */
+  @keyframes floatA {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%       { transform: translate(20px, -15px) scale(1.04); }
+  }
+  @keyframes floatB {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%       { transform: translate(-15px, 20px) scale(0.97); }
+  }
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.25; }
+    50%       { opacity: 0.1; }
+  }
+
+  .cover-glow-a {
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,92,246,0.28) 0%, transparent 70%);
+    top: -140px; right: -80px;
+    filter: blur(20px);
+    animation: floatA 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .cover-glow-b {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.2) 0%, transparent 70%);
+    bottom: -80px; left: 10%;
+    filter: blur(20px);
+    animation: floatB 10s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .cover-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(139,92,246,0.25);
+    animation: ringPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* ══════════════════════════════════════
+     COVER CONTENT
+  ══════════════════════════════════════ */
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cyan-lo);
+    border: 1px solid rgba(34,211,238,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.7em;
+    color: var(--cyan);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .cover-subtitle {
+    font-size: 0.95em;
+    color: var(--t2);
+    margin: 14px 0 30px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .cover-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.72em;
+    color: var(--t3);
+    flex-wrap: wrap;
+  }
+
+  .cover-meta .dot { color: var(--border-hi); }
+
+  .cover-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-hi);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.82em;
+    color: var(--t2);
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════════════
+     HIGHLIGHT UTILS
+  ══════════════════════════════════════ */
+  .hl         { color: var(--cyan);      font-weight: 700; }
+  .hl-purple  { color: var(--purple-lg); font-weight: 700; }
+  .hl-gold    { color: var(--gold);      font-weight: 700; }
+  .hl-green   { color: var(--green);     font-weight: 700; }
+
+  .grad-text {
+    background: linear-gradient(135deg, var(--purple-lg), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ══════════════════════════════════════
+     DIVIDER
+  ══════════════════════════════════════ */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-hi), transparent);
+    margin: 14px 0;
+  }
+
+  /* ══════════════════════════════════════
+     PROGRESS BAR (Reveal override)
+  ══════════════════════════════════════ */
+  .reveal .progress { height: 3px; background: rgba(255,255,255,0.06); }
+  .reveal .progress span {
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+  }
+
+  .reveal .slide-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.52em;
+    color: var(--t3);
+    background: none;
+    bottom: 14px; right: 18px;
+  }
+
+  /* ══════════════════════════════════════
+     SECTION LABEL
+  ══════════════════════════════════════ */
+  .section-label {
+    font-size: 0.6em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--t3);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ══════════════════════════════════════
+     INLINE STAT (for callouts)
+  ══════════════════════════════════════ */
+  .inline-stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .inline-stat .n {
+    font-size: 1.8em;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--cyan-lg);
+    line-height: 1;
+  }
+
+  .inline-stat .l {
+    font-size: 0.65em;
+    color: var(--t3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* ══════════════════════════════════════
+     FEATURE HERO (Vendor/etc)
+  ══════════════════════════════════════ */
+  .feature-hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: var(--purple-lo);
+    border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+
+  .feature-hero .fh-icon {
+    font-size: 2.2em;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .feature-hero h4 {
+    font-size: 0.9em;
+    font-weight: 800;
+    color: var(--t1);
+    margin: 0 0 4px;
+  }
+
+  .feature-hero p {
+    font-size: 0.74em;
+    color: var(--t2);
+    line-height: 1.5;
+  }
+
+  /* channel footer */
+  .channel-footer {
+    position: fixed;
+    bottom: 16px;
+    right: 68px;
+    font-size: 0.52em;
+    color: var(--t3);
+    font-weight: 500;
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
   </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
-<!-- ─── KAPAK ─── -->
-<section data-background-gradient="radial-gradient(ellipse at center, #1a1040 0%, #0d0d1a 70%)">
-  <br><br>
-  <h1 style="font-size:3em; margin-bottom:0;">🚗 MHM Rentiva</h1>
-  <h3 style="color:#888; margin-top:12px;">WordPress Araç Kiralama Eklentisi</h3>
-  <br>
-  <p style="font-size:0.9em; color:#aaa;">Lansman Yayını — 8 Nisan 2026</p>
-  <p style="font-size:0.75em; color:#666;">by MaxHandMade</p>
-  <div class="footer-note">youtube.com/@MaxHandMade</div>
-</section>
+<!-- ══════════════════════════════════════
+     01 · KAPAK
+══════════════════════════════════════ -->
+<section class="dark-glow" style="text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+  <div class="cover-glow-a"></div>
+  <div class="cover-glow-b"></div>
+  <div class="cover-ring" style="width:480px;height:480px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="cover-ring" style="width:680px;height:680px;top:50%;left:50%;transform:translate(-50%,-50%); animation-delay: 1.2s;"></div>
 
-<!-- ─── BUGÜN NE YAPACAĞIZ ─── -->
-<section>
-  <h2>📋 Bugün Ne Yapacağız?</h2>
-  <div class="roadmap">
-    <div class="roadmap-step active">
-      <div class="ep">Yayın 1 — Bugün</div>
-      <div class="title">🎉 Lansman<br>Eklenti Nedir?<br>Menü Turu</div>
-    </div>
-    <div class="roadmap-step">
-      <div class="ep">Yayın 2</div>
-      <div class="title">⚙️ Ayarlar<br>Detaylı<br>Yapılandırma</div>
-    </div>
-    <div class="roadmap-step">
-      <div class="ep">Yayın 3</div>
-      <div class="title">🌐 Canlı Kurulum<br>Gerçek Site'de<br>Veri Girişi</div>
+  <div style="position:relative; z-index:1; width:100%;">
+    <div class="cover-eyebrow">🎬 Canlı Yayın — 8 Nisan 2026</div>
+
+    <h1 style="font-size:3.6em; margin-bottom:6px;">MHM Rentiva</h1>
+    <p style="font-size:1em; color:var(--t2); font-weight:400; margin:0 0 32px; letter-spacing:-0.01em;">
+      WordPress için Araç Kiralama Yönetim Eklentisi
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+      <div class="cover-pill">📦 v4.26.1</div>
+      <div class="cover-pill">🆓 Ücretsiz Kullanım</div>
+      <div class="cover-pill">🔌 WooCommerce Entegrasyonu</div>
+      <div class="cover-pill">🧪 720 Otomatik Test</div>
     </div>
   </div>
 </section>
 
-<!-- ─── SORUN ─── -->
+<!-- ══════════════════════════════════════
+     02 · BUGÜN NE YAPACAĞIZ
+══════════════════════════════════════ -->
 <section>
-  <h2>🤔 Bir Sorundan Başlayalım</h2>
-  <br>
-  <div class="card-grid">
+  <div class="section-label">Yayın Planı</div>
+  <h2><span class="slide-icon">🗓️</span> Bugün Ne Yapacağız?</h2>
+  <div class="roadmap">
+    <div class="roadmap-step active">
+      <div class="ep">Yayın 1 · Bugün</div>
+      <div class="step-num">1</div>
+      <div class="step-title">🎉 Lansman<br>Eklenti Nedir?<br>Menü Turu</div>
+    </div>
+    <div class="roadmap-connector">›</div>
+    <div class="roadmap-step">
+      <div class="ep">Yayın 2</div>
+      <div class="step-num">2</div>
+      <div class="step-title">⚙️ Ayarlar<br>Yapılandırma<br>Demo Veri</div>
+    </div>
+    <div class="roadmap-connector">›</div>
+    <div class="roadmap-step">
+      <div class="ep">Yayın 3</div>
+      <div class="step-num">3</div>
+      <div class="step-title">🌐 Canlı Kurulum<br>Gerçek Site<br>Veri Girişi</div>
+    </div>
+  </div>
+  <div class="callout cyan" style="text-align:center; font-size:0.78em;">
+    Bu yayında: eklentiyi tanıyor, yönetim panelini geziyoruz ve canlı demo yapıyoruz.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     03 · PROBLEM
+══════════════════════════════════════ -->
+<section>
+  <div class="section-label">Motivasyon</div>
+  <h2><span class="slide-icon">🤔</span> Bir Sorundan Başlayalım</h2>
+  <div class="card-grid" style="margin-top:2px;">
     <div class="card">
       <span class="icon">📋</span>
       <h4>Manuel Excel Takibi</h4>
-      <p>Araç müsaitlik durumunu Excel ile takip etmek, çakışmaları kaçırmak, müşteri iletişimini telefonda yönetmek...</p>
+      <p>Araç müsaitliğini Excel ile yönetmek, çakışmaları kaçırmak, müşteri iletişimini telefonla yürütmek — zaman kaybı ve hata riski.</p>
     </div>
     <div class="card">
       <span class="icon">💸</span>
       <h4>Pahalı Yazılımlar</h4>
-      <p>Özel kiralama yazılımları yüzlerce dolar aylık lisans ücreti istiyor. WordPress üzerine kurulmuyor.</p>
+      <p>Özel araç kiralama yazılımları yüzlerce dolar aylık lisans ücreti istiyor. WordPress üzerinde çalışmıyor, entegrasyon yok.</p>
     </div>
     <div class="card">
       <span class="icon">🔧</span>
-      <h4>Eksik Çözümler</h4>
-      <p>Mevcut WP eklentileri ya çok basit ya da sadece tek kiralama tipine odaklanmış.</p>
+      <h4>Eksik WP Eklentileri</h4>
+      <p>Mevcut WordPress eklentileri ya çok basit ya da tek bir kiralama tipine odaklanmış. Vendor, transfer, lisans yok.</p>
     </div>
   </div>
-  <div class="callout green" style="margin-top:24px; text-align:center;">
-    <strong>MHM Rentiva</strong> — WordPress'e eksiksiz bir araç kiralama sistemi getiriyor.
+  <div class="callout green" style="text-align:center;">
+    <strong class="hl-green">MHM Rentiva</strong> — WordPress'e eksiksiz, modern bir araç kiralama sistemi getiriyor.
   </div>
 </section>
 
-<!-- ─── MHM RENTİVA NEDİR ─── -->
+<!-- ══════════════════════════════════════
+     04 · NEDİR
+══════════════════════════════════════ -->
 <section>
-  <h2>🚗 MHM Rentiva Nedir?</h2>
-  <br>
-  <div class="card-grid">
-    <div class="card">
+  <div class="section-label">Ürün</div>
+  <h2><span class="slide-icon">🚗</span> MHM Rentiva Nedir?</h2>
+  <div class="card-grid" style="margin-top:2px;">
+    <div class="card purple">
       <span class="icon">🔌</span>
       <h4>WordPress Eklentisi</h4>
-      <p>Mevcut WordPress sitenize kurun — hosting değiştirmenize, yeni yazılım almanıza gerek yok.</p>
+      <p>Mevcut sitenize kurun — hosting değiştirmenize, yeni yazılım almanıza gerek yok. Aktivasyon: 30 saniye.</p>
     </div>
-    <div class="card">
+    <div class="card cyan">
       <span class="icon">🛒</span>
       <h4>WooCommerce Entegrasyonu</h4>
-      <p>Ödemeler WooCommerce üzerinden geçer. Mevcut ödeme altyapınız çalışmaya devam eder.</p>
+      <p>Ödemeler WooCommerce üzerinden geçer. Mevcut ödeme altyapınız kod değişikliği gerektirmeden çalışır.</p>
     </div>
-    <div class="card">
+    <div class="card green">
       <span class="icon">🏗️</span>
       <h4>Tam Özelleştirilebilir</h4>
-      <p>23 shortcode, 19 Gutenberg bloğu, 20 Elementor widget. Her tema ile çalışır.</p>
+      <p>23 shortcode · 19 Gutenberg bloğu · 20 Elementor widget. Her tema ile uyumlu çalışır.</p>
     </div>
   </div>
-  <br>
-  <p class="hl" style="text-align:center; font-size:1.1em;">Araç kiralama → Transfer hizmetleri → Vendor marketplace</p>
+  <div class="divider"></div>
+  <p style="text-align:center; font-size:0.85em; color:var(--t2);">
+    <span class="hl-purple">Araç kiralama</span> &nbsp;·&nbsp;
+    <span class="hl">Transfer hizmetleri</span> &nbsp;·&nbsp;
+    <span class="hl-gold">Vendor marketplace</span>
+  </p>
 </section>
 
-<!-- ─── KİM KULLANIR ─── -->
+<!-- ══════════════════════════════════════
+     05 · KİM KULLANIR
+══════════════════════════════════════ -->
 <section>
-  <h2>👥 Kim Kullanır?</h2>
-  <br>
-  <div class="card-grid">
+  <div class="section-label">Hedef Kitle</div>
+  <h2><span class="slide-icon">👥</span> Kim Kullanır?</h2>
+  <div class="card-grid" style="margin-top:2px;">
     <div class="card">
       <span class="icon">🚗</span>
       <h4>Araç Kiralama Firmaları</h4>
-      <p>Filolarını online yönetmek, rezervasyon almak, müşteri takibi yapmak isteyen işletmeler.</p>
+      <p>Filolarını online yönetmek, rezervasyon almak, müşteri takibi yapmak isteyen küçük–orta işletmeler.</p>
     </div>
     <div class="card">
       <span class="icon">🚌</span>
       <h4>Transfer Servisleri</h4>
-      <p>Havalimanı transferi, şehirlerarası güzergah hizmetleri sunan operatörler.</p>
+      <p>Havalimanı transferi, şehirlerarası güzergah hizmetleri sunan operatörler için tam çözüm.</p>
     </div>
-    <div class="card">
+    <div class="card gold">
       <span class="icon">🏪</span>
       <h4>Vendor Marketplace</h4>
-      <p class="">Birden fazla araç sahibinin ürünlerini tek platformda sunduğu pazaryeri modeli. <span class="badge pro">PRO</span></p>
+      <p>Birden fazla araç sahibinin tek platformda yer aldığı çok satıcılı pazaryeri modeli. <span class="badge pro">PRO</span></p>
     </div>
   </div>
 </section>
 
-<!-- ─── ÖZELLIKLER GENEL BAKIŞ ─── -->
+<!-- ══════════════════════════════════════
+     06 · NELER YAPABİLİRSİNİZ
+══════════════════════════════════════ -->
 <section>
-  <h2>✨ Neler Yapabilirsiniz?</h2>
-  <div class="card-grid" style="margin-top:16px;">
+  <div class="section-label">Özellikler</div>
+  <h2><span class="slide-icon">✨</span> Neler Yapabilirsiniz?</h2>
+  <div class="card-grid" style="gap:10px; margin-top:2px;">
     <div class="card">
       <span class="icon">📅</span>
       <h4>Online Rezervasyon</h4>
-      <p>Takvim bazlı rezervasyon, tarih engelleme, depozito + tam ödeme desteği.</p>
+      <p>Takvim bazlı, depozito + tam ödeme desteği, otomatik müsaitlik takibi.</p>
     </div>
     <div class="card">
       <span class="icon">🚙</span>
       <h4>Araç Yönetimi</h4>
-      <p>Fotoğraf galerisi, kategori, yıllık model, otomatik müsaitlik takibi.</p>
+      <p>Galeri, kategori, yıl/model, yaşam döngüsü, otomatik blokaj sistemi.</p>
     </div>
     <div class="card">
       <span class="icon">📍</span>
-      <h4>Lokasyon Sistemi</h4>
-      <p>Teslim alma / bırakma noktaları, transfer güzergahları, şehir hiyerarşisi.</p>
+      <h4>Lokasyon & Transfer</h4>
+      <p>Teslim/bırakma noktaları, transfer güzergahları, şehir hiyerarşisi.</p>
     </div>
     <div class="card">
       <span class="icon">🎁</span>
       <h4>Ek Hizmetler</h4>
-      <p>Araç sigortası, bebek koltuğu, GPS — rezervasyona eklenebilir servisler.</p>
+      <p>Sigorta, bebek koltuğu, GPS — rezervasyona eklenebilir paketler.</p>
     </div>
     <div class="card">
       <span class="icon">👤</span>
       <h4>Müşteri Paneli</h4>
-      <p>Rezervasyon geçmişi, favori araçlar, mesajlaşma, kalan ödeme butonu.</p>
+      <p>Rezervasyon geçmişi, favoriler, mesajlaşma, kalan ödeme butonu.</p>
     </div>
-    <div class="card">
+    <div class="card gold">
       <span class="icon">📊</span>
       <h4>Raporlar & İhracat</h4>
-      <p>Gelir raporları, araç kullanım istatistikleri, CSV/Excel dışa aktarım. <span class="badge pro">PRO</span></p>
+      <p>Gelir raporları, araç kullanım istatistikleri, CSV/Excel. <span class="badge pro">PRO</span></p>
     </div>
   </div>
 </section>
 
-<!-- ─── RAKAMLAR ─── -->
-<section data-background-gradient="radial-gradient(ellipse at center, #0d2040 0%, #0d0d1a 70%)">
-  <h2>📊 Rakamlarla MHM Rentiva</h2>
+<!-- ══════════════════════════════════════
+     07 · RAKAMLAR
+══════════════════════════════════════ -->
+<section class="dark-glow" style="display:flex; flex-direction:column; justify-content:center;">
+  <div class="section-label">Teknik Büyüklük</div>
+  <h2><span class="slide-icon">📊</span> Rakamlarla MHM Rentiva</h2>
+
   <div class="stat-row">
-    <div class="stat"><div class="num">23</div><div class="lbl">Shortcode</div></div>
-    <div class="stat"><div class="num">19</div><div class="lbl">Gutenberg Block</div></div>
-    <div class="stat"><div class="num">20</div><div class="lbl">Elementor Widget</div></div>
+    <div class="stat">
+      <div class="num" id="stat-sc">23</div>
+      <div class="lbl">Shortcode</div>
+    </div>
+    <div class="stat">
+      <div class="num" id="stat-bl">19</div>
+      <div class="lbl">Gutenberg Block</div>
+    </div>
+    <div class="stat">
+      <div class="num" id="stat-el">20</div>
+      <div class="lbl">Elementor Widget</div>
+    </div>
   </div>
+
   <div class="stat-row">
-    <div class="stat"><div class="num">720</div><div class="lbl">Otomatik Test</div></div>
-    <div class="stat"><div class="num">2277+</div><div class="lbl">Test Senaryosu</div></div>
-    <div class="stat"><div class="num">4.26</div><div class="lbl">Mevcut Sürüm</div></div>
+    <div class="stat">
+      <div class="num" id="stat-t">720</div>
+      <div class="lbl">Otomatik Test</div>
+    </div>
+    <div class="stat">
+      <div class="num" id="stat-a">2470</div>
+      <div class="lbl">Test Senaryosu</div>
+    </div>
+    <div class="stat">
+      <div class="num">4.26</div>
+      <div class="lbl">Mevcut Sürüm</div>
+    </div>
   </div>
-  <div class="callout" style="text-align:center; margin-top:10px;">
-    Her sürümde 6 farklı PHP + WordPress kombinasyonunda otomatik test çalışır
+
+  <div class="callout cyan" style="text-align:center; font-size:0.77em;">
+    Her commit'te <strong>PHP 8.1 / 8.2 / 8.3 × WP 6.7 / latest</strong> — 6 farklı kombinasyonda otomatik CI çalışır.
   </div>
 </section>
 
-<!-- ─── MENÜ TURU — GİRİŞ ─── -->
+<!-- ══════════════════════════════════════
+     08 · MENÜ TURU
+══════════════════════════════════════ -->
 <section>
-  <h2>🗺️ Yönetim Paneli — Menü Turu</h2>
-  <p style="color:#888; font-size:0.85em;">WordPress Admin → MHM Rentiva menüsü altında bulunan tüm bölümler</p>
+  <div class="section-label">Yönetim Paneli</div>
+  <h2><span class="slide-icon">🗺️</span> Admin Menü Turu</h2>
+  <p style="font-size:0.76em; color:var(--t3); margin-bottom:12px;">WordPress Admin → MHM Rentiva altındaki tüm bölümler</p>
   <ul class="menu-list">
-    <li><span class="num">1</span> 📊 Dashboard</li>
-    <li><span class="num">2</span> 🚗 Araçlar (Vehicles)</li>
-    <li><span class="num">3</span> 🏷️ Araç Kategorileri</li>
-    <li><span class="num">4</span> ⚙️ Araç Ayarları</li>
-    <li><span class="num">5</span> 📅 Rezervasyonlar</li>
-    <li><span class="num">6</span> 📍 Lokasyonlar</li>
-    <li><span class="num">7</span> 🛣️ Transfer Güzergahları</li>
-    <li><span class="num">8</span> 🎁 Ek Hizmetler</li>
-    <li><span class="num">9</span> 👥 Müşteriler</li>
+    <li><span class="num">01</span> 📊 Dashboard</li>
+    <li><span class="num">02</span> 🚗 Araçlar (Vehicles)</li>
+    <li><span class="num">03</span> 🏷️ Araç Kategorileri</li>
+    <li><span class="num">04</span> ⚙️ Araç Ayarları</li>
+    <li><span class="num">05</span> 📅 Rezervasyonlar</li>
+    <li><span class="num">06</span> 📍 Lokasyonlar</li>
+    <li><span class="num">07</span> 🛣️ Transfer Güzergahları</li>
+    <li><span class="num">08</span> 🎁 Ek Hizmetler</li>
+    <li><span class="num">09</span> 👥 Müşteriler</li>
     <li><span class="num">10</span> 📈 Raporlar <span class="badge pro">PRO</span></li>
     <li><span class="num">11</span> 💬 Mesajlar <span class="badge pro">PRO</span></li>
     <li><span class="num">12</span> 📤 Dışa Aktarım</li>
   </ul>
 </section>
 
-<!-- ─── DASHBOARD ─── -->
+<!-- ══════════════════════════════════════
+     09 · DASHBOARD
+══════════════════════════════════════ -->
 <section>
-  <h2>📊 1 — Dashboard</h2>
-  <div class="card-grid" style="margin-top:20px;">
-    <div class="card">
+  <div class="section-label">Bölüm 1</div>
+  <h2><span class="slide-icon">📊</span> Dashboard</h2>
+  <div class="card-grid" style="margin-top:2px;">
+    <div class="card cyan">
       <span class="icon">📈</span>
       <h4>Anlık İstatistikler</h4>
-      <p>Bugünkü rezervasyonlar, toplam gelir, aktif araç sayısı tek ekranda.</p>
+      <p>Bugünkü rezervasyonlar, toplam gelir, aktif araç sayısı — panele girince ilk gördüğünüz tablo.</p>
     </div>
     <div class="card">
       <span class="icon">📋</span>
       <h4>Son Aktiviteler</h4>
-      <p>En son rezervasyonlar ve ödemeler — panele girince ilk gördüğünüz şey.</p>
+      <p>En son rezervasyonlar ve ödemeler, hızlı erişim linkleriyle birlikte listelenir.</p>
     </div>
     <div class="card">
       <span class="icon">⚠️</span>
-      <h4>Uyarı Sistemi</h4>
-      <p>Lite sürümde limit yaklaşınca renkli bildirimler gösterir.</p>
+      <h4>Lite Limit Uyarıları</h4>
+      <p>Araç veya rezervasyon limitine yaklaşınca renkli göstergeler uyarır: sarı %80, kırmızı %100.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── ARAÇLAR ─── -->
+<!-- ══════════════════════════════════════
+     10 · ARAÇLAR
+══════════════════════════════════════ -->
 <section>
-  <h2>🚗 2 — Araçlar (Vehicles)</h2>
-  <div class="card-grid two" style="margin-top:20px;">
+  <div class="section-label">Bölüm 2</div>
+  <h2><span class="slide-icon">🚗</span> Araçlar</h2>
+  <div class="card-grid two" style="margin-top:2px;">
     <div class="card">
       <span class="icon">🖼️</span>
       <h4>Fotoğraf Galerisi</h4>
-      <p>Her araca birden fazla fotoğraf ekleyin. Galeri slider olarak öne çıkar.</p>
+      <p>Her araca birden fazla fotoğraf. Galeri slider frontend'de otomatik gösterilir.</p>
     </div>
     <div class="card">
       <span class="icon">💰</span>
-      <h4>Günlük Fiyat</h4>
-      <p>Fiyat girilir, sistem kiralama süresine göre otomatik hesaplar.</p>
+      <h4>Günlük Fiyat Motoru</h4>
+      <p>Baz fiyat girilir, sistem kira süresine göre çarpanlarla otomatik hesaplar.</p>
     </div>
     <div class="card">
       <span class="icon">📅</span>
       <h4>Takvim & Müsaitlik</h4>
-      <p>Onaylanan rezervasyonlar otomatik bloke eder. Manuel engelleme de eklenebilir.</p>
+      <p>Onaylanan rezervasyonlar takvimi otomatik bloke eder. Manuel tarih engelleme de mevcut.</p>
     </div>
-    <div class="card">
+    <div class="card purple">
       <span class="icon">🔄</span>
       <h4>Yaşam Döngüsü</h4>
-      <p>Aktif / bakımda / pasif durumları. Araç geçmişi ve durum geçişleri.</p>
+      <p>Aktif / Bakımda / Pasif durumları. 90 günlük yayın süresi, otomatik süre dolumu. <span class="badge new">v4.24</span></p>
     </div>
   </div>
 </section>
 
-<!-- ─── REZERVASYONLAR ─── -->
+<!-- ══════════════════════════════════════
+     11 · REZERVASYONLAR
+══════════════════════════════════════ -->
 <section>
-  <h2>📅 5 — Rezervasyonlar</h2>
-  <div class="card-grid" style="margin-top:20px;">
+  <div class="section-label">Bölüm 5</div>
+  <h2><span class="slide-icon">📅</span> Rezervasyonlar</h2>
+  <div class="card-grid" style="margin-top:2px;">
     <div class="card">
       <span class="icon">🔍</span>
       <h4>Gelişmiş Filtreleme</h4>
-      <p>Duruma, tarihe, araca, müşteriye göre filtrele ve ara.</p>
+      <p>Durum, tarih, araç, müşteri bazında anlık filtre. Toplu işlem desteği.</p>
     </div>
-    <div class="card">
+    <div class="card cyan">
       <span class="icon">💳</span>
-      <h4>Depozito Desteği</h4>
+      <h4>Depozito Sistemi</h4>
       <p>Önce depozito, sonra kalan ödeme. Müşteri panelinden "Kalan Ödemeyi Tamamla" butonu.</p>
     </div>
     <div class="card">
       <span class="icon">📧</span>
       <h4>Otomatik E-posta</h4>
-      <p>Rezervasyon onayı, iptal, ödeme bildirimi — özelleştirilebilir şablonlar.</p>
+      <p>Rezervasyon onayı, iptal, ödeme bildirimi — her şablon admin panelinden özelleştirilebilir.</p>
     </div>
   </div>
-  <div class="callout" style="margin-top:16px;">
-    <strong>v4.26.0 yeni:</strong> Depozito ödemeli rezervasyonlarda kalan ödeme tamamlama özelliği eklendi. <span class="badge new">YENİ</span>
+  <div class="callout" style="margin-top:14px;">
+    <strong class="badge new" style="margin:0 8px 0 0; font-size:0.7em;">v4.26.0</strong>
+    Depozito ödemeli rezervasyonlarda kalan ödeme tamamlama özelliği eklendi. Herhangi bir WC ödeme altyapısıyla çalışır.
   </div>
 </section>
 
-<!-- ─── LOKASYONLAR & TRANSFER ─── -->
+<!-- ══════════════════════════════════════
+     12 · LOKASYONLAR & TRANSFER
+══════════════════════════════════════ -->
 <section>
-  <h2>📍 6-7 — Lokasyonlar & Transfer</h2>
-  <div class="card-grid two" style="margin-top:20px;">
+  <div class="section-label">Bölümler 6–7</div>
+  <h2><span class="slide-icon">📍</span> Lokasyonlar &amp; Transfer</h2>
+  <div class="card-grid two" style="margin-top:2px;">
     <div class="card">
       <span class="icon">🏙️</span>
       <h4>Lokasyon Hiyerarşisi</h4>
@@ -387,139 +1016,159 @@
     <div class="card">
       <span class="icon">🗺️</span>
       <h4>Transfer Güzergahları</h4>
-      <p>A noktasından B noktasına güzergah tanımlayın, fiyatlandırın, araç atayın.</p>
+      <p>A'dan B'ye güzergah tanımlayın, fiyatlandırın, araç atayın. Şehirlerarası destek.</p>
     </div>
     <div class="card">
       <span class="icon">🔎</span>
-      <h4>Akıllı Arama Motoru</h4>
-      <p>Müşteri çıkış/varış noktası seçer, sistem uygun araçları listeler.</p>
+      <h4>Akıllı Arama</h4>
+      <p>Müşteri çıkış/varış noktasını seçer, sistem uygun araçları ve fiyatları listeler.</p>
     </div>
-    <div class="card">
+    <div class="card gold">
       <span class="icon">👨‍💼</span>
       <h4>Vendor Fiyatlandırması</h4>
-      <p>Her vendor kendi rota fiyatını belirler (admin min/max aralığında). <span class="badge pro">PRO</span></p>
+      <p>Her vendor kendi rota fiyatını admin min/max aralığında belirler. <span class="badge pro">PRO</span></p>
     </div>
   </div>
 </section>
 
-<!-- ─── MÜŞTERILER ─── -->
+<!-- ══════════════════════════════════════
+     13 · MÜŞTERİLER
+══════════════════════════════════════ -->
 <section>
-  <h2>👥 9 — Müşteriler</h2>
-  <div class="card-grid two" style="margin-top:20px;">
+  <div class="section-label">Bölüm 9</div>
+  <h2><span class="slide-icon">👥</span> Müşteriler &amp; Hesabım</h2>
+  <div class="card-grid two" style="margin-top:2px;">
     <div class="card">
       <span class="icon">📄</span>
       <h4>Müşteri Profili</h4>
-      <p>Tüm rezervasyon geçmişi, toplam harcama, iletişim bilgileri tek sayfada.</p>
+      <p>Tüm rezervasyon geçmişi, toplam harcama ve iletişim bilgileri tek sayfada özetlenir.</p>
     </div>
     <div class="card">
       <span class="icon">❤️</span>
       <h4>Favori Araçlar</h4>
-      <p>Müşteriler beğendikleri araçları favorilere ekleyebilir ve panelden takip edebilir.</p>
+      <p>Müşteriler beğendikleri araçları favorilere ekler, Hesabım sayfasından takip eder.</p>
     </div>
-    <div class="card">
+    <div class="card purple">
       <span class="icon">💬</span>
       <h4>Mesajlaşma</h4>
-      <p>Müşteri ↔ İşletme dahili mesajlaşma sistemi. <span class="badge pro">PRO</span></p>
+      <p>Müşteri ↔ İşletme dahili mesajlaşma sistemi. E-posta bildirimi ile desteklenir. <span class="badge pro">PRO</span></p>
     </div>
     <div class="card">
       <span class="icon">⭐</span>
       <h4>Değerlendirmeler</h4>
-      <p>Kiralama sonrası müşteri yorumları, araç sayfasında slider olarak gösterilir.</p>
+      <p>Kiralama sonrası müşteri yorumları araç sayfasında slider olarak gösterilir.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── VENDOR MARKETPLACE ─── -->
+<!-- ══════════════════════════════════════
+     14 · VENDOR MARKETPLACE
+══════════════════════════════════════ -->
 <section>
-  <h2>🏪 Vendor Marketplace <span class="badge pro">PRO</span></h2>
-  <br>
-  <div class="card-grid" style="margin-top:10px;">
-    <div class="card">
-      <span class="icon">📝</span>
-      <h4>Vendor Başvurusu</h4>
-      <p>Araç sahipleri platformunuza başvurur, siz onaylarsınız. Shortcode ile herhangi bir sayfaya eklenebilir.</p>
+  <div class="section-label">Pro Özellik</div>
+  <h2><span class="slide-icon">🏪</span> Vendor Marketplace <span class="badge pro" style="font-size:0.5em;">PRO</span></h2>
+
+  <div class="feature-hero">
+    <div class="fh-icon">🌐</div>
+    <div>
+      <h4>Çok Satıcılı Platform</h4>
+      <p>Araç sahipleri platformunuza başvurur, siz onaylarsınız. Her vendor kendi panelinden araçlarını, rezervasyonlarını ve gelirlerini bağımsız olarak yönetir.</p>
     </div>
+  </div>
+
+  <div class="card-grid" style="gap:10px;">
     <div class="card">
       <span class="icon">🎛️</span>
       <h4>Vendor Paneli</h4>
-      <p>Her vendor kendi araçlarını, rezervasyonlarını, gelirini ve müşteri mesajlarını yönetir.</p>
+      <p>Araç listesi, rezervasyon takibi, gelir özeti ve müşteri mesajları.</p>
     </div>
     <div class="card">
       <span class="icon">💰</span>
-      <h4>Ödeme & Komisyon</h4>
-      <p>Platform komisyon oranı, otomatik ödeme takibi, vendor ödeme talepleri.</p>
+      <h4>Komisyon & Ödeme</h4>
+      <p>Platform komisyon oranı, ödeme talepleri, otomatik hesap takibi.</p>
     </div>
-  </div>
-  <div class="callout" style="text-align:center; margin-top:16px; font-size:0.8em;">
-    Güvenilirlik puanı sistemi, liste ücreti modeli, puan geçmişi takibi dahil.
+    <div class="card">
+      <span class="icon">🏆</span>
+      <h4>Güvenilirlik Puanı</h4>
+      <p>Vendor performans skoru, puan geçmişi ve liste ücreti modeli dahil.</p>
+    </div>
   </div>
 </section>
 
-<!-- ─── LITE vs PRO ─── -->
-<section>
-  <h2>🆓 Lite vs 💎 Pro</h2>
+<!-- ══════════════════════════════════════
+     15 · LITE vs PRO
+══════════════════════════════════════ -->
+<section class="gold-glow">
+  <div class="section-label">Lisanslama</div>
+  <h2><span class="slide-icon">⚖️</span> Lite vs Pro</h2>
   <div class="pricing">
     <div class="plan lite">
-      <h3>🆓 Lite</h3>
-      <div class="price" style="color:var(--accent2);">Ücretsiz</div>
+      <div class="plan-name">🆓 Lite — Ücretsiz</div>
+      <div class="price">Ücretsiz</div>
       <ul>
-        <li>Tam araç yönetimi</li>
-        <li>Online rezervasyon</li>
-        <li>Depozito desteği</li>
-        <li>Ek hizmetler</li>
-        <li>Shortcode / Block / Elementor</li>
-        <li class="limit">Araç limiti (küçük filo)</li>
-        <li class="limit">Rezervasyon limiti</li>
-        <li class="limit">Raporlar kısıtlı</li>
+        <li class="ok"><span class="ico">✓</span>Tam araç yönetimi</li>
+        <li class="ok"><span class="ico">✓</span>Online rezervasyon & takvim</li>
+        <li class="ok"><span class="ico">✓</span>Depozito desteği</li>
+        <li class="ok"><span class="ico">✓</span>Ek hizmetler</li>
+        <li class="ok"><span class="ico">✓</span>Shortcode / Block / Elementor</li>
+        <li class="ok"><span class="ico">✓</span>WooCommerce entegrasyonu</li>
+        <li class="warn"><span class="ico">⚠</span>Araç & rezervasyon limiti</li>
+        <li class="off"><span class="ico">—</span>Vendor Marketplace</li>
+        <li class="off"><span class="ico">—</span>Gelişmiş Raporlar</li>
       </ul>
     </div>
     <div class="plan pro">
-      <h3>💎 Pro</h3>
-      <div class="price" style="color:var(--pro);">Pro Lisans</div>
+      <div class="plan-name">💎 Pro Lisans</div>
+      <div class="price">Pro</div>
       <ul>
-        <li>Sınırsız araç & rezervasyon</li>
-        <li>Vendor Marketplace</li>
-        <li>Mesajlaşma sistemi</li>
-        <li>Gelişmiş raporlar</li>
-        <li>Tam REST API</li>
-        <li>JSON dışa aktarım</li>
-        <li>GDPR araçları</li>
-        <li>Öncelikli destek</li>
+        <li class="ok"><span class="ico">✓</span>Sınırsız araç & rezervasyon</li>
+        <li class="ok"><span class="ico">✓</span>Vendor Marketplace</li>
+        <li class="ok"><span class="ico">✓</span>Dahili Mesajlaşma</li>
+        <li class="ok"><span class="ico">✓</span>Gelişmiş Raporlar</li>
+        <li class="ok"><span class="ico">✓</span>Tam REST API</li>
+        <li class="ok"><span class="ico">✓</span>JSON / CSV Dışa Aktarım</li>
+        <li class="ok"><span class="ico">✓</span>GDPR Araçları</li>
+        <li class="ok"><span class="ico">✓</span>Öncelikli Destek</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ─── TEKNIK ─── -->
+<!-- ══════════════════════════════════════
+     16 · TEKNİK
+══════════════════════════════════════ -->
 <section>
-  <h2>🔧 Teknik Altyapı</h2>
-  <div class="card-grid" style="margin-top:20px;">
-    <div class="card">
+  <div class="section-label">Güvenilirlik</div>
+  <h2><span class="slide-icon">🔧</span> Teknik Altyapı</h2>
+  <div class="card-grid" style="margin-top:2px;">
+    <div class="card cyan">
       <span class="icon">🧪</span>
-      <h4>683 Otomatik Test</h4>
-      <p>720 test, 2277+ senaryo. PHP 8.1/8.2/8.3 × WP 6.7/latest matrix CI. Her commit'te çalışır.</p>
+      <h4>720 Otomatik Test</h4>
+      <p>2470+ senaryo. PHP 8.1/8.2/8.3 × WP 6.7/latest matris CI. Her commit'te çalışır.</p>
     </div>
-    <div class="card">
+    <div class="card purple">
       <span class="icon">🏗️</span>
       <h4>Modern PHP Mimarisi</h4>
-      <p>PSR-4 autoloading, dependency injection, service provider pattern, SOLID prensipler.</p>
+      <p>PSR-4 autoloading, service provider pattern, dependency injection, SOLID prensipler.</p>
     </div>
     <div class="card">
       <span class="icon">🔒</span>
-      <h4>Güvenlik</h4>
+      <h4>Güvenlik Katmanı</h4>
       <p>Nonce doğrulama, capability kontrolleri, sanitize/escape, HMAC-SHA256 lisans doğrulama.</p>
     </div>
   </div>
-  <div class="callout green" style="margin-top:16px; text-align:center; font-size:0.8em;">
-    WooCommerce HPOS (High Performance Order Storage) uyumlu · WordPress 6.0+ · PHP 8.0+
+  <div class="callout green" style="font-size:0.75em; text-align:center;">
+    ✅ WooCommerce HPOS uyumlu &nbsp;·&nbsp; ✅ WordPress 6.7+ &nbsp;·&nbsp; ✅ PHP 8.1+
   </div>
 </section>
 
-<!-- ─── AYARLAR ÖNIZLEME ─── -->
+<!-- ══════════════════════════════════════
+     17 · BİR SONRAKI YAYIN
+══════════════════════════════════════ -->
 <section>
-  <h2>⚙️ Bir Sonraki Yayın: Ayarlar</h2>
-  <br>
-  <div class="card-grid two">
+  <div class="section-label">Önizleme</div>
+  <h2><span class="slide-icon">⚙️</span> Bir Sonraki Yayın: Ayarlar</h2>
+  <div class="card-grid two" style="margin-top:2px;">
     <div class="card">
       <span class="icon">🌐</span>
       <h4>Genel Ayarlar</h4>
@@ -527,48 +1176,74 @@
     </div>
     <div class="card">
       <span class="icon">💰</span>
-      <h4>Fiyatlandırma</h4>
-      <p>Günlük oran çarpanları, sezonluk fiyatlar, depozito oranları.</p>
+      <h4>Fiyatlandırma Motoru</h4>
+      <p>Günlük oran çarpanları, sezonluk fiyatlar, depozito oranları ve kampanya kuralları.</p>
     </div>
     <div class="card">
       <span class="icon">📧</span>
       <h4>E-posta Şablonları</h4>
-      <p>Onay, iptal, ödeme bildirimleri — her şablon özelleştirilebilir.</p>
+      <p>Onay, iptal, ödeme bildirimleri — her şablon admin panelinden özelleştirilebilir.</p>
     </div>
-    <div class="card">
+    <div class="card purple">
       <span class="icon">🔑</span>
-      <h4>Lisans</h4>
-      <p>Pro lisans aktivasyonu, Lite limit göstergeleri, özellik kilit/açma.</p>
+      <h4>Lisans Aktivasyonu</h4>
+      <p>Pro lisans aktivasyonu, Lite limit göstergeleri ve özellik kilit/açma mekanizması.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── KAPANIŞ ─── -->
-<section data-background-gradient="radial-gradient(ellipse at center, #1a1040 0%, #0d0d1a 70%)">
-  <h2 style="margin-top:40px;">🎉 Hadi Başlayalım!</h2>
-  <br>
-  <div class="stat-row" style="margin:20px 0;">
-    <div class="stat"><div class="num" style="font-size:2em;">🆓</div><div class="lbl">GitHub'dan İndir</div></div>
-    <div class="stat"><div class="num" style="font-size:2em;">📚</div><div class="lbl">Dokümantasyon</div></div>
-    <div class="stat"><div class="num" style="font-size:2em;">💬</div><div class="lbl">Soru Sor</div></div>
+<!-- ══════════════════════════════════════
+     18 · KAPANIŞ
+══════════════════════════════════════ -->
+<section class="dark-glow" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+  <div class="cover-glow-a" style="opacity:0.7;"></div>
+  <div class="cover-glow-b" style="opacity:0.7;"></div>
+
+  <div style="position:relative; z-index:1; width:100%;">
+    <h1 style="font-size:2.8em; margin-bottom:8px;">Hadi Başlayalım!</h1>
+    <p style="font-size:0.9em; color:var(--t2); margin-bottom:32px;">
+      Sorularınızı sohbete yazabilirsiniz — her soruyu yanıtlayacağım.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:20px; margin-bottom:28px;">
+      <div style="text-align:center;">
+        <div style="font-size:2em; margin-bottom:8px;">🆓</div>
+        <div style="font-size:0.72em; color:var(--t2); font-weight:600;">GitHub'dan İndir</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:2em; margin-bottom:8px;">📚</div>
+        <div style="font-size:0.72em; color:var(--t2); font-weight:600;">Dokümantasyon</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:2em; margin-bottom:8px;">💬</div>
+        <div style="font-size:0.72em; color:var(--t2); font-weight:600;">Soru Sor</div>
+      </div>
+    </div>
+
+    <div class="callout green" style="max-width:600px; margin:0 auto; text-align:center;">
+      <strong>github.com/MaxHandMade/mhm-rentiva</strong><br>
+      <span style="font-size:0.85em; color:var(--t2); margin-top:4px; display:block;">⭐ Star atarsanız çok mutlu olurum!</span>
+    </div>
+
+    <p style="font-size:0.72em; color:var(--t3); margin-top:20px;">
+      Bir sonraki yayın: <span class="hl-purple">Ayarlar &amp; Yapılandırma</span>
+    </p>
   </div>
-  <div class="callout green" style="text-align:center;">
-    <strong>github.com/MaxHandMade/mhm-rentiva</strong><br>
-    <span style="font-size:0.85em; color:#888;">⭐ Star atarsanız çok mutlu olurum!</span>
-  </div>
-  <br>
-  <p style="font-size:0.8em; color:#666;">Bir sonraki yayın: <strong>Ayarlar & Yapılandırma</strong></p>
 </section>
 
 </div><!-- /slides -->
 </div><!-- /reveal -->
+
+<div class="channel-footer">youtube.com/@MaxHandMade</div>
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
 <script>
   Reveal.initialize({
     hash: true,
     slideNumber: 'c/t',
-    transition: 'slide',
+    transition: 'fade',
     transitionSpeed: 'fast',
     controls: true,
     progress: true,
@@ -576,7 +1251,39 @@
     width: 1280,
     height: 720,
     margin: 0.04,
+    minScale: 0.3,
+    maxScale: 2.0,
     plugins: []
+  });
+
+  /* ── Counter animation on stats slide ── */
+  function animateCounter(el, target, duration) {
+    const start = performance.now();
+    const isFloat = String(target).includes('.');
+    const update = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+      const current = isFloat ? (target * ease).toFixed(2) : Math.round(target * ease);
+      el.textContent = current;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  Reveal.on('slidechanged', event => {
+    const slide = event.currentSlide;
+    const counters = {
+      'stat-sc': 23,
+      'stat-bl': 19,
+      'stat-el': 20,
+      'stat-t': 720,
+      'stat-a': 2470,
+    };
+    for (const [id, val] of Object.entries(counters)) {
+      const el = slide.querySelector('#' + id);
+      if (el) animateCounter(el, val, 900);
+    }
   });
 </script>
 </body>
