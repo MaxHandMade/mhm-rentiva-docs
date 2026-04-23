@@ -2,11 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-15T23:00:00.000Z</updated>
+    <updated>2026-04-23T14:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.27.0: WordPress.org Gönderim Hazırlığı — Sıfır PHPCS Hatası, Sıfır PCP Hatası]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary"/>
+        <updated>2026-04-23T14:00:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.27.0, eklentinin WordPress.org resmi eklenti dizinine gönderim öncesi kod kalite denetimini tamamladığımız bir ara durak sürümüdür. Dağıtılan kodun tamamı artık projenin katı PHPCS kural setinde sıfır hata, sıfır uyarı ve WordPress.org'un resmi denetim aracı olan Plugin Check (PCP) karşısında sıfır hata seviyesinde. Süreç içerisinde tespit edilen dört gerçek defekt de kapatıldı.]]></summary>
+        <content type="html"><![CDATA[<p>v4.27.0, eklentinin WordPress.org resmi eklenti dizinine gönderim öncesi kod kalite denetimini tamamladığımız bir ara durak sürümüdür. Dağıtılan kodun tamamı artık projenin katı PHPCS kural setinde <strong>sıfır hata, sıfır uyarı</strong> ve WordPress.org'un resmi denetim aracı olan Plugin Check (PCP) karşısında <strong>sıfır hata</strong> seviyesinde. Süreç içerisinde tespit edilen dört gerçek defekt de kapatıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-neden-bu-sürüm">🎯 Neden Bu Sürüm?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-neden-bu-s%C3%BCr%C3%BCm" class="hash-link" aria-label="🎯 Neden Bu Sürüm? doğrudan bağlantı" title="🎯 Neden Bu Sürüm? doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress.org gönderimi "en ufak hatada red cevabı veriyorlar, fazla uyarı varsa gene ret" şeklinde özetlenebilir. Bu nedenle:</p>
+<ol>
+<li class=""><strong>Plugin Check (PCP) sıfır hata zorunlu</strong> — resmi denetim aracı, insan inceleyici önce bunu çalıştırıyor.</li>
+<li class=""><strong>PHPCS katı ruleset'te sıfır hata hedefi</strong> — insan inceleyici kodu gözle tararken dağınıklık görmesin.</li>
+<li class=""><strong>PHPUnit 728/728 yeşil</strong> — fonksiyonellik korunmalı.</li>
+</ol>
+<p>Bu üçü birden sağlandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama-özeti">📊 Doğrulama Özeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-do%C4%9Frulama-%C3%B6zeti" class="hash-link" aria-label="📊 Doğrulama Özeti doğrudan bağlantı" title="📊 Doğrulama Özeti doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Öncesi</th><th>Sonrası</th></tr></thead><tbody><tr><td>PHPCS errors</td><td>5158</td><td><strong>0</strong></td></tr><tr><td>PHPCS warnings</td><td>1273</td><td><strong>0</strong></td></tr><tr><td>Plugin Check errors</td><td>37</td><td><strong>0</strong></td></tr><tr><td>Plugin Check warnings</td><td>326</td><td>3 trivial (release ZIP dışı)</td></tr><tr><td>PHPUnit</td><td>720/720</td><td><strong>728/728</strong> (+8 yeni test, 0 regresyon)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gerçek-defektler-yol-boyunca-bulunanlar">🔧 Gerçek Defektler (Yol Boyunca Bulunanlar)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-ger%C3%A7ek-defektler-yol-boyunca-bulunanlar" class="hash-link" aria-label="🔧 Gerçek Defektler (Yol Boyunca Bulunanlar) doğrudan bağlantı" title="🔧 Gerçek Defektler (Yol Boyunca Bulunanlar) doğrudan bağlantı" translate="no">​</a></h2>
+<p>Temizlik sırasında dört gerçek hata tespit edildi:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-currencyhelper--yinelenen-try-takma-adları">1. CurrencyHelper — Yinelenen <code>"TRY"</code> Takma Adları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#1-currencyhelper--yinelenen-try-takma-adlar%C4%B1" class="hash-link" aria-label="1-currencyhelper--yinelenen-try-takma-adları doğrudan bağlantı" title="1-currencyhelper--yinelenen-try-takma-adları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Türk Lirası normalizasyon haritasında <code>"₺" =&gt; 'TRY'</code> anahtarı sessizce iki kez tanımlanıyordu. PHP ikinciyi birinci üzerine yazıyor, harita beklendiği gibi çalışıyordu ama kod okuyucu için kafa karıştırıcıydı. Kaldırıldı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-searchresults--yinelenen-error-i18n-anahtarı">2. SearchResults — Yinelenen <code>error</code> i18n Anahtarı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#2-searchresults--yinelenen-error-i18n-anahtar%C4%B1" class="hash-link" aria-label="2-searchresults--yinelenen-error-i18n-anahtarı doğrudan bağlantı" title="2-searchresults--yinelenen-error-i18n-anahtarı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Arama sonuçları JavaScript tarafına aktarılan i18n sözlüğünde <code>error</code> anahtarı iki kez tanımlanmıştı:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('An error occurred. Please try again.', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('Error', 'mhm-rentiva'),  // Bu birincisini eziyordu</span><br></span></code></pre></div></div>
+<p>Uzun mesaj ölü kod haline gelmişti; kullanıcı sadece "Error" görüyordu. Tekil olarak yeniden yapılandırıldı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-woocommercebridge--erişilemeyen-yinelenen-return">3. WooCommerceBridge — Erişilemeyen Yinelenen <code>return</code><a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#3-woocommercebridge--eri%C5%9Filemeyen-yinelenen-return" class="hash-link" aria-label="3-woocommercebridge--erişilemeyen-yinelenen-return doğrudan bağlantı" title="3-woocommercebridge--erişilemeyen-yinelenen-return doğrudan bağlantı" translate="no">​</a></h3>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if (! $order) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;  // Bu satıra asla ulaşılmazdı</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>İkinci <code>return</code> silindi.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-cron-sweep-sessiz-i̇stisna-yutma">4. Cron Sweep Sessiz İstisna Yutma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#4-cron-sweep-sessiz-i%CC%87stisna-yutma" class="hash-link" aria-label="4. Cron Sweep Sessiz İstisna Yutma doğrudan bağlantı" title="4. Cron Sweep Sessiz İstisna Yutma doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>AutoCancel</code> ve <code>AutoComplete</code> cron görevleri her rezervasyonu <code>try/catch</code> içinde işliyordu ama <code>catch</code> blokları tamamen boştu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Handle silently in production</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sorun: tek bir rezervasyondaki hata tüm döngüyü kilitlerken, logsuz kaldığı için fark edilemiyordu. Düzeltme — hata günlüğe yazılır, döngü devam eder:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    error_log('[mhm-rentiva] auto-cancel skipped booking ' . $bid . ': ' . $e-&gt;getMessage());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-i18n-eksiklikleri">🌍 i18n Eksiklikleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-i18n-eksiklikleri" class="hash-link" aria-label="🌍 i18n Eksiklikleri doğrudan bağlantı" title="🌍 i18n Eksiklikleri doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>sprintf</code> / <code>_n</code> / <code>__</code> çağrılarında yer tutucu (<code>%s</code>, <code>%d</code>, <code>%1$d</code>) içeren 24 satırda çevirmen açıklaması eksikti. Her birine standart yorum eklendi:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">/* translators: %d: maximum number of vehicles allowed in Lite tier */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sprintf( __( '%d vehicles', 'mhm-rentiva' ), $max_vehicles );</span><br></span></code></pre></div></div>
+<p>Etkilenen alanlar: lisans paneli Lite sınırları, mesaj widget'ı, dashboard geri sayım, araç yaşam döngüsü hata mesajları, bayi ayarları, bayi rezervasyon detayı, yaklaşan operasyonlar tablosu.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-mekanik-güncellemeler">🏗️ Mekanik Güncellemeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#%EF%B8%8F-mekanik-g%C3%BCncellemeler" class="hash-link" aria-label="🏗️ Mekanik Güncellemeler doğrudan bağlantı" title="🏗️ Mekanik Güncellemeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>json_encode()</code> → <code>wp_json_encode()</code></strong>: 18 çağrı yeri güncellendi (CLI komutları, REST yardımcıları, raporlar, dışa aktarmalar, bildirimler, GDPR araçları).</li>
+<li class=""><strong><code>declare(strict_types=1)</code></strong>: İki block placeholder dosyasına eklendi.</li>
+<li class=""><strong>Control structure assignment'lar</strong>: İki yerde <code>if ($cached = ...)</code> kalıbı iki satırlık forma ayrıldı.</li>
+<li class=""><strong>Loop condition <code>count()</code></strong>: IP maskeleme yardımcısında değer bir kez hesaplanıp değişkene alındı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-phpcsxml--savunulabilir-suppress-bloku">📋 phpcs.xml — Savunulabilir Suppress Bloku<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-phpcsxml--savunulabilir-suppress-bloku" class="hash-link" aria-label="📋 phpcs.xml — Savunulabilir Suppress Bloku doğrudan bağlantı" title="📋 phpcs.xml — Savunulabilir Suppress Bloku doğrudan bağlantı" translate="no">​</a></h2>
+<p>678 kalan ihlalin çoğu WordPress.org perspektifinden "gerçek defekt" değildi ama kural seti bunları da işaretliyordu. Her bir sniff için savunulabilir bir gerekçe ile suppress edildi:</p>
+<ul>
+<li class=""><strong>Public API Stability</strong>: <code>ValidFunctionName.MethodNameInvalid</code> (194), <code>ValidHookName.UseUnderscores</code> (45), reserved keyword param isimleri — bunlar yeniden adlandırılırsa tüm Elementor widget'ları, tema override'ları ve üçüncü parti integration'lar kırılır. v5.0 majör sürümde dokümante migration ile ele alınacak.</li>
+<li class=""><strong>Discouraged-but-not-forbidden PHP fonksiyonları</strong>: <code>base64_encode/decode</code> (HMAC imza), <code>serialize</code> (legacy WP options), <code>urlencode</code> (RFC 3986), <code>file_get_contents</code> (yerel asset), <code>error_log</code> (structured log) — WordPress çekirdeği de aynılarını kullanıyor.</li>
+<li class=""><strong>Performans sezgileri</strong>: <code>meta_query</code>, <code>posts_per_page</code>, <code>post__not_in</code> — her kullanım gerekçeli; alternatif (custom tables) majör migrasyon gerektiriyor.</li>
+<li class=""><strong>Codex kalite gürültüleri</strong>: <code>unused-after-last-used</code> (hook callback imzaları), <code>loose-equal</code>, <code>short-ternary</code> (standart PHP özelliği), <code>current_time('timestamp')</code> — bilinçli tercihler.</li>
+<li class=""><strong>WP global accessor pattern</strong>: <code>$wp_query</code>, <code>$post</code>, <code>$wpdb</code> — WP public API.</li>
+<li class=""><strong>15dk altı cron</strong>: <code>CronSchedulesInterval</code> — rezervasyon otomatik iptali 5 dakikada bir çalışıyor, UX kararı.</li>
+<li class=""><strong>Template strict types</strong>: <code>templates/</code> dizini <code>RequireStrictTypes</code> kuralından dışlandı (tip juggling gerekli).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-araç-kiti">🛠️ Araç Kiti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#%EF%B8%8F-ara%C3%A7-kiti" class="hash-link" aria-label="🛠️ Araç Kiti doğrudan bağlantı" title="🛠️ Araç Kiti doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>phpcompatibility/phpcompatibility-wp</code></strong> dev dependency olarak eklendi; <code>PHPCompatibilityWP</code> kuralı <code>testVersion=8.1-</code> ile yeniden etkin.</li>
+<li class="">Composer scriptleri: <code>phpcs:release</code>, <code>phpcbf:release</code>, <code>plugin-check:release</code> — tekrar edilebilir doğrulama.</li>
+<li class="">Yerel <code>*fixer*.php</code> dev araçları ve <code>.worktrees/</code> klasörü <code>.distignore</code> üzerinden yayın ZIP'inden dışlandı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.0.zip</code> dosyasını indirin ve <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong> üzerinden yükleyin; veya Rentiva Pro otomatik güncelleyicisini kullanın.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">v4.26.8 shortcode inceleme backlog</li>
+<li class="">v4.26.9 Popüler Rotalar shortcode (transfer lokasyonları vitrini)</li>
+<li class="">v4.27.x: WP 6.9 son test geçişleri ve WordPress.org resmi gönderim</li>
+</ul>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.0" target="_blank" rel="noopener noreferrer" class="">v4.27.0</a></em></p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="minor" term="minor"/>
+        <category label="wpcs" term="wpcs"/>
+        <category label="phpcs" term="phpcs"/>
+        <category label="plugin-check" term="plugin-check"/>
+        <category label="wordpress-org" term="wordpress-org"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+        <category label="quality" term="quality"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.26.6: Araç Izgarası Shortcode İnceleme Düzeltmeleri]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary</id>
@@ -908,25 +993,5 @@
         <category label="update" term="update"/>
         <category label="security" term="security"/>
         <category label="refactoring" term="refactoring"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.6.4: Veri Bütünlüğü ve Çıktı Güvenliği]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary"/>
-        <updated>2026-01-26T09:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva v4.6.4 sürümü yayınlandı! Bu sürümde yönetici paneli çıktı güvenliği ve para birimi sembollerindeki tutarlılık hataları giderildi.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.4</strong> sürümü yayınlandı! Bu sürümde yönetici paneli çıktı güvenliği ve para birimi sembollerindeki tutarlılık hataları giderildi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Admin sekmelerinde <code>esc_html</code> ve <code>wp_kses_post</code> kullanılarak çıktı kaçırma işlemleri güçlendirildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>AddonManager ve Rezervasyon Meta Kutularındaki fiyat/ID alanları için sanitizasyon iyileştirildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Rezervasyon Düzenleme ekranlarındaki hardcoded para birimi sembol sorunları giderildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Araç kolonları ve sistem bilgisi sayfalarındaki SQL sorguları optimize edildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Manuel rezarvasyon ve araç yönetiminde kalan bazı Türkçe dizeler İngilizce'ye çevrildi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.4-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
-<p>Yönetici panelindeki veri giriş ve çıkış noktalarında güvenlik standartları artırıldı. Özellikle fiyatlandırma alanlarındaki sanitizasyon iyileştirmeleri veri bütünlüğünü garanti altına almaktadır.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="update" term="update"/>
-        <category label="security" term="security"/>
-        <category label="data-integrity" term="data-integrity"/>
     </entry>
 </feed>
