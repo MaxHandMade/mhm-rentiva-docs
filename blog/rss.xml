@@ -4,10 +4,102 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 23 Apr 2026 18:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 23 Apr 2026 19:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.27.2: Settings Testing Kirlilik Hotfix + Duplicate Addon Notice Dedupe]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix</guid>
+            <pubDate>Thu, 23 Apr 2026 19:00:00 GMT</pubDate>
+            <description><![CDATA[v4.27.1 i18n hotfix'inden sonra kullanıcı üç yeni bug daha bildirdi — hepsi aynı taze-kurulum senaryosundan geliyor ve üçü de Settings Testing sayfasında "Run All Diagnostics" butonuna bir kere basma ile tetikleniyor. v4.27.2 bu zinciri kırıyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.27.1 i18n hotfix'inden sonra kullanıcı üç yeni bug daha bildirdi — hepsi aynı taze-kurulum senaryosundan geliyor ve üçü de <strong>Settings Testing sayfasında "Run All Diagnostics" butonuna bir kere basma</strong> ile tetikleniyor. v4.27.2 bu zinciri kırıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-1-taze-kurulumda-tüm-text-alanları-1">🐛 Bug 1: Taze Kurulumda Tüm Text Alanları "1"<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-1-taze-kurulumda-t%C3%BCm-text-alanlar%C4%B1-1" class="hash-link" aria-label="🐛 Bug 1: Taze Kurulumda Tüm Text Alanları &quot;1&quot; doğrudan bağlantı" title="🐛 Bug 1: Taze Kurulumda Tüm Text Alanları &quot;1&quot; doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>Senaryo:</strong></p>
+<ol>
+<li class="">Eklenti taze kurulur.</li>
+<li class="">Kullanıcı <strong>Ayarlar → Settings Testing</strong> sekmesine gidip "Run All Diagnostics" butonuna basar.</li>
+<li class="">General Settings'e döner — <strong>Brand Name = "1"</strong>, <strong>Cancellation Deadline = 1</strong>, <strong>Payment Deadline = 1</strong>, Support Email, Brand Logo URL, vs. hep "1".</li>
+<li class="">Ancak <strong>"Reset to Defaults"</strong> butonuna basınca düzeliyor.</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kök-neden">Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#k%C3%B6k-neden" class="hash-link" aria-label="Kök Neden doğrudan bağlantı" title="Kök Neden doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>SettingsTester::test_settings_save()</code> bir "değişiklik algılanmış save" tetiklemek için boş string'leri <code>'1'</code>'e çeviriyordu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// Fresh install: $current_str == ''</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ( in_array( $current_str, array( '0', '1', '' ) ) ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $test_value = ( $current_str === '1' ) ? '0' : '1'; // → '1'</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sonra bu <code>'1'</code> payload'u <strong>GERÇEK</strong> sanitizer'a veriliyordu. Sanitizer hedef tab'ın TÜM alanlarını yeniden yazıyordu (sadece test edilen keyleri değil). Restore mekanizması ise SADECE açıkça test edilen keyleri eski haline getiriyordu → diğer tab alanlarına yapılan collateral yazımlar DB'de kalıyordu.</p>
+<p><strong>Vahim nokta:</strong> Fresh install'da General test çalıştığında:</p>
+<ul>
+<li class=""><code>brand_name</code> → '1' (test flip'i, sonra restore edildi) ✓</li>
+<li class=""><code>currency</code> → '1' (flip + restore) ✓</li>
+<li class=""><code>dark_mode</code> → sanitizer yazdı, test hiç dokunmadı → <strong>DB'de kaldı</strong></li>
+<li class=""><code>support_email</code> → sanitizer default olarak <code>admin@...</code>e yazdı, flip'le '1' oldu, restore edilmedi → <strong>DB'de kaldı</strong></li>
+<li class="">... ve daha fazlası</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-harness-fix--tam-snapshotrestore">1. Harness fix — tam snapshot/restore<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#1-harness-fix--tam-snapshotrestore" class="hash-link" aria-label="1. Harness fix — tam snapshot/restore doğrudan bağlantı" title="1. Harness fix — tam snapshot/restore doğrudan bağlantı" translate="no">​</a></h4>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// YENİ v4.27.2: BÜTÜN option'ı snapshot al, BÜTÜN option'ı restore et.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$option_existed_before = false !== get_option( $option_name, false );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$full_option_snapshot  = (array) get_option( $option_name, array() );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ... test koşar, sanitizer DB'yi kirletir ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ( $option_existed_before ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_option( $option_name, $full_option_snapshot );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">} else {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    delete_option( $option_name );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Test artık DB'yi gerçekten read-only bırakıyor. Collateral yazımlar otomatik yok oluyor.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-migration--mevcut-installları-temizle">2. Migration — mevcut install'ları temizle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#2-migration--mevcut-installlar%C4%B1-temizle" class="hash-link" aria-label="2. Migration — mevcut install'ları temizle doğrudan bağlantı" title="2. Migration — mevcut install'ları temizle doğrudan bağlantı" translate="no">​</a></h4>
+<p><code>SettingsCore::migrate_clean_test_pollution()</code> flag'li (<code>mhm_rentiva_v4272_test_pollution_cleaned</code>) tek seferlik migrasyon:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$polluted_keys = array(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_brand_name', 'mhm_rentiva_email_from_name',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_email_from_address', 'mhm_rentiva_support_email',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_booking_url', 'mhm_rentiva_login_url',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_currency', /* ... */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">foreach ($polluted_keys as $key) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $value = $settings[$key] ?? null;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ('0' === $value || '1' === $value) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        unset($settings[$key]); // fallback to default</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sadece kirlilik imzasını (<code>'0'</code> / <code>'1'</code>) olan <strong>text, email, URL, currency</strong> alanlarını temizliyor. Numeric alanlar (deadline'lar) dokunulmadı — kullanıcı gerçekten 1 girmek istemiş olabilir (nadiren). Legitimate string değerler korunuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-2-ek-hizmetler-sayfasında-çift-limit-notice">🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-2-ek-hizmetler-sayfas%C4%B1nda-%C3%A7ift-limit-notice" class="hash-link" aria-label="🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice doğrudan bağlantı" title="🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice doğrudan bağlantı" translate="no">​</a></h2>
+<p>Additional Services admin sayfasında Lite limit uyarısı <strong>iki kez</strong> görünüyordu — istatistik kartlarının üstünde ve altında.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kök-neden-1">Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#k%C3%B6k-neden-1" class="hash-link" aria-label="Kök Neden doğrudan bağlantı" title="Kök Neden doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>AddonMenu::add_addon_page_title()</code> içinde, notice iç içe geçmiş <code>&lt;div class="wrap"&gt;</code> bloğunun içinde emit ediliyordu. WordPress core admin-notice relocator JS'i bu durumda:</p>
+<ul>
+<li class="">Standart kopyayı <code>wp-header-end</code> marker'ından sonra yerleştiriyor</li>
+<li class="">Orijinal kopya iç wrap'in içinde duruyor</li>
+<li class="">→ İki kopya</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm-1">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm-1" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<p>Notice artık ayrı bir <code>admin_notices</code> callback'i — <code>AddonMenu::render_addon_limit_notice()</code> — priority 20'de. İç wrap kapatıldıktan SONRA emit ediliyor, WordPress tam olarak bir kez yerleştiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-3-settings-testing-defaults-set-phantom-key-failleri">🐛 Bug 3: Settings Testing "Defaults Set" Phantom Key FAIL'leri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-3-settings-testing-defaults-set-phantom-key-failleri" class="hash-link" aria-label="🐛 Bug 3: Settings Testing &quot;Defaults Set&quot; Phantom Key FAIL'leri doğrudan bağlantı" title="🐛 Bug 3: Settings Testing &quot;Defaults Set&quot; Phantom Key FAIL'leri doğrudan bağlantı" translate="no">​</a></h2>
+<p>Settings Testing sayfası, hiçbir yerde kayıtlı olmayan ayar keyleri için "Defaults Set: FAIL" veriyordu:</p>
+<ul>
+<li class=""><code>mhm_rentiva_timezone</code> (General'de yok)</li>
+<li class=""><code>mhm_rentiva_db_auto_optimize</code> (Core'da yok)</li>
+<li class=""><code>mhm_rentiva_wp_optimization_enabled</code> (Core'da yok)</li>
+<li class=""><code>mhm_rentiva_my_account_url</code> (Frontend'de yok)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm-2">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm-2" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu phantom keyleri check-list'ten çıkardım. Ayrıca "Email Address Valid" ve "Email Validation Works" FAIL'leri de Bug 1'in alt etkisiydi (<code>'1'</code> → <code>is_email('1')</code> = false) — kirlilik migrasyonu çalıştıktan sonra kendiliğinden geçer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>tests/Migration/SettingsTestPollutionMigrationTest.php</code> — <strong>5 yeni test, 19 assertion</strong>:</p>
+<ol>
+<li class="">Text/email/URL/currency kirliliği temizleniyor</li>
+<li class="">Meşru kullanıcı değerleri korunuyor</li>
+<li class="">Numeric alanlar (deadlines) dokunulmuyor</li>
+<li class="">Post-migration meşru "1" rename'i ezilmiyor (idempotent)</li>
+<li class="">Fresh install'da flag set ediliyor</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama">✅ Doğrulama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-do%C4%9Frulama" class="hash-link" aria-label="✅ Doğrulama doğrudan bağlantı" title="✅ Doğrulama doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS release</td><td>0 error / 0 warning</td></tr><tr><td>PHPUnit</td><td><strong>737/737</strong> (+5 yeni, 732→737), 6 skipped, 0 regresyon</td></tr><tr><td>Plugin Check (PCP)</td><td>0 error, 3 trivial warning (değişmedi)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-upgrade-notu">⚠️ Upgrade Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#%EF%B8%8F-upgrade-notu" class="hash-link" aria-label="⚠️ Upgrade Notu doğrudan bağlantı" title="⚠️ Upgrade Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>"Run All Diagnostics"'e basıp Brand Name = 1 gören kullanıcılar: Migrasyon bir sonraki admin page load'da otomatik çalışıyor. <strong>"Reset to Defaults"'a basman GEREKMİYOR</strong>. Text/email/URL/currency alanları defaults'a geri dönecek.</p>
+<p><strong>Sayısal deadline'lar (Cancellation / Payment)</strong> dokunulmuyor — migrasyon bunları kullanıcı seçimi olabilir diye ayırt edemiyor. Booking tab'ında deadline'ları 24 saat / 30 dakika (veya tercih ettiğin değer) olarak manuel ayarla.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.2.zip</code> → <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong>, veya Rentiva Pro otomatik güncelleyicisi.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ders">🎓 Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-ders" class="hash-link" aria-label="🎓 Ders doğrudan bağlantı" title="🎓 Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu üç bug da — v4.27.1 i18n hotfix gibi — <strong>runtime DB-state</strong> sınıfında. Ne PHPCS, ne PCP, ne unit test suite bunları yakalayabilir. Sadece gerçek admin UI üzerinden fresh install senaryosu sınanarak görülüyor. <code>feedback_runtime_smoke_test.md</code> memory notu artık <strong>"her major release öncesi fresh install UI smoke test zorunlu"</strong> diyor — bir sonraki major'da bu pattern'ı checklist'e entegre edeceğim.</p>
+<p>Dinamik tablo: Bir günde 3 release çıkardık — v4.27.0 (WPCS submission prep) → v4.27.1 (i18n locale leak) → v4.27.2 (Settings Testing pollution + duplicate Addon notice). Her biri zero-regression + yeni regression testleri ile. Agile patch pipeline çalışıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">v4.28.0: Popüler Rotalar shortcode/block/widget (yeni özellik)</li>
+<li class="">v4.29.0: Vendor Report / Appeal System (yeni alt sistem)</li>
+<li class="">v4.27.x roadmap'i kapandı — bir sonraki şemsiye v4.28.0 olacak</li>
+</ul>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.2" target="_blank" rel="noopener noreferrer" class="">v4.27.2</a></em></p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>hotfix</category>
+            <category>settings</category>
+            <category>diagnostics</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.27.1: i18n Locale-Leak Hotfix — Araç Ayarları Etiketleri Artık İlk Kurulum Dilinde Donmuyor]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix</link>
@@ -947,22 +1039,6 @@
             <category>update</category>
             <category>security</category>
             <category>performance</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.6.6: Rezervasyon Formu ve Fiyatlandırma İyileştirmeleri]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary</guid>
-            <pubDate>Wed, 28 Jan 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.6.6 sürümü yayınlandı! Bu güncelleme, rezervasyon formundaki görsel hataları giderir ve yeni bir fiyatlandırma detayı ekler.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.6.6</strong> sürümü yayınlandı! Bu güncelleme, rezervasyon formundaki görsel hataları giderir ve yeni bir fiyatlandırma detayı ekler.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛠️ Düzeltme</td><td>Rezervasyon formundaki araç özellik ikonlarının (yakıt, vites vb.) kaybolma sorunu giderildi.</td></tr><tr><td>🛠️ Düzeltme</td><td>Araç özellik verilerinin işlenmesi sırasında oluşan mantıksal hatalar düzeltildi.</td></tr><tr><td>✨ Özellik</td><td>Rezervasyon formu fiyat detayına 'Hafta Sonu Farkı' gösterimi eklendi.</td></tr><tr><td>⚡ İyileştirme</td><td>Rezervasyon formu görselleştirmesi ve ikon boyutlandırmaları optimize edildi.</td></tr><tr><td>🧹 Temizlik</td><td>Çakışan eski CSS kodları temizlendi ve modern yapıya geçildi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.6-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
-<p>Kullanıcı deneyimini iyileştirmek adına rezervasyon formundaki ikon sorunları çözüldü ve fiyatlandırma şeffaflığı için hafta sonu farkı detayı eklendi. CSS yapısı daha sade ve hızlı hale getirildi.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>interface</category>
-            <category>booking</category>
         </item>
     </channel>
 </rss>
