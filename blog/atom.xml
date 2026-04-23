@@ -2,11 +2,80 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-23T14:00:00.000Z</updated>
+    <updated>2026-04-23T18:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[MHM Rentiva v4.27.1: i18n Locale-Leak Hotfix — Araç Ayarları Etiketleri Artık İlk Kurulum Dilinde Donmuyor]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix"/>
+        <updated>2026-04-23T18:30:00.000Z</updated>
+        <summary type="html"><![CDATA[v4.27.0 WordPress.org gönderim hazırlığından birkaç saat sonra kritik bir bug yakalandı: İngilizce bir WordPress sitesinde Araç Ayarları sayfası Türkçe etiketler gösteriyordu. Eklenti global bir eklenti, İngilizce birincil dil. Bu hata submission-blocker seviyesinde. v4.27.1 bunu düzeltiyor.]]></summary>
+        <content type="html"><![CDATA[<p>v4.27.0 WordPress.org gönderim hazırlığından birkaç saat sonra kritik bir bug yakalandı: <strong>İngilizce bir WordPress sitesinde Araç Ayarları sayfası Türkçe etiketler gösteriyordu.</strong> Eklenti global bir eklenti, İngilizce birincil dil. Bu hata submission-blocker seviyesinde. v4.27.1 bunu düzeltiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-hata-senaryosu">🐛 Hata Senaryosu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-hata-senaryosu" class="hash-link" aria-label="🐛 Hata Senaryosu doğrudan bağlantı" title="🐛 Hata Senaryosu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Tipik tekrarlama:</p>
+<ol>
+<li class="">Eklenti Türkçe bir WordPress sitesinde kurulu, Araç Ayarları sayfası bir kez ziyaret edildi.</li>
+<li class="">Site İngilizce'ye çevrildi (veya Türkçe bir DB yedeği İngilizce siteye restore edildi).</li>
+<li class="">Admin paneli hâlâ Türkçe etiketler gösteriyor: <strong>Günlük Fiyat</strong>, <strong>Model Yılı</strong>, <strong>Plaka</strong>, <strong>Klima</strong>, <strong>Yedek Lastik</strong>...</li>
+</ol>
+<p>Oysa kaynak koddaki her <code>__( 'Daily Price', 'mhm-rentiva' )</code> çağrısı güncel WordPress yerel ayarına göre doğru İngilizce değerini döndürüyor. Peki neden admin UI Türkçe gösteriyordu?</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kök-neden">🔍 Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-k%C3%B6k-neden" class="hash-link" aria-label="🔍 Kök Neden doğrudan bağlantı" title="🔍 Kök Neden doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>VehicleMeta::ensure_default_options()</code> fonksiyonu, ilk admin page load'da şöyle bir işlem yapıyordu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$default_details = self::get_default_details(); // __() çağrılarıyla CHEVİRİLMİŞ array</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if (get_option('mhm_vehicle_details', array()) === array()) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_option('mhm_vehicle_details', $default_details); // 🔥 Türkçe değerleri DB'ye yazdı</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><code>get_default_details()</code> içinde:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">return array(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'price_per_day' =&gt; __('Daily Price', 'mhm-rentiva'),   // Türkçe site → "Günlük Fiyat"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'year'          =&gt; __('Model Year', 'mhm-rentiva'),    // Türkçe site → "Model Yılı"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span></code></pre></div></div>
+<p><code>__()</code> <strong>çağrıldığı anın yerel ayarına göre</strong> çeviri döner. İlk site Türkçe'yken bu "Günlük Fiyat" döndü ve <code>wp_options</code>'a yazıldı.</p>
+<p>Sonrasında <code>get_all_available_details()</code> render akışında:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$details = self::get_default_details();              // canlı __() → İngilizce (site EN şimdi)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$stored  = get_option('mhm_vehicle_details');        // DONMUŞ Türkçe</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">foreach ($stored as $key =&gt; $label) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $details[$key] = $label;                         // Override: Türkçe kazanıyor</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><strong>Donmuş çeviri daima canlı çeviriyi eziyordu.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-çözüm">🛠️ Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#%EF%B8%8F-%C3%A7%C3%B6z%C3%BCm" class="hash-link" aria-label="🛠️ Çözüm doğrudan bağlantı" title="🛠️ Çözüm doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-otomatik-persisti-durdur">1. Otomatik persisti durdur<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#1-otomatik-persisti-durdur" class="hash-link" aria-label="1. Otomatik persisti durdur doğrudan bağlantı" title="1. Otomatik persisti durdur doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>VehicleMeta::ensure_default_options()</code> içindeki üç <code>update_option('mhm_vehicle_*', $translated_defaults)</code> çağrısı tamamen kaldırıldı. <code>mhm_selected_*</code> (sadece KEY listesi, çeviri içermez) seed etmeye devam ediyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-mevcut-installları-temizle">2. Mevcut install'ları temizle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#2-mevcut-installlar%C4%B1-temizle" class="hash-link" aria-label="2. Mevcut install'ları temizle doğrudan bağlantı" title="2. Mevcut install'ları temizle doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yeni method <code>VehicleMeta::migrate_remove_auto_populated_labels()</code> — tek seferlik migrasyon, <code>mhm_rentiva_v4271_labels_migrated</code> flag ile korunuyor:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">foreach (['mhm_vehicle_details', 'mhm_vehicle_features', 'mhm_vehicle_equipment'] as $key) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $stored = get_option($key, null);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (is_array($stored) &amp;&amp; !empty($stored)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        delete_option($key);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Migrasyon <code>plugins_loaded</code> hook'unda mevcut version-drift bloğu içinde tetikleniyor — admin, cron ve WP-CLI akışlarında hepsinde çalışıyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-kullanıcı-custom-alanları-korunuyor">3. Kullanıcı custom alanları korunuyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#3-kullan%C4%B1c%C4%B1-custom-alanlar%C4%B1-korunuyor" class="hash-link" aria-label="3. Kullanıcı custom alanları korunuyor doğrudan bağlantı" title="3. Kullanıcı custom alanları korunuyor doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>mhm_custom_details</code>, <code>mhm_custom_features</code>, <code>mhm_custom_equipment</code> — kullanıcının "Özel Ekle" ile eklediği alanlar başka options'ta duruyor. Migrasyon bunlara dokunmuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-trade-off">⚖️ Trade-off<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#%EF%B8%8F-trade-off" class="hash-link" aria-label="⚖️ Trade-off doğrudan bağlantı" title="⚖️ Trade-off doğrudan bağlantı" translate="no">​</a></h2>
+<p>"İsimleri Düzenle" (Edit Names) ile bir çekirdek alanı yeniden adlandırdıysan (örn. "Daily Price" → "Rental Rate"), upgrade sonrası bu rename'i tek sefer yeniden uygulaman gerekiyor. Bu nadir bir senaryo — ama bug her install'ı etkiliyordu. Takas adil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>tests/Migration/LocaleLeakLabelsMigrationTest.php</code> — <strong>4 yeni regresyon testi, 13 assertion</strong>:</p>
+<ol>
+<li class=""><strong>Sızmış etiket array'leri temizleniyor</strong> (Türkçe, İngilizce, karışık içeriklerde)</li>
+<li class=""><strong>Migrasyon idempotent</strong> — ikinci çağrı no-op, meşru post-migration rename'i ezmiyor</li>
+<li class=""><strong>Fresh install</strong> — legacy option yok, flag yine de set ediliyor (sonraki çağrılar atlanıyor)</li>
+<li class=""><strong><code>mhm_custom_*</code></strong> — kullanıcı custom alanlarına dokunulmuyor</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama">✅ Doğrulama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-do%C4%9Frulama" class="hash-link" aria-label="✅ Doğrulama doğrudan bağlantı" title="✅ Doğrulama doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS release scope</td><td>0 error, 0 warning</td></tr><tr><td>PHPUnit</td><td><strong>732/732</strong> (+4 yeni), 6 skipped, 0 regresyon</td></tr><tr><td>Plugin Check (PCP)</td><td>0 error, 3 trivial warning (.distignore-excluded)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.1.zip</code> → <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong>, veya Rentiva Pro otomatik güncelleyicisi.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>v4.27.2</strong>: Arama Sonuçları UX iyileştirmeleri + Shortcode Review Backlog (birleşik patch)</li>
+<li class=""><strong>v4.28.0</strong>: Popüler Rotalar shortcode/block/widget (yeni özellik)</li>
+<li class=""><strong>v4.29.0</strong>: Vendor Report / Appeal System (yeni alt sistem)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ders">🎓 Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.1-i18n-locale-leak-hotfix#-ders" class="hash-link" aria-label="🎓 Ders doğrudan bağlantı" title="🎓 Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu bug <strong>v4.27.0 WordPress.org submission readiness release'inden birkaç saat sonra</strong> yakalandı. Zero PHPCS / zero PCP doğrulama suite'i geçmişti ama <em>runtime</em> bir hatayı (mevcut DB state'in <code>__()</code> çıktılarını ezmesi) ne PHPCS ne PCP görebilirdi. Gerçek kullanıcı admin UI testi tek güvence. WordPress.org gönderiminden önce smoke test tur atmamız gerekiyordu — v4.27.1 ile bu pattern kazanıldı: <strong>test kaynağı çeviri katmanlarından geçen her UI için manuel doğrulama zorunlu.</strong></p>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.1" target="_blank" rel="noopener noreferrer" class="">v4.27.1</a></em></p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="patch" term="patch"/>
+        <category label="hotfix" term="hotfix"/>
+        <category label="i18n" term="i18n"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="mhm-rentiva" term="mhm-rentiva"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MHM Rentiva v4.27.0: WordPress.org Gönderim Hazırlığı — Sıfır PHPCS Hatası, Sıfır PCP Hatası]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary</id>
@@ -973,25 +1042,5 @@
         <category label="update" term="update"/>
         <category label="interface" term="interface"/>
         <category label="booking" term="booking"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.6.5: WPCS Uyumluluğu ve Kod Standartları]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary"/>
-        <updated>2026-01-26T15:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva v4.6.5 sürümü yayınlandı! Bu büyük ölçekli altyapı güncellemesi ile 110.000+ satır kod WordPress standartlarına (WPCS) uyumlu hale getirildi.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.6.5</strong> sürümü yayınlandı! Bu büyük ölçekli altyapı güncellemesi ile 110.000+ satır kod WordPress standartlarına (WPCS) uyumlu hale getirildi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>50+ WPCS güvenlik uyarısı çözüldü (Girdi Sanitizasyonu &amp; DB İnterpolasyonu).</td></tr><tr><td>🛡️ Güvenlik</td><td>Handler.php ve AccountController.php XSS'e karşı güçlendirildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>Eski <code>error_log</code> yapısı modern <code>AdvancedLogger</code> mimarisiyle değiştirildi.</td></tr><tr><td>⚡ İyileştirme</td><td>110.000+ WordPress Kodlama Standartları (WPCS) uyumsuzluğu otomatik düzeltildi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.5-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu güncelleme eklentimizin gelecekteki gelişimini sağlam bir temele oturtmaktadır. Geniş çaplı kod standartları denetimi ile hem güvenlik hem de bakım kolaylığı en üst düzeye çıkarıldı.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="update" term="update"/>
-        <category label="security" term="security"/>
-        <category label="refactoring" term="refactoring"/>
     </entry>
 </feed>
