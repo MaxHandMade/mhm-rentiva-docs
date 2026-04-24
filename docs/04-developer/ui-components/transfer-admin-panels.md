@@ -1,110 +1,111 @@
 ---
 id: transfer-admin-panels
-title: Transfer Admin Panelleri (UI & Dashboards)
-sidebar_label: Transfer Admin Panelleri
+title: Transfer Admin Panels (UI & Dashboards)
+sidebar_label: Transfer Admin Panels
 sidebar_position: 7
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Rentiva'nın araç transferi (Havalimanı VIP, Şehirlerarası vb.) operasyonlarını yöneten admin arayüzlerinin teknik mimarisini ve veri giriş kurallarını açıklar.
+:::info Purpose
+This page describes the technical architecture and data entry rules of the admin interfaces that manage Rentiva's vehicle transfer operations (Airport VIP, Intercity, etc.).
 :::
 
-# 🛣️ Transfer Admin Panelleri
+# 🛣️ Transfer Admin Panels
 
-Transfer modülü, standart araç kiralamadan farklı olarak lokasyon bazlı bir ağ yapısı üzerinde çalışır. `TransferAdmin` sınıfı, bu ağın yönetildiği ekranları (Locations, Routes, Stats) merkezi olarak kontrol eder.
-
----
-
-## 🏗️ Mimari Bileşenler
-
-Modül, veri girişi ve görselleştirme için üç ana bileşen kullanır:
-1.  **Stats Cards:** Lokasyon, rota ve son işlem verilerini gösteren üst panel.
-2.  **Location Manager:** Havalimanı, Otel, Liman gibi transfer noktalarının tanımı.
-3.  **Route Configurator:** İki lokasyon arasındaki mesafe, süre ve fiyatlandırma kuralları.
+The Transfer module operates on a location-based network structure, distinct from standard vehicle rental. The `TransferAdmin` class centrally controls the screens (Locations, Routes, Stats) where this network is managed.
 
 ---
 
-## 📊 Transfer İstatistik Kartları (Stats)
+## 🏗️ Architecture Components
 
-Admin panelinin üst kısmında yer alan `render_transfer_stats()` metodu, anlık operasyonel veriyi sunar:
-
-- **Total Locations:** `rentiva_transfer_locations` tablosundaki aktif transfer noktaları.
-- **Active Routes:** Tanımlanmış ve fiyatlandırılmış geçerli rotalar.
-- **Latest Operation:** En son yapılan `transfer` tipindeki rezervasyonun tarihi.
+The module uses three main components for data entry and visualization:
+1.  **Stats Cards:** Top panel showing location, route, and latest operation data.
+2.  **Location Manager:** Definition of transfer points such as airports, hotels, and ports.
+3.  **Route Configurator:** Distance, duration, and pricing rules between two locations.
 
 ---
 
-## Lokasyon Tipleri (Location Types)
+## 📊 Transfer Stats Cards
 
-Sistem asagidaki dahili tipleri destekler ve bu tipler Dashboard uzerinde ikonografiyi degistirir:
-- **Airport:** Havalimani noktalari.
-- **Hotel:** Konaklama tesisleri.
-- **Port:** Liman ve Cruise terminalleri.
-- **Station:** Tren ve Otobus terminalleri.
-- **City Center:** Şehir merkezi noktalari.
+The `render_transfer_stats()` method, located at the top of the admin panel, presents real-time operational data:
 
-### Lokasyon Formu Alanları
+- **Total Locations:** Active transfer points in the `rentiva_transfer_locations` table.
+- **Active Routes:** Defined and priced valid routes.
+- **Latest Operation:** Date of the most recent booking of type `transfer`.
 
-v4.23.0 itibariyle lokasyon formuna **city** (şehir) alani eklenmiştir. Bu alan, vendor marketplace entegrasyonunda şehir bazli filtreleme için kullanılır:
+---
 
-| Alan | Tip | Açıklama |
+## Location Types
+
+The system supports the following internal types, which change the iconography displayed on the dashboard:
+- **Airport:** Airport transfer points.
+- **Hotel:** Accommodation facilities.
+- **Port:** Harbor and cruise terminals.
+- **Station:** Train and bus terminals.
+- **City Center:** City center points.
+
+### Location Form Fields
+
+As of v4.23.0, a **city** field has been added to the location form. This field is used for city-based filtering in the vendor marketplace integration:
+
+| Field | Type | Description |
 |---|---|---|
-| `name` | VARCHAR(255) | Lokasyon adi |
+| `name` | VARCHAR(255) | Location name |
 | `type` | ENUM | airport, hotel, port, station, city_center |
-| `city` | VARCHAR(100) | Lokasyonun bulundugu şehir (v4.23.0) |
-| `lat` / `lng` | DECIMAL | Koordinatlar |
+| `city` | VARCHAR(100) | City where the location is situated (v4.23.0) |
+| `lat` / `lng` | DECIMAL | Coordinates |
 
 ---
 
-## Rota Formu ve Fiyatlandırma Alanları
+## Route Form and Pricing Fields
 
-Rota formuna v4.23.0 ile **max_price** alani eklenmiştir. Vendor marketplace'de vendor'lar kendi fiyatlarini admin tarafından belirlenen `min_price`/`max_price` araligi içinde belirler:
+A **max_price** field was added to the route form in v4.23.0. In the vendor marketplace, vendors set their own prices within the `min_price`/`max_price` range defined by the admin:
 
-| Alan | Tip | Açıklama |
+| Field | Type | Description |
 |---|---|---|
-| `origin_id` | BIGINT | Baslangic lokasyonu |
-| `destination_id` | BIGINT | Varis lokasyonu |
-| `base_price` | DECIMAL(10,2) | Temel fiyat |
-| `min_price` | DECIMAL(10,2) | Minimum vendor fiyati |
-| `max_price` | DECIMAL(10,2) | Maksimum vendor fiyati (v4.23.0) |
-| `distance_km` | FLOAT | Mesafe (km) |
-| `duration_min` | INT | Tahmini sure (dk) |
+| `origin_id` | BIGINT | Origin location |
+| `destination_id` | BIGINT | Destination location |
+| `base_price` | DECIMAL(10,2) | Base price |
+| `min_price` | DECIMAL(10,2) | Minimum vendor price |
+| `max_price` | DECIMAL(10,2) | Maximum vendor price (v4.23.0) |
+| `distance_km` | FLOAT | Distance (km) |
+| `duration_min` | INT | Estimated duration (min) |
 
 ---
 
-## Vendor Araç Meta Kutusu (`VehicleTransferMetaBox.php`)
+## Vendor Vehicle Meta Box (`VehicleTransferMetaBox.php`)
 
-Admin panelinde bir vendor aracıni düzenlerken, `VehicleTransferMetaBox` vendor'in şehir bilgisini gösterir. Bu sayede admin, vendor'in hangi şehirdeki rotalara erisebilecegini gorebilir.
+When editing a vendor's vehicle in the admin panel, `VehicleTransferMetaBox` displays the vendor's city information. This allows the admin to see which city's routes the vendor can access.
 
 ---
 
-## Veri Kaydi ve Güvenlik
+## Data Saving and Security
 
-Tüm form işlemleri `admin_post` kancaları üzerinden asenkron ve güvenli (Nonce-protected) olarak işlenir:
+All form operations are handled asynchronously and securely (nonce-protected) via `admin_post` hooks:
 
 ```php
-// Örnek: Rota kaydı sırasında tetiklenen kancalar
+// Example: hooks triggered during route saving
 add_action('admin_post_mhm_save_route', array(self::class, 'handle_save_route'));
 add_action('admin_post_mhm_delete_route', array(self::class, 'handle_delete_route'));
 ```
 
 ---
 
-## 📦 Veritabanı Geri Uyumluluğu (DB Fallback)
+## 📦 Database Backward Compatibility (DB Fallback)
 
-Transfer tabloları, modern `rentiva_` öneki ile çalışır ancak eski sistemlerden gelen `mhm_` tablolarını da `resolve_table_name()` metoduyla otomatik olarak tespit edip veriyi korur.
+Transfer tables operate with the modern `rentiva_` prefix, but also automatically detect legacy `mhm_` tables from older systems via the `resolve_table_name()` method and preserve data.
 
-## Bölüm Sonu Özeti
-- Transfer panelleri **Stats-first** yaklasimi ile tasarlanmistir.
-- Lokasyon formunda **city** alani vendor marketplace entegrasyonu için zorunludur.
-- Rota formunda **min_price/max_price** alanları vendor fiyat araligi belirler.
-- `VehicleTransferMetaBox` vendor araç düzenlemesinde şehir bilgisi gösterir.
-- Tum veri girişleri `TransferAdmin` sınıfı üzerinden atomik olarak yapilir.
+## Section Summary
+- Transfer panels are designed with a **stats-first** approach.
+- The **city** field in the location form is required for vendor marketplace integration.
+- The **min_price/max_price** fields in the route form define the vendor price range.
+- `VehicleTransferMetaBox` shows city information when editing a vendor vehicle.
+- All data entry is performed atomically through the `TransferAdmin` class.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | Lokasyon formuna city alani, rota formuna max_price alani, VehicleTransferMetaBox vendor şehir bilgisi eklendi. |
-| 19.03.2026 | 4.21.2 | Sayfa, TransferAdmin stats cards ve modern lokasyon yapısına gore güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | City field added to location form, max_price field added to route form, VehicleTransferMetaBox vendor city info added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect TransferAdmin stats cards and modern location structure. |

@@ -1,79 +1,79 @@
 ---
 id: messages-rest-endpoints
-title: Mesajlaşma ve İletişim API (Messages REST)
-sidebar_label: Mesajlaşma REST
+title: Messaging and Communication API (Messages REST)
+sidebar_label: Messaging REST
 sidebar_position: 70
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Mesajlaşma API'si, müşteriler, tedarikçiler ve sistem yöneticileri arasındaki iletişimi yönetmek için kullanılan uç noktaları (endpoints) açıklar.
+:::info Purpose
+The Messaging API describes the endpoints used to manage communication between customers, vendors, and system administrators.
 :::
 
-# 💬 Mesajlaşma ve İletişim API'si
+# 💬 Messaging and Communication API
 
-Rentiva mesajlaşma sistemi, asenkron bir "Thread" (Konu) mimarisi üzerine kuruludur. Tüm uç noktalar `Messages` servis sınıfı ve `MessageFormatter` yardımcılarını kullanır.
+The Rentiva messaging system is built on an asynchronous "Thread" architecture. All endpoints use the `Messages` service class and `MessageFormatter` helpers.
 
 ---
 
-## 🏗️ 1. Modül Mimarisi
+## 🏗️ 1. Module Architecture
 
-Kayıt noktası: `MHMRentiva\Admin\Messages\REST\Messages::register()`
+Registration point: `MHMRentiva\Admin\Messages\REST\Messages::register()`
 
-Sistem iki ana ad alanı üzerinden hizmet verir:
+The system serves through two main namespaces:
 - **Admin Endpoints:** `/v1/admin/messages/*`
 - **Customer/Vendor Endpoints:** `/v1/portal/messages/*`
 
 ---
 
-## 👨‍💼 2. Admin Uç Noktaları
+## 👨‍💼 2. Admin Endpoints
 
-Sistem yöneticilerinin tüm iletişim trafiğini denetlediği ve yanıtladığı bölümdür.
+The section where system administrators monitor and respond to all communication traffic.
 
-| Endpoint | Metot | İşlev |
+| Endpoint | Method | Function |
 |---|---|---|
-| `/admin/messages` | `GET` | Tüm mesaj konularını (threads) listeler. |
-| `/admin/messages/{id}` | `GET` | Belirli bir konunun tüm mesaj geçmişini döner. |
-| `/admin/messages/{id}/reply` | `POST` | Yönetici adına konuya yanıt gönderir. |
-| `/admin/messages/{id}/status`| `PUT` | Konuyu "Kapatıldı" veya "Çözüldü" olarak işaretler. |
+| `/admin/messages` | `GET` | Lists all message threads. |
+| `/admin/messages/{id}` | `GET` | Returns the full message history for a specific thread. |
+| `/admin/messages/{id}/reply` | `POST` | Sends a reply to the thread on behalf of the administrator. |
+| `/admin/messages/{id}/status`| `PUT` | Marks the thread as "Closed" or "Resolved". |
 
 ---
 
-## 👤 3. Müşteri ve Tedarikçi Uç Noktaları
+## 👤 3. Customer and Vendor Endpoints
 
-Kullanıcıların kendi aralarında veya destek ekibiyle iletişim kurduğu bölümdür.
+The section where users communicate with each other or with the support team.
 
-| Endpoint | Metot | İşlev |
+| Endpoint | Method | Function |
 |---|---|---|
-| `/portal/messages/create` | `POST` | Yeni bir mesaj konusu başlatır. |
-| `/portal/messages/threads` | `GET` | Kullanıcının dahil olduğu aktif konuları listeler. |
-| `/portal/messages/reply` | `POST` | Mevcut bir konuya yeni mesaj ekler. |
+| `/portal/messages/create` | `POST` | Starts a new message thread. |
+| `/portal/messages/threads` | `GET` | Lists active threads the user is part of. |
+| `/portal/messages/reply` | `POST` | Adds a new message to an existing thread. |
 
 ---
 
-## 🛡️ 4. Yetki ve Güvenlik (Ownership)
+## 🛡️ 4. Permission and Security (Ownership)
 
-Mesajlaşma sisteminde kimlik doğrulamanın ötesinde **Sahiplik (Ownership)** kontrolü uygulanır:
+The messaging system applies **Ownership** control beyond authentication:
 
-1. **Sahiplik Kontrolü:** Bir konunun mesajları çekilmeden önce, isteği yapan kullanıcının o konunun tarafı (Gönderen veya Alıcı) olup olmadığı `Messages::verify_access()` ile denetlenir.
-2. **Rol Doğrulaması:** Admin uç noktaları sadece `manage_options` kapasitesine sahip kullanıcılara açıktır.
-3. **İçerik Arındırma:** Tüm mesaj içerikleri kaydedilmeden önce `wp_kses()` ile zararlı HTML etiketlerinden arındırılır.
+1. **Ownership Check:** Before fetching a thread's messages, `Messages::verify_access()` verifies that the requesting user is a party to that thread (Sender or Recipient).
+2. **Role Verification:** Admin endpoints are only accessible to users with the `manage_options` capability.
+3. **Content Sanitization:** All message content is sanitized with `wp_kses()` to remove harmful HTML tags before being saved.
 
 ---
 
-## 📤 5. Yanıt Örneği (Formatted Message)
+## 📤 5. Response Example (Formatted Message)
 
 ```json
 {
   "success": true,
   "data": {
     "thread_id": 45,
-    "subject": "Araç Rezervasyonu Hakkında",
+    "subject": "Regarding Vehicle Booking",
     "messages": [
       {
         "author_name": "Ahmet Y.",
-        "content": "Araçta bebek koltuğu mevcut mu?",
+        "content": "Is a child seat available in the vehicle?",
         "created_at": "2026-03-19 14:30:00",
         "is_read": true
       }
@@ -82,12 +82,13 @@ Mesajlaşma sisteminde kimlik doğrulamanın ötesinde **Sahiplik (Ownership)** 
 }
 ```
 
-## Bölüm Sonu Özeti
-- Mesajlaşma API'si, thread tabanlı bir iletişim modeli sunar.
-- Admin ve portal/müşteri sorumlulukları kesin sınırlarla ayrılmıştır.
-- `verify_access()` katmanı ile veri güvenliği ve gizliliği en üst seviyede tutulur.
+## Section Summary
+- The Messaging API provides a thread-based communication model.
+- Admin and portal/customer responsibilities are separated by clear boundaries.
+- Data security and privacy are maintained at the highest level via the `verify_access()` layer.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Thread mimarisi, Sahiplik (Ownership) kontrolü ve formatlanmış yanıt yapısı eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Thread architecture, Ownership control, and formatted response structure added. |

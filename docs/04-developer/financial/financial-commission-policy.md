@@ -1,46 +1,46 @@
 ---
 id: financial-commission-policy
-title: Komisyon ve Policy Sistemi (Commission Policy)
-sidebar_label: Komisyon ve Policy
+title: Commission and Policy System
+sidebar_label: Commission and Policy
 sidebar_position: 5
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, komisyon oranlarının nasıl belirlendiğini, versiyonlanmış politikaların (`PolicyService`) ve performans teşviklerinin (`TierService`) nasıl çalıştığını dökümante eder.
+:::info Purpose
+This page documents how commission rates are determined, how versioned policies (`PolicyService`) work, and how performance incentives (`TierService`) operate.
 :::
 
-# 🏷️ Komisyon ve Policy Sistemi
+# 🏷️ Commission and Policy System
 
-MHM Rentiva, komisyon oranlarını hesaplamak için çok katmanlı ve deterministik bir **Komisyon Çözümleme Hiyerarşisi** kullanır. Bu sistem, hem global kuralları hem de özel ticari anlaşmaları (Overrides) destekler.
+MHM Rentiva uses a multi-layered, deterministic **Commission Resolution Hierarchy** to calculate commission rates. The system supports both global rules and custom commercial agreements (Overrides).
 
-## 📉 Karar Hiyerarşisi (Resolution Hierarchy)
+## 📉 Resolution Hierarchy
 
-`CommissionResolver`, bir rezervasyon için hangi oranın geçerli olacağına en özelden (Specific) en genele (Global) doğru 4 seviyeli bir kontrol ile karar verir:
+`CommissionResolver` determines which rate applies to a booking through a 4-level check, from most specific to most general:
 
-| Öncelik | Seviye | Meta / Kaynak | Açıklama |
+| Priority | Level | Meta / Source | Description |
 | :--- | :--- | :--- | :--- |
-| **1** | **Vehicle Override** | `_mhm_vendor_commission_rate` | Aracın kendisine özel bir oran atanmışsa en yüksek önceliğe sahiptir. |
-| **2** | **Vendor Override** | `_mhm_vendor_commission_rate` | Satıcı kullanıcısına özel bir oran atanmışsa (Vehicle yoksa) geçerlidir. |
-| **3** | **Tier Incentive** | `TierService` | Satıcının son 30 günlük başarısına göre Global orana ek indirim uygulanır. |
-| **4** | **Global Policy** | `CommissionPolicy` | Hiçbir kural eşleşmezse sistemin varsayılan politika oranı uygulanır. |
+| **1** | **Vehicle Override** | `_mhm_vendor_commission_rate` | If a specific rate is assigned to the vehicle itself, it takes highest priority. |
+| **2** | **Vendor Override** | `_mhm_vendor_commission_rate` | If a specific rate is assigned to the vendor user (and no Vehicle override exists), it applies. |
+| **3** | **Tier Incentive** | `TierService` | An additional discount is applied on top of the Global rate based on the vendor's performance over the last 30 days. |
+| **4** | **Global Policy** | `CommissionPolicy` | If no other rule matches, the system's default policy rate is applied. |
 
 ---
 
-## 🌳 Komisyon Çözümleme Karar Ağacı
+## 🌳 Commission Resolution Decision Tree
 
 ```mermaid
 graph TD
-    Start[Komisyon Hesaplama Başlatıldı] --> V{Araç Override Var mı?}
-    V -- Evet --> VR[Rate = Vehicle Rate]
-    V -- Hayır --> Vend{Vendor Override Var mı?}
+    Start[Commission Calculation Started] --> V{Vehicle Override exists?}
+    V -- Yes --> VR[Rate = Vehicle Rate]
+    V -- No --> Vend{Vendor Override exists?}
     
-    Vend -- Evet --> VendR[Rate = Vendor Rate]
-    Vend -- Hayır --> Tier{Tier Sistemine Uygun mu?}
+    Vend -- Yes --> VendR[Rate = Vendor Rate]
+    Vend -- No --> Tier{Eligible for Tier System?}
     
-    Tier -- Evet --> TierR[Rate = Policy - Tier Discount]
-    Tier -- Hayır --> GP[Rate = Global Policy Rate]
+    Tier -- Yes --> TierR[Rate = Policy - Tier Discount]
+    Tier -- No --> GP[Rate = Global Policy Rate]
     
     VR --> Result[CommissionResult]
     VendR --> Result
@@ -50,28 +50,29 @@ graph TD
 
 ---
 
-## 📜 Policy Versiyonlama ve Denetim
+## 📜 Policy Versioning and Auditing
 
-Sistemde her komisyon oranı bir **Policy** nesnesine (`MHMRentiva\Core\Financial\CommissionPolicy`) bağlıdır.
+Every commission rate in the system is bound to a **Policy** object (`MHMRentiva\Core\Financial\CommissionPolicy`).
 
-- **Immutable Hash:** Her politika değişikliğinde benzersiz bir `version_hash` üretilir.
-- **Audit Consistency:** Ledger kaydı oluşturulurken o anki `policy_id` ve `version_hash` veriye damgalanır. Bu, 2 yıl sonra bile o kaydın neden o oranla hesaplandığını kanıtlar.
-- **Time-based Resolution:** `PolicyService::resolve_policy_at()` metodu, rezervasyonun yaratıldığı tarihteki aktif olan politikayı bulur. Geriye dönük güncellemeler eski kayıtları bozmaz.
+- **Immutable Hash:** A unique `version_hash` is generated on each policy change.
+- **Audit Consistency:** When a Ledger entry is created, the current `policy_id` and `version_hash` are stamped onto the record. This proves why a particular rate was used even 2 years later.
+- **Time-based Resolution:** The `PolicyService::resolve_policy_at()` method finds the policy that was active at the time the booking was created. Retroactive updates do not break old records.
 
 ---
 
-## 💎 Tier ve Teşvik Sistemi (Incentives)
+## 💎 Tier and Incentive System
 
-`TierService`, yüksek hacimli satış yapan satıcıları ödüllendirmek için tasarlanmıştır:
-- **Net Ciro Kontrolü:** Son 30 günlük "Cleared" bakiye üzerinden hesaplanır.
-- **Additif İndirim:** Tier indirimi sadece **Global Policy** üzerinde uygulanır. Özel anlaşması (Override) olan satıcılar Tier indiriminden ayrıca yararlanamaz.
+`TierService` is designed to reward vendors with high sales volume:
+- **Net Revenue Check:** Calculated from the "Cleared" balance over the last 30 days.
+- **Additive Discount:** The Tier discount applies only on top of the **Global Policy**. Vendors with a custom agreement (Override) cannot additionally benefit from the Tier discount.
 
-## Bölüm Sonu Özeti
-- Karar sırası: **Vehicle > Vendor > Tier > Global**.
-- Tüm kararlar **deterministik** ve **versiyonlanmış** politikalara dayanır.
-- Finansal denetim için her hesaplamada politika snaphot'ı alınır.
+## Section Summary
+- Resolution order: **Vehicle > Vendor > Tier > Global**.
+- All decisions are based on **deterministic** and **versioned** policies.
+- A policy snapshot is captured with every calculation for financial auditing.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, 4 seviyeli hiyerarşi ve Tier indirim mantığıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with 4-level hierarchy and Tier discount logic. |

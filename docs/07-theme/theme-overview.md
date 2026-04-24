@@ -1,19 +1,19 @@
 ---
 id: theme-overview
-title: Tema Uyumluluğu ve Görsel Standartlar
-sidebar_label: Genel Bakış
+title: Theme Compatibility & Visual Standards
+sidebar_label: Overview
 sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Theme](https://img.shields.io/badge/theme-v0.3.0-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Theme](https://img.shields.io/badge/theme-v0.3.0-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-# 🎨 Tema ve Görsel Standartlar
+# 🎨 Theme & Visual Standards
 
-MHM Rentiva, modern WordPress blok temaları (FSE) ve klasik temalarla kusursuz uyum sağlar. Görsel bütünlük için gereken tüm tasarım kılavuzuna buradan erişebilirsiniz.
+MHM Rentiva provides seamless compatibility with modern WordPress block themes (FSE) and classic themes. Access the complete design guidelines for visual consistency here.
 
-:::tip TASARIM REHBERİ
-Aşağıdaki kartlar üzerinden tema mimarisi, şablon hiyerarşisi ve stil özelleştirme imkanlarını keşfedebilirsiniz.
+:::tip DESIGN GUIDE
+Use the cards below to explore theme architecture, template hierarchy, and style customization options.
 :::
 
 ---
@@ -21,16 +21,16 @@ Aşağıdaki kartlar üzerinden tema mimarisi, şablon hiyerarşisi ve stil öze
 <div className="row">
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
-      <h3 className="cardTitle">🏗️ Tema Mimarisi</h3>
-      <p className="cardDescription">Eklentinin tema üzerindeki etkisi, CSS/JS yükleme politikaları ve Asset Manager entegrasyonu.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/introduction">Mimarisi İlke</a>
+      <h3 className="cardTitle">🏗️ Theme Architecture</h3>
+      <p className="cardDescription">The plugin's impact on the theme, CSS/JS loading policies, and Asset Manager integration.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/introduction">Architecture Overview</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
-      <h3 className="cardTitle">📦 Şablon & Desenler</h3>
-      <p className="cardDescription">Block Patterns kullanımı, tekil araç sayfası şablonları (Single Vehicle) ve Liste görünümleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/templates-patterns">Şablon Rehberi</a>
+      <h3 className="cardTitle">📦 Templates & Patterns</h3>
+      <p className="cardDescription">Using Block Patterns, single vehicle page templates, and list views.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/templates-patterns">Template Guide</a>
     </div>
   </div>
 </div>
@@ -38,42 +38,43 @@ Aşağıdaki kartlar üzerinden tema mimarisi, şablon hiyerarşisi ve stil öze
 <div className="row">
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
-      <h3 className="cardTitle">🛠️ theme.json Desteği</h3>
-      <p className="cardDescription">Global renk paletleri, tipografi ayarları ve eklentinin temaya has stil parametreleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/theme-json">Stil Kuralları</a>
+      <h3 className="cardTitle">🛠️ theme.json Support</h3>
+      <p className="cardDescription">Global color palettes, typography settings, and theme-specific style parameters for the plugin.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/theme-json">Style Rules</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
-      <h3 className="cardTitle">💻 Tema Geliştirme</h3>
-      <p className="cardDescription">Özel tema geliştirmek isteyenler için kancalar (Hooks) ve override mekanizmaları rehberi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/development">Geliştirme Detayları</a>
+      <h3 className="cardTitle">💻 Theme Development</h3>
+      <p className="cardDescription">Hooks and override mechanisms for developers who want to build a custom theme.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/development">Development Details</a>
     </div>
   </div>
 </div>
 
 ---
 
-### Tema v0.3.0 Temel Bilgiler
+### Theme v0.3.0 Key Facts
 
-| Metrik | Değer |
+| Metric | Value |
 |---|---|
-| **Tema Sürümü** | v0.3.0 |
-| **Şablonlar (templates/)** | 10 adet (front-page, page, single-vehicle, archive-vehicle, page-account, 404, archive, index, search, single) |
-| **Desenler (patterns/)** | 31 adet (homepage, rentiva, 404 kategorilerinde) |
-| **CSS Dosyaları** | 6 adet: `header.css`, `3-layout.css`, `components.css`, `utilities.css`, `plugin-pages.css`, `elementor-compat.css` |
-| **WordPress Sayfaları** | 10+ sayfa (Türkçe slug'lar ile) |
+| **Theme Version** | v0.3.0 |
+| **Templates (templates/)** | 10 total (front-page, page, single-vehicle, archive-vehicle, page-account, 404, archive, index, search, single) |
+| **Patterns (patterns/)** | 31 total (in homepage, rentiva, and 404 categories) |
+| **CSS Files** | 6 total: `header.css`, `3-layout.css`, `components.css`, `utilities.css`, `plugin-pages.css`, `elementor-compat.css` |
+| **WordPress Pages** | 10+ pages (with localized slugs) |
 
-### Mimari Notlar
-- Tema **FSE (Full Site Editing)** mimarisi üzerine inşa edilmiştir.
-- **Mobil navigasyon overlay:** Koyu tema (`#101922`), `backdrop-filter` `::before` pseudo-element'e taşınmıştır (containing-block fix).
-- **header.html:** `style` attribute'u WP block comment ile eşleştirilmiştir (block validation fix).
-- **3-layout.css:** `@layer layout` KALDIRILDI; `rv-trust-value` için `white-space: nowrap` eklendi (10.000+ istatistik karti fix).
-- **Sayfa genişliği:** `content-narrow` yerine `content-wide` kullanılmaktadır; `3-layout.css` max-width değeri `var(--wp--style--global--content-size, 1280px)` ile `theme.json`'a senkronize edilmiştir.
-- Tum görsel bileşenler `AssetManager` üzerinden merkezi olarak yönetilmektedir.
+### Architecture Notes
+- The theme is built on **FSE (Full Site Editing)** architecture.
+- **Mobile navigation overlay:** Dark theme (`#101922`), `backdrop-filter` moved to `::before` pseudo-element (containing-block fix).
+- **header.html:** `style` attribute matched with WP block comment (block validation fix).
+- **3-layout.css:** `@layer layout` REMOVED; `white-space: nowrap` added for `rv-trust-value` (10,000+ stats card fix).
+- **Page width:** Uses `content-wide` instead of `content-narrow`; `3-layout.css` max-width synchronized to `theme.json` via `var(--wp--style--global--content-size, 1280px)`.
+- All visual components are centrally managed via `AssetManager`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | Tema v0.3.0 bilgileri eklendi: 31 pattern, 10 template, 6 CSS dosyası, mimari notlar. |
-| 19.03.2026 | 4.21.2 | Tema kategorisi için premium kart tasarımlı Genel Bakış sayfası oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | Theme v0.3.0 details added: 31 patterns, 10 templates, 6 CSS files, architecture notes. |
+| 19.03.2026 | 4.21.2 | Overview page with premium card design created for theme category. |

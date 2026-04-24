@@ -4,7 +4,7 @@ title: Technical Guide & CI/CD Pipeline
 sidebar_label: Technical & Development
 slug: /theme/development
 ---
-![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![PHP](https://img.shields.io/badge/PHP-8.1+-777bb4?style=flat-square) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![PHP](https://img.shields.io/badge/PHP-8.1+-777bb4?style=flat-square) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
 :::info Purpose
 This guide covers the development workflow, asset compilation, and the theme's testing infrastructure and CI/CD pipeline.
@@ -14,28 +14,28 @@ This guide covers the development workflow, asset compilation, and the theme's t
 
 The `mhm-rentiva-theme` is designed for performance and strict adherence to WordPress Coding Standards (WPCS).
 
-### Asset Yönetimi — 6 CSS Dosyası
+### Asset Management — 6 CSS Files
 
-Statik dosyalar `/assets` dizininde saklanir. v0.3.0 itibariyla CSS yigini 6 dosyadan olusur:
+Static files are stored in the `/assets` directory. As of v0.3.0 the CSS stack consists of 6 files:
 
-| # | Dosya | Amac |
+| # | File | Purpose |
 |---|-------|------|
-| 1 | `header.css` | Ust menu, mobil navigasyon overlay (koyu tema `#101922`). |
-| 2 | `3-layout.css` | Sayfa düzeni, `content-wide` modu, max-width: `var(--wp--style--global--content-size, 1280px)`. `@layer layout` **KALDIRILDI**. |
-| 3 | `components.css` | Kart, buton, badge gibi tekrar kullanilan UI bileşenleri. |
-| 4 | `utilities.css` | Yardimci siniflar (spacing, visibility, typography). |
-| 5 | `plugin-pages.css` | Eklenti sayfalarına ozel stil overridelari. |
-| 6 | `elementor-compat.css` | Elementor uyumluluk katmani. |
+| 1 | `header.css` | Top navigation, mobile navigation overlay (dark theme `#101922`). |
+| 2 | `3-layout.css` | Page layout, `content-wide` mode, max-width: `var(--wp--style--global--content-size, 1280px)`. `@layer layout` **REMOVED**. |
+| 3 | `components.css` | Reusable UI components such as cards, buttons, and badges. |
+| 4 | `utilities.css` | Helper classes (spacing, visibility, typography). |
+| 5 | `plugin-pages.css` | Style overrides specific to plugin pages. |
+| 6 | `elementor-compat.css` | Elementor compatibility layer. |
 
-- `/assets/js`: Hafif vanilla JS (ornegin mobil menu için `header.js`).
+- `/assets/js`: Lightweight vanilla JS (e.g., `header.js` for the mobile menu).
 
-:::caution CSS Mimarisi Notu
-`3-layout.css` dosyasında daha once kullanilan `@layer layout` **v0.3.0 ile kaldirilmistir**. Ayrica `rv-trust-value` sınıfına `white-space: nowrap` eklenmiştir (10.000+ istatistik karti fix).
+:::caution CSS Architecture Note
+The `@layer layout` previously used in `3-layout.css` **was removed in v0.3.0**. Additionally, `white-space: nowrap` was added to the `rv-trust-value` class (10,000+ stats card fix).
 :::
 
-#### Yükleme Mantigi
+#### Loading Logic
 
-Tum asset'ler `functions.php` icerisinde `mhm_rentiva_theme_enqueue_header_assets()` üzerinden yüklenir:
+All assets are loaded via `mhm_rentiva_theme_enqueue_header_assets()` inside `functions.php`:
 
 ```php
 wp_enqueue_style( 'mhm-theme-plugin-pages', $css_uri . 'plugin-pages.css', array(), $ver );
@@ -110,23 +110,21 @@ The theme follows these strict rules (as defined in `phpcs.xml.dist`):
 
 ---
 
----
+## DemoSeeder & WP-CLI
 
-## DemoSeeder ve WP-CLI
+### DemoSeeder Bug Fixes (v0.3.0)
+7 bugs were fixed in DemoSeeder in v0.3.0. The most important: the `add_booking_review()` method now works fully compatible with the testimonials shortcode. The testimonials shortcode reads from `vehicle_booking` post meta (`_mhm_rentiva_customer_review`), **not** from WP comments.
 
-### DemoSeeder Hata Düzeltmeleri (v0.3.0)
-v0.3.0 sürümünde DemoSeeder'da 7 hata düzeltildi. Bunlardan en önemlisi: `add_booking_review()` metodu artik testimonials shortcode'u ile tam uyumlu çalışmaktadir. Testimonials shortcode'u `vehicle_booking` post meta'dan (`_mhm_rentiva_customer_review`) okur, WP comment'lerden **değil**.
-
-### WP-CLI Sayfa Oluşturma
-WordPress sayfalarınin WP-CLI ile olusturulmasi sırasında bash `!` escaping sorunundan kacinmak için `wp eval-file -` heredoc yontemi kullanılır:
+### WP-CLI Page Creation
+To avoid bash `!` escaping issues when creating WordPress pages via WP-CLI, the `wp eval-file -` heredoc method is used:
 
 ```bash
 wp eval-file - <<'PHPEOF'
 <?php
-// Sayfa oluşturma kodu burada
+// Page creation code here
 wp_insert_post([
-    'post_title'   => 'Araclar',
-    'post_name'    => 'araclar',
+    'post_title'   => 'Vehicles',
+    'post_name'    => 'vehicles',
     'post_content' => '<!-- wp:shortcode -->[rentiva_vehicles_grid]<!-- /wp:shortcode -->',
     'post_status'  => 'publish',
     'post_type'    => 'page',
@@ -134,8 +132,9 @@ wp_insert_post([
 PHPEOF
 ```
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |-------|-------|-----|
-| 27.03.2026 | v0.3.0 | CSS yigini (6 dosya) detaylari, DemoSeeder düzeltmeleri, WP-CLI yontemi eklendi. |
-| 09.03.2026 | 4.21.0-docs | Gelistirme rehberi ve CI/CD dokumantasyonu oluşturuldu. |
+| 23.04.2026 | v0.3.0 | English translation applied to mixed-language sections. |
+| 27.03.2026 | v0.3.0 | CSS stack (6 files) details, DemoSeeder fixes, and WP-CLI method added. |
+| 09.03.2026 | 4.21.0-docs | Development guide and CI/CD documentation created. |

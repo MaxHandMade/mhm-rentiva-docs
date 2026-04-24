@@ -1,93 +1,94 @@
 ---
 title: Search results
-description: Search results modülünün kullanım kılavuzu ve teknik detayları.
+description: Usage guide and technical reference for the Search Results module.
 sidebar_position: 14
 ---
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Search results modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::info Purpose
+This page describes the Search Results module as a standard reference, covering both technical and operational aspects.
 :::
 
-# 🚗 Search results
+# 🚗 Search Results
 
-## İçindekiler
-- Kullanım
-- Özellikler
-- Geliştirici Notları
+## Contents
+- Usage
+- Features
+- Developer Notes
 
-Search results modülü, Rentiva platformundaki **vehicle** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+The Search Results module is designed to manage and present **vehicle** search results to visitors on the Rentiva platform.
 
-## Kullanım
+## Usage
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
+:::tip IMAGE COMING SOON
+A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
 :::
 
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+To add this module to any page or post, use the shortcode below:
 
 ```shortcode
 [rentiva_search_results layout="grid"]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Search results"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Search Results"**.
 
-### Parametreler
+### Parameters
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+The following parameters are available inside the shortcode:
 
-| Parametre | Varsayılan | Açıklama |
+| Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `layout` | `grid` | Modülün **general** davranışını kontrol eder. |
-| `show_filters` | `1` | Modülün **general** davranışını kontrol eder. |
-| `results_per_page` | `12` | Modülün **general** davranışını kontrol eder. |
-| `show_pagination` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_sorting` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_view_toggle` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_favorite_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_compare_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_booking_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_price` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_title` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_features` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_rating` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
-| `default_sort` | `price_asc` | Modülün **general** davranışını kontrol eder. |
-| `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
+| `layout` | `grid` | Controls the module's **general** layout behavior. |
+| `show_filters` | `1` | Controls the module's **general** display behavior. |
+| `results_per_page` | `12` | Controls the module's **general** display behavior. |
+| `show_pagination` | `1` | Controls the module's **general** display behavior. |
+| `show_sorting` | `1` | Controls the module's **general** display behavior. |
+| `show_view_toggle` | `1` | Controls the module's **general** display behavior. |
+| `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
+| `show_compare_button` | `1` | Controls the module's **general** display behavior. |
+| `show_booking_button` | `1` | Controls the module's **general** display behavior. |
+| `show_price` | `1` | Controls the module's **general** display behavior. |
+| `show_title` | `1` | Controls the module's **general** display behavior. |
+| `show_features` | `1` | Controls the module's **general** display behavior. |
+| `show_rating` | `1` | Controls the module's **general** display behavior. |
+| `show_badges` | `1` | Controls the module's **general** display behavior. |
+| `default_sort` | `price_asc` | Controls the module's **general** sorting behavior. |
+| `class` | `(empty)` | Controls the module's **general** layout behavior. |
 
 
-## Özellikler
+## Features
 
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
+### 📱 Responsive Design
+- **Mobile:** Single-column layout.
+- **Tablet (under 782px):** Optimized view.
+- **Desktop:** Full view at the configured column count or width.
 
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+### 🚀 Performance-Focused
+- **Smart Caching:** Database queries are optimized and cached by the system.
+- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
-## Sidebar Filtreleri
+## Sidebar Filters
 
-### Lokasyon Filtresi (Çoklu Seçim)
+### Location Filter (Multi-Select)
 
-v4.22.1 itibariyla lokasyon filtresi **radio buton** yerine **checkbox** kullanir. Bu sayede kullanıcılar ayni anda birden fazla lokasyon secebilir. Secilen lokasyonlar `IN()` SQL clause'u ile sorgulanir.
+As of v4.22.1, the location filter uses **checkboxes** instead of radio buttons. This allows users to select multiple locations at once. Selected locations are queried with an `IN()` SQL clause.
 
-- Tekli seçim: Bir lokasyon secildiginde sadece o lokasyondaki araclar listelenir.
-- Çoklu seçim: Birden fazla lokasyon isaretlendiginde, secilen lokasyonlarin herhangi birinde bulunan araclar gosterilir.
+- Single selection: selecting one location lists only vehicles at that location.
+- Multi-selection: selecting multiple locations shows vehicles available at any of the selected locations.
 
-## Geliştirici Notları
+## Developer Notes
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-search-results-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
-- **Musaitlik Sorgusu:** `QueryHelper::get_availability_subquery()` bos tarih parametrelerine karsi korumalıdir. `strtotime('')` PHP'de `false` yerine bugunun timestamp'ini dondurur; bu durum v4.22.1'de duzeltilmistir. Bos tarih gonderildiginde musaitlik filtresi devre disi kalir.
-- **Lokasyon Sorgusu:** `QueryHelper::get_location_subquery()` hem tekli (`int`) hem de çoklu (`array`) lokasyon ID'lerini kabul eder.
+- **HTML Structure:** All containers start with the `.mhm-rentiva-search-results-wrapper` class.
+- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
+- **Availability Query:** `QueryHelper::get_availability_subquery()` is protected against empty date parameters. `strtotime('')` returns today's timestamp in PHP instead of `false`; this was fixed in v4.22.1. When an empty date is passed, the availability filter is disabled.
+- **Location Query:** `QueryHelper::get_location_subquery()` accepts both single (`int`) and multiple (`array`) location IDs.
 
-## Bölüm Sonu Özeti
-- Search results sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+## Section Summary
+- The Search Results page has been aligned to the standard documentation structure with consistent reference headings.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.22.1 | Lokasyon filtresi radio -> checkbox (çoklu seçim). Musaitlik sorgusu bos tarih koruması. Geliştirici notlarına QueryHelper bilgileri eklendi. |
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.22.1 | Location filter changed from radio to checkbox (multi-select). Availability query protected against empty dates. QueryHelper information added to Developer Notes. |
+| 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

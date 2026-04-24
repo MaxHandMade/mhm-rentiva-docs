@@ -1,111 +1,111 @@
 ---
 id: installation
-title: Kurulum ve Başlangıç
-sidebar_label: Kurulum
+title: Installation & Getting Started
+sidebar_label: Installation
 sidebar_position: 2
 slug: /getting-started/installation
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-MHM Rentiva, WordPress sitenizi güçlü bir araç kiralama platformuna dönüştürmek için tasarlanmış profesyonel bir eklentidir. Bu rehberde, eklentinin sıfırdan kurulumunu ve ilk yapılandırma adımlarını bulacaksınız.
+MHM Rentiva is a professional plugin designed to turn your WordPress site into a powerful vehicle rental platform. This guide walks you through installing the plugin from scratch and completing the initial configuration steps.
 
-:::tip Eğitim Videosu
-Eklentinin kurulumunu adım adım izlemek için aşağıdaki video kutusuna tıklayabilirsiniz.
+:::tip Tutorial Video
+Click the video box below to watch a step-by-step installation walkthrough.
 <div className="video-placeholder" style={{ border: '2px dashed #0f766e', padding: '40px', textAlign: 'center', borderRadius: '8px', background: '#f0fdfa', marginBottom: '20px' }}>
-  <p><strong>🎥 Eğitim Videosu Yakında Gelecektir</strong></p>
-  <small>Resmi YouTube kanalımızda yayına girdiğinde burada izlenebilir olacak.</small>
+  <p><strong>🎥 Tutorial Video Coming Soon</strong></p>
+  <small>It will be available here once published on our official YouTube channel.</small>
 </div>
 :::
 
 ---
 
-## 1. Sistem Gereksinimleri
+## 1. System Requirements
 
-Eklentinin stabil çalışması için sunucunuzun ve WordPress kurulumunuzun aşağıdaki minimum gereksinimleri karşılaması gerekir:
+For stable operation, your server and WordPress installation must meet the following minimum requirements:
 
-| Gereksinim | Minimum Versiyon | Notlar |
+| Requirement | Minimum Version | Notes |
 | :-- | :-- | :-- |
-| **WordPress** | 6.7+ | En güncel kararlı sürüm önerilir. |
-| **PHP** | 8.1+ | Güvenlik ve performans için zorunludur. |
-| **WooCommerce** | 8.0+ | Tüm frontend ödeme akışları için **Mecburidir**. |
-| **SSL Sertifikası** | HTTPS | Ödeme ağ geçitlerinin (Stripe, iyzico vb.) çalışması için gereklidir. |
-| **Permalink Yapısı** | Yazı İsmi | `%postname%` yapısı SEO ve rotalar için önerilir. |
+| **WordPress** | 6.7+ | The latest stable release is recommended. |
+| **PHP** | 8.1+ | Required for security and performance. |
+| **WooCommerce** | 8.0+ | **Required** for all frontend payment flows. |
+| **SSL Certificate** | HTTPS | Required for payment gateways (Stripe, iyzico, etc.) to work. |
+| **Permalink Structure** | Post Name | `%postname%` is recommended for SEO and routing. |
 
 ---
 
-## 2. Adım Adım Kurulum
+## 2. Step-by-Step Installation
 
-MHM Rentiva'yı kurmak için iki ana yöntem bulunmaktadır:
+There are two main methods for installing MHM Rentiva:
 
-### Yöntem A: WordPress Admin Üzerinden (Önerilen)
-1. WordPress panelinizden **Eklentiler > Yeni Ekle** sayfasına gidin.
-2. **Eklenti Yükle** butonuna tıklayın ve size verilen `mhm-rentiva.zip` dosyasını seçin.
-
----
-
-### 🖼️ GÖRSEL: EKLENTİ YÜKLEME EKRANI
-*(Eklentiler > Yeni Ekle > Dosya Seç adımını gösteren ekran görüntüsü)*
+### Method A: Through the WordPress Admin (Recommended)
+1. From your WordPress dashboard, go to **Plugins > Add New**.
+2. Click the **Upload Plugin** button and select the `mhm-rentiva.zip` file you received.
 
 ---
 
-3. **Şimdi Kur** butonuna basın ve işlem tamamlandığında **Eklentiyi Etkinleştir**'e tıklayın.
+### 🖼️ IMAGE: PLUGIN UPLOAD SCREEN
+*(Screenshot showing the Plugins > Add New > Choose File step)*
 
 ---
 
-### 🖼️ GÖRSEL: EKLENTİ ETKİNLEŞTİRME ONAYI
-*(Eklenti başarıyla yüklendiğinde "Eklentiyi Etkinleştir" butonunun olduğu ekran)*
+3. Click **Install Now** and, once the process completes, click **Activate Plugin**.
 
 ---
 
-### Yöntem B: FTP/SFTP Üzerinden
-1. `mhm-rentiva.zip` dosyasını bilgisayarınızda bir klasöre çıkarın.
-2. FTP istemciniz (örneğin FileZilla) ile sunucunuza bağlanın.
-3. Çıkardığınız klasörü `/wp-content/plugins/` dizinine yükleyin.
-4. WordPress panelinizden eklentiyi etkinleştirin.
+### 🖼️ IMAGE: PLUGIN ACTIVATION CONFIRMATION
+*(The screen showing the "Activate Plugin" button after a successful upload)*
 
 ---
 
-## 3. Kurulum Sonrası Otomatik İşlemler
-
-Eklenti etkinleştirildiğinde arka planda aşağıdaki işlemler otomatik olarak gerçekleştirilir:
-
-1. **Veritabanı Tabloları:** `payment_log`, `sessions`, `transfer_routes` gibi fonksiyonel tablolar oluşturulur.
-2. **CPT Kaydı:** `vehicle` (Araçlar) özel yazı tipi ve ilgili taksonomiler sisteme tanıtılır.
-3. **Müşteri Rolü:** `rentiva_customer` adında özelleştirilmiş bir kullanıcı rolü eklenir.
-4. **Rewrite Rules:** Kalıcı bağlantılar araç sayfaları için otomatik olarak yenilenir.
+### Method B: Via FTP/SFTP
+1. Extract the `mhm-rentiva.zip` file into a folder on your computer.
+2. Connect to your server with an FTP client (such as FileZilla).
+3. Upload the extracted folder to the `/wp-content/plugins/` directory.
+4. Activate the plugin from your WordPress dashboard.
 
 ---
 
-## 4. İlk Kurulum Sihirbazı
+## 3. Automatic Post-Install Actions
 
-Eklentiyi ilk kez etkinleştirdiğinizde sistem sizi otomatik olarak **Kurulum Sihirbazı**'na yönlendirecektir. Bu sihirbaz:
-- Temel şirket bilgilerinizi alır.
-- Gerekli sayfaları (Arama, Araç Detay, Ödeme vb.) otomatik oluşturur.
-- WooCommerce entegrasyonunu doğrular.
+When the plugin is activated, the following actions run automatically in the background:
 
-:::info Manuel Yönlendirme
-Eğer sihirbaz otomatik açılmazsa, WordPress admin menüsünden **MHM Rentiva > Setup Wizard** yolunu izleyerek manuel olarak başlatabilirsiniz.
+1. **Database Tables:** Functional tables such as `payment_log`, `sessions`, and `transfer_routes` are created.
+2. **CPT Registration:** The `vehicle` custom post type and its related taxonomies are registered.
+3. **Customer Role:** A custom user role named `rentiva_customer` is added.
+4. **Rewrite Rules:** Permalinks are automatically refreshed for vehicle pages.
+
+---
+
+## 4. Initial Setup Wizard
+
+The first time you activate the plugin, the system automatically redirects you to the **Setup Wizard**. This wizard:
+- Collects your basic company information.
+- Automatically creates the required pages (Search, Vehicle Detail, Checkout, etc.).
+- Verifies the WooCommerce integration.
+
+:::info Manual Navigation
+If the wizard does not open automatically, you can start it manually via **MHM Rentiva > Setup Wizard** in the WordPress admin menu.
 :::
 
 ---
 
-## Teknik Detaylar (Geliştiriciler İçin)
+## Technical Details (For Developers)
 
-Eklenti etkinleştirme sırasında `register_activation_hook` kullanarak `mhm_rentiva_single_site_activation()` fonksiyonunu tetikler. Bu fonksiyon `DatabaseMigrator` sınıfı üzerinden veritabanı şemasını güncel tutar.
+During activation, the plugin uses `register_activation_hook` to fire the `mhm_rentiva_single_site_activation()` function. That function keeps the database schema up to date through the `DatabaseMigrator` class.
 
-Geliştirme aşamasında `WP_DEBUG` açıksa, kurulum hataları PHP loglarına veya ekranın üst kısmındaki hata bildirim kutularına yansıyacaktır.
+When `WP_DEBUG` is enabled during development, installation errors will surface in the PHP logs or in the error notice boxes at the top of the screen.
 
 ---
 
-### Bölüm Özeti
-- En az **PHP 8.1** ve **WooCommerce** gereklidir.
-- Kurulum sonrası **Setup Wizard** takip edilmelidir.
-- Veritabanı tabloları aktivasyonda otomatik kurulur.
+### Section Summary
+- **PHP 8.1+** and **WooCommerce** are required.
+- The **Setup Wizard** must be completed after installation.
+- Database tables are created automatically on activation.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 18.03.2026 | 4.21.2 | Tasarım revizyonu yapıldı ve içerik zenginleştirildi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 18.03.2026 | 4.21.2 | Design revision and expanded content. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

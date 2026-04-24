@@ -1,68 +1,68 @@
 ---
 id: payments
-title: Ödeme Yapılandırması
-sidebar_label: Ödeme Ayarları
+title: Payment Configuration
+sidebar_label: Payment Settings
 sidebar_position: 4
 slug: /core-configuration/payments
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-MHM Rentiva, finansal işlemlerini dünyanın en popüler e-ticaret altyapısı olan **WooCommerce** üzerine inşa eder. Bu sayede yüzlerce ödeme ağ geçidini (Stripe, PayPal, iyzico vb.) ek bir geliştirme yapmadan kullanabilirsiniz.
-
----
-
-## 💳 Ödeme Akış Senaryoları
-
-Sistem, ödemeleri iki temel kanal üzerinden yönetir:
-
-### 1. Frontend (Müşteri) Ödemeleri
-Web siteniz üzerinden müşterilerin yaptığı tüm kiralama işlemleri **WooCommerce** sepeti üzerinden döner.
-- **Süreç:** Müşteri aracı seçer > Tarih belirler > "Hemen Kirala" der > Ürün sepete eklenir > Ödeme sayfasında kart bilgileri girilir.
-- **Kritik Not:** Müşteri ödemeyi tamamladığında WooCommerce siparişi "Processing" veya "Completed" olur; buna bağlı olarak Rentiva rezervasyonu da otomatik "Confirmed" olur.
-
-### 2. Backend (Yönetici) ve Offline Ödemeler
-Yönetim panelinden manuel oluşturulan rezervasyonlar için kullanılır.
-- **Elden Tahsilat:** Aracı teslim ederken nakit ödeme alıyorsanız, rezervasyon detayından "Offline Payment" olarak işaretleyebilirsiniz.
-- **Banka Havalesi:** WooCommerce üzerindeki "BACS" (Banka Havalesi) yöntemiyle entegre çalışır.
+MHM Rentiva builds its financial operations on **WooCommerce**, the world's most popular e-commerce platform. This means you can use hundreds of payment gateways (Stripe, PayPal, iyzico, etc.) without any additional development.
 
 ---
 
-## 💰 Depozito Sistemi
+## 💳 Payment Flow Scenarios
 
-MHM Rentiva, gelişmiş bir depozito (ön ödeme) mantığına sahiptir. 
-- **Ayarlama:** Araç bazında veya genel ayarlarda "% X oranında depozito al" seçeneği aktiftir.
-- **Çalışma Biçimi:** Araç toplam kirası 1000 TL ise ve %20 depozito aktifse, WooCommerce sepetine sadece 200 TL yansıtılır. Kalan 800 TL "Kalan Ödeme" (Due Balance) olarak dökümlerde görünür.
+The system manages payments through two primary channels:
 
-:::tip Geliştirici Notu
-Depozito hesaplamaları için `DepositCalculator::calculate_deposit()` sınıfı kullanılır. Bu sınıf, ekstraları ve vergileri de hesaba katar.
+### 1. Frontend (Customer) Payments
+All rental transactions made by customers on your website flow through the **WooCommerce** cart.
+- **Process:** Customer selects a vehicle > sets dates > clicks "Rent Now" > product is added to cart > card details are entered on the payment page.
+- **Critical Note:** When the customer completes payment, the WooCommerce order becomes "Processing" or "Completed"; accordingly, the Rentiva booking is automatically set to "Confirmed".
+
+### 2. Backend (Admin) & Offline Payments
+Used for bookings created manually from the admin panel.
+- **Cash Collection:** If you collect cash on vehicle handover, you can mark it as "Offline Payment" from the booking details.
+- **Bank Transfer:** Works integrated with the "BACS" (Bank Transfer) method in WooCommerce.
+
+---
+
+## 💰 Deposit System
+
+MHM Rentiva features an advanced deposit (upfront payment) logic.
+- **Setup:** The "Take X% deposit" option is available per vehicle or in general settings.
+- **How it Works:** If the total vehicle rental cost is 1000 and the deposit is set to 20%, only 200 is reflected in the WooCommerce cart. The remaining 800 appears as "Due Balance" in statements.
+
+:::tip Developer Note
+The `DepositCalculator::calculate_deposit()` class is used for deposit calculations. This class also accounts for add-ons and taxes.
 :::
 
 ---
 
-## 🛠️ Desteklenen Ödeme Yöntemleri
+## 🛠️ Supported Payment Methods
 
-WooCommerce ile uyumlu tüm eklentiler Rentiva ile çalışır. En sık kullanılanlar:
+All WooCommerce-compatible plugins work with Rentiva. The most commonly used:
 - **Global:** Stripe, PayPal, Square.
-- **Yerel (Türkiye):** iyzico, PayTR, Param.
+- **Local (Turkey):** iyzico, PayTR, Param.
 
 ---
 
-### 🖼️ GÖRSEL: ÖDEME AYARLARI EKRANI
-*(MHM Rentiva > Ayarlar > Ödeme sekmesindeki depozito ve diğer ayarları gösteren ekran)*
+### 🖼️ IMAGE: PAYMENT SETTINGS SCREEN
+*(MHM Rentiva > Settings > Payment tab — deposit and other settings screen)*
 
 ---
 
 ---
 
-### Bölüm Özeti
-- Frontend ödemeleri için **WooCommerce zorunludur**.
-- **Depozito** özelliği ile ön ödeme alabilirsiniz.
-- Manuel rezervasyonlar için **Offline** ödeme desteği mevcuttur.
+### Section Summary
+- **WooCommerce is required** for frontend payments.
+- The **Deposit** feature lets you collect upfront payments.
+- **Offline** payment support is available for manually created bookings.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 18.03.2026 | 4.21.2 | İçerik hibrit modele göre güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 18.03.2026 | 4.21.2 | Content updated to hybrid model. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

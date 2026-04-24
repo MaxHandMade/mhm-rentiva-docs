@@ -1,85 +1,86 @@
 ---
 id: system-performance
-title: Sistem ve Performans Ayarları
-sidebar_label: Sistem ve Performans
+title: System & Performance Settings
+sidebar_label: System & Performance
 sidebar_position: 11
 slug: /core-configuration/system-performance
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Eklentinin hızı (caching) ve güvenliği (WAF - Web Application Firewall) bu merkezden yönetilir. **MHM Rentiva > Ayarlar > Sistem ve Performans** sekmesinden tüm koruma ve hız optimizasyonlarını yapılandırabilirsiniz.
-
----
-
-## ⚡ Sistem ve Performans (Caching)
-
-MHM Rentiva, veritabanı yükünü azaltmak için gelişmiş bir nesne önbellekleme (Object Cache) katmanı kullanır.
-
-- **Nesne Önbelleğini Etkinleştir:** Aktif edildiğinde veritabanı sorguları belleğe alınır, sayfa açılış hızı ciddi oranda artar.
-- **Önbellek TTL Süreleri:** 
-    - **Varsayılan:** Genel veriler için saklama süresi (Saat).
-    - **Listeler:** Araç ve rezervasyon listeleri için önbellek süresi (Dakika).
-    - **Rapor & Grafikler:** İstatistiklerin ne sıklıkla güncelleneceği (Dakika).
-- **Meta Sorgu Sınırı:** Bir istek başına maksimum meta sorgu sayısı. Düşük olması sistemi daha hafif tutar.
+The plugin's speed (caching) and security (WAF — Web Application Firewall) are managed from this hub. Configure all protection and speed optimizations from the **MHM Rentiva > Settings > System & Performance** tab.
 
 ---
 
-### 🖼️ GÖRSEL: SİSTEM VE PERFORMANS AYARLARI
-*(Ayarlar > Sistem ve Performans sekmesi, cache ve TTL ayarları)*
+## ⚡ System & Performance (Caching)
+
+MHM Rentiva uses an advanced object caching layer to reduce database load.
+
+- **Enable Object Cache:** When active, database queries are stored in memory, significantly increasing page load speed.
+- **Cache TTL Durations:**
+    - **Default:** Storage duration for general data (Hours).
+    - **Lists:** Cache duration for vehicle and booking lists (Minutes).
+    - **Reports & Charts:** How frequently statistics are refreshed (Minutes).
+- **Meta Query Limit:** Maximum number of meta queries per request. Keeping this low keeps the system lighter.
 
 ---
 
-## 🛡️ IP Kontrolü ve Güvenlik Duvarı
-
-Kötü niyetli kullanıcıları ve spam botları sisteminizden uzak tutmak için IP bazlı ve ülke bazlı kısıtlamalar uygulayabilirsiniz.
-
-- **Beyaz Liste (White List):** Ofisiniz veya yönetim ekibinizin IP adreslerini buraya ekleyerek asla engellenmemelerini sağlayın.
-- **Kara Liste (Black List):** Bilinen saldırgan IP'leri kalıcı olarak engelleyin.
-- **Ülke Kısıtlaması:** Sadece hizmet verdiğiniz ülkeleri (örn: TR, DE) izin verilenlere ekleyip diğer tüm dünyayı tek tıkla bloklayabilirsiniz.
+### 🖼️ IMAGE: SYSTEM & PERFORMANCE SETTINGS
+*(Settings > System & Performance tab, cache and TTL settings)*
 
 ---
 
-## 🔓 Gelişmiş Koruma Kuralları (Security)
+## 🛡️ IP Control & Firewall
 
-Sistemin maruz kalabileceği en yaygın saldırı tiplerine karşı yerleşik koruma kuralları mevcuttur:
+Apply IP-based and country-based restrictions to keep malicious users and spam bots away from your system.
 
-- **Brute-Force Koruması:** Tekrar eden yanlış şifre denemelerine karşı hesabı geçici süreyle kilitler.
-- **SQL Injection & XSS Koruması:** Formlardan gelen verileri temizleyerek veritabanı güvenliğini sağlar.
-- **CSRF Koruması:** Sahte istekleri ve form manipülasyonlarını engeller.
-
----
-
-### 🖼️ GÖRSEL: GÜVENLİK VE FIREWALL PANELİ
-*(Ayar sekmesindeki IP kısıtlama ve koruma kuralları arayüzü)*
+- **Whitelist:** Add your office or management team's IP addresses here to ensure they are never blocked.
+- **Blacklist:** Permanently block known malicious IPs.
+- **Country Restriction:** Add only the countries you serve (e.g., TR, DE) to the allowed list and block the rest of the world with a single click.
 
 ---
 
-## 🚥 Trafik Sınırları ve İstek Kontrolü (Rate Limiting)
+## 🔓 Advanced Security Rules
 
-Sistem kaynaklarının istismar edilmesini önlemek için her IP için dakika bazlı limitler koyabilirsiniz.
+Built-in protection rules against the most common attack types the system may face:
 
-| Limit Tipi | Açıklama |
+- **Brute-Force Protection:** Temporarily locks accounts against repeated incorrect password attempts.
+- **SQL Injection & XSS Protection:** Sanitizes data coming from forms to ensure database security.
+- **CSRF Protection:** Blocks forged requests and form manipulation.
+
+---
+
+### 🖼️ IMAGE: SECURITY & FIREWALL PANEL
+*(Settings tab — IP restriction and security rules interface)*
+
+---
+
+## 🚥 Traffic Limits & Request Control (Rate Limiting)
+
+Set per-IP, per-minute limits to prevent system resources from being abused.
+
+| Limit Type | Description |
 | :--- | :--- |
-| **Küresel İstek Sınırı** | Bir kullanıcının eklenti fonksiyonlarına yapacağı toplam çağrı limiti. |
-| **Rezervasyon Talebi** | Bir IP'den dakikada kaç yeni rezervasyon denemesi yapılabilir? |
-| **Ödeme Talebi** | Ödeme geçidi denemelerini sınırlandırarak fraud işlemlerini engeller. |
+| **Global Request Limit** | Total call limit a user can make to plugin functions. |
+| **Booking Request** | How many new booking attempts can be made from one IP per minute? |
+| **Payment Request** | Limits payment gateway attempts to prevent fraudulent transactions. |
 
 ---
 
-## 🩺 Sistem Bakımı ve Durumu
+## 🩺 System Maintenance & Status
 
-Sayfanın altında bulunan **"Sistem Durumu"** alanı üzerinden sunucunuzun temel bilgilerini anlık olarak görebilirsiniz:
-- PHP / WordPress Sürümleri
-- Server Tipi (Apache, Nginx vb.)
-- **SQL Mode:** Yüksek performans için `High Performance` modunda olup olmadığınızı denetler.
+View your server's core information in real time from the **"System Status"** section at the bottom of the page:
+- PHP / WordPress Versions
+- Server Type (Apache, Nginx, etc.)
+- **SQL Mode:** Checks whether you are running in `High Performance` mode for optimal performance.
 
-### Bölüm Özeti
-- **Object Cache** hızı artırır, veritabanını rahatlatır.
-- **Rate Limiting** bot saldırılarını ve brute-force denemelerini durdurur.
-- **WAF kuralları** yazılım düzeyinde güvenlik kalkanı sağlar.
+### Section Summary
+- **Object Cache** increases speed and reduces database load.
+- **Rate Limiting** stops bot attacks and brute-force attempts.
+- **WAF rules** provide a software-level security shield.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Sistem, Performans ve Güvenlik (WAF) rehberi oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | System, Performance and Security (WAF) guide created. |

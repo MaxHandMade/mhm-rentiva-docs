@@ -1,0 +1,8 @@
+{
+    "label": "v2 Planning (Future)",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "MHM Rentiva v2 REST API planlaması ve mimarisi."
+    }
+}

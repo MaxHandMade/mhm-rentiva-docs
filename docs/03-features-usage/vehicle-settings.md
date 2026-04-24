@@ -1,64 +1,64 @@
 ---
 id: vehicle-settings-usage
-title: Global Araç Ayarları
-sidebar_label: Araç Ayarları
+title: Global Vehicle Settings
+sidebar_label: Vehicle Settings
 sidebar_position: 5
 slug: /features-usage/vehicle-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Global Araç Ayarları, sistemdeki tüm araçların ortak davranışlarını, görüntülenecek veri alanlarını ve teknik donanım listelerini yönetmenizi sağlar. **MHM Rentiva > Araç Ayarları** menüsünden ulaşılır.
-
----
-
-## 🛠️ Alan Tanımları (Field Definitions)
-
-Bu sekme, aracın teknik kimliğini oluşturan tüm veri alanlarının merkezi yönetim noktasıdır.
-
-### 1. Araç Detayları
-Sistemde ön tanımlı gelen **Günlük Fiyat, Model Yılı, Plaka, Marka, Model, Depozito** gibi alanların isimlerini buradan "İsimleri Düzenle" butonu ile Türkçeleştirebilir veya değiştirebilirsiniz.
-- **Özel Ayrıntı Ekle:** Standart alanlar dışında (Örn: "Hasar Kaydı", "Kasko Türü") yeni veri alanlarını Metin veya Sayı formatında ekleyebilirsiniz.
-
-### 2. Araç Özellikleri (Vehicle Features)
-Klima, ABS, Bluetooth gibi konfor ve güvenlik donanımlarıdır. "Özel özellik adı" kutusundan listenize yeni donanımlar ekleyebilirsiniz.
-
-### 3. Araç Ekipmanları (Equipment)
-Yedek Lastik, İlk Yardım Çantası gibi fiziksel donanımlar burada tanımlanır.
+Global Vehicle Settings lets you manage the common behaviors of all vehicles in the system, the data fields displayed, and the equipment lists. Access it via **MHM Rentiva > Vehicle Settings**.
 
 ---
 
-## ⚙️ Görüntüleme Seçenekleri (Display Options)
+## Field Definitions
 
-Tanımladığınız alanların frontend (ön yüz) tarafında nerede ve nasıl görüneceğini bu sekmeden kontrol edersiniz.
+This tab is the central management point for all data fields that form the technical identity of a vehicle.
 
-### 🖼️ Görünür Kart Öğeleri (Drag & Drop)
-Arama sonuçlarında ve araç listeleme kartlarında (Grid/List) hangi teknik verilerin görüneceğini sürükle-bırak yöntemiyle belirleyin.
-- **Sıralama:** Öğeleri yukarı-aşağı kaydırarak öncelik sırasını değiştirebilirsiniz (Örn: Önce Yakıt Tipi, sonra Vites).
-- **Gizleme:** Kartta görünmesini istemediğiniz öğeyi sağ sütuna (Uygun Öğeler) bırakarak pasif hale getirin.
+### 1. Vehicle Details
+Use the "Edit Names" button to localize or rename the pre-defined fields such as **Daily Price, Model Year, Plate, Make, Model, Deposit**.
+- **Add Custom Detail:** Add new data fields in Text or Number format beyond the standard fields (e.g. "Damage Record", "Insurance Type").
 
-### 🌟 Araç Detayları Öne Çıkan Özellikler
-Araç sayfasının üst kısmında, müşterinin ilk bakışta görmesini istediğiniz en önemli 4-5 özelliği (Örn: Koltuk Sayısı, Vites, Klima) buradan seçebilirsiniz.
+### 2. Vehicle Features
+Comfort and safety equipment such as Air Conditioning, ABS, and Bluetooth. Add new equipment to your list from the "Custom feature name" field.
 
-### 📊 Araç Karşılaştırma Tablosu Ayarları
-Müşterileriniz birden fazla aracı kıyaslarken, karşılaştırma tablosunda hangi Detay, Özellik ve Ekipmanların döküleceğini checklist üzerinden seçebilirsiniz.
-- **Toplu İşlemler:** "Tümünü Seç" ile tüm donanımları karşılaştırma tablosuna dahil edebilirsiniz.
+### 3. Vehicle Equipment
+Physical equipment such as Spare Tire and First Aid Kit is defined here.
+
+---
+
+## Display Options
+
+Control where and how the fields you have defined appear on the frontend from this tab.
+
+### Visible Card Items (Drag & Drop)
+Determine which technical data is shown on vehicle listing cards (Grid/List) in search results using drag-and-drop.
+- **Ordering:** Drag items up or down to change priority order (e.g. Fuel Type first, then Transmission).
+- **Hiding:** Drop an item into the right column (Available Items) to make it passive and hide it from the card.
+
+### Featured Specs on Vehicle Details
+At the top of the vehicle page, select the 4–5 most important specs (e.g. Seat Count, Transmission, Air Conditioning) you want the customer to see at first glance.
+
+### Vehicle Comparison Table Settings
+When customers compare multiple vehicles, use the checklist to choose which Details, Features, and Equipment appear in the comparison table.
+- **Bulk Actions:** Use "Select All" to include all equipment in the comparison table.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: GÖRÜNTÜLEME VE KART AYARLARI</strong><br/>
+  <strong>IMAGE: DISPLAY OPTIONS AND CARD SETTINGS</strong><br/>
   <em>mhm-rentiva-display-options-drag-drop</em>
 </div>
 
 ---
 
-### Bölüm Özeti
-- **Alan Tanımları** ile veri tabanını yapılandırın.
-- **Görüntüleme Seçenekleri** ile tasarımı ve kullanıcı deneyimini optimize edin.
-- **Sürükle-Bırak** arayüzü ile kod yazmadan liste görünümlerini özelleştirin.
+### Section Summary
+- Structure your database with **Field Definitions**.
+- Optimize design and user experience with **Display Options**.
+- Customize list views without writing code using the **Drag & Drop** interface.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Görüntüleme Seçenekleri ve Sürükle-Bırak ayarları gerçek arayüze göre detaylandırıldı. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 19.03.2026 | 4.21.2 | Display Options and Drag & Drop settings detailed against the real interface. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

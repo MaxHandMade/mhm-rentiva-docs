@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "MHM Rentiva",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "MHM Rentiva Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Documentation": {
+    "message": "Dokümantasyon",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Release Notes": {
+    "message": "Sürüm Notları",
+    "description": "Navbar item with label Release Notes"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

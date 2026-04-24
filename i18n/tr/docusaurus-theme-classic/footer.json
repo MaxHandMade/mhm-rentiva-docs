@@ -1,0 +1,54 @@
+{
+  "link.title.Documentation": {
+    "message": "Dokümantasyon",
+    "description": "The title of the footer links column with title=Documentation in the footer"
+  },
+  "link.title.Community": {
+    "message": "Topluluk",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.More": {
+    "message": "Diğer",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Quick Start": {
+    "message": "Hızlı Başlangıç",
+    "description": "The label of footer link with label=Quick Start linking to /docs/getting-started/installation"
+  },
+  "link.item.label.User Guide": {
+    "message": "Kullanım Kılavuzu",
+    "description": "The label of footer link with label=User Guide linking to /docs/features-usage/shortcodes/shortcodes-overview"
+  },
+  "link.item.label.Developer Docs": {
+    "message": "Geliştirici Belgeleri",
+    "description": "The label of footer link with label=Developer Docs linking to /docs/developer/core/technical-architecture"
+  },
+  "link.item.label.WordPress Support Forum": {
+    "message": "WordPress Destek Forumu",
+    "description": "The label of footer link with label=WordPress Support Forum linking to https://wordpress.org/support/plugin/mhm-rentiva"
+  },
+  "link.item.label.GitHub Repository": {
+    "message": "GitHub Deposu",
+    "description": "The label of footer link with label=GitHub Repository linking to https://github.com/MaxHandMade/mhm-rentiva"
+  },
+  "link.item.label.Report an Issue": {
+    "message": "Hata Bildir",
+    "description": "The label of footer link with label=Report an Issue linking to https://github.com/MaxHandMade/mhm-rentiva/issues"
+  },
+  "link.item.label.YouTube Channel": {
+    "message": "YouTube Kanalı",
+    "description": "The label of footer link with label=YouTube Channel linking to https://www.youtube.com/channel/UC3qBE6ZCCEc8ugFUYXwtcpA"
+  },
+  "link.item.label.Release Notes": {
+    "message": "Sürüm Notları",
+    "description": "The label of footer link with label=Release Notes linking to /blog"
+  },
+  "link.item.label.Official Website": {
+    "message": "Resmi Web Sitesi",
+    "description": "The label of footer link with label=Official Website linking to https://maxhandmade.com"
+  },
+  "copyright": {
+    "message": "Copyright © {year} MHM Development. Docusaurus ile hazırlanmıştır.",
+    "description": "The footer copyright"
+  }
+}

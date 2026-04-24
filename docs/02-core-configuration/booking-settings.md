@@ -1,64 +1,65 @@
 ---
 id: booking-settings
-title: Rezervasyon Yönetimi (Ayarlar)
-sidebar_label: Rezervasyon Yönetimi
+title: Booking Management (Settings)
+sidebar_label: Booking Management
 sidebar_position: 3
 slug: /core-configuration/booking-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Rezervasyon Yönetimi sekmesi, kiralama sürecinin zamanlama kurallarını, otomatik iptal mekanizmalarını ve e-posta bildirim tercihlerini yapılandırdığınız alandır. **MHM Rentiva > Ayarlar > Rezervasyon Yönetimi** altından ulaşılır.
-
----
-
-## 📋 Temel Rezervasyon Ayarları
-
-- **Varsayılan Kiralama Günleri:** Rezervasyon formunda (frontend) tarih seçilmeden önce varsayılan olarak seçili gelecek kiralama süresidir (Örn: 1 Gün).
+The Booking Management tab is where you configure the timing rules of the rental process, automatic cancellation mechanisms, and email notification preferences. Access it via **MHM Rentiva > Settings > Booking Management**.
 
 ---
 
-## ⏳ Zaman Yönetimi Ayarları
+## 📋 Basic Booking Settings
 
-Rezervasyonların yaşam döngüsü ve operasyonel hazırlık süreleri buradan yönetilir.
-
-- **İptal Son Tarihi (Saat):** Rezervasyon başlamadan ne kadar süre öncesine kadar müşterinin iptal hakkı olduğunu belirler (Örn: 24 Saat).
-- **Ödeme Son Tarihi (Dakika):** Rezervasyon oluşturulduktan sonra ödemenin tamamlanması için tanınan süredir. `0` girilirse süre sınırı devre dışı kalır.
-- **Otomatik İptal'i Etkinleştir:** Ödeme süresi dolan rezervasyonların sistem tarafından otomatik olarak "İptal Edildi" statüsüne alınmasını sağlar.
-- **Tampon Süresi (Dakika):** İki rezervasyon arasına eklenen "hazırlık ve temizlik" payıdır. Bu süre içinde araç takvimde meşgul görünür.
+- **Default Rental Days:** The default rental duration pre-selected on the frontend booking form before a date is chosen (e.g., 1 Day).
 
 ---
 
-### 🖼️ GÖRSEL: REZERVASYON ZAMAN YÖNETİMİ
-*(Ayarlar > Rezervasyon Yönetimi sekmesi, iptal ve ödeme süreleri alanı)*
+## ⏳ Time Management Settings
+
+The lifecycle and operational lead times of bookings are managed here.
+
+- **Cancellation Deadline (Hours):** Defines how many hours before the booking start time the customer retains the right to cancel (e.g., 24 Hours).
+- **Payment Deadline (Minutes):** The time allowed to complete payment after a booking is created. Entering `0` disables the time limit.
+- **Enable Auto-Cancel:** Automatically moves bookings whose payment period has expired to "Cancelled" status.
+- **Buffer Time (Minutes):** A "preparation and cleaning" gap inserted between two bookings. During this period the vehicle appears as busy in the calendar.
 
 ---
 
-## 🔔 Bildirim Ayarları
-
-Süreçteki kritik adımlarda gönderilecek otomatik e-posta bildirimlerini kontrol eder.
-
-- **Onay E-postaları Gönder:** Rezervasyon onaylandığında müşteriye otomatik bilgi gider.
-- **Hatırlatma E-postaları Gönder:** Rezervasyon başlangıç saatinden önce müşteriye hatırlatma e-postası gönderilir.
-- **Yönetici Bildirimleri:** Yeni bir rezervasyon oluşturulduğunda site yöneticisine e-posta bildirimi gider.
-- **Otomatik İptal E-postası Gönder:** Ödeme zaman aşımı nedeniyle sistem tarafından iptal edilen kayıtlar için müşteriye bilgilendirme yapılır.
+### 🖼️ IMAGE: BOOKING TIME MANAGEMENT
+*(Settings > Booking Management tab, cancellation and payment deadline fields)*
 
 ---
 
-## 💡 Teknik Notlar
+## 🔔 Notification Settings
 
-:::important Cron Bağımlılığı
-"Otomatik İptal" ve "Hatırlatma E-postaları" fonksiyonlarının çalışması için WordPress Cron sisteminin aktif olması gereklidir. Bu görevleri **Ayarlar > Cron İş Monitörü** sekmesinden takip edebilirsiniz.
+Controls the automatic email notifications sent at critical steps in the process.
+
+- **Send Confirmation Emails:** Sends the customer an automatic notification when a booking is confirmed.
+- **Send Reminder Emails:** Sends the customer a reminder email before the booking start time.
+- **Admin Notifications:** Sends the site administrator an email notification when a new booking is created.
+- **Send Auto-Cancel Email:** Notifies the customer when a booking is cancelled automatically due to payment timeout.
+
+---
+
+## 💡 Technical Notes
+
+:::important Cron Dependency
+The "Auto-Cancel" and "Reminder Emails" features require the WordPress Cron system to be active. You can monitor these tasks from the **Settings > Cron Job Monitor** tab.
 :::
 
 ---
 
-### Bölüm Özeti
-- **Zaman Yönetimi** ile ödeme ve iptal kurallarını netleştirin.
-- **Tampon Süresi (Buffer)** ile operasyonel hazırlığınıza zaman ayırın.
-- **Otomatik Bildirimler** ile müşteri ve yönetici arasındaki iletişimi otomatize edin.
+### Section Summary
+- Use **Time Management** to clarify payment and cancellation rules.
+- Use **Buffer Time** to allow time for operational preparation.
+- Use **Automatic Notifications** to automate communication between customers and administrators.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Rezervasyon Yönetimi dökümanı panel ekran görüntüsü ve kod analizine göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Booking Management documentation updated based on panel screenshot and code analysis. |

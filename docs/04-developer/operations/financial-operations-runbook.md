@@ -1,69 +1,69 @@
 ---
 id: financial-operations-runbook
-title: Finansal Operasyon Runbook (L1/L2)
-sidebar_label: Operasyon Runbook
+title: Financial Operations Runbook (L1/L2)
+sidebar_label: Operations Runbook
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu rehber, Rentiva finansal operasyon ekibi ve sistem yöneticileri için günlük rutinleri ve kritik müdahale adımlarını tanımlar.
+:::info Purpose
+This guide defines daily routines and critical intervention steps for the Rentiva financial operations team and system administrators.
 :::
 
-# 📖 Finansal Operasyon Runbook
+# 📖 Financial Operations Runbook
 
-Finansal operasyonlar, sistemin nakit akışını ve veri bütünlüğünü korumak için tasarlanmış sıralı adımlardan oluşur.
-
----
-
-## 🕒 Günlük Mutabakat (Reconciliation)
-
-Her iş günü başında aşağıdaki kontroller yapılmalıdır:
-1. **Pending Payouts:** `Payout List Table` üzerinden bekleyen taleplerin yaşlandırmasını (Aging) kontrol edin. 48 saati geçen talepleri incelemeye alın.
-2. **Ledger Balance:** Ledger tablolarındaki toplam giren/çıkan bakiyenin, sistemin raporladığı toplam `Net Balance` ile tutarlılığını test edin.
-3. **Failed Webhooks:** `WebhookLog` tablosunu tarayarak başarılı olmayan ödeme bildirimlerini tespit edin.
+Financial operations consist of sequential steps designed to maintain the system's cash flow and data integrity.
 
 ---
 
-## ⚖️ Governance Operasyonları
+## 🕒 Daily Reconciliation
 
-Kritik durumlarda `GovernanceService` üzerinden müdahale prosedürleri:
-
-### ❄️ Satıcı Dondurma (Freeze)
-Riskli aktivite tespit edildiğinde:
-- Satıcı ID'sini `Governance` paneline girin.
-- **Freeze** bayrağını aktif edin.
-- Bu işlem, satıcının tüm bekleyen payout'larını askıya alır ve yeni talep oluşturmasını engeller.
-
-### 🔓 Payout Onay Döngüsü (Maker-Checker)
-- **Maker:** Operasyon sorumlusu talebi inceler ve listeler.
-- **Checker:** Finans yöneticisi, operasyon sorumlusunun kendi hesabına payout yapmadığından emin olduktan sonra `Bulk Approve` işlemini gerçekleştirir.
+The following checks must be performed at the start of each business day:
+1. **Pending Payouts:** Review the aging of pending requests via the `Payout List Table`. Flag any requests older than 48 hours for review.
+2. **Ledger Balance:** Verify that the total debit/credit balance in the Ledger tables is consistent with the `Net Balance` reported by the system.
+3. **Failed Webhooks:** Scan the `WebhookLog` table to identify failed payment notifications.
 
 ---
 
-## 📝 Audit Log Doğrulama
+## ⚖️ Governance Operations
 
-Herhangi bir finansal itiraz durumunda:
-1. `mhm_rentiva_ledger` tablosundan işlem ID'sini bulun.
-2. `GovernanceService::log_decision()` tarafından oluşturulan audit kaydıyla eşleştiğini doğrulayın.
-3. Timestamp ve IP adresi tutarlılığını kontrol ederek adli (Forensic) bütünlüğü onaylayın.
+Intervention procedures via `GovernanceService` for critical situations:
+
+### ❄️ Vendor Freeze
+When suspicious activity is detected:
+- Enter the Vendor ID in the `Governance` panel.
+- Activate the **Freeze** flag.
+- This action suspends all of the vendor's pending payouts and prevents them from creating new requests.
+
+### 🔓 Payout Approval Cycle (Maker-Checker)
+- **Maker:** The operations officer reviews and lists the request.
+- **Checker:** The finance manager performs the `Bulk Approve` action after confirming that the operations officer has not approved a payout to their own account.
 
 ---
 
-## 🔄 Reversal (Ters İşlem) Yönetimi
+## 📝 Audit Log Verification
 
-Hatalı veya mükerrer ödemelerde:
-- `Ledger::record_reversal()` metodunu kullanarak yeni bir "Reversal" satırı ekleyin.
-- **Asla** mevcut bir Ledger kaydını silmeyin veya güncellemeyin.
+In the event of any financial dispute:
+1. Locate the transaction ID in the `mhm_rentiva_ledger` table.
+2. Verify that it matches the audit record created by `GovernanceService::log_decision()`.
+3. Confirm forensic integrity by checking timestamp and IP address consistency.
 
-## Bölüm Sonu Özeti
-- Operasyonel adımlarda "Silme" (Delete) yetkisi hiçbir kademede yoktur.
-- Her müdahale mutlaka bir audit kaydı bırakmalıdır.
-- Günlük mutabakat, sistemin finansal sağlığı için zorunludur.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## 🔄 Reversal Management
+
+For erroneous or duplicate payments:
+- Use the `Ledger::record_reversal()` method to add a new "Reversal" entry.
+- **Never** delete or update an existing Ledger record.
+
+## Section Summary
+- The "Delete" permission does not exist at any level in operational steps.
+- Every intervention must leave an audit record.
+- Daily reconciliation is mandatory for the financial health of the system.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, mutabakat ve Governance operasyonel adımlarıyla güncellendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with reconciliation and Governance operational steps. |

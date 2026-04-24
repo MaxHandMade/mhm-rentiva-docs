@@ -1,72 +1,72 @@
 ---
 id: about
-title: MHM Rentiva Hakkında (About)
-sidebar_label: Hakkında
+title: About MHM Rentiva
+sidebar_label: About
 sidebar_position: 16
 slug: /features-usage/about
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-**MHM Rentiva Hakkında** sayfası, eklentinin teknik altyapısını, sürüm notlarını, istatistiklerini izleyebileceğiniz ve doğrudan geliştirici ekiple (MaxHandMade) iletişim kurabileceğiniz merkezi yönetim destek alanıdır. Bu sayfaya WordPress admin panelinden **MHM Rentiva > Hakkında** yolunu izleyerek ulaşabilirsiniz.
-
----
-
-## ℹ️ 1. Genel Bilgi (General Info)
-
-Eklentinin mevcut durumu ve platform büyüklüğünüz hakkında makro düzeyde özet sağlar:
-
-- **Eklenti Bilgileri:** Yüklü olan versiyon (Örn: *v4.21.2*), dosya boyutu, geliştirici bilgisi ve mevcut lisans durumu (Pro / Lite).
-- **Uygunluk:** WordPress sürümünüz (Örn: 6.9.4), PHP sürümünüz ve MySQL versiyonlarınızın, eklentinin test edildiği versiyonlarla kıyaslamasını gösterir.
-- **İstatistikler:** Sisteminizdeki **Toplam Araç Sayısı**, **Toplam Rezervasyon** ve **Toplam Müşteri** istatistiklerini anlık olarak bir tabloda tutar.
+The **About MHM Rentiva** page is the central support and information hub where you can monitor the plugin's technical infrastructure, version notes, and statistics, and contact the developer team (MaxHandMade) directly. Access it from the WordPress admin menu via **MHM Rentiva > About**.
 
 ---
 
-## 💎 2. Özellikler (Lite vs Pro)
+## ℹ️ 1. General Info
 
-Lite (Ücretsiz) sürüm ile Pro (Lisanslı) sürüm arasındaki belirgin farkları ve sınırları tablo halinde net bir şekilde listeler. *Eğer halihazırda Pro lisansınız aktifse tüm özellikler "Sınırsız / Mevcut / Tam" olarak belirtilir.*
+Provides a high-level summary of the plugin's current status and your platform's scale:
 
-| Özellik | Lite (Sınır) | Pro (Limitsiz) |
+- **Plugin Information:** The installed version (e.g. *v4.21.2*), file size, developer details, and current license status (Pro / Lite).
+- **Compatibility:** Compares your WordPress version (e.g. 6.9.4), PHP version, and MySQL version against the versions the plugin has been tested with.
+- **Statistics:** Displays real-time totals for **Total Vehicles**, **Total Bookings**, and **Total Customers** in a summary table.
+
+---
+
+## 💎 2. Features (Lite vs Pro)
+
+Lists the key differences and limits between the Lite (Free) and Pro (Licensed) editions in a clear table. *If your Pro license is already active, all features show as "Unlimited / Available / Full".*
+
+| Feature | Lite (Limit) | Pro (Unlimited) |
 | :--- | :--- | :--- |
-| **Maksimum Araç Sayısı** | 3 Araç | Sınırsız |
-| **Rezervasyon Kapasitesi** | 50 Rezervasyon | Sınırsız |
-| **Müşteri Veritabanı** | 3 Müşteri | Sınırsız |
-| **Ek Hizmetler (Eklentiler)** | 4 Ek hizmet | Sınırsız |
-| **VIP Transfer Güzergahları**| 3 Güzergah | Sınırsız |
-| **Galeri Resimleri** | 3 Araç / Görseli | Sınırsız |
-| **Gelişmiş Raporlar** | 30 Gün (Maks 500 satır) | Sınırsız Tarih & Satır |
-| **Dışa Aktarım Biçimleri** | Yalnızca CSV | CSV, JSON |
-| **Özel Modüller (Mesaj/Vendor)**| Mevcut değil | Aktif Hâlde Mevcut |
-| **REST API Erişimi** | Sınırlı Erişim | Tam REST API Desteği |
+| **Maximum Vehicles** | 3 Vehicles | Unlimited |
+| **Booking Capacity** | 50 Bookings | Unlimited |
+| **Customer Database** | 3 Customers | Unlimited |
+| **Add-ons** | 4 Add-ons | Unlimited |
+| **VIP Transfer Routes** | 3 Routes | Unlimited |
+| **Gallery Images** | 3 per Vehicle | Unlimited |
+| **Advanced Reports** | 30 Days (Max 500 rows) | Unlimited Date & Rows |
+| **Export Formats** | CSV only | CSV, JSON |
+| **Premium Modules (Messaging/Vendor)** | Not available | Available |
+| **REST API Access** | Limited | Full REST API Support |
 
 ---
 
-## ⚙️ 3. Sistem Bilgisi (System Info)
+## ⚙️ 3. System Info
 
-Sunucu ve site yapılandırmanızın *Developer* düzeyinde incelendiği diagnostik sekmesidir. Geliştirici ekibe destek talebi açarken buradaki verilerin iletilmesi çok önemlidir:
+A developer-level diagnostic panel for inspecting your server and site configuration. Sharing this data when opening a support request with the developer team is strongly recommended:
 
-- **WordPress Bilgileri:** Dil ayarı (`tr_TR`), Zaman Dilimi (`+03:00`), Site URL'si, Çoklu Site (Multisite) durumu.
-- **PHP Bilgisi:** Sürüm (`8.2.30`), Bellek Sınırı (`128M`), Maksimum Yürütme Süresi (`30s`), Maksimum Yükleme Boyutu (`2M`), Post Max Boyutu.
-- **Eklenti Bilgileri:** Kurulum ve son güncellenme tarihleri, Lisans geçerlilik durumu (Örn: *Ömür boyu*).
-- **Veritabanı Bilgileri:** MySQL sürümü (`10.6.25`), Karakter kümesi (`utf8mb4`) ve Karşılaştırma/Derleme (`utf8mb4_unicode_520_ci`).
-
----
-
-## 🆘 4. Destek (Support & Changelog)
-
-Kullanıcı destek kanallarına ve dökümanlara hızlı erişim sağlar:
-
-- **Belgeler:** Kullanıcı rehberimiz, API Dökümantasyonumuz ve Video Öğreticilerimize anında bağlantılar.
-- **Destek Kanalları:** Bize ulaşabileceğiniz **İletişim Formu** ve doğrudan geliştirici destek e-postası / telefon numarası bölümü. Pro kullanıcılar için **Öncelikli destek** kanalı.
-- **Topluluk:** Deneyimlerinizi paylaşmak veya çözüm bulmak için *WordPress Destek Forumu* entegrasyonu.
-- **Sürüm Geçmişi (Changelog):** Eklentinin geçmişten günümüze yayınlanan güncellemelerini detaylandırır (Örn: v4.21.2 versiyonundaki Security hardening, REST API geliştirmeleri vb. yama notlarını içerir).
+- **WordPress Information:** Language setting (`tr_TR`), Timezone (`+03:00`), Site URL, Multisite status.
+- **PHP Information:** Version (`8.2.30`), Memory Limit (`128M`), Max Execution Time (`30s`), Max Upload Size (`2M`), Post Max Size.
+- **Plugin Information:** Installation and last-updated dates, license validity status (e.g. *Lifetime*).
+- **Database Information:** MySQL version (`10.6.25`), Character Set (`utf8mb4`), and Collation (`utf8mb4_unicode_520_ci`).
 
 ---
 
-## 👨‍💻 5. Geliştirici (Developer Details)
+## 🆘 4. Support (Support & Changelog)
 
-MHM Rentiva'yı var eden ana geliştirici **MHM (MaxHandMade)** hakkındaki dijital portfolyodur:
+Provides quick access to user support channels and documentation:
 
-- **Hakkımızda:** 10 yılı aşkın WordPress, e-ticaret, restorasyon ve özel yazılım çözümleri deneyimimizle `%100 Müşteri Memnuniyeti` ilkesi ile çalışan ekibimizin misyon açıklaması.
-- **Uzmanlık Alanlarımız:** WordPress Geliştirme (Performans ve Optimizasyon), E-ticaret Çözümleri (WooCommerce kişiselleştirmeleri) ve Karmaşık Rezervasyon Sistemleri altyapı inşası.
-- **İletişim & Diğer Projeler:** Kurumsal website (`maxhandmade.com`), Kocaeli / Türkiye resmi ofis adresi ve aktif olan diğer başarılı WordPress ticari projelerimizin (`MHM E-ticaret Paketi` vb.) linkleri yer alır.
+- **Documentation:** Direct links to the User Guide, API Documentation, and Video Tutorials.
+- **Support Channels:** A **Contact Form** and developer support email/phone number. A **Priority Support** channel for Pro users.
+- **Community:** WordPress Support Forum integration for sharing experiences or finding solutions.
+- **Version History (Changelog):** Details all updates released from the beginning to the present (e.g. Security hardening, REST API improvements, and other patch notes in v4.21.2).
+
+---
+
+## 👨‍💻 5. Developer Details
+
+A digital portfolio for **MHM (MaxHandMade)**, the team behind MHM Rentiva:
+
+- **About Us:** Mission statement of our team, with over 10 years of experience in WordPress, e-commerce, restoration, and custom software solutions, operating on a `100% Customer Satisfaction` principle.
+- **Areas of Expertise:** WordPress Development (Performance & Optimization), E-commerce Solutions (WooCommerce customizations), and Complex Booking System infrastructure.
+- **Contact & Other Projects:** Corporate website (`maxhandmade.com`), official office address in Kocaeli / Turkey, and links to other successful commercial WordPress projects (`MHM E-commerce Package`, etc.).

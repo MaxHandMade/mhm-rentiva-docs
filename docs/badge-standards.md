@@ -1,88 +1,89 @@
 ---
 id: badge-standards
-title: Rozet Standartları ve Kullanım Kılavuzu
+title: Badge Standards & Usage Guide
 sidebar_label: Badge Standards
 sidebar_position: 120
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-standard_v2-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-standard_v2-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu kılavuz, MHM Rentiva dökümantasyon sayfalarında kullanılan görsel rozetlerin (badges) standartlarını, renk kodlarını ve kullanım kurallarını tanımlar.
+:::info Purpose
+This guide defines the standards, color codes, and usage rules for the visual badges used across MHM Rentiva documentation pages.
 :::
 
-# 🏷️ Rozet Standartları ve Kullanım Kılavuzu
+# 🏷️ Badge Standards & Usage Guide
 
-Dökümantasyonun güncelliğini ve teknik seviyesini hızlıca görselleştirmek için `Shields.io` tabanlı rozetler kullanılır.
+`Shields.io`-based badges are used to quickly visualize the currency and technical level of each documentation page.
 
 ---
 
-## 🔝 1. Güncel Rozet Formatı (v4.21.2)
+## 🔝 1. Current Badge Format (v4.27.2)
 
-Her sayfanın başında bulunması gereken standart dizilim:
+The standard sequence that must appear at the top of every page:
 
 ```markdown
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 ```
 
 ---
 
-## 🏛️ 2. Rozet Bileşenleri
+## 🏛️ 2. Badge Components
 
-### Versiyon Rozeti (Version)
-- **Renk:** Mavi (`blue`)
+### Version Badge
+- **Color:** Blue (`blue`)
 - **Format:** `version-{plugin_version}`
-- **Kullanım:** Eklentinin hangi ana sürümüyle uyumlu olduğunu belirtir.
+- **Usage:** Indicates which major plugin version this page is compatible with.
 
-### Güvenlik ve Uyum Rozetleri (Security/Compliance)
-- **Renk:** Yeşil (`green`) veya Koyu Yeşil (`0f766e`)
-- **Değerler:**
-  - `WPCS Compliant`: WordPress Kod Standartlarına uygunluk.
-  - `Security Hardened`: Güvenlik sıkılaştırması yapılmış.
-  - `SQL Safe`: SQL Injection korumalı.
+### Security & Compliance Badges
+- **Color:** Green (`green`) or Dark Green (`0f766e`)
+- **Values:**
+  - `WPCS Compliant`: Compliant with WordPress Coding Standards.
+  - `Security Hardened`: Security hardening applied.
+  - `SQL Safe`: Protected against SQL Injection.
 
-### Güncelleme Rozeti (Updated)
-- **Renk:** Turuncu (`orange`)
+### Updated Badge
+- **Color:** Orange (`orange`)
 - **Format:** `last updated-DD.MM.YYYY`
-- **Kullanım:** Sayfanın en son ne zaman incelendiğini veya güncellendiğini gösterir.
+- **Usage:** Shows when the page was last reviewed or updated.
 
 ---
 
-## 🎨 3. Stil Parametreleri
+## 🎨 3. Style Parameters
 
-Tüm rozetler görsel bütünlük için şu parametreleri kullanmalıdır:
-- **`style=flat-square`**: Köşeli ve modern bir görünüm sağlar.
-- **`logo=...`**: Gerekli durumlarda marka logoları eklenebilir.
-
----
-
-## 📏 4. Kullanım Kuralları
-
-1. **Konum:** Rozetler, YAML meta verilerinden (frontmatter) hemen sonra, ana başlıktan (`#`) önce eklenmelidir.
-2. **Sıralama:** Standart sıra; **Versiyon** → **Döküman Tipi/Güvenlik** → **Son Güncelleme** şeklindedir.
-3. **Boşluk:** Rozetler arasında birer boşluk bırakılmalıdır.
-4. **Doğruluk:** Güncelleme tarihi her zaman işlemin yapıldığı günün tarihi olmalıdır.
+All badges must use the following parameters for visual consistency:
+- **`style=flat-square`**: Provides a modern, square-edged appearance.
+- **`logo=...`**: Brand logos can be added where required.
 
 ---
 
-## 📝 5. Örnek Uygulama
+## 📏 4. Usage Rules
+
+1. **Position:** Badges must be placed immediately after the YAML frontmatter and before the main heading (`#`).
+2. **Order:** The standard order is: **Version** → **Doc Type / Security** → **Last Updated**.
+3. **Spacing:** Leave a single space between badges.
+4. **Accuracy:** The updated date must always reflect the date the change was made.
+
+---
+
+## 📝 5. Example
 
 ```markdown
 ---
 id: sample-page
-title: Örnek Sayfa
+title: Sample Page
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-# Örnek Başlık
-İçerik buraya gelir...
+# Sample Title
+Content goes here...
 ```
 
-## Bölüm Sonu Özeti
-- Standart rozet kullanımı, dökümantasyonun profesyonel görünmesini sağlar.
-- v4.21.2 ile tüm sayfalar yeni formatta normalize edilmiştir.
+## Section Summary
+- Consistent badge usage gives the documentation a professional appearance.
+- All pages have been normalized to the new format as of v4.21.2.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sürüm v4.21.2 standartları ve yeni renk kodları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | v4.21.2 standards and new color codes added. |

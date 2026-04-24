@@ -1,59 +1,60 @@
 ---
 id: settings
-title: Genel Ayarlar
-sidebar_label: Genel Ayarlar
+title: General Settings
+sidebar_label: General Settings
 sidebar_position: 1
 slug: /core-configuration/settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Genel Ayarlar sayfası, eklentinin temel çalışma prensiplerini, para birimini ve şirket kimlik bilgilerini yapılandırdığınız başlangıç noktasıdır. **MHM Rentiva > Ayarlar > Genel Ayarlar** sekmesinden ulaşılır.
-
----
-
-## ⚙️ Genel Yapılandırma
-
-Bu bölümde sistemin temel görüntüleme ve para birimi tercihleri belirlenir.
-
-- **Para Birimi:** MHM Rentiva, WooCommerce ile tam uyumlu çalışır. Eğer sitenizde WooCommerce yüklüyse, para birimi ayarı otomatik olarak WooCommerce'den çekilir (Varsayılan: TRY).
-- **Para Birimi Pozisyonu:** Sembolün sağda/solda olması gibi yerleşim ayarları yine WooCommerce üzerinden merkezi olarak yönetilir.
-- **Karanlık Kip (Dark Mode):** Yönetim panelinin renk şemasını belirler. 
-    - **Otomatik (Sistem):** İşletim sisteminizin moduna göre (Gece/Gündüz) otomatik değişir.
-    - **Açık / Kapalı:** Sabit bir görünüm tercih edebilirsiniz.
+The General Settings page is the starting point where you configure the plugin's core operating principles, currency, and company identity. Access it from the **MHM Rentiva > Settings > General Settings** tab.
 
 ---
 
-### 🖼️ GÖRSEL: GENEL YAPILANDIRMA EKRANI
-*(Ayarlar > Genel Ayarlar sekmesi, para birimi ve görünüm tercihleri alanı)*
+## ⚙️ General Configuration
+
+This section defines the system's core display and currency preferences.
+
+- **Currency:** MHM Rentiva works fully integrated with WooCommerce. If WooCommerce is installed on your site, the currency setting is automatically pulled from WooCommerce (Default: TRY).
+- **Currency Position:** Placement settings such as symbol left/right are also managed centrally through WooCommerce.
+- **Dark Mode:** Defines the color scheme of the admin panel.
+    - **Auto (System):** Automatically switches based on your operating system's mode (Night/Day).
+    - **Light / Dark:** You can choose a fixed appearance.
 
 ---
 
-## 🏢 Marka ve İletişim Bilgileri
-
-Buraya girdiğiniz bilgiler; müşteriye giden e-postalarda, PDF faturalarında ve iletişim formlarında otomatik olarak yer tutucu (placeholders) olarak kullanılır.
-
-- **Marka Adı:** Şirketinizin veya markanızın tam adı.
-- **Destek E-postası:** Müşteri hizmetleri için kullanılacak e-posta adresi.
-- **İletişim Telefonu:** Şirketinizin resmi iletişim numarası (+90 555... formatı önerilir).
-- **Destek Saatleri:** Müşteri desteği sağladığınız çalışma saatleri (Örn: 09:00 - 18:00).
+### 🖼️ IMAGE: GENERAL CONFIGURATION SCREEN
+*(Settings > General Settings tab, currency and appearance preferences area)*
 
 ---
 
-## 💡 Teknik Notlar
+## 🏢 Brand & Contact Information
+
+The information you enter here is automatically used as placeholders in customer-facing emails, PDF invoices, and contact forms.
+
+- **Brand Name:** The full name of your company or brand.
+- **Support Email:** The email address used for customer service.
+- **Contact Phone:** Your company's official contact number (format +90 555... recommended).
+- **Support Hours:** The working hours during which you provide customer support (e.g., 09:00 – 18:00).
+
+---
+
+## 💡 Technical Notes
 
 :::info
-Eğer para birimini değiştirmek isterseniz ve sistemde WooCommerce yüklüyse, değişikliği **WooCommerce > Ayarlar > Genel** altından yapmalısınız. MHM Rentiva bu değişikliği anlık olarak algılayacaktır.
+If you want to change the currency and WooCommerce is installed, make the change under **WooCommerce > Settings > General**. MHM Rentiva will detect the change instantly.
 :::
 
 ---
 
-### Bölüm Özeti
-- Sistemin temel **para birimi** WooCommerce ile senkronize çalışır.
-- **Genel Yapılandırma** üzerinden admin panelinin görünümü (Karanlık Mod) ayarlanır.
-- **Marka Bilgileri**, döküman ve e-posta şablonlarının kurumsal kimliğini oluşturur.
+### Section Summary
+- The system's core **currency** works in sync with WooCommerce.
+- The appearance of the admin panel (Dark Mode) is configured via **General Configuration**.
+- **Brand Information** forms the corporate identity of documents and email templates.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Genel Ayarlar dökümanı panel ekran görüntüsüne göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | General Settings documentation updated based on panel screenshot. |

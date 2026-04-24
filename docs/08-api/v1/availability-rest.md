@@ -1,43 +1,43 @@
 ---
 id: availability-rest
-title: Müsaitlik Sorgulama (Availability REST)
+title: Availability Check (Availability REST)
 sidebar_label: Availability REST
 sidebar_position: 40
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu uç nokta (endpoint), belirli bir aracın seçilen tarih ve saat aralığında kiralanabilir olup olmadığını kontrol eder ve güncel fiyatlandırmayı hesaplar.
+:::info Purpose
+This endpoint checks whether a specific vehicle is available for rental within a selected date and time range, and calculates the current pricing.
 :::
 
-# 🚗 Müsaitlik Sorgulama Endpointi
+# 🚗 Availability Check Endpoint
 
-Müsaitlik sorgulama, rezervasyon sürecinin ilk ve en kritik adımıdır. `Util::has_overlap()` ve `PricingEngine` sınıflarını kullanarak gerçek zamanlı sonuç döner.
+Availability checking is the first and most critical step in the booking process. It returns real-time results using the `Util::has_overlap()` and `PricingEngine` classes.
 
 ---
 
-## 📍 Endpoint Bilgileri
+## 📍 Endpoint Details
 - **URL:** `/wp-json/mhm-rentiva/v1/availability`
-- **Metot:** `POST`
-- **Yetki:** Public (Eğer admin/vendor arayüzü değilse)
+- **Method:** `POST`
+- **Permission:** Public (if not an admin/vendor interface)
 
 ---
 
-## 📥 İstek Parametreleri (JSON Gövdesi)
+## 📥 Request Parameters (JSON Body)
 
-| Parametre | Tip | Zorunlu | Açıklama |
+| Parameter | Type | Required | Description |
 |---|---|---|---|
-| `vehicle_id` | `int` | Evet | Kontrol edilecek aracın ID'si. |
-| `pickup_date` | `string` | Evet | Alış tarihi (`YYYY-MM-DD`). |
-| `pickup_time` | `string` | Evet | Alış saati (`HH:MM`). |
-| `return_date` | `string` | Evet | Dönüş tarihi (`YYYY-MM-DD`). |
-| `return_time` | `string` | Evet | Dönüş saati (`HH:MM`). |
-| `location_id` | `int` | Hayır | Teslimat konumu (Fiyatı etkileyebilir). |
+| `vehicle_id` | `int` | Yes | The ID of the vehicle to check. |
+| `pickup_date` | `string` | Yes | Pickup date (`YYYY-MM-DD`). |
+| `pickup_time` | `string` | Yes | Pickup time (`HH:MM`). |
+| `return_date` | `string` | Yes | Return date (`YYYY-MM-DD`). |
+| `return_time` | `string` | Yes | Return time (`HH:MM`). |
+| `location_id` | `int` | No | Delivery location (may affect pricing). |
 
 ---
 
-## 📤 Başarılı Yanıt Örneği
+## 📤 Successful Response Example
 
 ```json
 {
@@ -60,29 +60,30 @@ Müsaitlik sorgulama, rezervasyon sürecinin ilk ve en kritik adımıdır. `Util
 
 ---
 
-## 🛡️ Güvenlik ve Doğrulama
-1. **Tarih Sıralaması:** Dönüş tarihi, alış tarihinden önce olamaz.
-2. **Saat Kontrolü:** Alış saati, minimum rezervasyon süresi kurallarına uygun olmalıdır.
-3. **`RateLimiter`:** Aynı IP'den gelen saniyede çoklu sorgular otomatik olarak yavaşlatılır.
-4. **Sanitizasyon:** Tüm girdi verileri `Sanitizer::absint()` ve `sanitize_text_field()` ile temizlenir.
+## 🛡️ Security and Validation
+1. **Date Order:** The return date cannot precede the pickup date.
+2. **Time Check:** The pickup time must comply with minimum booking duration rules.
+3. **`RateLimiter`:** Multiple queries from the same IP within a second are automatically throttled.
+4. **Sanitization:** All input data is sanitized via `Sanitizer::absint()` and `sanitize_text_field()`.
 
 ---
 
-## ❌ Hata Durumları
+## ❌ Error States
 
-| Kod | Mesaj | Neden |
+| Code | Message | Reason |
 |---|---|---|
-| **400** | `INVALID_DATE_RANGE` | Alış/Dönüş tarihleri mantıksız. |
-| **404** | `VEHICLE_NOT_FOUND` | Belirtilen ID'ye sahip araç bulunamadı. |
-| **409** | `VEHICLE_NOT_AVAILABLE` | Araç belirtilen tarihlerde zaten dolu. |
-| **429** | `TOO_MANY_REQUESTS` | Rate limit aşıldı. |
+| **400** | `INVALID_DATE_RANGE` | Pickup/return dates are illogical. |
+| **404** | `VEHICLE_NOT_FOUND` | No vehicle found with the specified ID. |
+| **409** | `VEHICLE_NOT_AVAILABLE` | Vehicle is already booked for the specified dates. |
+| **429** | `TOO_MANY_REQUESTS` | Rate limit exceeded. |
 
-## Bölüm Sonu Özeti
-- `availability` endpointi, hem müsaitlik hem de fiyat bilgisi sağlar.
-- `Util::has_overlap()` ile çakışmaları saniyeler içinde tespit eder.
-- Frontend takvimlerinde ve rezervasyon formlarında reaktif güncellemeler için kullanılır.
+## Section Summary
+- The `availability` endpoint provides both availability and pricing information.
+- `Util::has_overlap()` detects conflicts within seconds.
+- Used for reactive updates in front-end calendars and booking forms.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | JSON istek/yanıt şeması ve hata kodları detaylandırıldı. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | JSON request/response schema and error codes detailed. |

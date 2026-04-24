@@ -1,38 +1,38 @@
 ---
 id: financial-rest-callbacks
-title: Ödeme Geri Bildirim API (Payout Callback)
+title: Payment Callback API (Payout Callback)
 sidebar_label: Payout Callback API
 sidebar_position: 50
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu uç nokta (endpoint), dış ödeme işlemcilerinden (Bankalar, Ödeme Kuruluşları) gelen para çekme (payout) sonuçlarını güvenli bir şekilde karşılamak ve Ledger (Defter) kayıtlarını güncellemek için kullanılır.
+:::info Purpose
+This endpoint is used to securely receive payout results from external payment processors (banks, payment institutions) and update Ledger records accordingly.
 :::
 
-# 🧾 Ödeme Geri Bildirim API'si
+# 🧾 Payment Callback API
 
-Payout Callback API, finansal döngünün son adımıdır. Dış dünyadan gelen "Başarılı" veya "Hatalı" sinyallerine göre sistemin mali durumunu günceller.
+The Payout Callback API is the final step in the financial cycle. It updates the system's financial state based on "Success" or "Failure" signals received from the outside world.
 
 ---
 
-## 📍 Endpoint Bilgileri
+## 📍 Endpoint Details
 - **URL:** `/wp-json/mhm-rentiva/v1/payouts/{id}/callback`
-- **Metot:** `POST`
-- **Doğrulama:** HMAC SHA-256 (Zorunlu)
+- **Method:** `POST`
+- **Verification:** HMAC SHA-256 (Required)
 
 ---
 
-## 🛡️ 1. Güvenlik ve Doğrulama (HMAC)
+## 🛡️ 1. Security and Verification (HMAC)
 
-Sahte bildirimleri önlemek için her istek şu başlıkları içermelidir:
-- **`X-MHM-Timestamp`:** İsteğin yapıldığı UTC zaman damgası. Sunucu saatiyle farkı 300 saniyeden fazla ise istek reddedilir.
-- **`X-MHM-Signature`:** İstek gövdesi (payload) ve gizli anahtar (Secret Key) kullanılarak üretilen `HMAC SHA-256` hash değeri.
+To prevent forged notifications, every request must include the following headers:
+- **`X-MHM-Timestamp`:** UTC timestamp of when the request was made. If the difference from server time exceeds 300 seconds, the request is rejected.
+- **`X-MHM-Signature`:** The `HMAC SHA-256` hash value produced using the request payload and the Secret Key.
 
 ---
 
-## 📥 İstek Gövdesi (Payload)
+## 📥 Request Body (Payload)
 
 ```json
 {
@@ -42,35 +42,36 @@ Sahte bildirimleri önlemek için her istek şu başlıkları içermelidir:
 }
 ```
 
-- **`status`:** `confirmed` (Başarılı) veya `failed` (Hatalı).
-- **`external_reference`:** Ödeme kuruluşundan gelen işlem referans numarası.
-- **`reason`:** Hata durumunda (failed) reddedilme nedeni.
+- **`status`:** `confirmed` (Success) or `failed` (Failure).
+- **`external_reference`:** The transaction reference number from the payment institution.
+- **`reason`:** The rejection reason in case of failure.
 
 ---
 
-## ⚙️ 2. İş Kuralları ve Ledger Güncellemesi
+## ⚙️ 2. Business Rules and Ledger Update
 
-Sistem, gelen duruma göre Ledger (Defter) üzerinde atomik işlemler yapar:
+The system performs atomic operations on the Ledger based on the incoming status:
 
-| Durum | İşlem | Açıklama |
+| Status | Operation | Description |
 |---|---|---|
-| **confirmed** | Statü Güncellemesi | Payout kaydı `completed` olarak işaretlenir. Ledger üzerinde yeni bir satır eklenmez (Bakiye zaten düşülmüştü). |
-| **failed** | `payout_reversal` | Ödeme başarısız olduğu için, önceden düşülen bakiye tedarikçiye iade edilir. Ledger'a ters yönlü bir kayıt eklenir. |
-| **Mükerrer İstek** | Idempotency | Eğer isteğe konu olan `payout_id` zaten nihai bir statüdeyse, işlem yapılmaz ve `200 OK` dönülür. |
+| **confirmed** | Status Update | The payout record is marked as `completed`. No new row is added to the Ledger (the balance was already deducted). |
+| **failed** | `payout_reversal` | Since the payment failed, the previously deducted balance is refunded to the Vendor. A reverse entry is added to the Ledger. |
+| **Duplicate Request** | Idempotency | If the `payout_id` in question is already in a final status, no action is taken and `200 OK` is returned. |
 
 ---
 
-## 🚦 3. Hata Yönetimi
-- **401 Unauthorized:** İmza doğrulaması başarısız.
-- **404 Not Found:** Geçersiz Payout ID.
-- **429 Too Many Requests:** Rate limit (20 istek/dakika) aşıldı.
+## 🚦 3. Error Handling
+- **401 Unauthorized:** Signature verification failed.
+- **404 Not Found:** Invalid Payout ID.
+- **429 Too Many Requests:** Rate limit (20 requests/minute) exceeded.
 
-## Bölüm Sonu Özeti
-- Callback API, finansal veri bütünlüğünü sağlamak için HMAC doğrulaması kullanır.
-- `failed` durumunda otomatik bakiye iade mekanizması (`reversal`) çalışır.
-- Tüm işlemler `AdvancedLogger` üzerinden denetim izi (audit trail) olarak kaydedilir.
+## Section Summary
+- The Callback API uses HMAC verification to ensure financial data integrity.
+- An automatic balance refund mechanism (`reversal`) runs on `failed` status.
+- All operations are recorded as an audit trail via `AdvancedLogger`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | HMAC doğrulama detayları ve Reversal (Ters Kayıt) mantığı eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | HMAC verification details and Reversal logic added. |

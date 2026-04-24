@@ -1,90 +1,91 @@
 ---
 id: vendor-analytics
-title: Tedarikçi Analizleri (Vendor Analytics)
+title: Vendor Analytics
 sidebar_label: Analytics
 sidebar_position: 20
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, tedarikçilere gerçek zamanlı iş zekası (Business Intelligence) sağlar. Bu doküman, KPI kartlarının hesaplanması, trend analizleri ve veritabanı seviyesindeki veri toplama stratejilerini açıklar.
+:::info Purpose
+MHM Rentiva provides vendors with real-time Business Intelligence. This document explains KPI card calculations, trend analysis, and data aggregation strategies at the database level.
 :::
 
-# 📊 Analiz ve Raporlama Sistemi
+# 📊 Analytics & Reporting System
 
-Sistemin finansal analizleri için **tek gerçeklik kaynağı (Source of Truth)** Ledger tablosudur. Operasyonel analizler ise rezervasyon statüleri üzerinden dinamik olarak hesaplanır.
-
----
-
-## 🏗️ 1. Veri Toplama Stratejisi (`AnalyticsService`)
-
-`AnalyticsService`, Ledger tablosu üzerinde `status = 'cleared'` ve `vendor_id` filtreleri ile çalışır.
-
-### Finansal Metrikler
-- **Net Gelir:** Belirli bir tarih aralığındaki `commission_credit` (artı) ve `commission_refund` (eksi) kayıtlarının toplamıdır.
-- **Ortalama Rezervasyon Değeri (ABV):** Toplam net gelirin, benzersiz (distinct) `booking_id` sayısına bölünmesiyle elde edilir.
-
-### Operasyonel Metrikler
-- **Doluluk Oranı (Occupancy):** `(Kiralanan Gün Sayısı / Toplam Mevcut Gün Sayısı) * 100`.
-- **İptal Oranı:** `(İptal Edilen Rezervasyonlar / Toplam Talep Sayısı) * 100`.
+The **single source of truth** for financial analytics is the Ledger table. Operational analytics are calculated dynamically based on booking statuses.
 
 ---
 
-## 📉 2. Büyüme ve Trend Analizi
+## 🏗️ 1. Data Aggregation Strategy (`AnalyticsService`)
 
-Sistem, seçilen tarih aralığını bir önceki benzer period ile karşılaştırarak büyüme oranlarını hesaplar.
+`AnalyticsService` operates on the Ledger table using `status = 'cleared'` and `vendor_id` filters.
 
-### Hesaplama Modeli
-`Büyüme = ((Mevcut Dönem - Önceki Dönem) / Önceki Dönem) * 100`
+### Financial Metrics
+- **Net Revenue:** The sum of `commission_credit` (positive) and `commission_refund` (negative) entries within a given date range.
+- **Average Booking Value (ABV):** Total net revenue divided by the number of distinct `booking_id` values.
 
-**Teknik Detaylar:**
-- **Pencere Aynalama:** Eğer son 7 gün seçildiyse, önceki dönem olarak ondan önceki 7 gün (overlap olmadan) baz alınır.
-- **Sıfır Bölme Koruması:** Önceki dönem geliri 0 ise, büyüme oranı `%0` yerine `NULL` döner. Bu durum arayüzde "—" olarak maskelenir.
-
----
-
-## 📈 3. Sparkline Veri Yapısı
-
-Dashboard üzerindeki trend grafikleri için `get_sparkline_data()` metodu kullanılır.
-
-- **Backfilling:** Aktivite olmayan günler için veritabanından boş dönen tarihler, PHP tarafında otomatik olarak `0.0` ile doldurulur.
-- **UTC Sabiti:** Zaman dilimi kaymalarını engellemek için tüm tarih gruplamaları MySQL `DATE()` fonksiyonuyla UTC üzerinden yapılır.
+### Operational Metrics
+- **Occupancy Rate:** `(Rented Days / Total Available Days) * 100`.
+- **Cancellation Rate:** `(Cancelled Bookings / Total Requests) * 100`.
 
 ---
 
-## ⚡ 4. Performans ve Caching (`MetricCacheManager`)
+## 📉 2. Growth & Trend Analysis
 
-Analiz verileri pahalı SQL sorguları olduğu için çok katmanlı bir önbellekleme mekanizması kullanılır.
+The system calculates growth rates by comparing the selected date range against the previous equivalent period.
 
-| Katman | Süre | Geçersiz kılma (Invalidation) |
+### Calculation Model
+`Growth = ((Current Period - Previous Period) / Previous Period) * 100`
+
+**Technical Details:**
+- **Window Mirroring:** If the last 7 days are selected, the previous 7 days (without overlap) are used as the baseline.
+- **Zero-Division Protection:** If the previous period revenue is 0, the growth rate returns `NULL` instead of `0%`. This is masked as "—" in the UI.
+
+---
+
+## 📈 3. Sparkline Data Structure
+
+The `get_sparkline_data()` method is used for trend charts on the dashboard.
+
+- **Backfilling:** Dates with no activity that return empty from the database are automatically filled with `0.0` on the PHP side.
+- **UTC Normalization:** All date groupings use MySQL `DATE()` function over UTC to prevent timezone drift.
+
+---
+
+## ⚡ 4. Performance & Caching (`MetricCacheManager`)
+
+Analytics data involves expensive SQL queries, so a multi-layer caching mechanism is used.
+
+| Layer | Duration | Invalidation |
 |---|---|---|
-| **Transients** | 15 Dakika | Yeni rezervasyon, ödeme onayı veya statü değişikliği. |
-| **Object Cache** | Per-Session | Dashboard sekme geçişlerinde tekrar sorgulama yapılmaz. |
-| **Bypass** | - | Özel tarih aralığı aramalarında (Custom Range) cache devre dışı bırakılır. |
+| **Transients** | 15 Minutes | New booking, payment confirmation, or status change. |
+| **Object Cache** | Per-Session | No re-query on dashboard tab switches. |
+| **Bypass** | — | Cache is disabled for custom date range searches. |
 
 ---
 
-## ⚙️ 5. Teknik API Referansı
+## ⚙️ 5. Technical API Reference
 
-### Gelir Hesaplama
+### Revenue Calculation
 ```php
 // AnalyticsService::get_revenue_period($vendor_id, $from_ts, $to_ts)
-// PostgreSQL/MySQL uyumlu UTC normalization.
+// PostgreSQL/MySQL compatible UTC normalization.
 ```
 
-### Araç Bazlı Performans
+### Per-Vehicle Performance
 ```php
 // AnalyticsService::get_vehicle_performance($vehicle_id, $from_ts, $to_ts)
-// Belirli bir aracın özel doluluk ve gelir raporunu döner.
+// Returns occupancy and revenue report for a specific vehicle.
 ```
 
-## Bölüm Sonu Özeti
-- Finansal raporlarda sadece `cleared` durumundaki ledger kayıtları baz alınır.
-- Büyüme oranları lineer zaman kaydırma algoritmasıyla hesaplanır.
-- `MetricCacheManager` ile veritabanı yükü minimuma indirilmiştir.
+## Section Summary
+- Only `cleared` ledger entries are used as the basis for financial reports.
+- Growth rates are calculated using a linear time-shift algorithm.
+- `MetricCacheManager` minimizes database load.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Ledger tabanlı analiz ve büyüme formülleri dökümante edildi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Ledger-based analytics and growth formulas documented. |

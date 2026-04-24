@@ -1,84 +1,85 @@
 ---
 id: trend-service-and-metrics
-title: TrendService ve Metrik Altyapısı
-sidebar_label: TrendService & Metrikler
+title: TrendService and Metric Infrastructure
+sidebar_label: TrendService & Metrics
 sidebar_position: 14
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, dashboard üzerinde gösterilen büyüme oranları, eğilim verileri ve periyodik metriklerin nasıl hesaplandığını açıklar. `TrendService`, sistemin "Analitik Zekası" olarak görev yapar.
+:::info Purpose
+This page explains how growth rates, trend data, and periodic metrics displayed on the dashboard are calculated. `TrendService` acts as the system's "Analytics Intelligence".
 :::
 
-# 📈 TrendService ve Metrik Altyapısı
+# 📈 TrendService and Metric Infrastructure
 
-`TrendService`, dinamik metrikleri (Rezervasyonlar, Mesajlar, Pickup'lar vb.) belirli zaman pencereleri içinde analiz eden merkezi bir motorudur.
-
----
-
-## 🏗️ Mimari Yapı
-
-Sistem, genişletilebilir bir metrik yapısı sunar:
-1.  **MetricRegistry:** Her metrik (örn: `total_bookings`), kendi hesaplama mantığını barındıran bir sınıf olarak sisteme kaydedilir.
-2.  **TrendService:** Kayıtlı metrikleri kullanarak "Geçen Hafta" vs "Bu Hafta" karşılaştırması yapar.
-3.  **TrendMath:** Karşılaştırma sonuçlarını yüzde (%) büyüme ve yön (Yukarı/Aşağı) bilgisine dönüştürür.
+`TrendService` is a central engine that analyzes dynamic metrics (Bookings, Messages, Pickups, etc.) within specific time windows.
 
 ---
 
-## 🔄 Metrik Hesaplama Akışı
+## 🏗️ Architecture
+
+The system provides an extensible metric structure:
+1.  **MetricRegistry:** Each metric (e.g., `total_bookings`) is registered in the system as a class containing its own calculation logic.
+2.  **TrendService:** Uses registered metrics to compare "Last Week" vs "This Week".
+3.  **TrendMath:** Converts comparison results into percentage (%) growth and direction (Up/Down) information.
+
+---
+
+## 🔄 Metric Calculation Flow
 
 ```mermaid
 graph LR
-    A[Dashboard İsteği] --> B[TrendService::get_trend]
-    B --> C{Cache Kontrolü?}
-    C -- Hit --> D[Kayıtlı Veriyi Dön]
+    A[Dashboard Request] --> B[TrendService::get_trend]
+    B --> C{Cache Check?}
+    C -- Hit --> D[Return Cached Data]
     C -- Miss --> E[MetricRegistry::get]
     
-    E --> F[7 Günlük Pencere: Current]
-    E --> G[14-7 Günlük Pencere: Previous]
+    E --> F[7-Day Window: Current]
+    E --> G[14-7 Day Window: Previous]
     
     F & G --> H[TrendMath::calculate]
-    H --> I[Büyüme % & Yön]
+    H --> I[Growth % & Direction]
     I --> J[JSON Response]
 ```
 
 ---
 
-## ⏱️ Zaman Pencereleri (Windowing)
+## ⏱️ Time Windows (Windowing)
 
-`TrendService`, karşılaştırmalı analiz yapmak için iki adet **7 günlük** pencere kullanır:
--   **Current Period:** Son 7 gün (Bugün dahil).
--   **Previous Period:** Önceki 7 gün (7 gün öncesinden başlayarak 14 gün öncesine kadar).
+`TrendService` uses two **7-day** windows for comparative analysis:
+-   **Current Period:** Last 7 days (including today).
+-   **Previous Period:** The 7 days before that (starting 14 days ago through 7 days ago).
 
-Bu yapı, kullanıcıya "Geçen haftaya göre %X büyüme/düşüş" verisi sunar.
+This gives users data such as "X% growth/decline compared to last week".
 
 ---
 
-## 📋 Mevcut Metrik Tipleri
+## 📋 Available Metric Types
 
-| Metrik Anahtarı | Context | Açıklama |
+| Metric Key | Context | Description |
 | :--- | :--- | :--- |
-| `total_bookings` | `customer` | Kullanıcının toplam ve son dönem rezervasyon sayısı. |
-| `upcoming_pickups`| `customer` | Gelecek 7 gün içindeki araç teslim alma (Pickup) sayısı. |
-| `unread_messages` | `customer` | Satıcıdan gelen henüz okunmamış mesaj trendi. |
-| `net_revenue` | `vendor` | Satıcının hakediş büyüme eğilimi (Ledger tabanlı). |
+| `total_bookings` | `customer` | User's total and recent-period booking count. |
+| `upcoming_pickups`| `customer` | Number of vehicle pickups in the next 7 days. |
+| `unread_messages` | `customer` | Trend of unread messages received from vendors. |
+| `net_revenue` | `vendor` | Vendor's earnings growth trend (Ledger-based). |
 
 ---
 
-## ⚡ Performans ve Caching
+## ⚡ Performance and Caching
 
-Metrik hesaplamaları, özellikle büyük veritabanlarında `WP_Query` yükü oluşturabilir. `MetricCacheManager` sayesinde:
--   Hesaplanan trendler **1 saat** boyunca transient olarak saklanır.
--   Cache anahtarları `context`, `metric` ve `subject_id` (User ID/Email) bazlıdır.
--   Yeni bir rezervasyon veya mesaj geldiğinde ilgili cache otomatik olarak düşürülür (Invalidation).
+Metric calculations can generate `WP_Query` load on large databases. Thanks to `MetricCacheManager`:
+-   Calculated trends are stored as transients for **1 hour**.
+-   Cache keys are based on `context`, `metric`, and `subject_id` (User ID/Email).
+-   When a new booking or message arrives, the relevant cache is automatically invalidated.
 
-## Bölüm Sonu Özeti
--   Trendler her zaman **7 günlük karşılaştırma** üzerinden çalışır.
--   `MetricRegistry` sayesinde yeni metrik tipleri kolayca eklenebilir.
--   Tüm veriler sanallaştırılmış bir **Cache Katmanı** üzerinden sunulur.
+## Section Summary
+-   Trends always operate on a **7-day comparison** basis.
+-   New metric types can be added easily via `MetricRegistry`.
+-   All data is served through a virtualized **Cache Layer**.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, TrendService ve MetricRegistry mimarisine göre baştan yazıldı. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page rewritten from scratch to reflect TrendService and MetricRegistry architecture. |

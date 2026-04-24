@@ -1,71 +1,72 @@
 ---
 id: framework-architecture
-title: Kiralama Framework Mimarisi (Leasing Framework)
-sidebar_label: Mimari ve Özelleştirme
+title: Rental Framework Architecture (Leasing Framework)
+sidebar_label: Architecture & Customization
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, MHM Rentiva'nın kiralama varlık modelini nasıl yönettiğini, Lite/Pro sürümleri arasındaki teknik farkları ve esnek nitelik (Attribute) sistemini açıklar.
+:::info Purpose
+This page explains how MHM Rentiva manages its rental asset model, the technical differences between Lite and Pro versions, and the flexible attribute system.
 :::
 
-# 🏗️ Kiralama Framework Mimarisi
+# 🏗️ Rental Framework Architecture
 
-MHM Rentiva, sadece bir araç kiralama eklentisi değil; otomobil, bisiklet, tekne veya benzeri kiralık varlıklar için özelleştirilebilen esnek bir **Kiralama Framework'üdür**.
+MHM Rentiva is not just a vehicle rental plugin; it is a flexible **Rental Framework** that can be customized for cars, bicycles, boats, or similar rental assets.
 
-## 🛠️ Modüler Mimari (Lite vs Pro)
+## 🛠️ Modular Architecture (Lite vs Pro)
 
-Sistem mimarisi, `MHMRentiva\Admin\Licensing\Mode` sınıfı üzerinden yönetilen bir yetkilendirme katmanına sahiptir.
+The system architecture has an authorization layer managed through the `MHMRentiva\Admin\Licensing\Mode` class.
 
-### 📊 Versiyon Kısıtlamaları ve Kapasite
-Aşağıdaki tablo, sistemin çekirdek kapasite limitlerini gösterir:
+### 📊 Version Restrictions and Capacity
+The following table shows the core capacity limits of the system:
 
-| Özellik | Lite (Ücretsiz) | Pro (Premium) |
+| Feature | Lite (Free) | Pro (Premium) |
 | :--- | :--- | :--- |
-| **Maksimum Araç** | 3 Adet | Limitsiz |
-| **Aylık Rezervasyon** | 50 Adet | Limitsiz |
-| **Müşteri Kaydı** | 3 Adet | Limitsiz |
-| **Galeri Görseli** | 3 Adet / Araç | Limitsiz |
-| **VIP Transfer** | 3 Güzergah | Limitsiz |
+| **Maximum Vehicles** | 3 | Unlimited |
+| **Monthly Bookings** | 50 | Unlimited |
+| **Customer Records** | 3 | Unlimited |
+| **Gallery Images** | 3 per Vehicle | Unlimited |
+| **VIP Transfer** | 3 Routes | Unlimited |
 
 ---
 
-## 🧬 Core vs Attributes Ayrımı
+## 🧬 Core vs Attributes Separation
 
-Platform, verileri operasyonel önceliğine göre iki ana gruba ayırır:
+The platform divides data into two main groups based on operational priority:
 
-### 1. Çekirdek Alanlar (Core)
-:::danger Silinemez / Devre Dışı Bırakılamaz
-Bu alanlar sistemin fiyat hesaplama, rezervasyon ve faturalandırma motoru için zorunludur.
+### 1. Core Fields
+:::danger Cannot Be Deleted / Disabled
+These fields are mandatory for the system's pricing calculation, booking, and invoicing engine.
 :::
-- **Fiyatlandırma:** Günlük baz fiyat ve vergi oranları.
-- **Müsaitlik:** Takvim tabanlı stok kontrolü.
-- **Varlık Kimliği:** Plaka, seri numarası veya benzersiz ID.
+- **Pricing:** Daily base price and tax rates.
+- **Availability:** Calendar-based stock control.
+- **Asset Identity:** License plate, serial number, or unique ID.
 
-### 2. Nitelik Alanlar (Attributes)
-:::tip Özelleştirilebilir
-İş modeline göre eklenebilir veya tamamen kaldırılabilir alanlardır.
+### 2. Attribute Fields
+:::tip Customizable
+Fields that can be added or completely removed according to the business model.
 :::
-- **Vasıta Detayları:** Yakıt tipi, vites, koltuk sayısı.
-- **Ekstra Parametreler:** `MHMRentiva\Core\Attribute\AllowlistRegistry` üzerinden yönetilen ve kısa kodlarda parametre olarak kullanılabilen alanlar.
+- **Asset Details:** Fuel type, transmission, seat count.
+- **Extra Parameters:** Fields managed through `MHMRentiva\Core\Attribute\AllowlistRegistry` and usable as parameters in shortcodes.
 
 ---
 
-## 🧩 Modül Esnekliği (Clean Slate)
+## 🧩 Module Flexibility (Clean Slate)
 
-Eklenti, **"Clean Slate" (Temiz Sayfa)** politikasını benimser. Bu sayede, ihtiyacınız olmayan özellikleri pasif hale getirerek arayüzü sadeleştirebilirsiniz:
+The plugin adopts a **"Clean Slate"** policy. This allows you to simplify the interface by disabling features you do not need:
 
-- **Eklenti Ayarları:** `MHM Rentiva > Settings` altındaki sekmelerden kullanılmayan alanlar gizlenebilir.
-- **UI Pipeline:** Bir alan gizlendiğinde, hem yönetim panelindeki (backend) formlardan hem de kullanıcı tarafındaki (frontend) teknik özellikler tablosundan otomatik olarak kaldırılır.
+- **Plugin Settings:** Unused fields can be hidden from tabs under `MHM Rentiva > Settings`.
+- **UI Pipeline:** When a field is hidden, it is automatically removed from both the backend admin forms and the frontend specification table.
 
-## Bölüm Sonu Özeti
-- Sistem `Mode` sınıfı üzerinden limitleri denetler.
-- **Pro** sürümü tüm teknik limitleri kaldırarak sınırsız ölçeklenme sağlar.
-- Mimari, araç dışındaki kiralama modellerine de (teknik nitelikler değiştirilerek) uyum sağlar.
+## Section Summary
+- The system enforces limits through the `Mode` class.
+- **Pro** removes all technical limits, enabling unlimited scaling.
+- The architecture adapts to rental models beyond vehicles (by changing technical attributes).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, Lite/Pro limitleri ve güncel mimari detaylarıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with Lite/Pro limits and current architecture details. |

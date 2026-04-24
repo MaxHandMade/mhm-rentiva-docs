@@ -1,89 +1,89 @@
 ---
 id: setup-wizard
-title: Kurulum Sihirbazı
-sidebar_label: Kurulum Sihirbazı
+title: Setup Wizard
+sidebar_label: Setup Wizard
 sidebar_position: 3
 slug: /getting-started/setup-wizard
 ---
 
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-MHM Rentiva'yı ilk kez etkinleştirdiğinizde, sizi temel yapılandırma adımlarında yönlendiren interaktif bir **Kurulum Sihirbazı** karşılar. Bu sihirbaz, eklentinin sitenizle kusursuz uyum sağlaması için kritik ayarları dakikalar içinde yapmanıza olanak tanır.
-
----
-### 🖼️ GÖRSEL: KURULUM SİHİRBAZI KARŞILAMA EKRANI
-*(6 adımı gösteren geniş bir ekran görüntüsü)*
+When you activate MHM Rentiva for the first time, an interactive **Setup Wizard** guides you through the essential configuration steps. The wizard lets you complete the critical settings needed for the plugin to work seamlessly with your site — all in a matter of minutes.
 
 ---
-
-## Sihirbaz Adımları
-
-Kurulum sihirbazı toplam 6 ana adımdan oluşur:
-
-### 1. Sistem Kontrolü
-Sihirbazın ilk adımı, sunucunuzun MHM Rentiva için hazır olup olmadığını denetler.
-- **PHP sürümü**, **WordPress sürümü** ve **WooCommerce durumu** kontrol edilir.
-- Bir gereksinim karşılanmıyorsa, devam etmeden önce uyarı alırsınız.
-
-### 2. Lisans Aktivasyonu
-Eklentinin Pro özelliklerini (Online ödemeler, gelişmiş raporlar vb.) kullanabilmeniz için lisans anahtarınızı bu alana girmeniz önerilir.
-- Lisansınız yoksa bu adımı geçebilir, daha sonra admin panelinden etkinleştirebilirsiniz.
-
-### 3. Gerekli Sayfaların Oluşturulması
-Eklenti, araç listeleme, rezervasyon detayı, ödeme ve müşteri paneli gibi işlevler için özel sayfalara ihtiyaç duyar.
-- **Tek tıkla** tüm zorunlu sayfaları kısa kodları (shortcodes) ile birlikte otomatik oluşturabilirsiniz. Toplam **6 zorunlu sayfa** kontrol edilir: Rezervasyon Formu, Birlesik Arama, Arama Sonuçları, Araç Detaylari, Araç Listesi ve Iletisim Formu.
-- Eğer bu sayfalar zaten varsa, sihirbaz bunları algılar ve "Mevcut" olarak işaretler.
-- **Not:** Araçlar Tablosu (`rentiva_vehicles_grid`) ve Araç Karşılaştırması (`rentiva_vehicle_comparison`) sayfaları opsiyoneldir ve sihirbaz tarafından zorunlu tutulmaz.
-
-### 4. E-posta ve Bildirimler
-Rezervasyon onayları ve müşteri bilgilendirmeleri için gönderici bilgilerini ayarlarsınız.
-- **Gönderici Adı** ve **E-posta Adresi** belirlenir.
-- **SMTP Notu:** Sitenizin e-posta gönderiminde sorun yaşamaması için harici bir SMTP eklentisi kullanmanız şiddetle tavsiye edilir.
-
-### 5. Frontend ve Görünüm
-Sitenizdeki araç kartları ve arama formları için varsayılan değerleri belirlersiniz.
-- **Para Birimi:** WooCommerce yüklü ise sistem otomatik olarak WooCommerce ayarlarını kullanır.
-- **Kiralama Süreleri:** Minimum ve maksimum kiralama gün sayılarını set edersiniz.
-
-### 6. Özet ve Tamamlama
-Tüm adımların durumunu gösteren son bir kontrol listesi sunulur.
-- Eksik bir adım varsa geri dönebilir veya doğrudan **Dashboard**'a geçiş yapabilirsiniz.
+### 🖼️ IMAGE: SETUP WIZARD WELCOME SCREEN
+*(A wide screenshot showing all 6 steps)*
 
 ---
 
-## Sihirbazı Yeniden Başlatmak
+## Wizard Steps
 
-Sihirbazı tamamladıktan sonra ayarlarda bir hata yaptığınızı düşünüyorsanız veya sayfaları silip tekrar oluşturmak istiyorsanız:
+The Setup Wizard consists of 6 main steps:
 
-1. WordPress panelinden **MHM Rentiva > Setup Wizard** menüsüne gidin.
-2. Adımları baştan takip ederek yapılandırmayı güncelleyin.
+### 1. System Check
+The first step verifies that your server is ready to run MHM Rentiva.
+- **PHP version**, **WordPress version**, and **WooCommerce status** are all checked.
+- If a requirement is not met, you will receive a warning before proceeding.
 
-:::important Veri Kaybı Uyarısı
-Sihirbazı tekrar çalıştırmak mevcut verilerinizi (araçlar, rezervasyonlar) **silmez**, sadece genel ayarları ve sayfa eşleşmelerini günceller.
+### 2. License Activation
+To use the plugin's Pro features (online payments, advanced reports, etc.), you are prompted to enter your license key here.
+- If you do not have a license, you can skip this step and activate it later from the admin panel.
+
+### 3. Required Pages Creation
+The plugin requires dedicated pages for features such as vehicle listing, booking details, payment, and the customer dashboard.
+- With a **single click**, you can automatically create all required pages together with their shortcodes. A total of **6 required pages** are checked: Booking Form, Unified Search, Search Results, Vehicle Details, Vehicle Listing, and Contact Form.
+- If these pages already exist, the wizard detects them and marks them as "Existing."
+- **Note:** The Vehicles Grid (`rentiva_vehicles_grid`) and Vehicle Comparison (`rentiva_vehicle_comparison`) pages are optional and are not enforced by the wizard.
+
+### 4. Email and Notifications
+Set your sender details for booking confirmations and customer communications.
+- **Sender Name** and **Email Address** are configured here.
+- **SMTP Note:** Using an external SMTP plugin is strongly recommended to avoid email delivery issues on your site.
+
+### 5. Frontend and Display
+Define default values for vehicle cards and search forms on your site.
+- **Currency:** If WooCommerce is installed, the system automatically inherits WooCommerce settings.
+- **Rental Durations:** Set the minimum and maximum number of rental days.
+
+### 6. Summary and Completion
+A final checklist is presented showing the status of all steps.
+- If any step is incomplete, you can go back or proceed directly to the **Dashboard**.
+
+---
+
+## Restarting the Wizard
+
+If you think you made a mistake in the settings after completing the wizard, or if you want to delete and recreate the pages:
+
+1. Go to **MHM Rentiva > Setup Wizard** in the WordPress admin panel.
+2. Follow the steps again from the beginning to update the configuration.
+
+:::important Data Loss Warning
+Running the wizard again does **not** delete your existing data (vehicles, bookings) — it only updates general settings and page assignments.
 :::
 
 ---
 
-## Teknik Not: Otomatik Yönlendirme (Geliştiriciler İçin)
+## Technical Note: Automatic Redirect (For Developers)
 
-Eklenti ilk yüklendiğinde `mhm_rentiva_setup_redirect` opsiyonunu `1` olarak set eder. `admin_init` hook'u bu opsiyonu kontrol ederek kullanıcıyı sihirbaza yönlendirir ve işlem bitince bu opsiyonu siler.
+When the plugin is first installed, it sets the `mhm_rentiva_setup_redirect` option to `1`. The `admin_init` hook checks this option, redirects the user to the wizard, and deletes the option once the process is complete.
 
-Programatik olarak sihirbaz durumunu kontrol etmek için:
+To check the wizard status programmatically:
 ```php
-$is_completed = get_option('mhm_rentiva_setup_completed'); // '1' ise tamamlanmıştır
+$is_completed = get_option('mhm_rentiva_setup_completed'); // '1' means completed
 ```
 
 ---
 
-### Bölüm Özeti
-- Kurulum Sihirbazı **6 adımdan** oluşur.
-- **Otomatik sayfa oluşturma** özelliği kurulumu hızlandırır.
-- Ayarlar bittikten sonra sihirbaz kapatılabilir.
+### Section Summary
+- The Setup Wizard consists of **6 steps**.
+- The **automatic page creation** feature speeds up the setup process.
+- The wizard can be closed once configuration is complete.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 27.03.2026 | 4.22.1 | Zorunlu sayfa listesi güncellendi: `rentiva_vehicle_details` eklendi, `rentiva_vehicles_grid` ve `rentiva_vehicle_comparison` kaldırıldı (opsiyonel). 7 -> 6 sayfa. |
-| 18.03.2026 | 4.21.2 | İçerik hibrit modele (kullanıcı + teknik) göre güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.22.1 | Required page list updated: `rentiva_vehicle_details` added, `rentiva_vehicles_grid` and `rentiva_vehicle_comparison` removed (now optional). 7 → 6 pages. |
+| 18.03.2026 | 4.21.2 | Content updated to hybrid model (user + technical). |
+| 26.02.2026 | 4.21.0 | Initial version created. |

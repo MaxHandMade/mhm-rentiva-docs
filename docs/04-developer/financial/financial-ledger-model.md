@@ -1,25 +1,25 @@
 ---
 id: financial-ledger-model
-title: Ledger Veri Modeli (Schema & Logic)
-sidebar_label: Ledger Modeli
+title: Ledger Data Model (Schema & Logic)
+sidebar_label: Ledger Model
 sidebar_position: 11
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Rentiva finansal sisteminin temeli olan Değişmez Defter (Immutable Ledger) veri şemasını, depolama kurallarını ve finansal mantığını detaylandırır.
+:::info Purpose
+This page details the Immutable Ledger data schema, storage rules, and financial logic that form the foundation of the Rentiva financial system.
 :::
 
-# 🧾 Ledger Veri Modeli
+# 🧾 Ledger Data Model
 
-`wp_mhm_rentiva_ledger` tablosu, tüm finansal olayların nihai kayıt yeridir. Bu tablo **Append-Only** (Sadece Ekleme) yapısındadır; mevcut satırlar asla güncellenmez veya silinmez.
+The `wp_mhm_rentiva_ledger` table is the final record store for all financial events. This table is **Append-Only**; existing rows are never updated or deleted.
 
 ---
 
-## 🏗️ SQL Şeması (Technical Schema)
+## 🏗️ SQL Schema (Technical Schema)
 
-Sistemde kullanılan ana tablo yapısı aşağıdadır. Hassas finansal hesaplamalar için `DECIMAL(12,2)` kullanılmaktadır.
+The main table structure used by the system is shown below. `DECIMAL(12,2)` is used for precise financial calculations.
 
 ```sql
 CREATE TABLE wp_mhm_rentiva_ledger (
@@ -29,62 +29,63 @@ CREATE TABLE wp_mhm_rentiva_ledger (
     vendor_id BIGINT UNSIGNED NOT NULL,
     booking_id BIGINT UNSIGNED NULL,
     order_id BIGINT UNSIGNED NULL,
-    type VARCHAR(30) NOT NULL,          -- İşlem Türü
-    amount DECIMAL(12,2) NOT NULL,      -- Net Etki Tutarı
-    gross_amount DECIMAL(12,2) NULL,    -- WC Sipariş Toplamı
+    type VARCHAR(30) NOT NULL,          -- Transaction Type
+    amount DECIMAL(12,2) NOT NULL,      -- Net Impact Amount
+    gross_amount DECIMAL(12,2) NULL,    -- WC Order Total
     status VARCHAR(30) NOT NULL,        -- 'cleared', 'pending', 'void'
-    policy_id BIGINT UNSIGNED NULL,     -- İlişkili Policy ID
-    policy_version_hash CHAR(64) NULL,  -- Denetim için Policy Hash
+    policy_id BIGINT UNSIGNED NULL,     -- Associated Policy ID
+    policy_version_hash CHAR(64) NULL,  -- Policy Hash for Auditing
     created_at DATETIME NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY (transaction_uuid),      -- Mükerrer Kayıt Engeli
+    UNIQUE KEY (transaction_uuid),      -- Duplicate Entry Prevention
     INDEX (vendor_id, status, created_at)
 ) ENGINE=InnoDB;
 ```
 
 ---
 
-## 🔄 İşlem Türleri ve Bakiye Etkisi
+## 🔄 Transaction Types and Balance Impact
 
-`type` kolonu, işlemin satıcı bakiyesine nasıl etki edeceğini belirler:
+The `type` column determines how the transaction affects the vendor's balance:
 
-| İşlem Türü (`type`) | Bakiye Etkisi | Açıklama |
+| Transaction Type (`type`) | Balance Impact | Description |
 | :--- | :--- | :--- |
-| `commission_credit` | **Pozitif (+)** | Tamamlanan bir satıştan gelen hakediş. |
-| `commission_refund` | **Negatif (-)** | İade edilen bir siparişin ters kaydı. |
-| `payout_debit` | **Negatif (-)** | Satıcıya yapılan başarılı ödeme (Çıkış). |
-| `payout_reversal` | **Pozitif (+)** | Başarısız/Geri dönen bir ödemenin iadesi. |
+| `commission_credit` | **Positive (+)** | Earnings from a completed sale. |
+| `commission_refund` | **Negative (-)** | Reverse entry for a refunded order. |
+| `payout_debit` | **Negative (-)** | Successful Payout made to the vendor (outflow). |
+| `payout_reversal` | **Positive (+)** | Reversal of a failed/returned Payout. |
 
 ---
 
-## 🛡️ Domain Kuralları ve Güvenlik
+## 🛡️ Domain Rules and Security
 
-### 1. Immutability (Değişmezlik)
-Finansal denetim (Audit) standartları gereği, bu tabloda `UPDATE` veya `DELETE` işlemi yapılması kesinlikle yasaktır. Bir hata düzeltilmesi gerekiyorsa, hatayı nötralize eden yeni bir ters kayıt (Correction/Refund) eklenmelidir.
+### 1. Immutability
+Per financial audit standards, `UPDATE` or `DELETE` operations on this table are strictly prohibited. If a correction is needed, a new reverse entry (Correction/Refund) that neutralizes the error must be added.
 
 ### 2. Transaction UUID (Idempotency)
-Her finansal olay (Sipariş ödemesi, Payout onayı), kaynağında bir UUID üretir. Veritabanı seviyesindeki `UNIQUE` kısıtlaması, sistemin aynı olayı yanlışlıkla iki kez işlemesini donanım seviyesinde engeller.
+Each financial event (order payment, Payout approval) generates a UUID at its source. The database-level `UNIQUE` constraint prevents the system from processing the same event twice at the hardware level.
 
-### 3. Zamanlama (Temporal Audit)
-Tüm işlemler `created_at` kolonu üzerinden UTC olarak damgalanır. `policy_id` ve `policy_version_hash` alanları sayesinde, işlemin yapıldığı tarihteki komisyon politikası ile tutarlılığı 2 yıl sonra bile doğrulanabilir.
+### 3. Temporal Audit
+All transactions are stamped in UTC via the `created_at` column. The `policy_id` and `policy_version_hash` fields allow the commission policy active at the time of the transaction to be verified even 2 years later.
 
 ---
 
-## 📊 Bakiye Hesaplama Mantığı
+## 📊 Balance Calculation Logic
 
-Satıcının güncel bakiyesi her zaman tüm "cleared" satırların toplanmasıyla bulunur:
+A vendor's current balance is always derived by summing all "cleared" rows:
 
 ```sql
 SELECT SUM(amount) FROM wp_mhm_rentiva_ledger 
 WHERE vendor_id = %d AND status = 'cleared';
 ```
 
-## Bölüm Sonu Özeti
-- Veri tipi her zaman **DECIMAL**'dır (Float yasaktır).
-- Tablo yapısı **Append-Only** ve **Tenant-Isolated**'dır.
-- Her kaydın benzersiz bir **UUID**'si vardır.
+## Section Summary
+- The data type is always **DECIMAL** (Float is prohibited).
+- The table structure is **Append-Only** and **Tenant-Isolated**.
+- Every entry has a unique **UUID**.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, LedgerMigration şeması ve bakiye etkisi matrisi ile güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with LedgerMigration schema and balance impact matrix. |

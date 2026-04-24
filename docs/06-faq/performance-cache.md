@@ -1,72 +1,73 @@
 ---
 id: performance-cache
-title: Performans ve Önbellek Yönetimi
-sidebar_label: Performans ve Önbellek
+title: Performance & Cache Management
+sidebar_label: Performance & Cache
 sidebar_position: 40
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Rentiva'nın yüksek trafikli araç kiralama sitelerinde verimli çalışması için kullanılan önbellekleme (caching) mimarisini ve yaygın performans sorunlarının çözümünü açıklar.
+:::info Purpose
+Explains the caching architecture Rentiva uses to operate efficiently on high-traffic vehicle rental sites, and how to resolve common performance issues.
 :::
 
-# ⚡ Performans ve Önbellek Yönetimi
+# ⚡ Performance & Cache Management
 
-Sistem; Object Cache, Transients ve Page Cache olmak üzere üç ana katmanda optimizasyon sağlar.
-
----
-
-## 🛠️ 1. Önbellekleme Katmanları
-
-### WordPress Transients (Veritabanı Seviyesi)
-- **Kullanım:** Fiyat hesaplamaları, karmaşık araç listeleme sorguları ve tedarikçi analizleri.
-- ** TTL (Ömür):** Kritik veriler için genellikle 15 dakika (`900 saniye`).
-- **Önemli:** Eğer Transients veritabanında aşırı birikir ve temizlenmezse, site genelinde yavaşlamaya neden olabilir. `mhm_rentiva_flush_cache` fonksiyonuyla manuel temizlenebilir.
-
-### Object Cache (Bellek Seviyesi)
-- **Kullanım:** Redis veya Memcached aktifse, sistem tüm nesne (Object) verilerini bellek üzerinden çeker.
-- **Avantaj:** SQL sorgu sayısını %80'e kadar azaltır.
-- **Dikkat:** Veri tutarsızlığı yaşanıyorsa Redis'i geçici olarak kapatıp sorunu test edin.
+The system provides optimization across three main layers: Object Cache, Transients, and Page Cache.
 
 ---
 
-## 🐢 2. Yaygın Performans Sorunları
+## 🛠️ 1. Caching Layers
 
-### Yavaş Araç Arama Sonuçları
-- **Neden:** Çok fazla `WP_Query` meta anahtarı (Meta Key) üzerinden arama yapılması.
-- **Çözüm:** Rentiva "Meta Optimizer" özelliğini aktifleştirin. Sık kullanılan meta verilerini (Marka, Model, Yıl vb.) ayrı bir tabloda veya optimize edilmiş bir index yapısında saklamayı düşünün.
+### WordPress Transients (Database Level)
+- **Usage:** Price calculations, complex vehicle listing queries, and vendor analytics.
+- **TTL (Lifetime):** Typically 15 minutes (`900 seconds`) for critical data.
+- **Important:** If Transients accumulate in the database without being cleared, they can cause site-wide slowdowns. Use `mhm_rentiva_flush_cache` for manual cleanup.
 
-### Admin Panelinde "Yönetim" Sayfalarının Yavaşlığı
-- **Neden:** Çok fazla rezervasyon verisinin (10k+) aynı anda listelenmesi.
-- **Çözüm:** Sayfalama (Pagination) sayısını düşürün (Varsayılan: 20). Gereksiz sütunları "Ekran Tercihleri" menüsünden kapatın.
-
----
-
-## 🕒 3. Gecikmiş Veri (Stale Data) Sorunları
-
-### Bir ayarı değiştirdim ama frontend'de yansımadı?
-- **Olası Nedenler:**
-    1. **Page Cache:** WP Rocket, LiteSpeed gibi eklentilerin sayfa önbelleği eski kalmıştır.
-    2. **Fragment Cache:** Fiyat tablosu veya SSS gibi alanlar bağımsız önbelleğe sahip olabilir.
-- **Çözüm:** Rentiva > Hızlı İşlemler > Cache Sıfırla butonuna basın.
+### Object Cache (Memory Level)
+- **Usage:** If Redis or Memcached is active, the system retrieves all object data from memory.
+- **Advantage:** Reduces SQL query count by up to 80%.
+- **Caution:** If you are experiencing data inconsistencies, temporarily disable Redis and test the issue.
 
 ---
 
-## 📈 4. İzleme ve Ölçüm (Monitoring)
+## 🐢 2. Common Performance Issues
 
-Sitenizin performansını takip etmek için şunları izleyin:
-- **TTFB (Time to First Byte):** Sunucu hızı ve PHP yürütme süresi.
-- **Sorgu Sayısı (SQL Queries):** "Query Monitor" eklentisiyle Rentiva sorgularının toplam içindeki payını görün.
-- **Cron Jobs:** Finansal güncellemelerin veya temizlik işlemlerinin düzenli çalışıp çalışmadığını kontrol edin.
+### Slow Vehicle Search Results
+- **Reason:** Searching across too many `WP_Query` meta keys.
+- **Fix:** Activate the Rentiva "Meta Optimizer" feature. Consider storing frequently used meta data (Make, Model, Year, etc.) in a separate table or an optimized index structure.
 
-## Denetim Listesi
-1. Redis/Memcached durumunu kontrol edin.
-2. Sayfa önbellekleme istisnalarını (Checkout sayfası hariç tutulmalıdır) doğrulayın.
-3. Gereksiz meta sorgularını optimize edin.
-4. Periyodik olarak "Database Cleanup" yapın.
+### Slow Admin Panel Management Pages
+- **Reason:** A large volume of booking data (10k+) being listed at the same time.
+- **Fix:** Reduce the pagination count (Default: 20). Disable unnecessary columns from the "Screen Options" menu.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+## 🕒 3. Stale Data Issues
+
+### I changed a setting but it's not reflecting on the frontend?
+- **Possible Reasons:**
+    1. **Page Cache:** The page cache of plugins like WP Rocket or LiteSpeed is out of date.
+    2. **Fragment Cache:** Areas like the pricing table or FAQ may have independent caches.
+- **Fix:** Press the Cache Reset button at Rentiva > Quick Actions > Reset Cache.
+
+---
+
+## 📈 4. Monitoring & Measurement
+
+Monitor the following to track your site's performance:
+- **TTFB (Time to First Byte):** Server speed and PHP execution time.
+- **Query Count (SQL Queries):** Use the "Query Monitor" plugin to see Rentiva queries as a share of the total.
+- **Cron Jobs:** Check whether financial updates or cleanup tasks are running on schedule.
+
+## Checklist
+1. Check Redis/Memcached status.
+2. Verify page cache exclusions (the checkout page must be excluded).
+3. Optimize unnecessary meta queries.
+4. Perform periodic "Database Cleanup".
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Object Cache, Transients ve Stale Data (Eskimiş Veri) senaryoları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Object Cache, Transients, and Stale Data scenarios added. |

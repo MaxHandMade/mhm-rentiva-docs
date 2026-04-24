@@ -1,66 +1,67 @@
 ---
 id: message-settings
-title: Mesaj Ayarları
-sidebar_label: Mesaj Ayarları
+title: Message Settings
+sidebar_label: Message Settings
 sidebar_position: 10
 slug: /core-configuration/message-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Mesaj Ayarları sekmesi, müşteriler ve personel arasındaki dahili sohbet sistemini, bildirim tercihlerini ve iş akışı kategorilerini yapılandırdığınız bölümdür. **MHM Rentiva > Ayarlar > Mesaj Ayarları** altından ulaşılır.
+The Message Settings tab is where you configure the internal chat system between customers and staff, notification preferences, and workflow categories. Access it via **MHM Rentiva > Settings > Message Settings**.
 
-:::important Pro Özelliği
-Mesajlaşma sistemi Premium paket kapsamında sunulmaktadır. Ayarların aktif olması için lisansınızın bu özelliği desteklemesi gerekir.
+:::important Pro Feature
+The messaging system is available as part of the Premium package. Your license must support this feature for the settings to be active.
 :::
 
 ---
 
-## 🛠️ Yönetim Araçları
+## 🛠️ Management Tools
 
-- **Sohbetleri Sıfırla:** Tüm mesaj geçmişini veritabanından kalıcı olarak temizler (Operasyonel temizlik için kullanılır).
-- **Bu Sekmeyi Sıfırla:** Mesaj ayarlarını varsayılan fabrika değerlerine döndürür.
-
----
-
-## 📂 Ayar Sekmeleri
-
-Mesaj sistemi dört ana başlık altında yapılandırılır:
-
-### 1. Bildirimler
-- **Yönetim E-postası:** Personel uyarıları için hedef adres (Boş bırakılırsa global admin e-postası kullanılır).
-- **Giden Adı:** Mesaj bildirim e-postalarında görünecek gönderici ismi.
-- **Personel Uyarıları:** Yeni bir müşteri mesajı geldiğinde personelin e-posta ile uyarılmasını sağlar.
-- **Müşteri Yanıt Bildirimi:** Personel bir mesaja yanıt verdiğinde müşteriye e-posta gönderir.
-
-### 2. Sistem Kuralları
-- **Gösterge Paneli Görünürlüğü:** WordPress Kontrol Paneli (Dashboard) üzerinde hızlı mesaj widget'ını aktif eder.
-- **Widget Kapasitesi:** Dashboard üzerinde listelenecek son mesaj sayısını belirler (Varsayılan: 5).
-- **Otomatik Yanıtlayıcı:** Müşteri ilk mesajı gönderdiğinde sistemin ona anlık bir "Mesajınız alındı" teyidi göndermesini sağlar.
-
-### 3. Kategoriler
-Mesajların konusuna göre sınıflandırılmasını sağlar. Varsayılan kategoriler şunlardır:
-- Genel, Rezervasyon, Ödeme, Teknik Destek, Şikayetler, Öneriler.
-- *Yeni kategoriler ekleyebilir veya mevcutları silebilirsiniz.*
-
-### 4. İş Akışı Durumları
-Mesajların yaşam döngüsünü takip etmek için kullanılır:
-- Beklemede, Cevaplandı, Kapalı, Önemli.
-- *İşletmenizin ihtiyacına göre yeni durumlar tanımlayabilirsiniz.*
+- **Reset Conversations:** Permanently clears all message history from the database (used for operational cleanup).
+- **Reset This Tab:** Restores message settings to their default factory values.
 
 ---
 
-### 🖼️ GÖRSEL: MESAJ AYARLARI PANELİ
-*(Ayarlar > Mesaj Ayarları sekmesi, kategori ve bildirim yönetim alanı)*
+## 📂 Settings Tabs
+
+The messaging system is configured under four main headings:
+
+### 1. Notifications
+- **Admin Email:** The target address for staff alerts (if left blank, the global admin email is used).
+- **Sender Name:** The sender name displayed in message notification emails.
+- **Staff Alerts:** Sends staff an email alert when a new customer message arrives.
+- **Customer Reply Notification:** Sends the customer an email when staff replies to a message.
+
+### 2. System Rules
+- **Dashboard Visibility:** Enables the quick message widget on the WordPress Dashboard.
+- **Widget Capacity:** Defines how many recent messages are listed on the Dashboard (Default: 5).
+- **Auto-Responder:** When a customer sends their first message, the system instantly sends them a "Your message has been received" confirmation.
+
+### 3. Categories
+Allows messages to be classified by topic. Default categories are:
+- General, Booking, Payment, Technical Support, Complaints, Suggestions.
+- *You can add new categories or delete existing ones.*
+
+### 4. Workflow Statuses
+Used to track the lifecycle of messages:
+- Pending, Replied, Closed, Important.
+- *You can define new statuses to match your business needs.*
 
 ---
 
-### Bölüm Özeti
-- **Bildirimler** ile müşteri sorularına anında yanıt verme potansiyelinizi artırın.
-- **Kategoriler** ile gelen talepleri ilgili birimlere (Satış, Destek vb.) yönlendirin.
-- **İş Akışı** ile hiçbir müşteri talebinin yanıtsız kalmadığından emin olun.
+### 🖼️ IMAGE: MESSAGE SETTINGS PANEL
+*(Settings > Message Settings tab, category and notification management area)*
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+### Section Summary
+- Use **Notifications** to maximize your potential for instant responses to customer inquiries.
+- Use **Categories** to route incoming requests to the relevant departments (Sales, Support, etc.).
+- Use **Workflow** to ensure no customer request goes unanswered.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Mesaj Ayarları dökümanı 4 alt sekme ve kategori yönetimi detaylarıyla oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Message Settings documentation created with 4 sub-tabs and category management details. |

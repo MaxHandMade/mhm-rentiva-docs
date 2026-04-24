@@ -1,63 +1,63 @@
 ---
 id: post-install-checklist
-title: Kurulum Sonrası Kontrol Listesi
-sidebar_label: Kontrol Listesi
+title: Post-Install Checklist
+sidebar_label: Checklist
 sidebar_position: 4
 slug: /getting-started/checklist
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Kurulum adımlarını ve sihirbazı tamamladıktan sonra, sitenizin tam işlevsel olduğundan emin olmak için aşağıdaki kontrol listesini takip edin. Bu liste, canlı rezervasyon almaya başlamadan önceki son emniyet kilididir.
-
----
-
-### 🛠️ Yapılandırma Kontrolü
-- [ ] **Ayarlar Kaydedildi:** `MHM Rentiva > Settings` sayfasındaki tüm sekmeler kontrol edildi ve kaydedildi.
-- [ ] **Para Birimi:** `General Settings` sekmesinde para birimi ve sembolü doğru görünüyor.
-- [ ] **Tarih & Saat:** Sitenizin zaman dilimi (`Settings > General`) işletmenizin lokasyonuyla uyumlu.
-- [ ] **Lisans:** `License` sayfasında anahtarınızın "Active" olduğu doğrulandı.
-
-### 📄 Sayfalar ve Kısa Kodlar (Shortcodes)
-- [ ] **Sayfa Eşleşmeleri:** `Settings > Shortcode Pages` sekmesinde her fonksiyon (Arama, Liste, Detay, Ödeme, Hesabım) doğru bir sayfaya atanmış.
-- [ ] **Görünüm Testi:** Oluşturulan bu sayfalar frontend tarafında şık ve hatasız açılıyor.
-- [ ] **Menü Entegrasyonu:** Müşteri paneli (Hesabım) ve Arama sayfası ana menüye eklendi.
-
-### 💰 Ödeme ve Finans
-- [ ] **Ödeme Ağ Geçitleri:** WooCommerce ödeme yöntemleri (Stripe, PayPal, Havale vb.) aktif edildi.
-- [ ] **Test Ödemesi:** Sandbox/Test modunda en az bir başarılı rezervasyon ödemesi gerçekleştirildi.
-- [ ] **Fiyat Hesaplama:** Araç günlük fiyatları ve ekstralar sepete doğru yansıyor.
-
-### 📧 Bildirim Sistemi
-- [ ] **Test E-postası:** `Settings > Email Templates` üzerinden bir deneme e-postası gönderildi.
-- [ ] **SMTP Doğrulaması:** E-postalar "Spam" klasörüne düşmeden alıcıya ulaşıyor (SMTP kullanımı önerilir).
-- [ ] **Admin Bildirimleri:** Yeni bir rezervasyon geldiğinde admin e-postasına bildirim düşüyor.
-
-### 🚗 Araç ve Stok Yönetimi
-- [ ] **Örnek Araç:** En az bir adet gerçek özellikli araç sisteme eklendi.
-- [ ] **Kategoriler:** Araçlar sınıflarına (Ekonomik, SUV, VIP vb.) göre ayrıldı.
-- [ ] **Takvim Kontrolü:** Araç müsaitlik takvimi rezervasyon sonrası doğru şekilde güncelleniyor.
+After completing the installation steps and the Setup Wizard, follow the checklist below to make sure your site is fully functional. This checklist is the final safety gate before you start accepting live bookings.
 
 ---
 
-## Teknik Doğrulama (Geliştiriciler İçin)
+### 🛠️ Configuration Check
+- [ ] **Settings Saved:** All tabs on the `MHM Rentiva > Settings` page have been reviewed and saved.
+- [ ] **Currency:** The currency and symbol are displayed correctly on the `General Settings` tab.
+- [ ] **Date & Time:** Your site's timezone (`Settings > General`) matches your business location.
+- [ ] **License:** Confirmed that your key shows "Active" on the `License` page.
 
-Eğer teknik bir sorun yaşıyorsanız, aşağıdaki noktaları kontrol edin:
+### 📄 Pages and Shortcodes
+- [ ] **Page Assignments:** Each function (Search, Listing, Detail, Checkout, My Account) is assigned to the correct page under `Settings > Shortcode Pages`.
+- [ ] **Display Test:** These generated pages open cleanly and without errors on the frontend.
+- [ ] **Menu Integration:** The Customer Dashboard (My Account) and Search pages have been added to the main menu.
 
-1. **Permalinks:** `Settings > Permalinks` sayfasını ziyaret edip "Save Changes" butonuna basarak rotaları yenileyin (`flush_rewrite_rules`).
-2. **WooCommerce Sync:** Rentiva'nın WooCommerce sepetine veri gönderip göndermediğini `WooCommerceBridge` loglarından takip edin.
-3. **Database Check:** `wp_mhm_rentiva_sessions` tablosunda aktif oturum verisi olup olmadığını PHPMyAdmin üzerinden doğrulayabilirsiniz.
+### 💰 Payment and Finance
+- [ ] **Payment Gateways:** WooCommerce payment methods (Stripe, PayPal, Bank Transfer, etc.) have been activated.
+- [ ] **Test Payment:** At least one successful booking payment has been completed in Sandbox/Test mode.
+- [ ] **Price Calculation:** Vehicle daily prices and add-ons are correctly reflected in the cart.
+
+### 📧 Notification System
+- [ ] **Test Email:** A test email has been sent via `Settings > Email Templates`.
+- [ ] **SMTP Verification:** Emails are reaching recipients without landing in the Spam folder (SMTP is recommended).
+- [ ] **Admin Notifications:** An admin email notification is triggered when a new booking is received.
+
+### 🚗 Vehicle and Inventory Management
+- [ ] **Sample Vehicle:** At least one vehicle with real attributes has been added to the system.
+- [ ] **Categories:** Vehicles have been grouped by class (Economy, SUV, VIP, etc.).
+- [ ] **Calendar Check:** The vehicle availability calendar updates correctly after a booking.
 
 ---
 
-### Bölüm Özeti
-- Kontrol listesi **5 ana kategoriden** oluşur.
-- **Canlıya çıkmadan önce** test ödemesi yapılması kritiktir.
-- **Permalink yenileme** birçok sayfa hatasını çözer.
+## Technical Verification (For Developers)
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+If you encounter a technical issue, check the following:
+
+1. **Permalinks:** Visit `Settings > Permalinks` and click "Save Changes" to flush the rewrite rules (`flush_rewrite_rules`).
+2. **WooCommerce Sync:** Use `WooCommerceBridge` logs to verify that Rentiva is sending data to the WooCommerce cart.
+3. **Database Check:** You can verify active session data in the `wp_mhm_rentiva_sessions` table via phpMyAdmin.
+
+---
+
+### Section Summary
+- The checklist consists of **5 main categories**.
+- Completing a test payment **before going live** is critical.
+- **Flushing permalinks** resolves many page-related errors.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 18.03.2026 | 4.21.2 | Checklist yapısı modern ikonlar ve kategorilerle yenilendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 18.03.2026 | 4.21.2 | Checklist structure refreshed with modern icons and categories. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

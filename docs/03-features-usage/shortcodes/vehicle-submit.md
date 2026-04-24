@@ -1,93 +1,94 @@
 ---
 title: Vendor vehicle submission
-description: Vendor vehicle submission modülünün kullanım kılavuzu ve teknik detayları.
+description: Usage guide and technical reference for the Vendor Vehicle Submission module.
 sidebar_position: 25
 ---
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Vendor vehicle submission modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::info Purpose
+This page describes the Vendor Vehicle Submission module as a standard reference, covering both technical and operational aspects.
 :::
 
-# 🚗 Vendor vehicle submission
+# 🚗 Vendor Vehicle Submission
 
-## İçindekiler
-- Kullanım
-- Özellikler
-- Geliştirici Notları
+## Contents
+- Usage
+- Features
+- Developer Notes
 
-Vendor vehicle submission modülü, Rentiva platformundaki **vendor** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+The Vendor Vehicle Submission module is designed to manage and present **vendor** vehicle submission processes to visitors on the Rentiva platform.
 
-## Kullanım
+## Usage
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
+:::tip IMAGE COMING SOON
+A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
 :::
 
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+To add this module to any page or post, use the shortcode below:
 
 ```shortcode
 [rentiva_vehicle_submit]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Vendor vehicle submission"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Vendor Vehicle Submission"**.
 
-### Parametreler
+### Parameters
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+The following parameters are available inside the shortcode:
 
-| Parametre | Varsayılan | Açıklama |
+| Parameter | Default | Description |
 | :--- | :--- | :--- |
-| - | - | Bu kısa kod parametre almaz. |
+| - | - | This shortcode accepts no parameters. |
 
 
-## Özellikler
+## Features
 
-### 📱 Responsive Tasarim
-- **Mobil:** Tek sutun düzeni.
-- **Tablet (782px alti):** Optimize edilmis gorunum.
-- **Masaustu:** Ayarlanan sutun veya genislikte tam gorunum.
+### 📱 Responsive Design
+- **Mobile:** Single-column layout.
+- **Tablet (under 782px):** Optimized view.
+- **Desktop:** Full view at the configured column count or width.
 
-### 🚀 Performans Odakli
-- **Akilli Önbellek:** Veritabanı sorgulari sistem tarafından optimize edilerek onbellege alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modulun kullanildigi sayfalarda yüklenir.
+### 🚀 Performance-Focused
+- **Smart Caching:** Database queries are optimized and cached by the system.
+- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
-### 🚗 Transfer Lokasyon ve Rota Seçimi (v4.23.0)
+### 🚗 Transfer Location and Route Selection (v4.23.0)
 
-v4.23.0 ile araç ekleme formuna transfer modulune ozel alanlar eklenmiştir:
+As of v4.23.0, the vehicle submission form includes fields specific to the transfer module.
 
-#### Şehir-Filtrelenms Lokasyon Seçimi
-Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari otomatik filtrelenir. `LocationProvider::get_by_city()` ile sorgulama yapilir. Vendor yalnızca kendi sehrine ait lokasyonlari gorebilir ve secebilir.
+#### City-Filtered Location Selection
+Transfer locations are automatically filtered based on the vendor's `_vendor_city` meta value. Queried via `LocationProvider::get_by_city()`. Vendors can only see and select locations belonging to their own city.
 
 - **Meta key:** `_mhm_rentiva_transfer_locations` (array)
 - **Meta key:** `_mhm_rentiva_transfer_routes` (array)
 
-#### Rota Basi Fiyat Girişi
-Her secilen rota için vendor, admin tarafından belirlenen `min_price` / `max_price` araligi dahilinde kendi fiyatini girebilir. Aralik disinda fiyat kabul edilmez.
+#### Per-Route Price Entry
+For each selected route, the vendor can enter their own price within the `min_price` / `max_price` range set by the admin. Prices outside the range are rejected.
 
 - **Meta key:** `_mhm_rentiva_transfer_route_prices` (JSON)
-- **Fallback:** Vendor fiyati yoksa rotanin `base_price` değeri kullanılır.
+- **Fallback:** If no vendor price is set, the route's `base_price` value is used.
 
-#### Yolcu ve Bagaj Kapasitesi
-- **Yolcu kapasitesi:** Aracın tasiyabilecegi maksimum yolcu sayısı.
-- **Buyuk bagaj:** Maksimum buyuk valiz kapasitesi.
-- **Kucuk bagaj:** Maksimum kucuk valiz/canta kapasitesi.
+#### Passenger and Luggage Capacity
+- **Passenger capacity:** Maximum number of passengers the vehicle can carry.
+- **Large luggage:** Maximum large suitcase capacity.
+- **Small luggage:** Maximum small bag/carry-on capacity.
 
-#### Araç Belgesi (Ruhsat) Yükleme
-Vendor, araç ruhsat belgesini form üzerinden yukleyebilir. Bu belge admin tarafından doğrulama için incelenir.
+#### Vehicle Document (Registration) Upload
+The vendor can upload the vehicle registration document via the form. The document is reviewed by the admin for verification.
 
-## Geliştirici Notları
+## Developer Notes
 
-- **HTML Yapısı:** Tum kapsayıcılar `.mhm-rentiva-vehicle-submit-wrapper` sınıfı ile başlar.
-- **Ozellestirme:** CSS degiskenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
-- **Transfer alanları:** Hizmet turu "Transfer" veya "Her Ikisi" secildiginde JS ile gosterilir/gizlenir (hide/show toggle).
+- **HTML Structure:** All containers start with the `.mhm-rentiva-vehicle-submit-wrapper` class.
+- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
+- **Transfer fields:** Shown/hidden via JS toggle when service type is set to "Transfer" or "Both".
 
-## Bölüm Sonu Özeti
-- Vendor araç ekleme formu, temel araç bilgilerinin yaninda transfer lokasyon/rota seçimi, rota basi fiyatlandırma ve kapasite alanlarıni icerir.
-- Şehir bazli filtreleme ile vendor yalnızca kendi bolgesindeki lokasyonlari gorebilir.
+## Section Summary
+- The Vendor Vehicle Submission form includes transfer location/route selection, per-route pricing, and capacity fields in addition to core vehicle information.
+- City-based filtering ensures vendors can only see locations within their own region.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | Şehir-filtrelenmiş transfer lokasyon/rota seçimi, rota basi fiyatlandırma, kapasite alanları, ruhsat yükleme dokumante edildi. |
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak siralandi ve görsel yer tutucusu eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | City-filtered transfer location/route selection, per-route pricing, capacity fields, and registration upload documented. |
+| 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

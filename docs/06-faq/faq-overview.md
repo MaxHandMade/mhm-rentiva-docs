@@ -1,19 +1,19 @@
 ---
 id: faq-overview
-title: Sıkça Sorulan Sorular ve Sorun Giderme
-sidebar_label: Genel Bakış
+title: FAQ & Troubleshooting
+sidebar_label: Overview
 sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-# 🛠️ SSS ve Sorun Giderme
+# 🛠️ FAQ & Troubleshooting
 
-MHM Rentiva kullanımı sırasında karşılaşabileceğiniz yaygın teknik veya operasyonel soruların yanıtlarını barındıran destek merkezi.
+A support hub with answers to common technical and operational questions you may encounter while using MHM Rentiva.
 
-:::tip TEKNİK DESTEK
-Sorununuzun çözümü için aşağıdaki kategorize edilmiş rehberlere göz atın. Çoğu sorun basit bir ayar değişikliğiyle çözülebilmektedir.
+:::tip TECHNICAL SUPPORT
+Browse the categorized guides below to find a solution. Most issues can be resolved with a simple settings change.
 :::
 
 ---
@@ -21,16 +21,16 @@ Sorununuzun çözümü için aşağıdaki kategorize edilmiş rehberlere göz at
 <div className="row">
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
-      <h3 className="cardTitle">🆘 Genel Sorunlar</h3>
-      <p className="cardDescription">Hata mesajları, kurulum sonrası eksiklikler ve temel operasyonel problemlerin çözümleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/common-issues">Çözümleri Gör</a>
+      <h3 className="cardTitle">🆘 General Issues</h3>
+      <p className="cardDescription">Solutions for error messages, post-installation gaps, and fundamental operational problems.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/common-issues">View Solutions</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
-      <h3 className="cardTitle">📧 E-posta Problemleri</h3>
-      <p className="cardDescription">Gitmeyen mailler, SMTP ayarları ve e-posta şablonlarının görüntüleme sorunları.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/email-delivery">E-posta Rehberi</a>
+      <h3 className="cardTitle">📧 Email Problems</h3>
+      <p className="cardDescription">Undelivered emails, SMTP configuration, and email template rendering issues.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/email-delivery">Email Guide</a>
     </div>
   </div>
 </div>
@@ -38,27 +38,28 @@ Sorununuzun çözümü için aşağıdaki kategorize edilmiş rehberlere göz at
 <div className="row">
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
-      <h3 className="cardTitle">💳 Ödeme Hataları</h3>
-      <p className="cardDescription">Ödeme geçidi (WooCommerce) çakışmaları ve callback/webhook doğrulama hataları.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/payment-troubleshooting">Ödeme Sorunları</a>
+      <h3 className="cardTitle">💳 Payment Errors</h3>
+      <p className="cardDescription">WooCommerce payment gateway conflicts and callback/webhook validation failures.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/payment-troubleshooting">Payment Issues</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
-      <h3 className="cardTitle">⚡ Hız & Önbellek</h3>
-      <p className="cardDescription">Dinamik takvimlerin önbelleğe takılması ve SQL performans optimizasyon soruları.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/performance-cache">Performans Rehberi</a>
+      <h3 className="cardTitle">⚡ Speed & Cache</h3>
+      <p className="cardDescription">Dynamic calendars stuck in cache and SQL performance optimization questions.</p>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/performance-cache">Performance Guide</a>
     </div>
   </div>
 </div>
 
 ---
 
-### Bölüm Özeti
-- Bu rehberler, MHM Rentiva destek ekibinin binlerce destek biletinden süzdüğü tecrübelerle hazırlanmıştır.
-- Sorununuz burada yoksa geliştirici paneli üzerindeki **Sistem Teşhis** aracını kullanabilirsiniz.
+### Section Summary
+- These guides are distilled from the experience of the MHM Rentiva support team across thousands of support tickets.
+- If your issue is not covered here, use the **System Diagnosis** tool in the developer panel.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | SSS kategorisi için premium kart tasarımlı Genel Bakış sayfası oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Overview page with premium card design created for FAQ category. |

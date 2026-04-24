@@ -1,66 +1,67 @@
 ---
 id: transfer-api-and-webhooks
-title: Transfer Servisleri ve Webhook Akışları
-sidebar_label: Transfer API ve Webhook
+title: Transfer Services and Webhook Flows
+sidebar_label: Transfer API and Webhooks
 sidebar_position: 100
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Transfer modülünün asenkron çalışma yapısını, sepete ekleme süreçlerini ve dış servislerle olan webhook haberleşme trafiğini açıklar.
+:::info Purpose
+This page explains the Transfer module's asynchronous operation structure, the cart-addition process, and webhook communication traffic with external services.
 :::
 
-# 🛣️ Transfer Servisleri ve Webhook Akışları
+# 🛣️ Transfer Services and Webhook Flows
 
-Transfer modülü, kiralama modülünden farklı olarak noktadan noktaya (Point-to-Point) fiyatlandırma ve özel rota hesaplamaları içerir. Bu süreçler AJAX ve REST API üzerinden hibrit bir şekilde yönetilir.
-
----
-
-## 🛒 1. Transfer Rezervasyon Akışı (Frontend)
-
-Müşteri tarafındaki etkileşimler yüksek performans için AJAX tabanlı yürütülür:
-
-- **Aksiyon:** `rentiva_transfer_add_to_cart`
-- **Güvenlik:** `rentiva_transfer_nonce` kontrolü zorunludur.
-- **Veri Modeli:** `booking_type=transfer` etiketi ile WooCommerce sepetine eklenir.
-- **İş Akışı:** Seçilen araç tipi, kişi sayısı ve rota bilgileri `TransferPricingEngine` tarafından doğrulanarak sepete yansıtılır.
+Unlike the rental module, the Transfer module includes point-to-point pricing and custom route calculations. These processes are managed in a hybrid manner over AJAX and the REST API.
 
 ---
 
-## 📡 2. Webhook ve Callback Mekanizması
+## 🛒 1. Transfer Booking Flow (Frontend)
 
-Dış ödeme sağlayıcıları ve transfer partnerleri ile olan iletişim REST uç noktaları üzerinden sağlanır.
+Customer-side interactions are executed via AJAX for high performance:
 
-### Payout ve Rezervasyon Callback
+- **Action:** `rentiva_transfer_add_to_cart`
+- **Security:** `rentiva_transfer_nonce` verification is required.
+- **Data Model:** Added to the WooCommerce cart with a `booking_type=transfer` tag.
+- **Workflow:** The selected vehicle type, passenger count, and route information are validated by `TransferPricingEngine` before being reflected in the cart.
+
+---
+
+## 📡 2. Webhook and Callback Mechanism
+
+Communication with external payment providers and transfer partners is handled via REST endpoints.
+
+### Payout and Booking Callback
 - **Route:** `/mhm-rentiva/v1/payouts/{id}/callback`
-- **Doğrulama:** `HMAC-SHA256` tabanlı imza kontrolü.
-- **İşleyiş:** Ödeme servisinden gelen "Başarılı" sinyali sonrası `TransferService` rezervasyonu onaylar ve ilgili taraflara (Müşteri/Tedarikçi) bildirim gönderir.
+- **Verification:** `HMAC-SHA256`-based signature check.
+- **Flow:** After a "Success" signal is received from the payment service, `TransferService` confirms the booking and sends notifications to the relevant parties (Customer/Vendor).
 
 ---
 
-## 🏥 3. Sistem Sağlık Denetimi (Health Endpoint)
+## 🏥 3. System Health Check (Health Endpoint)
 
-Sistemin dışarıdan izlenebilirliğini (Monitoring) sağlar.
+Provides external observability (monitoring) of the system.
 
 - **URL:** `/wp-json/mhm-rentiva/v1/health`
-- **Kullanım Alanları:** Uptime izleme, Smoke Test ve CI/CD sonrası canlılık kontrolü.
-- **Dönen Veri:** Veritabanı tablolarının durumu, `/tmp` dizini yazma izinleri ve PHP sürüm uyumluluğu.
+- **Use Cases:** Uptime monitoring, smoke testing, and post-CI/CD liveness checks.
+- **Returned Data:** Status of database tables, `/tmp` directory write permissions, and PHP version compatibility.
 
 ---
 
-## 🛡️ 4. Güvenlik ve Hız Sınırları (Rate Limiting)
+## 🛡️ 4. Security and Rate Limiting
 
-- **Genel Sınır:** Transfer arama uç noktaları için dakikada 30 istek.
-- **Callback Sınırı:** IP bazlı değil, servis sağlayıcı kimliği (PSP Identity) bazlı özel limitler uygulanır.
-- **Idempotency:** Aynı bildirim ID'sine sahip tekrarlı istekler işlem görmez, ancak `200 OK` dönülür.
+- **General Limit:** 30 requests per minute for transfer search endpoints.
+- **Callback Limit:** Custom limits are applied per PSP identity, not per IP.
+- **Idempotency:** Repeated requests with the same notification ID are not processed, but `200 OK` is returned.
 
-## Bölüm Sonu Özeti
-- Transfer modülü, AJAX (Frontend) ve REST (Backend/External) katmanlarını bir arada kullanır.
-- Tüm finansal etkileşimler imza tabanlı (`HMAC`) doğrulamaya tabidir.
-- `Health` endpointi ile sistemin operasyonel durumu anlık takip edilebilir.
+## Section Summary
+- The Transfer module uses both AJAX (Frontend) and REST (Backend/External) layers together.
+- All financial interactions are subject to signature-based (`HMAC`) verification.
+- The `Health` endpoint allows real-time monitoring of the system's operational status.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | TransferPricingEngine entegrasyonu, Health endpoint detayları ve HMAC doğrulama akışı eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | TransferPricingEngine integration, Health endpoint details, and HMAC verification flow added. |

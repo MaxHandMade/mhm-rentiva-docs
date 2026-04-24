@@ -1,73 +1,73 @@
 ---
 id: vendor-onboarding
-title: Tedarikçi Katılımı (Vendor Onboarding)
+title: Vendor Onboarding
 sidebar_label: Onboarding
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.24.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-01.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, bir kullanıcının tedarikçi olma sürecini; başvuru formundan admin onayına, rol atamasından veri senkronizasyonuna kadar teknik olarak açıklar.
+:::info Purpose
+This page provides a technical explanation of the vendor onboarding process — from the application form to admin approval, role assignment, and data synchronization.
 :::
 
-# 🚀 Tedarikçi Katılım Süreci
+# 🚀 Vendor Onboarding Process
 
-Rentiva onboarding modülü, kontrollü bir pazar yeri (Marketplace) yapısını garanti etmek için **iki aşamalı onay mekanizması** kullanır.
+The Rentiva onboarding module uses a **two-stage approval mechanism** to guarantee a controlled Marketplace structure.
 
 ---
 
-## 📝 1. Başvuru Formu ve Kısa Kod
+## 📝 1. Application Form & Shortcode
 
-Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen bir form üzerinden alınır.
+Vendor applications are submitted through a form rendered by the `[rentiva_vendor_apply]` shortcode.
 
-### Teknik Uygulama
-- **Sınıf:** `MHMRentiva\Admin\Frontend\Shortcodes\Vendor\VendorApply`
-- **AJAX İşleyici:** `mhm_vendor_apply` eylemi üzerinden `handle_ajax()` metoduyla çalışır.
-- **Güvenlik:** Her başvuru için `wp_create_nonce('mhm_vendor_apply_nonce')` ile CSRF koruması sağlanır.
+### Technical Implementation
+- **Class:** `MHMRentiva\Admin\Frontend\Shortcodes\Vendor\VendorApply`
+- **AJAX Handler:** Runs via the `handle_ajax()` method on the `mhm_vendor_apply` action.
+- **Security:** CSRF protection is provided using `wp_create_nonce('mhm_vendor_apply_nonce')` for each application.
 
-### Zorunlu Alanlar
-| Alan | Meta Anahtari | Tip | Sifreleme |
+### Required Fields
+| Field | Meta Key | Type | Encrypted |
 |---|---|---|---|
-| Ad Soyad | `_vendor_full_name` | Metin | Hayir |
-| Telefon | `_vendor_phone` | Metin | Hayir |
-| Sehir / Bolge | `_vendor_city` | SelectWoo | Hayir |
-| **IBAN** | `_vendor_iban` | Metin | **Evet (AES-256)** |
-| **Hesap Sahibi** | `_vendor_account_holder` | Metin | Hayir |
-| Kimlik Belgesi | `_vendor_doc_id` | Dosya | Hayir |
-| Ehliyet | `_vendor_doc_license` | Dosya | Hayir |
-| Adres Belgesi | `_vendor_doc_address` | Dosya | Hayir |
+| Full Name | `_vendor_full_name` | Text | No |
+| Phone | `_vendor_phone` | Text | No |
+| City / Region | `_vendor_city` | SelectWoo | No |
+| **IBAN** | `_vendor_iban` | Text | **Yes (AES-256)** |
+| **Account Holder** | `_vendor_account_holder` | Text | No |
+| ID Document | `_vendor_doc_id` | File | No |
+| Driver's License | `_vendor_doc_license` | File | No |
+| Proof of Address | `_vendor_doc_address` | File | No |
 
-### Opsiyonel Alanlar
-| Alan | Meta Anahtari | Tip | Not |
+### Optional Fields
+| Field | Meta Key | Type | Note |
 |---|---|---|---|
-| Vergi Dairesi | `_vendor_tax_office` | Metin | v4.23.1 ile eklendi |
+| Tax Office | `_vendor_tax_office` | Text | Added in v4.23.1 |
 
-:::info v4.23.1 Form Degisiklikleri
-- **Hizmet Alanlari (Service Areas):** Checkbox bolumu kaldirildi, yerine bilgi notu eklendi.
-- **Arac Sigortasi:** Basvuru formundan kaldirildi, arac ekleme formuna (`[rentiva_vehicle_submit]`) tasindi.
-- **Sehir Secimi:** Metin girisi (`<datalist>`) yerine `<select>` + WooCommerce SelectWoo bilesenine donusturuldu (`CityHelper::render_select()`).
-- **Hesap Sahibi:** Yeni zorunlu alan — banka hesap sahibi bilgisi.
-- **Vergi Dairesi:** Yeni opsiyonel alan.
+:::info v4.23.1 Form Changes
+- **Service Areas:** The checkbox section was removed and replaced with an informational note.
+- **Vehicle Insurance:** Removed from the application form and moved to the vehicle submission form (`[rentiva_vehicle_submit]`).
+- **City Selection:** Converted from a text input (`<datalist>`) to a `<select>` + WooCommerce SelectWoo component (`CityHelper::render_select()`).
+- **Account Holder:** New required field — bank account holder information.
+- **Tax Office:** New optional field.
 :::
 
 ---
 
-## 🛡️ 2. Uygünlük Kontrolleri (`Eligibility`)
+## 🛡️ 2. Eligibility Checks (`Eligibility`)
 
-Bir kullanıcı başvuru yapmadan önce `VendorApplicationManager::can_apply()` ile şu kurallar denetlenir:
-1. Kullanıcı zaten `rentiva_vendor` rolüne sahip olmamalıdır.
-2. Mevcut bir "Pending" (Beklemede) başvurusu olmamalıdır.
-3. `Mode::canUseVendorMarketplace()` kontrolü ile lisansın bu özelliği desteklediği doğrulanmalıdır.
+Before a user can apply, the following rules are checked via `VendorApplicationManager::can_apply()`:
+1. The user must not already hold the `rentiva_vendor` role.
+2. There must be no existing Pending application.
+3. The `Mode::canUseVendorMarketplace()` check must confirm that the license supports this feature.
 
 ---
 
-## 🔒 3. Veri Saklama ve Güvenlik
+## 🔒 3. Data Storage & Security
 
-Başvurular `mhm_vendor_app` CPT'si olarak saklanır.
+Applications are stored as `mhm_vendor_app` CPT entries.
 
-### IBAN Şifreleme Protokolü
-IBAN bilgileri veritabanına asla düz metin olarak yazılmaz:
+### IBAN Encryption Protocol
+IBAN data is never written to the database as plain text:
 ```php
 // VendorApplicationManager::encrypt_iban()
 $key = substr(hash('sha256', AUTH_KEY . SECURE_AUTH_SALT), 0, 32);
@@ -75,81 +75,82 @@ $iv  = openssl_random_pseudo_bytes(16);
 $cipher = openssl_encrypt($raw_iban, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
 return base64_encode($iv . $cipher);
 ```
-**Not:** `AUTH_KEY` veya `SECURE_AUTH_SALT` değişirse eski şifrelenmiş IBAN'lar çözülemez.
+**Note:** If `AUTH_KEY` or `SECURE_AUTH_SALT` change, previously encrypted IBANs can no longer be decrypted.
 
 ---
 
-## ⚙️ 4. Admin Onay ve Rol Atama
+## ⚙️ 4. Admin Approval & Role Assignment
 
-### Onay Akisi (`Approve`)
-Admin panelinden "Approve" tiklandiginda `VendorOnboardingController::approve()` su islemleri sirasiyla yapar:
-1. **Rol Yukseltme:** Kullaniciya `rentiva_vendor` rolu atanir.
-2. **Meta Sync:** Basvuru postundaki veriler (`_vendor_*`) kullanici meta tablolarina (`_rentiva_vendor_*`) kopyalanir. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanlari da senkronize edilir.
-3. **Loglama:** Onay tarihi ve onaylayan admin ID'si kaydedilir.
-4. **Bildirim:** `mhm_rentiva_vendor_approved` kancasi tetiklenir.
+### Approval Flow (`Approve`)
+When "Approve" is clicked in the admin panel, `VendorOnboardingController::approve()` performs the following in sequence:
+1. **Role Upgrade:** The user is assigned the `rentiva_vendor` role.
+2. **Meta Sync:** Data from the application post (`_vendor_*`) is copied to the user meta tables (`_rentiva_vendor_*`). From v4.23.1, the `_vendor_account_holder` and `_vendor_tax_office` fields are also synchronized.
+3. **Logging:** The approval date and the approving admin's ID are recorded.
+4. **Notification:** The `mhm_rentiva_vendor_approved` hook is triggered.
 
-### Red Akışı (`Reject`)
-Admin reddettiğinde:
-1. Başvuru statüsü `trash` (çöp) durumuna alınır.
-2. `_vendor_rejection_note` içine red gerekçesi yazılır.
-3. `mhm_rentiva_vendor_rejected` kancası tetiklenir.
-
----
-
-## 📧 5. E-posta Bildirimleri
-
-Tedarikçi döngüsündeki tüm statü değişiklikleri `VendorNotifications` sınıfı tarafından dinlenir:
-- **Başvuru Alındı:** Adaya onaya alındığı bilgisi gider.
-- **Onaylandı:** Hoş geldin mesajı ve panel erişim bilgileri gönderilir.
-- **Reddedildi:** Red gerekçesiyle birlikte bilgilendirme yapılır.
+### Rejection Flow (`Reject`)
+When the admin rejects an application:
+1. The application status is moved to `trash`.
+2. The rejection reason is written to `_vendor_rejection_note`.
+3. The `mhm_rentiva_vendor_rejected` hook is triggered.
 
 ---
 
-## 🚗 6. Araç Ekleme Süreci (v4.23.0)
+## 📧 5. Email Notifications
 
-Vendor onaylandiktan sonra `[rentiva_vehicle_submit]` formu ile araç ekleyebilir. v4.23.0 ile eklenen özellikler:
+All status changes in the vendor lifecycle are handled by the `VendorNotifications` class:
+- **Application Received:** The applicant is notified that the application is under review.
+- **Approved:** A welcome message and dashboard access details are sent.
+- **Rejected:** An informational email is sent with the rejection reason.
 
-### Şehir Filtrelenms Lokasyon/Rota Seçimi
-Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari ve rotalari filtrelenir. `LocationProvider::get_by_city()` ile sehre gore sorgulama yapilir.
+---
 
-### Rota Basi Fiyatlandırma
-Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlanan `min_price` / `max_price` araligi zorunludur. Meta key: `_mhm_rentiva_transfer_route_prices` (JSON).
+## 🚗 6. Vehicle Submission Process (v4.23.0)
 
-### Kapasite Alanları
-- **Yolcu kapasitesi:** Maksimum yolcu sayısı.
-- **Bagaj limitleri:** Buyuk ve kucuk bagaj kapasiteleri.
+After a vendor is approved, they can add vehicles using the `[rentiva_vehicle_submit]` form. Features added in v4.23.0:
 
-### Arac Belgesi (Ruhsat) Yukleme
-Vendor, arac ruhsat belgesini form uzerinden yukleyebilir. Bu belge admin tarafindan dogrulama icin incelenir.
+### City-Filtered Location/Route Selection
+Transfer locations and routes are filtered based on the vendor's `_vendor_city` meta value. `LocationProvider::get_by_city()` is used to query by city.
 
-### Arac Sigorta Belgesi Yukleme (v4.23.1)
-Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhm_rentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
+### Per-Route Pricing
+Vendors can set their own price for each route. The `min_price` / `max_price` range defined by the admin is enforced. Meta key: `_mhm_rentiva_transfer_route_prices` (JSON).
 
-### Ücretli İlan Kapısı (v4.24.1)
+### Capacity Fields
+- **Passenger capacity:** Maximum number of passengers.
+- **Luggage limits:** Large and small luggage capacities.
 
-Admin ücretli ilan sistemini etkinleştirdiyse, vendor araç formu gönderildiğinde araç **taslak** olarak kaydedilir ve vendor WooCommerce ödeme sayfasına yönlendirilir. Ödeme tamamlandığında araç otomatik olarak "İnceleme Bekliyor" durumuna geçer. Detaylar için [Ücretli İlan Sistemi](/mhm-rentiva-docs/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241) bölümüne bakın.
+### Vehicle Registration Document Upload
+Vendors can upload the vehicle registration document via the form. This document is reviewed by the admin for verification.
 
-### Düzenleme ve Yeniden İnceleme
-Vendor, aracında kritik alan degisikligi yaptiginda (marka, model, plaka vb.) araç otomatik olarak yeniden inceleme kuyuguna alınır (`VendorVehicleReviewManager`). Minor değişiklikler (fiyat, açıklama) aninda yayinlanir.
+### Vehicle Insurance Document Upload (v4.23.1)
+An insurance document can be uploaded in addition to the registration. Meta key: `_mhm_rentiva_vehicle_insurance_doc`. This field was moved from the application form to the vehicle submission form — allowing a separate insurance document per vehicle.
+
+### Paid Listing Gate (v4.24.1)
+
+If the paid listing system is enabled by the admin, the vehicle is saved as a **draft** when the vendor submits the form, and the vendor is redirected to the WooCommerce payment page. Once payment is complete, the vehicle automatically moves to the "Pending Review" status. See [Paid Listing System](/mhm-rentiva-docs/docs/vendor/vendor-management#-paid-listing-system-v4241) for details.
+
+### Edit & Re-Review
+When a vendor makes a change to a critical field (make, model, plate number, etc.), the vehicle is automatically re-queued for review (`VendorVehicleReviewManager`). Minor changes (price, description) are published immediately.
 
 ### Vendor Badge
-Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
+Vendor vehicles are marked with a vendor badge on vehicle cards.
 
 ---
 
-## Bölüm Sonu Özeti
-- Onboarding süreci tamamen AJAX tabanldir ve sayfa yenileme gerektirmez.
-- Hassas finansal veriler (IBAN) donanim/sunucu seviyesinde şifrelenir.
-- Rol ve meta senkronizasyonu atomik bir işlem olarak yurutulur.
-- Basvuru formu 3 farkli belge yuklemesini destekler (kimlik, ehliyet, adres). Sigorta belgesi v4.23.1 ile arac ekleme formuna tasindi.
-- Araç ekleme formu şehir-filtrelenmiş lokasyon/rota seçimi, rota başı fiyatlandırma ve sigorta belgesi yükleme içerir.
-- Şehir seçimi tüm formlarda SelectWoo bileşeni üzerinden yapılır (v4.23.1).
-- Ücretli ilan etkinse araç formu gönderildiğinde WC ödeme sayfasına yönlendirme yapılır (v4.24.1).
+## Section Summary
+- The onboarding process is fully AJAX-based and requires no page refresh.
+- Sensitive financial data (IBAN) is encrypted at the hardware/server level.
+- Role and meta synchronization runs as an atomic operation.
+- The application form supports 3 document uploads (ID, license, proof of address). Insurance document was moved to the vehicle submission form in v4.23.1.
+- The vehicle submission form includes city-filtered location/route selection, per-route pricing, and insurance document upload.
+- City selection uses the SelectWoo component across all forms (v4.23.1).
+- If the paid listing feature is enabled, the vehicle form submission redirects to the WC payment page (v4.24.1).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 01.04.2026 | 4.24.1 | Ücretli ilan kapısı: araç ekleme → taslak → WC ödeme → inceleme bekliyor akışı eklendi. |
-| 28.03.2026 | 4.23.1 | Başvuru formu: Hizmet Alanları ve Araç Sigortası kaldırıldı. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Şehir seçimi SelectWoo'ya dönüştürüldü. Araç sigorta belgesi araç ekleme formuna taşındı. Meta senkronizasyonu güncellendi. |
-| 27.03.2026 | 4.23.0 | Belge yüklemeleri (4 tip), araç ekleme süreci, şehir-filtrelenmiş rota seçimi, rota fiyatlandırma, kapasite alanları, yeniden inceleme mekanizması eklendi. |
-| 19.03.2026 | 4.21.2 | Sayfa, HMAC şifreleme ve meta senkronizasyon detaylarıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 01.04.2026 | 4.24.1 | Paid listing gate: vehicle submission → draft → WC payment → pending review flow added. |
+| 28.03.2026 | 4.23.1 | Application form: Service Areas and Vehicle Insurance removed. Account Holder (required) and Tax Office (optional) added. City selection converted to SelectWoo. Vehicle insurance document moved to vehicle submission form. Meta synchronization updated. |
+| 27.03.2026 | 4.23.0 | Document uploads (4 types), vehicle submission process, city-filtered route selection, route pricing, capacity fields, and re-review mechanism added. |
+| 19.03.2026 | 4.21.2 | Page updated with HMAC encryption and meta synchronization details. |

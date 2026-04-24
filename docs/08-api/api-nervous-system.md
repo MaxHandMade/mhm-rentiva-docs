@@ -1,70 +1,71 @@
 ---
 id: api-nervous-system
-title: Sinir Sistemi (Internal Communication)
-sidebar_label: Sinir Sistemi
+title: Nervous System (Internal Communication)
+sidebar_label: Nervous System
 sidebar_position: 10
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, kullanıcı etkileşimlerini yönetmek ve modüller arası veriyi senkronize etmek için üç katmanlı bir haberleşme mimarisi ("Sinir Sistemi") kullanır: **AJAX**, **REST API (v1)** ve **Interactivity API**.
+:::info Purpose
+MHM Rentiva uses a three-layer communication architecture ("Nervous System") to manage user interactions and synchronize data across modules: **AJAX**, **REST API (v1)**, and the **Interactivity API**.
 :::
 
-# 🧠 Sinir Sistemi: Haberleşme Kanalları
+# 🧠 Nervous System: Communication Channels
 
-Eklentinin içsel haberleşme mimarisi, yüksek performans ve düşük gecikme süresi (low latency) için optimize edilmiştir.
+The plugin's internal communication architecture is optimized for high performance and low latency.
 
 ---
 
-## ⚡ 1. AJAX Katmanı (admin-ajax.php)
+## ⚡ 1. AJAX Layer (admin-ajax.php)
 
-Tedarikçi paneli ve ön yüzdeki form etkileşimleri için kullanılan ana kanaldır.
+The primary channel used for Vendor dashboard and front-end form interactions.
 
-| Kanca (Action) | Sorumlu Controller | İşlev |
+| Hook (Action) | Responsible Controller | Function |
 | :--- | :--- | :--- |
-| `mhm_fetch_vendor_stats` | `AnalyticsController` | Dashboard KPI ve Sparkline verilerini çeker. |
-| `mhm_request_payout` | `PayoutAjaxController` | Para çekme taleplerini atomik olarak başlatır. |
-| `mhm_rentiva_filter_results` | `SearchResults` | Araç listesini sayfayı yenilemeden filtreler. |
-| `mhm_approve_iban` | `VendorOnboardingController` | Admin panelinden IBAN değişikliklerini onaylar. |
+| `mhm_fetch_vendor_stats` | `AnalyticsController` | Fetches dashboard KPI and Sparkline data. |
+| `mhm_request_payout` | `PayoutAjaxController` | Initiates payout requests atomically. |
+| `mhm_rentiva_filter_results` | `SearchResults` | Filters the vehicle list without a page reload. |
+| `mhm_approve_iban` | `VendorOnboardingController` | Approves IBAN changes from the admin panel. |
 
 ---
 
 ## 🌐 2. REST API v1 (mhm-rentiva/v1)
 
-Dış servislerle (ödeme sağlayıcılar, mobil uygulamalar) ve karmaşık konfigürasyonlarla haberleşen mimaridir.
+The architecture that communicates with external services (payment providers, mobile apps) and handles complex configurations.
 
-### Temel Uç Noktalar (Endpoints):
-- **`/locations`:** Transfer ve rezervasyon modülleri için coğrafi konum verilerini sağlar.
-- **`/health`:** Veritabanı tablolarını, lisans durumunu ve PHP ortamını denetler.
-- **`/payouts/{id}/callback`:** Ödeme sistemlerinden gelen imzasız talepleri reddetmek için HMAC doğrulaması kullanır.
-- **`/availability`:** Anlık takvim doluluk kontrolü ve fiyat hesaplama (Pricing Engine) yapar.
+### Core Endpoints:
+- **`/locations`:** Provides geographic location data for the Transfer and Booking modules.
+- **`/health`:** Audits database tables, license status, and the PHP environment.
+- **`/payouts/{id}/callback`:** Uses HMAC verification to reject unsigned requests from payment systems.
+- **`/availability`:** Performs real-time calendar availability checks and price calculation via the Pricing Engine.
 
 ---
 
 ## 🧪 3. Interactivity API (WP 6.5+)
 
-WordPress'in yeni standartlarına uygun olarak, blok tabanlı ve reaktif arayüzler için kullanılır.
+Used for block-based and reactive interfaces in line with WordPress's new standards.
 
-- **`mhmLive.endpoint`:** Sunucu tarafındaki bir state değişimini frontend tarafında anlık yansıtmak için kullanılır (Örn: Favori Sayacı).
-- **Filtreleme:** `data-wp-context` kullanarak asenkron veri yükleme sağlar.
-- **Micro-interactions:** Buton animasyonları ve form doğrulama geri bildirimleri bu katmanı kullanır.
+- **`mhmLive.endpoint`:** Used to reflect a server-side state change on the frontend in real time (e.g., Favorites counter).
+- **Filtering:** Provides asynchronous data loading using `data-wp-context`.
+- **Micro-interactions:** Button animations and form validation feedback use this layer.
 
 ---
 
-## 🛡️ 4. Güvenlik ve Doğrulama
+## 🛡️ 4. Security and Verification
 
-Tüm haberleşme kanallarında aşağıdaki güvenlik katmanları zorunludur:
-- **Nonce (CSRF):** Her AJAX isteğinde `_wpnonce` alanının doğrulanması.
-- **Capability:** `current_user_can` ile rol tabanlı erişim kontrolü.
-- **AuthHelper:** API anahtarı tabanlı dış erişim doğrulaması.
+The following security layers are required across all communication channels:
+- **Nonce (CSRF):** Verification of the `_wpnonce` field on every AJAX request.
+- **Capability:** Role-based access control via `current_user_can`.
+- **AuthHelper:** API key-based verification for external access.
 
-## Bölüm Sonu Özeti
-- AJAX, kullanıcı paneli etkileşimleri için optimize edilmiştir.
-- REST API v1, sistem bütünlüğü ve dış dünyaya açılan kapıdır.
-- Interactivity API, modern ve sıvı kullanıcı deneyimi için reaktif yöntemler sunar.
+## Section Summary
+- AJAX is optimized for user dashboard interactions.
+- REST API v1 is the gateway to system integrity and the outside world.
+- The Interactivity API offers reactive methods for a modern, fluid user experience.
 
-## Değişiklik Günlüğü
-| Tarih | Süm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Interactivity API ve AJAX denetim detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Interactivity API and AJAX audit details added. |

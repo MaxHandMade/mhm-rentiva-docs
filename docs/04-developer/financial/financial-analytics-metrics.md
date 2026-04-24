@@ -1,58 +1,58 @@
 ---
 id: financial-analytics-metrics
-title: Finansal ve Analitik Metrikler
-sidebar_label: Analytics Metrikleri
+title: Financial and Analytics Metrics
+sidebar_label: Analytics Metrics
 sidebar_position: 4
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, `AnalyticsService` tarafından hesaplanan finansal ve operasyonel metriklerin arkasındaki mantığı ve veri kaynaklarını açıklar.
+:::info Purpose
+This page describes the logic and data sources behind the financial and operational metrics calculated by `AnalyticsService`.
 :::
 
-# 📊 Analytics ve Finansal Metrikler
+# 📊 Analytics and Financial Metrics
 
-MHM Rentiva, "Tek Doğruluk Kaynağı" (**Single Source of Truth**) olarak finansal metriklerde sadece `mhm_rentiva_ledger` tablosunu kullanır. Operasyonel metrikler (doluluk oranı vb.) ise rezervasyon meta verileriyle harmanlanır.
+MHM Rentiva uses the `mhm_rentiva_ledger` table exclusively as the **Single Source of Truth** for financial metrics. Operational metrics (occupancy rate, etc.) are blended with booking metadata.
 
-## 🛠️ Temel Prensipler
+## 🛠️ Core Principles
 
-- **Ledger-Only Truth:** Gelir hesaplamaları asla sipariş (Order) tablosundan değil, her zaman defter (Ledger) tablosundan yapılır.
-- **UTC Normalization:** Tüm zaman pencereleri UTC formatında normalize edilir ve çakışmayan (Non-overlapping) pencereler kullanılır.
-- **Sanitizasyon:** Metrik sorguları her zaman `status = 'cleared'` ve `type IN ('commission_credit', 'commission_refund')` filtrelerini içerir.
+- **Ledger-Only Truth:** Revenue calculations always come from the Ledger table, never from the Order table.
+- **UTC Normalization:** All time windows are normalized to UTC and use non-overlapping periods.
+- **Sanitization:** Metric queries always include `status = 'cleared'` and `type IN ('commission_credit', 'commission_refund')` filters.
 
 ---
 
-## 📈 Finansal Metrikler
+## 📈 Financial Metrics
 
-Sistem tarafından hesaplanan temel finansal göstergeler:
+Key financial indicators calculated by the system:
 
-| Metrik | Metod | Hesaplama Mantığı |
+| Metric | Method | Calculation Logic |
 | :--- | :--- | :--- |
-| **Net Gelir** | `get_revenue_period()` | `Sum(commission_credit) - Sum(commission_refund)` |
-| **Büyüme Oranı** | `get_growth_rate()` | `((Mevcut - Önceki) / Önceki) * 100` |
-| **Ort. Rezervasyon** | `get_avg_booking_value()` | `Toplam_Net / Tekil_Rezervasyon_Sayısı` |
-| **Sparkline** | `get_sparkline_data()` | Günlük bazda normalize edilmiş bakiye noktaları. |
+| **Net Revenue** | `get_revenue_period()` | `Sum(commission_credit) - Sum(commission_refund)` |
+| **Growth Rate** | `get_growth_rate()` | `((Current - Previous) / Previous) * 100` |
+| **Avg. Booking** | `get_avg_booking_value()` | `Total_Net / Unique_Booking_Count` |
+| **Sparkline** | `get_sparkline_data()` | Balance points normalized on a daily basis. |
 
 ---
 
-## ⚙️ Operasyonel Metrikler
+## ⚙️ Operational Metrics
 
-Araç ve Vendor bazlı performans analizi için kullanılan metrikler:
+Metrics used for Vehicle- and Vendor-based performance analysis:
 
-### 1. Doluluk Oranı (Occupancy Rate)
-`get_vehicle_performance()` metodu ile hesaplanır. Belirlenen zaman penceresindeki toplam gün sayısının, aracın rezerve edildiği (completed, confirmed, in_progress) gün sayısına oranıdır.
+### 1. Occupancy Rate
+Calculated via the `get_vehicle_performance()` method. The ratio of days the vehicle was booked (completed, confirmed, in_progress) to the total number of days in the specified time window.
 
-### 2. İptal Oranı (Cancellation Rate)
-Toplam rezervasyonlar içindeki `cancelled` ve `refunded` durumundaki kayıtların yüzdesel oranıdır.
+### 2. Cancellation Rate
+The percentage of `cancelled` and `refunded` records within total bookings.
 
 ---
 
-## 🔄 Metrik Hesaplama Akışı
+## 🔄 Metric Calculation Flow
 
 ```mermaid
 graph TD
-    A[Ledger Filtreleri: cleared + audited] --> B[get_revenue_period]
+    A[Ledger Filters: cleared + audited] --> B[get_revenue_period]
     B --> C[get_growth_rate]
     B --> D[get_sparkline_data]
     C --> E[Dashboard KPI: Revenue, Growth, Sparkline]
@@ -64,18 +64,19 @@ graph TD
 
 ---
 
-## 🛡️ Kritik Detaylar
+## 🛡️ Critical Details
 
-- **NULL vs 0.0:** `get_growth_rate()` metodunda önceki dönem verisi 0 ise sonuç `NULL` döner. Bu, "değişim yok" (0.0) ile "yeterli veri yok" (NULL) durumlarını finansal raporlamada ayırmak içindir.
-- **Sparkline Backfilling:** Aktivite olmayan günler için sistem otomatik olarak `0.0` değeri basar, böylece grafiklerde kopukluk oluşmaz.
-- **Banker-Safe Rounding:** Tüm yüzdesel hesaplamalarda `PHP_ROUND_HALF_UP` kullanılarak finansal hassasiyet korunur.
+- **NULL vs 0.0:** In `get_growth_rate()`, if the previous period has zero data, the result returns `NULL`. This distinguishes "no change" (0.0) from "insufficient data" (NULL) in financial reporting.
+- **Sparkline Backfilling:** For days with no activity, the system automatically inserts `0.0` so charts have no gaps.
+- **Banker-Safe Rounding:** `PHP_ROUND_HALF_UP` is used for all percentage calculations to maintain financial precision.
 
-## Bölüm Sonu Özeti
-- Finansal metrikler sadece **Ledger** tablosuna dayanır.
-- Operasyonel metrikler zaman penceresi (Window Intersection) guard'ları ile korunur.
-- Tüm veriler UTC bazlı ve tutarlı (Idempotent) şekilde üretilir.
+## Section Summary
+- Financial metrics rely solely on the **Ledger** table.
+- Operational metrics are protected by time-window (Window Intersection) guards.
+- All data is produced UTC-based and consistently (idempotent).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, AnalyticsService'in Ledger ve Operasyonel metrik yapısına göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect AnalyticsService's Ledger and Operational metric structure. |

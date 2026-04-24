@@ -1,8 +1,8 @@
 {
-  "label": "Kısa Kodlar",
+  "label": "Shortcodes",
   "position": 14,
   "link": {
     "type": "generated-index",
-    "description": "MHM Rentiva altyapısında bulunan tüm kısa kodlar ve bileşen kılavuzları."
+    "description": "All shortcodes and component guides available in the MHM Rentiva platform."
   }
 }

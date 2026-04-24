@@ -1,74 +1,75 @@
 ---
 id: audit-crypto-and-export-integrity
-title: Audit Kriptografi ve Export Bütünlüğü
-sidebar_label: Audit Kripto ve Bütünlük
+title: Audit Cryptography and Export Integrity
+sidebar_label: Audit Crypto & Integrity
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, finansal denetim (Audit) süreçlerinde kullanılan dijital imzalama, anahtar yönetimi ve veri bütünlüğü (Hash-Chain) modellerini açıklar.
+:::info Purpose
+This page describes the digital signing, key management, and data integrity (Hash-Chain) models used in financial audit processes.
 :::
 
-# 🔐 Audit Kriptografi ve Bütünlük
+# 🔐 Audit Cryptography and Integrity
 
-MHM Rentiva, finansal raporların ve dışa aktarılan (Export) verilerin manipüle edilmediğini garanti altına almak için askeri düzeyde kriptografik standartlar kullanır.
+MHM Rentiva uses military-grade cryptographic standards to guarantee that financial reports and exported data have not been tampered with.
 
-## 🛠️ Teknik Bileşenler
+## 🛠️ Technical Components
 
-Kriptografik güvenlik katmanı şu servisler tarafından yönetilir:
+The cryptographic security layer is managed by the following services:
 
-| Servis | Görev | Algoritma |
+| Service | Responsibility | Algorithm |
 | :--- | :--- | :--- |
-| `ExportSignatureService` | Dışa aktarılan dosyaları (CSV/JSON) imzalar. | **Ed25519** (Detached) |
-| `KeyPairManager` | Sistem anahtar çiftlerini (Private/Public) yönetir. | **Libsodium** tabanlı |
-| `HashChainService` | Finansal olayları birbirine bağlı bir zincir haline getirir. | **SHA-256** |
+| `ExportSignatureService` | Signs exported files (CSV/JSON). | **Ed25519** (Detached) |
+| `KeyPairManager` | Manages system key pairs (Private/Public). | **Libsodium**-based |
+| `HashChainService` | Links financial events into a chained sequence. | **SHA-256** |
 
 ---
 
-## ⚡ Hash-Chain (Bütünlük Zinciri) Modeli
+## ⚡ Hash-Chain (Integrity Chain) Model
 
-Her finansal işlem, kendisinden önceki işlemin hash değerini referans alarak kaydedilir. Bu yapı, veri tabanındaki tek bir satır dahi değiştirilirse zincirin kırılmasını ve manipülasyonun anında tespit edilmesini sağlar.
+Each financial transaction is recorded by referencing the hash value of the previous transaction. This structure ensures that if even a single row in the database is altered, the chain breaks and the manipulation is detected immediately.
 
 ```mermaid
 graph LR
     subgraph "Hash Chain Workflow"
-    A[İşlem 1 <br/> Hash: 0000...] --> B[İşlem 2 <br/> Prev: Hash1 <br/> Hash: ABC...]
-    B --> C[İşlem 3 <br/> Prev: Hash2 <br/> Hash: XYZ...]
-    C --> D[Eylem: Zincir Doğrulama]
+    A[Transaction 1 <br/> Hash: 0000...] --> B[Transaction 2 <br/> Prev: Hash1 <br/> Hash: ABC...]
+    B --> C[Transaction 3 <br/> Prev: Hash2 <br/> Hash: XYZ...]
+    C --> D[Action: Chain Verification]
     end
 ```
 
 ---
 
-## 🖋️ Dosya İmzalama Akışı (Ed25519)
+## 🖋️ File Signing Flow (Ed25519)
 
-Bir denetim raporu (Audit Export) oluşturulduğunda şu süreç işler:
+When an audit report (Audit Export) is generated, the following process runs:
 
-1.  **Payload Hazırlama:** Veriler CSV veya JSON olarak üretilir.
-2.  **Hex Hash Üretimi:** Dosyanın içeriği `SHA-256` ile özetlenir (File Hash).
-3.  **Dijital İmzalama:** Bu özet değer, sistemin aktif `Private Key`'i ile Ed25519 algoritmaı kullanılarak imzalanır.
-4.  **Doğrulama Anahtarı:** İmza ile birlikte `Key ID` export paketine eklenir.
+1.  **Payload Preparation:** Data is produced as CSV or JSON.
+2.  **Hex Hash Generation:** The file content is hashed using `SHA-256` (File Hash).
+3.  **Digital Signing:** This digest is signed using the system's active `Private Key` with the Ed25519 algorithm.
+4.  **Verification Key:** The `Key ID` is included in the export package alongside the signature.
 
-:::important Doğrulama
-İmza doğrulaması için sadece `Public Key` yeterlidir. Bu, verileri alan denetçinin (Auditor), verinin MHM Rentiva sisteminden çıktığını ve yolda değişmediğini kanıtlamasına olanak tanır.
+:::important Verification
+Only the `Public Key` is needed for signature verification. This allows the auditor receiving the data to prove that it originated from the MHM Rentiva system and was not altered in transit.
 :::
 
 ---
 
-## 🔑 Anahtar Yönetimi (Key Management)
+## 🔑 Key Management
 
-- **Sessiz Üretim:** Anahtarlar ilk kurulumda veya `KeyPairManager` üzerinden manuel olarak üretilir.
-- **Güvenli Saklama:** `Private Key` veritabanında şifrelenmiş (Encrypted) olarak saklanır veya çevre değişkeni (Env) üzerinden okunabilir.
-- **Rotation (Döngü):** Periyodik olarak anahtar değişimi yapılması ve eski anahtarların "Archive" durumuna çekilmesi önerilir.
+- **Silent Generation:** Keys are generated on first installation or manually via `KeyPairManager`.
+- **Secure Storage:** The `Private Key` is stored encrypted in the database or can be read from an environment variable (Env).
+- **Rotation:** Periodic key rotation is recommended; old keys should be moved to "Archive" status.
 
-## Bölüm Sonu Özeti
-- Sistem, **Ed25519** ile yüksek performanslı ve güvenli imzalama yapar.
-- **Hash-Chain** yapısı, geriye dönük veri manipülasyonunu imkansız kılar.
-- Finansal veriler hem veritabanında hem de dışa aktarıldığında korunur.
+## Section Summary
+- The system uses **Ed25519** for high-performance, secure signing.
+- The **Hash-Chain** structure makes retroactive data manipulation impossible.
+- Financial data is protected both in the database and during export.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, Ed25519 ve Hash-Chain mimari detaylarıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with Ed25519 and Hash-Chain architecture details. |

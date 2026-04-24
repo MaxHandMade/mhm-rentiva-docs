@@ -1,61 +1,62 @@
 ---
 id: email-configuration
-title: E-posta Yapılandırması
-sidebar_label: E-posta Yapılandırması
+title: Email Configuration
+sidebar_label: Email Configuration
 sidebar_position: 8
 slug: /core-configuration/email-configuration
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-E-posta Yapılandırması sekmesi, sistemden gönderilen otomatik bildirimlerin kimlik bilgilerini, tasarım detaylarını ve gönderim modlarını belirlediğiniz alandır. **MHM Rentiva > Ayarlar > E-posta Yapılandırması** altından ulaşılır.
+The Email Configuration tab is where you define the sender identity, design details, and delivery modes of automated notifications sent by the system. Access it via **MHM Rentiva > Settings > Email Configuration**.
 
-:::info WooCommerce Entegrasyonu
-Sistemde WooCommerce yüklü ise, ana işlem e-postaları (sipariş onayı vb.) WooCommerce üzerinden yönetilir. Buradaki ayarlar, eklentiye özgü iç bildirimler (Yönetici uyarıları, özel müşteri mesajları vb.) için geçerlidir.
+:::info WooCommerce Integration
+When WooCommerce is installed, primary transactional emails (order confirmations, etc.) are managed through WooCommerce. The settings here apply to plugin-specific internal notifications (admin alerts, custom customer messages, etc.).
 :::
 
 ---
 
-## 📧 Gönderici ve Tasarım Ayarları
+## 📧 Sender & Design Settings
 
-E-postaların müşteriye nasıl görüneceğini buradan belirleyin:
+Define how emails appear to customers:
 
-- **Gönderen Adı:** E-postanın "Kimden" kısmında görünecek isim (Örn: Rentiva Filo).
-- **Gönderen E-postası:** Mesajın hangi adresten çıkış yapacağı (Örn: info@site.com).
-- **Cevap Adresi:** Müşteri e-postayı yanıtladığında mesajın gideceği adres.
-- **Temel Renk:** E-posta şablonlarındaki buton, başlık ve vurgu renklerini belirler.
-- **Alt Bilgi Metni (Footer):** E-postaların en altında yer alacak telif ve iletişim notu.
-
----
-
-## 🛠️ Gönderim ve Test Araçları
-
-- **Test Bağlantısı E-postası Gönder:** Yapılandırmanızın doğru çalışıp çalışmadığını anlamak için kendinize anlık bir test mesajı gönderir.
-- **Giden E-postaları Etkinleştir:** Sistemin otomatik e-posta gönderme yetkisini açar/kapatır.
-- **Üretim Sandbox (Test Modu):** Aktif edildiğinde hiçbir e-posta müşteriye gitmez, tüm mesajlar belirlenen "Test E-posta Adresi"ne yönlendirilir.
+- **Sender Name:** The name shown in the "From" field of emails (e.g., Rentiva Fleet).
+- **Sender Email:** The address emails are sent from (e.g., info@site.com).
+- **Reply-To Address:** The address where replies go when a customer responds to an email.
+- **Primary Color:** Sets the button, heading, and accent colors in email templates.
+- **Footer Text:** The copyright and contact note that appears at the bottom of all emails.
 
 ---
 
-## ⚙️ Gelişmiş Teknik Ayarlar
+## 🛠️ Delivery & Testing Tools
 
-- **Şablon Geçersiz Kılma Yolu:** E-posta tasarımlarını temanız üzerinden özelleştirmek isterseniz kullanacağınız klasör yolu (Varsayılan: `mhm-rentiva/emails/`).
-- **Otomatik Arka Plan Gönderme:** Sayfa hızını etkilememek için e-postaları arka planda (asenkron) sıraya alır.
-- **İletişim Günlükleri:** Gönderilen tüm e-postaların bir kopyasını veritabanında saklar.
-- **Günlük Saklama Süresi:** Kayıtların kaç gün sonra otomatik silineceğini belirler (Örn: 30 Gün).
-
----
-
-### 🖼️ GÖRSEL: E-POSTA YAPILANDIRMA PANELİ
-*(Ayarlar > E-posta Yapılandırması sekmesi, gönderici ve günlük ayarları alanı)*
+- **Send Test Connection Email:** Sends you an instant test message to verify your configuration is working correctly.
+- **Enable Outgoing Emails:** Toggles the system's permission to send automated emails.
+- **Production Sandbox (Test Mode):** When active, no emails are delivered to customers — all messages are redirected to the designated "Test Email Address".
 
 ---
 
-### Bölüm Özeti
-- **Marka Kimliği** için gönderen adı ve renkleri kurumsal yapınıza göre ayarlayın.
-- **Test Modu** ile canlıya geçmeden önce bildirimleri güvenle kontrol edin.
-- **Arka Plan Gönderimi** ile sitenizin performansını koruyun.
+## ⚙️ Advanced Technical Settings
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+- **Template Override Path:** The folder path used when you want to customize email designs through your theme (Default: `mhm-rentiva/emails/`).
+- **Async Background Sending:** Queues emails in the background (asynchronously) to avoid affecting page load speed.
+- **Communication Logs:** Stores a copy of all sent emails in the database.
+- **Log Retention Period:** Defines how many days before records are automatically deleted (e.g., 30 Days).
+
+---
+
+### 🖼️ IMAGE: EMAIL CONFIGURATION PANEL
+*(Settings > Email Configuration tab, sender and log settings area)*
+
+---
+
+### Section Summary
+- Set the sender name and colors to match your **Brand Identity**.
+- Use **Test Mode** to safely verify notifications before going live.
+- Use **Background Sending** to maintain your site's performance.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | E-posta Yapılandırması dökümanı panel ekran görüntüsü ve kod analizine göre oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Email Configuration documentation created based on panel screenshot and code analysis. |

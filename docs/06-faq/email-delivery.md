@@ -1,78 +1,79 @@
 ---
 id: email-delivery
-title: E-posta Gönderim ve Teslimat Sorunları
-sidebar_label: E-posta Teslimi
+title: Email Sending & Delivery Issues
+sidebar_label: Email Delivery
 sidebar_position: 20
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, rezervasyon onayları ve tedarikçi bildirimleri için e-posta sistemine yoğun olarak dayanır. Bu sayfa, e-posta gönderim hatalarını teşhis etme ve çözme süreçlerini kapsar.
+:::info Purpose
+MHM Rentiva relies heavily on the email system for booking confirmations and vendor notifications. This page covers how to diagnose and resolve email sending failures.
 :::
 
-# 📧 E-posta Gönderim ve Teslimat Sorunları
+# 📧 Email Sending & Delivery Issues
 
-Sistem e-postaları (`Mailer::send`), varsayılan WordPress `wp_mail()` fonksiyonunu kullanır. Teslimat sorunları genellikle sunucu yapılandırması veya e-posta servis sağlayıcısı ile ilgilidir.
-
----
-
-## ❌ 1. E-posta Hiç Gönderilmiyor (Sistem Hataları)
-
-### Log Kontrolü
-- **Teşhis:** Rentiva > Sistem Günlükleri (AdvancedLogger) sekmesinden e-posta hatalarını kontrol edin. `EmailLog` post tipi, her gönderim denemesini kaydeder.
-- **Çözüm:** `Mailer` sınıfının döndürdüğü hata mesajına göre SMTP ayarlarınızı güncelleyin.
-
-### SMTP Yapılandırması
-- **Neden:** PHP `mail()` fonksiyonu birçok modern sunucuda engellenmiştir.
-- **Çözüm:** "WP Mail SMTP" gibi eklentilerle veya Rentiva ayarlarından doğrudan bir SMTP sağlayıcısı (SendGrid, Mailgun vb.) kullanarak yapılandırma yapın.
+System emails (`Mailer::send`) use the default WordPress `wp_mail()` function. Delivery issues are generally related to server configuration or the email service provider.
 
 ---
 
-## 📂 2. E-posta Spam Klasörüne Düşüyor
+## ❌ 1. Emails Not Sent at All (System Errors)
 
-### SPF, DKIM ve DMARC Kayıtları
-- **Neden:** Alan adınızın (domain) e-posta gönderme yetkisi doğru tanımlanmamış olabilir.
-- **Çözüm:** DNS ayarlarınızdan aşağıdaki kayıtları doğrulayın:
-    - **SPF:** E-posta gönderen sunucunun IP adresini içermelidir.
-    - **DKIM:** E-postaların dijital olarak imzalanmasını sağlar.
-    - **DMARC:** Sahte e-postalara karşı politika belirler.
+### Log Check
+- **Diagnose:** Check email errors from the Rentiva > System Logs (AdvancedLogger) tab. The `EmailLog` post type records every sending attempt.
+- **Fix:** Update your SMTP settings based on the error message returned by the `Mailer` class.
 
-### Gönderici Adresi Uyumsuzluğu
-- **Neden:** Ayarlardaki "Gönderici E-postası" ile SMTP hesabındaki e-posta uyuşmuyor olabilir.
-- **Çözüm:** Gönderici adresi (`From:`) ile yetkilendirilmiş SMTP adresini aynı yapın.
+### SMTP Configuration
+- **Reason:** The PHP `mail()` function is blocked on many modern servers.
+- **Fix:** Configure a SMTP provider (SendGrid, Mailgun, etc.) using a plugin like "WP Mail SMTP" or directly from Rentiva settings.
 
 ---
 
-## 🕒 3. Gecikmeli Teslimat ve Kuyruk Sorunları
+## 📂 2. Emails Landing in Spam
 
-### WordPress Cron (WP-Cron) Durumu
-- **Neden:** Sistem toplu e-postaları veya gecikmeli bildirimleri WP-Cron üzerinden işler. Sitenize ziyaret gelmiyorsa Cron çalışmayabilir.
-- **Çözüm:** Gerçek bir sunucu Cron (Server-side Cron) kurarak her dakikada bir `wp-cron.php` tetiklenmesini sağlayın.
+### SPF, DKIM, and DMARC Records
+- **Reason:** Your domain's email-sending authorization may not be correctly defined.
+- **Fix:** Verify the following records from your DNS settings:
+    - **SPF:** Must include the IP address of the email-sending server.
+    - **DKIM:** Enables digital signing of emails.
+    - **DMARC:** Sets a policy against spoofed emails.
 
-### Servis Sağlayıcı Limitleri
-- **Neden:** Paylaşımlı sunucu paketleri saatlik e-posta limiti uyguluyor olabilir.
-- **Çözüm:** Limitleri kontrol edin veya profesyonel bir e-posta dağıtım servisine geçin.
+### Sender Address Mismatch
+- **Reason:** The "Sender Email" in settings may not match the email on the SMTP account.
+- **Fix:** Make the sender address (`From:`) match the authorized SMTP address.
 
 ---
 
-## 🛠️ 4. Test Modu ve Debugging
+## 🕒 3. Delayed Delivery & Queue Issues
 
-### E-posta Test Modu
-- **Kontrol:** `mhm_rentiva_email_test_mode` ayarı açıksa, e-postalar gerçek alıcılara gitmek yerine sadece `AdvancedLogger`'a kaydedilir.
-- **Çözüm:** Canlıya alırken test modunun kapalı olduğundan emin olun.
+### WordPress Cron (WP-Cron) Status
+- **Reason:** The system processes bulk emails or delayed notifications through WP-Cron. If your site receives no traffic, Cron may not run.
+- **Fix:** Set up a real server-side Cron job to trigger `wp-cron.php` every minute.
 
-### Şablon Hataları
-- **Neden:** Özel bir HTML şablonu (`EmailTemplates`) kullanılıyorsa, hatalı PHP kodları gönderimi durdurabilir.
-- **Çözüm:** Varsayılan şablonu kullanarak gönderimi test edin.
+### Service Provider Limits
+- **Reason:** Shared hosting plans may enforce hourly email limits.
+- **Fix:** Check your limits or switch to a professional email delivery service.
 
-## Denetim Listesi
-1. `EmailLog` post tipini kontrol et.
-2. SMTP bağlantısını test et.
-3. Alan adı DNS kayıtlarını (SPF/DKIM) doğrula.
-4. Test modunun kapalı olduğunu onayla.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## 🛠️ 4. Test Mode & Debugging
+
+### Email Test Mode
+- **Check:** If the `mhm_rentiva_email_test_mode` setting is enabled, emails are only logged to `AdvancedLogger` instead of being sent to real recipients.
+- **Fix:** Make sure test mode is off before going live.
+
+### Template Errors
+- **Reason:** If a custom HTML template (`EmailTemplates`) is used, faulty PHP code can stop delivery.
+- **Fix:** Test sending using the default template.
+
+## Checklist
+1. Check the `EmailLog` post type.
+2. Test the SMTP connection.
+3. Verify domain DNS records (SPF/DKIM).
+4. Confirm test mode is disabled.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | SMTP, DNS (SPF/DKIM) ve Test Modu detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | SMTP, DNS (SPF/DKIM), and Test Mode details added. |

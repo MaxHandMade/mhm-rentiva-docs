@@ -1,54 +1,55 @@
 ---
 id: settings-test
-title: Ayarlar Testi (Diagnostic Testing)
-sidebar_label: Ayarlar Testi
+title: Settings Test (Diagnostic Testing)
+sidebar_label: Settings Test
 sidebar_position: 16
 slug: /core-configuration/settings-test
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Ayarlar Testi sekmesi, eklentinin tüm parçalarının (Veritabanı, E-posta, Dosya Sistemi, WooCommerce Entegrasyonu vb.) doğru yapılandırılıp yapılandırılmadığını otomatik olarak denetleyen teşhis (Diagnostic) aracıdır. **MHM Rentiva > Ayarlar > Ayarlar Testi** altından ulaşılır.
+The Settings Test tab is a diagnostic tool that automatically checks whether all parts of the plugin (Database, Email, File System, WooCommerce Integration, etc.) are correctly configured. Access it via **MHM Rentiva > Settings > Settings Test**.
 
-Eklentiyi kurduğunuzda veya sunucu değişikliği yaptığınızda sistemin tüm gereksinimleri karşıladığından emin olmanızı sağlar.
-
----
-
-## 🩺 Kapsamlı Test Kategorileri
-
-Sistem şu ana başlıklar altında derinlemesine tarama yapar:
-
-- **E-posta Altyapısı:** SMTP bağlantısı, e-posta gönderici adı, şablonların mevcudiyeti ve test mesajı gönderilebilirliği.
-- **Dosya Sistemi İzinleri:** CSS, JS ve log dosyalarının belirlenen dizinlere (`/uploads/mhm-rentiva/` vb.) yazılabildiğini kontrol eder.
-- **Güvenlik Yapılandırması:** Auth anahtarlarının geçerliliği, IP kısıtlama mekanizmalarının ve brute-force korumasının aktifiği.
-- **WooCommerce Entegrasyonu:** Ödeme yöntemleri, vergi kuralları ve ürün senkronizasyonunun eklentiyle tam uyumlu çalışıp çalışmadığı.
-- **Dahili Sistem Sağlığı:** SQL Mode'un performansa uygunluğu, PHP sürümü ve WordPress temel ayarlarının (Timezone vb.) doğruluğu.
+It ensures your system meets all requirements after installing the plugin or making server changes.
 
 ---
 
-### 🛡️ Teşhis Raporu Sonuçları
+## 🩺 Comprehensive Test Categories
 
-Rapor ekranındaki her satırın anlamı şudur:
+The system performs an in-depth scan under the following main headings:
 
-| Simge | Durum | Açıklama |
+- **Email Infrastructure:** SMTP connection, email sender name, template availability, and test message deliverability.
+- **File System Permissions:** Verifies that CSS, JS, and log files can be written to the designated directories (e.g., `/uploads/mhm-rentiva/`).
+- **Security Configuration:** Validity of auth keys, and whether IP restriction mechanisms and brute-force protection are active.
+- **WooCommerce Integration:** Checks that payment methods, tax rules, and product synchronization are fully compatible with the plugin.
+- **Internal System Health:** SQL Mode suitability for performance, PHP version, and the correctness of core WordPress settings (Timezone, etc.).
+
+---
+
+### 🛡️ Diagnostic Report Results
+
+The meaning of each row in the report screen:
+
+| Icon | Status | Description |
 | :---: | :--- | :--- |
-| ✅ | **GEÇTİ** | İlgili sistem birimi tüm şartları sağlıyor ve sorunsuz çalışıyor. |
-| ❌ | **BAŞARISIZ** | Kritik bir yapılandırma hatası (Dosya yazma izni eksik olabilir vb.). Mutlaka düzeltilmelidir. |
-| ⚠️ | **UYARI** | Sistem çalışır durumda ancak performans veya yapılandırma iyileştirilmesi önerilir. |
+| ✅ | **PASSED** | The relevant system component meets all requirements and is working without issues. |
+| ❌ | **FAILED** | A critical configuration error (e.g., missing file write permission). Must be fixed. |
+| ⚠️ | **WARNING** | The system is operational but a performance or configuration improvement is recommended. |
 
 ---
 
-### 🖼️ GÖRSEL: AYARLAR TEST RAPORU
-*(Ayarlar > Ayarlar Testi sekmesindeki Diagnostic sonuçları listesi ve rapor özet ekranı)*
+### 🖼️ IMAGE: SETTINGS TEST REPORT
+*(Settings > Settings Test tab — diagnostic results list and report summary screen)*
 
 ---
 
-### Bölüm Özeti
-- **Hızlı Sorun Giderme** (Troubleshooting) için bu testi her yapılandırma değişikliği sonrası çalıştırın.
-- **Destek Başvuruları** öncesi bu sayfadaki sonuçları ekibimizle paylaşarak teşhis sürecini hızlandırın.
-- **Güvenli Kurulum** yaparak müşterilerinizin rezervasyon sürecinde hata almamasını sağlayın.
+### Section Summary
+- Run this test after every configuration change for **Quick Troubleshooting**.
+- Share the results on this page with our team before **Support Requests** to speed up the diagnostic process.
+- Perform a **Secure Installation** to ensure your customers do not encounter errors during the booking process.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Ayarlar Testi (Diagnostic) dökümanı ayrı bir sayfa olarak oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Settings Test (Diagnostic) documentation created as a standalone page. |

@@ -1,46 +1,47 @@
 ---
 id: additional-services
-title: Ek Hizmet Ayarları
-sidebar_label: Ek Hizmet Ayarları
+title: Add-on Settings
+sidebar_label: Add-on Settings
 sidebar_position: 5
 slug: /core-configuration/additional-services
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Ek Hizmet Ayarları sekmesi, bebek koltuğu, GPS, ek sigorta gibi yan ürünlerin kiralama sürecindeki davranışlarını ve görüntülenme sırasını yapılandırdığınız alandır. **MHM Rentiva > Ayarlar > Ek Hizmet Ayarları** altından ulaşılır.
+The Add-on Settings tab is where you configure the behavior and display order of supplementary products — such as baby seats, GPS devices, and extra insurance — within the rental process. Access it via **MHM Rentiva > Settings > Add-on Settings**.
 
-:::info Önemli Hatırlatma
-Bu sayfa sadece **genel ayarları** içerir. Ek hizmetlerin kendisini (isim, fiyat, resim vb.) oluşturmak ve düzenlemek için sol menüdeki **MHM Rentiva > Ek Hizmetler** sayfasını kullanmalısınız.
+:::info Important Note
+This page contains only **general settings**. To create and edit the add-ons themselves (name, price, image, etc.), use the **MHM Rentiva > Add-ons** page in the left menu.
 :::
 
 ---
 
-## ⚙️ Ek Hizmetler Yapılandırması
+## ⚙️ Add-on Configuration
 
-Müşterilerin ek hizmet seçimlerini nasıl yöneteceğinizi belirleyen kurallar:
+Rules that determine how customers manage their add-on selections:
 
-- **Onay İste:** Müşteriler bir ek hizmet (örn: ek şoför) seçtiğinde, bu seçimin kesinleşmesi için yöneticinin manuel onayı gerekip gerekmediğini belirler.
-- **Takvimde Fiyatları Göster:** Rezervasyon takvimi üzerinde, seçilen ek hizmetlerin bedellerinin canlı olarak gösterilmesini sağlar.
-- **Siparişi Görüntüle (Görünüm Sırası):** Ek hizmetlerin rezervasyon formunda hangi kriterle sıralanacağını belirler:
-    - **Menü Siparişi (Varsayılan):** Sizin belirlediğiniz manuel sıra.
-    - **Alfabetik (A-Z):** İsim sırasına göre.
-    - **Fiyat (Artan/Azalan):** Bedellere göre ucuzdan pahalıya veya tersi.
-    - **Eklenme Tarihi:** En son eklenen hizmetin en üstte olması.
-
----
-
-### 🖼️ GÖRSEL: EK HİZMET AYARLARI PANELİ
-*(Ayarlar > Ek Hizmet Ayarları sekmesi, onay ve sıralama tercihleri alanı)*
+- **Require Approval:** Determines whether an administrator's manual approval is required before a customer's add-on selection (e.g., extra driver) is confirmed.
+- **Show Prices in Calendar:** Displays the cost of selected add-ons in real time on the booking calendar.
+- **Display Order (Sort Order):** Determines the criteria by which add-ons are sorted on the booking form:
+    - **Menu Order (Default):** The manual order you define.
+    - **Alphabetical (A–Z):** Sorted by name.
+    - **Price (Ascending/Descending):** Sorted by cost, cheapest to most expensive or vice versa.
+    - **Date Added:** The most recently added service appears at the top.
 
 ---
 
-### Bölüm Özeti
-- **Onay Modu** ile riskli ek hizmetleri (örn: özel ekipmanlar) denetim altında tutun.
-- **Sıralama Seçenekleri** ile en çok satılan veya en karlı hizmetlerinizi ön plana çıkarın.
-- **Görsel Takvim** entegrasyonu ile müşteriye anlık fiyat geri bildirimi sağlayın.
+### 🖼️ IMAGE: ADD-ON SETTINGS PANEL
+*(Settings > Add-on Settings tab, approval and sort order preferences area)*
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+### Section Summary
+- Use **Approval Mode** to keep risky add-ons (e.g., specialized equipment) under review.
+- Use **Sort Options** to feature your best-selling or most profitable services.
+- Use **Visual Calendar** integration to provide customers with instant price feedback.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Ek Hizmet Ayarları dökümanı panel ekran görüntüsü ve kod analizine göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Add-on Settings documentation updated based on panel screenshot and code analysis. |

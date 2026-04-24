@@ -1,91 +1,92 @@
 ---
 id: vendor-security-privacy
-title: Güvenlik ve Gizlilik Mimarisi (Vendor Security & Privacy)
+title: Vendor Security & Privacy Architecture
 sidebar_label: Security & Privacy
 sidebar_position: 30
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, tedarikçilerin finansal verilerini ve kişisel bilgilerini korumak için çok katmanlı bir güvenlik mimarisi (Defense-in-Depth) kullanır. Bu sayfa, şifreleme yöntemleri, veri izolasyonu ve denetim izi mekanizmalarını açıklar.
+:::info Purpose
+MHM Rentiva uses a multi-layer security architecture (Defense-in-Depth) to protect vendors' financial data and personal information. This page explains encryption methods, data isolation, and audit trail mechanisms.
 :::
 
-# 🛡️ Güvenlik ve Gizlilik Katmanları
+# 🛡️ Security & Privacy Layers
 
-Tedarikçi verileri, veritabanı seviyesinden uygulama arayüzüne kadar dört ana katmanla korunur.
+Vendor data is protected by four main layers, from the database level to the application interface.
 
 ---
 
-## 🔒 1. Finansal Veri Şifreleme (IBAN Security)
+## 🔒 1. Financial Data Encryption (IBAN Security)
 
-Tedarikçilerin IBAN bilgileri veritabanında hiçbir zaman yalın metin (plain-text) olarak saklanmaz.
+Vendors' IBAN data is never stored as plain text in the database.
 
-### AES-256-CBC Şifreleme
-- **Algoritma:** Endüstri standardı `AES-256-CBC`.
-- **Anahtar Yönetimi:** WordPress `AUTH_KEY` ve `SECURE_AUTH_SALT` sabitleri kullanılarak türetilen anahtarlar.
-- **Fail-Safe:** Eğer şifreleme kütüphanesi (OpenSSL) mevcut değilse, sistem veri sızıntısını önlemek için boş değer döner ve kaydı durdurur.
+### AES-256-CBC Encryption
+- **Algorithm:** Industry-standard `AES-256-CBC`.
+- **Key Management:** Keys derived from WordPress `AUTH_KEY` and `SECURE_AUTH_SALT` constants.
+- **Fail-Safe:** If the encryption library (OpenSSL) is not available, the system returns an empty value and stops the save to prevent data leakage.
 
 ```php
 // VendorApplicationManager::encrypt_iban();
-// Şifrelenen veri base64_encode() edilerek saklanır.
+// Encrypted data is stored using base64_encode().
 ```
 
-:::warning Kritik Uyarı
-`wp-config.php` içerisindeki güvenlik anahtarlarının değiştirilmesi, mevcut tüm şifreli IBAN verilerini okunamaz hale getirir. Bu anahtarların yedeği mutlaka alınmalıdır.
+:::warning Critical Warning
+Changing the security keys in `wp-config.php` renders all existing encrypted IBAN data unreadable. These keys must always be backed up.
 :::
 
 ---
 
-## 🚦 2. Kritiği Yüksek Alan Değişiklik Onayı
+## 🚦 2. High-Criticality Field Change Approval
 
-IBAN gibi kritik alanların tedarikçi tarafından değiştirilmesi doğrudan gerçekleşmez, bir **Admin Onay Süreci** tetiklenir.
+Changes to critical fields such as IBAN by the vendor do not take effect immediately — an **Admin Approval Process** is triggered.
 
-### IBAN Değişiklik İş Akışı
-1. **Talep:** Tedarikçi yeni IBAN'ı girer.
-2. **Geçici Saklama:** Yeni IBAN şifrelenerek `_mhm_rentiva_pending_iban` meta alanında saklanır.
-3. **Admin Bildirimi:** Admin panelinde bir sayaç rozeti (badge) belirir.
-4. **Onay/Red:** Admin onaylarsa, geçici IBAN ana IBAN alanına taşınır. Reddedilirse geçici veri silinir ve tedarikçiye e-posta gönderilir.
-
----
-
-## 📁 3. Veri ve Medya İzolasyonu
-
-Tedarikçiler, sistemdeki diğer kullanıcıların verilerine veya medya dosyalarına erişemez.
-
-- **Medya İzolasyonu:** `ajax_query_attachments_args` filtresi ile tedarikçiler sadece kendi yükledikleri görselleri görebilir.
-- **Dashboard İzolasyonu:** `VendorOwnershipEnforcer` sınıfı, tüm veritabanı sorgularına otomatik olarak `post_author` filtresi ekleyerek yetkisiz erişimi engeller.
+### IBAN Change Workflow
+1. **Request:** The vendor enters a new IBAN.
+2. **Temporary Storage:** The new IBAN is encrypted and stored in the `_mhm_rentiva_pending_iban` meta field.
+3. **Admin Notification:** A counter badge appears in the admin panel.
+4. **Approve/Reject:** If the admin approves, the temporary IBAN is moved to the main IBAN field. If rejected, the temporary data is deleted and the vendor receives an email.
 
 ---
 
-## 📝 4. Denetim İzi (Audit Trail)
+## 📁 3. Data & Media Isolation
 
-Tüm kritik güvenlik olayları `AdvancedLogger` üzerinden kayıt altına alınır.
+Vendors cannot access other users' data or media files.
 
-| Olay | İçerik | Seviye |
-|---|---|---|
-| IBAN Değişikliği | "Tedarikçi #X IBAN değişikliği talep etti." | `INFO` |
-| Giriş Denemesi | Başarısız tedarikçi paneli girişleri. | `WARNING` |
-| Ödeme Onayı | "Admin #Y, Tedarikçi #X için ödemeyi onayladı." | `CRITICAL` |
-
-Kayıtlar, admin panelindeki **Sistem Günlükleri** bölümünden takip edilebilir ve `mhm_rentiva_log_retention_days` ayarına göre otomatik temizlenir.
+- **Media Isolation:** The `ajax_query_attachments_args` filter restricts vendors to seeing only the images they have uploaded.
+- **Dashboard Isolation:** The `VendorOwnershipEnforcer` class automatically adds a `post_author` filter to all database queries, preventing unauthorized access.
 
 ---
 
-## ⚙️ 5. Teknik Güvenlik Özeti
+## 📝 4. Audit Trail
 
-| Mekanizma | Korunma Tipi | Detay |
+All critical security events are logged via `AdvancedLogger`.
+
+| Event | Content | Level |
 |---|---|---|
-| **Nonce (CSRF)** | Form Güvenliği | Her AJAX ve Form işlemi için benzersiz token. |
-| **Capability** | Yetkilendirme | `rentiva_vendor` rolü dışındaki erişimler engellenir. |
-| **Masking** | Gizlilik | Arayüzlerde IBAN'ların sadece son 4 hanesi gösterilir. |
+| IBAN Change | "Vendor #X requested an IBAN change." | `INFO` |
+| Login Attempt | Failed vendor dashboard login attempts. | `WARNING` |
+| Payout Approval | "Admin #Y approved a payout for Vendor #X." | `CRITICAL` |
 
-## Bölüm Sonu Özeti
-- IBAN verileri `AES-256-CBC` ile şifrelenmiş olarak saklanır.
-- Kritik değişiklikler admin onayına tabidir.
-- Çok katmanlı izolasyon ile tedarikçi verileri birbirinden ayrıştırılır.
+Logs can be monitored from the **System Logs** section of the admin panel and are automatically purged based on the `mhm_rentiva_log_retention_days` setting.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+## ⚙️ 5. Technical Security Summary
+
+| Mechanism | Protection Type | Detail |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Veri şifreleme, IBAN onay akışı ve medya izolasyonu detayları eklendi. |
+| **Nonce (CSRF)** | Form Security | Unique token for every AJAX and form operation. |
+| **Capability** | Authorization | Access outside the `rentiva_vendor` role is blocked. |
+| **Masking** | Privacy | Only the last 4 digits of IBANs are shown in the UI. |
+
+## Section Summary
+- IBAN data is stored encrypted with `AES-256-CBC`.
+- Critical changes are subject to admin approval.
+- Multi-layer isolation keeps vendor data separated from one another.
+
+## Changelog
+| Date | Version | Note |
+|---|---|---|
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Data encryption, IBAN approval workflow, and media isolation details added. |

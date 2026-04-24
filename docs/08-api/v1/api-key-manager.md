@@ -1,67 +1,68 @@
 ---
 id: api-key-manager
-title: API Anahtar Yönetimi (API Key Manager)
+title: API Key Management (API Key Manager)
 sidebar_label: API Key Manager
 sidebar_position: 30
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-`APIKeyManager`, MHM Rentiva'nın dış dünya ile güvenli bir şekilde konuşmasını sağlayan anahtar (Key) yönetim merkezidir. Bu sayfa, anahtarların yaşam döngüsünü ve güvenlik standartlarını açıklar.
+:::info Purpose
+`APIKeyManager` is the central key management hub that enables MHM Rentiva to communicate securely with the outside world. This page explains the lifecycle of keys and the security standards that govern them.
 :::
 
-# 🔑 API Anahtar Yönetimi
+# 🔑 API Key Management
 
-API anahtarları, üçüncü taraf yazılımların (Mobil App, ERP, Muhasebe Yazılımları vb.) Rentiva verilerine erişimini sağlayan dijital kimliklerdir.
-
----
-
-## 🏗️ 1. Bileşen Rolü ve Mimarisi
-
-`APIKeyManager` sınıfı, `AuthHelper` ile koordineli çalışarak şu görevleri üstlenir:
-- **Benzersizlik:** Her anahtarın sistem genelinde benzersiz olmasını garanti eder.
-- **Yetki Atama:** Anahtarlara `read_only` (Sadece Okuma) veya `read_write` (Okuma ve Yazma) yetkileri atar.
-- **İzleme:** Hangi anahtarın ne zaman ve hangi IP'den kullanıldığını `AdvancedLogger` üzerinden kayıt altına alır.
+API keys are digital identities that allow third-party software (Mobile Apps, ERP systems, accounting software, etc.) to access Rentiva data.
 
 ---
 
-## 🔄 2. Anahtar Yaşam Döngüsü
+## 🏗️ 1. Component Role and Architecture
 
-### Üretim (Generation)
-- Anahtarlar, kriptografik olarak güvenli rastgele dizelerden (`wp_generate_password`) üretilir.
-- Üretilen anahtarın hashlenmiş (şifrelenmiş) versiyonu veritabanında saklanır.
-
-### Aktivasyon ve Kullanım
-- Anahtar üretildiği an aktif olur.
-- İstek sırasında `X-Rentiva-API-Key` başlığıyla gönderilir.
-
-### Rotasyon (Rotation)
-- **Güvenlik Politikası:** Anahtarların her 90 günde bir değiştirilmesi önerilir.
-- **Grace Period:** Yeni anahtar üretildiğinde, eskisi 24 saat boyunca "geçersiz kılınana kadar" çalışmaya devam edebilir (Konfigürasyona bağlı).
+The `APIKeyManager` class works in coordination with `AuthHelper` to handle the following tasks:
+- **Uniqueness:** Guarantees that every key is unique across the system.
+- **Permission Assignment:** Assigns `read_only` or `read_write` permissions to keys.
+- **Monitoring:** Records which key was used, when, and from which IP, via `AdvancedLogger`.
 
 ---
 
-## 🛡️ 3. Güvenlik ve Gizlilik Kuralları
+## 🔄 2. Key Lifecycle
 
-- **Loglama Yasaktır:** API anahtarlarının yalın metin hali asla log dosyalarına (`debug.log`) yazılmamalıdır.
-- **Veritabanı Güvenliği:** Anahtarlar veritabanında `MD5` veya `SHA-256` ile hashlenmiş olarak tutulur (WP standartlarına göre).
-- **IP Kısıtlaması:** Belirli API anahtarları sadece tanımlanan IP adreslerinden gelen talepleri kabul edecek şekilde kısıtlanabilir.
+### Generation
+- Keys are generated from cryptographically secure random strings (`wp_generate_password`).
+- The hashed version of the generated key is stored in the database.
+
+### Activation and Usage
+- A key becomes active the moment it is generated.
+- It is sent via the `X-Rentiva-API-Key` header during requests.
+
+### Rotation
+- **Security Policy:** Keys are recommended to be rotated every 90 days.
+- **Grace Period:** When a new key is generated, the old one may continue to work for 24 hours "until invalidated" (depending on configuration).
 
 ---
 
-## 🛠️ 4. Operasyonel Öneriler
+## 🛡️ 3. Security and Privacy Rules
 
-1. **Ortam Ayrımı:** Geliştirme (Staging) ve Canlı (Production) ortamları için mutlaka farklı anahtarlar kullanın.
-2. **Minimum Yetki:** Bir entegrasyon sadece veri okuyacaksa, ona hiçbir zaman `read_write` yetkisi vermeyin.
-3. **Anlık İptal:** Bir sızıntı şüphesi durumunda, ilgili anahtar admin panelinden tek tıkla "İptal (Revoke)" edilmelidir.
+- **Logging Prohibited:** The plaintext value of API keys must never be written to log files (`debug.log`).
+- **Database Security:** Keys are stored in the database hashed with `MD5` or `SHA-256` (per WP standards).
+- **IP Restriction:** Specific API keys can be restricted to only accept requests from defined IP addresses.
 
-## Bölüm Sonu Özeti
-- `APIKeyManager`, tüm REST güvenliğinin kalbidir.
-- Anahtarlar asla açık metin olarak saklanmaz veya paylaşılmaz.
-- Periyodik rotasyon ve IP kısıtlaması en iyi uygulama (Best Practice) olarak kabul edilir.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## 🛠️ 4. Operational Recommendations
+
+1. **Environment Separation:** Always use different keys for staging and production environments.
+2. **Least Privilege:** If an integration only reads data, never assign it `read_write` permission.
+3. **Instant Revocation:** In the event of a suspected leak, the relevant key should be revoked with a single click from the admin panel.
+
+## Section Summary
+- `APIKeyManager` is the heart of all REST security.
+- Keys are never stored or shared in plaintext.
+- Periodic rotation and IP restriction are considered best practices.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Anahtar yaşam döngüsü, Grace Period ve IP kısıtlama detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Key lifecycle, Grace Period, and IP restriction details added. |

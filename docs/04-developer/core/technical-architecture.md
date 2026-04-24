@@ -1,25 +1,25 @@
 ---
 id: technical-architecture
-title: MHMRentiva Modül Mimarisi
-sidebar_label: Modül Mimarisi
+title: MHM Rentiva Module Architecture
+sidebar_label: Module Architecture
 sidebar_position: 4
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu belge, Rentiva modüllerinin sorumluluk sınırlarını, veri akışını ve servisler arası bağımlılık hiyerarşisini teknik bir referans olarak toplar.
+:::info Purpose
+This document brings together the responsibility boundaries, data flow, and inter-service dependency hierarchy of Rentiva's modules as a technical reference.
 :::
 
-# 🧱 MHM Rentiva Modül Mimarisi
+# 🧱 MHM Rentiva Module Architecture
 
-MHM Rentiva, **"Modüler Monolit"** yaklaşımıyla geliştirilmiştir. Her modül kendi içinde bağımsız bir "Service" veya "Manager" olarak tasarlanmış, ancak tüm sistem `MHMRentiva\Plugin` ana sınıfı (Service Graph) üzerinden koordine edilmektedir.
+MHM Rentiva is built using a **"Modular Monolith"** approach. Each module is designed as a self-contained "Service" or "Manager", but the entire system is coordinated through the `MHMRentiva\Plugin` root class (Service Graph).
 
-## 🚀 Service Graph ve Önyükleme (Bootstrap)
+## 🚀 Service Graph and Bootstrap
 
-Eklenti, performans ve öngörülebilirlik için katı bir servis başlatma sırası izler. `Plugin::initialize_services()` metodu bu hiyerarşiyi yönetir.
+For performance and predictability, the plugin follows a strict service initialization order. The `Plugin::initialize_services()` method manages this hierarchy.
 
-### 📊 Modüller Arası Hiyerarşi
+### 📊 Inter-Module Hierarchy
 
 ```mermaid
 graph TD
@@ -34,44 +34,45 @@ graph TD
 
 ---
 
-## 📂 Modül Kategorileri ve Sorumluluklar
+## 📂 Module Categories and Responsibilities
 
-| Kategori | Namespace | Sorumluluk |
+| Category | Namespace | Responsibility |
 | :--- | :--- | :--- |
-| **Core** | `MHMRentiva\Core` | Veritabanı (Migrations), Güvenlik (Governance), Lisans Kontrolü (Licensing). |
-| **Admin** | `MHMRentiva\Admin` | Panel arayüzleri, Liste tabloları (ListTables), Ayar sayfaları. |
-| **Financial** | `MHMRentiva\Core\Financial` | Ledger (Defter) kayıtları, Komisyon politikaları, Payout yönetimi. |
-| **Layout** | `MHMRentiva\Layout` | Manifest doğrulaması, Atomik Import, Tasarım token yönetimi. |
-| **API** | `MHMRentiva\Api` | REST-API endpointleri, Webhook yönetimleri ve JSON dökümleri. |
+| **Core** | `MHMRentiva\Core` | Database (Migrations), Security (Governance), License checks (Licensing). |
+| **Admin** | `MHMRentiva\Admin` | Admin UIs, List tables (ListTables), Settings pages. |
+| **Financial** | `MHMRentiva\Core\Financial` | Ledger entries, Commission policies, Payout management. |
+| **Layout** | `MHMRentiva\Layout` | Manifest validation, Atomic Import, Design token management. |
+| **API** | `MHMRentiva\Api` | REST API endpoints, Webhook handlers, and JSON outputs. |
 
 ---
 
-## 🛠️ Temel Mimari Prensipler
+## 🛠️ Core Architectural Principles
 
-### 1. Singleton ve Statik Erişim
-Çekirdek sınıflar (Örn: `Plugin.php`) Singleton deseniyle çalışır. Bu, aynı request içinde servislerin birden fazla kez başlatılmasını engelleyerek bellek kullanımını optimize eder.
+### 1. Singleton and Static Access
+Core classes (e.g., `Plugin.php`) use the Singleton pattern. This prevents services from being initialized more than once per request, optimizing memory usage.
 
-### 2. Dependency Injection (Gevşek Bağlılık)
-Modüller birbirlerine doğrudan sıkı bağlı değildir. Bir modün çalışıp çalışmayacağı `is_class_available()` kontrolü ve lisans kapısı üzerinden dinamik olarak belirlenir.
+### 2. Dependency Injection (Loose Coupling)
+Modules are not tightly coupled to each other. Whether a module runs or not is determined dynamically via `is_class_available()` checks and the license gate.
 
-### 3. Event-Driven Mimari (Hooks)
-Sistem, WordPress'in `add_action` ve `add_filter` ekosistemini kullanarak genişletilebilir. Örneğin; bir rezervasyon tamamlandığında (`mhm_rentiva_booking_completed`), finansal kayıtlar (Ledger) otomatik tetiklenir.
+### 3. Event-Driven Architecture (Hooks)
+The system is extensible through WordPress's `add_action` and `add_filter` ecosystem. For example, when a booking is completed (`mhm_rentiva_booking_completed`), the financial records (Ledger) are triggered automatically.
 
 ---
 
-## 🛡️ Güvenlik ve Uyumluluk
+## 🛡️ Security and Compliance
 
-Her modül şu güvenlik protokollerine uymak zorundadır:
-- **Sanitizasyon:** Tüm girdi verileri `Sanitizer::text_field_safe()` gibi yardımcı sınıflarla temizlenir.
-- **Nonce & Capability:** Admin tarafındaki her istek için `current_user_can()` ve `check_admin_referer()` kontrolleri standarttır.
-- **Audit Logs:** Finansal veya mimari her kritik işlem `AdvancedLogger` ile kayıt altına alınır.
+Every module must follow these security protocols:
+- **Sanitization:** All input is cleaned through helper classes such as `Sanitizer::text_field_safe()`.
+- **Nonce & Capability:** `current_user_can()` and `check_admin_referer()` checks are standard for every admin-side request.
+- **Audit Logs:** Every critical financial or architectural operation is recorded via `AdvancedLogger`.
 
-## Bölüm Sonu Özeti
-- Sistem servis tabanlı bir graf (Service Graph) üzerinde yükselir.
-- **Core** modülü en altta yer alan ve tüm sistemi taşıyan temeldir.
-- Modüller arası iletişim hooks (event-driven) veya merkezi servis çağrılarıyla yapılır.
+## Section Summary
+- The system is built on a service-based graph (Service Graph).
+- The **Core** module is the foundation at the bottom that supports the entire system.
+- Inter-module communication happens through hooks (event-driven) or central service calls.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, Service Graph ve Modüler Monolit detaylarıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | Documentation translated into English. |
+| 19.03.2026 | 4.21.2 | Page updated with Service Graph and Modular Monolith details. |

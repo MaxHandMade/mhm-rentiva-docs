@@ -1,83 +1,84 @@
 ---
 id: governance-controls
-title: Governance ve Güvenlik Kontrolleri
-sidebar_label: Governance Kontrolleri
+title: Governance and Security Controls
+sidebar_label: Governance Controls
 sidebar_position: 7
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, finansal ödeme (Payout) sürecindeki risk analizini, onay hiyerarşisini ve denetim (Audit) mekanizmalarını açıklar.
+:::info Purpose
+This page describes the risk analysis, approval hierarchy, and audit mechanisms in the financial Payout process.
 :::
 
-# ⚖️ Governance Kontrolleri
+# ⚖️ Governance Controls
 
-`GovernanceService`, finansal işlemlerin doğruluğunu ve güvenliğini sağlamak için tasarlanmış bir akıllı yönetişim katmanıdır. Finansal mekaniklerden bağımsız olarak, sadece "Kim, neyi, hangi riskle onaylayabilir?" sorusuna yanıt verir.
+`GovernanceService` is an intelligent governance layer designed to ensure the correctness and security of financial transactions. Independent of the financial mechanics, it answers only the question: "Who can approve what, and at what risk?"
 
-## 🛡️ Temel Güvenlik Katmanları
+## 🛡️ Core Security Layers
 
-### 1. Freeze (Blokaj) Kontrolleri
-Sistem, herhangi bir işlem başlatılmadan önce iki aşamalı blokaj kontrolü yapar:
-- **Global Freeze:** `mhm_rentiva_global_payout_freeze` ayarı aktifse tüm ödemeler anında durur.
-- **Vendor Freeze:** `_mhm_vendor_payout_freeze` metasını içeren satıcıların talepleri reddedilir.
+### 1. Freeze Controls
+Before any transaction is initiated, the system performs a two-stage freeze check:
+- **Global Freeze:** If the `mhm_rentiva_global_payout_freeze` setting is active, all Payouts stop immediately.
+- **Vendor Freeze:** Requests from vendors with the `_mhm_vendor_payout_freeze` meta are rejected.
 
-### 2. Risk Engine (Deterministik Risk Analizi)
-Sistem, her ödeme talebi için şu kriterlere göre bir risk puanı üretir:
-- **Vendor Yaşı:** Yeni satıcılar daha yüksek risk puanı alır.
-- **İptal Oranı:** Yüksek iade/iptal oranına sahip satıcılar takibe alınır.
-- **Tutar Limiti:** Belirli eşiklerin üzerindeki ödemeler otomatik olarak "High Risk" işaretlenir.
+### 2. Risk Engine (Deterministic Risk Analysis)
+The system generates a risk score for each Payout request based on the following criteria:
+- **Vendor Age:** Newer vendors receive a higher risk score.
+- **Cancellation Rate:** Vendors with a high refund/cancellation rate are flagged for review.
+- **Amount Limit:** Payouts above certain thresholds are automatically marked "High Risk".
 
-### 3. Maker-Checker (Çift Onay Prensibi)
-Dolandırıcılığı önlemek için hiçbir yönetici kendi başlattığı veya oluşturduğu bir ödemeyi tek başına onaylayamaz:
-- **Maker:** Talebi oluşturan veya ilk incelemeyi yapan kişi.
-- **Checker:** Nihai onayı veren farklı bir yetkili.
-- *İstisna:** Sadece `mhm_rentiva_override_maker_checker` yetkisine sahip üst düzey yöneticiler bu kuralı bypass edebilir (ve bu işlem forensic loguna düşer).
+### 3. Maker-Checker (Dual Approval Principle)
+To prevent internal fraud, no administrator can unilaterally approve a Payout they initiated or created:
+- **Maker:** The person who created the request or performed the initial review.
+- **Checker:** A different authorized person who gives the final approval.
+- *Exception:* Only senior administrators with the `mhm_rentiva_override_maker_checker` capability can bypass this rule (and the action is recorded in the forensic log).
 
 ---
 
-## 🔄 Yönetişim İş Akışı
+## 🔄 Governance Workflow
 
 ```mermaid
 graph TD
-    A[Ödeme Talebi] --> B{Freeze Kontrolü}
-    B -- Aktif --> Error[İşlem Reddedildi]
-    B -- Pasif --> C[Risk Engine: Score Context]
+    A[Payout Request] --> B{Freeze Check}
+    B -- Active --> Error[Transaction Rejected]
+    B -- Inactive --> C[Risk Engine: Score Context]
     
-    C --> D{Risk Seviyesi?}
+    C --> D{Risk Level?}
     D -- High Risk --> E[Auto-Flag & Freeze]
-    D -- Mid/Low --> F{Seviye 1 Onay}
+    D -- Mid/Low --> F{Level 1 Approval}
     
     F --> G{Maker == Checker?}
-    G -- Evet --> H{Bypass Yetkisi?}
-    H -- Hayır --> Error
-    H -- Evet --> I[Seviye 2 Final Onay]
-    G -- Hayır --> I
+    G -- Yes --> H{Bypass Capability?}
+    H -- No --> Error
+    H -- Yes --> I[Level 2 Final Approval]
+    G -- No --> I
     
-    I --> J[Time-Lock: Soğutma Süresi]
+    I --> J[Time-Lock: Cooling Period]
     J --> K[Atomic Execute]
 ```
 
 ---
 
-## 🏛️ Audit Trail (Denetim İzi)
+## 🏛️ Audit Trail
 
-Tüm yönetişim kararları `wp_mhm_rentiva_payout_audit` tablosunda **Immutable (Değiştirilemez)** olarak saklanır:
-- **IP Hash:** Gizlilik korunarak işlem yapanın IP izi SHA-256 ile saklanır.
-- **Action Constants:** `submit_payout`, `review_payout`, `finalize_payout`, `bypass_time_lock` gibi aksiyonlar kaydedilir.
-- **Metadata JSON:** O anki risk puanı, iş akışı durumu ve bağlamsal detaylar her olayda damgalanır.
+All governance decisions are stored **immutably** in the `wp_mhm_rentiva_payout_audit` table:
+- **IP Hash:** The IP trace of the actor is stored as SHA-256 to preserve privacy.
+- **Action Constants:** Actions such as `submit_payout`, `review_payout`, `finalize_payout`, `bypass_time_lock` are recorded.
+- **Metadata JSON:** The current risk score, workflow state, and contextual details are stamped on each event.
 
 ---
 
-## ⏳ Time-Locks (Zaman Kilidi)
-Onaylanan yüksek tutarlı ödemeler, `STATE_TIME_LOCKED` aşamasına alınır. Bu süreçte para rezerve edilir ancak ödeme kanalına (Webhook) hemen gönderilmez. Bu "soğutma süresi", hatalı veya şüpheli işlemleri geri çekmek için son güvenlik duvarıdır.
+## ⏳ Time-Locks
+Approved high-value Payouts are placed in the `STATE_TIME_LOCKED` phase. During this period, the funds are reserved but not immediately sent to the payment channel (Webhook). This "cooling period" is the last line of defense for rolling back erroneous or suspicious transactions.
 
-## Bölüm Sonu Özeti
-- Güvenlik hiyerarşisi: **Freeze > Risk Engine > Maker-Checker > Time-Lock**.
-- Tüm kararlar **payout_audit** tablosunda kalıcı olarak izlenebilir.
-- `GovernanceService`, finansal hataları değil, süreç suistimallerini engeller.
+## Section Summary
+- Security hierarchy: **Freeze > Risk Engine > Maker-Checker > Time-Lock**.
+- All decisions are permanently traceable in the **payout_audit** table.
+- `GovernanceService` prevents process abuse, not financial errors.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, GovernanceService'in risk motoru ve Maker-Checker yapısına göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect GovernanceService's risk engine and Maker-Checker structure. |

@@ -30,11 +30,11 @@ const config = {
   organizationName: 'MaxHandMade', // Usually your GitHub org/user name.
   projectName: 'mhm-rentiva-docs', // Usually your repo name.
 
-  onBrokenLinks: 'ignore',
+  onBrokenLinks: 'warn',
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'ignore',
+      onBrokenMarkdownLinks: 'warn',
     },
   },
 
@@ -42,11 +42,16 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'tr',
-    locales: ['tr'],
+    defaultLocale: 'en',
+    locales: ['en', 'tr'],
     localeConfigs: {
+      en: {
+        label: 'English',
+        htmlLang: 'en-US',
+      },
       tr: {
         label: 'Türkçe',
+        htmlLang: 'tr-TR',
       },
     },
   },
@@ -100,9 +105,13 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Dokümantasyon',
+            label: 'Documentation',
           },
-          { to: '/blog', label: 'Sürüm Notları', position: 'left' },
+          { to: '/blog', label: 'Release Notes', position: 'left' },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
           {
             href: 'https://github.com/MaxHandMade/mhm-rentiva',
             label: 'GitHub',
@@ -114,58 +123,58 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Dökümantasyon',
+            title: 'Documentation',
             items: [
               {
-                label: 'Hızlı Başlangıç',
+                label: 'Quick Start',
                 to: '/docs/getting-started/installation',
               },
               {
-                label: 'Kullanım Kılavuzu',
+                label: 'User Guide',
                 to: '/docs/features-usage/shortcodes/shortcodes-overview',
               },
               {
-                label: 'Geliştirici Belgeleri',
+                label: 'Developer Docs',
                 to: '/docs/developer/core/technical-architecture',
               },
             ],
           },
           {
-            title: 'Topluluk',
+            title: 'Community',
             items: [
               {
-                label: 'WordPress Destek Forumu',
+                label: 'WordPress Support Forum',
                 href: 'https://wordpress.org/support/plugin/mhm-rentiva',
               },
               {
-                label: 'GitHub Deposu',
+                label: 'GitHub Repository',
                 href: 'https://github.com/MaxHandMade/mhm-rentiva',
               },
               {
-                label: 'Hata Bildir',
+                label: 'Report an Issue',
                 href: 'https://github.com/MaxHandMade/mhm-rentiva/issues',
               },
               {
-                label: 'YouTube Kanalı',
+                label: 'YouTube Channel',
                 href: 'https://www.youtube.com/channel/UC3qBE6ZCCEc8ugFUYXwtcpA',
               },
             ],
           },
           {
-            title: 'Diğer',
+            title: 'More',
             items: [
               {
-                label: 'Sürüm Notları',
+                label: 'Release Notes',
                 to: '/blog',
               },
               {
-                label: 'Resmi Web Sitesi',
+                label: 'Official Website',
                 href: 'https://maxhandmade.com',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} MHM Development. Docusaurus ile hazırlanmıştır.`,
+        copyright: `Copyright © ${new Date().getFullYear()} MHM Development. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

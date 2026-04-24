@@ -1,81 +1,82 @@
 ---
 id: notification-templates
-title: Bildirim Şablonları
-sidebar_label: Bildirim Şablonları
+title: Notification Templates
+sidebar_label: Notification Templates
 sidebar_position: 9
 slug: /core-configuration/notification-templates
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Bildirim Şablonları sekmesi, müşterilere ve yöneticilere giden tüm e-posta içeriklerini (HTML) özelleştirebileceğiniz, test edebileceğiniz ve "Altın Standart" (Gold Standard) tasarımına geri dönebileceğiniz merkezdir. **MHM Rentiva > Ayarlar > Bildirim Şablonları** altından ulaşılır.
-
----
-
-## 🛠️ Yönetim Araçları
-
-Sayfanın sağ üst kısmında iki kritik buton bulunur:
-- **E-Posta Ayarları:** Gönderen ismi ve renk gibi global ayarlara hızlı geçiş sağlar.
-- **Altın Standardını Geri Getir:** Şablonlarda yapılan hataları düzeltmek veya orijinal profesyonel tasarıma dönmek için kullanılır.
+The Notification Templates tab is the hub where you can customize, test, and restore all email content (HTML) sent to customers and administrators — including returning to the "Gold Standard" design. Access it via **MHM Rentiva > Settings > Notification Templates**.
 
 ---
 
-## 📂 Şablon Kategorileri
+## 🛠️ Management Tools
 
-Bildirimler dört ana sekme altında gruplanmıştır:
-
-### 1. Rezervasyon Bildirimleri
-Müşteri kiralama süreciyle ilgili temel mesajlar:
-- **Yeni Rezervasyon (Müşteri):** Rezervasyon oluşturulduğu an gider.
-- **Durum Değişikliği:** Onaylandı, Beklemede gibi statü güncellemeleri.
-- **Yönetici Bildirimi:** Yeni sipariş geldiğinde size gelen uyarı.
-- **İptal Mesajları:** Manuel veya ödeme zaman aşımı (Otomatik) iptal durumları.
-- **Hatırlatma ve Karşılama:** Teslimat öncesi hatırlatma ve kayıt sonrası "Hoş Geldiniz" mesajları.
-
-### 2. Geri Ödeme E-postaları
-İade süreçlerine özel şablonlar:
-- **Müşteri İade Bilgisi:** İade edilen tutar ve rezervasyon numarası detayları.
-- **Yönetici İade Uyarısı:** Muhasebe ve operasyon takibi için yöneticiye giden bilgi.
-
-### 3. Mesaj Bildirimleri
-Mesajlaşma sistemi (Pro özelliği) uyarıları:
-- **Yeni Mesaj:** Müşteriden gelen sorular için yönetici bildirimi.
-- **Mesaj Cevabı:** Sizin yanıtınız müşteriye ulaştığında giden e-posta.
-- **Otomatik Yanıt:** Mesaj alındığında müşteriye giden teyit mesajı.
+Two critical buttons appear in the top-right of the page:
+- **Email Settings:** Provides quick access to global settings such as sender name and color.
+- **Restore Gold Standard:** Used to fix errors in templates or revert to the original professional design.
 
 ---
 
-## 🔍 E-Posta Önizleme ve Test
+## 📂 Template Categories
 
-Şablonların canlı halini kontrol etmek için bu sekmeyi kullanın:
-- **Canlı Önizleme:** Sağ tarafta, e-postanın müşterinin gelen kutusunda nasıl görüneceğini anlık (Responsive) olarak gösterir.
-- **Test Gönderimi:** Belirli bir şablonu seçip istediğiniz bir adrese "Test Maili yolla" diyerek gönderimi doğrulayabilirsiniz.
+Notifications are grouped under four main tabs:
+
+### 1. Booking Notifications
+Core messages related to the customer's rental process:
+- **New Booking (Customer):** Sent the moment a booking is created.
+- **Status Change:** Status updates such as Confirmed, Pending.
+- **Admin Notification:** The alert sent to you when a new order arrives.
+- **Cancellation Messages:** Manual or payment-timeout (automatic) cancellation scenarios.
+- **Reminders & Welcome:** Pre-delivery reminder and post-registration "Welcome" messages.
+
+### 2. Refund Emails
+Templates specific to refund processes:
+- **Customer Refund Info:** Details of the refunded amount and booking number.
+- **Admin Refund Alert:** Information sent to the administrator for accounting and operational tracking.
+
+### 3. Message Notifications
+Messaging system (Pro feature) alerts:
+- **New Message:** Admin notification for questions received from customers.
+- **Message Reply:** Email sent when your response reaches the customer.
+- **Auto-Reply:** Confirmation message sent to the customer when their message is received.
 
 ---
 
-## 🏷️ Kullanılabilir Dinamik Etiketler (Placeholders)
+## 🔍 Email Preview & Testing
 
-Şablon içeriklerine `{}` parantezleri içinde aşağıdaki kodları ekleyerek verilerin otomatik gelmesini sağlayabilirsiniz:
-- `{booking_id}`: Rezervasyon NO.
-- `{vehicle_title}`: Araç adı.
-- `{pickup_date}` / `{dropoff_date}`: Tarih bilgileri.
-- `{total_price}`: Toplam tutar.
-- `{contact_name}`: Müşteri adı.
-- `{site_name}`: Sitenizin adı.
+Use this tab to check the live state of templates:
+- **Live Preview:** Shows in real time on the right side how the email will appear in the customer's inbox (responsive).
+- **Send Test:** Select a specific template and send a "Test Email" to any address to verify delivery.
 
 ---
 
-### 🖼️ GÖRSEL: BİLDİRİM ŞABLONLARI PANELİ
-*(Ayarlar > Bildirim Şablonları sekmesi, şablon listesi ve önizleme aracı)*
+## 🏷️ Available Dynamic Tags (Placeholders)
+
+Add the following codes within `{}` brackets in template content to have data populated automatically:
+- `{booking_id}`: Booking number.
+- `{vehicle_title}`: Vehicle name.
+- `{pickup_date}` / `{dropoff_date}`: Date information.
+- `{total_price}`: Total amount.
+- `{contact_name}`: Customer name.
+- `{site_name}`: Your site's name.
 
 ---
 
-### Bölüm Özeti
-- **Gold Standard** ile profesyonel bir e-posta tasarımıyla başlayın.
-- **Dinamik Etiketler** ile mesajları kişiselleştirin.
-- **Önizleme Aracı** ile hataları yayına girmeden önce düzeltin.
+### 🖼️ IMAGE: NOTIFICATION TEMPLATES PANEL
+*(Settings > Notification Templates tab, template list and preview tool)*
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+### Section Summary
+- Start with a professional email design using the **Gold Standard**.
+- Personalize messages with **Dynamic Tags**.
+- Use the **Preview Tool** to fix errors before publishing.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Bildirim Şablonları dökümanı 4 farklı sekme ve önizleme aracı detaylarıyla oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Notification Templates documentation created with 4 tabs and preview tool details. |

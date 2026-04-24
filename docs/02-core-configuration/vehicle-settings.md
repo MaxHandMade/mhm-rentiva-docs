@@ -1,79 +1,80 @@
 ---
 id: vehicle-settings
-title: Araç Ayarları
-sidebar_label: Araç Ayarları
+title: Vehicle Settings
+sidebar_label: Vehicle Settings
 sidebar_position: 6
 slug: /core-configuration/vehicle-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Araç Ayarları sayfası, filonuzdaki araçların hem verisel yapısını (vites, yakıt, plaka vb.) hem de kullanıcıya sunum şeklini belirlediğiniz kontrol merkezidir. **MHM Rentiva > Araç Ayarları** menüsü üzerinden iki ana sekmede yönetilir.
-
----
-
-## 1. Alan Tanımları (Field Definitions)
-
-Bu sekmede her araç kartı ve detay sayfası için hangi veri alanlarının (data fields) aktif olacağını ve hangilerinin zorunlu tutulacağını belirlersiniz.
-
-### 🏠 Araç Detayları
-Araç kartlarında ve detay sayfalarında görülen teknik verileri yönetebilirsiniz:
-- **Temel Detaylar:** Günlük Fiyat, Plaka, Model, Model Yılı, Marka, Depozito ve Kullanılabilirlik Durumu.
-- **Özellikler ve Özel Ayrıntılar:** Kilometre, Koltuk Sayısı, Vites Tipi, Motor Hacmi, Renk, Kapı Sayısı ve Yakıt Tipi.
-
-### ⚙️ Araç Özellikleri (Features)
-Araçların sahip olduğu konfor donanımlarını (Klima, ABS, Hidrolik Direksiyon, Bluetooth vb.) seçebilir ve özel özellikler ekleyebilirsiniz.
-
-### 🎒 Araç Ekipmanları (Equipment)
-Araç içerisinde sunulan fiziksel donanımları (Yedek Lastik, İlk Yardım Çantası, GPS Takip Cihazı vb.) yönetebilirsiniz.
-
-### ➕ Özel Alan Ekleme (Custom Add-ons)
-Sistemde ön tanımlı olmayan bir alan mı eklemek istiyorsunuz? "Özel detay adı" kutusuna istediğiniz başlığı yazıp, veri tipini (Metin, Sayı vb.) belirleyerek kendi teknik alanlarınızı oluşturabilirsiniz.
+The Vehicle Settings page is the control center where you define both the data structure (transmission, fuel type, plate number, etc.) and the presentation format for vehicles in your fleet. It is managed under two main tabs via the **MHM Rentiva > Vehicle Settings** menu.
 
 ---
 
-### 🖼️ GÖRSEL: ARAÇ ALAN TANIMLARI
-*(MHM Rentiva > Araç Ayarları > Alan Tanımları sekmesi ekran görüntüsü)*
+## 1. Field Definitions
+
+On this tab you determine which data fields are active for each vehicle card and detail page, and which are required.
+
+### 🏠 Vehicle Details
+Manage the technical data shown on vehicle cards and detail pages:
+- **Basic Details:** Daily Price, Plate, Model, Model Year, Brand, Deposit, and Availability Status.
+- **Features & Custom Details:** Mileage, Seat Count, Transmission Type, Engine Displacement, Color, Door Count, and Fuel Type.
+
+### ⚙️ Vehicle Features
+Select the comfort equipment vehicles are equipped with (Air Conditioning, ABS, Power Steering, Bluetooth, etc.) and add custom features.
+
+### 🎒 Vehicle Equipment
+Manage the physical accessories available in the vehicle (Spare Tire, First Aid Kit, GPS Tracking Device, etc.).
+
+### ➕ Custom Field Addition
+Want to add a field that is not predefined in the system? Type your desired label in the "Custom detail name" box, select the data type (Text, Number, etc.), and create your own technical fields.
 
 ---
 
-## 2. Görüntüleme Seçenekleri (Display Options)
-
-Bu sekme, tanımladığınız alanların frontend (kullanıcı tarafı) arayüzündeki yerleşimini ve görünürlüğünü kontrol eder.
-
-### 🔄 Görünür Kart Öğeleri & Sıralama
-- **Sürükle-Bırak:** Araç kartlarında (listeleme sayfasında) hangi bilginin önce görüneceğini öğeleri tutup sürükleyerek belirleyebilirsiniz.
-- **Gizleme:** İstemediğiniz öğeleri "Görünen öğeler" listesinden yanındaki `x` butonuna basarak kaldırabilirsiniz.
-
-### 🌟 Öne Çıkan Özellikler (Highlighted Features)
-Araç detay sayfalarında, teknik özellikler tablosundan bağımsız olarak en üstte vurgulanacak (vurgulanmış ikonlu alanlar) özelliklerin sırasını ve varlığını buradan yönetebilirsiniz.
-
-### 📊 Karşılaştırma Tablosu Ayarları
-Kullanıcı araç karşılaştırma özelliğini kullandığında, tabloda hangi detayların, özelliklerin veya ekipmanların kıyaslanacağını tek tek seçebilirsiniz.
+### 🖼️ IMAGE: VEHICLE FIELD DEFINITIONS
+*(MHM Rentiva > Vehicle Settings > Field Definitions tab screenshot)*
 
 ---
 
-### 🖼️ GÖRSEL: GÖRÜNTÜLEME VE SIRALAMA AYARLARI
-*(MHM Rentiva > Araç Ayarları > Görüntüleme Seçenekleri sekmesi ekran görüntüsü)*
+## 2. Display Options
+
+This tab controls the layout and visibility of the fields you defined in the frontend (user-facing) interface.
+
+### 🔄 Visible Card Items & Ordering
+- **Drag & Drop:** Determine which information appears first on vehicle cards (listing page) by dragging and dropping items.
+- **Hide:** Remove items you do not want from the "Visible items" list by clicking the `x` button next to them.
+
+### 🌟 Highlighted Features
+On vehicle detail pages, independently from the technical specifications table, manage the order and presence of the features highlighted at the top (fields with highlighted icons).
+
+### 📊 Comparison Table Settings
+When a user uses the vehicle comparison feature, individually select which details, features, or equipment are compared in the table.
 
 ---
 
-## 💡 Teknik Notlar ve Öneriler
+### 🖼️ IMAGE: DISPLAY & ORDERING SETTINGS
+*(MHM Rentiva > Vehicle Settings > Display Options tab screenshot)*
 
-:::important Veri Güvenliği
-Bir alanı "Alan Tanımları" kısmından kapatırsanız, o alanla ilgili daha önce girdiğiniz veriler **silinmez**, sadece kullanıcıya gösterilmez. Tekrar açtığınızda veriler geri gelir.
+---
+
+## 💡 Technical Notes & Recommendations
+
+:::important Data Safety
+If you disable a field in "Field Definitions", the data you previously entered for that field is **not deleted** — it is simply hidden from users. The data reappears when you re-enable the field.
 :::
 
-- **Sıralama:** Sürükle-bırak ile yaptığınız sıralamalar; araç tabloları, liste görünümleri ve "Hesabım" sayfasındaki listeler için geçerlidir.
-- **İkonlar:** Standart özellikler ve donanımlar için sistem uygun ikonları otomatik olarak atar.
+- **Ordering:** The drag-and-drop ordering applies to vehicle tables, list views, and lists on the "My Account" page.
+- **Icons:** The system automatically assigns appropriate icons for standard features and equipment.
 
-### Bölüm Özeti
-- **Alan Tanımları:** Hangi verilerin toplanacağını belirler.
-- **Görüntüleme Seçenekleri:** Verilerin nasıl ve hangi sırada sunulacağını belirler.
-- **Özel Alanlar:** Sınırsız sayıda teknik detay eklenmesine olanak tanır.
+### Section Summary
+- **Field Definitions:** Determines which data is collected.
+- **Display Options:** Determines how and in what order data is presented.
+- **Custom Fields:** Allows an unlimited number of technical details to be added.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Alan tanımları ve görüntüleme seçenekleri detaylı olarak eklendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Field definitions and display options added in detail. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

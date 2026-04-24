@@ -1,85 +1,86 @@
 ---
 id: layout-import-pipeline
-title: Layout Import Pipeline (Görünüm Akış Hattı)
+title: Layout Import Pipeline
 sidebar_label: Layout Pipeline
 sidebar_position: 3
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa; tasarım manifestlerinin (JSON) sisteme nasıl aktarıldığını, doğrulama (Validation) aşamalarını ve atomik içe aktarma sürecini açıklar.
+:::info Purpose
+This page explains how design manifests (JSON) are imported into the system, the validation stages, and the atomic import process.
 :::
 
 # 🏗️ Layout Import Pipeline
 
-MHM Rentiva, temadan bağımsız bir tasarım sistemi kullanır. Bu sistem, **Layout Manifest** adı verilen JSON dosyalarının işlenmesiyle çalışır. Süreç, hatalı bir tasarımın sistemi bozmasını engellemek için çok katmanlı bir doğrulama hattından geçer.
+MHM Rentiva uses a theme-independent design system. This system works by processing JSON files called **Layout Manifests**. The process passes through a multi-layered validation pipeline to prevent a faulty design from breaking the system.
 
-## 🛠️ Ana Bileşenler
+## 🛠️ Core Components
 
-Sistem şu sınıflar üzerinden koordine edilir:
+The system is coordinated through the following classes:
 
-| Bileşen | Görevi |
+| Component | Role |
 | :--- | :--- |
-| `BlueprintValidator` | Manifest JSON dosyasının yapısal ve mantıksal doğruluğunu kontrol eder. |
-| `AtomicImporter` | Değişiklikleri tek bir veritabanı işleminde (Transaction) uygular. |
-| `ContractRules` | Tasarımın uyması gereken katı kuralları (Örn: Tailwind sınıflarının yasağı) tanımlar. |
-| `LayoutRollbackService` | Hata durumunda sistemi bir önceki kararlı tasarıma döndürür. |
+| `BlueprintValidator` | Checks the structural and logical correctness of the manifest JSON file. |
+| `AtomicImporter` | Applies changes within a single database transaction. |
+| `ContractRules` | Defines strict rules the design must follow (e.g., prohibition of Tailwind classes). |
+| `LayoutRollbackService` | Reverts the system to the previous stable design in case of error. |
 
 ---
 
-## 🔄 İş Akışı (Pipeline Sequence)
+## 🔄 Workflow (Pipeline Sequence)
 
-Bir tasarım dosyası yüklendiğinde şu aşamalardan geçer:
+When a design file is uploaded, it passes through the following stages:
 
 ```mermaid
 graph TD
-    A[JSON Manifest Yükle] --> B{BlueprintValidator}
-    B -- Geçersiz --> C[Hata Raporla & Dur]
-    B -- Geçerli --> D{ContractRules Kontrolü}
-    D -- Yasaklı Kod Var --> E[Güvenlik Reddi]
-    D -- Temiz --> F[AtomicImporter Başlat]
-    F --> G[Site Ayarları & Tokenlar Güncelle]
-    G --> H[Sayfa Kompozisyonları Oluştur]
-    H --> I[Başarılı: Yeni Tasarım Yayında]
+    A[Load JSON Manifest] --> B{BlueprintValidator}
+    B -- Invalid --> C[Report Error & Stop]
+    B -- Valid --> D{ContractRules Check}
+    D -- Forbidden Pattern Found --> E[Security Rejection]
+    D -- Clean --> F[Start AtomicImporter]
+    F --> G[Update Site Settings & Tokens]
+    G --> H[Build Page Compositions]
+    H --> I[Success: New Design Live]
 ```
 
 ---
 
-## 🛡️ Güvenlik ve Doğrulama Kuralları
+## 🛡️ Security and Validation Rules
 
-### 1. Yapısal Doğrulama (`BlueprintValidator`)
-Manifest dosyasında şu kök anahtarların bulunması zorunludur:
-- `version`: Manifest sürümü (v1.x desteklenir).
-- `pages`: Sayfa tasarımları ve slug tanımları.
-- `tokens`: Renk, tipografi ve boşluk değişkenleri.
-- `components`: Kullanılan bileşenlerin listesi.
+### 1. Structural Validation (`BlueprintValidator`)
+The following root keys must be present in the manifest file:
+- `version`: Manifest version (v1.x supported).
+- `pages`: Page designs and slug definitions.
+- `tokens`: Color, typography, and spacing variables.
+- `components`: List of components used.
 
-### 2. Yasaklı Desen Taraması (`ContractRules`)
-Mevcut mimari, CSS sızıntılarını ve performans sorunlarını engellemek için manifestler içerisinde **Tailwind CSS** sınıflarının veya satır içi (inline) ağır stil tanımlarının kullanımını yasaklamıştır. `BlueprintValidator` bu desenleri algıladığında işlemi otomatik olarak iptal eder.
-
----
-
-## 💾 Atomik İşlemler ve Geri Dönüş (Rollback)
-
-Import işlemi **Atomik** (ya hep ya hiç) prensibiyle çalışır. 
-- Eğer 10 sayfalık bir manifestin 9. sayfasında bir hata oluşursa, daha önce güncellenen 8 sayfa da eski haline geri döndürülür.
-- Bu işlem `LayoutRollbackService` tarafından yönetilir ve veritabanı bütünlüğünü korur.
+### 2. Forbidden Pattern Scan (`ContractRules`)
+The current architecture prohibits the use of **Tailwind CSS** classes or heavy inline style definitions inside manifests, to prevent CSS leakage and performance issues. When `BlueprintValidator` detects these patterns, it automatically aborts the operation.
 
 ---
 
-## 🛠️ Geliştirici Notları
+## 💾 Atomic Operations and Rollback
 
-- **Manifest Versiyonu:** Şu an sadece `1.0.0` tabanlı tasarımlar desteklenmektedir.
-- **Cache:** Başarılı bir import sonrası platformun Object Cache (Redis/Memcached) belleği otomatik olarak temizlenir.
-- **Log:** Tüm import işlemleri `AdvancedLogger` üzerinden `layout_ingestion` kanalıyla takip edilebilir.
+The import operation works on an **Atomic** (all-or-nothing) principle.
+- If an error occurs on page 9 of a 10-page manifest, the 8 pages already updated are also reverted to their previous state.
+- This is managed by `LayoutRollbackService` and preserves database integrity.
 
-## Bölüm Sonu Özeti
-- Pipeline, **"Önce Doğrula, Sonra Yaz"** prensibiyle çalışır.
-- Tasarım hataları çalışma zamanında (Runtime) değil, içe aktarma (Import) sırasında yakalanır.
-- Hata durumunda sistem otomatik olarak bir önceki kararlı sürüme (Rollback) döner.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## 🛠️ Developer Notes
+
+- **Manifest Version:** Currently only `1.0.0`-based designs are supported.
+- **Cache:** After a successful import, the platform's Object Cache (Redis/Memcached) is automatically flushed.
+- **Log:** All import operations can be tracked through `AdvancedLogger` via the `layout_ingestion` channel.
+
+## Section Summary
+- The pipeline operates on a **"Validate First, Then Write"** principle.
+- Design errors are caught at import time, not at runtime.
+- On failure, the system automatically rolls back to the previous stable version.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, v1.9 mimarisine ve güncel validator kurallarına göre normalize edildi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page normalized to v1.9 architecture and current validator rules. |

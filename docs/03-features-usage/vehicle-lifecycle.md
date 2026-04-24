@@ -1,168 +1,168 @@
 ---
 id: vehicle-lifecycle
-title: Araç Yaşam Döngüsü Yönetimi
-sidebar_label: Yaşam Döngüsü
+title: Vehicle Lifecycle Management
+sidebar_label: Lifecycle
 sidebar_position: 4
 slug: /features-usage/vehicle-lifecycle
 ---
 
-![Version](https://img.shields.io/badge/version-4.24.0-blue?style=flat-square) ![Pro](https://img.shields.io/badge/lisans-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Araç Yaşam Döngüsü Yönetimi, her aracın platformdaki tüm ömrünü — aktifleşmeden sona ermeye, geri çekilmeden yeniden listelemeye kadar — kural tabanlı bir durum makinesi üzerinden yönetir. **Pro lisans gerektirir.**
+Vehicle Lifecycle Management controls the entire lifespan of each vehicle on the platform — from activation to expiry, from withdrawal to re-listing — through a rule-based state machine. **Requires a Pro license.**
 
 ---
 
-## 🔄 Durum Makinesi
+## State Machine
 
-Her araç aşağıdaki 5 durumdan birinde bulunur:
+Each vehicle exists in one of the following 5 states:
 
-| Durum | Açıklama |
-|-------|----------|
-| `pending_review` | Araç inceleme bekliyor, henüz yayında değil |
-| `active` | Araç aktif, müşteriler görebilir ve kiralayabilir |
-| `paused` | Vendor geçici olarak duraklattı, araç gizlendi |
-| `expired` | 90 günlük listeleme süresi doldu, araç yayından kalktı |
-| `withdrawn` | Vendor geri çekti, araç platformdan ayrıldı |
+| State | Description |
+|-------|-------------|
+| `pending_review` | Vehicle awaiting review, not yet live |
+| `active` | Vehicle is active; customers can view and rent it |
+| `paused` | Vendor has temporarily paused it; vehicle is hidden |
+| `expired` | 90-day listing period has elapsed; vehicle is unlisted |
+| `withdrawn` | Vendor has withdrawn it; vehicle has left the platform |
 
-### İzin Verilen Geçişler
+### Allowed Transitions
 
 ```
-pending_review → active         (admin onayı)
-active         → paused         (vendor duraklat)
-active         → withdrawn      (vendor geri çek)
-paused         → active         (vendor devam et)
-paused         → withdrawn      (vendor geri çek)
-expired        → active         (vendor yenile)
-withdrawn      → active         (vendor yeniden listele)
+pending_review → active         (admin approval)
+active         → paused         (vendor pause)
+active         → withdrawn      (vendor withdraw)
+paused         → active         (vendor resume)
+paused         → withdrawn      (vendor withdraw)
+expired        → active         (vendor renew)
+withdrawn      → active         (vendor re-list)
 ```
 
-Tanımlanmamış geçişler `VehicleLifecycleManager` tarafından reddedilir.
+Undefined transitions are rejected by `VehicleLifecycleManager`.
 
 ---
 
-## ⏱️ 90 Günlük Listeleme Süresi
+## 90-Day Listing Period
 
-- Araç `active` durumuna geçtiğinde **90 günlük süre** başlar.
-- Günlük cron süresi dolan araçları tespit eder ve `expired` durumuna geçirir.
-- Vendor'a uyarı e-postaları otomatik gönderilir:
-  - Süre dolumundan **10 gün önce**
-  - Süre dolumundan **3 gün önce**
+- When a vehicle transitions to `active`, a **90-day countdown** begins.
+- A daily cron identifies vehicles whose time has elapsed and moves them to `expired`.
+- Warning emails are automatically sent to the vendor:
+  - **10 days** before expiry
+  - **3 days** before expiry
 
-> Süresi dolan araç, vendor tarafından **"Yenile"** işlemi ile 90 günlük yeni süre başlatılabilir.
-
----
-
-## 🎮 Vendor Self-Servis İşlemleri
-
-Vendor'lar araçlarını admin müdahalesi olmadan yönetebilir:
-
-### Duraklat
-Aktif araç geçici olarak yayından kaldırılır. Araç, bekleyen rezervasyonları etkilemez — yalnızca yeni rezervasyon alınamaz.
-
-### Devam Et
-Duraklatılmış araç tekrar aktifleştirilir. Kalan listeleme süresi devam eder (süre duraklatma sırasında işlemez).
-
-### Geri Çek
-Araç platformdan kalıcı olarak çekilir. **Ceza sistemi uygulanabilir** (aşağıya bak).
-
-### Yenile
-Süresi dolmuş araç yeniden aktifleştirilir ve 90 günlük yeni süre başlar.
-
-### Yeniden Listele
-Geri çekilmiş araç tekrar platforma eklenir. Geçmiş ceza sayacı korunur.
+> A vendor can restart a new 90-day period for an expired vehicle using the **"Renew"** action.
 
 ---
 
-## 💸 Geri Çekme Ceza Sistemi
+## Vendor Self-Service Actions
 
-Vendor'ların keyfi araç geri çekmesini caydırmak için kademeli ceza uygulanır:
+Vendors can manage their vehicles without admin intervention:
 
-| Geri Çekme Sayısı | Ceza Oranı |
-|-------------------|-----------|
-| 1. geri çekme | Ücretsiz |
-| 2. geri çekme | Aylık ortalama gelirin **%10**'u |
-| 3. ve sonrası | Aylık ortalama gelirin **%25**'i |
+### Pause
+The active vehicle is temporarily unlisted. This does not affect pending bookings — the vehicle simply cannot receive new bookings.
 
-**12 aylık kayan pencere:** Ceza sayacı, son 12 ay içindeki geri çekmeleri sayar. 12 ay geçen geri çekmeler sayaca dahil edilmez.
+### Resume
+The paused vehicle is reactivated. The remaining listing time continues (time does not count down while the vehicle is paused).
 
-Kesintiler ledger'a otomatik kaydedilir ve bir sonraki payout hesabında düşülür.
+### Withdraw
+The vehicle is permanently removed from the platform. **A penalty may apply** (see below).
 
----
+### Renew
+An expired vehicle is reactivated and a new 90-day period begins.
 
-## 🛡️ Anti-Gaming: Bloklu Tarih Koruması
-
-Fiyat manipülasyonunu önlemek için:
-
-- Vendor, aktif rezervasyonu olan bir aracı iptal edip aynı tarihlere daha yüksek fiyatla yeniden listeleyemez.
-- Vendor tarafından iptal edilen rezervasyonların tarihleri **30 gün boyunca** yeniden rezervasyona kapalı kalır.
-- `AntiGamingBlocker` bu blokları `_mhm_anti_gaming_blocks` meta key ile saklar.
+### Re-list
+A withdrawn vehicle is added back to the platform. The historical penalty counter is preserved.
 
 ---
 
-## ⭐ Vendor Güvenilirlik Puanı
+## Withdrawal Penalty System
 
-Her vendor için 0-100 arası bir güvenilirlik skoru hesaplanır:
+A graduated penalty is applied to discourage arbitrary vehicle withdrawals by vendors:
 
-- **Günlük cron** ile `ReliabilityScoreCalculator` tarafından yeniden hesaplanır.
-- **Formüle dahil faktörler:**
-  - Tamamlanan rezervasyon oranı (pozitif)
-  - İptal oranı (negatif)
-  - Geri çekme sıklığı (negatif)
-  - Duraklatma süresi (hafif negatif)
+| Withdrawal Count | Penalty Rate |
+|------------------|--------------|
+| 1st withdrawal | Free |
+| 2nd withdrawal | **10%** of monthly average revenue |
+| 3rd and beyond | **25%** of monthly average revenue |
 
-| Puan | Yorum |
-|------|-------|
-| 80–100 | Güvenilir vendor |
-| 60–79 | Ortalama |
-| 40–59 | Dikkat gerektiriyor |
-| 0–39 | Yüksek riskli |
+**12-month rolling window:** The penalty counter counts withdrawals within the last 12 months. Withdrawals older than 12 months are excluded from the count.
 
-Admin, kullanıcı listesinde her vendor'un güncel puanını görür.
+Deductions are automatically recorded in the ledger and subtracted from the next payout calculation.
 
 ---
 
-## 📧 Yaşam Döngüsü E-posta Bildirimleri
+## Anti-Gaming: Blocked Date Protection
 
-Tüm durum geçişleri için otomatik e-posta şablonları mevcuttur:
+To prevent price manipulation:
 
-| Olay | Alıcı |
-|------|-------|
-| Araç aktifleştirildi | Vendor |
-| Araç duraklatıldı | Vendor |
-| Duraklatma devam etti | Vendor |
-| Araç geri çekildi | Vendor + Admin |
-| 10 gün kala uyarı | Vendor |
-| 3 gün kala uyarı | Vendor |
-| Listeleme süresi doldu | Vendor + Admin |
-| Araç yenilendi | Vendor |
-| Araç yeniden listelendi | Vendor |
+- A vendor cannot cancel a vehicle that has an active booking and re-list it for the same dates at a higher price.
+- Dates of bookings cancelled by the vendor remain closed to new bookings for **30 days**.
+- `AntiGamingBlocker` stores these blocks using the `_mhm_anti_gaming_blocks` meta key.
 
 ---
 
-## 📊 Admin Arayüzü
+## Vendor Reliability Score
 
-### Araç Listesi Sütunu
-Her aracın yaşam döngüsü durumu renk kodlu rozet ile görüntülenir:
-- 🟢 Aktif
-- 🟡 Duraklatılmış
-- 🔴 Süresi Dolmuş
-- ⚫ Geri Çekilmiş
+A reliability score between 0–100 is calculated for each vendor:
 
-### Araç Düzenleme Meta Kutusu
-Araç düzenleme ekranında **"Yaşam Döngüsü"** meta kutusu:
-- Mevcut durum göstergesi
-- Durum geçiş butonu (izin verilen geçişler)
-- Listeleme süresi bitiş tarihi
-- Geri çekme ceza sayacı
+- Recalculated daily by `ReliabilityScoreCalculator`.
+- **Factors included in the formula:**
+  - Completed booking rate (positive)
+  - Cancellation rate (negative)
+  - Withdrawal frequency (negative)
+  - Pause duration (mildly negative)
 
-### Kullanıcı Listesi
-Vendor satırlarında güvenilirlik puanı sütunu eklendi.
+| Score | Interpretation |
+|-------|----------------|
+| 80–100 | Reliable vendor |
+| 60–79 | Average |
+| 40–59 | Needs attention |
+| 0–39 | High risk |
+
+The admin sees each vendor's current score in the user list.
 
 ---
 
-## 🔍 Frontend Aktif Filtre
+## Lifecycle Email Notifications
 
-6 frontend shortcode artık bakımdaki ve pasif araçları otomatik filtreler:
+Automatic email templates exist for all state transitions:
+
+| Event | Recipient |
+|-------|-----------|
+| Vehicle activated | Vendor |
+| Vehicle paused | Vendor |
+| Pause resumed | Vendor |
+| Vehicle withdrawn | Vendor + Admin |
+| 10-day warning | Vendor |
+| 3-day warning | Vendor |
+| Listing period expired | Vendor + Admin |
+| Vehicle renewed | Vendor |
+| Vehicle re-listed | Vendor |
+
+---
+
+## Admin Interface
+
+### Vehicle List Column
+Each vehicle's lifecycle status is displayed with a color-coded badge:
+- Green Active
+- Yellow Paused
+- Red Expired
+- Black Withdrawn
+
+### Vehicle Edit Meta Box
+The **"Lifecycle"** meta box on the vehicle editing screen shows:
+- Current status indicator
+- Status transition button (allowed transitions)
+- Listing period expiry date
+- Withdrawal penalty counter
+
+### User List
+A reliability score column has been added to vendor rows.
+
+---
+
+## Frontend Active Filter
+
+6 frontend shortcodes now automatically filter out vehicles under maintenance or in a passive state:
 
 - `[rentiva_vehicles_grid]`
 - `[rentiva_vehicles_list]`
@@ -171,8 +171,8 @@ Vendor satırlarında güvenilirlik puanı sütunu eklendi.
 - `[rentiva_search_results]`
 - `[rentiva_transfer_results]`
 
-`expired` veya `withdrawn` durumdaki araçlar, `MetaQueryHelper` aracılığıyla sorgulardan otomatik hariç tutulur.
+Vehicles in `expired` or `withdrawn` state are automatically excluded from queries via `MetaQueryHelper`.
 
 ---
 
-> **Not:** Araç Yaşam Döngüsü Yönetimi **Pro** lisans gerektirir. Lite sürümde araçlar yalnızca WordPress post durumu (`publish`/`draft`) ile yönetilir; durum makinesi, ceza sistemi ve güvenilirlik puanı özellikleri kullanılamaz.
+> **Note:** Vehicle Lifecycle Management requires a **Pro** license. In the Lite edition, vehicles are managed only by WordPress post status (`publish`/`draft`); the state machine, penalty system, and reliability score features are not available.

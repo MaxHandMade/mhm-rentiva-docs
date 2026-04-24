@@ -1,75 +1,75 @@
 ---
 id: financial-test-strategy
-title: Finansal Test Stratejisi & Güvence
-sidebar_label: Finansal Test Stratejisi
+title: Financial Test Strategy & Assurance
+sidebar_label: Financial Test Strategy
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::important Kritik Uyarı
-Finansal katmandaki testlerin %100 kapsama (Coverage) ile geçmesi zorunludur. Herhangi bir başarısızlık, tüm ödeme sisteminin kilitlenmesine neden olur.
+:::important Critical Warning
+Tests in the financial layer must pass with 100% coverage. Any failure causes the entire payment system to lock.
 :::
 
-# 🛡️ Finansal Test Stratejisi
+# 🛡️ Financial Test Strategy
 
-Rentiva Finansal Katmanı, paranın izini sürmek ve hatalı işlemleri önlemek için çok katmanlı bir test stratejisi kullanır. Bu stratejinin merkezinde **Değişmezlik (Immutability)** ve **Atomiklik (Atomicity)** prensipleri yer alır.
-
----
-
-## 🏗️ Test Katmanları
-
-### 1. Ledger (Defter) Testleri
-`LedgerTest.php`, defter kayıtlarının asla silinemeyeceğini ve güncellenemeyeceğini doğrular.
-- **Kural:** Sadece `INSERT` işlemine izin verilir.
-- **Doğrulama:** Negatif bakiye kontrolleri ve toplam bakiye tutarlılığı (Checksum).
-
-### 2. Atomiklik ve Regresyon (`AtomicPayoutServiceTest`)
-Ödeme işlemlerinin yarıda kalması (Race Condition) durumunda sistemin tutarlı kalmasını sağlar.
-- **Test Senaryosu:** Veritabanı bağlantısı koptuğunda işlemin tamamen geri alınması (Rollback).
-- **Idempotency:** Aynı ödeme talebinin iki kez işlenmesinin engellenmesi.
-
-### 3. Kiracı İzolasyonu (`TenantIsolationTest`)
-Transfer ve ödeme verilerinin farklı satıcılar (Tenants) arasında asla karışmadığını doğrular.
-- **Kontrol:** `vendor_a` kullanıcısının `vendor_b` ledger verisine erişimi engellenir.
+The Rentiva Financial Layer uses a multi-layered test strategy to track money and prevent erroneous transactions. The core principles of this strategy are **Immutability** and **Atomicity**.
 
 ---
 
-## 🔒 Güvenlik Sertleştirme Testleri (Forensic Hardening)
+## 🏗️ Test Layers
 
-`ForensicHardeningTest.php`, adli bilişim standartlarında veri güvenliğini denetler:
-- **Tampering Detection:** Geçmiş kayıtlarda yasadışı değişiklik yapılıp yapılmadığının tespiti.
-- **Audit Consistency:** Governance kararlarının adli loglarla uyuşup uyuşmadığı.
+### 1. Ledger Tests
+`LedgerTest.php` verifies that ledger records can never be deleted or updated.
+- **Rule:** Only `INSERT` operations are permitted.
+- **Verification:** Negative balance checks and total balance consistency (checksum).
+
+### 2. Atomicity and Regression (`AtomicPayoutServiceTest`)
+Ensures the system remains consistent when a payment transaction is interrupted (race condition).
+- **Test Scenario:** The transaction is fully rolled back when the database connection drops.
+- **Idempotency:** The same payment request cannot be processed twice.
+
+### 3. Tenant Isolation (`TenantIsolationTest`)
+Verifies that transfer and payment data never mixes between different vendors (tenants).
+- **Control:** Access by `vendor_a` to `vendor_b` ledger data is blocked.
 
 ---
 
-## 🧪 Governance ve Dondurma Testleri
+## 🔒 Security Hardening Tests (Forensic Hardening)
 
-`GovernanceFreezeTest.php` ve `GovernanceAuthorizationTest.php` sınıfları şunları denetler:
-- **Dondurma (Freeze):** Riskli bir satıcının ödeme taleplerinin anında bloke edilmesi.
-- **Yetkilendirme:** Maker-Checker prensibinin (kendine onay verememe) ihlal edilmediği.
+`ForensicHardeningTest.php` audits data security to forensic standards:
+- **Tampering Detection:** Detection of any unauthorized modifications to historical records.
+- **Audit Consistency:** Whether governance decisions match the forensic logs.
 
 ---
 
-## 🔄 Test Akış Şeması
+## 🧪 Governance and Freeze Tests
+
+The `GovernanceFreezeTest.php` and `GovernanceAuthorizationTest.php` classes verify:
+- **Freeze:** Immediate blocking of payment requests from a high-risk vendor.
+- **Authorization:** That the Maker-Checker principle (inability to self-approve) has not been violated.
+
+---
+
+## 🔄 Test Flow Diagram
 
 ```mermaid
 graph TD
-    A[İşlem Başlat] --> B{Atomik Kilit?}
-    B -- Evet --> C[Ledger Kaydı]
-    B -- Hayır --> D[Hata & Rollback]
-    C --> E{Governance Süzgeci}
-    E -- Onay --> F[Payout Executed]
-    E -- Red --> G[Ledger Reversal]
+    A[Start Transaction] --> B{Atomic Lock?}
+    B -- Yes --> C[Ledger Entry]
+    B -- No --> D[Error & Rollback]
+    C --> E{Governance Filter}
+    E -- Approved --> F[Payout Executed]
+    E -- Denied --> G[Ledger Reversal]
 ```
 
-## Bölüm Sonu Özeti
-- Tüm finansal testler `tests/Core/Financial` dizininde yer alır.
-- **Forensic Hardening**, sistemin adli kanıt değerini korur.
-- Regresyon testleri, her sürüm öncesi otomatik olarak çalıştırılır.
+## Section Summary
+- All financial tests are located in the `tests/Core/Financial` directory.
+- **Forensic Hardening** preserves the forensic evidence value of the system.
+- Regression tests run automatically before each release.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, Forensic Hardening ve Tenant Isolation testlerine göre güncellendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated per Forensic Hardening and Tenant Isolation tests. |

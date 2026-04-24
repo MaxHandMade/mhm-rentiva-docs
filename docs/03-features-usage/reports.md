@@ -1,86 +1,86 @@
 ---
 id: reports
-title: Raporlama
+title: Reports
 sidebar_position: 11
 slug: /features-usage/reports
 ---
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Raporlar, MHM Rentiva'nin tum operasyonel verilerini finansal ve istatistiksel çıktılara dönüşturen gelişmiş analiz merkezidir. **MHM Rentiva > Raporlar** menusu üzerinden işletmenizin buyume trendlerini ve verimliligini izleyebilirsiniz.
+Reports is the advanced analytics hub that converts all of MHM Rentiva's operational data into financial and statistical outputs. Monitor your business's growth trends and efficiency via **MHM Rentiva > Reports**.
 
-:::caution Lite / Pro Farki
-**Gelir Grafigi** ve **Yaklasan Operasyonlar** widget'lari yalnızca Pro sürümde kullanilabilir. Lite sürümde bu widget'lar gorunmez. Guard: `Mode::canUseAdvancedReports()`.
+:::caution Lite / Pro Difference
+The **Revenue Chart** and **Upcoming Operations** widgets are available in the Pro edition only. These widgets are not visible in the Lite edition. Guard: `Mode::canUseAdvancedReports()`.
 :::
 
 ---
 
-## Global Performans Metrikleri (İstatistik Widget'i)
+## Global Performance Metrics (Statistics Widget)
 
-Sayfanin en üstünde, secilen tarih araligina gore güncellenen 4 ana performans gostergesi **2x2 grid** duzende, ikon ve renklerle zenginlestirilmis olarak yer alir:
+At the top of the page, four main performance indicators updated according to the selected date range are displayed in a **2x2 grid** layout enriched with icons and colors:
 
-- **Toplam Rezervasyonlar:** Belirlenen araliktaki tum işlemler.
-- **Bu Ayin Geliri:** Mevcut ayin toplam cirosu (Para birimi simgesiyle).
-- **Aktif Rezervasyonlar:** Su an devam eden (Müşteride olan) araç sayısı.
-- **Doluluk Orani (%):** Filonuzun kapasite kullanim yuzdesi.
+- **Total Bookings:** All transactions within the defined range.
+- **This Month's Revenue:** Total turnover for the current month (with currency symbol).
+- **Active Bookings:** Number of vehicles currently in use (with the customer).
+- **Occupancy Rate (%):** The capacity utilization percentage of your fleet.
 
-:::info Teknik Not
-İstatistik widget'i `mhm_rentiva_dashboard_stats` cache key prefix'i ile önbelleklenir. Tum tarih hesaplamalari WordPress timezone'unu kullanir (`wp_date`).
+:::info Technical Note
+The statistics widget is cached with the `mhm_rentiva_dashboard_stats` cache key prefix. All date calculations use the WordPress timezone (`wp_date`).
 :::
 
 ---
 
-## 🧪 Rapor Sekmeleri ve Detaylar
+## Report Tabs and Details
 
-MHM Rentiva, veriyi 5 farklı perspektiften işlemenize olanak tanır:
+MHM Rentiva lets you process data from 5 different perspectives:
 
-### 1. Genel Bakış (Overview)
-Tüm raporların bir "özet panosu" (Snapshot) halidir. Gelir, Rezervasyon, Müşteri ve Araç analizlerini tek ekranda karşılaştırmalı grafiklerle sunar.
+### 1. Overview
+A "snapshot" summary of all reports. Presents revenue, booking, customer, and vehicle analyses in comparative charts on a single screen.
 
-### 2. Gelir Raporu (Revenue) — Yalnızca Pro
-Finansal sagliginizi detaylandirir.
-- **Gelir Analitigi:** Günlük ciro ortalamasi ve toplam kazanc.
-- **Gelir Egilimi:** Haftalik bazda (Pzt-Paz) hangi gunlerin daha karli olduğunu gosteren bar grafikler. Tarih formati `date_i18n(get_option('date_format'))` ile yerellestirilerek gosterilir.
-- **Iptal Dataset'i:** Iptal edilen rezervasyonlar kırmızı kesikli cizgiyle ayri bir dataset olarak grafige yansitilir.
-- **Günlük Detaylar:** Tarih bazli seffaf gelir listesi.
+### 2. Revenue Report — Pro Only
+Details your financial health.
+- **Revenue Analytics:** Daily revenue average and total earnings.
+- **Revenue Trend:** Bar charts showing which days of the week (Mon-Sun) are more profitable. Date format is localized using `date_i18n(get_option('date_format'))`.
+- **Cancellation Dataset:** Cancelled bookings are reflected in the chart as a separate dataset with a red dashed line.
+- **Daily Details:** A date-by-date transparent revenue list.
 
-### 3. Rezervasyon Şikayeti (Distribution)
-Rezervasyonların durum dağılımını ve iptal oranlarını analiz eder.
-- **İptal Oranı (%):** Toplam rezervasyonlar içinde iptal edilenlerin yüzdesi.
-- **Durum Dağılımı:** Onaylı, Beklemede, Tamamlandı ve İptal Edilenlerin adet/yüzde bazlı dökümü.
+### 3. Booking Distribution
+Analyzes the status distribution of bookings and cancellation rates.
+- **Cancellation Rate (%):** The percentage of cancelled bookings among total bookings.
+- **Status Distribution:** A breakdown of Confirmed, Pending, Completed, and Cancelled bookings by count and percentage.
 
-### 4. Araç Raporu (Vehicle Performance)
-Hangi araçların veya kategorilerin daha çok kazandırdığını ölçer.
-- **En Popüler Araçlar:** Kiralama adedi en yüksek olan modeller.
-- **Kiralama Sayısı vs Toplam Gelir:** Her aracın toplamda ne kadar ciro ürettiği.
+### 4. Vehicle Report (Vehicle Performance)
+Measures which vehicles or categories generate more revenue.
+- **Most Popular Vehicles:** Models with the highest number of rentals.
+- **Rental Count vs Total Revenue:** Total revenue generated by each vehicle.
 
-### 5. Müşteri Raporu (Customer Analysis)
-Müşteri sadakatini ve harcama alışkanlıklarını takip eder.
-- **Müşteri Özeti:** Toplam müşteri, tekrar gelen müşteri (Repeat) ve ortalama harcama tutarı.
-- **Yaşam Döngüsü (LTV):** Yeni vs Geri gelen müşteri oranlarını grafikleştirir.
+### 5. Customer Report (Customer Analysis)
+Tracks customer loyalty and spending habits.
+- **Customer Summary:** Total customers, repeat customers, and average spending amount.
+- **Lifecycle (LTV):** Visualizes the ratio of new vs. returning customers in a chart.
 
 ---
 
-## 🔍 Veri Filtreleme ve Dışa Aktar
+## Data Filtering and Export
 
-- **Özel Tarih Aralığı:** Başlangıç ve bitiş tarihleri seçerek geriye dönük (Historical) veya ileriye dönük analizler yapabilirsiniz.
-- **Dinamik Güncelleme:** Filtre uygulandığı anda takvim ve grafikler anlık olarak yeniden hesaplanır.
+- **Custom Date Range:** Select start and end dates to perform historical or forward-looking analyses.
+- **Dynamic Update:** The calendar and charts recalculate instantly as soon as a filter is applied.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: RAPORLAMA VE ANALİZ PANTOLARI</strong><br/>
+  <strong>IMAGE: REPORTING AND ANALYTICS PANELS</strong><br/>
   <em>mhm-rentiva-reports-all-tabs</em>
 </div>
 
 ---
 
-### Bölüm Özeti
-- **Genel Bakış** ile işletmenin röntgenini çekin.
-- **Gelir/Araç Raporları** ile en karlı segmentleri belirleyin.
-- **Müşteri Raporları** ile sadakat stratejileri geliştirin.
+### Section Summary
+- Get an X-ray of your business with the **Overview**.
+- Identify the most profitable segments with **Revenue/Vehicle Reports**.
+- Develop loyalty strategies with **Customer Reports**.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 27.03.2026 | 4.23.0 | Lite/Pro gating (Gelir Grafigi + Yaklasan Ops), stats widget 2x2 grid tasarimi, timezone düzeltmeleri (`wp_date`), iptal dataset'i, cache key prefix düzeltmesi dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Raporlar sayfası 5 farkli sekme ve tum grafik detaylariyla gerçek arayuze gore güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 27.03.2026 | 4.23.0 | Lite/Pro gating (Revenue Chart + Upcoming Ops), stats widget 2x2 grid design, timezone fixes (`wp_date`), cancellation dataset, and cache key prefix fix documented. |
+| 19.03.2026 | 4.21.2 | Reports page updated against the real interface with 5 tabs and all chart details. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

@@ -1,76 +1,76 @@
 ---
 id: financial-overview
-title: Finansal Sistem Genel Bakış
-sidebar_label: Finansal Genel Bakış
+title: Financial System Overview
+sidebar_label: Financial Overview
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, MHM Rentiva'nın finansal çekirdeğini (Financial Core), komisyon hesaplama mantığını ve veri güvenliği standartlarını özetler.
+:::info Purpose
+This page summarizes MHM Rentiva's Financial Core, commission calculation logic, and data security standards.
 :::
 
-# 💰 Finansal Sistem Genel Bakış
+# 💰 Financial System Overview
 
-MHM Rentiva'nın kalbi olan finansal sistem, yüksek hassasiyetli hesaplamalar ve denetlenebilir (Auditable) bir veri yapısı üzerine kurulmuştur. Sistem, her işlemi **Immutable Ledger (Değiştirilemez Defter)** mantığıyla kayıt altına alır.
+The financial system at the heart of MHM Rentiva is built on high-precision calculations and an auditable data structure. The system records every transaction using an **Immutable Ledger** approach.
 
-## 🏗️ Çekirdek Bileşenler
+## 🏗️ Core Components
 
-Finansal operasyonlar şu motorlar üzerinden yönetilir:
+Financial operations are managed through the following engines:
 
-| Bileşen | Görev |
+| Component | Responsibility |
 | :--- | :--- |
-| `CommissionResolver` | Rezervasyon için en uygun komisyon politikasını belirleyen karar motoru. |
-| `Ledger` | Tüm parasal hareketleri `wp_mhm_rentiva_ledger` tablosuna atomik olarak yazan servis. |
-| `PayoutService` | Vendor hak edişlerini hesaplayan ve ödeme taleplerini yöneten katman. |
-| `GovernanceService` | Finansal limitleri, risk kontrollerini ve yetkilendirmeleri denetler. |
-| `PolicyRepository` | Versiyonlanmış komisyon politikalarını ve kurumsal anlaşmaları saklar. |
+| `CommissionResolver` | Decision engine that determines the most appropriate commission policy for a booking. |
+| `Ledger` | Service that atomically writes all monetary movements to the `wp_mhm_rentiva_ledger` table. |
+| `PayoutService` | Layer that calculates vendor earnings and manages Payout requests. |
+| `GovernanceService` | Audits financial limits, risk controls, and authorizations. |
+| `PolicyRepository` | Stores versioned commission policies and enterprise agreements. |
 
 ---
 
-## 🔄 Finansal Veri Akışı
+## 🔄 Financial Data Flow
 
-Bir rezervasyon tamamlandığında finansal sistem şu sırayla tetiklenir:
+When a booking is completed, the financial system is triggered in the following order:
 
 ```mermaid
 graph TD
-    A[Rezervasyon Tamamlandı] --> B[CommissionResolver]
-    B --> C{Politika Bul?}
-    C -- Evet --> D[Komisyon Hesapla]
+    A[Booking Completed] --> B[CommissionResolver]
+    B --> C{Policy Found?}
+    C -- Yes --> D[Calculate Commission]
     D --> E[Ledger::record]
-    E --> F[Finansal Defter Kaydı]
-    F --> G[Vendor Bakiyesi Güncelle]
-    G --> H[Payout Talebi Oluşturulabilir]
+    E --> F[Financial Ledger Entry]
+    F --> G[Update Vendor Balance]
+    G --> H[Payout Request Can Be Created]
 ```
 
 ---
 
-## 📉 Komisyon Çözümleme Hiyerarşisi (Decision Order)
+## 📉 Commission Resolution Hierarchy (Decision Order)
 
-Sistem, bir rezervasyon için hangi oranın uygulanacağına şu öncelik sırasına göre karar verir:
+The system determines which rate to apply to a booking based on the following priority order:
 
-1.  **Araç Bazlı (Vehicle Override):** Araç ayarlarında özel bir komisyon oranı tanımlanmışsa o kullanılır.
-2.  **Vendor Bazlı (Vendor Override):** Satıcıya özel bir anlaşma varsa uygulanır.
-3.  **Tier Sistemi (Tier Discount):** Vendor'un performansına göre bir indirim/artış uygulanabilir.
-4.  **Global Politika (Global Policy):** Hiçbir kural eşleşmezse sistemin genel ayarlarındaki varsayılan oran uygulanır.
+1.  **Vehicle-Based (Vehicle Override):** If a custom commission rate is defined in the vehicle settings, it is used.
+2.  **Vendor-Based (Vendor Override):** If a custom agreement exists for the vendor, it is applied.
+3.  **Tier System (Tier Discount):** A discount or increase may be applied based on the vendor's performance.
+4.  **Global Policy (Global Policy):** If no rule matches, the default rate from the system's global settings is applied.
 
 ---
 
-## 🛡️ Finansal Güvenlik Prensipleri (Invariantlar)
+## 🛡️ Financial Security Principles (Invariants)
 
-- **Immutability:** `ledger` tablosundaki bir kayıt asla silinmez veya `UPDATE` edilmez. Yanlış işlemler "Ters Kayıt" (Offsetting Entry) ile düzeltilir.
-- **Atomic Operations:** Komisyon hesaplama ve deftere yazma işlemi bir bütün (Atomic Transaction) olarak gerçekleşir.
-- **Audit Trail:** Her finansal hareket, işlemi yapan kullanıcı ve zaman mührü (Timestamp) ile imzalanır.
-- **Idempotency:** Aynı rezervasyon için mükerrer komisyon kaydı oluşması uygulama seviyesinde engellenmiştir.
+- **Immutability:** A record in the `ledger` table is never deleted or `UPDATE`d. Incorrect transactions are corrected via an "Offsetting Entry".
+- **Atomic Operations:** Commission calculation and writing to the Ledger occur as a single unit (Atomic Transaction).
+- **Audit Trail:** Every financial movement is signed with the acting user and a timestamp.
+- **Idempotency:** Creating duplicate commission entries for the same booking is prevented at the application level.
 
-## Bölüm Sonu Özeti
-- Finansal sistem **Ledger-first** (Önce Defter) prensibiyle çalışır.
-- Kararlar modüler `CommissionResolver` tarafından hiyerarşik olarak verilir.
-- Tüm veriler mali denetime (Audit) uygun şekilde saklanır.
+## Section Summary
+- The financial system operates on a **Ledger-first** principle.
+- Decisions are made hierarchically by the modular `CommissionResolver`.
+- All data is stored in compliance with financial auditing requirements.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Finansal genel bakış, v1.9 hiyerarşisi ve Ledger mimarisine göre güncellendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Financial overview updated to reflect v1.9 hierarchy and Ledger architecture. |

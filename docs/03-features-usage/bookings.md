@@ -1,117 +1,118 @@
 ---
 id: bookings
-title: Rezervasyon Yönetimi
-sidebar_label: Rezervasyonlar
+title: Booking Management
+sidebar_label: Bookings
 sidebar_position: 6
 slug: /features-usage/bookings
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Rezervasyonlar, MHM Rentiva sisteminin operasyonel ve finansal kalbidir. **MHM Rentiva > Rezervasyonlar** menüsü üzerinden tüm rezervasyon trafiğini izleyebilir, yeni kayıtlar açabilir ve finansal akışları yönetebilirsiniz.
-
----
-
-## 📊 Rezervasyon Analitiği ve Özet
-
-Sayfanın en üstünde, filonuzun anlık durumunu gösteren 4 ana gösterge kartı bulunur:
-- **Beklemede:** Henüz onaylanmamış veya ödemesi beklenen talepler.
-- **Onaylı:** Rezervasyonu kesinleşmiş işlemler.
-- **Tamamlandı:** Süreci başarıyla bitmiş kiralama/transferler.
-- **Aylık Gelir:** Seçilen ayın toplam cirosu ve bir önceki aya göre büyüme oranı (%).
+Bookings are the operational and financial core of the MHM Rentiva system. Use **MHM Rentiva > Bookings** to monitor all booking traffic, create new records, and manage financial flows.
 
 ---
 
-## 📅 Aylık Rezervasyon Takvimi (Interactive)
+## 📊 Booking Analytics and Summary
 
-Merkezi takvim, araçlarınızın doluluk oranını görselleştirir. 
+At the top of the page, four main indicator cards display the current state of your fleet:
+- **Pending:** Requests that have not yet been confirmed or are awaiting payment.
+- **Confirmed:** Transactions with finalized bookings.
+- **Completed:** Rentals/transfers that have successfully concluded.
+- **Monthly Revenue:** Total turnover for the selected month and the growth rate (%) compared to the previous month.
 
-**Durum Renkleri (Legend):**
-- <span style={{color: '#facc15'}}>●</span> **Beklemede:** Henüz onaylanmamış veya ödemesi beklenen rezervasyonlar.
-- <span style={{color: '#3b82f6'}}>●</span> **Onaylı:** Ödemesi alınmış veya admin tarafından onaylanmış işlemler.
-- <span style={{color: '#f97316'}}>●</span> **Devam Etmekte:** Kiralama süreci başlamış, araç şu an müşteride olan işlemler.
-- <span style={{color: '#22c55e'}}>●</span> **Tamamlandı:** Kiralama süreci başarıyla bitmiş ve araç teslim alınmış rezervasyonlar.
-- <span style={{color: '#ef4444'}}>●</span> **İptal Edildi:** Müşteri veya sistem tarafından iptal edilmiş geçersiz kayıtlar.
+---
 
-*Ipucu: Takvim uzerindeki bir kayda tikladiginizda müşteri ve araç detaylarini iceren hizli bir ozet paneli acilir. v4.23.0 itibariyla popup'ta `_mhm_start_time` ve `_mhm_end_time` meta değerleri ile **saat bilgisi** de gosterilmektedir.*
+## 📅 Monthly Booking Calendar (Interactive)
+
+The central calendar visualizes the occupancy rate of your vehicles.
+
+**Status Colors (Legend):**
+- <span style={{color: '#facc15'}}>●</span> **Pending:** Bookings that have not yet been confirmed or are awaiting payment.
+- <span style={{color: '#3b82f6'}}>●</span> **Confirmed:** Transactions approved by payment or by an admin.
+- <span style={{color: '#f97316'}}>●</span> **In Progress:** Transactions where the rental has started and the vehicle is currently with the customer.
+- <span style={{color: '#22c55e'}}>●</span> **Completed:** Bookings where the rental process has successfully concluded and the vehicle has been returned.
+- <span style={{color: '#ef4444'}}>●</span> **Cancelled:** Invalid records cancelled by the customer or the system.
+
+*Tip: Clicking a record on the calendar opens a quick summary panel with customer and vehicle details. As of v4.23.0, the popup also displays time information via the `_mhm_start_time` and `_mhm_end_time` meta values.*
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: REZERVASYON TAKVİMİ VE ÖZET POPUP</strong><br/>
+  <strong>📸 IMAGE: BOOKING CALENDAR AND SUMMARY POPUP</strong><br/>
   <em>mhm-rentiva-booking-calendar-popup</em>
 </div>
 
 ---
 
-## ➕ Manuel Rezervasyon Oluşturma
+## ➕ Manual Booking Creation
 
-Ofisinizden veya telefonla gelen talepleri sisteme işlemek için **"Yeni Ekle Rezervasyon"** butonunu kullanılır. Form 4 ana bölümden oluşur:
+Use the **"Add New Booking"** button to enter requests received by phone or in person. The form has four main sections:
 
-1.  **Araç ve Müşteri Seçimi:** Listeden aracı ve mevcut müşteriyi seçin.
-2.  **Tarih ve Misafir:** Teslim alma/dönüş tarih-saatlerini ve yolcu sayısını belirleyin.
-3.  **Ek Hizmetler:** Müşterinin talep ettiği ek donanımları (Navigasyon, Bebek Koltuğu vb.) seçin. Fiyatlar otomatik eklenir.
-4.  **Ödeme ve Durum:** Ödeme türünü (Depozito/Tamamı), yöntemini (Nakit/Çevrimdışı) ve başlangıç durumunu belirleyip "Fiyatı Hesapla" butonuna basın.
-
----
-
-## 📝 Rezervasyon Düzenleme ve Finans Yönetimi
-
-Mevcut bir rezervasyonun detay sayfası, tam bir operasyonel kontrol paneli sunar:
-
-### Finansal Takip (Mevduat Yönetimi)
-Sistem; **Toplam Tutar**, **Depozito Miktarı** ve **Kalan Miktar** verilerini anlık olarak hesaplar.
-- **Ödeme Durumu:** "Ödeme Bekleniyor", "Ödendi" veya "İptal Edildi" olarak güncellenebilir.
-- **İptal Politikası:** Belirlenen son iptal tarihine (Deadline) göre işlemin iptal edilebilir olup olmadığını gösterir.
-
-### Kalan Ödeme (Pay Remaining) — v4.26.0
-
-Depozito ile yapılmış rezervasyonlarda müşteriler kalan bakiyeyi doğrudan **Hesabım → Rezervasyon Detayı** sayfasından ödeyebilir.
-
-**Nasıl Çalışır:**
-1. Müşteri "Kalan Ödemeyi Yap" butonuna tıklar.
-2. Sistem, kalan tutar için minimal bir WooCommerce siparişi oluşturur.
-3. Müşteri WooCommerce'in native `order-pay` sayfasına yönlendirilir.
-4. Sitede aktif olan herhangi bir ödeme yöntemiyle ödeme tamamlanır.
-
-**Teknik Detaylar:**
-- `_mhm_is_remaining_payment` flag'i ile kalan ödeme siparişleri tanımlanır.
-- `_mhm_remaining_order_id` meta'sı ile duplicate sipariş koruması sağlanır — bekleyen sipariş varsa yeni sipariş oluşturulmaz.
-- Herhangi bir ek entegrasyon veya ödeme eklentisi gerektirmez.
-
-### Para Yatırma Geçmişi (Timeline)
-Rezervasyonun oluşturulmasından, ödemelerin alınmasına ve durum değişikliklerine kadar her adım bir zaman çizelgesi (Log) olarak kaydedilir. Bu, hatalı işlemlerin takibi için kritiktir.
-
-### Sağ Kenar Çubuğu (Side Actions)
-- **E-posta Gönder:** Manuel olarak "Rezervasyon Onayı" veya "Hatırlatma" e-postaları tetiklenebilir.
-- **Ödeme Makbuzu:** Müşteriden gelen ödeme dekontları sisteme yüklenip admin tarafından onaylanabilir.
-- **Müşteri Hesabı:** Rezervasyon sahibi ile doğrudan iletişim veya hesap bağlantısı kurulabilir.
+1.  **Vehicle and Customer Selection:** Select the vehicle and the existing customer from the list.
+2.  **Date and Guests:** Set the pickup/return date-times and the number of passengers.
+3.  **Add-ons:** Select any additional equipment the customer has requested (Navigation, Baby Seat, etc.). Prices are added automatically.
+4.  **Payment and Status:** Set the payment type (Deposit/Full), method (Cash/Offline), and initial status, then click "Calculate Price".
 
 ---
 
+## 📝 Booking Editing and Financial Management
+
+The detail page of an existing booking provides a full operational control panel:
+
+### Financial Tracking (Deposit Management)
+The system calculates **Total Amount**, **Deposit Amount**, and **Remaining Amount** in real time.
+- **Payment Status:** Can be updated to "Awaiting Payment", "Paid", or "Cancelled".
+- **Cancellation Policy:** Indicates whether the transaction is cancellable based on the defined cancellation deadline.
+
+### Pay Remaining — v4.26.0
+
+For bookings made with a deposit, customers can pay the remaining balance directly from **My Account → Booking Detail**.
+
+**How It Works:**
+1. The customer clicks the "Pay Remaining Balance" button.
+2. The system creates a minimal WooCommerce order for the outstanding amount.
+3. The customer is redirected to WooCommerce's native `order-pay` page.
+4. Payment is completed using any payment method active on the site.
+
+**Technical Details:**
+- Remaining payment orders are identified by the `_mhm_is_remaining_payment` flag.
+- The `_mhm_remaining_order_id` meta provides duplicate order protection — if a pending order already exists, a new one is not created.
+- Does not require any additional integrations or payment plugins.
+
+### Payment History (Timeline)
+Every step — from booking creation, to payments received, to status changes — is recorded as a timeline (Log). This is critical for tracking erroneous transactions.
+
+### Right Sidebar (Side Actions)
+- **Send Email:** Manually trigger "Booking Confirmation" or "Reminder" emails.
+- **Payment Receipt:** Payment receipts from customers can be uploaded to the system and approved by the admin.
+- **Customer Account:** Communicate directly with the booking owner or access their account.
+
 ---
 
-## 🆔 Gorunum ID'si (Display ID)
+---
 
-v4.23.0 itibariyla rezervasyon listelerinde ve widget'larda `mhm_rentiva_get_display_id()` fonksiyonu kullanılmaktadır. WooCommerce entegrasyonu aktifse, bu fonksiyon WC siparis ID'sini dondurur; değilse standart post ID gosterilir. Bu sayede müşteriye iletilen ID ile admin panelindeki ID tutarli olur.
+## 🆔 Display ID
+
+As of v4.23.0, the `mhm_rentiva_get_display_id()` function is used in booking lists and widgets. If the WooCommerce integration is active, this function returns the WC order ID; otherwise the standard post ID is shown. This ensures the ID shown to the customer is consistent with the ID in the admin panel.
 
 ---
 
-## 🔄 Durum Degisikligi Hook'lari
+## 🔄 Status Change Hooks
 
-Rezervasyon durumu degistiginde `update_post_meta` cagrilari standart `save_post` hook'unu tetiklemez. v4.23.0 ile `updated_post_meta` ve `added_post_meta` hook'lari dinlenerek dashboard widget'lari ve istatistiklerin anlik güncellenmesi saglanmistir.
+When a booking status changes, calls to `update_post_meta` do not trigger the standard `save_post` hook. As of v4.23.0, the `updated_post_meta` and `added_post_meta` hooks are listened to, ensuring real-time updates to dashboard widgets and statistics.
 
 ---
 
-### Bölüm Özeti
-- **Dashboard** ile anlık doluluk oranını izleyin.
-- **Zaman Çizelgesi** ile her operasyonel adımı denetleyin.
-- **Finansal Panel** ile ödeme ve kalan bakiye takibini hatasız yapın.
-- **Kalan Ödeme** ile depozito müşterilerine self-servis ödeme imkânı sunun.
-- **Takvim popup'ı** artık saat bilgisi gösterir.
-- **Display ID** ile WC sipariş ID'si tutarlılığı sağlanır.
+### Section Summary
+- Monitor real-time occupancy via the **Dashboard**.
+- Audit every operational step with the **Timeline**.
+- Track payments and outstanding balances accurately with the **Financial Panel**.
+- Offer deposit customers self-service payment with **Pay Remaining**.
+- The **Calendar popup** now displays time information.
+- **Display ID** ensures consistency with the WC order ID.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 27.03.2026 | 4.23.0 | Takvim popup saat bilgisi, Display ID, durum hook'lari dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Rezervasyon listesi, takvim, manuel kayıt ve odeme yönetimi gerçek arayuze gore bastan yazildi. |
-| 18.03.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 27.03.2026 | 4.23.0 | Calendar popup time info, Display ID, and status hooks documented. |
+| 19.03.2026 | 4.21.2 | Booking list, calendar, manual entry, and payment management rewritten against the real interface. |
+| 18.03.2026 | 4.21.0 | Initial version created. |

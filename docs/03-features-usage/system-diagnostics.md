@@ -1,49 +1,50 @@
 ---
 id: system-diagnostics-usage
-title: Sistem Sağlığı ve Ayarlar Testi (Usage)
-sidebar_label: Sistem Sağlığı
+title: System Health and Settings Test
+sidebar_label: System Health
 sidebar_position: 18
 slug: /features-usage/system-diagnostics
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Sistem Sağlığı ve Ayarlar Testi, eklentinin tüm bileşenlerinin (Ödeme kapıları, E-posta, Cron görevleri, Araç envanteri) doğru çalışıp çalışmadığını denetlemenizi sağlar. **MHM Rentiva > Ayarlar > Ayarlar Testi** sekmesinden ulaşılır.
+System Health and Settings Test lets you verify that all components of the plugin (Payment gateways, Email, Cron jobs, Vehicle inventory) are working correctly. Access it via **MHM Rentiva > Settings > Settings Test** tab.
 
-İşletmenizin sorunsuz hizmet vermesi için periyodik olarak bu testleri çalıştırmanız önerilir.
-
----
-
-## 🔍 Kategori Bazlı Testler
-
-Tanılama sistemi, işletmenizi şu başlıklarda tarar:
-
-- **E-posta Gönderimi:** Bildirimlerin müşteriye ulaşıp ulaşmadığını test eder.
-- **Dizin Yazma Yetkileri:** Araç görselleri ve rapor çıktıları için klasör izinlerini kontrol eder.
-- **Kritik Sayfa Bağlantıları:** Arama, rezervasyon ve ödeme sayfalarının yayında olup olmadığını doğrular.
-- **WP Cron Durumu:** Zamanlanmış görevlerin (Hatırlatıcılar, Payout hesaplamaları) sıraya alınıp alınmadığını izler.
+Running these tests periodically is recommended to keep your business running smoothly.
 
 ---
 
-### 🖼️ GÖRSEL: SİSTEM TANILAMA RAPORU
-*(Ayarlar testi sayfası ve başarı/hata bildirimleri)*
+## Category-Based Tests
+
+The diagnostics system scans your business under the following headings:
+
+- **Email Delivery:** Tests whether notifications are reaching customers.
+- **Directory Write Permissions:** Checks folder permissions for vehicle images and report outputs.
+- **Critical Page Links:** Verifies that the search, booking, and payment pages are live.
+- **WP Cron Status:** Monitors whether scheduled tasks (Reminders, Payout calculations) are queued correctly.
 
 ---
 
-## 📉 Hata Giderme ve Aksiyonlar
-
-Bir test başarısız olduğunda sistem size şu çözümleri sunar:
-- **Tek Tıkla Çöz:** Eğer sorun bir sayfanın eksik olması gibi basit bir durumsa, sayfayı otomatik oluşturur.
-- **Detaylı Log:** Hatanın teknik detayını (örn: sunucu hatası 500) göstererek destek almanızı kolaylaştırır.
-- **Yeniden Tara:** Sorunu çözdükten sonra testi tekrar çalıştırarak durumu doğrulayabilirsiniz.
+### 🖼️ IMAGE: SYSTEM DIAGNOSTICS REPORT
+*(Settings test page and success/error notifications)*
 
 ---
 
-### Bölüm Özeti
-- **Operasyonel Güvence:** Hatalı yapılandırmalardan kaynaklı müşteri kaybını önleyin.
-- **Hızlı Teşhis:** Sorunun sunucu kaynaklı mı yoksa ayar kaynaklı mı olduğunu saniyeler içinde anlayın.
+## Error Resolution and Actions
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+When a test fails, the system offers the following solutions:
+- **One-Click Fix:** If the issue is simple — such as a missing page — it creates the page automatically.
+- **Detailed Log:** Shows the technical detail of the error (e.g. server error 500) to make it easier to get support.
+- **Re-scan:** After resolving the issue, run the test again to verify the status.
+
+---
+
+### Section Summary
+- **Operational Assurance:** Prevent customer loss caused by misconfigurations.
+- **Quick Diagnosis:** Determine in seconds whether a problem is server-side or configuration-side.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Sistem Sağlığı ve Ayarlar Testi kullanım rehberi oluşturuldu. |
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 19.03.2026 | 4.21.2 | System Health and Settings Test usage guide created. |

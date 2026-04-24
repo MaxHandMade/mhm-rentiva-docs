@@ -18,7 +18,7 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">
-          <Translate>WordPress Araç Kiralama Eklentisi</Translate>
+          <Translate>WordPress Vehicle Rental Plugin</Translate>
         </p>
         <div className="margin-bottom--lg">
           <img src="img/header-cover.png" alt="MHM Rentiva Cover" style={{ maxWidth: '800px', width: '100%', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }} />
@@ -27,7 +27,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/getting-started/installation">
-            <Translate>Hızlı Başlangıç (5dk) ⏱️</Translate>
+            <Translate>Quick Start (5 min) ⏱️</Translate>
           </Link>
         </div>
       </div>

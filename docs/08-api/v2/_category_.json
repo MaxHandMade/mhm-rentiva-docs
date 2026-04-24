@@ -3,6 +3,6 @@
     "position": 2,
     "link": {
         "type": "generated-index",
-        "description": "MHM Rentiva v2 REST API planlaması ve mimarisi."
+        "description": "MHM Rentiva v2 REST API planning and architecture."
     }
 }

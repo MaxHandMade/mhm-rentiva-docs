@@ -4,7 +4,7 @@ title: Theme Introduction
 sidebar_label: Introduction
 slug: /theme/introduction
 ---
-![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-09.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
 :::info Purpose
 The `mhm-rentiva-theme` is a modern, high-performance **Full Site Editing (FSE)** theme designed specifically to complement the `mhm-rentiva` plugin suite. It provides a seamless, unified design language for both static content and dynamic rental features.

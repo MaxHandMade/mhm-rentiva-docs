@@ -1,118 +1,118 @@
 ---
 id: vehicles
-title: Araç Yönetimi
-sidebar_label: Araç Listesi
+title: Vehicle Management
+sidebar_label: Vehicle List
 sidebar_position: 3
 slug: /features-usage/vehicles
 ---
 
-![Version](https://img.shields.io/badge/version-4.24.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Araçlar, MHM Rentiva sisteminin temel yapı taşlarıdır. **MHM Rentiva > Araçlar** menüsü, filonuzdaki tüm araçların listelendiği, durumlarının takip edildiği ve yeni araç girişlerinin yapıldığı ana yönetim ekranıdır.
+Vehicles are the fundamental building blocks of the MHM Rentiva system. **MHM Rentiva > Vehicles** is the main management screen where all vehicles in your fleet are listed, their statuses are tracked, and new vehicle entries are made.
 
 ---
 
-## 🚘 Araç Listesi ve Hızlı İşlemler
+## Vehicle List and Quick Actions
 
-Araç listesi, filonuzun genel dökümünü sunar. **"Hızlı Düzenle"** seçeneği ile sayfayı yenilemeden plaka, fiyat ve müsaitlik durumunu güncelleyebilirsiniz.
+The vehicle list provides a general overview of your fleet. Use the **"Quick Edit"** option to update plate, price, and availability status without reloading the page.
 
-- **Liste Sütunları:** Başlık, Araç Kategorileri, Plaka, Günlük Fiyat, Koltuk Sayısı, Vites, Yakıt ve Müsaitlik (Aktif/Pasif).
-- **Filtreleme:** Kategoriye, tarihe veya mevcut durumuna göre araçları süzebilirsiniz.
+- **List Columns:** Title, Vehicle Categories, Plate, Daily Price, Seat Count, Transmission, Fuel, and Availability (Active/Passive).
+- **Filtering:** Filter vehicles by category, date, or current status.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: ARAÇ LİSTESİ VE HIZLI DÜZENLEME</strong><br/>
+  <strong>IMAGE: VEHICLE LIST AND QUICK EDIT</strong><br/>
   <em>mhm-rentiva-vehicle-list-quick-edit</em>
 </div>
 
 ---
 
-## ➕ Araç Tanımlama ve Detaylar
+## Adding and Editing Vehicles
 
-Yeni bir araç eklerken veya mevcut olanı düzenlerken **"Araç Detayları"** panelinde aşağıdaki verileri eksiksiz doldurmanız önerilir:
+When adding a new vehicle or editing an existing one, it is recommended to fill in all fields in the **"Vehicle Details"** panel:
 
-### 1. Temel Teknik Veriler
-- **Kullanılabilirlik:** Aracın sistemde aktif/pasif olma durumu.
-- **Lokasyon:** Aracın hangi ofis veya vendor bölgesine ait olduğu.
-- **Fiyat ve Finans:** Günlük kiralama bedeli ve Depozito tutarı.
-- **Kimlik Bilgileri:** Plaka, Marka, Model ve Model Yılı.
-- **Kapasite:** Koltuk Sayısı ve Kapı Sayısı.
-- **Mekanik:** Vites Tipi (Otomatik/Manuel), Yakıt Tipi (Benzin/Dizel/Hibrit/Elektrik) ve Motor Hacmi.
-
----
-
-## 🛠️ Özellikler ve Ekipmanlar
-
-Her araç için müşterilerin filtreleme yapabileceği iki ana kontrol listesi bulunur:
-
-### Araç Özellikleri (Vehicle Features)
-Klima, Hidrolik Direksiyon, ABS, Hava Yastıkları, Merkezi Kilit, Elektrikli Camlar/Aynalar, Sis Farları, Hız Sabitleyici, Bluetooth, Navigasyon, Tavan Penceresi ve Isıtmalı Koltuklar.
-
-### Araç Ekipmanları (Equipment)
-Yedek Lastik, İlk Yardım Çantası, Yangın Söndürücü, Uyarı Üçgeni, Araba Örtüsü, Çocuk Koltuğu, GPS Takip Cihazı, Araç Kamerası ve Temizlik Kiti.
+### 1. Core Technical Data
+- **Availability:** Whether the vehicle is active or passive in the system.
+- **Location:** Which office or vendor region the vehicle belongs to.
+- **Price and Finance:** Daily rental fee and Deposit amount.
+- **Identity Information:** Plate, Make, Model, and Model Year.
+- **Capacity:** Seat Count and Door Count.
+- **Mechanical:** Transmission Type (Automatic/Manual), Fuel Type (Petrol/Diesel/Hybrid/Electric), and Engine Displacement.
 
 ---
 
-## ✈️ Transfer Ayarları (VIP Modülü)
+## Features and Equipment
 
-MHM Rentiva, klasik kiralamanın dışında VIP Transfer operasyonlarını da destekler. Aracın en alt kısmındaki bu panelden şu ayarlar yapılır:
+Two main checklists are available for each vehicle that customers can use for filtering:
 
-- **Hizmet Türü:** Sadece Kiralama, Sadece Transfer veya Her İkisi.
-- **Yolcu Kapasitesi:** Maksimum yolcu sayısı.
-- **Bagaj Limitleri:** Maksimum büyük ve küçük bagaj kapasiteleri (Puan tabanlı hesaplama için).
-- **Fiyat Çarpanı:** Belirli araçlara özel (örn: VIP araçlar için 1.2x) fiyat çarpanı atama.
+### Vehicle Features
+Air Conditioning, Power Steering, ABS, Airbags, Central Locking, Electric Windows/Mirrors, Fog Lights, Cruise Control, Bluetooth, Navigation, Sunroof, and Heated Seats.
 
----
-
-## Galeri ve Gorsel Yonetimi
-
-- **Arac Goruntusu:** Arama sonuclarinda gorunecek ana profil fotografi.
-- **Arac Galerisi:** Aracin ic ve dis detaylarini gosteren maksimum 10 adet fotograf.
+### Vehicle Equipment
+Spare Tire, First Aid Kit, Fire Extinguisher, Warning Triangle, Car Cover, Child Seat, GPS Tracker, Dashboard Camera, and Cleaning Kit.
 
 ---
 
-## Arac Belgeleri (v4.23.1)
+## Transfer Settings (VIP Module)
 
-Arac ekleme formunda (`[rentiva_vehicle_submit]`) iki belge yukleme alani bulunur:
+MHM Rentiva supports VIP Transfer operations in addition to standard rentals. Configure the following settings in this panel at the bottom of the vehicle:
 
-### Arac Ruhsati (Vehicle Registration Document)
-Vendor, arac ruhsat belgesini form uzerinden yukler. Admin tarafindan dogrulama icin incelenir.
+- **Service Type:** Rental Only, Transfer Only, or Both.
+- **Passenger Capacity:** Maximum number of passengers.
+- **Luggage Limits:** Maximum large and small luggage capacities (for point-based calculation).
+- **Price Multiplier:** Assign a price multiplier specific to certain vehicles (e.g. 1.2x for VIP vehicles).
 
-### Arac Sigortasi (Vehicle Insurance Document)
-v4.23.1 ile eklenmistir. Arac ruhsatindan hemen sonra gelen bu bolum, aracin sigorta belgesinin yuklenmesini saglar.
+---
+
+## Gallery and Image Management
+
+- **Vehicle Image:** The main profile photo shown in search results.
+- **Vehicle Gallery:** Up to 10 photos showing the interior and exterior details of the vehicle.
+
+---
+
+## Vehicle Documents (v4.23.1)
+
+The vehicle submission form (`[rentiva_vehicle_submit]`) contains two document upload fields:
+
+### Vehicle Registration Document
+The vendor uploads the vehicle registration document via the form. It is reviewed by the admin for verification.
+
+### Vehicle Insurance Document
+Added in v4.23.1. This section, which appears immediately after the registration document, allows uploading the vehicle's insurance document.
 
 - **Meta key:** `_mhm_rentiva_vehicle_insurance_doc`
-- **Islem:** VehicleSubmit.php AJAX handler tarafindan islenir ve WordPress Media Library'de saklanir.
-- **Gecmis:** Bu alan onceden vendor basvuru formunda bulunuyordu. v4.23.1 ile her araca ozel sigorta belgesi yuklenebilmesi icin arac ekleme formuna tasindi.
+- **Processing:** Handled by the `VehicleSubmit.php` AJAX handler and stored in the WordPress Media Library.
+- **History:** This field was previously in the vendor application form. In v4.23.1, it was moved to the vehicle submission form so that an insurance document can be uploaded per vehicle.
 
 ---
 
-## Bloklu Tarihler (Blocked Dates)
+## Blocked Dates
 
-Aracın belirli tarihlerde kiralanmasını engellemek için **Bloklu Tarihler** meta kutusu kullanılır. v4.23.0 ile "Tumune Uygula" (Apply to All) işlevi duzeltilmistir:
+Use the **Blocked Dates** meta box to prevent a vehicle from being rented on specific dates. The "Apply to All" function was fixed in v4.23.0:
 
-- **Eski davranis:** JS yalnızca `vehicle_id` gonderiyordu, PHP tarafinda DB'den okuma yapiliyordu (henuz kaydedilmemis veriler için calismiyordu).
-- **Yeni davranis (v4.23.0):** JS artik `dates` + `notes` verilerini JSON payload olarak gonderir. PHP, oncelikle payload'tan okur; bulamazsa DB'ye duser (fallback).
-- **Ilgili dosyalar:** `BlockedDatesMetaBox.php`, `assets/js/admin/blocked-dates.js`
-
----
-
-## ⚡ AssetManager Admin Kapsami
-
-v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admin sayfalarında çalışır (`is_rentiva_admin_page()` guard). v4.22.1 ile `vehicle`, `vehicle_booking` ve `vehicle_addon` post type'lari da guard'a eklenmiştir. Bu sayede CSS degiskenleri (`css-variables.css`) dogru sekilde yüklenir ve KPI kartlari bozulmaz.
+- **Old behavior:** JS was only sending `vehicle_id`; PHP was reading from the DB (which did not work for unsaved data).
+- **New behavior (v4.23.0):** JS now sends `dates` + `notes` data as a JSON payload. PHP reads from the payload first; if not found, it falls back to the DB.
+- **Relevant files:** `BlockedDatesMetaBox.php`, `assets/js/admin/blocked-dates.js`
 
 ---
 
-### Bölüm Özeti
-- Araclar **CPT** (Custom Post Type) olarak saklanir ve her araç kendine ozel meta alanlara sahiptir.
-- **Hizli Düzenleme** ile operasyonel hiz kazanin.
-- **VIP Modulu** ile transfer kapasitelerini ve fiyat carpanlarini yonetin.
-- **Bloklu Tarihler** artik "Tumune Uygula" işlevinde JSON payload kullanir.
+## AssetManager Admin Scope
 
-### Degisiklik Gunlugu
-| Tarih | Surum | Not |
+As of v4.22.0, `AssetManager::enqueue_admin_assets()` runs only on Rentiva admin pages (guarded by `is_rentiva_admin_page()`). In v4.22.1, the `vehicle`, `vehicle_booking`, and `vehicle_addon` post types were also added to the guard. This ensures that CSS variables (`css-variables.css`) load correctly and KPI cards are not broken.
+
+---
+
+### Section Summary
+- Vehicles are stored as a **CPT** (Custom Post Type) and each vehicle has its own set of meta fields.
+- Gain operational speed with **Quick Edit**.
+- Manage transfer capacities and price multipliers with the **VIP Module**.
+- **Blocked Dates** now uses a JSON payload for the "Apply to All" function.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 28.03.2026 | 4.23.1 | Arac sigorta belgesi yukleme bolumu eklendi. Sehir secimi SelectWoo'ya donusturuldu. |
-| 27.03.2026 | 4.23.0 | Bloklu Tarihler "Tumune Uygula" fix, AssetManager admin guard dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Arac detaylari, ozellikler, ekipmanlar ve VIP modulu gercek arayuze gore guncellendi. |
-| 26.02.2026 | 4.21.0 | Ilk surum olusturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 28.03.2026 | 4.23.1 | Vehicle insurance document upload section added. City selection converted to SelectWoo. |
+| 27.03.2026 | 4.23.0 | Blocked Dates "Apply to All" fix and AssetManager admin guard documented. |
+| 19.03.2026 | 4.21.2 | Vehicle details, features, equipment, and VIP module updated against the real interface. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

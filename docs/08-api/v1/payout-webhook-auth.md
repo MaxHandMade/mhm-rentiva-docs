@@ -1,64 +1,65 @@
 ---
 id: payout-webhook-auth
-title: Ödeme Webhook Kimlik Doğrulama
+title: Payment Webhook Authentication
 sidebar_label: Payout Webhook Auth
 sidebar_position: 80
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-`PayoutWebhookAuth`, dış ödeme servislerinden gelen bildirimlerin (webhooks) güvenilirliğini doğrulamak için kullanılan uzmanlaşmış bir güvenlik katmanıdır.
+:::info Purpose
+`PayoutWebhookAuth` is a specialized security layer used to verify the authenticity of notifications (webhooks) arriving from external payment services.
 :::
 
-# 🔒 Ödeme Webhook Kimlik Doğrulama
+# 🔒 Payment Webhook Authentication
 
-MHM Rentiva, finansal veri bütünlüğünü korumak için dış dünyadan gelen her ödeme bildirimini sıkı bir doğrulama sürecinden geçirir.
-
----
-
-## 🛡️ 1. Kimlik Doğrulama Modeli
-
-Bu bileşen, `AuthHelper` sınıfının bir uzantısı olarak çalışır ve sadece ödeme servis sağlayıcıları (PSP) için tanımlanan özel anahtarları kullanır.
-
-- **Kaynak Doğrulaması:** İsteklerin sadece bilinen IP adreslerinden veya geçerli bir uygulama kimliğiyle geldiğini kontrol eder.
-- **Gizli Anahtar (Secret Key):** Her PSP entegrasyonu için benzersiz bir `Webhook Secret` tanımlanır.
+MHM Rentiva subjects every payment notification received from the outside world to a strict verification process to maintain financial data integrity.
 
 ---
 
-## ✍️ 2. İmza Doğrulama (Signature Verification)
+## 🛡️ 1. Authentication Model
 
-En yaygın kullanılan güvenlik methodu `HMAC-SHA256`'dır. Süreç şu adımlardan oluşur:
+This component operates as an extension of the `AuthHelper` class and uses only the dedicated keys defined for payment service providers (PSPs).
 
-1. **Header Çıkarma:** İstek başlığındaki `X-Rentiva-Signature` değeri alınır.
-2. **Hash Üretimi:** Gelen ham istek gövdesi (Raw Body) ve sistemdeki `Webhook Secret` kullanılarak sunucu tarafında yeni bir hash hesaplanır.
-3. **Karşılaştırma:** Hesaplanan hash ile başlıktaki imza `hash_equals()` (timing-attack safe) fonksiyonu ile karşılaştırılır.
+- **Source Verification:** Checks that requests originate only from known IP addresses or with a valid application identity.
+- **Secret Key:** A unique `Webhook Secret` is defined for each PSP integration.
 
 ---
 
-## ⏳ 3. Replay ve Rate Koruması
+## ✍️ 2. Signature Verification
 
-### Zaman Damgası (Timestamp) Kontrolü
-İstek içindeki zaman damgası, sunucu saatiyle karşılaştırılır. Eğer fark 5 dakikadan (300sn) fazlaysa, istek bir "Replay Attack" (Tekrar Saldırısı) kabul edilerek reddedilir.
+The most commonly used security method is `HMAC-SHA256`. The process consists of the following steps:
+
+1. **Header Extraction:** The `X-Rentiva-Signature` value from the request header is retrieved.
+2. **Hash Generation:** A new hash is computed server-side using the incoming raw request body and the system's `Webhook Secret`.
+3. **Comparison:** The computed hash is compared against the signature in the header using `hash_equals()` (timing-attack safe).
+
+---
+
+## ⏳ 3. Replay and Rate Protection
+
+### Timestamp Check
+The timestamp within the request is compared against the server time. If the difference exceeds 5 minutes (300s), the request is treated as a "Replay Attack" and rejected.
 
 ### Webhook Rate Limiter
-- Aynı işlem ID'si için saniyede birden fazla bildirim gelirse, sistem sadece ilkini işler.
-- `WebhookRateLimiter` sınıfı, ödeme sağlayıcısından kaynaklanan mükerrer çağrıları (retries) yönetir.
+- If more than one notification arrives for the same transaction ID per second, the system processes only the first.
+- The `WebhookRateLimiter` class manages duplicate calls (retries) originating from the payment provider.
 
 ---
 
-## ⚙️ 4. İdempotent İşlem Stratejisi
+## ⚙️ 4. Idempotent Operation Strategy
 
-Eğer ödeme servis sağlayıcısı aynı başarılı bildirimi (`confirmed`) tekrar gönderirse:
-- Sistem veritabanında bu işlemin statüsünü kontrol eder.
-- Eğer işlem zaten "Completed" ise, herhangi bir Ledger (Defter) işlemi yapmaz ancak servis sağlayıcısına `200 OK` dönerek sürecin sona ermesini sağlar.
+If the payment service provider sends the same successful notification (`confirmed`) again:
+- The system checks the status of that operation in the database.
+- If the operation is already "Completed", no Ledger operation is performed, but `200 OK` is returned to the service provider to signal that the process has concluded.
 
-## Bölüm Sonu Özeti
-- `PayoutWebhookAuth`, finansal manipülasyonları önleyen en kritik güvenlik katmanıdır.
-- `hash_equals` kullanımı ile zamanlama saldırılarına karşı korunur.
-- Replay koruması ile eski veya ele geçirilmiş isteklerin tekrar yürütülmesi engellenir.
+## Section Summary
+- `PayoutWebhookAuth` is the most critical security layer preventing financial manipulation.
+- The use of `hash_equals` protects against timing attacks.
+- Replay protection prevents old or intercepted requests from being re-executed.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | HMAC-SHA256, hash_equals ve Replay Attack koruma detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | HMAC-SHA256, hash_equals, and Replay Attack protection details added. |

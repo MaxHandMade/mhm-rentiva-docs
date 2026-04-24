@@ -1,151 +1,151 @@
 ---
 id: dashboard-widgets
-title: Dashboard Widget Mimarisi (UI & Analytics)
-sidebar_label: Dashboard Widget'ları
+title: Dashboard Widget Architecture (UI & Analytics)
+sidebar_label: Dashboard Widgets
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amac
-Bu sayfa, hem WordPress yönetim panelinde (Admin) hem de on yuz (Frontend) kullanıcı panellerinde kullanilan KPI kartlarinin, widget'larin ve analitik bileşenlerin mimarisini açıklar.
+:::info Purpose
+This page describes the architecture of KPI cards, widgets, and analytics components used in both the WordPress admin panel and the frontend user dashboards.
 :::
 
-# Dashboard Widget Mimarisi
+# Dashboard Widget Architecture
 
-Rentiva dokumantasyonunda "Widget", veriyi görsellestiren ve etkilesim sunan bagimsiz UI bloklarini ifade eder. Bu bloklar iki ana katmanda çalışır: **Frontend (Elementor)** ve **Admin (Custom List Tables)**.
-
----
-
-## 1. Frontend Widget Katmani (Elementor)
-
-On yuz panellerindeki (Müşteri/Satici) tum görsel bileşenler `ElementorIntegration` sınıfı üzerinden yonetilir.
-
-### Temel KPI Widget'lari
-Tum KPI kartlari verisini `TrendService` üzerinden asenkron olarak ceker:
-- **My Bookings Widget:** Aktif rezervasyon sayilarini ve buyume trendini gösterir.
-- **Payment History Widget:** Satiçinin hakedis ve odeme gecmisini tablo olarak sunar.
-- **My Messages Widget:** Okunmamis mesaj sayısını anlik (Real-time) yansitir.
+In Rentiva documentation, "Widget" refers to independent UI blocks that visualize data and offer interactions. These blocks operate in two main layers: **Frontend (Elementor)** and **Admin (Custom List Tables)**.
 
 ---
 
-## 2. Admin Widget Katmani
+## 1. Frontend Widget Layer (Elementor)
 
-Yönetim panelindeki widget'lar `DashboardPage.php`, `Reports.php`, `Messages.php` ve `RevenueReport.php` siniflari tarafından yonetilir.
+All visual components in the frontend panels (Customer/Vendor) are managed through the `ElementorIntegration` class.
 
-### İstatistik Widget'i (Stats)
-- **Tasarim:** 2x2 grid düzeninde, ikonlar ve renklerle zenginlestirilmis inline CSS.
-- **Cache:** Cache key prefix `mhm_rentiva_dashboard_stats` (v4.23.0'da düzeltildi; önceki hatali prefix: `mhm_dashboard_stats`).
-- **Dosya:** `Reports.php`
+### Core KPI Widgets
+All KPI cards fetch their data asynchronously via `TrendService`:
+- **My Bookings Widget:** Shows active booking counts and growth trends.
+- **Payment History Widget:** Presents the vendor's earnings and payment history as a table.
+- **My Messages Widget:** Reflects unread message counts in real time.
 
-### Gelir Grafigi (Revenue Chart)
-- **Tarih formati:** `date_i18n(get_option('date_format'))` ile yerellestirilmis tarihler.
-- **Iptal dataset'i:** Kırmızı kesikli cizgiyle iptal edilen rezervasyonlar ayri gosterilir.
-- **Timezone:** `gmdate('Y-m-01')` yerine `wp_date('Y-m-01')` kullanılır (aylik gelir tarihleri için).
-- **Dosyalar:** `RevenueReport.php` + `reports-charts.js`
+---
 
-### Yaklasan Operasyonlar (Upcoming Ops)
-- **Saat bilgisi:** `start_date + start_time` birlestirilerek gosterilir (önceki 00:00 hatasi düzeltildi).
-- **Display ID:** `mhm_rentiva_get_display_id()` ile WC order ID gösterimi + tıklanabilir link.
-- **Dosya:** `Reports.php`
+## 2. Admin Widget Layer
 
-### Son Rezervasyonlar (Recent Bookings)
-- **ID gösterimi:** `mhm_rentiva_get_display_id()` ile WC order ID uyumu.
-- **Dosyalar:** `recent-bookings.php` + `transfer-widget.php`
+Widgets in the admin panel are managed by the `DashboardPage.php`, `Reports.php`, `Messages.php`, and `RevenueReport.php` classes.
 
-### Mesajlar Widget'i (Messages)
-- **Tasarim:** Self-contained inline CSS, okunmamis mesaj badge'i, avatar initials ve "time ago" formati.
-- **Dosya:** `Messages.php`
+### Statistics Widget (Stats)
+- **Design:** 2×2 grid layout with icons and colors via inline CSS.
+- **Cache:** Cache key prefix `mhm_rentiva_dashboard_stats` (fixed in v4.23.0; previous incorrect prefix: `mhm_dashboard_stats`).
+- **File:** `Reports.php`
 
-### Takvim Popup
-- **Saat bilgisi:** `get_post_meta()` ile `_mhm_start_time`/`_mhm_end_time` alanları (SQL JOIN yerine).
-- **Dosya:** `BookingColumns.php`
+### Revenue Chart
+- **Date format:** Localized dates via `date_i18n(get_option('date_format'))`.
+- **Cancellation dataset:** Cancelled bookings are shown separately with a red dashed line.
+- **Timezone:** Uses `wp_date('Y-m-01')` instead of `gmdate('Y-m-01')` (for monthly revenue dates).
+- **Files:** `RevenueReport.php` + `reports-charts.js`
+
+### Upcoming Operations
+- **Time display:** `start_date + start_time` are combined and shown (previous 00:00 bug fixed).
+- **Display ID:** WC order ID displayed via `mhm_rentiva_get_display_id()` with a clickable link.
+- **File:** `Reports.php`
+
+### Recent Bookings
+- **ID display:** WC order ID compatibility via `mhm_rentiva_get_display_id()`.
+- **Files:** `recent-bookings.php` + `transfer-widget.php`
+
+### Messages Widget
+- **Design:** Self-contained inline CSS, unread message badge, avatar initials, and "time ago" format.
+- **File:** `Messages.php`
+
+### Calendar Popup
+- **Time display:** `_mhm_start_time`/`_mhm_end_time` fields via `get_post_meta()` (instead of SQL JOIN).
+- **File:** `BookingColumns.php`
 
 ### Payout List Table (`PayoutListTable.php`)
-Finansal operasyonlarin kalbi olan bu tablo sunlari icerir:
-- **Analitik Kolonlar:** Mevcut Bakiye, Talep Edilen Tutar ve İşlem Durumu.
-- **Toplu İşlemler (Bulk Actions):** Onay Bekleyen (Pending) odemelerin tek tikla toplu onaylanmasi.
-- **Banka Uyumlulugu:** İşlem durumlarini (Confirmed / Failed) Processor katmanindan gelen verilerle anlik günceller.
+The central table for financial operations, containing:
+- **Analytics Columns:** Current Balance, Requested Amount, and Transaction Status.
+- **Bulk Actions:** One-click bulk approval of pending payments.
+- **Bank Compatibility:** Updates transaction statuses (Confirmed / Failed) in real time from the Processor layer.
 
 ---
 
-## 3. Lite / Pro Widget Erişim Kontrolu
+## 3. Lite / Pro Widget Access Control
 
-Bazi widget'lar yalnızca Pro sürümde kullanilabilir:
+Some widgets are available only in the Pro version:
 
-| Widget | Erişim | Guard |
+| Widget | Access | Guard |
 |---|---|---|
-| İstatistik Widget'i | Lite + Pro | — |
-| Son Rezervasyonlar | Lite + Pro | — |
-| Mesajlar | Lite + Pro | — |
-| **Gelir Grafigi** | **Yalnızca Pro** | `Mode::canUseAdvancedReports()` |
-| **Yaklasan Operasyonlar** | **Yalnızca Pro** | `Mode::canUseAdvancedReports()` |
+| Statistics Widget | Lite + Pro | — |
+| Recent Bookings | Lite + Pro | — |
+| Messages | Lite + Pro | — |
+| **Revenue Chart** | **Pro only** | `Mode::canUseAdvancedReports()` |
+| **Upcoming Operations** | **Pro only** | `Mode::canUseAdvancedReports()` |
 
 ---
 
-## 4. Timezone ve Tarih İşlemleri
+## 4. Timezone and Date Handling
 
-v4.23.0 itibariyle tum dashboard widget'lari WordPress timezone'unu kullanir:
+As of v4.23.0, all dashboard widgets use the WordPress timezone:
 
-| Önceki (hatali) | Guncel (dogru) | Açıklama |
+| Previous (incorrect) | Current (correct) | Description |
 |---|---|---|
-| `time()` | `current_time('timestamp')` | Geri sayim hesaplamalari |
-| `strtotime('today')` | `strtotime(wp_date('Y-m-d'))` | Gün baslangici |
-| `gmdate('Y-m-01')` | `wp_date('Y-m-01')` | Aylik gelir tarihleri |
+| `time()` | `current_time('timestamp')` | Countdown calculations |
+| `strtotime('today')` | `strtotime(wp_date('Y-m-d'))` | Start of day |
+| `gmdate('Y-m-01')` | `wp_date('Y-m-01')` | Monthly revenue dates |
 
-**Dosyalar:** `DashboardPage.php`, `upcoming-operations.php`, `Reports.php`
-
----
-
-## 5. Status Senkronizasyonu
-
-`update_post_meta` cagrisi `save_post` hook'unu tetiklemez. Bu nedenle dashboard'un durumu dogru yansitmasi için ek hook'lar eklenmiştir:
-- `updated_post_meta` — mevcut meta degistiginde
-- `added_post_meta` — yeni meta eklendiğinde
-
-**Dosya:** `DashboardPage.php`
+**Files:** `DashboardPage.php`, `upcoming-operations.php`, `Reports.php`
 
 ---
 
-## 6. WooCommerce Entegrasyonu
+## 5. Status Synchronization
 
-- **Email araç görseli:** `woocommerce_order_item_thumbnail` filter'i ile WC siparis email'lerine araç görseli eklenir.
-- **Dosya:** `WooCommerceBridge.php`
+`update_post_meta` calls do not trigger the `save_post` hook. Additional hooks have been added to ensure the dashboard reflects status correctly:
+- `updated_post_meta` — when existing meta changes
+- `added_post_meta` — when new meta is added
+
+**File:** `DashboardPage.php`
 
 ---
 
-## 7. Veri Akisi ve Performans
+## 6. WooCommerce Integration
 
-Widget'lar, veritabanı yukunu minimize etmek için **Tier-1 Cache** katmani kullanir:
+- **Email vehicle image:** The `woocommerce_order_item_thumbnail` filter adds a vehicle image to WC order emails.
+- **File:** `WooCommerceBridge.php`
+
+---
+
+## 7. Data Flow and Performance
+
+Widgets use a **Tier-1 Cache** layer to minimize database load:
 
 ```mermaid
 graph TD
-    A[Widget Render] --> B{Cache Var mi?}
-    B -- Evet --> C[Hizli Render]
-    B -- Hayir --> D[TrendService::get_trend]
+    A[Widget Render] --> B{Cache Hit?}
+    B -- Yes --> C[Fast Render]
+    B -- No --> D[TrendService::get_trend]
     D --> E[WP_Query / Ledger Sum]
-    E --> F[Cache Kaydet - 1 Saat]
+    E --> F[Save to Cache - 1 Hour]
     F --> C
 ```
 
 ---
 
-## 8. Güvenlik Kuralları
+## 8. Security Rules
 
-- **Data Isolation:** Bir satici sadece kendi verisini (`post_author` eslesmesi) gorebilir.
-- **Capability Check:** `PayoutListTable` uzerindeki toplu onay butonu sadece `mhm_rentiva_approve_payout` yetkisine sahip kullanıcılara gorunur.
-- **Nonce Security:** Elementor widget'lari üzerinden yapilan tum AJAX istekleri `mhm_rentiva_elementor` nonce anahtarıyla dogrulanir.
+- **Data Isolation:** A vendor can only see their own data (`post_author` match).
+- **Capability Check:** The bulk approval button on `PayoutListTable` is visible only to users with the `mhm_rentiva_approve_payout` capability.
+- **Nonce Security:** All AJAX requests made through Elementor widgets are verified with the `mhm_rentiva_elementor` nonce key.
 
-## Bölüm Sonu Özeti
-- Frontend widget'lari **Elementor** tabalidir ve `TrendService` kullanir.
-- Admin widget'lari `DashboardPage`, `Reports`, `Messages` ve `RevenueReport` siniflari tarafından yonetilir.
-- Gelir Grafigi ve Yaklasan Operasyonlar **yalnızca Pro** sürümde kullanilabilir (`Mode::canUseAdvancedReports()`).
-- Tum widget'lar WordPress timezone'unu kullanir (`current_time`, `wp_date`).
+## Section Summary
+- Frontend widgets are **Elementor**-based and use `TrendService`.
+- Admin widgets are managed by the `DashboardPage`, `Reports`, `Messages`, and `RevenueReport` classes.
+- Revenue Chart and Upcoming Operations are available **Pro only** (`Mode::canUseAdvancedReports()`).
+- All widgets use the WordPress timezone (`current_time`, `wp_date`).
 - Cache key prefix: `mhm_rentiva_dashboard_stats`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | 12 dashboard widget düzeltmesi dokumante edildi: timezone, status sync, takvim saat, ID uyumu, WC email görseli, mesajlar tasarimi, gelir grafigi, stats cache, Lite/Pro gating. |
-| 19.03.2026 | 4.21.2 | Sayfa, Elementor entegrasyonu ve TrendService KPI yapısına gore güncellendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | 12 dashboard widget fixes documented: timezone, status sync, calendar time, ID compatibility, WC email image, messages design, revenue chart, stats cache, Lite/Pro gating. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect Elementor integration and TrendService KPI structure. |

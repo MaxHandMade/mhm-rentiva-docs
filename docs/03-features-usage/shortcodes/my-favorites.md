@@ -1,81 +1,82 @@
 ---
 title: Account favorites
-description: Account favorites modülünün kullanım kılavuzu ve teknik detayları.
+description: Usage guide and technical reference for the Account Favorites module.
 sidebar_position: 3
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Account favorites modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::info Purpose
+This page describes the Account Favorites module as a standard reference, covering both technical and operational aspects.
 :::
 
-# 🚗 Account favorites
+# 🚗 Account Favorites
 
-## İçindekiler
-- Kullanım
-- Özellikler
-- Geliştirici Notları
+## Contents
+- Usage
+- Features
+- Developer Notes
 
-Account favorites modülü, Rentiva platformundaki **account** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+The Account Favorites module is designed to manage and present **account** favorites to visitors on the Rentiva platform.
 
-## Kullanım
+## Usage
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
+:::tip IMAGE COMING SOON
+A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
 :::
 
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+To add this module to any page or post, use the shortcode below:
 
 ```shortcode
 [rentiva_my_favorites limit="12"]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Account favorites"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Account Favorites"**.
 
-### Parametreler
+### Parameters
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+The following parameters are available inside the shortcode:
 
-| Parametre | Varsayılan | Açıklama |
+| Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `limit` | `12` | Görüntülenecek maksimum öğe sayısı. |
-| `columns` | `3` | Modülün **general** davranışını kontrol eder. |
-| `orderby` | `date` | Modülün **general** davranışını kontrol eder. |
-| `order` | `DESC` | Modülün **general** davranışını kontrol eder. |
-| `show_image` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_title` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_price` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_features` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_rating` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_booking_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_favorite_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
-| `layout` | `grid` | Modülün **general** davranışını kontrol eder. |
-| `show_remove_button` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_added_date` | `0` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `no_results_text` | `__(You have no favorite vehicles yet.` | Modülün **content** davranışını kontrol eder. |
+| `limit` | `12` | Maximum number of items to display. |
+| `columns` | `3` | Controls the module's **general** layout behavior. |
+| `orderby` | `date` | Controls the module's **general** sorting behavior. |
+| `order` | `DESC` | Controls the module's **general** sorting direction. |
+| `show_image` | `1` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_title` | `1` | Controls the module's **general** display behavior. |
+| `show_price` | `1` | Controls the module's **general** display behavior. |
+| `show_features` | `1` | Controls the module's **general** display behavior. |
+| `show_rating` | `1` | Controls the module's **general** display behavior. |
+| `show_booking_button` | `1` | Controls the module's **general** display behavior. |
+| `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
+| `show_badges` | `1` | Controls the module's **general** display behavior. |
+| `layout` | `grid` | Controls the module's **general** layout behavior. |
+| `show_remove_button` | `1` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_added_date` | `0` | Visibility toggle. `1` (on) or `0` (off). |
+| `no_results_text` | `__(You have no favorite vehicles yet.` | Controls the module's **content** behavior. |
 
 
-## Özellikler
+## Features
 
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
+### 📱 Responsive Design
+- **Mobile:** Single-column layout.
+- **Tablet (under 782px):** Optimized view.
+- **Desktop:** Full view at the configured column count or width.
 
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+### 🚀 Performance-Focused
+- **Smart Caching:** Database queries are optimized and cached by the system.
+- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
-## Geliştirici Notları
+## Developer Notes
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-my-favorites-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **HTML Structure:** All containers start with the `.mhm-rentiva-my-favorites-wrapper` class.
+- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
 
-## Bölüm Sonu Özeti
-- Account favorites sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+## Section Summary
+- The Account Favorites page has been aligned to the standard documentation structure with consistent reference headings.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

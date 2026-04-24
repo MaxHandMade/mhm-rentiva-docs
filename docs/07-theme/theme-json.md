@@ -4,7 +4,7 @@ title: Theme Configuration (theme.json)
 sidebar_label: theme.json
 slug: /theme/theme-json
 ---
-![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
 :::info Purpose
 `theme.json` is the configuration hub for global styles, settings, and behavior. It defines the color palette, typography hierarchy, spacing scales, and global block styles.
@@ -77,13 +77,13 @@ The theme uses proportional spacing steps from `3xs` to `3xl`:
 }
 ```
 
-### Duzen Kısıtlamaları
+### Layout Constraints
 
-- **Content Size**: `1280px` (standart genislik).
-- **Wide Size**: `1440px` (tam genislik veya genis hizalama bölümleri için).
+- **Content Size**: `1280px` (standard width).
+- **Wide Size**: `1440px` (for full-width or wide-aligned sections).
 
-:::info v0.3.0 Değişiklik
-`page.html` şablonu `content-narrow` yerine artik `content-wide` kullanmaktadir. `3-layout.css` dosyasındaki `max-width` değeri `var(--wp--style--global--content-size, 1280px)` ile `theme.json`'a senkronize edilmiştir. Bu sayede tema editoru üzerinden content-size degistirildiginde eklenti sayfaları da otomatik olarak güncellenir.
+:::info v0.3.0 Change
+The `page.html` template now uses `content-wide` instead of `content-narrow`. The `max-width` value in `3-layout.css` has been synchronized to `theme.json` via `var(--wp--style--global--content-size, 1280px)`. This means changing the content-size in the theme editor automatically updates plugin pages as well.
 :::
 
 ---
@@ -100,7 +100,7 @@ By centralizing all design tokens in `theme.json`, the `mhm-rentiva` plugin can 
 }
 ```
 
-**This "Tight Coupling" (Sıkı Bağ)** ensures that any global color change in the theme editor automatically propagates to:
+**This "Tight Coupling"** ensures that any global color change in the theme editor automatically propagates to:
 - The Booking Widget
 - Vendor Analytics Cards
 - Search Results Grid
@@ -108,8 +108,9 @@ By centralizing all design tokens in `theme.json`, the `mhm-rentiva` plugin can 
 
 ---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |-------|-------|-----|
-| 27.03.2026 | v0.3.0 | `content-wide` düzeni ve CSS degisken senkronizasyonu dokumante edildi. |
-| 09.03.2026 | 4.21.0-docs | Tema yapilandirma dokumantasyonu oluşturuldu. |
+| 23.04.2026 | v0.3.0 | English translation applied to Turkish sections. |
+| 27.03.2026 | v0.3.0 | `content-wide` layout and CSS variable synchronization documented. |
+| 09.03.2026 | 4.21.0-docs | Theme configuration documentation created. |

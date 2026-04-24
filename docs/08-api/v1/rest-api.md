@@ -1,64 +1,64 @@
 ---
 id: rest-api-v1
-title: REST API v1 Genel Bakış
+title: REST API v1 Overview
 sidebar_label: REST API
 sidebar_position: 10
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva v1 REST API, dış sistemlerle entegrasyon, mobil uygulama desteği ve asenkron operasyonlar için temel uç noktaları sağlar. Tüm uç noktalar `wp-json/mhm-rentiva/v1` ad alanı (namespace) altında sunulur.
+:::info Purpose
+The MHM Rentiva v1 REST API provides core endpoints for external system integration, mobile app support, and asynchronous operations. All endpoints are served under the `wp-json/mhm-rentiva/v1` namespace.
 :::
 
-# 🌐 REST API v1 Yapısı
+# 🌐 REST API v1 Structure
 
-v1 API katmanı, geriye dönük uyumluluğu korurken güvenli ve hızlı veri erişimi sağlar.
+The v1 API layer provides secure and fast data access while maintaining backward compatibility.
 
 ---
 
-## 🔑 1. Kimlik Doğrulama ve Güvenlik
+## 🔑 1. Authentication and Security
 
-API uç noktalarına erişim, işlemin türüne göre üç farklı yöntemle sağlanır:
+Access to API endpoints is provided through three different methods depending on the type of operation:
 
-| Yöntem | Kullanım Alanı | Detay |
+| Method | Use Case | Details |
 |---|---|---|
-| **Public** | Konumlar, Müsaitlik | Herkese açık veriler için kimlik doğrulama gerekmez. |
-| **Nonce** | AJAX/Web etkileşimleri | `_wpnonce` header/parametre doğrulaması gerekir. |
-| **API Key** | Dış Servis Entegrasyonları | `X-Rentiva-API-Key` veya `Bearer Token` üzerinden doğrulama. |
+| **Public** | Locations, Availability | No authentication required for publicly accessible data. |
+| **Nonce** | AJAX/Web interactions | `_wpnonce` header/parameter verification required. |
+| **API Key** | External Service Integrations | Authentication via `X-Rentiva-API-Key` or Bearer Token. |
 
 ---
 
-## 🚀 2. Temel Uç Noktalar (Endpoints)
+## 🚀 2. Core Endpoints
 
-### A. Sistem Sağlığı (`/health`)
-- **Metot:** `GET`
-- **İşlev:** Veritabanı tablolarının varlığını, eklenti sürümünü ve lisans durumunu kontrol eder.
-- **Yanıt:** `{"status": "ok", "version": "4.21.2"}`
+### A. System Health (`/health`)
+- **Method:** `GET`
+- **Function:** Checks the existence of database tables, plugin version, and license status.
+- **Response:** `{"status": "ok", "version": "4.21.2"}`
 
-### B. Konum Servisleri (`/locations`)
-- **Metot:** `GET`
-- **İşlev:** Rezervasyon ve transfer modülleri için tanımlı aktif lokasyonları döner.
-- **Parametreler:** `?type=airport`, `?city=istanbul`
+### B. Location Services (`/locations`)
+- **Method:** `GET`
+- **Function:** Returns defined active locations for the booking and transfer modules.
+- **Parameters:** `?type=airport`, `?city=istanbul`
 
-### C. Müsaitlik ve Fiyatlandırma (`/availability`)
-- **Metot:** `POST`
-- **İşlev:** Belirli tarihler ve araç ID'si için müsaitlik kontrolü yapar ve Pricing Engine üzerinden net fiyat hesaplar.
-- **Girdi:** `vehicle_id`, `pickup_date`, `return_date`
-
----
-
-## 🛡️ 3. Güvenlik Katmanı (AuthHelper)
-
-Tüm "yazma" (POST/PUT/DELETE) işlemlerinde `AuthHelper` sınıfı devreye girer:
-- **Rate Limiting:** Her API anahtarı için dakikalık istek sınırı.
-- **HMAC Verification:** Webhook geri dönüşlerinde veri bütünlüğünü garanti eder.
+### C. Availability and Pricing (`/availability`)
+- **Method:** `POST`
+- **Function:** Checks availability for specific dates and a vehicle ID, and calculates the net price via the Pricing Engine.
+- **Input:** `vehicle_id`, `pickup_date`, `return_date`
 
 ---
 
-## 📊 4. Yanıt ve Hata Formatı
+## 🛡️ 3. Security Layer (AuthHelper)
 
-Sistem standart olarak JSON yanıtlar döner:
+`AuthHelper` is engaged for all "write" (POST/PUT/DELETE) operations:
+- **Rate Limiting:** Per-minute request limit for each API key.
+- **HMAC Verification:** Guarantees data integrity on webhook callbacks.
+
+---
+
+## 📊 4. Response and Error Format
+
+The system returns standard JSON responses:
 
 ```json
 {
@@ -68,7 +68,7 @@ Sistem standart olarak JSON yanıtlar döner:
 }
 ```
 
-Hata durumunda:
+On error:
 ```json
 {
   "success": false,
@@ -77,12 +77,13 @@ Hata durumunda:
 }
 ```
 
-## Bölüm Sonu Özeti
-- v1 API, `mhm-rentiva/v1` altında hizmet verir.
-- Kimlik doğrulama, işlemin kritiklik seviyesine göre değişkenlik gösterir.
-- Tüm operasyonlar merkezi `AuthHelper` ve `ErrorHandler` ile denetlenir.
+## Section Summary
+- v1 API serves under `mhm-rentiva/v1`.
+- Authentication method varies based on the criticality of the operation.
+- All operations are audited via the central `AuthHelper` and `ErrorHandler`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | v1 API mimarisi ve güvenlik katmanları güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | v1 API architecture and security layers updated. |

@@ -1,33 +1,33 @@
 ---
 id: addon-settings
-title: AddonSettings Sınıf Mimarisi (UI)
-sidebar_label: Addon Ayarları (Teknik)
+title: AddonSettings Class Architecture (UI)
+sidebar_label: Addon Settings (Technical)
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Rentiva "Ek Hizmetler" (Addons) ayarlarının yönetim panelinde nasıl yapılandırıldığını ve `AddonSettings` sınıfının teknik mimarisini açıklar.
+:::info Purpose
+This page explains how Rentiva's "Additional Services" (Add-ons) settings are configured in the admin panel, and describes the technical architecture of the `AddonSettings` class.
 :::
 
-# 🛠️ AddonSettings Sınıfı
+# 🛠️ AddonSettings Class
 
-`AddonSettings`, WP Settings API'si üzerine inşa edilmiş, ek hizmetlerin (Addon) global davranışlarını yöneten bir ayar grubudur.
+`AddonSettings` is a settings group built on top of the WP Settings API that manages the global behavior of add-ons.
 
 ---
 
-## 🏗️ Mimari Yapı
+## 🏗️ Architecture
 
-Sınıf, modular bir yapı kullanarak `SettingsCore` ve `SettingsHelper` bileşenleriyle entegre çalışır:
+The class integrates with `SettingsCore` and `SettingsHelper` using a modular structure:
 - **Namespace:** `MHMRentiva\Admin\Settings\Groups`
-- **Methodlar:** Statik metodlar üzerinden kayıt (`register`), varsayılan değer tanımlama (`get_default_settings`) ve erişim (`require_confirmation`) sağlar.
+- **Methods:** Registration (`register`), default value definition (`get_default_settings`), and access (`require_confirmation`) are all handled through static methods.
 
 ---
 
-## 📝 Kayıt ve Alan Tanımları
+## 📝 Registration and Field Definitions
 
-`register()` metodu, WordPress'e yeni bir sekme (Section) ve ayar alanları ekler:
+The `register()` method adds a new section and settings fields to WordPress:
 
 ```php
 public static function register(): void {
@@ -40,7 +40,7 @@ public static function register(): void {
         $page_slug
     );
 
-    // SettingsHelper kullanımı ile alan kaydı
+    // Field registration via SettingsHelper
     SettingsHelper::checkbox_field($page_slug, 'mhm_rentiva_addon_require_confirmation', ...);
     SettingsHelper::select_field($page_slug, 'mhm_rentiva_addon_display_order', ...);
 }
@@ -48,34 +48,34 @@ public static function register(): void {
 
 ---
 
-## 📋 Mevcut Ayar Alanları
+## 📋 Available Settings Fields
 
-| Ayar Anahtarı (Option) | UI Tipi | Varsayılan | Açıklama |
+| Option Key | UI Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `require_confirmation` | **Checkbox** | `0` (False) | Ek hizmetler için manuel onay gerekip gerekmediği. |
-| `show_prices_in_calendar` | **Checkbox** | `1` (True) | Takvimde ek hizmet fiyatlarının gösterilip gösterilmeyeceği. |
-| `display_order` | **Select** | `menu_order` | Ek hizmetlerin sıralama kriteri (Başlık, Fiyat, Tarih). |
+| `require_confirmation` | **Checkbox** | `0` (False) | Whether manual confirmation is required for add-ons. |
+| `show_prices_in_calendar` | **Checkbox** | `1` (True) | Whether add-on prices are shown in the calendar. |
+| `display_order` | **Select** | `menu_order` | Sorting criterion for add-ons (Title, Price, Date). |
 
 ---
 
-## 🛡️ Veri Erişimi (Static Accessors)
+## 🛡️ Data Access (Static Accessors)
 
-Geliştiriciler, ham `get_option` yerine tip güvenli (type-safe) accessor metodlarını kullanmalıdır:
+Developers should use the type-safe accessor methods instead of raw `get_option`:
 
 ```php
-// Onay gereksinimi kontrolü
+// Check confirmation requirement
 if ( AddonSettings::require_confirmation() ) {
-    // Mantık
+    // Logic
 }
 ```
 
-## Bölüm Sonu Özeti
-- `AddonSettings`, WP Settings API'sini modernize eden bir katmandır.
-- Tüm ayarlar `SettingsCore::get()` üzerinden atomik olarak çekilir.
-- Görsel tasarım rehberi için `/website/static/img/docs/ui-components/` altındaki varlıklara bakılabilir.
+## Section Summary
+- `AddonSettings` is a modernization layer on top of the WP Settings API.
+- All settings are fetched atomically via `SettingsCore::get()`.
+- For visual design references, see assets under `/website/static/img/docs/ui-components/`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, modern SettingsHelper ve modularite yapısına göre güncellendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect modern SettingsHelper and modularity structure. |

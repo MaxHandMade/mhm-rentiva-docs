@@ -1,98 +1,99 @@
 ---
 id: vendor-payouts-ledger
-title: Ödemeler ve Finansal Defter (Payouts & Ledger)
+title: Payouts & Ledger
 sidebar_label: Payouts & Ledger
 sidebar_position: 10
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, "Model B" olarak adlandırılan, değişmez (immutable) ve her zaman denetlenebilir bir finansal motor kullanır. Bu doküman, tedarikçi kazançlarının nasıl hesaplandığını ve ödeme süreçlerinin nasıl atomik olarak yönetildiğini açıklar.
+:::info Purpose
+MHM Rentiva uses a financial engine called "Model B" — immutable and always auditable. This document explains how vendor earnings are calculated and how payout processes are managed atomically.
 :::
 
-# 💳 Finansal Motor ve Payout Döngüsü
+# 💳 Financial Engine & Payout Cycle
 
-Sistem, tedarikçi bakiyelerini dinamik bir bakiye alanı yerine, append-only (sadece ekleme yapılabilen) bir defter üzerinden hesaplar.
+The system calculates vendor balances using an append-only ledger rather than a dynamic balance field.
 
 ---
 
-## 🏗️ 1. Model B Ledger Yapısı
+## 🏗️ 1. Model B Ledger Structure
 
-Ledger, sistemdeki tek finansal gerçeklik kaynağıdır (`Single Source of Truth`).
+The Ledger is the single source of truth for all financial data in the system.
 
-### Değişmezlik (Immutability) İlkesi
-- **Update/Delete Yasaktır:** Hiçbir ledger satırı güncellenemez veya silinemez.
-- **Düzeltme Kayıtları:** Hatalı bir işlem ancak ters yönlü bir kayıtla (reversal) düzeltilebilir.
-- **SaaS İzolasyonu:** Her kayıt bir `tenant_id` ile ilişkilendirilmiştir.
+### Immutability Principle
+- **Update/Delete Prohibited:** No ledger row can be updated or deleted.
+- **Correction Entries:** A faulty transaction can only be corrected by a reversal entry.
+- **SaaS Isolation:** Each entry is associated with a `tenant_id`.
 
-### Kayıt Tipleri (`Entry Types`)
-| Tip | Yön | Açıklama |
+### Entry Types
+| Type | Direction | Description |
 |---|---|---|
-| `commission_credit` | `+` | Tamamlanan rezervasyondan gelen hak ediş. |
-| `payout_debit` | `−` | Onaylanan ödeme talebi sonucu bakiye düşümü. |
-| `refund` | `−` | İptal edilen rezervasyonun geri iadesi. |
+| `commission_credit` | `+` | Earnings from a completed booking. |
+| `payout_debit` | `−` | Balance reduction from an approved payout request. |
+| `refund` | `−` | Refund from a cancelled booking. |
 
 ---
 
-## ⚛️ 2. Atomik Ödeme Süreci (`AtomicPayoutService`)
+## ⚛️ 2. Atomic Payout Process (`AtomicPayoutService`)
 
-Ödemelerin onaylanması, veritabanı seviyesinde bir **Transaction** içinde gerçekleşir. Bu, sistemin bir adımda hata alması durumunda tüm sürecin geri alınmasını (Rollback) sağlar.
+Payout approvals occur within a database-level **Transaction**. This ensures the entire process is rolled back if any step fails.
 
-### İşlem Adımları:
-1. **Pre-flight Check:** Bakiye ve statü kontrolü (Transaction dışı).
-2. **START TRANSACTION:** DB kilidi başlatılır.
-3. **Concurrent Guard:** `post_status` DB'den tekrar okunur (Race condition engelleme).
-4. **Ledger Write:** `payout_pending_debit` kaydı atılır.
-5. **CPT Update:** Payout postu `publish` durumuna getirilir.
-6. **COMMIT:** Tüm işlemler başarılıysa kalıcı hale getirilir.
+### Process Steps:
+1. **Pre-flight Check:** Balance and status verification (outside transaction).
+2. **START TRANSACTION:** DB lock initiated.
+3. **Concurrent Guard:** `post_status` is re-read from the DB (race condition prevention).
+4. **Ledger Write:** `payout_pending_debit` entry is created.
+5. **CPT Update:** Payout post is set to `publish` status.
+6. **COMMIT:** All operations are persisted if successful.
 
 ---
 
-## 🛡️ 3. Çift Ödemeyi Engelleme Katmanları
+## 🛡️ 3. Double-Spending Prevention Layers
 
-Double-spending riskine karşı 4 katmanlı koruma mevcuttur:
+Four layers of protection exist against double-spending risk:
 
-| Katman | Mekanizma | Seviye |
+| Layer | Mechanism | Level |
 |---|---|---|
-| **L1: Uygulama** | `vendor_has_pending_payout()` kontrolü. | PHP / AJAX |
-| **L2: Bakiye** | `Ledger::get_balance() >= amount` doğrulaması. | Domain Logic |
-| **L3: Transaction** | InnoDB Row Lock ve concurrent status guard. | Database |
-| **L4: Idempotency** | `payout_{id}` formatında benzersiz UUID. | DB Unique Key |
+| **L1: Application** | `vendor_has_pending_payout()` check. | PHP / AJAX |
+| **L2: Balance** | `Ledger::get_balance() >= amount` validation. | Domain Logic |
+| **L3: Transaction** | InnoDB Row Lock and concurrent status guard. | Database |
+| **L4: Idempotency** | Unique UUID in `payout_{id}` format. | DB Unique Key |
 
 ---
 
-## ⚙️ 4. Teknik API Referansı
+## ⚙️ 4. Technical API Reference
 
-### Bakiye Sorgulama
+### Balance Query
 ```php
-// Sadece 'cleared' ve 'reserved' durumundaki kayıtların toplamını döner.
+// Returns the sum of entries with 'cleared' and 'reserved' statuses only.
 $balance = Ledger::get_balance($vendor_id);
 ```
 
-### Ödeme Talebi Oluşturma
+### Creating a Payout Request
 ```php
 // PayoutService::request_payout()
-// 1. Minimum limit (mhm_min_payout_amount) kontrol edilir.
-// 2. Bekleyen talep olup olmadığı denetlenir.
-// 3. mhm_payout postu oluşturulur.
+// 1. Minimum limit (mhm_min_payout_amount) is checked.
+// 2. Presence of a pending request is verified.
+// 3. mhm_payout post is created.
 ```
 
 ---
 
-## 📧 5. Bildirimler ve Hook'lar
+## 📧 5. Notifications & Hooks
 
-| Hook | Tetiklenme Anı | Alıcı |
+| Hook | Trigger | Recipient |
 |---|---|---|
-| `mhm_rentiva_payout_approved` | Ödeme atomik olarak onaylandığında. | Vendor |
-| `mhm_rentiva_payout_rejected` | Ödeme admin tarafından reddedildiğinde. | Vendor |
+| `mhm_rentiva_payout_approved` | When payout is atomically approved. | Vendor |
+| `mhm_rentiva_payout_rejected` | When payout is rejected by the admin. | Vendor |
 
-## Bölüm Sonu Özeti
-- Ledger tablosu `APPEND-ONLY` mimaridedir.
-- `AtomicPayoutService` veritabanı tutarlılığını transaction ile garanti eder.
-- Çift ödeme engelleme (Idempotency) UUID seviyesinde zorunlu tutulmuştur.
+## Section Summary
+- The Ledger table uses an `APPEND-ONLY` architecture.
+- `AtomicPayoutService` guarantees database consistency via transactions.
+- Double-spending prevention (Idempotency) is enforced at the UUID level.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Model B Engine, Atomic Transactions ve SaaS izolasyonu detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Model B Engine, Atomic Transactions, and SaaS isolation details added. |

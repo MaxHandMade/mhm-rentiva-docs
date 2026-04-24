@@ -6,32 +6,32 @@ import Translate from '@docusaurus/Translate';
 
 const FeatureList = [
   {
-    title: <Translate>Filo Yönetimi</Translate>,
+    title: <Translate>Fleet Management</Translate>,
     image: 'img/filo-yonetimi-docs-01.webp',
     description: (
       <Translate>
-        Araçlarınızı detaylı özellik setleri, bakım takvimi ve fiyatlandırma
-        kuralları ile tek bir merkezden yönetin.
+        Manage your vehicles from a single hub with detailed feature sets,
+        maintenance schedules, and pricing rules.
       </Translate>
     ),
   },
   {
-    title: <Translate>Güçlü Rezervasyon Altyapısı</Translate>,
+    title: <Translate>Powerful Booking Infrastructure</Translate>,
     image: 'img/guclu-rezervasyon-altyapisi-02.webp',
     description: (
       <Translate>
-        Esnek rezervasyon formları, Stripe/PayPal/PayTR entegrasyonları ve
-        otomatik bildirim sistemi ile işinizi kolaylaştırın.
+        Streamline your business with flexible booking forms, Stripe/PayPal/PayTR
+        integrations, and an automated notification system.
       </Translate>
     ),
   },
   {
-    title: <Translate>Geliştirici Dostu</Translate>,
+    title: <Translate>Developer Friendly</Translate>,
     image: 'img/gelistirici-dostu-03.webp',
     description: (
       <Translate>
-        Genişletilebilir mimari, REST API desteği ve zengin hook/filter
-        altyapısı ile projenize özelleştirin.
+        Customize for your project with an extensible architecture, REST API
+        support, and a rich hook/filter system.
       </Translate>
     ),
   },

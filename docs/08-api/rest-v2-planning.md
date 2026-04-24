@@ -1,68 +1,69 @@
 ---
 id: rest-v2-planning
-title: REST v2 Planlama ve Yol Haritası
-sidebar_label: REST v2 Planı
+title: REST v2 Planning and Roadmap
+sidebar_label: REST v2 Plan
 sidebar_position: 110
 ---
 
-![Version](https://img.shields.io/badge/status-planning-brighgreen?style=flat-square) ![Docs](https://img.shields.io/badge/docs-v2--blueprint-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/status-planning-brighgreen?style=flat-square) ![Docs](https://img.shields.io/badge/docs-v2--blueprint-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::important Vizyon
-MHM Rentiva v2 REST API, mevcut dağınık internal haberleşme kanallarını (AJAX ve v1 REST) modernize ederek, tek bir merkezi mimaride toplamayı ve mobil uygulama (Native App) desteğini güçlendirmeyi hedefler.
+:::important Vision
+The MHM Rentiva v2 REST API aims to modernize the existing scattered internal communication channels (AJAX and v1 REST) by consolidating them into a single centralized architecture and strengthening mobile application (Native App) support.
 :::
 
-# 🏗️ REST v2 Planlama ve Mimari Yol Haritası
+# 🏗️ REST v2 Planning and Architecture Roadmap
 
-v2 mimarisi, "API-First" yaklaşımını benimseyerek tüm eklenti fonksiyonlarını standart JSON uç noktaları olarak sunacaktır.
-
----
-
-## 🛤️ 1. Hedeflenen Namespace Yapısı
-
-Tüm yeni uç noktalar `wp-json/mhm-rentiva/v2` ad alanı altında toplanacak ve sürüm yönetimi (Version Management) ile geriye dönük uyumluluk korunacaktır.
+The v2 architecture adopts an "API-First" approach to expose all plugin functionality as standard JSON endpoints.
 
 ---
 
-## 📦 2. Modüler Geçiş Planı
+## 🛤️ 1. Target Namespace Structure
 
-### A. Finans ve Ledger Modülü (`/v2/ledger`)
-- **GET `/v2/ledger/summary`:** AJAX `mhm_fetch_vendor_stats` yerine geçecek.
-- **POST `/v2/ledger/payouts`:** AJAX `mhm_request_payout` yerine geçecek.
-- **Analiz:** Bu geçiş, tedarikçi panelinin (Dashboard) %40 daha hızlı yüklenmesini sağlayacaktır.
-
-### B. Rezervasyon Motoru (`/v2/booking`)
-- **POST `/v2/booking/check`:** Mevcut `/v1/availability` sorgusunun daha performanslı ve JSON Schema doğrulamalı versiyonu.
-- **POST `/v2/booking/create`:** WooCommerce sepet sürecini tamamen API üzerinden yöneten yeni uç nokta.
-
-### C. Araç ve Filtreleme (`/v2/vehicles`)
-- **GET `/v2/vehicles/search`:** AJAX `mhm_rentiva_filter_results` yerine geçecek.
-- **Interactivity API Entegrasyonu:** Reaktif arama sonuçları için doğrudan bu uç nokta kullanılacak.
+All new endpoints will be grouped under the `wp-json/mhm-rentiva/v2` namespace, with version management maintaining backward compatibility.
 
 ---
 
-## 🔒 3. Yeni Güvenlik Standartları
+## 📦 2. Modular Migration Plan
 
-v2 geçişiyle birlikte şu güvenlik katmanları standart hale gelecektir:
+### A. Financial and Ledger Module (`/v2/ledger`)
+- **GET `/v2/ledger/summary`:** Will replace the AJAX `mhm_fetch_vendor_stats` action.
+- **POST `/v2/ledger/payouts`:** Will replace the AJAX `mhm_request_payout` action.
+- **Analysis:** This migration will result in the Vendor dashboard loading 40% faster.
 
-1. **JWT (JSON Web Token) Desteği:** Mobil uygulamalar için şifreli ve süreli oturum yönetimi.
-2. **X-WP-Nonce Zorunluluğu:** Tarayıcı tabanlı tüm asenkron taleplerde zorunlu doğrulama.
-3. **HTTP Metot Sıkılaştırması:** Sadece ilgili metotların (GET/POST/PUT) çalıştırılmasına izin veren "Strict" mod.
-4. **Dinamik Rate Limiting:** `RateLimiter` üzerinden API anahtarı bazlı dinamik kota yönetimi.
+### B. Booking Engine (`/v2/booking`)
+- **POST `/v2/booking/check`:** A more performant, JSON Schema-validated version of the existing `/v1/availability` query.
+- **POST `/v2/booking/create`:** A new endpoint that manages the WooCommerce cart process entirely via the API.
+
+### C. Vehicles and Filtering (`/v2/vehicles`)
+- **GET `/v2/vehicles/search`:** Will replace the AJAX `mhm_rentiva_filter_results` action.
+- **Interactivity API Integration:** This endpoint will be used directly for reactive search results.
 
 ---
 
-## 🛠️ 4. Uygulama ve Entegrasyon Adımları
+## 🔒 3. New Security Standards
 
-1. **Controller Modernizasyonu:** Kalın (Fat) denetleyicilerin Servis katmanlarına tam ayrıştırılması.
-2. **Route Kaydı:** `src/Api/REST/V2/` altında yeni Controller sınıflarının oluşturulması.
-3. **JS Refaktörü:** `vehicles-grid.js` gibi JS dosyalarının AJAX yerine REST v2 uç noktalarına yönlendirilmesi.
+The following security layers will become standard with the v2 transition:
 
-## Bölüm Sonu Özeti
-- v2 mimarisi, sistemin "API-First" dönüşümünün temelidir.
-- Mobil uygulama ve dış ekosistem entegrasyonları için hazırlık aşamasıdır.
-- Güvenlik ve performans en üst seviyeye taşınacaktır.
+1. **JWT (JSON Web Token) Support:** Encrypted, time-limited session management for mobile apps.
+2. **X-WP-Nonce Requirement:** Mandatory verification on all browser-based asynchronous requests.
+3. **HTTP Method Hardening:** "Strict" mode allowing only the relevant methods (GET/POST/PUT) to execute.
+4. **Dynamic Rate Limiting:** Dynamic quota management per API key via `RateLimiter`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+## 🛠️ 4. Implementation and Integration Steps
+
+1. **Controller Modernization:** Full separation of Fat controllers into Service layers.
+2. **Route Registration:** Creation of new controller classes under `src/Api/REST/V2/`.
+3. **JS Refactor:** Redirecting JS files such as `vehicles-grid.js` from AJAX to REST v2 endpoints.
+
+## Section Summary
+- The v2 architecture is the foundation of the system's "API-First" transformation.
+- It is a preparation phase for mobile app and external ecosystem integrations.
+- Security and performance will be elevated to the highest level.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | JWT desteği, Mobil App vizyonu ve v2 blueprint detaylandırıldı. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | JWT support, Mobile App vision, and v2 blueprint detailed. |

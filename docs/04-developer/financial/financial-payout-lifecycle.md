@@ -1,39 +1,39 @@
 ---
 id: financial-payout-lifecycle
-title: Payout Yaşam Döngüsü (State Machine)
-sidebar_label: Payout Yaşam Döngüsü
+title: Payout Lifecycle (State Machine)
+sidebar_label: Payout Lifecycle
 sidebar_position: 12
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, bir ödeme talebinin (Payout) oluşturulmasından kesinleşmesine kadar geçtiği iş akışı eyaletlerini, geçiş kurallarını ve güvenlik bariyerlerini açıklar.
+:::info Purpose
+This page describes the workflow states, transition rules, and security barriers a Payout request passes through from creation to finalization.
 :::
 
-# 🔄 Payout Yaşam Döngüsü
+# 🔄 Payout Lifecycle
 
-MHM Rentiva, ödeme süreçlerini yönetmek için katı kurallara sahip bir **Approval State Machine** (Onay Eyalet Makinesi) kullanır. Her geçiş (`Transition`), hem sistemsel risk puanına hem de insan müdahalesine (Maker-Checker) tabidir.
+MHM Rentiva uses a strict **Approval State Machine** to manage Payout processes. Each transition is subject to both the system's risk score and human intervention (Maker-Checker).
 
 ---
 
-## 🏗️ Eyaletler (States)
+## 🏗️ States
 
-Sistemdeki her Payout talebi aşağıdaki eyaletlerden birinde bulunur:
+Every Payout request in the system exists in one of the following states:
 
-| Eyalet | Kod | Açıklama |
+| State | Code | Description |
 | :--- | :--- | :--- |
-| **Pending** | `pending` | Talep yeni oluşturuldu, risk analizi bekleniyor. |
-| **Under Review** | `under_review` | Orta riskli talepler için manuel inceleme aşaması. |
-| **Approved Stage 1** | `approved_stage_1` | İlk seviye onayı alınmış (İnceleme tamam). |
-| **Approved Stage 2** | `approved_stage_2` | Nihai onay (Finalize) aşaması. |
-| **Time Locked** | `time_locked` | Onaylandı ancak "Soğutma Süresi" (Cooling Period) içinde bekliyor. |
-| **Executed** | `executed` | Ödeme başarıyla gerçekleştirildi (Ledger kapandı). |
-| **Rejected** | `rejected` | Talep reddedildi, bakiye satıcıya iade edildi. |
+| **Pending** | `pending` | Request just created, awaiting risk analysis. |
+| **Under Review** | `under_review` | Manual review stage for medium-risk requests. |
+| **Approved Stage 1** | `approved_stage_1` | First-level approval obtained (review complete). |
+| **Approved Stage 2** | `approved_stage_2` | Final approval (Finalize) stage. |
+| **Time Locked** | `time_locked` | Approved but waiting within the "Cooling Period". |
+| **Executed** | `executed` | Payout successfully completed (Ledger closed). |
+| **Rejected** | `rejected` | Request rejected, balance returned to the vendor. |
 
 ---
 
-## 🌳 Eyalet Geçiş Diyagramı
+## 🌳 State Transition Diagram
 
 ```mermaid
 stateDiagram-v2
@@ -59,28 +59,29 @@ stateDiagram-v2
 
 ---
 
-## 🛡️ Geçiş Kuralları (Transition Rules)
+## 🛡️ Transition Rules
 
 ### 1. Maker-Checker Segregation
-Bir ödemeyi onaylayan kişi (`Checker`), o ödemeyi başlatan veya hazırlayan kişi (`Maker`) ile aynı olamaz. Bu kural, dâhili suistimalleri önlemek için kod seviyesinde (`ApprovalStateMachine::validate_transition`) zorunlu kılınmıştır.
+The person who approves a Payout (`Checker`) cannot be the same person who initiated or prepared it (`Maker`). This rule is enforced at the code level (`ApprovalStateMachine::validate_transition`) to prevent internal misconduct.
 
-### 2. Fast-Track (Hızlı Geçiş)
-Risk puanı **LOW** (Düşük) olan talepler, `Pending` eyaletinden doğrudan `Approved Stage 2` eyaletine geçebilir. Bu, operasyonel yükü azaltmak için güvenilir satıcılara uygulanan bir kolaylıktır.
+### 2. Fast-Track
+Requests with a **LOW** risk score can move directly from `Pending` to `Approved Stage 2`, bypassing `Under Review`. This is a convenience applied to trusted vendors to reduce operational overhead.
 
 ### 3. Atomic Updates
-Eyalet geçişleri veritabanında **nükleer (atomic)** olarak gerçekleştirilir. `UPDATE ... WHERE current_state = old_state` sorgusu kullanılarak, aynı ödeme talebi üzerinde iki yöneticinin aynı anda işlem yapması (Race Condition) engellenir.
+State transitions are executed **atomically** in the database. The `UPDATE ... WHERE current_state = old_state` query prevents two administrators from acting on the same Payout request simultaneously (Race Condition).
 
 ---
 
-## ⏳ Time-Lock ve Finalization
-`Approved Stage 2` onayı alındığında, bakiye Ledger üzerinde `payout_debit` olarak nükleer şekilde düşülür ancak ödeme henüz fiziksel olarak yapılmaz. Para `Time Locked` durumunda bekler. Kilit süresi dolduğunda sistem otomatik olarak ödemeyi `Executed` durumuna çeker.
+## ⏳ Time-Lock and Finalization
+When `Approved Stage 2` is granted, the balance is atomically deducted from the Ledger as `payout_debit`, but the physical payment is not sent yet. The funds wait in `Time Locked` status. When the lock period expires, the system automatically moves the Payout to `Executed`.
 
-## Bölüm Sonu Özeti
-- Eyalet geçişleri **katı bir matris** ile sınırlanmıştır; rastgele geçiş yapılamaz.
-- **Maker-Checker** kuralı sistemin temel güvenlik direğidir.
-- **Time-Lock**, hatalı işlemler için "Geri Dönüş" (Rollback) imkânı sağlar.
+## Section Summary
+- State transitions are constrained by **a strict matrix**; arbitrary transitions are not possible.
+- **Maker-Checker** is the system's fundamental security pillar.
+- **Time-Lock** provides a "Rollback" opportunity for erroneous transactions.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, ApprovalStateMachine eyalet matrisi ve Time-Lock mantığıyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated with ApprovalStateMachine state matrix and Time-Lock logic. |

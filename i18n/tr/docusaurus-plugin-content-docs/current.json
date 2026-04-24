@@ -1,0 +1,94 @@
+{
+  "version.label": {
+    "message": "Sonraki",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "Başlangıç Rehberi",
+    "description": "The label for category 'Getting Started' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core Configuration": {
+    "message": "Temel Yapılandırma",
+    "description": "The label for category 'Core Configuration' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Features & Usage": {
+    "message": "Özellikler ve Kullanım",
+    "description": "The label for category 'Features & Usage' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Shortcodes": {
+    "message": "Kısa Kodlar",
+    "description": "The label for category 'Shortcodes' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Shortcodes.link.generated-index.description": {
+    "message": "MHM Rentiva altyapısında bulunan tüm kısa kodlar ve bileşen kılavuzları.",
+    "description": "The generated-index page description for category 'Shortcodes' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Developer Guide": {
+    "message": "Geliştirici Rehberi",
+    "description": "The label for category 'Developer Guide' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core": {
+    "message": "Çekirdek",
+    "description": "The label for category 'Core' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core.link.generated-index.description": {
+    "message": "Mimari çekirdek, framework ve veri katmanı.",
+    "description": "The generated-index page description for category 'Core' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Financial": {
+    "message": "Finansal",
+    "description": "The label for category 'Financial' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Financial.link.generated-index.description": {
+    "message": "Komisyon, ledger, governance ve finansal sözlük.",
+    "description": "The generated-index page description for category 'Financial' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.UI Components": {
+    "message": "Arayüz Bileşenleri",
+    "description": "The label for category 'UI Components' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.UI Components.link.generated-index.description": {
+    "message": "Arayüz odaklı teknik bileşen dokümantasyonu.",
+    "description": "The generated-index page description for category 'UI Components' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Testing": {
+    "message": "Test",
+    "description": "The label for category 'Testing' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Testing.link.generated-index.description": {
+    "message": "Test stratejisi, suite ve kontrol listeleri.",
+    "description": "The generated-index page description for category 'Testing' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Operations": {
+    "message": "Operasyon",
+    "description": "The label for category 'Operations' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Operations.link.generated-index.description": {
+    "message": "Operasyon runbook ve sorun giderme rehberleri.",
+    "description": "The generated-index page description for category 'Operations' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Vendor Ecosystem": {
+    "message": "Bayi Ekosistemi",
+    "description": "The label for category 'Vendor Ecosystem' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.FAQ": {
+    "message": "SSS",
+    "description": "The label for category 'FAQ' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Theme Guide": {
+    "message": "Tema Rehberi",
+    "description": "The label for category 'Theme Guide' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.REST API & Nervous System": {
+    "message": "REST API ve Sinir Sistemi",
+    "description": "The label for category 'REST API & Nervous System' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.v1 Endpoints (Current)": {
+    "message": "v1 Uç Noktalar (Güncel)",
+    "description": "The label for category 'v1 Endpoints (Current)' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.v1 Endpoints (Current).link.generated-index.description": {
+    "message": "Mevcut v1 REST API uç noktaları ve asenkron operasyonlar.",
+    "description": "The generated-index page description for category 'v1 Endpoints (Current)' in sidebar 'tutorialSidebar'"
+  }
+}

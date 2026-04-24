@@ -1,246 +1,247 @@
 ---
 id: vendor-management
-title: Tedarikçi Ekosistemi (Vendor Management)
-sidebar_label: Vendor Yönetimi
+title: Vendor Ecosystem (Vendor Management)
+sidebar_label: Vendor Management
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/badge/version-4.24.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-01.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Rentiva, merkezi bir araç kiralama sisteminden çoklu tedarikçili (Multi-Vendor) bir pazar yerine dönüşebilir. Bu doküman, tedarikçi döngüsünü teknik detaylarıyla açıklar.
+:::info Purpose
+Rentiva can transform from a centralized vehicle rental system into a Multi-Vendor marketplace. This document explains the vendor lifecycle in technical detail.
 :::
 
-# 🤝 Tedarikçi Yönetimi
+# 🤝 Vendor Management
 
-Sistemde bir kullanıcının "Vendor" (Tedarikçi) olması için geçmesi gereken aşamalar ve bu sürecin arkasındaki teknik yapılar aşağıda özetlenmiştir.
-
----
-
-## 🏗️ 1. Tedarikçi Rolü ve Yetkilendirme
-
-### `rentiva_vendor` Rolü
-Onaylı her tedarikçiye atanan bu rol, şu yetkileri (capabilities) beraberinde getirir:
-- `edit_posts`: Kendi araçlarını ekleyebilir.
-- `upload_files`: Araç görselleri yükleyebilir.
-- `read`: Vendor paneline erişebilir.
-
-### 🛡️ Mülkiyet Zorunluluğu (`VendorOwnershipEnforcer`)
-Tedarikçilerin birbirlerinin araçlarına veya rezervasyonlarına erişmesini engellemek için `user_has_cap` filtresi kullanılır:
-- Bir vendor sadece `post_author` değeri kendi `user_id`'si ile eşleşen `vehicle` kayıtlarını düzenleyebilir.
-- Admin portalında "All Vehicles" listesi vendor için sadece kendi kayıtlarına filtrelenir.
+The stages a user must pass through to become a Vendor in the system, and the technical structures behind that process, are summarized below.
 
 ---
 
-## 📋 2. Başvuru Yönetimi (`mhm_vendor_app`)
+## 🏗️ 1. Vendor Role & Authorization
 
-Tedarikçi adaylarının verileri `mhm_vendor_app` Custom Post Type (CPT) içinde saklanır:
-- **Onboarding Akışı:** `Pending` (İnceleme) → `Approved` (Onaylandı) / `Rejected` (Reddedildi).
-- **Veri Güvenliği:** Başvuru sırasında alınan IBAN bilgileri `VendorApplicationManager::encrypt_iban()` ile **AES-256-CBC** metoduna göre şifrelenir.
-- **Evrak Takibi:** Kimlik, ehliyet ve ikametgah belgeleri `_vendor_doc_*` meta anahtarları altında WordPress Media Library ile ilişkilendirilir.
+### `rentiva_vendor` Role
+Every approved vendor is assigned this role, which comes with the following capabilities:
+- `edit_posts`: Can add their own vehicles.
+- `upload_files`: Can upload vehicle images.
+- `read`: Can access the vendor dashboard.
+
+### 🛡️ Ownership Enforcement (`VendorOwnershipEnforcer`)
+The `user_has_cap` filter is used to prevent vendors from accessing each other's vehicles or bookings:
+- A vendor can only edit `vehicle` records where the `post_author` value matches their own `user_id`.
+- The "All Vehicles" list in the admin portal is filtered to show only the vendor's own records.
 
 ---
 
-## ⚙️ 3. Operasyonel Kontroller
+## 📋 2. Application Management (`mhm_vendor_app`)
 
-### Onay ve Meta Senkronizasyonu (`VendorOnboardingController`)
-Admin bir başvuruyu onayladığında:
-1. `mhm_vendor_app` kaydındaki telefon, şehir ve IBAN bilgileri kullanıcının (WP_User) meta tablolarına kopyalanır.
-2. Kullanıcının rolü `customer`'dan `rentiva_vendor`'a yükseltilir.
-3. `mhm_rentiva_vendor_approved` kancası (hook) tetiklenerek hoş geldin e-postası gönderilir.
+Vendor applicant data is stored within the `mhm_vendor_app` Custom Post Type (CPT):
+- **Onboarding Flow:** `Pending` → `Approved` / `Rejected`.
+- **Data Security:** IBAN data collected during application is encrypted using `VendorApplicationManager::encrypt_iban()` with the **AES-256-CBC** method.
+- **Document Tracking:** Identity, driver's license, and proof of address documents are associated with the WordPress Media Library under `_vendor_doc_*` meta keys.
 
-### Profil Yonetimi (`VendorProfileExtension`)
-WordPress profil sayfasi (`wp-admin/profile.php`), vendorlara ozel alanlarla genisletilmistir:
-- **Magaza Bilgileri:** Bio, vergi numarasi ve hizmet bolgeleri.
-- **Finansal Bilgiler:** Maskelenmis IBAN gorunumu (orn: TR***5678).
+---
 
-### Vendor Ayarlar Sayfasi (v4.23.1)
+## ⚙️ 3. Operational Controls
 
-Vendor panelindeki ayarlar sayfasi (`vendor-settings.php`) v4.23.1 ile tamamen yeniden tasarlandi:
+### Approval & Meta Synchronization (`VendorOnboardingController`)
+When an admin approves an application:
+1. Phone, city, and IBAN data from the `mhm_vendor_app` record are copied to the user's (WP_User) meta tables.
+2. The user's role is upgraded from `customer` to `rentiva_vendor`.
+3. The `mhm_rentiva_vendor_approved` hook is triggered and a welcome email is sent.
 
-- **CSS Mimarisi:** Tum inline stiller kaldirildi, `.mhm-vendor-form__*` CSS sinif yapisi ile `vendor-forms.css` dosyasina tasindi.
-- **Yeni Alanlar:** Hesap Sahibi (Account Holder) ve Vergi Dairesi (Tax Office) alanlari eklendi.
-- **Sehir Secimi:** Metin girisi yerine SelectWoo bileseni (`CityHelper::render_select()`) kullanilir.
-- **Bildirim Sistemi:** Basari/hata bildirimleri `mhm-vendor-notice` sinif yapisi ile standartlastirildi.
+### Profile Management (`VendorProfileExtension`)
+The WordPress profile page (`wp-admin/profile.php`) is extended with vendor-specific fields:
+- **Store Information:** Bio, tax number, and service areas.
+- **Financial Information:** Masked IBAN display (e.g., TR***5678).
 
-:::tip Teknik Not
-Vendor ayarlar sayfasindaki tum form alanlari `.mhm-vendor-form__group`, `.mhm-vendor-form__label`, `.mhm-vendor-form__input` gibi BEM-benzeri siniflarla stillendirilir. Yeni alan eklemek icin ayni sinif yapisini takip edin.
+### Vendor Settings Page (v4.23.1)
+
+The settings page in the vendor dashboard (`vendor-settings.php`) was completely redesigned in v4.23.1:
+
+- **CSS Architecture:** All inline styles removed and moved to `vendor-forms.css` using the `.mhm-vendor-form__*` CSS class structure.
+- **New Fields:** Account Holder and Tax Office fields added.
+- **City Selection:** Uses the SelectWoo component (`CityHelper::render_select()`) instead of a text input.
+- **Notification System:** Success/error notifications standardized using the `mhm-vendor-notice` class structure.
+
+:::tip Technical Note
+All form fields on the vendor settings page are styled using BEM-like classes such as `.mhm-vendor-form__group`, `.mhm-vendor-form__label`, `.mhm-vendor-form__input`. Follow the same class structure when adding new fields.
 :::
 
 ---
 
-## Yasam Dongusu Ozeti
+## Lifecycle Summary
 
 ```mermaid
 graph LR
-    A[Aday Basvurusu] --> B{Admin Inceleme}
-    B -- Red --> C[E-posta Bildirimi]
-    B -- Onay --> D[Rol Atama: rentiva_vendor]
-    D --> E[Meta Veri Senkronizasyonu]
-    E --> F[Arac Ekleme Yetkisi]
+    A[Applicant Submission] --> B{Admin Review}
+    B -- Rejected --> C[Email Notification]
+    B -- Approved --> D[Role Assignment: rentiva_vendor]
+    D --> E[Meta Data Synchronization]
+    E --> F[Vehicle Submission Permission]
 ```
 
 ---
 
-## 🚐 5. Vendor Transfer Lokasyon ve Rota Yönetimi (v4.23.0)
+## 🚐 5. Vendor Transfer Location & Route Management (v4.23.0)
 
-v4.23.0 ile birlikte vendor'lar, transfer hizmetleri için lokasyon ve rota seçimi yapabilir:
+With v4.23.0, vendors can select locations and routes for transfer services:
 
-### Şehir Bazlı Filtreleme
-Vendor araç ekleme formunda (`[rentiva_vehicle_submit]`), yalnızca vendor'un başvurusunda belirttiği **şehirdeki lokasyonlar** ve **rotalar** listelenir. Bu, **Şehir → Nokta** hiyerarşisinin bir parçasıdır.
+### City-Based Filtering
+On the vendor vehicle submission form (`[rentiva_vehicle_submit]`), only **locations** and **routes** within the city specified in the vendor's application are listed. This is part of the **City → Point** hierarchy.
 
-### Rota Bazlı Fiyatlandırma
-- Vendor, hizmet vermek istediği rotaları seçer.
-- Her rota için admin'in belirlediği `min_price` — `max_price` aralığında kendi fiyatını girer.
-- Kapasite bilgileri (yolcu, bagaj) araç düzeyinde tanımlanır.
+### Per-Route Pricing
+- The vendor selects the routes they want to serve.
+- For each route, they enter their own price within the `min_price` — `max_price` range set by the admin.
+- Capacity details (passengers, luggage) are defined at the vehicle level.
 
-### Meta Yapısı
-- `_mhm_rentiva_transfer_locations`: Vendor'un hizmet verdiği lokasyonlar (array)
-- `_mhm_rentiva_transfer_routes`: Vendor'un hizmet verdiği rotalar (array)
-- `_mhm_rentiva_transfer_route_prices`: Rota bazlı vendor fiyatları (JSON)
+### Meta Structure
+- `_mhm_rentiva_transfer_locations`: Locations the vendor serves (array)
+- `_mhm_rentiva_transfer_routes`: Routes the vendor serves (array)
+- `_mhm_rentiva_transfer_route_prices`: Per-route vendor prices (JSON)
 
-### Admin Görünümü
-Admin araç düzenleme ekranında (`VehicleTransferMetaBox`), vendor'un şehir bilgisi ve seçtiği lokasyon/rotalar görüntülenir.
+### Admin View
+On the vehicle edit screen (`VehicleTransferMetaBox`), the vendor's city and their selected locations/routes are displayed.
 
 ---
 
-## 🔄 Araç Yaşam Döngüsü Yönetimi (v4.24.0)
+## 🔄 Vehicle Lifecycle Management (v4.24.0)
 
-v4.24.0 ile kapsamlı araç yaşam döngüsü sistemi uygulanmıştır:
+A comprehensive vehicle lifecycle system was implemented in v4.24.0:
 
-| Özellik | Detay |
+| Feature | Detail |
 |---------|-------|
-| **Durumlar** | Aktif / Duraklatıldı / Geri Çekildi / Süresi Doldu / İnceleme Bekliyor |
-| **Listeleme süresi** | 90 gün (admin ayarlanabilir), vendor tarafından yenilenebilir |
-| **İptal ceza sistemi** | Kademeli ceza puanları (2. çekilme %10, 3.+ %25) |
-| **Güvenilirlik skoru** | 0-100 arası performans değerlendirmesi |
-| **Soğuma süresi** | Geri çekilmeden sonra 7 gün bekleme |
-| **Anti-gaming** | İptal edilen rezervasyon tarihlerinin 30 gün engellenmesi |
+| **Statuses** | Active / Paused / Withdrawn / Expired / Pending Review |
+| **Listing period** | 90 days (admin-configurable), renewable by vendor |
+| **Cancellation penalty system** | Graduated penalty points (2nd withdrawal 10%, 3rd+ 25%) |
+| **Reliability score** | 0–100 performance rating |
+| **Cooldown period** | 7-day waiting period after withdrawal |
+| **Anti-gaming** | Cancelled booking dates blocked for 30 days |
 
-### Vendor Araç Kartlarında Kalan Süre Gösterimi (v4.24.1)
+### Remaining Time Display on Vendor Vehicle Cards (v4.24.1)
 
-Vendor panelindeki araç listesinde her araç kartında kalan listeleme süresi gösterilir:
+Each vehicle card in the vendor dashboard shows the remaining listing time:
 
-| Durum | Gösterim | Renk |
+| Status | Display | Color |
 |-------|----------|------|
-| > %50 süre kaldı | "Kalan: X gün" | 🟢 Yeşil |
-| %20–%50 süre kaldı | "Kalan: X gün" | 🟡 Sarı |
-| < %20 süre kaldı | "Kalan: X gün" | 🔴 Kırmızı |
-| Süresi dolmuş | "Süresi Doldu" rozeti | — |
+| > 50% time remaining | "Remaining: X days" | 🟢 Green |
+| 20%–50% time remaining | "Remaining: X days" | 🟡 Yellow |
+| < 20% time remaining | "Remaining: X days" | 🔴 Red |
+| Expired | "Expired" badge | — |
 
-**CSS sınıfları:** `.mhm-vendor-listing-card__remaining` ve `.is-green`, `.is-yellow`, `.is-red` varyantları.
+**CSS classes:** `.mhm-vendor-listing-card__remaining` with `.is-green`, `.is-yellow`, `.is-red` variants.
 
 ---
 
-## 💰 Ücretli İlan Sistemi (v4.24.1)
+## 💰 Paid Listing System (v4.24.1)
 
-Vendor'ların araç ilanı yayınlaması için WooCommerce üzerinden ödeme yapması gerekebilir. Bu özellik admin tarafından açılıp kapatılabilir.
+Vendors may be required to pay via WooCommerce to publish a vehicle listing. This feature can be toggled by the admin.
 
-### Admin Ayarları (Ayarlar → Vendor Marketplace → İlan Ücreti)
+### Admin Settings (Settings → Vendor Marketplace → Listing Fee)
 
-| Ayar | Tip | Varsayılan | Açıklama |
+| Setting | Type | Default | Description |
 |------|-----|-----------|----------|
-| İlan Ücretini Etkinleştir | Checkbox | Kapalı | Ücretli ilan sistemini aç/kapat |
-| Ücret Modeli | Select | Tek Seferlik | `one_time` (tek seferlik) veya `per_period` (her 90 günlük dönem) |
-| İlan Ücreti Tutarı | Sayı | 0 | Mağaza para biriminde ücret tutarı |
+| Enable Listing Fee | Checkbox | Off | Enable/disable the paid listing system |
+| Fee Model | Select | One-Time | `one_time` or `per_period` (every 90-day period) |
+| Listing Fee Amount | Number | 0 | Fee amount in store currency |
 
-### Ödeme Akışı
+### Payment Flow
 
 ```mermaid
 graph TD
-    A[Vendor: Araç Ekle / Yenile / Yeniden Listele] --> B{İlan Ücreti Etkin mi?}
-    B -- Hayır --> C[Mevcut ücretsiz akış]
-    B -- Evet --> D[Araç taslak olarak kaydedilir]
-    D --> E[WC sepetine ilan ücreti ürünü eklenir]
-    E --> F[WC Ödeme sayfasına yönlendirme]
-    F --> G{Ödeme tamamlandı?}
-    G -- Evet --> H[Araç: İnceleme Bekliyor / Yenilendi]
-    G -- Hayır --> I[Araç taslak kalır, vendor tekrar deneyebilir]
+    A[Vendor: Add / Renew / Relist Vehicle] --> B{Listing Fee Enabled?}
+    B -- No --> C[Existing free flow]
+    B -- Yes --> D[Vehicle saved as draft]
+    D --> E[Listing fee product added to WC cart]
+    E --> F[Redirect to WC checkout]
+    F --> G{Payment completed?}
+    G -- Yes --> H[Vehicle: Pending Review / Renewed]
+    G -- No --> I[Vehicle remains draft, vendor can retry]
 ```
 
-### Tetik Noktaları
+### Trigger Points
 
-| Eylem | Ücretsiz Akış | Ücretli Akış |
+| Action | Free Flow | Paid Flow |
 |-------|---------------|-------------|
-| **Yeni Araç** | Form → İnceleme Bekliyor | Form → Taslak → WC Ödeme → İnceleme Bekliyor |
-| **Yenileme** (süresi dolmuş) | AJAX → Yaşam döngüsü yenileme | AJAX → WC Ödeme → Yaşam döngüsü yenileme |
-| **Yeniden Listeleme** (geri çekilmiş) | AJAX → Yaşam döngüsü yeniden listeleme | AJAX → WC Ödeme → Yaşam döngüsü yeniden listeleme |
+| **New Vehicle** | Form → Pending Review | Form → Draft → WC Payment → Pending Review |
+| **Renewal** (expired) | AJAX → Lifecycle renewal | AJAX → WC Payment → Lifecycle renewal |
+| **Relist** (withdrawn) | AJAX → Lifecycle relist | AJAX → WC Payment → Lifecycle relist |
 
-### WooCommerce Ürünü
+### WooCommerce Product
 
-- **Tip:** `WC_Product_Simple` (sanal, gizli)
+- **Type:** `WC_Product_Simple` (virtual, hidden)
 - **SKU:** `mhm-rentiva-listing-fee`
-- **Görünürlük:** Mağazada gizli (shop/arama sonuçlarında gösterilmez)
-- **Fiyat:** Admin ayarlarından dinamik olarak okunur
-- **Sepet meta:** `_mhm_listing_vehicle_id`, `_mhm_listing_action` (new/renew/relist)
-- **Otomatik oluşturma:** Özellik ilk etkinleştirildiğinde otomatik oluşturulur
+- **Visibility:** Hidden in the store (not shown in shop/search results)
+- **Price:** Dynamically read from admin settings
+- **Cart meta:** `_mhm_listing_vehicle_id`, `_mhm_listing_action` (new/renew/relist)
+- **Auto-creation:** Automatically created when the feature is first enabled
 
-### Büyükbaba Kuralı (Grandfather Rule)
+### Grandfather Rule
 
-- Özellik etkinleştirildiğinde mevcut aktif araçlar etkilenmez
-- 90 günlük listeleme süreleri dolduğunda yenileme ödemesi gerekir
-- Geriye dönük ücret uygulanmaz
+- Existing active vehicles are not affected when the feature is enabled
+- Renewal payment is required when the 90-day listing period expires
+- No retroactive fees applied
 
-### Komisyon İlişkisi
+### Commission Relationship
 
-İlan ücreti ve komisyon **birbirinden bağımsızdır:**
-- Vendor, ilan ücreti öder (ön ödeme, ilan başına)
-- Vendor, komisyon öder (yüzde, rezervasyon başına)
-- İkisi arasında indirim veya mahsup yoktur
+The listing fee and commission are **independent of each other:**
+- Vendor pays the listing fee (upfront, per listing)
+- Vendor pays commission (percentage, per booking)
+- There is no discount or offset between the two
 
-### Teknik Sınıf
+### Technical Class
 
 **`ListingFeeManager`** (`src/Admin/Vehicle/ListingFeeManager.php`):
-- `is_enabled()` — Özellik aktif mi kontrol eder
-- `requires_payment(string $action)` — Belirtilen eylem için ödeme gerekiyor mu
-- `get_or_create_product()` — WC ürünü oluşturur veya mevcut olanı döner
-- `add_to_cart(int $vehicle_id, string $action)` — Sepete ekler, ödeme URL'si döner
-- `on_order_completed()` — Sipariş tamamlandığında aracı yayına alır
+- `is_enabled()` — Checks whether the feature is active
+- `requires_payment(string $action)` — Determines if payment is required for the given action
+- `get_or_create_product()` — Creates or returns the existing WC product
+- `add_to_cart(int $vehicle_id, string $action)` — Adds to cart and returns the payment URL
+- `on_order_completed()` — Publishes the vehicle when the order is completed
 
 ---
 
-## 🔗 WooCommerce Hesabım — Satıcı Paneli Menü Linki (v4.24.1)
+## 🔗 WooCommerce My Account — Vendor Dashboard Menu Link (v4.24.1)
 
-Vendor rolündeki kullanıcılar WooCommerce Hesabım sayfasında sidebar'da **"Satıcı Paneli"** menü linkini görür. Bu link `/panel/` sayfasına yönlendirir.
+Users with the vendor role see a **"Vendor Dashboard"** menu link in the sidebar on the WooCommerce My Account page. This link redirects to `/panel/`.
 
-| Kullanıcı Rolü | Menü Öğesi | URL |
+| User Role | Menu Item | URL |
 |----------------|------------|-----|
-| `rentiva_vendor` | Satıcı Paneli | `/panel/` |
-| Diğer roller (customer, vb.) | Satıcı Olun | `/hesabim/vendor-apply/` |
+| `rentiva_vendor` | Vendor Dashboard | `/panel/` |
+| Other roles (customer, etc.) | Become a Vendor | `/hesabim/vendor-apply/` |
 
-**Teknik Detay:**
-- `WooCommerceIntegration::add_menu_items()` — Vendor rolü kontrolü ile menü öğesi değiştirilir
-- `WooCommerceIntegration::vendor_panel_endpoint_url()` — `vendor-panel` endpoint'ini `/panel/` sayfasına yönlendirir
-- Vendor başvuru URL slug'ı `_x()` fonksiyonu ile çevrilebilir (SEO uyumlu)
+**Technical Details:**
+- `WooCommerceIntegration::add_menu_items()` — Menu item is switched based on vendor role check
+- `WooCommerceIntegration::vendor_panel_endpoint_url()` — Redirects the `vendor-panel` endpoint to the `/panel/` page
+- The vendor application URL slug is translatable via the `_x()` function (SEO-compatible)
 
 ---
 
-## Bilinen Sorunlar (v4.23.1 Keşfedilen)
+## Known Issues (Discovered in v4.23.1)
 
-| Sorun | Detay | Durum |
+| Issue | Detail | Status |
 |-------|-------|-------|
-| Arac durumu filtresi | `_mhm_vehicle_status` arama sorgularinda kontrol edilmiyor — bakimdaki araclar gorunur. | Kesfedildi |
-| Vendor askiya alma | `VendorOnboardingController::suspend()` vendor araclarini yayindan kaldirmiyor. | Kesfedildi |
+| Vehicle status filter | `_mhm_vehicle_status` is not checked in search queries — vehicles in maintenance are visible. | Discovered |
+| Vendor suspension | `VendorOnboardingController::suspend()` does not unpublish vendor vehicles. | Discovered |
 
 ---
 
-## Bölüm Sonu Özeti
-- `VendorOwnershipEnforcer` ile veri izolasyonu garanti altına alınmıştır.
-- Tüm kritik başvuru verileri şifrelenmiş olarak saklanır.
-- `rentiva_vendor` yetkileri sadece kendi mülkiyetindeki postlar için geçerlidir.
-- Vendor'lar yalnızca kendi şehirlerindeki lokasyonlara ve rotalara erişebilir. *(v4.23.0)*
-- Vendor ayarlar sayfası BEM-benzeri CSS sınıf yapısı ile yeniden tasarlandı. *(v4.23.1)*
-- Şehir seçimi tüm formlarda SelectWoo bileşeni ile yapılır. *(v4.23.1)*
-- Araç yaşam döngüsü sistemi (90 gün listeleme, duraklatma, yenileme, geri çekilme) uygulandı. *(v4.24.0)*
-- Ücretli ilan sistemi: WooCommerce checkout tabanlı ödeme kapısı, admin ayarlanabilir. *(v4.24.1)*
-- Vendor araç kartlarında kalan süre gösterimi (renk kodlu). *(v4.24.1)*
-- WC Hesabım menüsünde vendor'lar için "Satıcı Paneli" linki eklendi. *(v4.24.1)*
+## Section Summary
+- Data isolation is guaranteed by `VendorOwnershipEnforcer`.
+- All critical application data is stored encrypted.
+- `rentiva_vendor` capabilities apply only to posts owned by the vendor.
+- Vendors can only access locations and routes in their own city. *(v4.23.0)*
+- The vendor settings page was redesigned with a BEM-like CSS class structure. *(v4.23.1)*
+- City selection uses the SelectWoo component across all forms. *(v4.23.1)*
+- Vehicle lifecycle system (90-day listing, pausing, renewal, withdrawal) implemented. *(v4.24.0)*
+- Paid listing system: WooCommerce checkout-based payment gate, admin-configurable. *(v4.24.1)*
+- Remaining time display on vendor vehicle cards (color-coded). *(v4.24.1)*
+- "Vendor Dashboard" link added for vendors in the WC My Account menu. *(v4.24.1)*
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 01.04.2026 | 4.24.1 | Ücretli ilan sistemi (ListingFeeManager), kalan süre gösterimi, WC Hesabım "Satıcı Paneli" menü linki, 18 yeni test. |
-| 29.03.2026 | 4.24.0 | Araç yaşam döngüsü sistemi uygulandı (Faz 0-4, 6-7). Duraklatma, yenileme, geri çekilme, güvenilirlik skoru. |
-| 28.03.2026 | 4.23.1 | Vendor ayarlar sayfası yeniden tasarımı, Hesap Sahibi ve Vergi Dairesi alanları, şehir SelectWoo migrasyonu. |
-| 26.03.2026 | 4.23.0 | Vendor Transfer Lokasyon/Rota yönetimi, Şehir→Nokta hiyerarşisi ve rota bazlı fiyatlandırma eklendi. |
-| 19.03.2026 | 4.21.2 | CPT, Enforcer ve Onboarding detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 01.04.2026 | 4.24.1 | Paid listing system (ListingFeeManager), remaining time display, WC My Account "Vendor Dashboard" menu link, 18 new tests. |
+| 29.03.2026 | 4.24.0 | Vehicle lifecycle system implemented (Phases 0-4, 6-7). Pause, renewal, withdrawal, reliability score. |
+| 28.03.2026 | 4.23.1 | Vendor settings page redesign, Account Holder and Tax Office fields, city SelectWoo migration. |
+| 26.03.2026 | 4.23.0 | Vendor Transfer Location/Route management, City→Point hierarchy, and per-route pricing added. |
+| 19.03.2026 | 4.21.2 | CPT, Enforcer, and Onboarding details added. |

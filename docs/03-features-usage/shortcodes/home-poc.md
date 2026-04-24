@@ -1,66 +1,67 @@
 ---
 title: Experimental POC shortcode
-description: Experimental POC shortcode modülünün kullanım kılavuzu ve teknik detayları.
+description: Usage guide and technical reference for the Experimental POC Shortcode module.
 sidebar_position: 11
 ---
-![Version](https://img.shields.io/badge/version-4.21.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Experimental POC shortcode modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::info Purpose
+This page describes the Experimental POC Shortcode module as a standard reference, covering both technical and operational aspects.
 :::
 
-# 🚗 Experimental POC shortcode
+# 🚗 Experimental POC Shortcode
 
-## İçindekiler
-- Kullanım
-- Özellikler
-- Geliştirici Notları
+## Contents
+- Usage
+- Features
+- Developer Notes
 
-Experimental POC shortcode modülü, Rentiva platformundaki **support** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+The Experimental POC Shortcode module is designed to manage and present **support** processes to visitors on the Rentiva platform.
 
-## Kullanım
+## Usage
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
+:::tip IMAGE COMING SOON
+A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
 :::
 
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+To add this module to any page or post, use the shortcode below:
 
 ```shortcode
 [rentiva_home_poc]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Experimental POC shortcode"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Experimental POC Shortcode"**.
 
-### Parametreler
+### Parameters
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+The following parameters are available inside the shortcode:
 
-| Parametre | Varsayılan | Açıklama |
+| Parameter | Default | Description |
 | :--- | :--- | :--- |
-| - | - | Bu kısa kod parametre almaz. |
+| - | - | This shortcode accepts no parameters. |
 
 
-## Özellikler
+## Features
 
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
+### 📱 Responsive Design
+- **Mobile:** Single-column layout.
+- **Tablet (under 782px):** Optimized view.
+- **Desktop:** Full view at the configured column count or width.
 
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+### 🚀 Performance-Focused
+- **Smart Caching:** Database queries are optimized and cached by the system.
+- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
-## Geliştirici Notları
+## Developer Notes
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-home-poc-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **HTML Structure:** All containers start with the `.mhm-rentiva-home-poc-wrapper` class.
+- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
 
-## Bölüm Sonu Özeti
-- Experimental POC shortcode sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+## Section Summary
+- The Experimental POC Shortcode page has been aligned to the standard documentation structure with consistent reference headings.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

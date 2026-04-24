@@ -1,73 +1,74 @@
 ---
 id: payment-troubleshooting
-title: Ödeme ve Finansal Sorun Giderme
-sidebar_label: Ödeme Sorun Giderme
+title: Payment & Financial Troubleshooting
+sidebar_label: Payment Troubleshooting
 sidebar_position: 30
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Ödeme süreçleri (WooCommerce, Iyzico, Stripe vb.) ve finansal defter (Ledger) arasındaki uyumsuzlukları teşhis etmek ve gidermek için teknik bir rehberdir.
+:::info Purpose
+A technical guide for diagnosing and resolving mismatches between payment processes (WooCommerce, iyzico, Stripe, etc.) and the financial Ledger.
 :::
 
-# 💳 Ödeme ve Finansal Sorun Giderme
+# 💳 Payment & Financial Troubleshooting
 
-Ödeme hataları genellikle API bağlantıları, statü eşleşmeleri (Mapping) veya veritabanı kilitleri kaynaklıdır.
-
----
-
-## 🛑 1. Yaygın Hata Kodları ve Çözümleri
-
-### HTTP 400 / 401 (Hatalı İstek / Yetkisiz Erişim)
-- **Neden:** API anahtarları (Public/Private Key) yanlış girilmiş veya Test/Live modu uyumsuz.
-- **Çözüm:** Rentiva > Ödeme Ayarları sekmesinden anahtarların doğruluğunu ve "Çalışma Modunu" konfirme edin.
-
-### HTTP 403 (Erişim Engellendi)
-- **Neden:** Ödeme sağlayıcısının IP adresleri sunucu güvenlik duvarı (WAF/Cloudflare) tarafından engelleniyor olabilir.
-- **Çözüm:** Ödeme sağlayıcısının (Örn: Iyzico, Stripe) IP aralıklarını beyaz listeye (Whitelist) ekleyin.
-
-### HTTP 500 (Sunucu Hatası)
-- **Neden:** Callback işlemi sırasında bir PHP hatası veya veritabanı çakışması.
-- **Çözüm:** `wp-content/debug.log` dosyasını inceleyin ve `WooCommerceBridge::handle_webhook()` metodundaki hataları ayıklayın.
+Payment errors typically originate from API connections, status mappings, or database locks.
 
 ---
 
-## 🔄 2. Statü Eşleşme (Status Mapping) Sorunları
+## 🛑 1. Common Error Codes & Solutions
 
-### Ödeme "Tamamlandı" ama rezervasyon hala "Beklemede"?
-- **Kontrol:** WooCommerce sipariş statüsünün `processing` veya `completed` olduğundan emin olun.
-- **Teknik Detay:** Rentiva, WooCommerce status hook'larını (`woocommerce_order_status_changed`) dinler. Eğer otomatik tetiklenme olmuyorsa, eklenti çakışması olabilir.
-- **Çözüm:** Manuel sipariş güncellemesi yaparak Rentiva statüsünün senkronize olup olmadığını test edin.
+### HTTP 400 / 401 (Bad Request / Unauthorized)
+- **Reason:** API keys (Public/Private Key) entered incorrectly, or Test/Live mode mismatch.
+- **Fix:** Confirm the keys and "Operating Mode" from the Rentiva > Payment Settings tab.
 
----
+### HTTP 403 (Access Denied)
+- **Reason:** The payment provider's IP addresses may be blocked by the server firewall (WAF/Cloudflare).
+- **Fix:** Whitelist the IP ranges of the payment provider (e.g., iyzico, Stripe).
 
-## 📖 3. Ledger (Defter) Tutarsızlıkları
-
-### "Double-Spending" (Mükerrer Ödeme) Denemeleri
-- **Durum:** Bir ödeme talebi (Payout) onaylanmış görünüyor ama bakiye düşmemiş.
-- **Neden:** `AtomicPayoutService` transaction kilidine takılmış olabilir.
-- **Çözüm:** `mhm_rentiva_ledger` tablosunda ilgili `UUID` ile bir kayıt olup olmadığını SQL üzerinden doğrulayın.
-
-### Commission Credit Oluşmuyor?
-- **Neden:** Komisyon motoru (`CommissionEngine`), rezervasyonu sadece `completed` (Seyahat Bitti) statüsünde işler.
-- **Çözüm:** Rezervasyonun gerçekten sona erdiğini ve statüsünün `completed` olduğunu konfirme edin.
+### HTTP 500 (Server Error)
+- **Reason:** A PHP error or database conflict during the callback process.
+- **Fix:** Inspect the `wp-content/debug.log` file and debug errors in the `WooCommerceBridge::handle_webhook()` method.
 
 ---
 
-## 🛠️ 4. API Bağlantı Testi (Idempotency)
+## 🔄 2. Status Mapping Issues
 
-Tüm API çağrılarında `idempotency` anahtarı kullanılır:
-- **Teşhis:** Aynı ödeme isteğinin birden fazla kez gitmesi engellenmiştir.
-- **Çözüm:** Eğer bir callback hatası alıyorsanız, ödeme sağlayıcısından gelen `transaction_id` değerini `AdvancedLogger` üzerinden aratın ve mükerrer kayıt olup olmadığını kontrol edin.
+### Payment "Completed" but booking still "Pending"?
+- **Check:** Ensure the WooCommerce order status is `processing` or `completed`.
+- **Technical Detail:** Rentiva listens to WooCommerce status hooks (`woocommerce_order_status_changed`). If automatic triggering is not occurring, there may be a plugin conflict.
+- **Fix:** Perform a manual order update and test whether Rentiva status synchronizes.
 
-## Denetim Listesi
-1. API anahtarlarının doğruluğu (Test vs Live).
-2. Güvenlik duvarı (WAF) blokları.
-3. Webhook/Callback URL'inin doğruluğu.
-4. WooCommerce statü senkronizasyonu.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## 📖 3. Ledger Inconsistencies
+
+### Double-Spending Attempts
+- **Situation:** A payout request appears approved but the balance was not reduced.
+- **Reason:** `AtomicPayoutService` may have stalled on a transaction lock.
+- **Fix:** Verify via SQL whether a record exists in the `mhm_rentiva_ledger` table with the relevant `UUID`.
+
+### Commission Credit Not Created?
+- **Reason:** The commission engine (`CommissionEngine`) only processes bookings in `completed` (Trip Ended) status.
+- **Fix:** Confirm the booking has genuinely ended and its status is `completed`.
+
+---
+
+## 🛠️ 4. API Connection Test (Idempotency)
+
+An `idempotency` key is used in all API calls:
+- **Diagnose:** The same payment request being sent multiple times is prevented.
+- **Fix:** If you are receiving a callback error, search for the `transaction_id` value from the payment provider in `AdvancedLogger` and check whether there is a duplicate entry.
+
+## Checklist
+1. API key validity (Test vs Live).
+2. Firewall (WAF) blocks.
+3. Webhook/Callback URL correctness.
+4. WooCommerce status synchronization.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | API Hata Kodları, Status Mapping ve Ledger tutarlılık detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | API error codes, status mapping, and Ledger consistency details added. |

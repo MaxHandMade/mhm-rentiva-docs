@@ -1,61 +1,61 @@
 ---
 id: go-live-checklist
-title: Canlıya Alma Kontrol Listesi (Release Protocol)
-sidebar_label: Canlıya Alma Checklist
+title: Go-Live Checklist (Release Protocol)
+sidebar_label: Go-Live Checklist
 sidebar_position: 3
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::important Kritik Uyarı
-Canlı ortama geçiş öncesi tüm maddelerin "Yeşil" (Passed) olması zorunludur. Özellikle finansal anahtarların doğruluğu telafi edilemez veri hatalarını önler.
+:::important Critical Warning
+All items must be "Green" (Passed) before going live. In particular, the correctness of financial keys prevents irrecoverable data errors.
 :::
 
-# 🚀 Canlıya Alma Kontrol Listesi
+# 🚀 Go-Live Checklist
 
-Bu protokol, Rentiva sürüm geçişlerinde sistem sürekliliğini ve veri güvenliğini garanti altına almak için tasarlanmıştır.
-
----
-
-## 🏗️ 1. Altyapı ve Lisans Kontrolleri
-
-- [ ] **Pro Mode Activation:** `Mode::featureEnabled()` kontrolleri için lisans anahtarı canlı sunucuda doğrulandı mı?
-- [ ] **SQL Migrations:** `{$wpdb->prefix}mhm_rentiva_*` tabloları için gerekli `up()` scriptleri hatasız çalıştı mı?
-- [ ] **SSL Enforcement:** Payout ve Webhook trafiğinin sadece HTTPS üzerinden aktığı teyit edildi mi?
-- [ ] **SMTP / Mailer:** `Mailer::send()` üzerinden deneme e-postası başarıyla ulaştı mı?
+This protocol is designed to guarantee system continuity and data security during Rentiva version transitions.
 
 ---
 
-## 💰 2. Finansal Güvenlik Ayarları
+## 🏗️ 1. Infrastructure and License Checks
 
-- [ ] **HMAC Secrets:** Üretim ortamı (Production) için özel API Secret ve Key setleri doğru girildi mi?
-- [ ] **Webhook Idempotency:** Tekrarlanan callback'lerin `Ledger` üzerinde çift kayıt oluşturmadığı (Test mode kapalıyken) doğrulandı mı?
-- [ ] **Currency Codes:** Mevcut WooCommerce para birimi ayarlarının Rentiva `CurrencyHelper` ile uyumlu olduğu teyit edildi mi?
-- [ ] **Governance Freeze:** Kritik finansal yetkiler (Bulk Approve) sadece yetkili `Checker` rollerine atandı mı?
-
----
-
-## ⚡ 3. Uygulama ve Performans
-
-- [ ] **Asset Minification:** CSS ve JS dosyaları üretim ortamı için minifiye edildi mi?
-- [ ] **Cache Flush:** `CacheManager` üzerinden eski sürümden kalan transient ve nesne cache'leri temizlendi mi?
-- [ ] **Shortcode Audit:** Kritik rezervasyon sayfalarındaki `[rentiva_...]` kısa kodları doğru render ediliyor mu?
-- [ ] **Cron Health:** `wp-cron` üzerinden tetiklenen finansal raporlama işleri aktif mi?
+- [ ] **Pro Mode Activation:** Has the license key been validated on the live server for `Mode::featureEnabled()` checks?
+- [ ] **SQL Migrations:** Have the required `up()` scripts for `{$wpdb->prefix}mhm_rentiva_*` tables run without errors?
+- [ ] **SSL Enforcement:** Has it been confirmed that payout and webhook traffic flows only over HTTPS?
+- [ ] **SMTP / Mailer:** Has a test email been successfully delivered via `Mailer::send()`?
 
 ---
 
-## 🚨 4. Acil Durum (Rollback) Hazırlığı
+## 💰 2. Financial Security Settings
 
-- [ ] **DB Backup:** Güncel veritabanı yedeğinin erişilebilirliği kontrol edildi mi?
-- [ ] **Version Rollback:** Hata durumunda bir önceki stabil sürüme dönmek için `git` veya paket yedeği hazır mı?
-- [ ] **Communication:** Tüm paydaşlar (Satıcılar, Operasyon Ekibi) sürüm penceresi hakkında bilgilendirildi mi?
+- [ ] **HMAC Secrets:** Have the dedicated API Secret and Key sets for the production environment been entered correctly?
+- [ ] **Webhook Idempotency:** Has it been verified that repeated callbacks do not create duplicate entries in `Ledger` (with test mode off)?
+- [ ] **Currency Codes:** Has it been confirmed that the current WooCommerce currency settings are compatible with Rentiva `CurrencyHelper`?
+- [ ] **Governance Freeze:** Have critical financial permissions (Bulk Approve) been assigned exclusively to authorized `Checker` roles?
 
-## Bölüm Sonu Özeti
-- Canlıya alım protokolü, sürüm yayınlama sürecinin ayrılmaz bir parçasıdır.
-- Finansal maddelerdeki tek bir eksiklik, sürümü "Blok" statüsüne sokar.
+---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## ⚡ 3. Application and Performance
+
+- [ ] **Asset Minification:** Have CSS and JS files been minified for the production environment?
+- [ ] **Cache Flush:** Have transients and object caches left over from the previous version been cleared via `CacheManager`?
+- [ ] **Shortcode Audit:** Are the `[rentiva_...]` shortcodes on critical booking pages rendering correctly?
+- [ ] **Cron Health:** Are the financial reporting jobs triggered via `wp-cron` active?
+
+---
+
+## 🚨 4. Emergency (Rollback) Readiness
+
+- [ ] **DB Backup:** Has accessibility of a current database backup been verified?
+- [ ] **Version Rollback:** Is a `git` tag or package backup ready to revert to the previous stable version in case of error?
+- [ ] **Communication:** Have all stakeholders (Vendors, Operations Team) been informed about the release window?
+
+## Section Summary
+- The go-live protocol is an integral part of the version release process.
+- A single gap in financial items puts the release into "Blocked" status.
+
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, PRO aktivasyon ve finansal güvenlik maddeleriyle genişletildi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page expanded with PRO activation and financial security items. |

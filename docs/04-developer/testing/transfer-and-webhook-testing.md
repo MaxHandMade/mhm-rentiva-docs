@@ -1,67 +1,68 @@
 ---
 id: transfer-and-webhook-testing
-title: Transfer & Webhook Test Stratejisi
-sidebar_label: Transfer/Webhook Testleri
+title: Transfer & Webhook Test Strategy
+sidebar_label: Transfer/Webhook Tests
 sidebar_position: 4
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Rentiva'nın asenkron çalışan transfer modülü ve dış dünyaya açık Webhook uç noktalarının (Endpoint) test süreçlerini dökümante eder.
+:::info Purpose
+This page documents the test processes for Rentiva's asynchronously operating transfer module and the externally exposed webhook endpoints.
 :::
 
-# 🛰️ Transfer & Webhook Test Modeli
+# 🛰️ Transfer & Webhook Test Model
 
-Transfer ve Webhook katmanları, sistemin dış dünya ile konuştuğu en kritik uç noktalarıdır. Bu nedenle test senaryoları "Güvenli Red" (Safe Reject) prensibi üzerine kuruludur.
-
----
-
-## 🛣️ Transfer ve Lokasyon Testleri
-
-`HybridLocationTest.php` üzerinden yürüten testler, lokasyon bazlı arama ve rota hesaplama mantığını doğrular:
-- **Hybrid Data Logic:** Lokasyonların hem meta veriden hem de özel tablolardan tutarlı geldiği denetlenir.
-- **Route Integrity:** Tanımlanmamış rotalar için sistemin doğru "Fallback" (Hata mesajı veya alternatif rota) üretip üretmediği test edilir.
-- **Asenkron Arama:** Frontend üzerindeki lokasyon bazlı arama sorgularının performans ve doğruluk testleri yapılır.
+The transfer and webhook layers are the most critical endpoints through which the system communicates with the outside world. For this reason, test scenarios are built on the "Safe Reject" principle.
 
 ---
 
-## 🛡️ Webhook Güvenliği ve Hız Sınırı
+## 🛣️ Transfer and Location Tests
 
-Dışarıdan (Banka, Ödeme Sağlayıcı vb.) gelen bildirimler `WebhookRateLimiterTest.php` ile sıkı bir denetimden geçer:
-- **Rate Limiting:** Aynı IP veya kaynaktan gelen anormal trafik artışlarının (DDoS veya Brute Force denemeleri) anında bloklanması.
-- **Payload Validation:** Gelen verinin imza (Signature) doğrulaması ve JSON şema kontrolü.
-- **Idempotency:** Aynı Webhook bildiriminin iki kez işlenmesinin (Double-processing) engellenmesi.
-
----
-
-## ⚠️ Negatif Senaryolar (Edge Cases)
-
-Sistemin dayanıklılığını ölçmek için şu durumlar her zaman test edilir:
-- **Hatlar Arası Çakışma:** Bir aracın aynı anda iki farklı transfer rotasında rezerve edilmeye çalışılması.
-- **Geçersiz Webhook İmzası:** Hatalı veya süresi geçmiş imzalarla gelen isteklerin `401 Unauthorized` dönmesi.
-- **Eksik Parametre:** Rota hesaplanırken eksik koordinat veya şehir verisiyle yapılan isteklerin yönetimi.
+Tests run via `HybridLocationTest.php` verify the logic for location-based search and route calculation:
+- **Hybrid Data Logic:** Verifies that locations are retrieved consistently from both metadata and custom tables.
+- **Route Integrity:** Tests whether the system produces the correct "Fallback" (error message or alternative route) for undefined routes.
+- **Async Search:** Runs performance and accuracy tests on location-based search queries from the frontend.
 
 ---
 
-## 📊 Test Akış Şeması (Webhook)
+## 🛡️ Webhook Security and Rate Limiting
+
+Notifications arriving from external sources (Bank, Payment Provider, etc.) pass through strict scrutiny with `WebhookRateLimiterTest.php`:
+- **Rate Limiting:** Immediate blocking of abnormal traffic spikes (DDoS or brute-force attempts) from the same IP or source.
+- **Payload Validation:** Signature (HMAC) verification and JSON schema validation of incoming data.
+- **Idempotency:** Prevention of double-processing for the same webhook notification.
+
+---
+
+## ⚠️ Negative Scenarios (Edge Cases)
+
+The following situations are always tested to measure system resilience:
+- **Cross-Line Conflict:** Attempting to book a vehicle on two different transfer routes simultaneously.
+- **Invalid Webhook Signature:** Requests with incorrect or expired signatures must return `401 Unauthorized`.
+- **Missing Parameter:** Handling of requests made with missing coordinate or city data during route calculation.
+
+---
+
+## 📊 Test Flow Diagram (Webhook)
 
 ```mermaid
 graph LR
-    A[Dış İstek] --> B{Rate Limiter?}
-    B -- Geçerli --> C{İmza Kontrolü?}
-    B -- Blok --> H[429 Too Many Requests]
-    C -- Doğru --> D[İleti İşleme]
-    C -- Hatalı --> I[401 Unauthorized]
-    D --> E[Ledger Güncelleme]
+    A[External Request] --> B{Rate Limiter?}
+    B -- Valid --> C{Signature Check?}
+    B -- Blocked --> H[429 Too Many Requests]
+    C -- Valid --> D[Message Processing]
+    C -- Invalid --> I[401 Unauthorized]
+    D --> E[Ledger Update]
 ```
 
-## Bölüm Sonu Özeti
-- Webhook testleri güvenliği merkeze alır.
-- Transfer testleri "Hybrid Location" mimarisini doğrular.
-- Her iki modül de asenkron hatalara karşı (Timeout, Race Condition) dayanıklılık testlerinden geçer.
+## Section Summary
+- Webhook tests place security at the center.
+- Transfer tests validate the "Hybrid Location" architecture.
+- Both modules undergo resilience tests against async errors (timeout, race condition).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, HybridLocationTest ve WebhookRateLimiterTest standartlarına göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated per HybridLocationTest and WebhookRateLimiterTest standards. |

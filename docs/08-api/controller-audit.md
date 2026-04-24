@@ -1,76 +1,77 @@
 ---
 id: controller-audit
-title: Denetleyici (Controller) Mimarisi ve İş Mantığı
-sidebar_label: Controller Denetimi
+title: Controller Architecture and Business Logic
+sidebar_label: Controller Audit
 sidebar_position: 20
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva, "Fat Controller" (Şişman Denetleyici) anti-desenini engellemek için iş mantığını (Business Logic) servis sınıflarına aktarmayı hedefler. Bu sayfa, mevcut denetleyicilerin teknik denetim raporudur.
+:::info Purpose
+MHM Rentiva aims to delegate business logic to service classes in order to prevent the "Fat Controller" anti-pattern. This page is a technical audit report of the current controllers.
 :::
 
-# 🧬 Denetleyici ve Servis Katmanı Mimarisi
+# 🧬 Controller and Service Layer Architecture
 
-Eklentinin mimarisi, denetleyicilerin (Controllers) sadece istekleri karşılamasını, yetki kontrolü yapmasını ve işi ilgili servis sınıflarına (Services) devretmesini esas alır.
-
----
-
-## 🏗️ 1. Denetleyici Tasarım Kalıpları
-
-Tüm `*Controller.php` sınıfları şu kuralları takip etmelidir:
-- **Presentation-Only:** Veri hesaplaması yapmamalıdır.
-- **Validation:** İstek verilerini (Input) doğrulamalıdır.
-- **Authorization:** `current_user_can` veya `SecurityHelper` ile yetki kontrolü yapmalıdır.
+The plugin architecture is based on controllers only receiving requests, performing authorization checks, and delegating work to the relevant service classes.
 
 ---
 
-## 📊 2. AJAX Denetleyicileri Raporu
+## 🏗️ 1. Controller Design Patterns
+
+All `*Controller.php` classes must follow these rules:
+- **Presentation-Only:** Must not perform data calculations.
+- **Validation:** Must validate request input data.
+- **Authorization:** Must perform capability checks via `current_user_can` or `SecurityHelper`.
+
+---
+
+## 📊 2. AJAX Controllers Report
 
 ### A. AnalyticsController (Thin Controller)
-- **Dosya:** `src/Core/Dashboard/AnalyticsController.php`
-- **Görev:** İstatistik taleplerini karşılar.
-- **İş Mantığı:** Gelir, doluluk ve grafik verileri tamamen `AnalyticsService` içindedir.
-- **Sonuç:** ✅ **Standartlara Uygun.**
+- **File:** `src/Core/Dashboard/AnalyticsController.php`
+- **Role:** Handles statistics requests.
+- **Business Logic:** Revenue, occupancy, and chart data are entirely within `AnalyticsService`.
+- **Result:** ✅ **Compliant with standards.**
 
 ### B. PayoutAjaxController (Thin Controller)
-- **Dosya:** `src/Core/Financial/PayoutAjaxController.php`
-- **Görev:** Para çekme talebi başlatır.
-- **İş Mantığı:** `PayoutService` ve `AtomicPayoutService` (Transaction) sınıfları işlemi yürütür.
-- **Sonuç:** ✅ **Standartlara Uygun.**
+- **File:** `src/Core/Financial/PayoutAjaxController.php`
+- **Role:** Initiates payout requests.
+- **Business Logic:** The `PayoutService` and `AtomicPayoutService` (Transaction) classes execute the operation.
+- **Result:** ✅ **Compliant with standards.**
 
 ---
 
-## 🌐 3. REST Denetleyicileri Raporu
+## 🌐 3. REST Controllers Report
 
 ### A. HealthController (Audit Status)
-- **Dosya:** `src/Api/REST/HealthController.php`
-- **Gözlem:** Veritabanı sağlık sorgularının bir kısmı doğrudan controller içindedir.
-- **Öneri:** Bu mantığın `SystemHealthService` sınıfına aktarılması planlanmaktadır.
-- **Sonuç:** ⚠️ **İyileştirme Bekliyor.**
+- **File:** `src/Api/REST/HealthController.php`
+- **Observation:** Some database health queries are located directly inside the controller.
+- **Recommendation:** Migrating this logic to a `SystemHealthService` class is planned.
+- **Result:** ⚠️ **Improvement pending.**
 
 ### B. PayoutCallbackController (Transaction Controller)
-- **Dosya:** `src/Api/REST/PayoutCallbackController.php`
-- **Görev:** Ödeme geri bildirimlerini kanıtlarıyla (evidence) işler.
-- **Güvenlik:** HMAC imza kontrolü `AuthHelper` ile merkezi olarak yapılır.
-- **Sonuç:** ✅ **Standartlara Uygun.**
+- **File:** `src/Api/REST/PayoutCallbackController.php`
+- **Role:** Processes payment callbacks with their evidence.
+- **Security:** HMAC signature verification is handled centrally via `AuthHelper`.
+- **Result:** ✅ **Compliant with standards.**
 
 ---
 
-## 🛠️ 4. Mimari Standartlar ve Tavsiyeler
+## 🛠️ 4. Architectural Standards and Recommendations
 
-Hata yönetimini standartlaştırmak için şu yöntemler kullanılır:
-1. **`ErrorHandler::format_error()`:** Tüm hata yanıtları bu metot üzerinden standardize edilir.
-2. **DTO Sınıfları:** Büyük JSON verileri dönerken dizi (array) yerine DTO sınıfları kullanılarak veri kontratı (contract) garanti altına alınır.
-3. **`Sanitizer::*`:** Gelen tüm değişkenler ham veri olarak değil, sanitizasyon katmanından geçirilerek işlenir.
+The following methods are used to standardize error handling:
+1. **`ErrorHandler::format_error()`:** All error responses are standardized through this method.
+2. **DTO Classes:** When returning large JSON payloads, DTO classes are used instead of arrays to guarantee a data contract.
+3. **`Sanitizer::*`:** All incoming variables are processed through the sanitization layer rather than as raw data.
 
-## Bölüm Sonu Özeti
-- Denetleyiciler "İnce" (Thin) yapıda tutulur.
-- İş mantığı "Servis" sınıflarında merkezileştirilmiştir.
-- API güvenliği `AuthHelper` ve `SecurityHelper` ile sağlanır.
+## Section Summary
+- Controllers are kept "Thin."
+- Business logic is centralized in "Service" classes.
+- API security is provided by `AuthHelper` and `SecurityHelper`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Controller denetim raporu ve tasarım kalıpları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Controller audit report and design patterns added. |

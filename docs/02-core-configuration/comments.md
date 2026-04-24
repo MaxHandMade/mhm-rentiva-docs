@@ -1,68 +1,69 @@
 ---
 id: comments
-title: Yorumlar ve Puanlama (Ayarlar)
-sidebar_label: Yorumlar
+title: Reviews & Ratings (Settings)
+sidebar_label: Reviews
 sidebar_position: 7
 slug: /core-configuration/comments
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Yorumlar sekmesi, araç kiralama deneyimi sonrası müşterilerin yapacağı geri bildirimlerin, puanlamaların ve spam korumasının yönetildiği merkezdir. **MHM Rentiva > Ayarlar > Yorumlar** altından ulaşılır.
-
----
-
-## ⚙️ Genel Yapılandırma
-
-Yorum sisteminin temel çalışma kuralları buradan belirlenir:
-
-- **Yorumları Otomatik Olarak Onayla:** İşaretlendiğinde yorumlar admin onayına düşmeden anında yayınlanır.
-- **Giriş Gerekli:** Sadece üye girişi yapmış kullanıcıların yorum yapabilmesini sağlar.
-- **Misafir Yorumlarına İzin Ver:** Üye olmayan kullanıcıların da isim/e-posta ile yorum yapabilmesine olanak tanır.
+The Reviews tab is the hub for managing customer feedback, ratings, and spam protection after a vehicle rental experience. Access it via **MHM Rentiva > Settings > Reviews**.
 
 ---
 
-## 🎨 Görüntü Ayarları
+## ⚙️ General Configuration
 
-Frontend (kullanıcı tarafı) görünüm tercihleridir:
+The core operating rules for the review system are set here:
 
-- **Sayfa Başına Yorumlar:** Bir sayfada kaç adet yorum listeleneceği (Örn: 10).
-- **Puanları Göster:** Yıldızlı puanlama sistemini aktif/pasif yapar.
-- **Avatarları Göster:** Kullanıcıların profil resimlerini (Gravatar) görüntüler.
-- **Düzenleme ve Silme:** Kullanıcıların kendi yorumlarını belirli bir süre (Dakika) içinde düzeltmesine veya silmesine izin verir.
-
----
-
-## 🛡️ Spam ve Güvenlik
-
-Sistemi kötü niyetli içeriklerden ve botlardan korur:
-
-- **Spam Koruması:** Akıllı filtreleme sistemini aktif eder.
-- **Hız Sınırlamayı Etkinleştir (Rate Limiting):** Bir kullanıcının kısa sürede çok fazla yorum yapmasını engeller (Örn: 1 dakikada 1 yorum sınırı).
-- **İstenmeyen Sözcükler:** Yorumlarda geçmesi durumunda içeriği otomatik engeleyen kara liste (Blacklist). Virgülle ayırarak eklenir (Örn: spam, casino, viagra).
+- **Auto-Approve Reviews:** When checked, reviews are published immediately without going to admin moderation.
+- **Login Required:** Restricts review submission to logged-in users only.
+- **Allow Guest Reviews:** Allows non-registered users to submit a review with their name and email.
 
 ---
 
-### 🖼️ GÖRSEL: YORUM AYARLARI PANELİ
-*(Ayarlar > Yorumlar sekmesi, akordiyon yapısındaki ayar grupları)*
+## 🎨 Display Settings
+
+Frontend display preferences:
+
+- **Reviews Per Page:** How many reviews are listed on a single page (e.g., 10).
+- **Show Ratings:** Enables or disables the star-rating system.
+- **Show Avatars:** Displays user profile pictures (Gravatar).
+- **Edit and Delete:** Allows users to edit or delete their own reviews within a specified time period (Minutes).
 
 ---
 
-## ⚡ Önbellek ve Performans
+## 🛡️ Spam & Security
 
-Yüksek trafikli sitelerde veritabanı yükünü azaltmak için kullanılır:
+Protects the system from malicious content and bots:
 
-- **Yorum Önbelleğini Etkinleştir:** Yorum listelerini geçici hafızaya alır.
-- **Önbellek Süresi (Dakika):** Listelerin ne kadar süre güncel kalacağı (Örn: 5 dk).
+- **Spam Protection:** Enables the smart filtering system.
+- **Enable Rate Limiting:** Prevents a single user from submitting too many reviews in a short period (e.g., a limit of 1 review per minute).
+- **Blocked Words:** A blacklist of words that automatically block content if found in a review. Add entries separated by commas (e.g., spam, casino, viagra).
 
 ---
 
-### Bölüm Özeti
-- **Onay Süreci** ile içerik kalitesini denetleyin.
-- **Spam Filtreleri** ile temiz bir geri bildirim alanı oluşturun.
-- **Puanlama Sistemi** ile diğer müşterilere sosyal kanıt sunun.
+### 🖼️ IMAGE: REVIEWS SETTINGS PANEL
+*(Settings > Reviews tab, accordion-structured settings groups)*
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+---
+
+## ⚡ Cache & Performance
+
+Used to reduce database load on high-traffic sites:
+
+- **Enable Review Cache:** Stores review lists in temporary memory.
+- **Cache Duration (Minutes):** How long the lists remain current (e.g., 5 min).
+
+---
+
+### Section Summary
+- Use the **Approval Process** to monitor content quality.
+- Use **Spam Filters** to maintain a clean feedback area.
+- Use the **Rating System** to provide social proof to other customers.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Yorumlar (Ayarlar) dökümanı panel ekran görüntüsü ve kod analizine göre oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Reviews (Settings) documentation created based on panel screenshot and code analysis. |

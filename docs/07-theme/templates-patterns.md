@@ -4,28 +4,28 @@ title: Custom Templates & Block Patterns
 sidebar_label: Templates & Patterns
 slug: /theme/templates-patterns
 ---
-![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
 :::info Purpose
 This page documents the block templates and patterns that drive the visual representation of rental listings, search results, and vendor management interfaces.
 :::
 
-## Temel Şablonlar (`/templates`) — 10 Adet
+## Core Templates (`/templates`) — 10 Total
 
-Bu HTML şablonlari, belirli post tipleri ve gorunumler için temel yapisal düzeni tanımlar:
+These HTML templates define the base structural layout for specific post types and views:
 
-| Şablon | Dosya | Açıklama |
+| Template | File | Description |
 |--------|-------|----------|
-| **Ana Sayfa** | `front-page.html` | Site ana sayfası düzeni. |
-| **Genel Sayfa** | `page.html` | Standart WordPress sayfaları için `content-wide` düzeni. |
-| **Tekil Arac** | `single-vehicle.html` | Tekil araç listeleme sayfası düzeni. |
-| **Araç Arsivi** | `archive-vehicle.html` | Arama sonuçları ve genel araç arsivi. |
-| **Hesap Sayfasi** | `page-account.html` | Vendor Paneli için birlesik kabuk. |
-| **404 Sayfasi** | `404.html` | Bulunamayan sayfa için ozel hata sayfası. |
-| **Genel Arsiv** | `archive.html` | Varsayılan arsiv şablonu. |
-| **Ana Index** | `index.html` | WordPress varsayılan fallback şablonu. |
-| **Arama** | `search.html` | WordPress arama sonuçları sayfası. |
-| **Tekil Yazi** | `single.html` | Standart blog yazisi şablonu. |
+| **Homepage** | `front-page.html` | Site homepage layout. |
+| **General Page** | `page.html` | `content-wide` layout for standard WordPress pages. |
+| **Single Vehicle** | `single-vehicle.html` | Single vehicle listing page layout. |
+| **Vehicle Archive** | `archive-vehicle.html` | Search results and general vehicle archive. |
+| **Account Page** | `page-account.html` | Unified shell for the Vendor Dashboard. |
+| **404 Page** | `404.html` | Custom error page for not-found content. |
+| **General Archive** | `archive.html` | Default archive template. |
+| **Main Index** | `index.html` | WordPress default fallback template. |
+| **Search** | `search.html` | WordPress search results page. |
+| **Single Post** | `single.html` | Standard blog post template. |
 
 ### Vehicle Archive Layout (`archive-vehicle.html`)
 ```text
@@ -46,53 +46,53 @@ Bu HTML şablonlari, belirli post tipleri ve gorunumler için temel yapisal düz
 
 ---
 
-## Blok Desenleri (`/patterns`) — 31 Adet
+## Block Patterns (`/patterns`) — 31 Total
 
-Blok desenleri, `rentiva` kategorisi altında on-yapilandirilmis Gutenberg blok montajlaridir. v0.3.0 ile 31 desene ulasilmistir:
+Block patterns are pre-configured Gutenberg block assemblies registered under the `rentiva` category. v0.3.0 reaches 31 patterns:
 
-### Ana Sayfa Desenleri
+### Homepage Patterns
 
-| Desen | Dosya | Açıklama |
+| Pattern | File | Description |
 |-------|-------|----------|
-| **Hero** | `homepage-hero.php` | Ana sayfa hero bölümü. |
-| **Arama Hero** | `rentiva-search-hero.php` | Lokasyon/tarih girişli one cikan arama. |
-| **Guven Seridi** | `homepage-trust-strip.php` | Guvenilen marka logolari. |
-| **Nasil Calisir** | `homepage-how-it-works.php` | Adim adim kullanim rehberi. |
-| **Hizmetler** | `homepage-services.php` | Hizmet tanitim bölümü. |
-| **Bilgi Izgarasi** | `homepage-info-grid.php` | Bilgi kartlari izgarasi. |
-| **One Cikan Araclar** | `homepage-featured-vehicles.php` | Ana sayfada araç vitrin bölümü. |
-| **Rezervasyon CTA** | `homepage-booking-cta.php` | Rezervasyon aksiyona cagri. |
-| **Referanslar** | `homepage-testimonials.php` | Müşteri yorumlari bölümü. |
+| **Hero** | `homepage-hero.php` | Homepage hero section. |
+| **Search Hero** | `rentiva-search-hero.php` | Prominent search with location/date inputs. |
+| **Trust Strip** | `homepage-trust-strip.php` | Trusted brand logos. |
+| **How It Works** | `homepage-how-it-works.php` | Step-by-step usage guide. |
+| **Services** | `homepage-services.php` | Service introduction section. |
+| **Info Grid** | `homepage-info-grid.php` | Information card grid. |
+| **Featured Vehicles** | `homepage-featured-vehicles.php` | Vehicle showcase section on the homepage. |
+| **Booking CTA** | `homepage-booking-cta.php` | Booking call-to-action. |
+| **Testimonials** | `homepage-testimonials.php` | Customer reviews section. |
 
-### Sayfa Desenleri
+### Page Patterns
 
-| Desen | Dosya | Açıklama |
+| Pattern | File | Description |
 |-------|-------|----------|
-| **Hakkimizda** | `rentiva-about-page.php` | Hakkimizda sayfası içeriği. |
-| **Iletisim** | `rentiva-contact-page.php` | Iletisim sayfası formu. |
-| **SSS** | `rentiva-faq-page.php` | Sikca sorulan sorular. |
-| **Gizlilik** | `rentiva-privacy-page.php` | Gizlilik politikasi. |
-| **Kosullar** | `rentiva-terms-page.php` | Kullanim kosullari. |
-| **Vendor Başvuru** | `rentiva-vendor-apply-page.php` | Tedarikci başvuru sayfası. |
+| **About Us** | `rentiva-about-page.php` | About page content. |
+| **Contact** | `rentiva-contact-page.php` | Contact page form. |
+| **FAQ** | `rentiva-faq-page.php` | Frequently asked questions. |
+| **Privacy** | `rentiva-privacy-page.php` | Privacy policy. |
+| **Terms** | `rentiva-terms-page.php` | Terms of use. |
+| **Vendor Apply** | `rentiva-vendor-apply-page.php` | Vendor application page. |
 
-### Bileşen Desenleri
+### Component Patterns
 
-| Desen | Dosya | Açıklama |
+| Pattern | File | Description |
 |-------|-------|----------|
-| **Hesap Kabugu** | `rentiva-account-shell.php` | Vendor paneli ana konteyneri. |
-| **Araç Detay** | `rentiva-vehicle-details.php` | Tekil araç bilgi izgarasi. |
-| **Araclar Izgara** | `rentiva-vehicles-grid-section.php` | Araç kartlari izgarasi. |
-| **One Cikan Araclar** | `rentiva-featured-vehicles-section.php` | One cikan araclar bölümü. |
-| **Araç Karşılaştırma** | `rentiva-vehicle-comparison-page.php` | Araç karşılaştırma sayfası. |
-| **Araç Yorumlari** | `rentiva-vehicle-reviews.php` | Araç değerlendirmeleri. |
-| **Arama Sonuçları** | `rentiva-search-results.php` | Arama sonuçları düzeni. |
-| **Transfer Arama** | `rentiva-transfer-search.php` / `rentiva-transfer-search-page.php` | Transfer arama formu ve sayfası. |
-| **Transfer Sonuçları** | `rentiva-transfer-results.php` / `rentiva-transfer-results-page.php` | Transfer sonuçları düzeni. |
-| **Markalar** | `rentiva-brands.php` | Araç markalari bölümü. |
-| **Birincil CTA** | `rentiva-primary-cta.php` | Genel aksiyona cagri. |
-| **Rezervasyon CTA** | `rentiva-booking-cta.php` | Rezervasyon aksiyona cagri. |
-| **Guvenilen Takimlar** | `rentiva-trusted-teams.php` | Guvenilen is ortaklari. |
-| **404 Icerigi** | `404-content.php` | 404 sayfası içeriği. |
+| **Account Shell** | `rentiva-account-shell.php` | Vendor dashboard main container. |
+| **Vehicle Details** | `rentiva-vehicle-details.php` | Single vehicle information grid. |
+| **Vehicles Grid** | `rentiva-vehicles-grid-section.php` | Vehicle card grid. |
+| **Featured Vehicles** | `rentiva-featured-vehicles-section.php` | Featured vehicles section. |
+| **Vehicle Comparison** | `rentiva-vehicle-comparison-page.php` | Vehicle comparison page. |
+| **Vehicle Reviews** | `rentiva-vehicle-reviews.php` | Vehicle rating reviews. |
+| **Search Results** | `rentiva-search-results.php` | Search results layout. |
+| **Transfer Search** | `rentiva-transfer-search.php` / `rentiva-transfer-search-page.php` | Transfer search form and page. |
+| **Transfer Results** | `rentiva-transfer-results.php` / `rentiva-transfer-results-page.php` | Transfer results layout. |
+| **Brands** | `rentiva-brands.php` | Vehicle brands section. |
+| **Primary CTA** | `rentiva-primary-cta.php` | General call-to-action. |
+| **Booking CTA** | `rentiva-booking-cta.php` | Booking call-to-action. |
+| **Trusted Teams** | `rentiva-trusted-teams.php` | Trusted business partners. |
+| **404 Content** | `404-content.php` | 404 page content. |
 
 ---
 
@@ -130,8 +130,9 @@ If you prefer file-based customization, you can create a child theme and place y
 
 ---
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |-------|-------|-----|
-| 27.03.2026 | v0.3.0 | Tam şablon (10) ve desen (31) listesi güncellendi; Türkçe içerik. |
-| 09.03.2026 | 1.0.0-docs | Şablon ve desen dokumantasyonu oluşturuldu. |
+| 23.04.2026 | v0.3.0 | English translation applied to Turkish sections. |
+| 27.03.2026 | v0.3.0 | Full template (10) and pattern (31) list updated. |
+| 09.03.2026 | 1.0.0-docs | Templates and patterns documentation created. |

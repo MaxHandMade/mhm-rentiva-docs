@@ -1,70 +1,71 @@
 ---
 id: license-management
-title: Lisans Yönetimi
-sidebar_label: Lisans Yönetimi
+title: License Management
+sidebar_label: License Management
 sidebar_position: 8
 slug: /core-configuration/license
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-MHM Rentiva, tüm özelliklerin (VIP Transfer, Mesajlaşma, Gelişmiş Raporlar vb.) tam performansta çalışabilmesi için geçerli bir lisans anahtarı gerektirir. **MHM Rentiva > Lisans** menüsü üzerinden anahtarınızı yönetebilirsiniz.
-
----
-
-## 💻 Geliştirici Modu (Developer Mode)
-
-Rentiva, yerel (localhost) veya staging ortamlarında çalıştığını otomatik algılayarak sayfanın sağ üstünde **"Geliştirici Modu Etkin"** uyarısı verir. Bu moddayken gerçek bir lisans anahtarı girmeden de tüm Pro özellikler (Vendor & Payout dahil) kullanılabilir.
-
-*   **Zorunlu Doğrulama Seçeneği:** Canlı yayına geçmeden önce veya geliştirme sırasındayken lisans sisteminin gerçekten bağlandığını test etmek isterseniz, ekrandaki **"Otomatik geliştirici modunu devre dışı bırak (gerçek lisans doğrulamasını zorla)"** kutucuğunu işaretleyerek sistemi normal akışına döndürebilirsiniz.
+MHM Rentiva requires a valid license key for all features (VIP Transfer, Messaging, Advanced Reports, etc.) to operate at full capacity. Manage your key via the **MHM Rentiva > License** menu.
 
 ---
 
-## 🟢 Lisans Durumu ve Etkinleştirme
+## 💻 Developer Mode
 
-Sayfanın yönetim paneli üç ana bloğa bölünmüştür:
+Rentiva automatically detects when it is running on a local (localhost) or staging environment and displays a **"Developer Mode Active"** notice in the top-right corner of the page. In this mode, all Pro features (including Vendor & Payout) are available without entering a real license key.
 
-1. **Lisans Durumu:**
-   Mevcut lisansın geçerliliğini gösterir. Lisans geçerli olduğunda yeşil renkli tik ile **"Pro Lisans Etkin"** yazar ve altında kilidi açılan özelliklerin bir özeti bulunur: *(All Pro features active: Unlimited vehicles/bookings, export, advanced reports, Vendor & Payout)*.
-
-2. **Lisans Etkinleştirme:**
-   Satın aldığınız lisans anahtarını `XXXX-XXXX-XXXX-XXXX` formatındaki kutuya yapıştırıp **"Lisansı Etkinleştir"** butonuna basmanız yeterlidir. API anında doğrulama yapar.
-
-3. **Lisans Yönetimi (Serbest Bırakma):**
-   Eklentiyi başka bir web sitesine (domaine) taşımak isterseniz veya gerçek bir lisansı test/iptal etmek isterseniz, alttaki **"Lisansı Devre Dışı Bırak"** düğmesini kullanmalısınız. Aksi takdirde yeni domainde aktivasyon hatası (Too many activations) alabilirsiniz.
+*   **Force Validation Option:** If you want to test that the license system is actually connecting before going live or during development, check the **"Disable automatic developer mode (force real license validation)"** checkbox on the screen to return the system to its normal flow.
 
 ---
 
-## 💎 Lite ve Pro Karşılaştırması
+## 🟢 License Status & Activation
 
-Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) olduğu durumdaki kısıtlamalar ile lisanslı (Pro) durumun genişliğini kıyaslamanızı sağlar:
+The page's admin panel is divided into three main blocks:
 
-| Özellik | Lite (Sınır) | Pro (Limitsiz) |
+1. **License Status:**
+   Shows the validity of the current license. When the license is active, a green tick displays **"Pro License Active"** along with a summary of unlocked features below: *(All Pro features active: Unlimited vehicles/bookings, export, advanced reports, Vendor & Payout)*.
+
+2. **License Activation:**
+   Paste the license key you purchased into the `XXXX-XXXX-XXXX-XXXX` format field and click the **"Activate License"** button. The API validates instantly.
+
+3. **License Management (Release):**
+   If you want to move the plugin to another website (domain), or deactivate a real license for testing or cancellation, use the **"Deactivate License"** button at the bottom. Otherwise, you may receive an activation error (Too many activations) on the new domain.
+
+---
+
+## 💎 Lite vs. Pro Comparison
+
+The transparency table at the bottom of the page lets you compare the restrictions when the license is inactive (Lite) with the full scope of the licensed (Pro) state:
+
+| Feature | Lite (Limit) | Pro (Unlimited) |
 | :--- | :--- | :--- |
-| **Maksimum Araç Sayısı** | 5 Araç | Sınırsız |
-| **Rezervasyon Kapasitesi** | 50 Rezervasyon | Sınırsız |
-| **Müşteri Veritabanı** | 10 Müşteri | Sınırsız |
-| **Ek Hizmetler (Eklentiler)** | 4 Ek hizmet | Sınırsız |
-| **VIP Transfer Güzergahları**| 3 Güzergah | Sınırsız |
-| **Galeri Resimleri** | 5 Araç/Görseli | Sınırsız |
-| **Gelişmiş Raporlar** | 30 Gün (Maks 500 satır) | Sınırsız Tarih & Satır |
-| **Dışa Aktarım Biçimleri** | Sadece CSV | CSV, JSON |
-| **Mesajlaşma Sistemi** | Mevcut değil | Mevcut |
-| **Vendor & Payout** | Mevcut değil | Mevcut |
-| **REST API Erişimi** | Sınırlı | Tam REST API |
-| **GDPR Uyumluluk Araçları** | Mevcut değil | Mevcut |
-| **E-posta Bildirimleri** | Mevcut değil | Mevcut |
+| **Maximum Vehicles** | 5 Vehicles | Unlimited |
+| **Booking Capacity** | 50 Bookings | Unlimited |
+| **Customer Database** | 10 Customers | Unlimited |
+| **Add-ons** | 4 Add-ons | Unlimited |
+| **VIP Transfer Routes** | 3 Routes | Unlimited |
+| **Gallery Images** | 5 per Vehicle | Unlimited |
+| **Advanced Reports** | 30 Days (Max 500 rows) | Unlimited Date & Rows |
+| **Export Formats** | CSV only | CSV, JSON |
+| **Messaging System** | Not available | Available |
+| **Vendor & Payout** | Not available | Available |
+| **REST API Access** | Limited | Full REST API |
+| **GDPR Compliance Tools** | Not available | Available |
+| **Email Notifications** | Not available | Available |
 
 ---
 
-### Bölüm Özeti
-- Lisansınız **MHM Rentiva > Lisans** menüsünden tek tuşla aktifleştirilir veya iptal edilir.
-- Geliştirici ortamları sistem tarafından tespit edilir ve kolaylık sağlamak için "Geliştirici Modu" ile Pro özelliklerin denenebilmesine olanak tanır.
-- Domain taşıma öncesi eski lisans mutlaka **Devre Dışı Bırak** butonuyla serbest bırakılmalıdır.
+### Section Summary
+- Your license is activated or deactivated in one step from the **MHM Rentiva > License** menu.
+- Developer environments are detected automatically, and **Developer Mode** allows all Pro features to be tested conveniently.
+- Before moving a domain, always release the old license using the **Deactivate** button.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 27.03.2026 | 4.23.0 | Lite limitleri güncellendi (araç: 3→5, müşteri: 3→10, galeri: 3→5). Pro-only özellikler ayrıştı: Vendor & Payout, GDPR, E-posta Bildirimleri. |
-| 19.03.2026 | 4.21.2 | Lisans yönetimi rehberi görseller ve teknik notlarla modernize edildi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | Lite limits updated (vehicles: 3→5, customers: 3→10, gallery: 3→5). Pro-only features separated: Vendor & Payout, GDPR, Email Notifications. |
+| 19.03.2026 | 4.21.2 | License management guide modernized with visuals and technical notes. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

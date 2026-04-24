@@ -1,94 +1,95 @@
 ---
 title: Unified search
-description: Unified search modülünün kullanım kılavuzu ve teknik detayları.
+description: Usage guide and technical reference for the Unified Search module.
 sidebar_position: 18
 ---
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, Unified search modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::info Purpose
+This page describes the Unified Search module as a standard reference, covering both technical and operational aspects.
 :::
 
-# 🚗 Unified search
+# 🚗 Unified Search
 
-## İçindekiler
-- Kullanım
-- Özellikler
-- Geliştirici Notları
+## Contents
+- Usage
+- Features
+- Developer Notes
 
-Unified search modülü, Rentiva platformundaki **vehicle** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+The Unified Search module is designed to manage and present **vehicle** search processes to visitors on the Rentiva platform.
 
-## Kullanım
+## Usage
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
+:::tip IMAGE COMING SOON
+A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
 :::
 
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+To add this module to any page or post, use the shortcode below:
 
 ```shortcode
 [rentiva_unified_search default_tab="default"]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Unified search"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Unified Search"**.
 
-### Parametreler
+### Parameters
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+The following parameters are available inside the shortcode:
 
-| Parametre | Varsayılan | Açıklama |
+| Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `default_tab` | `default` | Modülün **workflow** davranışını kontrol eder. |
-| `default_tab_alias` | `defaultTab` | Modülün **feature** davranışını kontrol eder. |
-| `show_rental_tab` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_transfer_tab` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_location_select` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_time_select` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_date_picker` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_dropoff_location` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_pax` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_luggage` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `service_type` | `both` | Modülün **feature** davranışını kontrol eder. |
-| `filter_categories` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
-| `redirect_page` | `default` | Modülün **workflow** davranışını kontrol eder. |
-| `layout` | `horizontal` | Modülün **general** davranışını kontrol eder. |
-| `search_layout` | `(boş)` | Modülün **layout** davranışını kontrol eder. |
-| `style` | `glass` | Modülün **layout** davranışını kontrol eder. |
-| `location_required` | `0` | Lokasyon seçiminin zorunlu olup olmadigini kontrol eder. `1` (Zorunlu) veya `0` (Opsiyonel). |
-| `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
+| `default_tab` | `default` | Controls the module's **workflow** behavior. |
+| `default_tab_alias` | `defaultTab` | Controls the module's **feature** filter behavior. |
+| `show_rental_tab` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_transfer_tab` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_location_select` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_time_select` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_date_picker` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_dropoff_location` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_pax` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_luggage` | `default` | Visibility toggle. `1` (on) or `0` (off). |
+| `service_type` | `both` | Controls the module's **feature** filter behavior. |
+| `filter_categories` | `(empty)` | Controls the module's **feature** filter behavior. |
+| `redirect_page` | `default` | Controls the module's **workflow** behavior. |
+| `layout` | `horizontal` | Controls the module's **general** layout behavior. |
+| `search_layout` | `(empty)` | Controls the module's **layout** behavior. |
+| `style` | `glass` | Controls the module's **layout** behavior. |
+| `location_required` | `0` | Controls whether location selection is required. `1` (required) or `0` (optional). |
+| `class` | `(empty)` | Controls the module's **general** layout behavior. |
 
-### Alan Zorunluluğu Davranışı
+### Field Requirement Behavior
 
-Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik gösterir:
+Field requirement behavior in the search form differs by tab:
 
-- **Kiralama (Rental) sekmesi:** Alan zorunluluğu `mhm_rentiva_fields_required` genel ayarina bağlı olarak koşullu çalışır. Varsayılan değer `0` (zorunlu değil).
-- **Transfer sekmesi:** Transfer alanları (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) her zaman zorunludur (hardcoded `required`). Transfer rota-bazli bir servis olduğu için bu alanlar bos birakilamaz.
+- **Rental tab:** Field requirements are conditional, based on the `mhm_rentiva_fields_required` global setting. Default value is `0` (not required).
+- **Transfer tab:** Transfer fields (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) are always required (hardcoded `required`). Because transfer is a route-based service, these fields cannot be left empty.
 
-:::tip Ayar Yönetimi
-`mhm_rentiva_fields_required` değeri **MHM Rentiva > Ayarlar** üzerinden degistirilebilir. Bu ayar yalnızca kiralama sekmesini etkiler; transfer sekmesi daima zorunlu kalir.
+:::tip Settings Management
+The `mhm_rentiva_fields_required` value can be changed via **MHM Rentiva > Settings**. This setting only affects the rental tab; the transfer tab is always required.
 :::
 
-## Özellikler
+## Features
 
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
+### 📱 Responsive Design
+- **Mobile:** Single-column layout.
+- **Tablet (under 782px):** Optimized view.
+- **Desktop:** Full view at the configured column count or width.
 
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+### 🚀 Performance-Focused
+- **Smart Caching:** Database queries are optimized and cached by the system.
+- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
-## Geliştirici Notları
+## Developer Notes
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-unified-search-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
+- **HTML Structure:** All containers start with the `.mhm-rentiva-unified-search-wrapper` class.
+- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
 
-## Bölüm Sonu Özeti
-- Unified search sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+## Section Summary
+- The Unified Search page has been aligned to the standard documentation structure with consistent reference headings.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.22.1 | `location_required` parametresi eklendi. Alan zorunluluğu (fields_required) davranışı belgelendi: rental koşullu, transfer daima zorunlu. |
-| 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.22.1 | `location_required` parameter added. Field requirement (fields_required) behavior documented: rental is conditional, transfer is always required. |
+| 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

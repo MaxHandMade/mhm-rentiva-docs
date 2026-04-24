@@ -1,54 +1,54 @@
 ---
 id: auth-and-security
-title: API Kimlik Doğrulama ve Güvenlik
-sidebar_label: Auth ve Güvenlik
+title: API Authentication and Security
+sidebar_label: Auth and Security
 sidebar_position: 20
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-MHM Rentiva API katmanındaki veri alışverişinin bütünlüğünü ve gizliliğini sağlamak için kullanılan güvenlik protokollerini açıklar.
+:::info Purpose
+Explains the security protocols used to ensure the integrity and confidentiality of data exchange in the MHM Rentiva API layer.
 :::
 
-# 🔐 API Güvenlik Mimarisi
+# 🔐 API Security Architecture
 
-Sistem, hem dahili hem de harici talepler için çok katmanlı bir doğrulama stratejisi izler.
+The system follows a multi-layer verification strategy for both internal and external requests.
 
 ---
 
-## 🛡️ 1. Kimlik Doğrulama Yöntemleri
+## 🛡️ 1. Authentication Methods
 
-### A. Nonce (CSRF) Koruması (Internal)
-Dahili AJAX ve Interactivity API taleplerinde kullanılır.
+### A. Nonce (CSRF) Protection (Internal)
+Used for internal AJAX and Interactivity API requests.
 - **Header:** `X-WP-Nonce`
-- **Doğrulama:** `check_ajax_referer()` veya `rest_cookie_check_errors()`.
+- **Verification:** `check_ajax_referer()` or `rest_cookie_check_errors()`.
 
 ### B. API Key (External)
-Dış entegrasyonlar için `AuthHelper` ile yönetilir.
+Managed via `AuthHelper` for external integrations.
 - **Header:** `X-Rentiva-API-Key`
-- **İşlev:** API anahtarı, o anahtara atanmış yetki seviyesini (Read/Write) belirler.
+- **Function:** The API key determines the permission level (Read/Write) assigned to that key.
 
-### C. HMAC İmza Doğrulaması (Webhook)
-Ödeme geri bildirimleri (Callback) için kritik güvenlik adımıdır.
+### C. HMAC Signature Verification (Webhook)
+A critical security step for payment callbacks.
 - **Header:** `X-Rentiva-Signature`
-- **Mantık:** Gelen JSON gövdesi ve gizli anahtar (Secret Key) kullanılarak üretilen hash, başlıktaki veriyle karşılaştırılır.
+- **Logic:** The hash produced using the incoming JSON body and the Secret Key is compared against the value in the header.
 
 ---
 
-## 🚦 2. Yetkilendirme (Authorization)
+## 🚦 2. Authorization
 
-Kimlik doğrulandıktan sonra, kullanıcının işlem yetkisi kontrol edilir:
-- **`current_user_can('manage_options')`:** Admin bazlı işlemler.
-- **`current_user_can('rentiva_vendor')`:** Tedarikçi bazlı işlemler.
-- **`Mode::featureEnabled()`:** Lisans seviyesine göre özellik kısıtlaması.
+After authentication, the user's permission to perform the operation is checked:
+- **`current_user_can('manage_options')`:** Admin-level operations.
+- **`current_user_can('rentiva_vendor')`:** Vendor-level operations.
+- **`Mode::featureEnabled()`:** Feature restriction based on license tier.
 
 ---
 
-## 🚀 3. İstek Güvenliği ve Sanitizasyon
+## 🚀 3. Request Security and Sanitization
 
-### Parametre Doğrulama
-Tüm uç noktalar `args` dizisi üzerinden veri doğrulaması yapar:
+### Parameter Validation
+All endpoints validate data through an `args` array:
 ```php
 'id' => [
     'validate_callback' => function($param) {
@@ -59,22 +59,23 @@ Tüm uç noktalar `args` dizisi üzerinden veri doğrulaması yapar:
 ```
 
 ### Rate Limiting
-`RateLimiter::check()` metodu ile aynı IP veya API anahtarından gelen aşırı istekler bloklanır. Varsayılan limit: Dakikada 60 istek.
+Excessive requests from the same IP or API key are blocked via the `RateLimiter::check()` method. Default limit: 60 requests per minute.
 
 ---
 
-## 📦 4. Veri Taşıma Güvenliği
-- **HTTPS:** Tüm API uç noktaları için HTTPS zorunludur.
-- **Secrets:** API anahtarları veritabanında şifrelenmiş olarak saklanır.
-- **Preflight (CORS):** Sadece izin verilen alan adlarından (Origin) gelen talepler kabul edilir.
+## 📦 4. Data Transport Security
+- **HTTPS:** HTTPS is required for all API endpoints.
+- **Secrets:** API keys are stored encrypted in the database.
+- **Preflight (CORS):** Only requests from allowed origins are accepted.
 
-## Denetim Listesi
-1. Tüm POST isteklerinde Nonce kontrolü var mı?
-2. `AuthHelper` ile API Key doğrulaması yapılıyor mu?
-3. Hassas veriler JSON yanıtında gizlenmiş mi?
-4. `RateLimiter` aktif mi?
+## Checklist
+1. Is there a Nonce check on all POST requests?
+2. Is API key verification performed via `AuthHelper`?
+3. Are sensitive values masked in JSON responses?
+4. Is `RateLimiter` active?
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Nonce, API Key, HMAC ve Rate Limiting detayları eklendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Nonce, API Key, HMAC, and Rate Limiting details added. |

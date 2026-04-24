@@ -1,0 +1,8 @@
+{
+    "label": "Vendor Ecosystem",
+    "position": 5,
+    "link": {
+        "type": "doc",
+        "id": "vendor/vendor-overview"
+    }
+}

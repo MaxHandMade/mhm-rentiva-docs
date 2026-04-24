@@ -5,43 +5,43 @@ sidebar_label: Transfer Settings
 sidebar_position: 8
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, transfer modülünün global davranışını (Ödeme kuralları, depozito oranları ve özel kategoriler) belirleyen `TransferSettings` sınıfını açıklar.
+:::info Purpose
+This page describes the `TransferSettings` class, which defines the global behavior of the transfer module (payment rules, deposit rates, and custom location types).
 :::
 
 # ⚙️ Transfer Settings
 
-`TransferSettings`, transfer operasyonlarının finansal ve yapısal kurallarını belirleyen merkezi sınıftır. Rentiva'nın modern `SettingsHelper` ve `SettingsCore` mimarisine tam entegre çalışır.
+`TransferSettings` is the central class that defines the financial and structural rules for transfer operations. It is fully integrated with Rentiva's modern `SettingsHelper` and `SettingsCore` architecture.
 
 ---
 
-## 🏗️ Ayar Grupları ve Sahalar
+## 🏗️ Setting Groups and Fields
 
-Sınıf, admin panelinde `mhm_rentiva_transfer_section` ID'si ile aşağıdaki ayarları yönetir:
+The class manages the following settings in the admin panel under the `mhm_rentiva_transfer_section` ID:
 
-### 1. Ödeme Davranışı (Payment Type)
-Müşterinin transfer rezervasyonu sırasında yapacağı ödeme modelini belirler:
-- **Full Payment Required:** Ücretin tamamı rezervasyon anında tahsil edilir.
-- **Deposit (Percentage):** Sadece belirlenen bir yüzde (depozito) tahsil edilir.
+### 1. Payment Behavior (Payment Type)
+Determines the payment model the customer uses when making a transfer booking:
+- **Full Payment Required:** The full amount is collected at the time of booking.
+- **Deposit (Percentage):** Only a specified percentage (deposit) is collected.
 
-### 2. Depozito Oranları (Deposit Rate)
-Eğer ödeme modeli "Percentage" seçildiyse uygulanacak orandır.
-- **Default:** %20
-- **Range:** %0 - %100 (Type-safe `number_field` doğrulaması).
+### 2. Deposit Rate
+The rate applied when the payment model is set to "Percentage".
+- **Default:** 20%
+- **Range:** 0% – 100% (type-safe `number_field` validation).
 
-### 3. Özel Lokasyon Tipleri (Custom Location Types)
-Varsayılan lokasyon tiplerine (Havalimanı, Otel vb.) ek olarak operasyonel ihtiyaçlara göre elle girilen tiplerdir.
-- **Format:** Her satıra bir kategori gelecek şekilde `textarea_field` üzerinden girilir.
-- **Örnek:** `Stadium`, `Exhibition Center`, `Yacht Marina`.
+### 3. Custom Location Types
+Types entered manually to meet operational needs, in addition to default location types (Airport, Hotel, etc.).
+- **Format:** Entered via a `textarea_field`, one category per line.
+- **Example:** `Stadium`, `Exhibition Center`, `Yacht Marina`.
 
 ---
 
-## 🛠️ Teknik Entegrasyon
+## 🛠️ Technical Integration
 
-### Kayıt (Registration)
-Ayar sahaları `SettingsHelper` üzerinden tip güvenliği ile kaydedilir:
+### Registration
+Settings fields are registered with type safety via `SettingsHelper`:
 
 ```php
 SettingsHelper::select_field(
@@ -54,24 +54,25 @@ SettingsHelper::select_field(
 );
 ```
 
-### Erişim (Accessors)
-Kodun diğer kısımlarından bu ayarlara güvenli erişim için statik metodlar mevcuttur:
+### Accessors
+Static methods are available for safe access to these settings from other parts of the code:
 - `TransferSettings::get_deposit_type()`
 - `TransferSettings::get_deposit_rate()`
 
 ---
 
-## 🛡️ Doğrulama Kuralları
+## 🛡️ Validation Rules
 
-- **Sanitization:** String veriler `sanitize_text_field`, textarea verileri `sanitize_textarea_field` ile süzülür.
-- **Validation:** Sayısal alanlar `absint` ile tam sayıya zorlanır ve belirtilen min/max değerleri dışına çıkamaz.
+- **Sanitization:** String values are filtered via `sanitize_text_field`; textarea values via `sanitize_textarea_field`.
+- **Validation:** Numeric fields are coerced to integers via `absint` and cannot exceed the specified min/max values.
 
-## Bölüm Sonu Özeti
-- Transfer modülünün tüm global kuralları bu sınıf tarafından yönetilir.
-- Ayarlar Rentiva'nın genel ayar sayfasında entegre bir bölüm olarak sunulur.
-- Ödeme kuralları doğrudan `TransferBookingHandler` tarafından referans alınır.
+## Section Summary
+- All global rules for the transfer module are managed by this class.
+- Settings are presented as an integrated section on Rentiva's general settings page.
+- Payment rules are referenced directly by `TransferBookingHandler`.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | TransferSettings sınıfı, ödeme modelleri ve lokasyon tiplerine göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | TransferSettings class updated to reflect payment models and location types. |

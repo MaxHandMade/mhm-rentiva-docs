@@ -5,70 +5,71 @@ sidebar_label: Payout List Table
 sidebar_position: 6
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu döküman, yönetim panelindeki "Ödeme Talepleri" ekranını yöneten `PayoutListTable` sınıfının teknik yeteneklerini ve operasyonel akışını açıklar.
+:::info Purpose
+This document describes the technical capabilities and operational flow of the `PayoutListTable` class, which manages the "Payout Requests" screen in the admin panel.
 :::
 
 # 🧾 Payout List Table
 
-`PayoutListTable`, Rentiva'nın finansal yönetişim katmanının admin tarafındaki ana UI bileşenidir. `WP_List_Table` sınıfını temel alarak, karmaşık finansal verileri okunabilir ve aksiyon alınabilir bir formatta sunar.
+`PayoutListTable` is the primary admin-side UI component of Rentiva's financial governance layer. Built on the `WP_List_Table` class, it presents complex financial data in a readable, actionable format.
 
 ---
 
-## 🏗️ Temel Sorumluluklar
+## 🏗️ Core Responsibilities
 
-1.  **Analitik Görünüm:** Satıcı bakiyeleri ve talep edilen tutarların anlık gösterimi.
-2.  **Güvenli Filtreleme:** Sadece geçerli durumdaki ödeme taleplerinin listelenmesi.
-3.  **İşlem Yönetimi:** Toplu onay (Bulk Approve) ve CSV dışa aktarım entegrasyonu.
+1.  **Analytics View:** Real-time display of vendor balances and requested payout amounts.
+2.  **Secure Filtering:** Listing only payout requests in valid states.
+3.  **Transaction Management:** Bulk approval and CSV export integration.
 
 ---
 
-## 📊 Kolon Yapısı ve Veri Kaynakları
+## 📊 Column Structure and Data Sources
 
-Tablodaki her kolon, veritabanının farklı katmanlarından beslenir:
+Each column in the table is fed from different layers of the database:
 
-| Kolon | Veri Kaynağı | Açıklama |
+| Column | Data Source | Description |
 | :--- | :--- | :--- |
-| **Vendor** | `WP_User` | Talebi oluşturan satıcının Display Name ve ID'si. |
-| **Amount** | `post_meta` | Talep edilen hakediş tutarı (`wc_price` formatında). |
-| **Balance** | `Ledger` | Satıcının Ledger tablosundaki anlık kullanılabilir bakiyesi. |
-| **Status** | `post_status` | Talebin durumu (Pending, Approved, Rejected). |
-| **Requested**| `post_date` | Talebin oluşturulduğu tarih (GMT normalizasyonu ile). |
+| **Vendor** | `WP_User` | Display Name and ID of the vendor who submitted the request. |
+| **Amount** | `post_meta` | Requested payout amount (formatted with `wc_price`). |
+| **Balance** | `Ledger` | Vendor's current available balance in the Ledger table. |
+| **Status** | `post_status` | Request status (Pending, Approved, Rejected). |
+| **Requested**| `post_date` | Date the request was created (with GMT normalization). |
 
 ---
 
-## ⚡ Toplu İşlemler (Bulk Actions)
+## ⚡ Bulk Actions
 
-### Toplu Onay (Bulk Approve)
-Yöneticiler, birden fazla talebi seçerek merkezi onay mekanizmasını tetikleyebilir:
-- **Metot:** `process_bulk_approve()`
-- **İşleyiş:** Seçilen ID'ler üzerinden `GovernanceService::process_approval` metodunu çağırır.
-- **İdempozens:** Sadece `pending` durumundaki talepler işlenir; zaten onaylanmış olanlar atlanır (Double-debit koruması).
+### Bulk Approve
+Administrators can select multiple requests and trigger the central approval mechanism:
+- **Method:** `process_bulk_approve()`
+- **How it works:** Calls `GovernanceService::process_approval` for each selected ID.
+- **Idempotency:** Only `pending` requests are processed; already-approved ones are skipped (double-debit protection).
 
 ---
 
-## 🔄 Durum ve Renk Kodları
+## 🔄 Status and Color Codes
 
-Tablo, işlem durumlarını dinamik renklerle görselleştirir:
-- 🟡 **Pending:** Beklemede (Onay bekliyor).
-- 🔵 **Approved:** Onaylandı (Ödeme emri verildi).
-- 🟢 **Confirmed:** Kesinleşti (Banka/Processor tarafı tamamlandı).
-- 🔴 **Rejected / Failed:** Reddedildi veya Hata oluştu.
+The table visualizes transaction statuses with dynamic colors:
+- 🟡 **Pending:** Awaiting approval.
+- 🔵 **Approved:** Approved (payment order issued).
+- 🟢 **Confirmed:** Finalized (completed on the bank/processor side).
+- 🔴 **Rejected / Failed:** Rejected or an error occurred.
 
-## 🛡️ Güvenlik ve Yetkilendirme
+## 🛡️ Security and Authorization
 
-- **Capability:** Toplu işlemleri gerçekleştirmek için `mhm_rentiva_approve_payout` yetkisi zorunludur.
-- **Nonce:** Tüm bulk action'lar standart WP güvenliğinden geçirilir.
-- **Idempotency Guard:** `PayoutListTable` içinde her işlem öncesi `post_status` kontrolü yapılarak mükerrer işlem yapılması kod seviyesinde engellenir.
+- **Capability:** The `mhm_rentiva_approve_payout` capability is required to perform bulk actions.
+- **Nonce:** All bulk actions pass through standard WP security.
+- **Idempotency Guard:** Inside `PayoutListTable`, a `post_status` check is performed before each operation to prevent duplicate processing at the code level.
 
-## Bölüm Sonu Özeti
-- `PayoutListTable` finansal dökümü gösteren dâhili bir admin aracıdır.
-- Veriler `Ledger` ve `post_meta` üzerinden hibrit olarak çekilir.
-- Toplu onay işlemi **GovernanceService** süzgecinden geçer.
+## Section Summary
+- `PayoutListTable` is an internal admin tool that displays the financial ledger.
+- Data is fetched in a hybrid manner from `Ledger` and `post_meta`.
+- Bulk approval passes through the **GovernanceService** filter.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | PayoutListTable sınıfı, bulk approve ve ledgar entegrasyonuyla güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | PayoutListTable class updated with bulk approve and ledger integration. |

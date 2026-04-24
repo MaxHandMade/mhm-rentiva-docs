@@ -1,65 +1,65 @@
 ---
 id: financial-data-dictionary
-title: Finansal Veri Sözlüğü (Data Dictionary)
-sidebar_label: Finansal Veri Sözlüğü
+title: Financial Data Dictionary
+sidebar_label: Financial Data Dictionary
 sidebar_position: 6
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, MHM Rentiva finansal modülünde kullanılan tüm anahtar kelimelerin, veritabanı alanlarının ve teknik tanımların standart referans dökümantasyonudur.
+:::info Purpose
+This page is the standard reference documentation for all keywords, database fields, and technical definitions used in the MHM Rentiva financial module.
 :::
 
-# 📖 Finansal Veri Sözlüğü
+# 📖 Financial Data Dictionary
 
-Finansal veriler Rentiva ekosisteminde üç ana katmanda saklanır: **Global Ayarlar (Options)**, **Kullanıcı Bilgileri (User Meta)** ve **İşlem Detayları (Payout/Booking Meta)**.
+Financial data in the Rentiva ecosystem is stored across three main layers: **Global Settings (Options)**, **User Information (User Meta)**, and **Transaction Details (Payout/Booking Meta)**.
 
-## ⚙️ Global Ayarlar (Options)
-`wp_options` tablosunda saklanan sistem geneli finansal konfigürasyonlar:
+## ⚙️ Global Settings (Options)
+System-wide financial configurations stored in the `wp_options` table:
 
-| Anahtar (Key) | Tip | Açıklama |
+| Key | Type | Description |
 | :--- | :--- | :--- |
-| `mhm_min_payout_amount` | `float` | Bir satıcının ödeme talep edebilmesi için gereken minimum bakiye. |
-| `mhm_rentiva_global_payout_freeze` | `bool` | Sistem genelinde tüm ödemeleri durduran acil durum anahtarı. |
-| `mhm_rentiva_payout_webhook_secret`| `string` | Payout bildirimleri için kullanılan HMAC imzalı secret key. |
-| `mhm_rentiva_commission_tiers` | `json` | Satış hacmine göre indirim oranlarını belirleyen eşik değerleri. |
+| `mhm_min_payout_amount` | `float` | Minimum balance a vendor must have to request a Payout. |
+| `mhm_rentiva_global_payout_freeze` | `bool` | Emergency switch that halts all Payouts system-wide. |
+| `mhm_rentiva_payout_webhook_secret`| `string` | HMAC-signed secret key used for Payout notifications. |
+| `mhm_rentiva_commission_tiers` | `json` | Threshold values that determine discount rates based on sales volume. |
 
 ---
 
-## 👤 Kullanıcı Finansal Verileri (User Meta)
-`wp_usermeta` tablosunda satıcı (Vendor) bazlı saklanan veriler:
+## 👤 Vendor Financial Data (User Meta)
+Data stored per vendor in the `wp_usermeta` table:
 
-| Anahtar (Key) | Tip | Açıklama |
+| Key | Type | Description |
 | :--- | :--- | :--- |
-| `_mhm_vendor_commission_rate` | `float` | Satıcıya özel tanımlanmış sabit komisyon oranı (Override). |
-| `_mhm_vendor_payout_freeze` | `bool` | Sadece bu satıcının ödeme almasını engelleyen blokaj durumu. |
-| `_mhm_vendor_tier_id` | `string` | Satıcının şu an dahil olduğu performans kategorisi. |
+| `_mhm_vendor_commission_rate` | `float` | Fixed commission rate defined specifically for this vendor (Override). |
+| `_mhm_vendor_payout_freeze` | `bool` | Block status that prevents only this vendor from receiving Payouts. |
+| `_mhm_vendor_tier_id` | `string` | The performance tier the vendor currently belongs to. |
 
 ---
 
-## 💰 Payout (Ödeme) Verileri (Post Meta)
-`mhm_rentiva_payout` post type altında saklanan meta veriler:
+## 💰 Payout Data (Post Meta)
+Metadata stored under the `mhm_rentiva_payout` post type:
 
-| Anahtar (Key) | Tip | Açıklama |
+| Key | Type | Description |
 | :--- | :--- | :--- |
-| `_mhm_payout_amount` | `float` | Talep edilen veya ödenen net tutar. |
-| `_mhm_payout_status` | `string` | Durum: `pending`, `processing`, `completed`, `rejected`. |
-| `_mhm_payout_external_ref` | `string` | Banka veya ödeme geçidi (Stripe vb.) referans numarası. |
-| `_mhm_payout_rejection_reason` | `string` | Reddedilen talepler için girilen açıklama metni. |
+| `_mhm_payout_amount` | `float` | Net amount requested or paid. |
+| `_mhm_payout_status` | `string` | Status: `pending`, `processing`, `completed`, `rejected`. |
+| `_mhm_payout_external_ref` | `string` | Reference number from the bank or payment gateway (Stripe, etc.). |
+| `_mhm_payout_rejection_reason` | `string` | Explanation text entered for rejected requests. |
 
 ---
 
-## 🔑 Yetkilendirme (Capabilities)
-Finansal işlemleri yönetmek için gerekli WordPress yetkileri:
+## 🔑 Capabilities
+WordPress capabilities required to manage financial operations:
 
-- **`mhm_rentiva_approve_payout`**: Ödeme taleplerini onaylama yetkisi.
-- **`mhm_rentiva_freeze_payout`**: Ödemeleri durdurma/blokaj uygulama yetkisi.
-- **`mhm_rentiva_view_financial_audit`**: Audit loglarını ve Ledger detaylarını görme yetkisi.
+- **`mhm_rentiva_approve_payout`**: Permission to approve Payout requests.
+- **`mhm_rentiva_freeze_payout`**: Permission to freeze/block Payouts.
+- **`mhm_rentiva_view_financial_audit`**: Permission to view audit logs and Ledger details.
 
 ---
 
-## 🔄 Veri İlişki Haritası
+## 🔄 Data Relationship Map
 
 ```mermaid
 graph LR
@@ -70,12 +70,13 @@ graph LR
     L -- sums to --> PM[Payout Meta]
 ```
 
-## Bölüm Sonu Özeti
-- Tüm finansal anahtarlar `_mhm_` ön eki ile (private meta) saklanır.
-- Kritik işlemler (Örn: `payout_status`) sadece yetkili (Capabilities) kullanıcılar tarafından değiştirilebilir.
-- Ledger tablosundaki alanlar için [Ledger Modeli](./ledger-model) sayfasına bakınız.
+## Section Summary
+- All financial keys are stored with the `_mhm_` prefix (private meta).
+- Critical operations (e.g., `payout_status`) can only be changed by authorized (Capabilities) users.
+- For fields in the Ledger table, see the [Ledger Model](./ledger-model) page.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, eklentinin güncel Meta ve Option anahtarlarına göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect the plugin's current Meta and Option keys. |

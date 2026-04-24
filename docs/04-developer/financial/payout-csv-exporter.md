@@ -5,74 +5,75 @@ sidebar_label: Payout CSV Exporter
 sidebar_position: 13
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, finansal ödeme kayıtlarının toplu olarak dışa aktarılmasını sağlayan `PayoutCsvExporter` bileşeninin teknik işleyişini ve veri güvenliği kurallarını açıklar.
+:::info Purpose
+This page describes the technical operation and data security rules of the `PayoutCsvExporter` component, which enables bulk export of financial Payout records.
 :::
 
 # 📊 Payout CSV Exporter
 
-`PayoutCsvExporter`, yöneticilerin ödeme geçmişini denetlemek veya banka entegrasyonları için toplu veri almak amacıyla kullandığı bir yardımcı sınıftır. Veriyi hafızaya almadan doğrudan tarayıcıya "stream" ederek yüksek performans sağlar.
+`PayoutCsvExporter` is a utility class used by administrators to audit Payout history or retrieve bulk data for bank integrations. It streams data directly to the browser without loading it into memory, ensuring high performance.
 
 ---
 
-## 🛠️ Teknik İşleyiş
+## 🛠️ Technical Operation
 
-### 1. Erişim ve Güvenlik
-Dışa aktarma işlemi standart bir WordPress `admin_post` kancası üzerinden yürütülür:
+### 1. Access and Security
+The export operation runs through a standard WordPress `admin_post` hook:
 - **Endpoint:** `/wp-admin/admin-post.php?action=mhm_export_payouts`
-- **Yetki Kontrolü:** Sadece `manage_options` (Yönetici) yetkisine sahip kullanıcılar erişebilir.
-- **Nonce Doğrulama:** İşlemin geçerliliği `mhm_export_payouts` anahtarlı bir **WP Nonce** üzerinden doğrulanır.
+- **Capability Check:** Only users with `manage_options` (Administrator) capability can access this.
+- **Nonce Verification:** The validity of the request is verified via a **WP Nonce** keyed with `mhm_export_payouts`.
 
-### 2. Veri Formatı (Excel Uyumluluğu)
-Sistem, CSV dosyalarının özellikle Excel'de düzgün açılabilmesi için **UTF-8 with BOM (Byte Order Mark)** kullanır:
-- **BOM:** `\xEF\xBB\xBF` karakter dizisi dosyanın başına eklenir.
-- **Ayrıcı:** Standart virgül (`,`) ayrıcı olarak kullanılır.
+### 2. Data Format (Excel Compatibility)
+The system uses **UTF-8 with BOM (Byte Order Mark)** to ensure CSV files open correctly in Excel:
+- **BOM:** The `\xEF\xBB\xBF` character sequence is prepended to the file.
+- **Delimiter:** Standard comma (`,`) is used as the delimiter.
 
 ---
 
-## 📋 CSV Sütun Yapısı (Mapping)
+## 📋 CSV Column Structure (Mapping)
 
-Dışa aktarılan dosyadaki kolonlar ve kaynakları aşağıdaki gibidir:
+The columns in the exported file and their sources are as follows:
 
-| Kolon Adı | Veri Kaynağı | Açıklama |
+| Column Name | Data Source | Description |
 | :--- | :--- | :--- |
-| `Payout ID` | `Post ID` | Sistemsel benzersiz kimlik. |
-| `Vendor Name` | `WP_User` Display Name | Ödemenin yapıldığı satıcının tam adı. |
-| `Amount` | `_mhm_payout_amount` | Ödeme tutarı (Decimal format). |
-| `Currency` | WC Currency | WooCommerce baz para birimi. |
-| `CPT Status` | `post_status` | WordPress tarafındaki durum (Pending, Approved vb.). |
-| `Processor Status`| `_mhm_payout_status` | Ödeme sağlayıcısından dönen statü kodu (n/a ise bekliyor). |
-| `Requested At` | `post_date_gmt` | Talebin UTC zaman damgası. |
+| `Payout ID` | `Post ID` | System-assigned unique identifier. |
+| `Vendor Name` | `WP_User` Display Name | Full name of the vendor being paid. |
+| `Amount` | `_mhm_payout_amount` | Payout amount (Decimal format). |
+| `Currency` | WC Currency | WooCommerce base currency. |
+| `CPT Status` | `post_status` | WordPress-side status (Pending, Approved, etc.). |
+| `Processor Status`| `_mhm_payout_status` | Status code returned from the payment processor (n/a if pending). |
+| `Requested At` | `post_date_gmt` | UTC timestamp of the request. |
 
 ---
 
-## 🔒 Güvenlik Protokolleri
+## 🔒 Security Protocols
 
-### PII (Kişisel Veri) Maskeleme
-CSV çıktıları finansal denetim için tasarlandığından, satıcıların hassas bilgileri (IBAN, Vergi No) varsayılan olarak bu exportta yer almaz. Bu verilere sadece `Payout` dökümü içindeki şifreli meta katmanından erişilebilir.
+### PII (Personal Data) Masking
+Since CSV outputs are designed for financial auditing, sensitive vendor information (IBAN, Tax ID) is not included in this export by default. This data is only accessible through the encrypted meta layer within the Payout record.
 
-### Loglama
-Her dışa aktarma (Export) işlemi, `mhm_rentiva_payout_audit` tablosuna "export_triggered" aksiyonu ile kaydedilir. Kimin, ne zaman veri indirdiği forensics sisteminde izlenebilir.
+### Logging
+Every export operation is recorded in the `mhm_rentiva_payout_audit` table with an "export_triggered" action. Who downloaded data, and when, is traceable in the forensics system.
 
 ---
 
-## 💡 Geliştirici Notları
+## 💡 Developer Notes
 
-İhracat linkini dinamik olarak oluşturmak için PHP tarafında şu metod kullanılmalıdır:
+Use the following method on the PHP side to dynamically generate the export link:
 
 ```php
-// Güvenli (Nonce-protected) Export URL'si alma
+// Get a secure (Nonce-protected) Export URL
 $export_url = \MHMRentiva\Admin\PostTypes\Payouts\PayoutCsvExporter::get_export_url();
 ```
 
-## Bölüm Sonu Özeti
-- `PayoutCsvExporter`, yüksek veri hacimleri için **Streaming** metodunu kullanır.
-- Tüm operasyon **Nonce** ve **Capability** kontrolü ile korunur.
-- Çıktılar **Excel-Ready (UTF-8 BOM)** formatındadır.
+## Section Summary
+- `PayoutCsvExporter` uses the **Streaming** method for high data volumes.
+- The entire operation is protected by **Nonce** and **Capability** checks.
+- Outputs are in **Excel-Ready (UTF-8 BOM)** format.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Sayfa, PayoutCsvExporter sınıfındaki streaming mantığı ve Excel BOM yapısına göre güncellendi. |
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Page updated to reflect streaming logic and Excel BOM structure in PayoutCsvExporter. |

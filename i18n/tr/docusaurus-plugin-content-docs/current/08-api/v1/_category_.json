@@ -1,0 +1,8 @@
+{
+    "label": "v1 Endpoints (Current)",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Mevcut v1 REST API uç noktaları ve asenkron operasyonlar."
+    }
+}

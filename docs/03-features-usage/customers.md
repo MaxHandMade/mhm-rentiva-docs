@@ -1,73 +1,73 @@
 ---
 id: customers
-title: Müşteri Yönetimi
-sidebar_label: Müşteriler
+title: Customer Management
+sidebar_label: Customers
 sidebar_position: 10
 slug: /features-usage/customers
 ---
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Müşteri Yönetimi, sadık müşteri kitlesi oluşturmak ve rezervasyon geçmişini takip etmek için kullanılan merkezi bölümdür. **MHM Rentiva > Müşteriler** menüsü üzerinden tüm müşteri veritabanına erişebilirsiniz.
+Customer Management is the central section for building a loyal customer base and tracking booking history. Access the full customer database via **MHM Rentiva > Customers**.
 
 ---
 
-## 📊 Müşteri Analitigi (Top Metrics)
+## 📊 Customer Analytics (Top Metrics)
 
-Sayfanin ust kisminda, müşteri tabaninizin buyumesini ve aktifligini gosteren 4 ana kart yer alir:
+At the top of the page, four main cards display the growth and activity of your customer base:
 
-:::info Lite Bildirim Konumu (v4.22.2)
-Lite sürümde gosterilen limit bildirimi artik KPI kartlarinin **altında**, liste baslamadan **once** konumlandirmistir. Bu standartlastirma `VehicleColumns`, `BookingColumns`, `CustomersPage` ve `TransferAdmin` için geçerlidir.
+:::info Lite Notice Position (v4.22.2)
+In the Lite edition, the limit notice is now positioned **below** the KPI cards, **before** the list begins. This standardization applies to `VehicleColumns`, `BookingColumns`, `CustomersPage`, and `TransferAdmin`.
 :::
 
-- **Toplam Müşteri:** Sisteme kayıtlı tüm kullanıcıların sayısı.
-- **Aktif Müşteriler:** Son 30 gün içinde rezervasyon yapmış veya sisteme giriş yapmış kullanıcılar.
-- **Bu Ayın Yenilikleri (Yeni):** İçinde bulunulan ay içerisinde sisteme kayıt olan yeni müşteri sayısı.
-- **Aylık Ortalama Müşteri Sayısı:** Aylık kayıt trendinin bir önceki aya göre değişim oranı (%).
+- **Total Customers:** The number of all users registered in the system.
+- **Active Customers:** Users who have made a booking or logged in within the last 30 days.
+- **New This Month:** The number of new customers who registered in the current month.
+- **Monthly Average:** The change rate (%) in the monthly registration trend compared to the previous month.
 
 ---
 
-## 🗓️ Müşteri Aktivite Takvimi
+## 🗓️ Customer Activity Calendar
 
-Müşteriler sayfasında yer alan takvim, günlük bazda müşteri etkileşimlerini (yeni kayıtlar veya aktivite yoğunluğu) görselleştirir. Bu sayede hangi günlerde müşteri trafiğinin yoğunlaştığını tek bakışta görebilirsiniz.
+The calendar on the Customers page visualizes daily customer interactions (new registrations or activity volume). This lets you see at a glance which days have the highest customer traffic.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: MÜŞTERİ LİSTESİ VE ANALİZ PANELİ</strong><br/>
+  <strong>📸 IMAGE: CUSTOMER LIST AND ANALYTICS PANEL</strong><br/>
   <em>mhm-rentiva-customer-list-analytics</em>
 </div>
 
 ---
 
-## 👥 Müşteri Listesi ve Finansal Özet
+## 👥 Customer List and Financial Summary
 
-Müşteri tablosu, her bir kullanıcının işletmeniz için değerini (LTV - Lifetime Value) ölçmenizi sağlar:
+The customer table lets you measure the value (LTV - Lifetime Value) each user brings to your business:
 
-- **Rezervasyonlar:** Müşterinin toplamda kaç adet kiralama/transfer işlemi yaptığı.
-- **Toplam Harcama:** Müşterinin tüm işlemlerinden elde edilen toplam ciro (Para Birimi ile).
-- **Son Rezervasyon:** En son hangi tarihte işlem yaptığı.
-- **Kayıt Tarihi:** Sisteme ilk giriş yaptığı tarih.
-
----
-
-## ➕ Yeni Müşteri Tanımlama
-
-Operasyonel hız için manuel müşteri kaydı açma ekranı basitleştirilmiştir. **"Yeni Müşteri Ekleyin"** butonu ile şu verileri girebilirsiniz:
-
-- **Müşteri Adı:** (Zorunlu)
-- **E-posta:** (Zorunlu) - Sistemdeki benzersiz kimliktir.
-- **Telefon:** İletişim amaçlı.
-- **Adres:** Faturalandırma veya teslimat noktası belirleme için temel adres bilgisi.
+- **Bookings:** Total number of rental/transfer transactions completed by the customer.
+- **Total Spent:** Total revenue generated from all of the customer's transactions (with currency symbol).
+- **Last Booking:** The date of their most recent transaction.
+- **Registration Date:** The date they first joined the system.
 
 ---
 
-### Bölüm Özeti
-- **Analitik Kartları** ile müşteri büyümesini izleyin.
-- **Toplam Harcama** sütunu ile VIP müşterilerinizi belirleyin.
-- **Merkezi Veritabanı** ile tüm rezervasyonları müşteri üzerinden ilişkilendirin.
+## ➕ Adding a New Customer
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+The manual customer registration screen is streamlined for operational speed. Click **"Add New Customer"** to enter the following data:
+
+- **Customer Name:** (Required)
+- **Email:** (Required) — the unique identifier in the system.
+- **Phone:** For communication purposes.
+- **Address:** Basic address information for billing or delivery point identification.
+
+---
+
+### Section Summary
+- Monitor customer growth with **Analytics Cards**.
+- Identify your VIP customers with the **Total Spent** column.
+- Associate all bookings with customers via the **Central Database**.
+
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 27.03.2026 | 4.23.0 | Lite bildirim konumu (KPI kartlari altında) dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartlari ve kayıt formu gerçek arayuze gore güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 27.03.2026 | 4.23.0 | Lite notice position (below KPI cards) documented. |
+| 19.03.2026 | 4.21.2 | Customer list, analytics cards, and registration form updated against the real interface. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

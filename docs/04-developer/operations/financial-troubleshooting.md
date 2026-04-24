@@ -1,67 +1,67 @@
 ---
 id: financial-troubleshooting
-title: Finansal Sorun Giderme & Hata Matrisi
-sidebar_label: Finansal Sorun Giderme
+title: Financial Troubleshooting & Error Matrix
+sidebar_label: Financial Troubleshooting
 sidebar_position: 2
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Bu sayfa, finansal modüllerde karşılaşılan teknik hataların teşhisi ve hızlı çözümü için bir rehberdir.
+:::info Purpose
+This page is a guide for diagnosing technical errors in financial modules and resolving them quickly.
 :::
 
-# 🔍 Finansal Sorun Giderme
+# 🔍 Financial Troubleshooting
 
-Finansal hatalar genellikle ağ kesintileri, yetki eksiklikleri veya veri tutarsızlıklarından kaynaklanır.
+Financial errors typically originate from network interruptions, missing permissions, or data inconsistencies.
 
 ---
 
-## 🛠️ Hata Kodu & Çözüm Matrisi
+## 🛠️ Error Code & Resolution Matrix
 
-| Hata Kodu | Anlamı | İlk Müdahale |
+| Error Code | Meaning | First Response |
 |---|---|---|
-| `401 Unauthorized` | HMAC / İmza Hatası | API Secret key eşleşmesini ve sunucu saatini (NTP) kontrol edin. |
-| `403 Forbidden` | Governance Blokajı | Satıcının `Freeze` durumunda olup olmadığını `GovernanceService` üzerinden denetleyin. |
-| `409 Invalid State` | Statü Çakışması | Webhook callback'in sadece `Processing` veya `Approved` statüsündeki payout'lar için geldiğini doğrulayın. |
-| `429 Too Many Requests` | Rate Limit Aşımı | `WebhookRateLimiter` kayıtlarını temizleyin veya limitleri esnetin. |
-| `Atomic Failure` | DB Rollback | İşlem sırasında bağlantı kopmuş olabilir. `Ledger` üzerinde mükerrer kayıt olmadığını teyit edin. |
+| `401 Unauthorized` | HMAC / Signature Error | Check the API Secret key match and server time (NTP). |
+| `403 Forbidden` | Governance Block | Check via `GovernanceService` whether the vendor is in a `Freeze` state. |
+| `409 Invalid State` | Status Conflict | Verify that the webhook callback is only arriving for payouts in `Processing` or `Approved` status. |
+| `429 Too Many Requests` | Rate Limit Exceeded | Clear `WebhookRateLimiter` records or relax the limits. |
+| `Atomic Failure` | DB Rollback | The connection may have dropped during the transaction. Confirm there are no duplicate entries in `Ledger`. |
 
 ---
 
-## 🚩 Yaygın Senaryolar ve Teşhis
+## 🚩 Common Scenarios and Diagnosis
 
-### 1. Beklenen Bakiye Yanlış (Balance Mismatch)
-Eğer satıcının paneli ile Ledger tabloları uyuşmuyorsa:
-- **Teşhis:** `mhm_rentiva_ledger` tablosunda `source_type` filtresiyle arama yapın.
-- **Çözüm:** `Ledger::calculate_net_balance()` metodunu asenkron olarak tetikleyerek veritabanı toplamını zorlayın.
+### 1. Expected Balance is Wrong (Balance Mismatch)
+If the vendor's dashboard does not match the Ledger tables:
+- **Diagnosis:** Search the `mhm_rentiva_ledger` table with a `source_type` filter.
+- **Resolution:** Trigger `Ledger::calculate_net_balance()` asynchronously to force a database recount.
 
-### 2. Payout "Approved" Kalıyor (No Callback)
-Onaylanan bir ödeme "Confirmed" statüsüne geçmiyorsa:
-- **Teşhis:** `WebhookLog` kayıtlarını inceleyerek bankadan gelen bildirim hatasını bulun.
-- **Çözüm:** Webhook'u manuel olarak (cURL üzerinden imza simülasyonu ile) tekrar tetikleyin.
+### 2. Payout Stays "Approved" (No Callback)
+If an approved payment does not transition to "Confirmed" status:
+- **Diagnosis:** Review `WebhookLog` records to find the notification error from the bank.
+- **Resolution:** Manually re-trigger the webhook (via cURL with signature simulation).
 
-### 3. Çift Kayıt (Double Entry)
-Aynı işlem ID'si ile iki Ledger kaydı oluştuysa:
-- **Teşhis:** `ForensicHardeningTest` scriptini o kullanıcı için koşturun.
-- **Çözüm:** İkinci kaydı `record_reversal()` ile nötrleyin. **Asla manuel silme yapmayın.**
+### 3. Double Entry
+If two Ledger records were created with the same transaction ID:
+- **Diagnosis:** Run the `ForensicHardeningTest` script for that user.
+- **Resolution:** Neutralize the second record with `record_reversal()`. **Never delete manually.**
 
 ---
 
-## 📄 Log Tarama Prosedürü
+## 📄 Log Scanning Procedure
 
-Sorunun kaynağını bulmak için şu log kanallarını izleyin:
-- **WP Debug Log:** PHP hataları ve `Util` uyarıları için.
-- **Stitch / API Logs:** Webhook payload içeriğini doğrulamak için.
-- **Audit Logs:** `GovernanceService` tarafından kaydedilen yetki redleri için.
+Monitor the following log channels to locate the source of an issue:
+- **WP Debug Log:** For PHP errors and `Util` warnings.
+- **Stitch / API Logs:** To validate webhook payload content.
+- **Audit Logs:** For permission denials recorded by `GovernanceService`.
 
-## Bölüm Sonu Özeti
-- Hataların çoğu **HMAC** veya **NTP** (zaman senkronizasyonu) kaynaklıdır.
-- Ledger tutarsızlıklarında referans her zaman veritabanı (WPDB) satırlarıdır.
-- Loglar, sorunun adli (Forensic) kanıtıdır; silinmemelidir.
+## Section Summary
+- Most errors originate from **HMAC** or **NTP** (time synchronization) issues.
+- For Ledger inconsistencies, the reference is always the database (WPDB) rows.
+- Logs are forensic evidence of the issue and must not be deleted.
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 19.03.2026 | 4.21.2 | Hata matrisi ve asenkron bakiye sorunları ekendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 19.03.2026 | 4.21.2 | Error matrix and async balance issues added. |

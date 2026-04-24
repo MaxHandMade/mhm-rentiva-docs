@@ -1,58 +1,58 @@
 ---
 id: messages
-title: Mesajlaşma Sistemi
+title: Messaging System
 sidebar_position: 12
 slug: /features-usage/messages
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-Mesajlaşma Sistemi, kiralama öncesi veya sonrası müşterilerinizle doğrudan ve güvenli iletişim kurmanızı sağlayan merkezi bir destek hattıdır. **MHM Rentiva > Mesajlar** menüsü üzerinden tüm gelen talepleri yönetebilirsiniz.
-
----
-
-## 📩 Mesaj Listesi ve Filtreleme
-
-Gelen kutusu, taleplerin aciliyetine ve türüne göre organize edilmiştir. Liste şu ana kolonları içerir:
-
-- **Konu & Etiketler:** "Yeni" (YENİ) mesajlar turuncu etiketle vurgulanır.
-- **Öncelik:** "Düşük", "Normal" veya "Yüksek" olarak belirlenmiş aciliyet seviyesi.
-- **Kategori:** Mesajın konusu (Genel, Destek, Rezervasyon Sorunu vb.).
-- **Durum:** "Beklemede", "Yanıtlandı" veya "Kapatıldı" durum takibi.
+The Messaging System is a centralized support channel that lets you communicate directly and securely with your customers before or after a rental. Manage all incoming requests via **MHM Rentiva > Messages**.
 
 ---
 
-## 💬 İletişim ve Yanıt Akışı
+## 📩 Message List and Filtering
 
-Bir mesaj tıkladığınızda açılan detay sayfası, müşteriyle olan diyaloğu bir "Thread" (İleti Dizisi) yapısında sunar:
+The inbox is organized by urgency and type of request. The list includes the following main columns:
 
-1.  **Müşteri Kimliği:** Mesajı gönderen kişinin kullanıcı adı ve e-posta adresi en üstte yer alır.
-2.  **Mesaj İçeriği:** Müşterinin gönderdiği asıl metin ve gönderim zamanı (Örn: "3 hafta önce").
-3.  **Cevapla Butonu:** Admin panelinden müşteriye anında yanıt yazmanıza olanak tanır.
+- **Subject & Labels:** New (NEW) messages are highlighted with an orange label.
+- **Priority:** Urgency level set to "Low", "Normal", or "High".
+- **Category:** The topic of the message (General, Support, Booking Issue, etc.).
+- **Status:** Status tracking as "Pending", "Replied", or "Closed".
+
+---
+
+## 💬 Communication and Reply Flow
+
+Clicking a message opens a detail page that presents the dialogue with the customer in a thread structure:
+
+1.  **Customer Identity:** The username and email address of the sender appear at the top.
+2.  **Message Content:** The actual text sent by the customer and the send time (e.g. "3 weeks ago").
+3.  **Reply Button:** Allows you to instantly write a reply to the customer from the admin panel.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: MESAJ DETAYLARI VE YANIT AKIŞI</strong><br/>
+  <strong>📸 IMAGE: MESSAGE DETAILS AND REPLY FLOW</strong><br/>
   <em>mhm-rentiva-message-details-reply</em>
 </div>
 
 ---
 
-## ⚙️ Teknik Yönetim ve Rezervasyon İlişkilendirme
+## ⚙️ Technical Management and Booking Association
 
-Mesaj düzenleme ekranı, operasyonel bağlamı korumak için kritik bir özelliğe sahiptir: **Rezervasyon Derneği.**
+The message editing screen has a critical feature for maintaining operational context: **Booking Association.**
 
-- **Kategori ve Durum Değişimi:** Mesajın türünü ve sürecini (Örn: Beklemede'den Yanıtlandı'ya) admin manuel olarak güncelleyebilir.
-- **Rezervasyonla İlişkilendirme (Booking Mapping):** Gelen mesajı mevcut bir rezervasyon numarasına (#3037 gibi) bağlayabilirsiniz. Bu sayede, rezervasyon detaylarına baktığınızda o işlemle ilgili tüm geçmiş yazışmaları görebilirsiniz.
+- **Category and Status Change:** The admin can manually update the message type and its status (e.g. from Pending to Replied).
+- **Booking Mapping:** You can link an incoming message to an existing booking number (such as #3037). This way, when you view the booking details, you can see all historical correspondence related to that transaction.
 
 ---
 
-### Bölüm Özeti
-- **Mesaj Filtreleme** ile destek taleplerini organize edin.
-- **Yanıt Akışı** ile müşteri memnuniyetini artırın.
-- **Rezervasyon İlişkilendirme** ile iletişim geçmişini operasyonel verilerle eşleştirin.
+### Section Summary
+- Organize support requests with **Message Filtering**.
+- Improve customer satisfaction with **Reply Flow**.
+- Match communication history with operational data using **Booking Association**.
 
-### Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+### Changelog
+| Date | Version | Note |
 | :--- | :--- | :--- |
-| 19.03.2026 | 4.21.2 | Mesaj dökümanı, yanıt akışı ve rezervasyon ilişkilendirme özellikleriyle gerçek arayüze göre güncellendi. |
-| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
-
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 19.03.2026 | 4.21.2 | Message documentation updated with reply flow and booking association features against the real interface. |
+| 26.02.2026 | 4.21.0 | Initial version created. |

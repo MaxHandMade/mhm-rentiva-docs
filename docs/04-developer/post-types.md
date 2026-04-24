@@ -1,79 +1,79 @@
 ---
 id: post-types
-title: Kayıt Türleri (Custom Post Types)
-sidebar_label: Kayıt Türleri
+title: Custom Post Types
+sidebar_label: Custom Post Types
 sidebar_position: 10
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
 
-:::info Amaç
-Rentiva, karmaşık iş mantığını (Business Logic) yönetmek için standart WordPress tablolarını Custom Post Type (CPT) mimarisiyle genişletir.
+:::info Purpose
+Rentiva extends standard WordPress tables with a Custom Post Type (CPT) architecture to manage complex business logic.
 :::
 
-# 🗄️ Kayıt Türleri
+# 🗄️ Custom Post Types
 
-Eklenti, verileri "Sektörel" (Araçlar/Rezervasyonlar) ve "Operasyonel" (Payoutlar/Loglar) olarak iki ana grupta saklar.
+The plugin stores data in two main groups: "Operational" (Vehicles/Bookings) and "System" (Payouts/Logs).
 
 ---
 
-## 💰 1. Finansal Kayıt Türleri
+## 💰 1. Financial Post Types
 
 ### `mhm_payout` (Payout Requests)
-Model B iş akışı kapsamında satıcıların ödeme taleplerini yönetir.
-- **Kullanım:** Off-ledger (defter dışı) iş akışı statülerini (Pending, Approved, Processing) tutar.
-- **Güvenlik:** Sadece `manage_options` veya `rentiva_financial_manager` yetkisine sahip kullanıcılar görebilir.
-- **İlişki:** Her payout kaydı, veritabanındaki `mhm_rentiva_ledger` satırlarıyla Transaction ID üzerinden eşleşir.
+Manages vendor payment requests within the Model B workflow.
+- **Usage:** Holds off-ledger workflow statuses (Pending, Approved, Processing).
+- **Security:** Only users with `manage_options` or `rentiva_financial_manager` capability can view these records.
+- **Relationship:** Each payout record maps to `mhm_rentiva_ledger` rows in the database via Transaction ID.
 
 ---
 
-## 💬 2. İletişim Kayıt Türleri
+## 💬 2. Communication Post Types
 
 ### `mhm_message` (Messages)
-Müşteri, satıcı ve admin arasındaki mesajlaşma trafiğini yönetir.
-- **Thread Yönetimi:** `_mhm_thread_id` meta anahtarı üzerinden mesajları gruplandırır.
-- **UUID Desteği:** Thread ID'leri hem integer hem de UUID (string) formatını destekler.
-- **Görünürlük:** Standart admin menüsünde gizlidir, özel bir mesajlaşma arayüzü üzerinden yönetilir.
+Manages messaging traffic between customers, vendors, and admins.
+- **Thread Management:** Groups messages via the `_mhm_thread_id` meta key.
+- **UUID Support:** Thread IDs support both integer and UUID (string) formats.
+- **Visibility:** Hidden from the standard admin menu; managed through a dedicated messaging interface.
 
 ---
 
-## 🪵 3. Sistem ve Denetim Kayıt Türleri
+## 🪵 3. System and Audit Post Types
 
 ### `mhm_app_log` (Application Logs)
-Sistem hatalarını, kritik API çağrılarını ve denetim izlerini (Audit Trails) saklar.
-- **Otomatik Temizlik (Retention):** `LogRetention::purge()` görevi ile varsayılan olarak 30 günden eski kayıtlar günlük olarak silinir.
-- **Kategoriler:** Hata (Error), Bilgi (Info) ve Kritik (Critical) seviyelerinde kayıt tutar.
+Stores system errors, critical API calls, and audit trails.
+- **Automatic Cleanup (Retention):** The `LogRetention::purge()` routine deletes records older than 30 days by default, running daily.
+- **Categories:** Logs at Error, Info, and Critical severity levels.
 
 ---
 
-## 4. Sektorel Kayıt Turleri
+## 4. Operational Post Types
 
-Eklenti, asagidaki CPT'ler ile çalışır:
-- **`vehicle`:** Kiralik araç portfoyu.
-- **`vehicle_booking`:** Rezervasyon kayıtlari ve takvimi.
-- **`vehicle_addon`:** Araç ek hizmetleri (cocuk koltugu, GPS, sigorta vb.).
+The plugin works with the following CPTs:
+- **`vehicle`:** Rental vehicle portfolio.
+- **`vehicle_booking`:** Booking records and calendar.
+- **`vehicle_addon`:** Vehicle add-ons (child seat, GPS, insurance, etc.).
 
 ---
 
-## 5. Vendor Marketplace Kayıt Turleri (Pro)
+## 5. Vendor Marketplace Post Types (Pro)
 
-### `mhm_vendor_app` (Vendor Başvurulari)
-Vendor marketplace kapsaminda satici başvurularini yonetir.
-- **CPT Slug:** `mhm_vendor_app` (14 karakter — WordPress 20 karakter limitine uygun). **NOT:** `mhm_vendor_application` DEGiL.
-- **Kullanim:** Vendor onboarding süreci (başvuru, onay, red, askıya alma) bu CPT üzerinden yurutulur.
-- **Yönetim:** `VendorApplicationManager` ile CRUD işlemleri, `VendorOnboardingController` ile durum geçişleri (approve/reject/suspend).
-- **Güvenlik:** IBAN bilgileri AES-256-CBC ile şifrelenir (`OPENSSL_RAW_DATA` flag). OpenSSL yoksa bos string doner (plain text ASLA saklanmaz).
-- **Dosya:** `src/Admin/Vendor/PostType/VendorApplication.php`
+### `mhm_vendor_app` (Vendor Applications)
+Manages vendor applications within the vendor marketplace.
+- **CPT Slug:** `mhm_vendor_app` (14 characters — compliant with WordPress's 20-character limit). **NOTE:** NOT `mhm_vendor_application`.
+- **Usage:** The vendor onboarding process (application, approval, rejection, suspension) runs through this CPT.
+- **Management:** CRUD operations via `VendorApplicationManager`; status transitions (approve/reject/suspend) via `VendorOnboardingController`.
+- **Security:** IBAN data is encrypted with AES-256-CBC (`OPENSSL_RAW_DATA` flag). If OpenSSL is unavailable, an empty string is returned — plain text is NEVER stored.
+- **File:** `src/Admin/Vendor/PostType/VendorApplication.php`
 
-## Bölüm Sonu Özeti
-- CPT'ler, veritabanı yukunu hafifletmek için `no_found_rows` ve limitli meta sorgulariyla optimize edilmiştir.
-- Finansal kayıtlar (`mhm_payout`) asla direkt veritabanından silinmez; statu degisikligi ile arsivlenir.
-- Loglar (`mhm_app_log`) performans için duzenli olarak temizlenir.
-- Vendor başvurulari `mhm_vendor_app` CPT'sinde saklanir (14 karakter, WP 20-char limiti).
+## Section Summary
+- CPTs are optimized with `no_found_rows` and limited meta queries to reduce database load.
+- Financial records (`mhm_payout`) are never deleted directly from the database; they are archived via status change.
+- Logs (`mhm_app_log`) are purged regularly for performance.
+- Vendor applications are stored in the `mhm_vendor_app` CPT (14 characters, within WP 20-char limit).
 
-## Değişiklik Günlüğü
-| Tarih | Sürüm | Not |
+## Changelog
+| Date | Version | Note |
 |---|---|---|
-| 27.03.2026 | 4.23.0 | `vehicle_addon` ve `mhm_vendor_app` CPT'leri, vendor marketplace detaylari eklendi. |
-| 19.03.2026 | 4.21.2 | mhm_payout, mhm_message ve LogRetention detaylari eklendi. |
-
+| 23.04.2026 | 4.27.2 | English translation added. |
+| 27.03.2026 | 4.23.0 | `vehicle_addon` and `mhm_vendor_app` CPTs and vendor marketplace details added. |
+| 19.03.2026 | 4.21.2 | `mhm_payout`, `mhm_message`, and `LogRetention` details added. |
