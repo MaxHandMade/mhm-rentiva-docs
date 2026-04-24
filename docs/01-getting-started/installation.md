@@ -6,7 +6,7 @@ sidebar_position: 2
 slug: /getting-started/installation
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 MHM Rentiva is a professional plugin designed to turn your WordPress site into a powerful vehicle rental platform. This guide walks you through installing the plugin from scratch and completing the initial configuration steps.
 

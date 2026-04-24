@@ -6,7 +6,7 @@ sidebar_position: 4
 slug: /features-usage/vehicle-lifecycle
 ---
 
-![Version](https://img.shields.io/badge/version-4.24.0-blue?style=flat-square) ![Pro](https://img.shields.io/badge/lisans-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-28.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/lisans-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Araç Yaşam Döngüsü Yönetimi, her aracın platformdaki tüm ömrünü — aktifleşmeden sona ermeye, geri çekilmeden yeniden listelemeye kadar — kural tabanlı bir durum makinesi üzerinden yönetir. **Pro lisans gerektirir.**
 

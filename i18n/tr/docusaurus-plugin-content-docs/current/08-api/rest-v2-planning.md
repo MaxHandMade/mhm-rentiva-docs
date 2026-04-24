@@ -5,7 +5,7 @@ sidebar_label: REST v2 Planı
 sidebar_position: 110
 ---
 
-![Version](https://img.shields.io/badge/status-planning-brighgreen?style=flat-square) ![Docs](https://img.shields.io/badge/docs-v2--blueprint-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/status-planning-brighgreen?style=flat-square) ![Docs](https://img.shields.io/badge/docs-v2--blueprint-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::important Vizyon
 MHM Rentiva v2 REST API, mevcut dağınık internal haberleşme kanallarını (AJAX ve v1 REST) modernize ederek, tek bir merkezi mimaride toplamayı ve mobil uygulama (Native App) desteğini güçlendirmeyi hedefler.

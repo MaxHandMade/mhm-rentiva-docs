@@ -5,7 +5,7 @@ sidebar_label: Tüm Kısa Kodlar Listesi
 sidebar_position: 1
 slug: /features-usage/shortcodes/overview
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Kısa Kod Sayfaları, MHM Rentiva'nın tüm frontend (ön yüz) fonksiyonlarını WordPress ile entegre eden mimarinin merkezidir. Sistemimizde aktif olarak görev yapan **24 adet kısa kod (shortcode)** bulunmaktadır. Bu araçları ister klasik (metin), ister sayfa oluşturucu entegrasyonlarıyla sitenizin her yerine konumlandırabilirsiniz.
 

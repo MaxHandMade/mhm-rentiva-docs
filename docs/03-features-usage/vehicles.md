@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /features-usage/vehicles
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Vehicles are the fundamental building blocks of the MHM Rentiva system. **MHM Rentiva > Vehicles** is the main management screen where all vehicles in your fleet are listed, their statuses are tracked, and new vehicle entries are made.
 

@@ -5,7 +5,7 @@ sidebar_label: Badge Standards
 sidebar_position: 120
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-standard_v2-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-standard_v2-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::info Amaç
 Bu kılavuz, MHM Rentiva dökümantasyon sayfalarında kullanılan görsel rozetlerin (badges) standartlarını, renk kodlarını ve kullanım kurallarını tanımlar.
@@ -22,7 +22,7 @@ Dökümantasyonun güncelliğini ve teknik seviyesini hızlıca görselleştirme
 Her sayfanın başında bulunması gereken standart dizilim:
 
 ```markdown
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 ```
 
 ---
@@ -72,7 +72,7 @@ Tüm rozetler görsel bütünlük için şu parametreleri kullanmalıdır:
 id: sample-page
 title: Örnek Sayfa
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # Örnek Başlık
 İçerik buraya gelir...

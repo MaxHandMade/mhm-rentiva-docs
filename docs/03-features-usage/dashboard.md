@@ -6,7 +6,7 @@ sidebar_position: 2
 slug: /features-usage/dashboard
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 The Dashboard is the heart of MHM Rentiva. It lets you see your business's real-time status, financial performance, and pending operational tasks on a single screen. Access it via **MHM Rentiva > Dashboard**.
 

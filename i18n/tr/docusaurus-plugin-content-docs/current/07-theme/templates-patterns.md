@@ -4,7 +4,7 @@ title: Custom Templates & Block Patterns
 sidebar_label: Templates & Patterns
 slug: /theme/templates-patterns
 ---
-![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![FSE](https://img.shields.io/badge/FSE-Full_Site_Editing-success?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::info Purpose
 This page documents the block templates and patterns that drive the visual representation of rental listings, search results, and vendor management interfaces.

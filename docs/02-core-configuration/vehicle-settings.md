@@ -6,7 +6,7 @@ sidebar_position: 6
 slug: /core-configuration/vehicle-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 The Vehicle Settings page is the control center where you define both the data structure (transmission, fuel type, plate number, etc.) and the presentation format for vehicles in your fleet. It is managed under two main tabs via the **MHM Rentiva > Vehicle Settings** menu.
 

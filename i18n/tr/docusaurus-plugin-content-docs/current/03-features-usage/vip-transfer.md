@@ -6,7 +6,7 @@ sidebar_position: 10
 slug: /features-usage/vip-transfer
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 VIP Transfer modülü, standart araç kiralamadan farklı olarak, şoförlü ulaşım hizmetlerini (Havalimanı transferi, şehirlerarası ulaşım vb.) yönetmek için tasarlanmıştır. Bu modül, rota bazlı fiyatlandırma ve kapasite kontrolü üzerine inşa edilmiştir.
 

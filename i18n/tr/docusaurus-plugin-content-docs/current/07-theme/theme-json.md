@@ -4,7 +4,7 @@ title: Theme Configuration (theme.json)
 sidebar_label: theme.json
 slug: /theme/theme-json
 ---
-![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/badge/version-v0.3.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::info Purpose
 `theme.json` is the configuration hub for global styles, settings, and behavior. It defines the color palette, typography hierarchy, spacing scales, and global block styles.

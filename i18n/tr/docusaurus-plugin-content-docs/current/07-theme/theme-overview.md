@@ -6,7 +6,7 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Theme](https://img.shields.io/badge/theme-v0.3.0-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Theme](https://img.shields.io/badge/theme-v0.3.0-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🎨 Tema ve Görsel Standartlar
 

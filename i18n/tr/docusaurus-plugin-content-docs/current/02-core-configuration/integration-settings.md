@@ -6,7 +6,7 @@ sidebar_position: 13
 slug: /core-configuration/integration-settings
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Entegrasyon Ayarları sekmesi, MHM Rentiva'nın dış uygulamalarla (Mobil uygulamalar, harici web siteleri vb.) konuşmasını sağlayan REST API altyapısını yönettiğiniz bölümdür. **MHM Rentiva > Ayarlar > Entegrasyon Ayarları** altından ulaşılır.
 

@@ -4,7 +4,7 @@ title: Mesajlaşma Sistemi
 sidebar_position: 12
 slug: /features-usage/messages
 ---
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Mesajlaşma Sistemi, kiralama öncesi veya sonrası müşterilerinizle doğrudan ve güvenli iletişim kurmanızı sağlayan merkezi bir destek hattıdır. **MHM Rentiva > Mesajlar** menüsü üzerinden tüm gelen talepleri yönetebilirsiniz.
 

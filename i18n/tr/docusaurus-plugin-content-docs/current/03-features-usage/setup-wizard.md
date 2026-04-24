@@ -5,7 +5,7 @@ sidebar_label: Kurulum Sihirbazı
 sidebar_position: 15
 slug: /features-usage/setup-wizard
 ---
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Kurulum Sihirbazı, yeni bir WordPress kurulumunda MHM Rentiva'yı hazırlamak ve ayarları yapılandırmak için izlenen adımlardır. Bu sihirbazı daha sonra **MHM Rentiva > Kurulum Sihirbazı** menüsünden dilediğiniz zaman yeniden açabilirsiniz. Sihirbaz ekranının üst kısmında, sistemde çözülmesi gereken bildirimler veya hatalar (Örn: Harekete geçirici Eylem Planlayıcı mesajları) sürekli olarak gösterilir.
 

@@ -6,7 +6,7 @@ sidebar_position: 4
 slug: /core-configuration/payments
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-18.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 MHM Rentiva, finansal işlemlerini dünyanın en popüler e-ticaret altyapısı olan **WooCommerce** üzerine inşa eder. Bu sayede yüzlerce ödeme ağ geçidini (Stripe, PayPal, iyzico vb.) ek bir geliştirme yapmadan kullanabilirsiniz.
 

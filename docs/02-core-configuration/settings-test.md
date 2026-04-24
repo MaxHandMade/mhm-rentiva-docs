@@ -6,7 +6,7 @@ sidebar_position: 16
 slug: /core-configuration/settings-test
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 The Settings Test tab is a diagnostic tool that automatically checks whether all parts of the plugin (Database, Email, File System, WooCommerce Integration, etc.) are correctly configured. Access it via **MHM Rentiva > Settings > Settings Test**.
 

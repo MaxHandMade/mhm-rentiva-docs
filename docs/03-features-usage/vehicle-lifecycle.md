@@ -6,7 +6,7 @@ sidebar_position: 4
 slug: /features-usage/vehicle-lifecycle
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Vehicle Lifecycle Management controls the entire lifespan of each vehicle on the platform — from activation to expiry, from withdrawal to re-listing — through a rule-based state machine. **Requires a Pro license.**
 

@@ -4,7 +4,7 @@ title: Dışa Aktarım
 sidebar_position: 13
 slug: /features-usage/export
 ---
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Dışa Aktar aracı, kiralama verilerinizi analiz, muhasebe veya yedekleme amacıyla farklı formatlarda sistem dışına almanızı sağlar. **MHM Rentiva > Dışa Aktar** menüsü üzerinden kapsamlı veri ihracatı yapabilirsiniz.
 

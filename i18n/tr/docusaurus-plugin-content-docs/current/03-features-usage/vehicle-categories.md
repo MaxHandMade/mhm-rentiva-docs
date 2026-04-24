@@ -6,7 +6,7 @@ sidebar_position: 4
 slug: /features-usage/vehicle-categories
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Araç Kategorileri, filonuzdaki araçları mantıksal gruplara ayırmanızı ve frontend tarafında güçlü filtreleme seçenekleri sunmanızı sağlar. **MHM Rentiva > Araç Kategorileri** menüsünden yönetilir.
 

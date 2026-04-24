@@ -5,7 +5,7 @@ sidebar_label: E-posta Teslimi
 sidebar_position: 20
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::info Amaç
 MHM Rentiva, rezervasyon onayları ve tedarikçi bildirimleri için e-posta sistemine yoğun olarak dayanır. Bu sayfa, e-posta gönderim hatalarını teşhis etme ve çözme süreçlerini kapsar.

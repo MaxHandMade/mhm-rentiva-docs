@@ -6,7 +6,7 @@ sidebar_position: 7
 slug: /features-usage/locations
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Konum Yönetimi, araç kiralama ve transfer operasyonlarınızın fiziksel noktalarını (Havalimanı, Ofis, Otel vb.) tanımladığınız bölümdür. **MHM Rentiva > Locations** menüsünden ulaşılır.
 

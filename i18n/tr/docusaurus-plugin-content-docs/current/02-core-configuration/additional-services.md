@@ -6,7 +6,7 @@ sidebar_position: 5
 slug: /core-configuration/additional-services
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Ek Hizmet Ayarları sekmesi, bebek koltuğu, GPS, ek sigorta gibi yan ürünlerin kiralama sürecindeki davranışlarını ve görüntülenme sırasını yapılandırdığınız alandır. **MHM Rentiva > Ayarlar > Ek Hizmet Ayarları** altından ulaşılır.
 

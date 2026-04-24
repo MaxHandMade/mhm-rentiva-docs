@@ -6,7 +6,7 @@ sidebar_position: 2
 slug: /features-usage/dashboard
 ---
 
-![Version](https://img.shields.io/badge/version-4.23.0-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-26.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Kontrol Paneli, MHM Rentiva'nın kalbidir. İşletmenizin anlık durumunu, finansal performansını ve bekleyen operasyonel görevleri tek bir ekranda görmenizi sağlar. **MHM Rentiva > Kontrol Paneli** menüsünden ulaşılır.
 

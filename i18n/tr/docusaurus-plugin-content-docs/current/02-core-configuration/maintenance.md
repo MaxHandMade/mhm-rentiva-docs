@@ -6,7 +6,7 @@ sidebar_position: 14
 slug: /core-configuration/maintenance
 ---
 
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Sistemin uzun vadeli performansı için gereksiz verilerin periyodik olarak temizlenmesi ve veritabanı tablolarının optimize edilmesi kritik önem taşır. Bu işlemler **MHM Rentiva > Ayarlar > Veri tabanı temizleme** sekmesinden yönetilir.
 

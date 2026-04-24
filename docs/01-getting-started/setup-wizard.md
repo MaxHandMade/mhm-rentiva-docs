@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /getting-started/setup-wizard
 ---
 
-![Version](https://img.shields.io/badge/version-4.27.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-23.04.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 When you activate MHM Rentiva for the first time, an interactive **Setup Wizard** guides you through the essential configuration steps. The wizard lets you complete the critical settings needed for the plugin to work seamlessly with your site — all in a matter of minutes.
 

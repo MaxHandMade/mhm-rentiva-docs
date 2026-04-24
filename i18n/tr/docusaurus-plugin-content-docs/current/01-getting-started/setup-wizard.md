@@ -6,7 +6,7 @@ sidebar_position: 3
 slug: /getting-started/setup-wizard
 ---
 
-![Version](https://img.shields.io/badge/version-4.22.1-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-27.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 MHM Rentiva'yı ilk kez etkinleştirdiğinizde, sizi temel yapılandırma adımlarında yönlendiren interaktif bir **Kurulum Sihirbazı** karşılar. Bu sihirbaz, eklentinin sitenizle kusursuz uyum sağlaması için kritik ayarları dakikalar içinde yapmanıza olanak tanır.
 

@@ -5,7 +5,7 @@ sidebar_label: Ödeme Sorun Giderme
 sidebar_position: 30
 ---
 
-![Version](https://img.shields.io/badge/version-4.21.2-blue?style=flat-square) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/badge/last%20updated-19.03.2026-orange?style=flat-square)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 :::info Amaç
 Ödeme süreçleri (WooCommerce, Iyzico, Stripe vb.) ve finansal defter (Ledger) arasındaki uyumsuzlukları teşhis etmek ve gidermek için teknik bir rehberdir.
