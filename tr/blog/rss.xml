@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>MHM Rentiva Documentation Blog</title>
+        <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
+        <description>MHM Rentiva Documentation Blog</description>
+        <lastBuildDate>Thu, 23 Apr 2026 19:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>tr</language>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.27.2: Settings Testing Kirlilik Hotfix + Duplicate Addon Notice Dedupe]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix</guid>
+            <pubDate>Thu, 23 Apr 2026 19:00:00 GMT</pubDate>
+            <description><![CDATA[v4.27.1 i18n hotfix'inden sonra kullanıcı üç yeni bug daha bildirdi — hepsi aynı taze-kurulum senaryosundan geliyor ve üçü de Settings Testing sayfasında "Run All Diagnostics" butonuna bir kere basma ile tetikleniyor. v4.27.2 bu zinciri kırıyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.27.1 i18n hotfix'inden sonra kullanıcı üç yeni bug daha bildirdi — hepsi aynı taze-kurulum senaryosundan geliyor ve üçü de <strong>Settings Testing sayfasında "Run All Diagnostics" butonuna bir kere basma</strong> ile tetikleniyor. v4.27.2 bu zinciri kırıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-1-taze-kurulumda-tüm-text-alanları-1">🐛 Bug 1: Taze Kurulumda Tüm Text Alanları "1"<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-1-taze-kurulumda-t%C3%BCm-text-alanlar%C4%B1-1" class="hash-link" aria-label="🐛 Bug 1: Taze Kurulumda Tüm Text Alanları &quot;1&quot; doğrudan bağlantı" title="🐛 Bug 1: Taze Kurulumda Tüm Text Alanları &quot;1&quot; doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>Senaryo:</strong></p>
+<ol>
+<li class="">Eklenti taze kurulur.</li>
+<li class="">Kullanıcı <strong>Ayarlar → Settings Testing</strong> sekmesine gidip "Run All Diagnostics" butonuna basar.</li>
+<li class="">General Settings'e döner — <strong>Brand Name = "1"</strong>, <strong>Cancellation Deadline = 1</strong>, <strong>Payment Deadline = 1</strong>, Support Email, Brand Logo URL, vs. hep "1".</li>
+<li class="">Ancak <strong>"Reset to Defaults"</strong> butonuna basınca düzeliyor.</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kök-neden">Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#k%C3%B6k-neden" class="hash-link" aria-label="Kök Neden doğrudan bağlantı" title="Kök Neden doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>SettingsTester::test_settings_save()</code> bir "değişiklik algılanmış save" tetiklemek için boş string'leri <code>'1'</code>'e çeviriyordu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// Fresh install: $current_str == ''</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ( in_array( $current_str, array( '0', '1', '' ) ) ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $test_value = ( $current_str === '1' ) ? '0' : '1'; // → '1'</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sonra bu <code>'1'</code> payload'u <strong>GERÇEK</strong> sanitizer'a veriliyordu. Sanitizer hedef tab'ın TÜM alanlarını yeniden yazıyordu (sadece test edilen keyleri değil). Restore mekanizması ise SADECE açıkça test edilen keyleri eski haline getiriyordu → diğer tab alanlarına yapılan collateral yazımlar DB'de kalıyordu.</p>
+<p><strong>Vahim nokta:</strong> Fresh install'da General test çalıştığında:</p>
+<ul>
+<li class=""><code>brand_name</code> → '1' (test flip'i, sonra restore edildi) ✓</li>
+<li class=""><code>currency</code> → '1' (flip + restore) ✓</li>
+<li class=""><code>dark_mode</code> → sanitizer yazdı, test hiç dokunmadı → <strong>DB'de kaldı</strong></li>
+<li class=""><code>support_email</code> → sanitizer default olarak <code>admin@...</code>e yazdı, flip'le '1' oldu, restore edilmedi → <strong>DB'de kaldı</strong></li>
+<li class="">... ve daha fazlası</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-harness-fix--tam-snapshotrestore">1. Harness fix — tam snapshot/restore<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#1-harness-fix--tam-snapshotrestore" class="hash-link" aria-label="1. Harness fix — tam snapshot/restore doğrudan bağlantı" title="1. Harness fix — tam snapshot/restore doğrudan bağlantı" translate="no">​</a></h4>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// YENİ v4.27.2: BÜTÜN option'ı snapshot al, BÜTÜN option'ı restore et.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$option_existed_before = false !== get_option( $option_name, false );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$full_option_snapshot  = (array) get_option( $option_name, array() );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ... test koşar, sanitizer DB'yi kirletir ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ( $option_existed_before ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_option( $option_name, $full_option_snapshot );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">} else {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    delete_option( $option_name );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Test artık DB'yi gerçekten read-only bırakıyor. Collateral yazımlar otomatik yok oluyor.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-migration--mevcut-installları-temizle">2. Migration — mevcut install'ları temizle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#2-migration--mevcut-installlar%C4%B1-temizle" class="hash-link" aria-label="2. Migration — mevcut install'ları temizle doğrudan bağlantı" title="2. Migration — mevcut install'ları temizle doğrudan bağlantı" translate="no">​</a></h4>
+<p><code>SettingsCore::migrate_clean_test_pollution()</code> flag'li (<code>mhm_rentiva_v4272_test_pollution_cleaned</code>) tek seferlik migrasyon:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$polluted_keys = array(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_brand_name', 'mhm_rentiva_email_from_name',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_email_from_address', 'mhm_rentiva_support_email',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_booking_url', 'mhm_rentiva_login_url',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_currency', /* ... */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">foreach ($polluted_keys as $key) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $value = $settings[$key] ?? null;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ('0' === $value || '1' === $value) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        unset($settings[$key]); // fallback to default</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sadece kirlilik imzasını (<code>'0'</code> / <code>'1'</code>) olan <strong>text, email, URL, currency</strong> alanlarını temizliyor. Numeric alanlar (deadline'lar) dokunulmadı — kullanıcı gerçekten 1 girmek istemiş olabilir (nadiren). Legitimate string değerler korunuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-2-ek-hizmetler-sayfasında-çift-limit-notice">🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-2-ek-hizmetler-sayfas%C4%B1nda-%C3%A7ift-limit-notice" class="hash-link" aria-label="🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice doğrudan bağlantı" title="🐛 Bug 2: Ek Hizmetler Sayfasında Çift Limit Notice doğrudan bağlantı" translate="no">​</a></h2>
+<p>Additional Services admin sayfasında Lite limit uyarısı <strong>iki kez</strong> görünüyordu — istatistik kartlarının üstünde ve altında.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kök-neden-1">Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#k%C3%B6k-neden-1" class="hash-link" aria-label="Kök Neden doğrudan bağlantı" title="Kök Neden doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>AddonMenu::add_addon_page_title()</code> içinde, notice iç içe geçmiş <code>&lt;div class="wrap"&gt;</code> bloğunun içinde emit ediliyordu. WordPress core admin-notice relocator JS'i bu durumda:</p>
+<ul>
+<li class="">Standart kopyayı <code>wp-header-end</code> marker'ından sonra yerleştiriyor</li>
+<li class="">Orijinal kopya iç wrap'in içinde duruyor</li>
+<li class="">→ İki kopya</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm-1">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm-1" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<p>Notice artık ayrı bir <code>admin_notices</code> callback'i — <code>AddonMenu::render_addon_limit_notice()</code> — priority 20'de. İç wrap kapatıldıktan SONRA emit ediliyor, WordPress tam olarak bir kez yerleştiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bug-3-settings-testing-defaults-set-phantom-key-failleri">🐛 Bug 3: Settings Testing "Defaults Set" Phantom Key FAIL'leri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-bug-3-settings-testing-defaults-set-phantom-key-failleri" class="hash-link" aria-label="🐛 Bug 3: Settings Testing &quot;Defaults Set&quot; Phantom Key FAIL'leri doğrudan bağlantı" title="🐛 Bug 3: Settings Testing &quot;Defaults Set&quot; Phantom Key FAIL'leri doğrudan bağlantı" translate="no">​</a></h2>
+<p>Settings Testing sayfası, hiçbir yerde kayıtlı olmayan ayar keyleri için "Defaults Set: FAIL" veriyordu:</p>
+<ul>
+<li class=""><code>mhm_rentiva_timezone</code> (General'de yok)</li>
+<li class=""><code>mhm_rentiva_db_auto_optimize</code> (Core'da yok)</li>
+<li class=""><code>mhm_rentiva_wp_optimization_enabled</code> (Core'da yok)</li>
+<li class=""><code>mhm_rentiva_my_account_url</code> (Frontend'de yok)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="çözüm-2">Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#%C3%A7%C3%B6z%C3%BCm-2" class="hash-link" aria-label="Çözüm doğrudan bağlantı" title="Çözüm doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu phantom keyleri check-list'ten çıkardım. Ayrıca "Email Address Valid" ve "Email Validation Works" FAIL'leri de Bug 1'in alt etkisiydi (<code>'1'</code> → <code>is_email('1')</code> = false) — kirlilik migrasyonu çalıştıktan sonra kendiliğinden geçer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>tests/Migration/SettingsTestPollutionMigrationTest.php</code> — <strong>5 yeni test, 19 assertion</strong>:</p>
+<ol>
+<li class="">Text/email/URL/currency kirliliği temizleniyor</li>
+<li class="">Meşru kullanıcı değerleri korunuyor</li>
+<li class="">Numeric alanlar (deadlines) dokunulmuyor</li>
+<li class="">Post-migration meşru "1" rename'i ezilmiyor (idempotent)</li>
+<li class="">Fresh install'da flag set ediliyor</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama">✅ Doğrulama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-do%C4%9Frulama" class="hash-link" aria-label="✅ Doğrulama doğrudan bağlantı" title="✅ Doğrulama doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS release</td><td>0 error / 0 warning</td></tr><tr><td>PHPUnit</td><td><strong>737/737</strong> (+5 yeni, 732→737), 6 skipped, 0 regresyon</td></tr><tr><td>Plugin Check (PCP)</td><td>0 error, 3 trivial warning (değişmedi)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-upgrade-notu">⚠️ Upgrade Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#%EF%B8%8F-upgrade-notu" class="hash-link" aria-label="⚠️ Upgrade Notu doğrudan bağlantı" title="⚠️ Upgrade Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>"Run All Diagnostics"'e basıp Brand Name = 1 gören kullanıcılar: Migrasyon bir sonraki admin page load'da otomatik çalışıyor. <strong>"Reset to Defaults"'a basman GEREKMİYOR</strong>. Text/email/URL/currency alanları defaults'a geri dönecek.</p>
+<p><strong>Sayısal deadline'lar (Cancellation / Payment)</strong> dokunulmuyor — migrasyon bunları kullanıcı seçimi olabilir diye ayırt edemiyor. Booking tab'ında deadline'ları 24 saat / 30 dakika (veya tercih ettiğin değer) olarak manuel ayarla.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.2.zip</code> → <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong>, veya Rentiva Pro otomatik güncelleyicisi.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ders">🎓 Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-ders" class="hash-link" aria-label="🎓 Ders doğrudan bağlantı" title="🎓 Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu üç bug da — v4.27.1 i18n hotfix gibi — <strong>runtime DB-state</strong> sınıfında. Ne PHPCS, ne PCP, ne unit test suite bunları yakalayabilir. Sadece gerçek admin UI üzerinden fresh install senaryosu sınanarak görülüyor. <code>feedback_runtime_smoke_test.md</code> memory notu artık <strong>"her major release öncesi fresh install UI smoke test zorunlu"</strong> diyor — bir sonraki major'da bu pattern'ı checklist'e entegre edeceğim.</p>
+<p>Dinamik tablo: Bir günde 3 release çıkardık — v4.27.0 (WPCS submission prep) → v4.27.1 (i18n locale leak) → v4.27.2 (Settings Testing pollution + duplicate Addon notice). Her biri zero-regression + yeni regression testleri ile. Agile patch pipeline çalışıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.2-settings-testing-pollution-hotfix#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">v4.28.0: Popüler Rotalar shortcode/block/widget (yeni özellik)</li>
+<li class="">v4.29.0: Vendor Report / Appeal System (yeni alt sistem)</li>
+<li class="">v4.27.x roadmap'i kapandı — bir sonraki şemsiye v4.28.0 olacak</li>
+</ul>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.2" target="_blank" rel="noopener noreferrer" class="">v4.27.2</a></em></p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>hotfix</category>
+            <category>settings</category>
+            <category>diagnostics</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.27.1: i18n Locale-Leak Hotfix — Araç Ayarları Etiketleri Artık İlk Kurulum Dilinde Donmuyor]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix</guid>
+            <pubDate>Thu, 23 Apr 2026 18:30:00 GMT</pubDate>
+            <description><![CDATA[v4.27.0 WordPress.org gönderim hazırlığından birkaç saat sonra kritik bir bug yakalandı: İngilizce bir WordPress sitesinde Araç Ayarları sayfası Türkçe etiketler gösteriyordu. Eklenti global bir eklenti, İngilizce birincil dil. Bu hata submission-blocker seviyesinde. v4.27.1 bunu düzeltiyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.27.0 WordPress.org gönderim hazırlığından birkaç saat sonra kritik bir bug yakalandı: <strong>İngilizce bir WordPress sitesinde Araç Ayarları sayfası Türkçe etiketler gösteriyordu.</strong> Eklenti global bir eklenti, İngilizce birincil dil. Bu hata submission-blocker seviyesinde. v4.27.1 bunu düzeltiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-hata-senaryosu">🐛 Hata Senaryosu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-hata-senaryosu" class="hash-link" aria-label="🐛 Hata Senaryosu doğrudan bağlantı" title="🐛 Hata Senaryosu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Tipik tekrarlama:</p>
+<ol>
+<li class="">Eklenti Türkçe bir WordPress sitesinde kurulu, Araç Ayarları sayfası bir kez ziyaret edildi.</li>
+<li class="">Site İngilizce'ye çevrildi (veya Türkçe bir DB yedeği İngilizce siteye restore edildi).</li>
+<li class="">Admin paneli hâlâ Türkçe etiketler gösteriyor: <strong>Günlük Fiyat</strong>, <strong>Model Yılı</strong>, <strong>Plaka</strong>, <strong>Klima</strong>, <strong>Yedek Lastik</strong>...</li>
+</ol>
+<p>Oysa kaynak koddaki her <code>__( 'Daily Price', 'mhm-rentiva' )</code> çağrısı güncel WordPress yerel ayarına göre doğru İngilizce değerini döndürüyor. Peki neden admin UI Türkçe gösteriyordu?</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kök-neden">🔍 Kök Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-k%C3%B6k-neden" class="hash-link" aria-label="🔍 Kök Neden doğrudan bağlantı" title="🔍 Kök Neden doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>VehicleMeta::ensure_default_options()</code> fonksiyonu, ilk admin page load'da şöyle bir işlem yapıyordu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$default_details = self::get_default_details(); // __() çağrılarıyla CHEVİRİLMİŞ array</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if (get_option('mhm_vehicle_details', array()) === array()) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_option('mhm_vehicle_details', $default_details); // 🔥 Türkçe değerleri DB'ye yazdı</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><code>get_default_details()</code> içinde:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">return array(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'price_per_day' =&gt; __('Daily Price', 'mhm-rentiva'),   // Türkçe site → "Günlük Fiyat"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'year'          =&gt; __('Model Year', 'mhm-rentiva'),    // Türkçe site → "Model Yılı"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span></code></pre></div></div>
+<p><code>__()</code> <strong>çağrıldığı anın yerel ayarına göre</strong> çeviri döner. İlk site Türkçe'yken bu "Günlük Fiyat" döndü ve <code>wp_options</code>'a yazıldı.</p>
+<p>Sonrasında <code>get_all_available_details()</code> render akışında:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$details = self::get_default_details();              // canlı __() → İngilizce (site EN şimdi)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$stored  = get_option('mhm_vehicle_details');        // DONMUŞ Türkçe</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">foreach ($stored as $key =&gt; $label) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $details[$key] = $label;                         // Override: Türkçe kazanıyor</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p><strong>Donmuş çeviri daima canlı çeviriyi eziyordu.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-çözüm">🛠️ Çözüm<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#%EF%B8%8F-%C3%A7%C3%B6z%C3%BCm" class="hash-link" aria-label="🛠️ Çözüm doğrudan bağlantı" title="🛠️ Çözüm doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-otomatik-persisti-durdur">1. Otomatik persisti durdur<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#1-otomatik-persisti-durdur" class="hash-link" aria-label="1. Otomatik persisti durdur doğrudan bağlantı" title="1. Otomatik persisti durdur doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>VehicleMeta::ensure_default_options()</code> içindeki üç <code>update_option('mhm_vehicle_*', $translated_defaults)</code> çağrısı tamamen kaldırıldı. <code>mhm_selected_*</code> (sadece KEY listesi, çeviri içermez) seed etmeye devam ediyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-mevcut-installları-temizle">2. Mevcut install'ları temizle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#2-mevcut-installlar%C4%B1-temizle" class="hash-link" aria-label="2. Mevcut install'ları temizle doğrudan bağlantı" title="2. Mevcut install'ları temizle doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yeni method <code>VehicleMeta::migrate_remove_auto_populated_labels()</code> — tek seferlik migrasyon, <code>mhm_rentiva_v4271_labels_migrated</code> flag ile korunuyor:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">foreach (['mhm_vehicle_details', 'mhm_vehicle_features', 'mhm_vehicle_equipment'] as $key) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $stored = get_option($key, null);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (is_array($stored) &amp;&amp; !empty($stored)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        delete_option($key);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Migrasyon <code>plugins_loaded</code> hook'unda mevcut version-drift bloğu içinde tetikleniyor — admin, cron ve WP-CLI akışlarında hepsinde çalışıyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-kullanıcı-custom-alanları-korunuyor">3. Kullanıcı custom alanları korunuyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#3-kullan%C4%B1c%C4%B1-custom-alanlar%C4%B1-korunuyor" class="hash-link" aria-label="3. Kullanıcı custom alanları korunuyor doğrudan bağlantı" title="3. Kullanıcı custom alanları korunuyor doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>mhm_custom_details</code>, <code>mhm_custom_features</code>, <code>mhm_custom_equipment</code> — kullanıcının "Özel Ekle" ile eklediği alanlar başka options'ta duruyor. Migrasyon bunlara dokunmuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-trade-off">⚖️ Trade-off<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#%EF%B8%8F-trade-off" class="hash-link" aria-label="⚖️ Trade-off doğrudan bağlantı" title="⚖️ Trade-off doğrudan bağlantı" translate="no">​</a></h2>
+<p>"İsimleri Düzenle" (Edit Names) ile bir çekirdek alanı yeniden adlandırdıysan (örn. "Daily Price" → "Rental Rate"), upgrade sonrası bu rename'i tek sefer yeniden uygulaman gerekiyor. Bu nadir bir senaryo — ama bug her install'ı etkiliyordu. Takas adil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>tests/Migration/LocaleLeakLabelsMigrationTest.php</code> — <strong>4 yeni regresyon testi, 13 assertion</strong>:</p>
+<ol>
+<li class=""><strong>Sızmış etiket array'leri temizleniyor</strong> (Türkçe, İngilizce, karışık içeriklerde)</li>
+<li class=""><strong>Migrasyon idempotent</strong> — ikinci çağrı no-op, meşru post-migration rename'i ezmiyor</li>
+<li class=""><strong>Fresh install</strong> — legacy option yok, flag yine de set ediliyor (sonraki çağrılar atlanıyor)</li>
+<li class=""><strong><code>mhm_custom_*</code></strong> — kullanıcı custom alanlarına dokunulmuyor</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama">✅ Doğrulama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-do%C4%9Frulama" class="hash-link" aria-label="✅ Doğrulama doğrudan bağlantı" title="✅ Doğrulama doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS release scope</td><td>0 error, 0 warning</td></tr><tr><td>PHPUnit</td><td><strong>732/732</strong> (+4 yeni), 6 skipped, 0 regresyon</td></tr><tr><td>Plugin Check (PCP)</td><td>0 error, 3 trivial warning (.distignore-excluded)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.1.zip</code> → <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong>, veya Rentiva Pro otomatik güncelleyicisi.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>v4.27.2</strong>: Arama Sonuçları UX iyileştirmeleri + Shortcode Review Backlog (birleşik patch)</li>
+<li class=""><strong>v4.28.0</strong>: Popüler Rotalar shortcode/block/widget (yeni özellik)</li>
+<li class=""><strong>v4.29.0</strong>: Vendor Report / Appeal System (yeni alt sistem)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ders">🎓 Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.1-i18n-locale-leak-hotfix#-ders" class="hash-link" aria-label="🎓 Ders doğrudan bağlantı" title="🎓 Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu bug <strong>v4.27.0 WordPress.org submission readiness release'inden birkaç saat sonra</strong> yakalandı. Zero PHPCS / zero PCP doğrulama suite'i geçmişti ama <em>runtime</em> bir hatayı (mevcut DB state'in <code>__()</code> çıktılarını ezmesi) ne PHPCS ne PCP görebilirdi. Gerçek kullanıcı admin UI testi tek güvence. WordPress.org gönderiminden önce smoke test tur atmamız gerekiyordu — v4.27.1 ile bu pattern kazanıldı: <strong>test kaynağı çeviri katmanlarından geçen her UI için manuel doğrulama zorunlu.</strong></p>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.1" target="_blank" rel="noopener noreferrer" class="">v4.27.1</a></em></p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>hotfix</category>
+            <category>i18n</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.27.0: WordPress.org Gönderim Hazırlığı — Sıfır PHPCS Hatası, Sıfır PCP Hatası]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary</guid>
+            <pubDate>Thu, 23 Apr 2026 14:00:00 GMT</pubDate>
+            <description><![CDATA[v4.27.0, eklentinin WordPress.org resmi eklenti dizinine gönderim öncesi kod kalite denetimini tamamladığımız bir ara durak sürümüdür. Dağıtılan kodun tamamı artık projenin katı PHPCS kural setinde sıfır hata, sıfır uyarı ve WordPress.org'un resmi denetim aracı olan Plugin Check (PCP) karşısında sıfır hata seviyesinde. Süreç içerisinde tespit edilen dört gerçek defekt de kapatıldı.]]></description>
+            <content:encoded><![CDATA[<p>v4.27.0, eklentinin WordPress.org resmi eklenti dizinine gönderim öncesi kod kalite denetimini tamamladığımız bir ara durak sürümüdür. Dağıtılan kodun tamamı artık projenin katı PHPCS kural setinde <strong>sıfır hata, sıfır uyarı</strong> ve WordPress.org'un resmi denetim aracı olan Plugin Check (PCP) karşısında <strong>sıfır hata</strong> seviyesinde. Süreç içerisinde tespit edilen dört gerçek defekt de kapatıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-neden-bu-sürüm">🎯 Neden Bu Sürüm?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-neden-bu-s%C3%BCr%C3%BCm" class="hash-link" aria-label="🎯 Neden Bu Sürüm? doğrudan bağlantı" title="🎯 Neden Bu Sürüm? doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress.org gönderimi "en ufak hatada red cevabı veriyorlar, fazla uyarı varsa gene ret" şeklinde özetlenebilir. Bu nedenle:</p>
+<ol>
+<li class=""><strong>Plugin Check (PCP) sıfır hata zorunlu</strong> — resmi denetim aracı, insan inceleyici önce bunu çalıştırıyor.</li>
+<li class=""><strong>PHPCS katı ruleset'te sıfır hata hedefi</strong> — insan inceleyici kodu gözle tararken dağınıklık görmesin.</li>
+<li class=""><strong>PHPUnit 728/728 yeşil</strong> — fonksiyonellik korunmalı.</li>
+</ol>
+<p>Bu üçü birden sağlandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-doğrulama-özeti">📊 Doğrulama Özeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-do%C4%9Frulama-%C3%B6zeti" class="hash-link" aria-label="📊 Doğrulama Özeti doğrudan bağlantı" title="📊 Doğrulama Özeti doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kontrol</th><th>Öncesi</th><th>Sonrası</th></tr></thead><tbody><tr><td>PHPCS errors</td><td>5158</td><td><strong>0</strong></td></tr><tr><td>PHPCS warnings</td><td>1273</td><td><strong>0</strong></td></tr><tr><td>Plugin Check errors</td><td>37</td><td><strong>0</strong></td></tr><tr><td>Plugin Check warnings</td><td>326</td><td>3 trivial (release ZIP dışı)</td></tr><tr><td>PHPUnit</td><td>720/720</td><td><strong>728/728</strong> (+8 yeni test, 0 regresyon)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gerçek-defektler-yol-boyunca-bulunanlar">🔧 Gerçek Defektler (Yol Boyunca Bulunanlar)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-ger%C3%A7ek-defektler-yol-boyunca-bulunanlar" class="hash-link" aria-label="🔧 Gerçek Defektler (Yol Boyunca Bulunanlar) doğrudan bağlantı" title="🔧 Gerçek Defektler (Yol Boyunca Bulunanlar) doğrudan bağlantı" translate="no">​</a></h2>
+<p>Temizlik sırasında dört gerçek hata tespit edildi:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-currencyhelper--yinelenen-try-takma-adları">1. CurrencyHelper — Yinelenen <code>"TRY"</code> Takma Adları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#1-currencyhelper--yinelenen-try-takma-adlar%C4%B1" class="hash-link" aria-label="1-currencyhelper--yinelenen-try-takma-adları doğrudan bağlantı" title="1-currencyhelper--yinelenen-try-takma-adları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Türk Lirası normalizasyon haritasında <code>"₺" =&gt; 'TRY'</code> anahtarı sessizce iki kez tanımlanıyordu. PHP ikinciyi birinci üzerine yazıyor, harita beklendiği gibi çalışıyordu ama kod okuyucu için kafa karıştırıcıydı. Kaldırıldı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-searchresults--yinelenen-error-i18n-anahtarı">2. SearchResults — Yinelenen <code>error</code> i18n Anahtarı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#2-searchresults--yinelenen-error-i18n-anahtar%C4%B1" class="hash-link" aria-label="2-searchresults--yinelenen-error-i18n-anahtarı doğrudan bağlantı" title="2-searchresults--yinelenen-error-i18n-anahtarı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Arama sonuçları JavaScript tarafına aktarılan i18n sözlüğünde <code>error</code> anahtarı iki kez tanımlanmıştı:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('An error occurred. Please try again.', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('Error', 'mhm-rentiva'),  // Bu birincisini eziyordu</span><br></span></code></pre></div></div>
+<p>Uzun mesaj ölü kod haline gelmişti; kullanıcı sadece "Error" görüyordu. Tekil olarak yeniden yapılandırıldı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-woocommercebridge--erişilemeyen-yinelenen-return">3. WooCommerceBridge — Erişilemeyen Yinelenen <code>return</code><a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#3-woocommercebridge--eri%C5%9Filemeyen-yinelenen-return" class="hash-link" aria-label="3-woocommercebridge--erişilemeyen-yinelenen-return doğrudan bağlantı" title="3-woocommercebridge--erişilemeyen-yinelenen-return doğrudan bağlantı" translate="no">​</a></h3>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if (! $order) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;  // Bu satıra asla ulaşılmazdı</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>İkinci <code>return</code> silindi.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-cron-sweep-sessiz-i̇stisna-yutma">4. Cron Sweep Sessiz İstisna Yutma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#4-cron-sweep-sessiz-i%CC%87stisna-yutma" class="hash-link" aria-label="4. Cron Sweep Sessiz İstisna Yutma doğrudan bağlantı" title="4. Cron Sweep Sessiz İstisna Yutma doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>AutoCancel</code> ve <code>AutoComplete</code> cron görevleri her rezervasyonu <code>try/catch</code> içinde işliyordu ama <code>catch</code> blokları tamamen boştu:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Handle silently in production</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Sorun: tek bir rezervasyondaki hata tüm döngüyü kilitlerken, logsuz kaldığı için fark edilemiyordu. Düzeltme — hata günlüğe yazılır, döngü devam eder:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    error_log('[mhm-rentiva] auto-cancel skipped booking ' . $bid . ': ' . $e-&gt;getMessage());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-i18n-eksiklikleri">🌍 i18n Eksiklikleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-i18n-eksiklikleri" class="hash-link" aria-label="🌍 i18n Eksiklikleri doğrudan bağlantı" title="🌍 i18n Eksiklikleri doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>sprintf</code> / <code>_n</code> / <code>__</code> çağrılarında yer tutucu (<code>%s</code>, <code>%d</code>, <code>%1$d</code>) içeren 24 satırda çevirmen açıklaması eksikti. Her birine standart yorum eklendi:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">/* translators: %d: maximum number of vehicles allowed in Lite tier */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sprintf( __( '%d vehicles', 'mhm-rentiva' ), $max_vehicles );</span><br></span></code></pre></div></div>
+<p>Etkilenen alanlar: lisans paneli Lite sınırları, mesaj widget'ı, dashboard geri sayım, araç yaşam döngüsü hata mesajları, bayi ayarları, bayi rezervasyon detayı, yaklaşan operasyonlar tablosu.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-mekanik-güncellemeler">🏗️ Mekanik Güncellemeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#%EF%B8%8F-mekanik-g%C3%BCncellemeler" class="hash-link" aria-label="🏗️ Mekanik Güncellemeler doğrudan bağlantı" title="🏗️ Mekanik Güncellemeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>json_encode()</code> → <code>wp_json_encode()</code></strong>: 18 çağrı yeri güncellendi (CLI komutları, REST yardımcıları, raporlar, dışa aktarmalar, bildirimler, GDPR araçları).</li>
+<li class=""><strong><code>declare(strict_types=1)</code></strong>: İki block placeholder dosyasına eklendi.</li>
+<li class=""><strong>Control structure assignment'lar</strong>: İki yerde <code>if ($cached = ...)</code> kalıbı iki satırlık forma ayrıldı.</li>
+<li class=""><strong>Loop condition <code>count()</code></strong>: IP maskeleme yardımcısında değer bir kez hesaplanıp değişkene alındı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-phpcsxml--savunulabilir-suppress-bloku">📋 phpcs.xml — Savunulabilir Suppress Bloku<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-phpcsxml--savunulabilir-suppress-bloku" class="hash-link" aria-label="📋 phpcs.xml — Savunulabilir Suppress Bloku doğrudan bağlantı" title="📋 phpcs.xml — Savunulabilir Suppress Bloku doğrudan bağlantı" translate="no">​</a></h2>
+<p>678 kalan ihlalin çoğu WordPress.org perspektifinden "gerçek defekt" değildi ama kural seti bunları da işaretliyordu. Her bir sniff için savunulabilir bir gerekçe ile suppress edildi:</p>
+<ul>
+<li class=""><strong>Public API Stability</strong>: <code>ValidFunctionName.MethodNameInvalid</code> (194), <code>ValidHookName.UseUnderscores</code> (45), reserved keyword param isimleri — bunlar yeniden adlandırılırsa tüm Elementor widget'ları, tema override'ları ve üçüncü parti integration'lar kırılır. v5.0 majör sürümde dokümante migration ile ele alınacak.</li>
+<li class=""><strong>Discouraged-but-not-forbidden PHP fonksiyonları</strong>: <code>base64_encode/decode</code> (HMAC imza), <code>serialize</code> (legacy WP options), <code>urlencode</code> (RFC 3986), <code>file_get_contents</code> (yerel asset), <code>error_log</code> (structured log) — WordPress çekirdeği de aynılarını kullanıyor.</li>
+<li class=""><strong>Performans sezgileri</strong>: <code>meta_query</code>, <code>posts_per_page</code>, <code>post__not_in</code> — her kullanım gerekçeli; alternatif (custom tables) majör migrasyon gerektiriyor.</li>
+<li class=""><strong>Codex kalite gürültüleri</strong>: <code>unused-after-last-used</code> (hook callback imzaları), <code>loose-equal</code>, <code>short-ternary</code> (standart PHP özelliği), <code>current_time('timestamp')</code> — bilinçli tercihler.</li>
+<li class=""><strong>WP global accessor pattern</strong>: <code>$wp_query</code>, <code>$post</code>, <code>$wpdb</code> — WP public API.</li>
+<li class=""><strong>15dk altı cron</strong>: <code>CronSchedulesInterval</code> — rezervasyon otomatik iptali 5 dakikada bir çalışıyor, UX kararı.</li>
+<li class=""><strong>Template strict types</strong>: <code>templates/</code> dizini <code>RequireStrictTypes</code> kuralından dışlandı (tip juggling gerekli).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-araç-kiti">🛠️ Araç Kiti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#%EF%B8%8F-ara%C3%A7-kiti" class="hash-link" aria-label="🛠️ Araç Kiti doğrudan bağlantı" title="🛠️ Araç Kiti doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>phpcompatibility/phpcompatibility-wp</code></strong> dev dependency olarak eklendi; <code>PHPCompatibilityWP</code> kuralı <code>testVersion=8.1-</code> ile yeniden etkin.</li>
+<li class="">Composer scriptleri: <code>phpcs:release</code>, <code>phpcbf:release</code>, <code>plugin-check:release</code> — tekrar edilebilir doğrulama.</li>
+<li class="">Yerel <code>*fixer*.php</code> dev araçları ve <code>.worktrees/</code> klasörü <code>.distignore</code> üzerinden yayın ZIP'inden dışlandı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>mhm-rentiva.4.27.0.zip</code> dosyasını indirin ve <strong>Eklentiler → Yeni Ekle → Eklenti Yükle</strong> üzerinden yükleyin; veya Rentiva Pro otomatik güncelleyicisini kullanın.</p>
+<p><strong>Gereksinimler:</strong> PHP 8.1+, WordPress 6.7+.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sıradaki">🔜 Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.27.0-release-summary#-s%C4%B1radaki" class="hash-link" aria-label="🔜 Sıradaki doğrudan bağlantı" title="🔜 Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">v4.26.8 shortcode inceleme backlog</li>
+<li class="">v4.26.9 Popüler Rotalar shortcode (transfer lokasyonları vitrini)</li>
+<li class="">v4.27.x: WP 6.9 son test geçişleri ve WordPress.org resmi gönderim</li>
+</ul>
+<hr>
+<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.0" target="_blank" rel="noopener noreferrer" class="">v4.27.0</a></em></p>]]></content:encoded>
+            <category>release</category>
+            <category>minor</category>
+            <category>wpcs</category>
+            <category>phpcs</category>
+            <category>plugin-check</category>
+            <category>wordpress-org</category>
+            <category>mhm-rentiva</category>
+            <category>quality</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.6: Araç Izgarası Shortcode İnceleme Düzeltmeleri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary</guid>
+            <pubDate>Wed, 15 Apr 2026 23:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.6, YouTube yayın hazırlığı kapsamındaki shortcode inceleme seansının ürünüdür. rentivavehiclesgrid ve rentivafeaturedvehicles shortcode'larında biriken sessiz hatalar giderildi; yeni viewallurl ve servis tipi rozeti özellikleri eklendi.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.6, YouTube yayın hazırlığı kapsamındaki shortcode inceleme seansının ürünüdür. <code>rentiva_vehicles_grid</code> ve <code>rentiva_featured_vehicles</code> shortcode'larında biriken sessiz hatalar giderildi; yeni <code>view_all_url</code> ve servis tipi rozeti özellikleri eklendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-izgarası-fiyat-sıralaması-düzeltmesi">🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-ara%C3%A7-izgaras%C4%B1-fiyat-s%C4%B1ralamas%C4%B1-d%C3%BCzeltmesi" class="hash-link" aria-label="🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi doğrudan bağlantı" title="🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>sort_by="price"</code> ayarı uzun süredir doğru çalışmıyordu. Kök neden: araç uygunluk filtresiyle birlikte kullanılan <strong>named meta_query clause</strong> yaklaşımı yanlış SQL sıralaması üretiyordu.</p>
+<p><strong>Çözüm:</strong> WordPress'in standart <code>meta_key + meta_value_num</code> kalıbına geçiş.</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if ( $orderby_key === 'price' ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['meta_key'] = MetaKeys::VEHICLE_PRICE_PER_DAY;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['orderby']  = 'meta_value_num';</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['order']    = $sort_order;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>WP-CLI üzerinden hem artan hem azalan sıralama doğrulandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-önbellek-mantığı-onarıldı">⚡ Önbellek Mantığı Onarıldı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-%C3%B6nbellek-mant%C4%B1%C4%9F%C4%B1-onar%C4%B1ld%C4%B1" class="hash-link" aria-label="⚡ Önbellek Mantığı Onarıldı doğrudan bağlantı" title="⚡ Önbellek Mantığı Onarıldı doğrudan bağlantı" translate="no">​</a></h2>
+<p>İki sessiz önbellek hatası:</p>
+<ol>
+<li class=""><strong>Her zaman kapalıydı</strong> — Koşul mantığında ters kontrol vardı. Üretimde önbellek artık aktif.</li>
+<li class=""><strong>Her <code>wp_head</code> çağrısında temizleniyordu</strong> — Geçersizleştirme artık yalnızca araç kaydedildiğinde veya silindiğinde tetikleniyor.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-9-blokta-sıralama-enjeksiyonu-kaldırıldı">🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-9-blokta-s%C4%B1ralama-enjeksiyonu-kald%C4%B1r%C4%B1ld%C4%B1" class="hash-link" aria-label="🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı doğrudan bağlantı" title="🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Dokuz Gutenberg bloğu, CAM pipeline'dan gelen <code>sort_by</code> özniteliğini her render işleminde <code>orderby=title, order=ASC</code> varsayılanlarıyla sessizce geçersiz kılıyordu. Bu varsayılanlar kaldırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-tümünü-gör-linki">✨ Yeni: "Tümünü Gör" Linki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-yeni-t%C3%BCm%C3%BCn%C3%BC-g%C3%B6r-linki" class="hash-link" aria-label="✨ Yeni: &quot;Tümünü Gör&quot; Linki doğrudan bağlantı" title="✨ Yeni: &quot;Tümünü Gör&quot; Linki doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>view_all_url</code> ve <code>view_all_text</code> öznitelikleri eklendi. Blok editörü, Elementor ve klasik shortcode'da destekleniyor.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[rentiva_vehicles_grid view_all_url="/araclar/" view_all_text="Tüm Araçları Gör"]</span><br></span></code></pre></div></div>
+<p>Bölüm altbilgisinde düzgün hizalanmış buton olarak render edilir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yeni-servis-tipi-rozeti">🏷️ Yeni: Servis Tipi Rozeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#%EF%B8%8F-yeni-servis-tipi-rozeti" class="hash-link" aria-label="🏷️ Yeni: Servis Tipi Rozeti doğrudan bağlantı" title="🏷️ Yeni: Servis Tipi Rozeti doğrudan bağlantı" translate="no">​</a></h2>
+<p>Araç kartları artık <code>_rentiva_vehicle_service_type</code> meta değerine göre rozet gösteriyor:</p>
+<ul>
+<li class=""><strong>Yalnızca Transfer</strong> — mavi rozet</li>
+<li class=""><strong>Transfer + Kiralık</strong> — yeşil rozet</li>
+<li class="">Standart kiralık araçlarda rozet gösterilmez.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-araçlar-başlatma-flashı-giderildi">🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-ara%C3%A7lar-ba%C5%9Flatma-flash%C4%B1-giderildi" class="hash-link" aria-label="🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi doğrudan bağlantı" title="🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Swiper başlatılmadan önce ham flex işaretlemesi görünüyordu (5 araç yatay → 3 sütunlu slider). Çözüm: <code>opacity:0</code> + CSS geçişi.</p>
+<div class="language-css codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-css codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">transition</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> opacity </span><span class="token number" style="color:#36acaa">0.2</span><span class="token unit">s</span><span class="token plain"> ease</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token selector pseudo-class" style="color:#00009f">:not</span><span class="token selector punctuation" style="color:#393A34">(</span><span class="token selector class" style="color:#00009f">.swiper-initialized</span><span class="token selector punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">opacity</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">pointer-events</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> none</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>Düzen boşluk korunur (sıfır CLS), Swiper hazır olunca 0,2 saniyelik geçişle beliriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-diğer-düzeltmeler">🔧 Diğer Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-di%C4%9Fer-d%C3%BCzeltmeler" class="hash-link" aria-label="🔧 Diğer Düzeltmeler doğrudan bağlantı" title="🔧 Diğer Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>show_book_button</code> ölü öznitelik:</strong> Öne Çıkan Araçlar ve Elementor widget'ı bu anahtarı gönderiyordu ama şablon yalnızca <code>show_booking_button</code> kontrol ediyordu. Artık her iki anahtar da kabul ediliyor.</li>
+<li class=""><strong>Arama Sonuçları <code>default_sort</code>:</strong> URL'de sıralama parametresi yoksa artık uygulanıyor.</li>
+<li class=""><strong>Birleşik Arama bagaj ipucu:</strong> Bagaj kapasitesi alanı için hover/focus ipucu eklendi.</li>
+</ul>
+<hr>
+<p><em>Sıradaki: v4.26.7/v4.26.8 — Popüler Rotalar shortcode'u ve Swiper loop modu düzeltmesi.</em></p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>shortcode</category>
+            <category>vehicles-grid</category>
+            <category>featured-vehicles</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.5: Bayi Paneli Kimlik Kartı ve Mesajlaşma Parite Fix'leri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary</guid>
+            <pubDate>Wed, 15 Apr 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.5, bayi paneli üzerinde uzun bir UX cilası seansının meyvelerini taşıyor: sol menünün alt kısmına premium bir kimlik kartı (Gravatar + son giriş), mesajlaşma formunda bayi rezervasyonlarının görünmemesi sorununun çözümü, mesaj listesi kartlarının premium yeniden tasarımı ve beraberinde bir dizi sessiz hata düzeltmesi.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.5, bayi paneli üzerinde uzun bir UX cilası seansının meyvelerini taşıyor: sol menünün alt kısmına premium bir <strong>kimlik kartı</strong> (Gravatar + son giriş), mesajlaşma formunda <strong>bayi rezervasyonlarının görünmemesi</strong> sorununun çözümü, mesaj listesi kartlarının <strong>premium yeniden tasarımı</strong> ve beraberinde bir dizi sessiz hata düzeltmesi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-bayi-paneli-kimlik-kartı">👤 Bayi Paneli Kimlik Kartı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-bayi-paneli-kimlik-kart%C4%B1" class="hash-link" aria-label="👤 Bayi Paneli Kimlik Kartı doğrudan bağlantı" title="👤 Bayi Paneli Kimlik Kartı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bayi panelinin sol menüsünde daha önce yalnızca kullanıcı adı + "Çıkış Yap" linki vardı. Artık:</p>
+<ul>
+<li class=""><strong>Gravatar fotoğrafı</strong> (40 px, yuvarlak, beyaz çerçeve, yumuşak gölge)</li>
+<li class=""><strong>Kullanıcının görünen adı</strong> (ellipsis ile taşma kontrolü)</li>
+<li class=""><strong>Son başarılı giriş tarihi ve saati</strong> (ör. <code>Son giriş: 15/04/2026 04:57</code>)</li>
+<li class=""><strong>Çıkış Yap</strong> butonu kartın dışına çıktı, tek başına aksiyon oldu; hover durumunda kırmızıya dönüyor.</li>
+</ul>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&lt;?php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$last_login_raw = (string) get_user_meta($user-&gt;ID, 'last_login', true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ($last_login_raw !== '') {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $ts = strtotime($last_login_raw);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ($ts) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        echo date_i18n(get_option('date_format') . ' H:i', $ts);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">?&gt;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="last_login-user-meta--okunan-ama-yazılmayan-anahtar"><code>last_login</code> user meta — okunan ama yazılmayan anahtar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#last_login-user-meta--okunan-ama-yaz%C4%B1lmayan-anahtar" class="hash-link" aria-label="last_login-user-meta--okunan-ama-yazılmayan-anahtar doğrudan bağlantı" title="last_login-user-meta--okunan-ama-yazılmayan-anahtar doğrudan bağlantı" translate="no">​</a></h3>
+<p>İlginç bir keşif: <code>last_login</code> user meta'sı <strong>GDPR/Privacy ve DataRetentionManager kodumuzda zaten okunuyordu</strong> — ama hiçbir yerde yazılmıyordu. Yani veri saklama süresi hesaplarında "bu kullanıcı N gündür giriş yapmadı" kararı hep boş değer üzerinden veriliyordu.</p>
+<p>v4.26.5 bu boşluğu doldurdu: <code>SessionManager::set_session_timeout()</code> artık <code>wp_login</code> action'ının ikinci parametresini (<code>WP_User $user</code>) alıyor ve <code>current_time('mysql')</code> ile <code>last_login</code>'i güncelliyor.</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">add_action('wp_login', array(self::class, 'set_session_timeout'), 10, 2);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public static function set_session_timeout($user_login = '', $user = null): void</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $user_id = ($user instanceof \WP_User) ? (int) $user-&gt;ID : get_current_user_id();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (! $user_id) return;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_user_meta($user_id, 'mhm_rentiva_last_activity', time());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    update_user_meta($user_id, 'last_login', current_time('mysql'));</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-mesajlaşma-bayiler-artık-kendi-rezervasyonlarını-görüyor">📥 Mesajlaşma: Bayiler Artık Kendi Rezervasyonlarını Görüyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-mesajla%C5%9Fma-bayiler-art%C4%B1k-kendi-rezervasyonlar%C4%B1n%C4%B1-g%C3%B6r%C3%BCyor" class="hash-link" aria-label="📥 Mesajlaşma: Bayiler Artık Kendi Rezervasyonlarını Görüyor doğrudan bağlantı" title="📥 Mesajlaşma: Bayiler Artık Kendi Rezervasyonlarını Görüyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>"Yeni Mesaj" formundaki <strong>İlgili Rezervasyon</strong> dropdown'u her zaman boş geliyordu — bayi açısından. REST endpoint sadece <code>_mhm_customer_user_id</code> meta'sını sorguluyordu, yani "benim yaptığım rezervasyonlar". Bayinin araçlarına başkalarının yaptığı rezervasyonlar görünmüyordu.</p>
+<p>Çözüm: endpoint iki sorgu yapıyor ve sonuçları ID bazında birleştirip tekilleştirerek, post_date DESC sıralıyor:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// Customer-side: rezervasyonu yapan kullanıcı</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$customer_query = new WP_Query([</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'post_type' =&gt; 'vehicle_booking',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'meta_query' =&gt; [[</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        'key' =&gt; '_mhm_customer_user_id',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        'value' =&gt; $user_id,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ]],</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// Vendor-side: bayinin sahibi olduğu araçlara yapılan rezervasyonlar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$vendor_vehicle_ids = get_posts([</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'post_type' =&gt; 'vehicle',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'author'    =&gt; $user_id,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'posts_per_page' =&gt; -1,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'fields'    =&gt; 'ids',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if (!empty($vendor_vehicle_ids)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $vendor_query = new WP_Query([</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        'post_type' =&gt; 'vehicle_booking',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        'meta_query' =&gt; [[</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            'key' =&gt; '_mhm_vehicle_id',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            'value' =&gt; $vendor_vehicle_ids,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            'compare' =&gt; 'IN',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ]],</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-premium-mesaj-listesi-kartları">🎨 Premium Mesaj Listesi Kartları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-premium-mesaj-listesi-kartlar%C4%B1" class="hash-link" aria-label="🎨 Premium Mesaj Listesi Kartları doğrudan bağlantı" title="🎨 Premium Mesaj Listesi Kartları doğrudan bağlantı" translate="no">​</a></h2>
+<p>Mesaj listesi kartları düz beyaz kutulardan premium tasarıma geçti:</p>
+<ul>
+<li class=""><strong>Gradyan arka plan</strong> (<code>#ffffff → #fafbff</code>)</li>
+<li class=""><strong>Mor pill ID rozeti</strong> (<code>#4F46E5</code> arka plan, <code>#eef2ff</code> içi)</li>
+<li class=""><strong>Turuncu gradient "YENİ" etiketi</strong> (<code>#f59e0b → #f97316</code>, box-shadow amber glow)</li>
+<li class=""><strong>Hover durumunda</strong> kartın sol kenarında indigo aksan bar belirip, kart 2 px yukarı kalkıyor</li>
+<li class=""><strong>Okunmamış state</strong> için amber arka plan + sol aksan bar</li>
+<li class=""><strong>Mobil breakpoint</strong> altında padding + tipografi otomatik uyarlanıyor</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-hidden--eksik-olduğunu-fark-etmediğimiz-kural">🗂️ <code>.hidden</code> — Eksik Olduğunu Fark Etmediğimiz Kural<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#%EF%B8%8F-hidden--eksik-oldu%C4%9Funu-fark-etmedi%C4%9Fimiz-kural" class="hash-link" aria-label="️-hidden--eksik-olduğunu-fark-etmediğimiz-kural doğrudan bağlantı" title="️-hidden--eksik-olduğunu-fark-etmediğimiz-kural doğrudan bağlantı" translate="no">​</a></h2>
+<p>Mesajlar sayfasının şablonunda üç görünüm var:</p>
+<ol>
+<li class="">Mesaj listesi</li>
+<li class="">Konuşma (thread) görünümü</li>
+<li class="">Yeni mesaj formu</li>
+</ol>
+<p>Şablonda bu üçü başlangıçta <code>class="hidden"</code> ile gizlenmeye çalışılıyordu — ama <strong><code>.hidden</code> CSS kuralı hiçbir yerde tanımlanmamıştı</strong>. Sonuç: üçü de aynı anda <code>display: block</code> ile render oluyordu. Kullanıcı aşağı scroll edince üst üste yığılmış panel karmaşası görüyordu.</p>
+<p>Çözüm bir CSS utility:</p>
+<div class="language-css codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-css codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token selector class" style="color:#00009f">.mhm-messages-section</span><span class="token selector" style="color:#00009f"> </span><span class="token selector class" style="color:#00009f">.hidden</span><span class="token selector punctuation" style="color:#393A34">,</span><span class="token selector" style="color:#00009f"></span><br></span><span class="token-line" style="color:#393A34"><span class="token selector" style="color:#00009f"></span><span class="token selector class" style="color:#00009f">.mhm-messages-section</span><span class="token selector" style="color:#00009f"> </span><span class="token selector class" style="color:#00009f">.thread-reply</span><span class="token selector class" style="color:#00009f">.hidden</span><span class="token selector punctuation" style="color:#393A34">,</span><span class="token selector" style="color:#00009f"></span><br></span><span class="token-line" style="color:#393A34"><span class="token selector" style="color:#00009f"></span><span class="token selector class" style="color:#00009f">.mhm-messages-section</span><span class="token selector" style="color:#00009f"> </span><span class="token selector class" style="color:#00009f">.new-message-form</span><span class="token selector class" style="color:#00009f">.hidden</span><span class="token selector punctuation" style="color:#393A34">,</span><span class="token selector" style="color:#00009f"></span><br></span><span class="token-line" style="color:#393A34"><span class="token selector" style="color:#00009f"></span><span class="token selector class" style="color:#00009f">.mhm-messages-section</span><span class="token selector" style="color:#00009f"> </span><span class="token selector class" style="color:#00009f">.message-thread</span><span class="token selector class" style="color:#00009f">.hidden</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">display</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> none </span><span class="token important">!important</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>Artık üç görünüm <strong>mutually exclusive</strong>: hangisi aktifse o görünüyor, diğerleri gizli.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-konuşma-tekrar-açıldığında-birikmeyen-butonlar">🔁 Konuşma Tekrar Açıldığında Birikmeyen Butonlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-konu%C5%9Fma-tekrar-a%C3%A7%C4%B1ld%C4%B1%C4%9F%C4%B1nda-birikmeyen-butonlar" class="hash-link" aria-label="🔁 Konuşma Tekrar Açıldığında Birikmeyen Butonlar doğrudan bağlantı" title="🔁 Konuşma Tekrar Açıldığında Birikmeyen Butonlar doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir thread kapatılıp tekrar açıldığında "Mesajı Kapat" butonu ve "Bu konuşma kapatıldı" uyarı afişi <strong>DOM'a tekrar append ediliyordu</strong> — stale elementler silinmeden. Sonuç: aynı threadi iki kez açarsanız iki tane "Mesajı Kapat" butonu görüyordunuz.</p>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// Yeniden render öncesi stale elementleri kaldır</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">$</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'#message-thread .close-thread-btn'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access" style="color:#d73a49">remove</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">$</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'#message-thread .thread-closed-notice'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access" style="color:#d73a49">remove</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-mojibake-kutusu-ve-translation-fixleri">🔣 Mojibake Kutusu ve Translation Fix'leri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-mojibake-kutusu-ve-translation-fixleri" class="hash-link" aria-label="🔣 Mojibake Kutusu ve Translation Fix'leri doğrudan bağlantı" title="🔣 Mojibake Kutusu ve Translation Fix'leri doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>templates/account/messages.php</code> içindeki "İletilere dön" metninin önündeki ok (<code>←</code>) UTF-8 double-encoded gelmişti (<code>â†</code> gibi görünüyordu) ve bir stray C1 control byte (<code>0xC2 0x90</code>) şablonda kaldı. Çözüm: <code>&lt;span aria-hidden="true"&gt;&amp;larr;&lt;/span&gt;</code> HTML entity + PowerShell script ile C1 byte stripping.</li>
+<li class="">Türkçe <code>.po</code> dosyasında <strong>"Booking Association"</strong> etiketi <strong>"Rezervasyon Derneği"</strong> (Booking Society) olarak çevrilmişti 😄 — düzeltildi: <strong>"İlgili Rezervasyon"</strong>.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-filemtime-cache-busting">📦 Filemtime Cache Busting<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-filemtime-cache-busting" class="hash-link" aria-label="📦 Filemtime Cache Busting doğrudan bağlantı" title="📦 Filemtime Cache Busting doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu seansta iki kez "tarayıcı cache'i eski CSS/JS'i tutuyor" döngüsüne girdik. Bundan sonra olmaması için asset enqueue'larında filemtime versiyonlama:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$customer_messages_css_ver = file_exists($path)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ? MHM_RENTIVA_VERSION . '.' . filemtime($path)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    : MHM_RENTIVA_VERSION;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp_enqueue_style('mhm-customer-messages', $url, [], $customer_messages_css_ver);</span><br></span></code></pre></div></div>
+<p>Plugin versiyonu aynı kalsa da dosya her değiştiğinde <code>?ver=4.26.5.1744742822</code> gibi unique bir query string oluşuyor — tarayıcı eski dosyayı asla servislemiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">✅ Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#-testler" class="hash-link" aria-label="✅ Testler doğrudan bağlantı" title="✅ Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>720 tests, 2601 assertions, 6 skipped</strong> — tam yeşil. Regresyon yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇ndirin">İndirin<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.5-release-summary#i%CC%87ndirin" class="hash-link" aria-label="İndirin doğrudan bağlantı" title="İndirin doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.26.5" target="_blank" rel="noopener noreferrer" class="">GitHub Release v4.26.5</a></li>
+<li class="">ZIP asset: <code>mhm-rentiva.4.26.5.zip</code> (2.61 MB, 764 dosya)</li>
+</ul>
+<p>Sıradaki minor versiyon (<strong>v4.27.0</strong>) bayi rapor ve itiraz sistemine ayrılmış durumda — rezervasyon, ceza ve araç raporları için birleşik bir altyapı.</p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>vendor</category>
+            <category>messages</category>
+            <category>ux</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.4: Parite Denetimi Fix'leri ve Transfer Widget UX Cilası]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary</guid>
+            <pubDate>Wed, 15 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.4, tüm 18 core "kısa kod ↔ Gutenberg bloğu ↔ Elementor widget'ı" üçlüsü üzerinde yapılan ayar paritesi denetiminde ortaya çıkan üç sessiz sorunu gideriyor: Arama Sonuçları bloğuna kopya-yapıştır ile sızmış üç hayalet attribute, Birleşik Arama bloğundaki duplicate genişlik attribute'ları ve Transfer Arama Elementor widget'ında otomatik üretilmiş ham etiketli control'ler. Üçü de kullanıcının gözünden kaçan ama panelde anlamsız görünen UX çürümeleriydi.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.4, tüm 18 core "kısa kod ↔ Gutenberg bloğu ↔ Elementor widget'ı" üçlüsü üzerinde yapılan ayar paritesi denetiminde ortaya çıkan üç sessiz sorunu gideriyor: Arama Sonuçları bloğuna kopya-yapıştır ile sızmış üç hayalet attribute, Birleşik Arama bloğundaki duplicate genişlik attribute'ları ve Transfer Arama Elementor widget'ında otomatik üretilmiş ham etiketli control'ler. Üçü de kullanıcının gözünden kaçan ama panelde anlamsız görünen UX çürümeleriydi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-parite-denetimi-neden-gerekli">🔍 Parite Denetimi Neden Gerekli?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-parite-denetimi-neden-gerekli" class="hash-link" aria-label="🔍 Parite Denetimi Neden Gerekli? doğrudan bağlantı" title="🔍 Parite Denetimi Neden Gerekli? doğrudan bağlantı" translate="no">​</a></h2>
+<p>MHM Rentiva'nın "Render Parity Rule" kuralına göre <strong>her blok</strong>, render zamanında <code>do_shortcode()</code> ile karşılık gelen kısa koda delege eder. Yani blokların kendi mantığı yoktur — sadece kısa koda argüman geçiren ince bir kabuktur. Elementor widget'ları da aynı prensiple çalışır.</p>
+<p>Bu mimari güçlü bir garanti sağlar: <strong>kısa kodda çalışan her şey blokta ve widget'ta da çalışır</strong>. Ama tersi de doğru olmalı — <strong>kısa kodun bilmediği bir attribute, blokta veya widget'ta da olmamalı</strong>. Aksi halde kullanıcı panel arayüzünde bir toggle açar, bir şey yazar, render'da hiçbir değişiklik olmaz. Hata yok, uyarı yok, sessiz no-op.</p>
+<p>Bu v4.26.4'te giderilen üç sorun da tam olarak bu sınıftan:</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-1-arama-sonuçları-bloğu--hayalet-attribute-sızıntısı">🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-1-arama-sonu%C3%A7lar%C4%B1-blo%C4%9Fu--hayalet-attribute-s%C4%B1z%C4%B1nt%C4%B1s%C4%B1" class="hash-link" aria-label="🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı doğrudan bağlantı" title="🐛 1. Arama Sonuçları Bloğu — Hayalet Attribute Sızıntısı doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>assets/blocks/search-results/block.json</code> dosyasına, zamanında <code>transfer-search</code> bloğundan kopya-yapıştır ile türetildiği sırada üç attribute sızmıştı:</p>
+<ul>
+<li class=""><code>button_text</code></li>
+<li class=""><code>show_pickup</code></li>
+<li class=""><code>show_dropoff</code></li>
+</ul>
+<p>Arama Sonuçları bloğunda <strong>buton yok</strong>, <strong>pickup/dropoff alanları yok</strong> — bu attribute'lar anlamsız. Ama Gutenberg inspector panelinde görünüyorlardı, otomatik üretilen Elementor widget'ına da geçiyorlardı. Kullanıcı açar, değer girer, render'da hiçbir şey olmaz.</p>
+<p><strong>Çözüm:</strong> <code>block.json</code>'dan üçü de silindi. Otomatik parite mekanizması (<code>register_parity_controls_from_block</code>) block.json'u kaynak kabul ettiği için widget'tan da otomatik düştüler.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-2-birleşik-arama-bloğu--duplicate-genişlik-attributeları">🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-2-birle%C5%9Fik-arama-blo%C4%9Fu--duplicate-geni%C5%9Flik-attributelar%C4%B1" class="hash-link" aria-label="🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları doğrudan bağlantı" title="🐛 2. Birleşik Arama Bloğu — Duplicate Genişlik Attribute'ları doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>assets/blocks/unified-search/block.json</code>'da iki duplicate attribute vardı:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token property" style="color:#36acaa">"min_width"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> ... </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token property" style="color:#36acaa">"max_width"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> ... </span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>CAM (Canonical Attribute Mapper) pipeline'ı snake_case ayraçlarını kaldırır ve kanonik isimler <code>minwidth</code> / <code>maxwidth</code> olarak render'a ulaşır. <code>min_width</code> / <code>max_width</code> ayrı birer alan olarak DB'ye yazılıyor, ama render aşamasında aynı değere map'leniyordu — iki kontrol aynı şeyi yapıyor, biri de render'da hiçbir zaman okunmuyordu.</p>
+<p><strong>Çözüm:</strong> Snake_case varyantlar silindi. Tek kanonik <code>minwidth</code> / <code>maxwidth</code> kaldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-3-transfer-arama-widgetı--ham-etiketli-controller">🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-3-transfer-arama-widget%C4%B1--ham-etiketli-controller" class="hash-link" aria-label="🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler doğrudan bağlantı" title="🎨 3. Transfer Arama Widget'ı — Ham Etiketli Control'ler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Base Elementor widget sınıfımızda <code>register_parity_controls_from_block()</code> adlı bir metod var. Bu metod, block.json'daki attribute'ları tarayıp widget'ta manuel tanımlanmamış olanlar için otomatik Elementor control'leri üretir. <strong>Amacı:</strong> yeni bir block.json attribute'u eklendiğinde Elementor widget'ının geride kalmamasını sağlamak. Bir güvenlik ağı.</p>
+<p>Ama güvenlik ağı <strong>tasarım aracı değil</strong>. Otomatik üretilen control'ler ham attribute name'leri label olarak kullanır: <code>showPickup</code> → "ShowPickup", <code>buttonText</code> → "ButtonText". Placeholder yok, doğru default yok, ayrı bir bölümde gösteriliyor. Transfer Search widget'ında tam olarak bu oluyordu.</p>
+<p><strong>Çözüm:</strong> Üç user-facing attribute için manuel <code>add_control()</code> çağrıları eklendi:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('buttonText', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'       =&gt; __('Button Text', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'        =&gt; Controls_Manager::TEXT,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'     =&gt; '',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'placeholder' =&gt; __('Search Transfers', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('showPickup', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'        =&gt; __('Show Pickup Location', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'         =&gt; Controls_Manager::SWITCHER,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'return_value' =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'      =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$this-&gt;add_control('showDropoff', [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'label'        =&gt; __('Show Dropoff Location', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'type'         =&gt; Controls_Manager::SWITCHER,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'return_value' =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'default'      =&gt; 'yes',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]);</span><br></span></code></pre></div></div>
+<p><code>register_parity_controls_from_block()</code> manuel tanımlı control'leri otomatik olarak atlar (<code>in_array($attr_name, $existing_controls)</code>), dolayısıyla duplicate çıkmaz. Ama artık panel ismini doğru, placeholder'lı, mantıklı default'larla gösteriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-çıkarılan-ders">📖 Çıkarılan Ders<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-%C3%A7%C4%B1kar%C4%B1lan-ders" class="hash-link" aria-label="📖 Çıkarılan Ders doğrudan bağlantı" title="📖 Çıkarılan Ders doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>Otomatik parite mekanizması güvenlik ağıdır, UI değil.</strong> Her user-facing attribute manuel <code>add_control()</code> ile tanımlanmalı: doğru label, placeholder, default. Otomatik mekanizma gelecekte eklenecek attribute'lar için arka planda bekleyen regresyon kalkanı olarak kalır.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-testler">🧪 Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-testler" class="hash-link" aria-label="🧪 Testler doğrudan bağlantı" title="🧪 Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>720 test · 2470 assertion · 6 skipped — tam yeşil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kurulum">📦 Kurulum<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.4-release-summary#-kurulum" class="hash-link" aria-label="📦 Kurulum doğrudan bağlantı" title="📦 Kurulum doğrudan bağlantı" translate="no">​</a></h2>
+<p><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.26.4" target="_blank" rel="noopener noreferrer" class="">GitHub Releases</a> üzerinden <code>mhm-rentiva.4.26.4.zip</code> dosyasını indirin ve WordPress Eklentiler → Yeni Ekle → Eklenti Yükle ekranından yükleyin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>elementor</category>
+            <category>blocks</category>
+            <category>parity</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.3: Araç Kartı Görsel Kalitesi, Admin Toast Kesilmesi ve ZIP Chart.js Düzeltmesi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary</guid>
+            <pubDate>Sat, 11 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.3, listeleme/arama sayfalarındaki araç görsellerinin bulanık yüklenmesine neden olan responsive sizes hatasını, ayarlar sayfasındaki "kaydedildi" toast bildirimlerinin kesilip ekrandan taşmasını ve release ZIP'inden Chart.js'in çıkarılmasına yol açan .distignore kök-sabitleme hatasını gideriyor. Üçü de üretimde gözle görülen ama console.log'a düşmeyen sessiz sorunlardı.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.3, listeleme/arama sayfalarındaki araç görsellerinin bulanık yüklenmesine neden olan responsive <code>sizes</code> hatasını, ayarlar sayfasındaki "kaydedildi" toast bildirimlerinin kesilip ekrandan taşmasını ve release ZIP'inden Chart.js'in çıkarılmasına yol açan <code>.distignore</code> kök-sabitleme hatasını gideriyor. Üçü de üretimde gözle görülen ama <code>console.log</code>'a düşmeyen sessiz sorunlardı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-araç-kartı-görsel-kalitesi--220px-tuzağı">🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#%EF%B8%8F-ara%C3%A7-kart%C4%B1-g%C3%B6rsel-kalitesi--220px-tuza%C4%9F%C4%B1" class="hash-link" aria-label="🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı doğrudan bağlantı" title="🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Araç kartı partialında (<code>templates/partials/vehicle-card.php</code>) yıllardır sabit kodlanmış bir <code>sizes</code> özniteliği vardı:</p>
+<div class="language-html codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-html codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sizes="(max-width: 782px) 100vw, (max-width: 900px) 180px, 220px"</span><br></span></code></pre></div></div>
+<p>Bu öznitelik tarayıcıya "bu görselin ekranda kaplayacağı alan en fazla 220px" diyordu. Tarayıcı da doğal olarak <code>srcset</code>'teki en küçük uygun varyantı — <strong>300w thumbnail</strong>'ı — seçiyordu. Ancak kartların gerçek görünen genişliği 350-440px arasındaydı. Sonuç: retina ekranlarda bile bulanık araç görselleri.</p>
+<p><strong>En belirgin olduğu yer:</strong> Arama sonuçları sayfası, çünkü oradaki kartlar en geniş olanlardı. Ayrıca arama kodu (<code>SearchResults::format_vehicle_data()</code>) varsayılan olarak zaten <code>'medium'</code> (300px) istiyordu — yani hem kaynak görsel small'dı, hem de browser daha da küçüğünü seçiyordu.</p>
+<p><strong>Çözüm iki katmanlı:</strong></p>
+<ol>
+<li class=""><code>SearchResults</code> varsayılan <code>image_size</code>'ı <code>'medium'</code> → <code>'large'</code> (1024px) oldu — araç ızgarası, araç listesi ve öne çıkan araçlar zaten <code>'large'</code> kullanıyordu</li>
+<li class=""><code>vehicle-card.php</code> <code>sizes</code> özniteliği → <code>(max-width: 782px) 100vw, 500px</code> — retina ekranlarda browser artık 1024w varyantı seçiyor, geniş kartlar keskin</li>
+</ol>
+<p>Bu düzeltme <strong>tek bir partial dosyası</strong> değiştiği için listeleme, favoriler, araç arşivi ve arama sonuçları — hepsi birlikte düzeldi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-admin-settings-toast--kaydedildi-bildiriminin-kesilmesi">🔔 Admin Settings Toast — "Kaydedildi" Bildiriminin Kesilmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-admin-settings-toast--kaydedildi-bildiriminin-kesilmesi" class="hash-link" aria-label="🔔 Admin Settings Toast — &quot;Kaydedildi&quot; Bildiriminin Kesilmesi doğrudan bağlantı" title="🔔 Admin Settings Toast — &quot;Kaydedildi&quot; Bildiriminin Kesilmesi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ayarlar sayfasında herhangi bir değişikliği kaydettiğinizde çıkan "Ayarlar kaydedildi" bildirimi, özellikle uzun mesajlarda sağ tarafı kesilmiş olarak görünüyordu. Sorun tek bir yerde değildi — iki ayrı bozukluk üst üste binmişti:</p>
+<p><strong>1. WordPress bildirimi header flex konteynerine hapsediliyordu.</strong> <code>render_admin_header()</code> helper'ı H1, alt başlık ve aksiyonlar için bir flex konteyner kuruyor ama sonuna <code>&lt;hr class="wp-header-end" /&gt;</code> koymuyordu. WordPress <code>common.js</code>'in bildirimleri yerleştirmek için kullandığı resmi API tam olarak bu işaretçi. İşaretçi yokken WordPress ilk H1'i arıyor ve bildirimi dar flex kolonunun içine sıkıştırıyordu.</p>
+<p><strong>2. Özel toast CSS'i her şeyi tek satıra zorluyordu.</strong> Plugin'in <code>convertWPNoticesToToasts()</code> helper'ı WordPress bildirimini gizleyip özel bir <code>.rv-notification.mhm-admin-toast</code> div'i oluşturuyor. Bu div'in CSS'i <code>white-space: nowrap</code>, <code>max-width: 350px</code>, <code>height: 50px</code> içeriyordu — yani uzun mesajları taşırıyor, kelime kaydırma yapmıyor, ve birden fazla toast üst üste geldiğinde istiflenmiyordu.</p>
+<p><strong>Çözüm:</strong></p>
+<ul>
+<li class=""><code>render_admin_header()</code> flex konteynerin kapanışından hemen sonra <code>&lt;hr class="wp-header-end" /&gt;</code> yayınlıyor — artık bildirimler konteynerin altında tam genişlikte beliriyor</li>
+<li class="">Toast CSS'i baştan yazıldı: sabit <code>height</code>/<code>max-width</code>/<code>nowrap</code> kaldırıldı; <code>min-width: 280px</code>, <code>max-width: min(480px, calc(100vw - 60px))</code>, <code>white-space: normal</code>, <code>overflow-wrap: break-word</code></li>
+<li class="">Toastlar için <code>#mhm-admin-toast-container</code> adında sabit konumlu flex konteyner eklendi; yeni toastlar <code>prepend</code> ile en üste giriyor — böylece birden fazla toast istifleniyor ve en yenisi her zaman üstte</li>
+<li class="">XSS güvenliği: toast mesajları artık template literal ile değil <code>.text(message)</code> ile yazılıyor — gelecekte bir hook'un bildirim içeriğine HTML enjekte etme riski yok</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-release-zip-chartjs-404--distignoreun-gizli-hatası">📦 Release ZIP Chart.js 404 — <code>.distignore</code>'un Gizli Hatası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-release-zip-chartjs-404--distignoreun-gizli-hatas%C4%B1" class="hash-link" aria-label="-release-zip-chartjs-404--distignoreun-gizli-hatası doğrudan bağlantı" title="-release-zip-chartjs-404--distignoreun-gizli-hatası doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress.org üzerinden kurulan kopyalarda admin dashboard'daki grafikler 404 veriyordu. Kök nedeni <code>.distignore</code> dosyasının <code>vendor/</code> paterniydi.</p>
+<p>Release ZIP'i oluşturan <code>bin/build-release.py</code> Python script'i, paterndeki trailing <code>/</code> karakterini siliyor ve kalan <code>vendor</code>'u "herhangi bir yol segmenti" olarak eşleştiriyordu. Bu mantıkla:</p>
+<ul>
+<li class="">✅ <code>vendor/composer/...</code> eşleşti — doğru (Composer klasörünü atlamak istiyoruz)</li>
+<li class="">❌ <code>assets/js/vendor/chart.min.js</code> <strong>de</strong> eşleşti — yanlış (bu dosya kargoda olmalıydı)</li>
+</ul>
+<p>Sonuç: <code>chart.min.js</code>, <code>flatpickr/</code>, <code>swiper-bundle.min.js</code> ve diğer ağaç içi vendor kütüphaneleri release ZIP'inden düşüyordu. Lokal geliştirmede görünmüyordu çünkü build süreci atlanıyordu. Ancak WordPress.org ya da GitHub Release ZIP'i üzerinden kurulum yapıldığında dashboard boş kalıyordu.</p>
+<p><strong>Çözüm:</strong></p>
+<ul>
+<li class=""><code>bin/build-release.py</code> artık <code>.gitignore</code> tarzı kök sabitlemeyi destekliyor — bir patern <code>/</code> ile başlarsa yalnızca plugin kök dizinindeki o yola eşleşiyor, alt dizinlerdeki aynı isimli klasörlere dokunmuyor</li>
+<li class=""><code>.distignore</code> güncellendi: <code>vendor/</code> → <code>/vendor/</code></li>
+</ul>
+<p>Doğrulama: Yeni ZIP'te <code>assets/js/vendor/chart.min.js</code>, <code>assets/vendor/flatpickr/*</code>, <code>assets/vendor/swiper-bundle.min.js</code> mevcut; Composer <code>vendor/</code> kök dizini dışlandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-setup-wizard--versiyon-badge-ve-litepro-cta-toplu-batchten">🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-setup-wizard--versiyon-badge-ve-litepro-cta-toplu-batchten" class="hash-link" aria-label="🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten) doğrudan bağlantı" title="🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten) doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu release'e toplu halde giren bir dizi kullanıcı arayüzü iyileştirmesi:</p>
+<ul>
+<li class=""><strong>Kurulum Sihirbazı başlığı</strong> artık plugin versiyonunu + Lite/Pro rozetini gösteriyor</li>
+<li class=""><strong>Lisans sekmesi + Lisans menü sayfası</strong> "Ürün Sayfasını Aç" CTA butonu kazandı — kullanıcı ürünün satın alma sayfasına tek tıkla gidebiliyor</li>
+<li class=""><strong>Geliştirici modu guardı:</strong> <code>has_real_license()</code> artık dev mode'da CTA görünmesini engellemiyor — geliştirme ortamlarında da CTA test edilebiliyor</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🖼️ Düzeltme</td><td>Araç kartı <code>sizes</code> özniteliği 220px → 500px (listeleme + favoriler + arşiv + arama sonuçları)</td></tr><tr><td>🖼️ Düzeltme</td><td><code>SearchResults</code> varsayılan <code>image_size</code> <code>'medium'</code> → <code>'large'</code></td></tr><tr><td>🔔 Düzeltme</td><td><code>render_admin_header()</code> <code>&lt;hr class="wp-header-end" /&gt;</code> emit ediyor — bildirimler artık header flex'ten çıkıyor</td></tr><tr><td>🔔 Düzeltme</td><td>Admin toast CSS: sabit <code>height</code>/<code>nowrap</code> kaldırıldı, kelime kaydırma eklendi</td></tr><tr><td>🔔 Düzeltme</td><td>Admin toast istifleme: <code>#mhm-admin-toast-container</code> + <code>prepend</code> — birden fazla toast üst üste binmiyor</td></tr><tr><td>🛡️ Güvenlik</td><td>Admin toast mesajları artık <code>.text()</code> ile yazılıyor — HTML enjeksiyonuna karşı güvende</td></tr><tr><td>📦 Düzeltme</td><td><code>.distignore</code> <code>/vendor/</code> kök sabitlemesi — <code>chart.min.js</code>, <code>flatpickr</code>, <code>swiper</code> artık ZIP'te</td></tr><tr><td>🔧 Build</td><td><code>bin/build-release.py</code> <code>.gitignore</code> tarzı leading-slash anchoring desteği</td></tr><tr><td>🧙 UX</td><td>Setup Wizard header versiyon + Lite/Pro badge</td></tr><tr><td>🧙 UX</td><td>Setup Wizard Lisans sekmesi + Lisans menüde "Ürün Sayfasını Aç" CTA</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="📁 Değiştirilen Dosyalar doğrudan bağlantı" title="📁 Değiştirilen Dosyalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>templates/partials/vehicle-card.php</code> <em>(sizes 220px → 500px)</em></li>
+<li class=""><code>src/Admin/Frontend/Shortcodes/SearchResults.php</code> <em>(image_size 'medium' → 'large')</em></li>
+<li class=""><code>src/Admin/Core/Traits/AdminHelperTrait.php</code> <em>(wp-header-end marker)</em></li>
+<li class=""><code>assets/css/admin/settings.css</code> <em>(toast wrap + stacking CSS redesign)</em></li>
+<li class=""><code>assets/js/admin/settings.js</code> <em>(container + prepend + .text XSS guard)</em></li>
+<li class=""><code>.distignore</code> <em>(/vendor/ kök sabitleme)</em></li>
+<li class=""><code>bin/build-release.py</code> <em>(anchored pattern support)</em></li>
+<li class=""><code>src/Admin/Setup/SetupWizard.php</code> <em>(versiyon badge + CTA)</em></li>
+<li class=""><code>src/Admin/Licensing/LicenseAdmin.php</code> <em>(CTA)</em></li>
+<li class=""><code>mhm-rentiva.php</code>, <code>readme.txt</code>, <code>README.md</code>, <code>README-tr.md</code>, <code>changelog.json</code>, <code>changelog-tr.json</code> <em>(versiyon yükseltme)</em></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kalite">✅ Kalite<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#-kalite" class="hash-link" aria-label="✅ Kalite doğrudan bağlantı" title="✅ Kalite doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>720 test, 2470 assertion, 6 atlandı</strong> (v4.25.0 baseline'ı 683/2277 idi)</li>
+<li class="">PHPUnit tam yeşil</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.3-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.3 tamamen geriye dönük uyumlu bir patch sürümüdür — DB şemasında değişiklik yoktur, migration çalışmaz, ek bir yapılandırma gerekmez. Güncelleme yolları:</p>
+<ul>
+<li class="">WordPress admin → Eklentiler → Güncelle</li>
+<li class=""><code>wp plugin update mhm-rentiva --allow-root</code></li>
+<li class="">Manuel ZIP yükleme (v4.26.2'den itibaren otomatik migration destekleniyor)</li>
+</ul>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>frontend</category>
+            <category>admin-ux</category>
+            <category>build</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.2: Tam Kaldırma Temizliği ve CLI Bootstrap Güçlendirmesi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary</guid>
+            <pubDate>Fri, 10 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.2, eklenti kaldırıldığında arkada kalan tüm tabloların silinmesini sağlıyor, wp-cli bootstrap sırasındaki fatal hatayı gideriyor ve şema migration'ların artık sürüm değişikliğinde otomatik çalışmasını garantiliyor. Üç düzeltme de üretim ortamlarındaki sessiz sorunları hedefliyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.2, eklenti kaldırıldığında arkada kalan tüm tabloların silinmesini sağlıyor, wp-cli bootstrap sırasındaki fatal hatayı gideriyor ve şema migration'ların artık sürüm değişikliğinde otomatik çalışmasını garantiliyor. Üç düzeltme de üretim ortamlarındaki sessiz sorunları hedefliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kaldırma-temizliği--artık-27-tablonun-hepsi">🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#-kald%C4%B1rma-temizli%C4%9Fi--art%C4%B1k-27-tablonun-hepsi" class="hash-link" aria-label="🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi doğrudan bağlantı" title="🧹 Kaldırma Temizliği — Artık 27 Tablonun Hepsi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Önceden eklenti "verileri temizle" seçeneği ile silindiğinde 14 alt sistem tablosu veritabanında yetim kalıyordu: <code>ledger</code>, <code>key_registry</code>, <code>commission_policy</code>, <code>payout_audit</code>, <code>tenants</code>, <code>usage_metrics</code> ve eski alert/payment alt sistemlerine ait artık kullanılmayan tablolar. Bu v4.26.2 ile tamamen çözüldü.</p>
+<p><strong>Yapılan iyileştirmeler:</strong></p>
+<ul>
+<li class=""><strong>Tam liste:</strong> 27 özel tablonun tamamı kaldırma sırasında siliniyor</li>
+<li class=""><strong>Pattern güvenlik ağı:</strong> Listede olmayan ama <code>mhm_rentiva_*</code> önekiyle başlayan herhangi bir yetim tablo da otomatik yakalanıp siliniyor — gelecekte eklenen tablolar için güvence</li>
+<li class=""><strong>Kurtarma tablosu temizliği:</strong> <code>DatabaseCleaner</code> tarafından oluşturulan <code>postmeta_backup_invalid_*</code> geçici tabloları da kaldırma sırasında temizleniyor</li>
+<li class=""><strong>Tek kaynak prensibi:</strong> Silme listesi ve istatistik sayacı artık aynı kaynaktan okuyor — sayaç ile gerçek temizlik birbirinden uzaklaşamaz</li>
+<li class=""><strong>Savunma mekanizmaları:</strong> <code>uninstall.php</code> ve taksonomi temizleme adımı artık bozuk bir ayar kaydı veya eksik taksonomi nedeniyle sessizce durmuyor — hata yakalanıyor ve kalan adımlar çalışmaya devam ediyor</li>
+</ul>
+<p><strong>Doğrulama:</strong> DemoSeed Docker ortamında v4.26.2 kaldırma testi → <strong>0 tablo, 0 post, 0 ayar</strong> artık geride kalıyor. Tam temiz kaldırma garantili.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-cli-bootstrap-fatal-error-düzeltmesi">🔧 CLI Bootstrap Fatal Error Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#-cli-bootstrap-fatal-error-d%C3%BCzeltmesi" class="hash-link" aria-label="🔧 CLI Bootstrap Fatal Error Düzeltmesi doğrudan bağlantı" title="🔧 CLI Bootstrap Fatal Error Düzeltmesi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Önceden belirli koşullarda wp-cli komutları <code>TypeError</code> veya <code>is_user_logged_in() undefined function</code> hatasıyla çöküyordu. Kök nedeni iki yerde yatıyordu:</p>
+<ul>
+<li class=""><code>SettingsCore::get()</code> ve <code>has()</code> bir ayar kaydının dizi olmadığı durumda <code>TypeError</code> fırlatıyordu</li>
+<li class=""><code>AdvancedLogger::log()</code> WordPress tam yüklenmeden (örneğin early bootstrap'te) çağrıldığında <code>is_user_logged_in()</code>'i çağırıyordu ama bu fonksiyon o aşamada tanımlı değildi</li>
+</ul>
+<p><strong>Çözüm:</strong></p>
+<ul>
+<li class=""><code>SettingsCore::get()</code>/<code>has()</code> artık dizi olmayan bir ayar değerini tolere ediyor ve güvenli varsayılana düşüyor</li>
+<li class=""><code>AdvancedLogger::log()</code> <code>plugins_loaded</code> hook'u çalışmadan önce çağrıldığında erken return ediyor — log atlanır ama bootstrap çökmez</li>
+</ul>
+<p><strong>Etkisi:</strong> <code>wp plugin activate mhm-rentiva</code>, <code>wp mhm-rentiva *</code> subkomutları ve diğer wp-cli akışları artık bozuk bir ayar kaydı ya da early-bootstrap log denemesi ile çökmüyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-otomatik-şema-migrationları">🔄 Otomatik Şema Migration'ları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#-otomatik-%C5%9Fema-migrationlar%C4%B1" class="hash-link" aria-label="🔄 Otomatik Şema Migration'ları doğrudan bağlantı" title="🔄 Otomatik Şema Migration'ları doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.2 ile şema migration'ları artık <strong>eklenti dosya sürümü değiştiğinde otomatik çalışıyor</strong>, WordPress aktivasyon hook'u çağrılmasa bile. Bu; manuel ZIP yükleme, FTP ile güncelleme ve <code>wp-cli plugin update</code> akışlarını kapsar.</p>
+<p><strong>Önceki durum:</strong> Yeni tabloları oluşturmak için eklentiyi pasifleştirip tekrar etkinleştirmek gerekiyordu. Kullanıcıların çoğu bunu bilmediğinden "yeni özellik çalışmıyor" raporu geliyordu.</p>
+<p><strong>Yeni durum:</strong> <code>DB_VERSION</code> sabiti değişir değişmez migration'lar sessizce ve tek seferlik çalışır. Aktivasyon hook'u hala destekleniyor — sadece artık zorunlu değil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🧹 Kaldırma</td><td>Tüm 27 özel tablo (ledger, key_registry, commission_policy, payout_audit, tenants, usage_metrics + eski alt sistem tabloları)</td></tr><tr><td>🛡️ Kaldırma</td><td>Pattern tabanlı güvenlik ağı (<code>mhm_rentiva_*</code> öneki)</td></tr><tr><td>🧹 Kaldırma</td><td><code>postmeta_backup_invalid_*</code> kurtarma tabloları</td></tr><tr><td>🔧 Kaldırma</td><td>Silme listesi ve istatistik sayacı tek kaynaktan</td></tr><tr><td>🛡️ Kaldırma</td><td><code>uninstall.php</code> ve taksonomi temizliğinde savunma mekanizmaları</td></tr><tr><td>🔄 Güncelleme</td><td>Şema migration'ları sürüm değişikliğinde otomatik çalışıyor</td></tr><tr><td>🐛 Düzeltme</td><td><code>SettingsCore::get()</code>/<code>has()</code> dizi olmayan değerleri tolere ediyor</td></tr><tr><td>🐛 Düzeltme</td><td><code>AdvancedLogger::log()</code> WordPress yüklenmeden güvenli dönüş</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="📁 Değiştirilen Dosyalar doğrudan bağlantı" title="📁 Değiştirilen Dosyalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>uninstall.php</code> <em>(defensive is_array guard + tam tablo listesi)</em></li>
+<li class=""><code>src/Admin/Core/Utilities/DatabaseCleaner.php</code> <em>(27 tablo + pattern wildcard)</em></li>
+<li class=""><code>src/Admin/Core/Utilities/DatabaseMigrator.php</code> <em>(otomatik migration tetikleme)</em></li>
+<li class=""><code>src/Admin/Core/SettingsCore.php</code> <em>(non-array toleransı)</em></li>
+<li class=""><code>src/Admin/Core/Logging/AdvancedLogger.php</code> <em>(plugins_loaded guard)</em></li>
+<li class=""><code>mhm-rentiva.php</code> <em>(versiyon güncelleme)</em></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.2-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.2 tamamen geriye dönük uyumlu bir patch sürümüdür — DB şemasında yeni tablo, kolon veya veri değişikliği <strong>yoktur</strong>. Güncelleme sonrası ek bir işlem gerekmez. Eklentiyi normal yollarla güncellemeniz yeterli:</p>
+<ul>
+<li class="">WordPress admin → Eklentiler → Güncelle</li>
+<li class="">Veya <code>wp plugin update mhm-rentiva --allow-root</code></li>
+<li class="">Veya manuel ZIP yükleme (artık otomatik migration tetiklenir)</li>
+</ul>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>uninstall</category>
+            <category>cli</category>
+            <category>migration</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.1: Araç Detayları, Rezervasyon, Ödeme ve Sepet Görsel Cilası]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary</guid>
+            <pubDate>Wed, 08 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-detayları-kenar-çubuğu">🎨 Araç Detayları Kenar Çubuğu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-ara%C3%A7-detaylar%C4%B1-kenar-%C3%A7ubu%C4%9Fu" class="hash-link" aria-label="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" title="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Özellik etiketleri taşma sorunu:</strong> Vites, yakıt, koltuk sayısı gibi spec chip'leri dar ekranlarda kart kenarından taşıyordu. Artık kart sınırları içinde kalıyor ve uzun etiketler doğru şekilde sarmalanıyor.</li>
+<li class=""><strong>Hibrit yakıt ikonu:</strong> Yakıt türü "hybrid" seçili araçlarda yanlış ikon gösteriliyordu. Doğru simgeyle değiştirildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-takvim">📅 Takvim<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-takvim" class="hash-link" aria-label="📅 Takvim doğrudan bağlantı" title="📅 Takvim doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Boş satır kaldırıldı:</strong> Takvim bileşeninin altında fazladan bir boş satır render ediliyordu — kaldırıldı.</li>
+<li class=""><strong>Kutu içinde kutu görünümü:</strong> Kenar çubuğunda takvim widget'ının kendi arka planı ile dış kart arka planı iç içe iki kutu izlenimi yaratıyordu. İç kaynağın arka planı nötrleştirildi, artık tek bir kart olarak görünüyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-rezervasyon-formu">📝 Rezervasyon Formu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-rezervasyon-formu" class="hash-link" aria-label="📝 Rezervasyon Formu doğrudan bağlantı" title="📝 Rezervasyon Formu doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araç görseli görünürlüğü:</strong> Form başlığındaki araç görseli açık arka planlarda düşük kontrasta sahipti. Altına bir degrade arka plan eklenerek araç her zaman görünür durumda tutuluyor.</li>
+<li class=""><strong>Kart başlık stili birleşimi:</strong> Rezervasyon formunun farklı bölümleri (tarih, müşteri bilgisi, ek hizmetler, fiyat özeti) birbirinden farklı başlık stillerine sahipti. Tüm bölümler artık aynı başlık tipografisi ve padding değerlerini kullanıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ödeme-sayfası">💳 Ödeme Sayfası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-%C3%B6deme-sayfas%C4%B1" class="hash-link" aria-label="💳 Ödeme Sayfası doğrudan bağlantı" title="💳 Ödeme Sayfası doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Ödeme yöntemleri dikey:</strong> Çoklu ödeme yöntemi (kart, havale, kapıda ödeme) etkin olduğunda seçenekler yatay olarak sıralanıyor ve mobilde taşıyordu. Artık tek sütun, dikey stack — her ekran genişliğinde tutarlı.</li>
+<li class=""><strong>Kupon alanı ikon:</strong> "Kupon kodunuz var mı?" uyarı satırındaki ikon belirli tema kombinasyonlarında bozuk (kare/?) görünüyordu. İkon emoji ile değiştirildi, her temada render oluyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sepet">🛒 Sepet<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-sepet" class="hash-link" aria-label="🛒 Sepet doğrudan bağlantı" title="🛒 Sepet doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rezervasyon meta satırlarında yeniden düzen:</strong> Rezervasyon detayları (tarih aralığı, ek hizmetler, teslim lokasyonu) daha önce tek bir cümle içinde virgülle ayrılmış şekilde gösteriliyordu — okunması zor. Artık her bilgi <code>Etiket: Değer</code> formatında ayrı satırlar halinde gösteriliyor.</li>
+<li class=""><strong>Ödemeye git butonu hover:</strong> Buton üzerine gelindiğinde yazı rengi arka planla aynı tonda kalıp okunamıyordu. Hover state rengi düzeltildi, yazı her durumda okunur.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Alan</th><th>Açıklama</th></tr></thead><tbody><tr><td>🔧 Araç Detayları</td><td>Spec chip taşma + hibrit yakıt ikonu</td></tr><tr><td>🔧 Takvim</td><td>Fazladan boş satır + kutu içinde kutu görünümü</td></tr><tr><td>🔧 Rezervasyon Formu</td><td>Araç görseli degrade arka plan + kart başlık birleştirme</td></tr><tr><td>🔧 Ödeme</td><td>Dikey ödeme yöntemleri + kupon ikon emoji</td></tr><tr><td>🔧 Sepet</td><td>Meta etiket/değer satırları + ödemeye git hover</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.26.1 <strong>yalnızca CSS ve şablon düzeltmeleri</strong> içerir — fonksiyonel değişiklik, DB şema güncellemesi veya yeni ayar yoktur. v4.26.0'dan güncellemek için herhangi bir işlem gerekmez:</p>
+<ul>
+<li class="">WordPress admin → Eklentiler → Güncelle</li>
+<li class="">Veya <code>wp plugin update mhm-rentiva --allow-root</code></li>
+</ul>
+<p>Özel tema override'ları yapmadıysanız güncelleme sonrası ek adım gerekmez. Child theme ile <code>cart.php</code>, <code>checkout/form.php</code> veya rezervasyon formu şablonlarını override ettiyseniz, yeni sürümle uyumluluk için şablonlarınızı karşılaştırmanızı öneririz.</p>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>ui</category>
+            <category>checkout</category>
+            <category>cart</category>
+            <category>booking</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.26.0: Depozito Rezervasyonlarında Kalan Ödeme]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary</guid>
+            <pubDate>Tue, 07 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.]]></description>
+            <content:encoded><![CDATA[<p>v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilik">🚀 Öne Çıkan Yenilik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilik" class="hash-link" aria-label="🚀 Öne Çıkan Yenilik doğrudan bağlantı" title="🚀 Öne Çıkan Yenilik doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kalan-ödeme--depozito-rezervasyonları-için">💳 Kalan Ödeme — Depozito Rezervasyonları için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#-kalan-%C3%B6deme--depozito-rezervasyonlar%C4%B1-i%C3%A7in" class="hash-link" aria-label="💳 Kalan Ödeme — Depozito Rezervasyonları için doğrudan bağlantı" title="💳 Kalan Ödeme — Depozito Rezervasyonları için doğrudan bağlantı" translate="no">​</a></h3>
+<p>Depozito ile rezervasyon oluşturulduğunda kalan bakiye daha önce yalnızca manuel takip ya da operatörle iletişim gerektiriyordu. v4.26.0 ile müşteriler bu adımı tamamen kendi başlarına tamamlayabiliyor.</p>
+<p><strong>Nasıl çalışır:</strong></p>
+<ol>
+<li class="">Müşteri <strong>Hesabım → Rezervasyon Detayı</strong> sayfasına gider</li>
+<li class="">Kalan bakiye &gt; 0 ise <strong>"Kalan Ödemeyi Yap"</strong> butonu görünür</li>
+<li class="">Butona tıklandığında tam tutar için minimal bir WC siparişi arka planda oluşturulur</li>
+<li class="">Müşteri WooCommerce'in native order-pay sayfasına yönlendirilir</li>
+<li class="">Ödeme başarılı olduğunda rezervasyon güncellenir: kalan bakiye sıfırlanır, durum onaylanır</li>
+</ol>
+<p><strong>Teknik özellikler:</strong></p>
+<ul>
+<li class=""><code>RemainingPaymentHandler</code> — AJAX endpoint, nonce + sahiplik doğrulaması</li>
+<li class=""><strong>Tekrar sipariş koruması:</strong> Bekleyen kalan ödeme siparişi varsa yeni sipariş oluşturulmaz, mevcut sipariş yeniden kullanılır (<code>_mhm_remaining_order_id</code> meta)</li>
+<li class=""><strong>HPOS uyumlu:</strong> Tüm WC sipariş işlemleri <code>$order-&gt;update_meta_data() + $order-&gt;save()</code> ile yapılır</li>
+<li class=""><code>WooCommerceBridge</code>: processing durumunda <code>_mhm_is_remaining_payment</code> bayrağı varsa <code>_mhm_remaining_amount</code> sıfırlanır</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-hata-düzeltmeleri">🛠️ Hata Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#%EF%B8%8F-hata-d%C3%BCzeltmeleri" class="hash-link" aria-label="🛠️ Hata Düzeltmeleri doğrudan bağlantı" title="🛠️ Hata Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="css-kapsam-düzeltmesi">CSS Kapsam Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#css-kapsam-d%C3%BCzeltmesi" class="hash-link" aria-label="CSS Kapsam Düzeltmesi doğrudan bağlantı" title="CSS Kapsam Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tüm genel hesap sayfası sınıfları (<code>.btn</code>, <code>.booking-item</code>, <code>.stat-card</code> vb.) artık <code>.mhm-rentiva-account-page</code> sarmalayıcısı altına alındı. Bu değişiklik WoodMart, Flatsome gibi premium temalarla yaşanan görsel çakışmaları engelliyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wc-hesabım-izgara-düzeni">WC Hesabım Izgara Düzeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#wc-hesab%C4%B1m-izgara-d%C3%BCzeni" class="hash-link" aria-label="WC Hesabım Izgara Düzeni doğrudan bağlantı" title="WC Hesabım Izgara Düzeni doğrudan bağlantı" translate="no">​</a></h3>
+<p>Entegre modda ızgara tabanlı temalarda yaşanan <code>grid-column</code> düzeni sorunu giderildi (<code>grid-column: 1/-1</code>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni</td><td>Kalan ödeme butonu — Hesabım → Rezervasyon Detayı</td></tr><tr><td>✨ Yeni</td><td><code>RemainingPaymentHandler</code> sınıfı (AJAX + doğrulama)</td></tr><tr><td>✨ Yeni</td><td>Tekrar sipariş koruması (<code>_mhm_remaining_order_id</code> meta)</td></tr><tr><td>🐛 Düzeltme</td><td>CSS kapsam — tüm sınıflar <code>.mhm-rentiva-account-page</code> altına alındı</td></tr><tr><td>🐛 Düzeltme</td><td>WC Hesabım ızgara düzeni (grid-column: 1/-1)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="📁 Değiştirilen Dosyalar doğrudan bağlantı" title="📁 Değiştirilen Dosyalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><code>src/Admin/Payment/WooCommerce/RemainingPaymentHandler.php</code> <em>(yeni)</em></li>
+<li class=""><code>src/Admin/Payment/WooCommerce/WooCommerceBridge.php</code></li>
+<li class=""><code>src/Admin/Frontend/Account/AccountController.php</code></li>
+<li class=""><code>templates/account/booking-detail.php</code></li>
+<li class=""><code>mhm-rentiva.php</code> <em>(versiyon güncelleme)</em></li>
+</ul>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>payment</category>
+            <category>woocommerce</category>
+            <category>deposit</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.25.0: Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary</guid>
+            <pubDate>Wed, 01 Apr 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[v4.25.0, vendor bildirimleri için yönetici panelinden düzenlenebilir e-posta şablonları getiriyor. 22 vendor bildirim şablonu artık Ayarlar ekranından özelleştirilebilir. Ayrıca Site Instance Check-in cron'u Cron İş Monitörü'ne eklendi ve weekly WP cron interval'inin güvenilir kaydı garanti altına alındı.]]></description>
+            <content:encoded><![CDATA[<p>v4.25.0, vendor bildirimleri için yönetici panelinden düzenlenebilir e-posta şablonları getiriyor. 22 vendor bildirim şablonu artık Ayarlar ekranından özelleştirilebilir. Ayrıca Site Instance Check-in cron'u Cron İş Monitörü'ne eklendi ve <code>weekly</code> WP cron interval'inin güvenilir kaydı garanti altına alındı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yönetici-tarafından-düzenlenebilir-vendor-e-posta-şablonları">✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#%EF%B8%8F-y%C3%B6netici-taraf%C4%B1ndan-d%C3%BCzenlenebilir-vendor-e-posta-%C5%9Fablonlar%C4%B1" class="hash-link" aria-label="✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları doğrudan bağlantı" title="✉️ Yönetici Tarafından Düzenlenebilir Vendor E-posta Şablonları doğrudan bağlantı" translate="no">​</a></h3>
+<p>22 vendor bildirim şablonu artık doğrudan admin panelinden düzenlenebilir: <strong>Ayarlar → Bildirim Şablonları → Vendor Bildirimleri</strong> sekmesi.</p>
+<p>Şablonlar 4 bölüme ayrılmış durumda:</p>
+<table><thead><tr><th>Bölüm</th><th>Şablon Sayısı</th></tr></thead><tbody><tr><td>Vendor Hesap (kayıt, onay, ret, askı)</td><td>5</td></tr><tr><td>Araç İnceleme (onay, ret, düzenleme, yeniden inceleme)</td><td>4</td></tr><tr><td>Araç Yaşam Döngüsü (duraklatma, devam, sona erme vb.)</td><td>9</td></tr><tr><td>Finansal E-postalar (ödeme, iade, fatura)</td><td>4</td></tr></tbody></table>
+<p><strong>Akıllı Fallback Sistemi:</strong></p>
+<ul>
+<li class="">Konu alanı boş bırakılırsa → varsayılan konu metni gösterilir (admin ne gönderileceğini görür)</li>
+<li class="">Gövde alanı boş = Gold Standard HTML dosya fallback — özelleştirme yapılmadığında profesyonel tasarım korunur</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-çeviri-desteği">🌐 Çeviri Desteği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-%C3%A7eviri-deste%C4%9Fi" class="hash-link" aria-label="🌐 Çeviri Desteği doğrudan bağlantı" title="🌐 Çeviri Desteği doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor e-posta admin arayüzü için <strong>56 yeni Türkçe çeviri</strong> eklendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler">🛠️ Teknik İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-gold-standard-e-posta-şablonu-gradient-düzeltmesi">🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-gold-standard-e-posta-%C5%9Fablonu-gradient-d%C3%BCzeltmesi" class="hash-link" aria-label="🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi doğrudan bağlantı" title="🎨 Gold Standard E-posta Şablonu Gradient Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Header başlığında gerçek renk geçişi artık doğru üretiliyor — önceki sürümde gradient oluşturma hesaplama hatası vardı.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-erişilebilirlik-cta-buton-kontrast-oranı">♿ Erişilebilirlik: CTA Buton Kontrast Oranı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-eri%C5%9Filebilirlik-cta-buton-kontrast-oran%C4%B1" class="hash-link" aria-label="♿ Erişilebilirlik: CTA Buton Kontrast Oranı doğrudan bağlantı" title="♿ Erişilebilirlik: CTA Buton Kontrast Oranı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Araç yeniden inceleme admin e-postasındaki amber CTA butonunun kontrast oranı <strong>2.97:1'den 6.8:1'e</strong> yükseltildi. WCAG AA standardını karşılıyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-site-instance-check-in-cron-görünürlüğü">🔧 Site Instance Check-in Cron Görünürlüğü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-site-instance-check-in-cron-g%C3%B6r%C3%BCn%C3%BCrl%C3%BC%C4%9F%C3%BC" class="hash-link" aria-label="🔧 Site Instance Check-in Cron Görünürlüğü doğrudan bağlantı" title="🔧 Site Instance Check-in Cron Görünürlüğü doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>mhm_rentiva_instance_checkin</code> cron görevi artık <strong>Cron İş Monitörü</strong>'nde görünüyor ve "Şimdi Çalıştır" butonu ile manuel tetiklenebiliyor. Bu sayede Lite site instance'larının lisans sunucusuna kaydı izlenebilir.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-weekly-cron-interval-garantisi">🔧 Weekly Cron Interval Garantisi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-weekly-cron-interval-garantisi" class="hash-link" aria-label="🔧 Weekly Cron Interval Garantisi doğrudan bağlantı" title="🔧 Weekly Cron Interval Garantisi doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>weekly</code> WP cron interval'i artık eklenti tarafından açıkça kayıt ediliyor — WooCommerce gibi harici eklentilere bağımlılık kaldırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.25.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni</td><td>22 vendor bildirim şablonu admin panelinden düzenlenebilir</td></tr><tr><td>✨ Yeni</td><td>4 bölüm: Hesap (5), İnceleme (4), Yaşam Döngüsü (9), Finansal (4)</td></tr><tr><td>✨ Yeni</td><td>Boş konu → varsayılan göster; boş gövde → Gold Standard HTML fallback</td></tr><tr><td>🎨 İyileştirme</td><td>Gold Standard gradient üretimi düzeltildi</td></tr><tr><td>♿ Erişilebilirlik</td><td>Amber CTA kontrast oranı 2.97:1 → 6.8:1 (WCAG AA)</td></tr><tr><td>🌐 Çeviri</td><td>56 yeni Türkçe çeviri (vendor e-posta admin UI)</td></tr><tr><td>🐛 Düzeltme</td><td>Site Instance Check-in cron Cron Monitörü'nde görünür oldu</td></tr><tr><td>🐛 Düzeltme</td><td>weekly interval artık eklenti tarafından garantili kayıt ediliyor</td></tr></tbody></table>
+<hr>
+<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>email</category>
+            <category>accessibility</category>
+            <category>bugfix</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.24.0: Araç Yaşam Döngüsü Yönetimi & Vendor Self-Servis]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary</guid>
+            <pubDate>Sat, 28 Mar 2026 20:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.24.0 sürümü yayınlandı! Bu sürüm, araçların tüm ömrü boyunca yönetilebileceği tam durum makinesi, vendor'ların araçlarını kendi kendine yönetebileceği AJAX self-servis uç noktaları ve adil rekabeti koruyan anti-gaming mekanizmaları getiriyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.24.0</strong> sürümü yayınlandı! Bu sürüm, araçların tüm ömrü boyunca yönetilebileceği tam durum makinesi, vendor'ların araçlarını kendi kendine yönetebileceği AJAX self-servis uç noktaları ve adil rekabeti koruyan anti-gaming mekanizmaları getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-yaşam-döngüsü-durum-makinesi">🚀 Araç Yaşam Döngüsü Durum Makinesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-ara%C3%A7-ya%C5%9Fam-d%C3%B6ng%C3%BCs%C3%BC-durum-makinesi" class="hash-link" aria-label="🚀 Araç Yaşam Döngüsü Durum Makinesi doğrudan bağlantı" title="🚀 Araç Yaşam Döngüsü Durum Makinesi doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.24.0'ın ana özelliği: araçların <strong>Aktif → Duraklatılmış → Süresi Dolmuş → Geri Çekilmiş</strong> durumları arasındaki geçişlerini yöneten tam durum makinesi.</p>
+<ul>
+<li class=""><strong>5 Durum:</strong> <code>pending_review</code>, <code>active</code>, <code>paused</code>, <code>expired</code>, <code>withdrawn</code> — her geçiş kurallarla korunuyor.</li>
+<li class=""><strong>Geçiş kuralları:</strong> Hangi durumdan hangi duruma geçileceği <code>VehicleLifecycleManager</code> tarafından zorunlu kılınır.</li>
+<li class=""><strong>Admin UI:</strong> Araç listesinde yaşam döngüsü sütunu, araç düzenleme ekranında meta kutu.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-90-günlük-listeleme-süresi">⏱️ 90 Günlük Listeleme Süresi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#%EF%B8%8F-90-g%C3%BCnl%C3%BCk-listeleme-s%C3%BCresi" class="hash-link" aria-label="⏱️ 90 Günlük Listeleme Süresi doğrudan bağlantı" title="⏱️ 90 Günlük Listeleme Süresi doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class="">Araçlar yayınlandıktan <strong>90 gün</strong> sonra otomatik olarak süresi dolar.</li>
+<li class="">Sona ermeden <strong>10 gün</strong> ve <strong>3 gün</strong> önce vendor'a uyarı e-postaları gönderilir.</li>
+<li class="">Günlük cron ile kontrol edilir; süresi dolan araçlar <code>expired</code> durumuna geçer.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-self-servis-ajax-uç-noktaları">🎮 Vendor Self-Servis AJAX Uç Noktaları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-vendor-self-servis-ajax-u%C3%A7-noktalar%C4%B1" class="hash-link" aria-label="🎮 Vendor Self-Servis AJAX Uç Noktaları doğrudan bağlantı" title="🎮 Vendor Self-Servis AJAX Uç Noktaları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'lar artık araçlarını admin müdahalesi olmadan yönetebilir:</p>
+<table><thead><tr><th>İşlem</th><th>Açıklama</th></tr></thead><tbody><tr><td><strong>Duraklat</strong></td><td>Aktif araç geçici olarak pasife alınır</td></tr><tr><td><strong>Devam Et</strong></td><td>Duraklatılmış araç tekrar aktifleştirilir</td></tr><tr><td><strong>Geri Çek</strong></td><td>Araç platformdan kalıcı olarak çekilir (ceza uygulanabilir)</td></tr><tr><td><strong>Yenile</strong></td><td>Süresi dolmuş araç yeniden aktifleştirilir</td></tr><tr><td><strong>Yeniden Listele</strong></td><td>Geri çekilmiş araç tekrar yayınlanır</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-artan-geri-çekme-ceza-sistemi">💸 Artan Geri Çekme Ceza Sistemi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-artan-geri-%C3%A7ekme-ceza-sistemi" class="hash-link" aria-label="💸 Artan Geri Çekme Ceza Sistemi doğrudan bağlantı" title="💸 Artan Geri Çekme Ceza Sistemi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'ların sık sık araç geri çekmesini önleyen kademeli ceza mekanizması:</p>
+<ul>
+<li class=""><strong>1. geri çekme:</strong> Ücretsiz — ceza yok.</li>
+<li class=""><strong>2. geri çekme:</strong> Aylık ortalama gelirin <strong>%10</strong>'u kesilir.</li>
+<li class=""><strong>3. ve sonrası:</strong> Aylık ortalama gelirin <strong>%25</strong>'i kesilir.</li>
+<li class=""><strong>12 aylık kayan pencere:</strong> Ceza sayacı 12 ay geçince sıfırlanır.</li>
+<li class="">Kesintiler doğrudan ledger'a kaydedilir, payout hesabından düşülür.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-anti-gaming-bloklu-tarih-koruması">🛡️ Anti-Gaming: Bloklu Tarih Koruması<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#%EF%B8%8F-anti-gaming-bloklu-tarih-korumas%C4%B1" class="hash-link" aria-label="🛡️ Anti-Gaming: Bloklu Tarih Koruması doğrudan bağlantı" title="🛡️ Anti-Gaming: Bloklu Tarih Koruması doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor'ların fiyat manipülasyonunu önlemek için:</p>
+<ul>
+<li class="">Vendor iptal ettiği rezervasyonun tarihleri <strong>30 gün boyunca yeniden bloklanır</strong>.</li>
+<li class="">Vendor düşük fiyatla almak için iptal edip daha yüksek fiyata satamaz.</li>
+<li class=""><code>AntiGamingBlocker</code> sınıfı bu tarih blokajlarını yönetir.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-güvenilirlik-puanı">⭐ Vendor Güvenilirlik Puanı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-vendor-g%C3%BCvenilirlik-puan%C4%B1" class="hash-link" aria-label="⭐ Vendor Güvenilirlik Puanı doğrudan bağlantı" title="⭐ Vendor Güvenilirlik Puanı doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tüm platformda vendor kalitesini ölçen 0-100 arası puan sistemi:</p>
+<ul>
+<li class=""><strong>Günlük cron</strong> ile yeniden hesaplama.</li>
+<li class=""><strong>Formül:</strong> İptal oranı, geri çekme sıklığı, duraklatma geçmişi ve tamamlanan rezervasyon sayısı bazlı.</li>
+<li class="">Admin kullanıcı listesinde vendor güvenilirlik sütunu eklendi.</li>
+<li class="">Araç kartlarında vendor badge olarak gösterilmeye hazır.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-9-yeni-e-posta-şablonu">📧 9 Yeni E-posta Şablonu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-9-yeni-e-posta-%C5%9Fablonu" class="hash-link" aria-label="📧 9 Yeni E-posta Şablonu doğrudan bağlantı" title="📧 9 Yeni E-posta Şablonu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yaşam döngüsünün her adımı için ayrı e-posta şablonları:</p>
+<table><thead><tr><th>Şablon</th><th>Tetikleyici</th></tr></thead><tbody><tr><td>Araç Aktifleştirildi</td><td>Araç <code>active</code> durumuna geçtiğinde</td></tr><tr><td>Araç Duraklatıldı</td><td>Vendor veya admin duraklattığında</td></tr><tr><td>Duraklatma Devam Etti</td><td>Araç yeniden aktifleştirildiğinde</td></tr><tr><td>Araç Geri Çekildi</td><td>Vendor geri çekme işlemi yaptığında</td></tr><tr><td>Listeleme Süresi Doldu</td><td>90. gün sonunda otomatik</td></tr><tr><td>10 Gün Uyarısı</td><td>Süre dolumundan 10 gün önce</td></tr><tr><td>3 Gün Uyarısı</td><td>Süre dolumundan 3 gün önce</td></tr><tr><td>Araç Yenilendi</td><td>Süresi dolmuş araç yenilendiğinde</td></tr><tr><td>Araç Yeniden Listelendi</td><td>Geri çekilmiş araç tekrar yayınlandığında</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler">🛠️ Teknik İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Aktif Filtre:</strong> 6 frontend shortcode artık <code>MetaQueryHelper</code> aracılığıyla bakımdaki/pasif araçları filtreler — müşteriler geçersiz araçları göremez.</li>
+<li class=""><strong>Veritabanı:</strong> <code>DatabaseMigrator v3.5.0</code> — mevcut tüm aktif araçlar için yaşam döngüsü durumu otomatik migrate edildi.</li>
+<li class=""><strong>Login Yönlendirme:</strong> <code>wp-login.php</code> erişimi WooCommerce hesap sayfasına yönlendirildi.</li>
+<li class=""><strong>Lisans Check-in:</strong> Haftalık cron ile instance check-in.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🚀 Durum Makinesi</td><td>5 durum, geçiş kuralları, VehicleLifecycleManager.</td></tr><tr><td>⏱️ Listeleme Süresi</td><td>90 gün, cron tabanlı, 10/3 gün uyarı e-postaları.</td></tr><tr><td>🎮 Self-Servis</td><td>Duraklat, devam et, geri çek, yenile, yeniden listele AJAX.</td></tr><tr><td>💸 Ceza Sistemi</td><td>%0/%10/%25 kademeli, 12 aylık kayan pencere, ledger entegrasyonu.</td></tr><tr><td>🛡️ Anti-Gaming</td><td>İptal edilen tarihler 30 gün bloklanır.</td></tr><tr><td>⭐ Güvenilirlik</td><td>Vendor skoru 0-100, günlük cron yeniden hesaplama.</td></tr><tr><td>📧 Bildirimler</td><td>9 yeni yaşam döngüsü e-posta şablonu.</td></tr><tr><td>📊 Admin UI</td><td>Yaşam döngüsü sütunu, meta kutu, vendor güvenilirlik sütunu.</td></tr><tr><td>🔍 Aktif Filtre</td><td>6 shortcode MetaQueryHelper ile pasif araçları filtreler.</td></tr><tr><td>🗄️ Veritabanı</td><td>v3.5.0 migration, mevcut araçlar migrate edildi.</td></tr><tr><td>✅ Test</td><td>665 test, 2248 assertion (567/2036'dan artış).</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.24.0-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.24.0, MHM Rentiva'nın araç yönetim altyapısını kökten güçlendiriyor. Artık araçlar yalnızca "aktif/pasif" değil; tam bir yaşam döngüsüne sahip. Vendor'lar araçlarını kendi kendine yönetirken platform, adil rekabeti ceza sistemi ve anti-gaming mekanizmalarıyla koruyor. Güvenilirlik puanı ise kaliteli vendor'ların öne çıkmasını sağlayan yeni bir rekabet boyutu ekliyor.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>lifecycle</category>
+            <category>reliability</category>
+            <category>notifications</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.23.1: Vendor Form Yeniden Tasarimi & Sehir SelectWoo Migrasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary</guid>
+            <pubDate>Sat, 28 Mar 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.23.1 surumu yayinlandi! Bu surum, vendor ayarlar sayfasinin tamamen yeniden tasarlanmasini, basvuru formundaki alan degisikliklerini, sehir secici bilesenlerin SelectWoo'ya donusturulmesini ve arac sigorta belgesi yukleme ozelligini icerir.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.23.1</strong> surumu yayinlandi! Bu surum, vendor ayarlar sayfasinin tamamen yeniden tasarlanmasini, basvuru formundaki alan degisikliklerini, sehir secici bilesenlerin SelectWoo'ya donusturulmesini ve arac sigorta belgesi yukleme ozelligini icerir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="onemli-yenilikler">Onemli Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#onemli-yenilikler" class="hash-link" aria-label="Onemli Yenilikler doğrudan bağlantı" title="Onemli Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-ayarlar-sayfasi-yeniden-tasarimi">Vendor Ayarlar Sayfasi Yeniden Tasarimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#vendor-ayarlar-sayfasi-yeniden-tasarimi" class="hash-link" aria-label="Vendor Ayarlar Sayfasi Yeniden Tasarimi doğrudan bağlantı" title="Vendor Ayarlar Sayfasi Yeniden Tasarimi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor ayarlar sayfasi (<code>vendor-settings.php</code>) sifirdan yeniden yazildi:</p>
+<ul>
+<li class=""><strong>Inline stil temizligi:</strong> Tum inline CSS kaldirildi, <code>.mhm-vendor-form__*</code> CSS sinif yapisi ile <code>vendor-forms.css</code> dosyasina tasinarak bakim kolayligi saglandi.</li>
+<li class=""><strong>Yeni alanlar:</strong> Hesap Sahibi (Account Holder) ve Vergi Dairesi (Tax Office) alanlari eklendi.</li>
+<li class=""><strong>Bildirim sistemi:</strong> Bildirimler artik <code>mhm-vendor-notice</code> siniflariyla gosteriliyor.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="basvuru-formu-guncellemeleri">Basvuru Formu Guncellemeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#basvuru-formu-guncellemeleri" class="hash-link" aria-label="Basvuru Formu Guncellemeleri doğrudan bağlantı" title="Basvuru Formu Guncellemeleri doğrudan bağlantı" translate="no">​</a></h3>
+<p>Vendor basvuru formunda onemli alan degisiklikleri yapildi:</p>
+<ul>
+<li class=""><strong>Hizmet Alanlari kaldirildi:</strong> Checkbox olarak sunulan Hizmet Alanlari (Service Areas) bolumu kaldirildi; yerine bilgi notu eklendi.</li>
+<li class=""><strong>Arac Sigortasi tasinidi:</strong> Basvuru formundan kaldirilip arac ekleme formuna (<code>[rentiva_vehicle_submit]</code>) tasindi.</li>
+<li class=""><strong>Yeni finansal alanlar:</strong> Hesap Sahibi (zorunlu) ve Vergi Dairesi (opsiyonel) alanlari eklendi.</li>
+<li class=""><strong>Meta senkronizasyonu:</strong> <code>VendorApplicationManager</code> ve <code>VendorOnboardingController</code> onay akisinda yeni alanlarin senkronizasyonu saglandi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sehir-selectwoo-migrasyonu">Sehir SelectWoo Migrasyonu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#sehir-selectwoo-migrasyonu" class="hash-link" aria-label="Sehir SelectWoo Migrasyonu doğrudan bağlantı" title="Sehir SelectWoo Migrasyonu doğrudan bağlantı" translate="no">​</a></h3>
+<p>Tum sehir metin girisleri (<code>&lt;datalist&gt;</code>) modern bir secim bilesenine donusturuldu:</p>
+<ul>
+<li class=""><strong>Yeni mimari:</strong> <code>&lt;select&gt;</code> + WooCommerce selectWoo ile aranabilir, kullanici dostu sehir secimi.</li>
+<li class=""><strong>Yeni metot:</strong> <code>CityHelper::render_select()</code> — tum sehir secicilerde tek kaynak (SSOT).</li>
+<li class=""><strong>Guncellenen formlar:</strong> vendor-settings.php, VendorApply.php, VehicleSubmit.php, TransferAdmin.php.</li>
+<li class=""><strong>CSS/JS enqueue:</strong> UserDashboard.php, VendorApply.php ve VehicleSubmit.php dosyalarina SelectWoo asset'leri eklendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arac-sigorta-belgesi-yukleme">Arac Sigorta Belgesi Yukleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#arac-sigorta-belgesi-yukleme" class="hash-link" aria-label="Arac Sigorta Belgesi Yukleme doğrudan bağlantı" title="Arac Sigorta Belgesi Yukleme doğrudan bağlantı" translate="no">​</a></h3>
+<p>Arac ekleme formuna yeni bir belge yukleme bolumu eklendi:</p>
+<ul>
+<li class="">Arac ruhsatindan sonra sigorta belgesi (<code>_mhm_rentiva_vehicle_insurance_doc</code>) yuklenebilir.</li>
+<li class="">VehicleSubmit.php AJAX handler'i sigorta dosyasi isleme destegi ile guncellendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arac-yasam-dongusu-yonetimi-tasarim">Arac Yasam Dongusu Yonetimi (Tasarim)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#arac-yasam-dongusu-yonetimi-tasarim" class="hash-link" aria-label="Arac Yasam Dongusu Yonetimi (Tasarim) doğrudan bağlantı" title="Arac Yasam Dongusu Yonetimi (Tasarim) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Kapsamli bir tasarim dokumani olusturuldu (<code>docs/plans/2026-03-28-vehicle-lifecycle-management-design.md</code>):</p>
+<ul>
+<li class=""><strong>Durumlar:</strong> Aktif / Duraklatildi / Geri Cekildi / Suresi Doldu</li>
+<li class=""><strong>Listeleme suresi:</strong> 90 gun, yenileme mekanizmasi ile</li>
+<li class=""><strong>Iptal ceza sistemi:</strong> Kademeli ceza puanlari</li>
+<li class=""><strong>Guvenilirlik skoru:</strong> 0-100 arasi performans degerlendirmesi</li>
+<li class=""><strong>Soguma suresi:</strong> Geri cekilmeden sonra 7 gun bekleme</li>
+<li class=""><strong>Tarih engelleme:</strong> Kotu niyetli kullanima karsi onlem</li>
+<li class=""><strong>8 fazli uygulama plani</strong> hazirlandı</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kesfedilen-hatalar-henuz-duzeltilmedi">Kesfedilen Hatalar (Henuz Duzeltilmedi)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#kesfedilen-hatalar-henuz-duzeltilmedi" class="hash-link" aria-label="Kesfedilen Hatalar (Henuz Duzeltilmedi) doğrudan bağlantı" title="Kesfedilen Hatalar (Henuz Duzeltilmedi) doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Hata</th><th>Detay</th></tr></thead><tbody><tr><td>Arac durumu arama filtresi</td><td><code>_mhm_vehicle_status</code> arama sorgularinda kontrol edilmiyor — bakimdaki araclar arama sonuclarinda gorunuyor.</td></tr><tr><td>Vendor askiya alma</td><td><code>VendorOnboardingController::suspend()</code> vendor'un araclarini yayindan kaldirmiyor.</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="degisiklik-kaydi">Degisiklik Kaydi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#degisiklik-kaydi" class="hash-link" aria-label="Degisiklik Kaydi doğrudan bağlantı" title="Degisiklik Kaydi doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tur</th><th>Aciklama</th></tr></thead><tbody><tr><td>Vendor Ayarlar</td><td>Sayfa tamamen yeniden tasarlandi; inline stiller CSS sinif yapisina tasindi.</td></tr><tr><td>Vendor Ayarlar</td><td>Hesap Sahibi ve Vergi Dairesi alanlari eklendi.</td></tr><tr><td>Basvuru Formu</td><td>Hizmet Alanlari ve Arac Sigortasi alanlari kaldirildi/tasindi.</td></tr><tr><td>Basvuru Formu</td><td>Hesap Sahibi (zorunlu) ve Vergi Dairesi (opsiyonel) eklendi.</td></tr><tr><td>Sehir Secici</td><td>Tum datalist sehir girisleri SelectWoo bilesenine donusturuldu.</td></tr><tr><td>Arac Formu</td><td>Sigorta belgesi yukleme bolumu eklendi.</td></tr><tr><td>Tasarim</td><td>Arac Yasam Dongusu Yonetimi tasarim dokumani olusturuldu.</td></tr><tr><td>Hata Kesfedilen</td><td>2 hata tespiti: arac durumu filtresi, vendor askiya alma.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="surum-notlari">Surum Notlari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.1-release-summary#surum-notlari" class="hash-link" aria-label="Surum Notlari doğrudan bağlantı" title="Surum Notlari doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu surum, vendor formlarinin modernizasyonu, sehir secici bilesenlerinin WooCommerce SelectWoo'ya tasınması ve arac sigorta belgesi yukleme destegi ile vendor deneyimini onemli olcude iyilestirmistir. Arac Yasam Dongusu Yonetimi tasarim dokumani gelecek surumler icin yol haritasi saglamaktadir.</p>
+<hr>
+<p>MHM Rentiva hakkinda daha fazla bilgi ve dokumantasyon icin <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Dokuman Sayfamizi</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>forms</category>
+            <category>selectwoo</category>
+            <category>vehicle</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.23.0: Vendor Transfer Mimarisi & Dashboard Denetimi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary</guid>
+            <pubDate>Thu, 26 Mar 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.23.0 sürümü yayınlandı! Bu sürüm, vendor'ların transfer hizmetlerini şehir bazlı yönetebilmesini sağlayan yeni bir mimari, kapsamlı Dashboard widget denetimi ve onlarca hata düzeltmesi getiriyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.23.0</strong> sürümü yayınlandı! Bu sürüm, vendor'ların transfer hizmetlerini şehir bazlı yönetebilmesini sağlayan yeni bir mimari, kapsamlı Dashboard widget denetimi ve onlarca hata düzeltmesi getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-vendor-transfer-lokasyon-sistemi">🏗️ Vendor Transfer Lokasyon Sistemi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#%EF%B8%8F-vendor-transfer-lokasyon-sistemi" class="hash-link" aria-label="🏗️ Vendor Transfer Lokasyon Sistemi doğrudan bağlantı" title="🏗️ Vendor Transfer Lokasyon Sistemi doğrudan bağlantı" translate="no">​</a></h3>
+<p>v4.23.0'ın en büyük yeniliği, <strong>Şehir → Nokta hiyerarşisi</strong> ile vendor'ların transfer operasyonlarını yönetebilmesidir:</p>
+<ul>
+<li class=""><strong>Şehir bazlı filtreleme:</strong> Her lokasyona bir şehir alanı eklendi. Vendor'lar yalnızca kendi şehirlerindeki lokasyonları ve rotaları görebilir.</li>
+<li class=""><strong>Rota bazlı fiyatlandırma:</strong> Admin'in belirlediği <code>min_price</code> — <code>max_price</code> aralığında her vendor kendi rota fiyatını belirleyebilir.</li>
+<li class=""><strong>Transfer arama motoru:</strong> Rota bazlı araç filtreleme ve vendor fiyatı desteği ile yeniden yapılandırıldı. Vendor fiyatı yoksa rotanın <code>base_price</code> değeri fallback olarak kullanılır.</li>
+<li class=""><strong>Veritabanı:</strong> <code>DatabaseMigrator v3.4.0</code> ile lokasyonlara <code>city</code> sütunu, rotalara <code>max_price</code> sütunu eklendi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-dashboard-widget-denetimi-11-düzeltme">📊 Dashboard Widget Denetimi (11 Düzeltme)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-dashboard-widget-denetimi-11-d%C3%BCzeltme" class="hash-link" aria-label="📊 Dashboard Widget Denetimi (11 Düzeltme) doğrudan bağlantı" title="📊 Dashboard Widget Denetimi (11 Düzeltme) doğrudan bağlantı" translate="no">​</a></h3>
+<p>Dashboard widget'larında kapsamlı bir denetim yapıldı:</p>
+<ul>
+<li class=""><strong>Timezone tutarlılığı:</strong> Geri sayım ve operasyon widget'ları WordPress timezone ayarına uyumlu hale getirildi.</li>
+<li class=""><strong>Cache invalidation:</strong> İstatistik cache key prefix uyumsuzluğu düzeltildi.</li>
+<li class=""><strong>WC email görselleri:</strong> Rezervasyon onay e-postalarında araç görseli artık doğru gösteriliyor.</li>
+<li class=""><strong>Tasarım iyileştirmeleri:</strong> 2x2 grid istatistik kartları, yerelleştirilmiş gelir grafiği, mesajlar widget'ı yeniden tasarlandı.</li>
+<li class=""><strong>Lite gating:</strong> Gelir Grafiği ve Yaklaşan Operasyonlar widget'ları artık Pro-only.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-arama-ve-filtreleme-düzeltmeleri">🔎 Arama ve Filtreleme Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-arama-ve-filtreleme-d%C3%BCzeltmeleri" class="hash-link" aria-label="🔎 Arama ve Filtreleme Düzeltmeleri doğrudan bağlantı" title="🔎 Arama ve Filtreleme Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>strtotime('') hatası:</strong> Boş tarih parametresi bugünün tarihini döndürüyordu, aktif booking'li araçlar hatalı filtreleniyordu. Guard eklendi.</li>
+<li class=""><strong>Lokasyon filtresi:</strong> Radio butonlardan checkbox'a dönüştürüldü; birden fazla lokasyon seçilebilir.</li>
+<li class=""><strong>Transfer tab doğrulama:</strong> Transfer alanları (<code>origin_id</code>, <code>destination_id</code>, <code>date</code>, <code>luggage_*</code>) hardcoded required olarak ayarlandı.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-dışa-aktarım-4-düzeltme">📤 Dışa Aktarım (4 Düzeltme)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-d%C4%B1%C5%9Fa-aktar%C4%B1m-4-d%C3%BCzeltme" class="hash-link" aria-label="📤 Dışa Aktarım (4 Düzeltme) doğrudan bağlantı" title="📤 Dışa Aktarım (4 Düzeltme) doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class="">Ödeme günlükleri post_type uyumsuzluğu giderildi.</li>
+<li class="">Kayıt sayısı daima 0 dönen sorgu hatası düzeltildi.</li>
+<li class="">Geçmiş silme işlevi artık çalışıyor (transient tabanlı).</li>
+<li class="">Araç CSV/JSON PHP 8 strict types fatal error'ı giderildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-i̇yileştirmeleri">👤 Vendor İyileştirmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-vendor-i%CC%87yile%C5%9Ftirmeleri" class="hash-link" aria-label="👤 Vendor İyileştirmeleri doğrudan bağlantı" title="👤 Vendor İyileştirmeleri doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araç ruhsat doğrulama:</strong> Vendor araç ekleme formunda ruhsat bilgisi doğrulanıyor.</li>
+<li class=""><strong>Düzenleme formu:</strong> Vendor araç düzenlemesinde yeniden inceleme (re-review) mekanizması.</li>
+<li class=""><strong>Vendor rozeti:</strong> Vendor araçlarında tedarikçi rozeti görüntüleniyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-diğer-i̇yileştirmeler">⚙️ Diğer İyileştirmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#%EF%B8%8F-di%C4%9Fer-i%CC%87yile%C5%9Ftirmeler" class="hash-link" aria-label="⚙️ Diğer İyileştirmeler doğrudan bağlantı" title="⚙️ Diğer İyileştirmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Engellli tarihler:</strong> "Tümüne Uygula" AJAX düzeltmesi; tarayıcı verisi payload'da gönderiliyor.</li>
+<li class=""><strong>Elementor:</strong> 7 widget'ta attribute kontrol sayısı artırıldı (VehicleComparison, MyBookings, MyFavorites, VehicleDetails, Testimonials, VehiclesGrid, FeaturedVehicles).</li>
+<li class=""><strong>Ayarlar:</strong> Cache tekrarı, ölü ayarlar temizliği, SetupWizard sayfa listesi ve AssetManager guard düzeltmeleri.</li>
+<li class=""><strong>Çeviri:</strong> 15+ yeni Türkçe çeviri, WP 6.5+ <code>.l10n.php</code> dosyası yenilendi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🏗️ Mimari</td><td>Vendor Transfer Lokasyon sistemi: Şehir→Nokta hiyerarşisi.</td></tr><tr><td>💰 Fiyatlama</td><td>Vendor rota bazlı fiyatlandırma (min/max aralığı).</td></tr><tr><td>🔍 Arama</td><td>Transfer arama motoru rota bazlı filtreleme + vendor fiyatı.</td></tr><tr><td>🗄️ Veritabanı</td><td>v3.4.0 migration: city + max_price sütunları.</td></tr><tr><td>📊 Dashboard</td><td>11 hata düzeltmesi: timezone, cache, WC email, tasarım, Lite gating.</td></tr><tr><td>🔎 Filtre</td><td>strtotime hatası, lokasyon checkbox, transfer tab doğrulama.</td></tr><tr><td>📅 Engelli Tarihler</td><td>"Tümüne Uygula" AJAX düzeltmesi.</td></tr><tr><td>📤 Dışa Aktarım</td><td>4 kritik hata düzeltmesi.</td></tr><tr><td>👤 Vendor</td><td>Ruhsat doğrulama, yeniden inceleme, vendor rozeti.</td></tr><tr><td>🎨 Elementor</td><td>7 widget attribute iyileştirmesi.</td></tr><tr><td>⚙️ Ayarlar</td><td>Cache, ölü ayarlar, SetupWizard, AssetManager düzeltmeleri.</td></tr><tr><td>🌐 Çeviri</td><td>15+ yeni Türkçe çeviri, .l10n.php yenilendi.</td></tr><tr><td>✅ Test</td><td>567 test, 2036 assertion.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.23.0-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, MHM Rentiva'nın vendor transfer mimarisini temelden yeniden yapılandırmıştır. Şehir bazlı lokasyon filtresi, rota bazlı fiyatlandırma ve Dashboard widget denetimi ile platform daha kararlı ve zengin bir yapıya kavuşmuştur.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>transfer</category>
+            <category>dashboard</category>
+            <category>export</category>
+            <category>search</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.21.2: Vendor Yönetimi ve Finansal Mimari Devrimi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary</guid>
+            <pubDate>Wed, 11 Mar 2026 16:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.21.2 sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.21.2</strong> sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu güncelleme, MHM Rentiva'yı sadece bir rezervasyon motoru olmaktan çıkarıp, tam teşekküllü bir pazaryeri (marketplace) ve transfer yönetim platformuna dönüştürüyor.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-tedarikçi-yönetimi">🏢 Vendor (Tedarikçi) Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-vendor-tedarik%C3%A7i-y%C3%B6netimi" class="hash-link" aria-label="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" title="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" translate="no">​</a></h3>
+<p>Artık platformunuzda birden fazla tedarikçiyi yönetebilirsiniz. Her tedarikçi kendi araçlarını, fiyatlandırmasını ve rezervasyonlarını kontrol edebilir.</p>
+<ul>
+<li class=""><strong>Tedarikçi Paneli:</strong> Özelleştirilmiş admin arayüzü.</li>
+<li class=""><strong>Performans Takibi:</strong> Tedarikçi bazlı doluluk ve gelir raporları.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-finansal-mimari">💰 Yeni Finansal Mimari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-yeni-finansal-mimari" class="hash-link" aria-label="💰 Yeni Finansal Mimari doğrudan bağlantı" title="💰 Yeni Finansal Mimari doğrudan bağlantı" translate="no">​</a></h3>
+<p>Ödeme yönetimi ve komisyon hesaplamaları tamamen standardize edildi.</p>
+<ul>
+<li class=""><strong>Commission Management:</strong> Esnek komisyon oranları ve otomatik hesaplama.</li>
+<li class=""><strong>Ledger System:</strong> Tüm finansal hareketlerin şeffaf bir şekilde kaydedildiği muhasebe defteri.</li>
+<li class=""><strong>Payouts:</strong> Tedarikçi ödemelerinin merkezi takibi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü">🚐 VIP Transfer Modülü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-vip-transfer-mod%C3%BCl%C3%BC" class="hash-link" aria-label="🚐 VIP Transfer Modülü doğrudan bağlantı" title="🚐 VIP Transfer Modülü doğrudan bağlantı" translate="no">​</a></h3>
+<p>Noktadan noktaya rota bazlı fiyatlandırma ve rezervasyon sistemi.</p>
+<ul>
+<li class=""><strong>Rota Bazlı Fiyatlandırma:</strong> Mesafe veya rota bazlı dinamik fiyat tanımlama.</li>
+<li class=""><strong>Transfer Rezervasyonu:</strong> Araç kiralama akışından bağımsız, optimize edilmiş transfer deneyimi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler-ve-güvenlik">🛠️ Teknik İyileştirmeler ve Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler-ve-g%C3%BCvenlik" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" translate="no">​</a></h2>
+<p>Sadece özellik değil, altyapı olarak da güçlendik:</p>
+<ul>
+<li class=""><strong>Hardened REST API:</strong> <code>SecurityHelper</code> ve <code>AuthHelper</code> ile API uç noktaları daha güvenli hale getirildi.</li>
+<li class=""><strong>WP 6.7+ Uyumlu:</strong> En son WordPress sürümleriyle tam uyumluluk ve performans optimizasyonu.</li>
+<li class=""><strong>Modern Gereksinimler:</strong> Minimum PHP 8.1+ ve WP 6.7+ standartlarına geçiş yapıldı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni Modül</td><td>Vendor Yönetim Sistemi (Multi-vendor desteği).</td></tr><tr><td>💸 Finans</td><td>Gelişmiş finansal mimari, komisyon ve defter (ledger) sistemi.</td></tr><tr><td>🛫 Transfer</td><td>VIP Transfer modülü ve rota bazlı fiyatlandırma motoru.</td></tr><tr><td>🛡️ Güvenlik</td><td>REST API güvenlik katmanları (<code>AuthHelper</code> entegrasyonu).</td></tr><tr><td>🚀 Performans</td><td>PHP 8.1+ optimizasyonu ve autoloader iyileştirmeleri.</td></tr><tr><td>🧹 Paketleme</td><td><code>.distignore</code> ile optimize edilmiş, tertemiz eklenti paketi yapısı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, <code>mhm-rentiva</code> ekosisteminde bugüne kadar yapılmış en kapsamlı modüler genişletmedir. Modüller arası veri bütünlüğü <code>Util::has_overlap()</code> ve <code>DepositCalculator</code> gibi merkezi sınıflar üzerinden garanti altına alınmıştır.</p>
+<hr>
+<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>vendor</category>
+            <category>finance</category>
+            <category>payment</category>
+            <category>vip-transfer</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.10.0: Block/Shortcode Parity Stabilizasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary</guid>
+            <pubDate>Wed, 18 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.10.0 sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.10.0</strong> sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🎯 Eşlik (Parity)</td><td>Block ↔ Shortcode tam eşliği sağlandı — 19/19 deterministic yüzey doğrulandı.</td></tr><tr><td>🔗 Eşleme (Mapping)</td><td><code>vehicle-comparison</code>, <code>booking-form</code> ve <code>testimonials</code> blokları için deterministik alias eşlemesi eklendi.</td></tr><tr><td>🔄 Dönüşüm (Transform)</td><td><code>showFeatures</code> değer dönüşümü kapsam izolasyonuyla stabilize edildi (boolean → <code>all</code>/<code>basic</code>).</td></tr><tr><td>🛡️ Güvenlik</td><td>Booking form dinamik varsayılan koruması eklendi (<code>defaultDays</code>/<code>minDays</code>/<code>maxDays</code> statik override engellendi).</td></tr><tr><td>📋 Denetim</td><td>19/19 Light Parity Audit tam kanıt zinciriyle tamamlandı.</td></tr><tr><td>✅ Kalite Kapıları</td><td>PHPCS, Plugin Check, PHPUnit — 0 hata, tam suite geçişi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, MHM Rentiva'nın blok ve kısa kod çıktılarını birbirinin aynısı haline getiren kapsamlı bir stabilizasyon çalışmasının ürünüdür. Artık aynı içerik hem Gutenberg bloğu hem de <code>[mhm_rentiva_*]</code> kısa kodu olarak eklendiğinde birebir aynı HTML çıktısı ve davranış elde edilmektedir.</p>
+<p>Kalite kapıları post-bump olarak doğrulandı:</p>
+<table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS</td><td>✅ 0 hata</td></tr><tr><td>Plugin Check</td><td>✅ PASS (exit code 0)</td></tr><tr><td>PHPUnit</td><td>✅ 216 test, 0 başarısızlık</td></tr></tbody></table>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>gutenberg</category>
+            <category>blocks</category>
+            <category>shortcode</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.9.8: URL Tutarlılığı ve WooCommerce İyileştirmeleri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.8-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.8-release-summary</guid>
+            <pubDate>Mon, 09 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.9.8 sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.8</strong> sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.8-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛠️ Düzeltme</td><td>WooCommerce Hesabım uç noktalarında fiziksel sayfa kısa isimlerine (slug) mutlak öncelik verildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Entegre panel düzeni korundu; özel linklerde (örn. /favorilerim/) dışa yönlendirme sorunu giderildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>URL tutarlılığı için kalıcı linklerin (rewrite rules) otomatik yenilenmesi sağlandı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.8-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Bu sürüm, kullanıcılarımızın "Hesabım" panelindeki deneyimini pürüzsüz hale getirmeye odaklanıyor. Özellikle özel sayfa yapısı kullanan temalarda yaşanan yönlendirme sorunları giderilerek sistem daha kararlı hale getirildi.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>woocommerce</category>
+            <category>mhm-rentiva</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.9.7: Gutenberg UI/UX Standardizasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary</guid>
+            <pubDate>Sun, 08 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.9.7 sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.7</strong> sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Gutenberg blok kenar çubukları (InspectorControls) tutarlı UI/UX için standartlaştırıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Blok editöründeki konsol uyarıları giderilerek kararlılık artırıldı.</td></tr><tr><td>⚡ İyileştirme</td><td>Proje dokümantasyonu ve kuralları güncellendi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Editör tarafındaki kullanıcı deneyimini iyileştirmek adına Gutenberg blok kontrolleri daha düzenli hale getirildi. Arka planda çalışan scriptlerdeki ufak hatalar giderilerek temiz bir çalışma ortamı sağlandı.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>gutenberg</category>
+            <category>ui-ux</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.9.6: Transfer Modülü ve Büyük Bakım]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.6-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.6-release-summary</guid>
+            <pubDate>Mon, 02 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.9.6 sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.6</strong> sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.6-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Transfer Modülü: Ön ek standardizasyonu (rentiva_) ve veritabanı taşıma mantığı tamamlandı.</td></tr><tr><td>⚡ Performans</td><td>Genel kod optimizasyonu ve performans iyileştirmeleri yapıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Müsaitlik Takvimi için HTML yapısı daha iyi erişilebilirlik için güncellendi.</td></tr><tr><td>🎨 Stil</td><td>Daha iyi bakım için CSS mimarisi temizlendi ve yeniden yapılandırıldı.</td></tr><tr><td>🌐 i18n</td><td>Yeni çeviri dosyaları eklendi ve mevcut çeviriler iyileştirildi.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.6-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Yüksek performanslı bir altyapı için CSS ve PHP tarafında büyük çaplı temizlik yapıldı. Transfer modülünün veritabanı yapısı standartlara uygun hale getirilerek sistem kararlılığı artırıldı.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>transfer</category>
+            <category>performance</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.6.7: Güvenlik ve Performans Optimizasyonu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.6.7-release-summary</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.6.7-release-summary</guid>
+            <pubDate>Sun, 01 Feb 2026 09:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva v4.6.7 sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.6.7</strong> sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.6.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Yönlendirme güvenliğini artırmak için <code>wp_safe_redirect</code> kullanımına geçildi.</td></tr><tr><td>🛡️ Güvenlik</td><td><code>SecurityHelper::safe_output()</code> metodu bağlam doğrulaması ve JSON desteğiyle modernize edildi.</td></tr><tr><td>⚡ Performans</td><td>SQL transient silme işlemi, native <code>delete_transient()</code> fonksiyonuna çevrildi.</td></tr><tr><td>🎨 Stil</td><td>Satır içi CSS kodları <code>wp_add_inline_style</code> API'sine taşınarak standartlaştırıldı.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.6.7-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
+<p>Eklentinin çekirdek fonksiyonları daha güvenli ve performanslı hale getirildi. Özellikle yönlendirme ve veri çıktı işlemleri WordPress'in en güncel güvenlik protokollerine göre optimize edildi.</p>]]></content:encoded>
+            <category>release</category>
+            <category>update</category>
+            <category>security</category>
+            <category>performance</category>
+        </item>
+    </channel>
+</rss>
