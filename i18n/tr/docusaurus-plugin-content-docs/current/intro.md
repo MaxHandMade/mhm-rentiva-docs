@@ -79,10 +79,10 @@ Geliştiriciler için derinlemesine teknik dökümanlar:
 ---
 
 ## 🤝 Tedarikçi (Vendor) Ekosistemi
-- 🚀 [Vendor Oryantasyonu](./vendor/vendor-onboarding)
-- 💳 [Payout & Ledger Sistemi](./vendor/vendor-payouts-ledger)
-- 📊 [Analiz ve Performans](./vendor/vendor-analytics)
-- 🛡️ [Güvenlik ve Gizlilik](./vendor/vendor-security-privacy)
+- 🚀 [Vendor Oryantasyonu](./vendor/onboarding)
+- 💳 [Payout & Ledger Sistemi](./vendor/payouts-ledger)
+- 📊 [Analiz ve Performans](./vendor/analytics)
+- 🛡️ [Güvenlik ve Gizlilik](./vendor/security-privacy)
 
 ---
 

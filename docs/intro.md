@@ -79,10 +79,10 @@ In-depth technical documentation for developers:
 ---
 
 ## 🤝 Vendor Ecosystem
-- 🚀 [Vendor Onboarding](./vendor/vendor-onboarding)
-- 💳 [Payout & Ledger System](./vendor/vendor-payouts-ledger)
-- 📊 [Analytics & Performance](./vendor/vendor-analytics)
-- 🛡️ [Security & Privacy](./vendor/vendor-security-privacy)
+- 🚀 [Vendor Onboarding](./vendor/onboarding)
+- 💳 [Payout & Ledger System](./vendor/payouts-ledger)
+- 📊 [Analytics & Performance](./vendor/analytics)
+- 🛡️ [Security & Privacy](./vendor/security-privacy)
 
 ---
 

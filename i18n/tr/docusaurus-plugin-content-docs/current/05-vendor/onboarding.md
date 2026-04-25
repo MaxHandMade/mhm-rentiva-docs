@@ -1,5 +1,5 @@
 ---
-id: vendor-onboarding
+id: onboarding
 title: Tedarikçi Katılımı (Vendor Onboarding)
 sidebar_label: Onboarding
 sidebar_position: 2

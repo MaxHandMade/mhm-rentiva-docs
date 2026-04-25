@@ -58,7 +58,7 @@ Günlük kiralama operasyonlarınızı yönetmek, araç eklemek ve rapor alabilm
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #8b5cf6' }}>
       <h3 className="cardTitle">📊 5. Raporlama ve Analiz</h3>
       <p className="cardDescription">İşletme performans grafikleri, gelir raporları ve verilerin dışa aktarımı.</p>
-      <a className="button button--secondary button--block" href="./reports">Raporlar ve Export</a>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/features-usage/reports">Raporlar ve Export</a>
     </div>
   </div>
 </div>

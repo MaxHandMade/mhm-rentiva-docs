@@ -48,7 +48,7 @@ A hierarchical learning path has been designed, starting from the plugin's core 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Testing & Operations</h3>
       <p className="cardDescription">Unit test strategies, Webhook simulations, and Go-Live checklists.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/testing/controller-audit">Testing Guide</a>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/controller-audit">Testing Guide</a>
     </div>
   </div>
 </div>

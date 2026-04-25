@@ -1,5 +1,5 @@
 ---
-id: vendor-onboarding
+id: onboarding
 title: Vendor Onboarding
 sidebar_label: Onboarding
 sidebar_position: 2

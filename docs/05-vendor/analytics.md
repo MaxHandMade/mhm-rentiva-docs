@@ -1,5 +1,5 @@
 ---
-id: vendor-analytics
+id: analytics
 title: Vendor Analytics
 sidebar_label: Analytics
 sidebar_position: 20

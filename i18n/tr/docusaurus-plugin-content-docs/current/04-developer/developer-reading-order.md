@@ -48,7 +48,7 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Test & Operasyon</h3>
       <p className="cardDescription">Unit test stratejileri, Webhook simülasyonları ve Go-Live kontrolleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/testing/controller-audit">Test Rehberi</a>
+      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/controller-audit">Test Rehberi</a>
     </div>
   </div>
 </div>

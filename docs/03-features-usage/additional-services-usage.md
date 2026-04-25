@@ -3,7 +3,6 @@ id: additional-services-usage
 title: Add-on Management
 sidebar_label: Add-ons
 sidebar_position: 9
-slug: /features-usage/additional-services
 ---
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)

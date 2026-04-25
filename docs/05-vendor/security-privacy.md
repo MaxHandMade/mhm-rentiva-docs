@@ -1,5 +1,5 @@
 ---
-id: vendor-security-privacy
+id: security-privacy
 title: Vendor Security & Privacy Architecture
 sidebar_label: Security & Privacy
 sidebar_position: 30

@@ -1,5 +1,5 @@
 ---
-id: vendor-analytics
+id: analytics
 title: Tedarikçi Analizleri (Vendor Analytics)
 sidebar_label: Analytics
 sidebar_position: 20

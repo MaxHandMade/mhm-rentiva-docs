@@ -131,7 +131,7 @@ const config = {
               },
               {
                 label: 'User Guide',
-                to: '/docs/features-usage/shortcodes/shortcodes-overview',
+                to: '/docs/features-usage/shortcodes/overview',
               },
               {
                 label: 'Developer Docs',

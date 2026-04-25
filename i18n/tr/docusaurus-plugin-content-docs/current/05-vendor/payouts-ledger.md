@@ -1,5 +1,5 @@
 ---
-id: vendor-payouts-ledger
+id: payouts-ledger
 title: Ödemeler ve Finansal Defter (Payouts & Ledger)
 sidebar_label: Payouts & Ledger
 sidebar_position: 10

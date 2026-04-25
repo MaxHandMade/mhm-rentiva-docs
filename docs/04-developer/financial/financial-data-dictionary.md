@@ -73,7 +73,7 @@ graph LR
 ## Section Summary
 - All financial keys are stored with the `_mhm_` prefix (private meta).
 - Critical operations (e.g., `payout_status`) can only be changed by authorized (Capabilities) users.
-- For fields in the Ledger table, see the [Ledger Model](./ledger-model) page.
+- For fields in the Ledger table, see the [Ledger Model](./financial-ledger-model) page.
 
 ## Changelog
 | Date | Version | Note |

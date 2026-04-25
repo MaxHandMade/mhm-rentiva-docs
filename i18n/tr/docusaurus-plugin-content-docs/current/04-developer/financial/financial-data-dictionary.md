@@ -73,7 +73,7 @@ graph LR
 ## Bölüm Sonu Özeti
 - Tüm finansal anahtarlar `_mhm_` ön eki ile (private meta) saklanır.
 - Kritik işlemler (Örn: `payout_status`) sadece yetkili (Capabilities) kullanıcılar tarafından değiştirilebilir.
-- Ledger tablosundaki alanlar için [Ledger Modeli](./ledger-model) sayfasına bakınız.
+- Ledger tablosundaki alanlar için [Ledger Modeli](./financial-ledger-model) sayfasına bakınız.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |

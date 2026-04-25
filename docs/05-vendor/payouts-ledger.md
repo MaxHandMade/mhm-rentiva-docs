@@ -1,5 +1,5 @@
 ---
-id: vendor-payouts-ledger
+id: payouts-ledger
 title: Payouts & Ledger
 sidebar_label: Payouts & Ledger
 sidebar_position: 10

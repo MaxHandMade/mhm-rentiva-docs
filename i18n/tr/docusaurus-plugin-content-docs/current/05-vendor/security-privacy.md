@@ -1,5 +1,5 @@
 ---
-id: vendor-security-privacy
+id: security-privacy
 title: Güvenlik ve Gizlilik Mimarisi (Vendor Security & Privacy)
 sidebar_label: Security & Privacy
 sidebar_position: 30
