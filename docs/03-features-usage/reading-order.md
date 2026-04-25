@@ -24,14 +24,14 @@ Use the categorized cards below to manage your daily rental operations, add vehi
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏎️ 1. Vehicles & Inventory</h3>
       <p className="cardDescription">Adding vehicles, category management, pricing, and global vehicle settings.</p>
-      <a className="button button--secondary button--block" href="./vehicles">Vehicle Management</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/vehicles">Vehicle Management</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📅 2. Booking Tracking</h3>
       <p className="cardDescription">Manage incoming requests, monitor the calendar, and review booking details.</p>
-      <a className="button button--secondary button--block" href="./bookings">Bookings</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/bookings">Bookings</a>
     </div>
   </div>
 </div>
@@ -41,14 +41,14 @@ Use the categorized cards below to manage your daily rental operations, add vehi
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">✨ 3. Add-ons & VIP</h3>
       <p className="cardDescription">Extras like baby seats and insurance, plus VIP transfer route definitions.</p>
-      <a className="button button--secondary button--block" href="./additional-services-usage">Extra Services</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/additional-services-usage">Extra Services</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💬 4. Customers & Communication</h3>
       <p className="cardDescription">Customer portal management, loyalty program, and internal messaging system.</p>
-      <a className="button button--secondary button--block" href="./customers">Customer Management</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/customers">Customer Management</a>
     </div>
   </div>
 </div>

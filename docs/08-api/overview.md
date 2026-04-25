@@ -23,14 +23,14 @@ Use the cards below to access detailed technical information about the system's 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🌐 v1 Endpoints (Current)</h3>
       <p className="cardDescription">Currently active REST endpoints. References for rentals, location services, and health audits.</p>
-      <a className="button button--secondary button--block" href="./v1/rest-api-v1">v1 Reference</a>
+      <a className="button button--secondary button--block" href="/docs/api/v1/rest-api-v1">v1 Reference</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🏗️ v2 Planning (Future)</h3>
       <p className="cardDescription">The system's API-First transition. Mobile app support, JWT design, and next-generation API architecture roadmap.</p>
-      <a className="button button--secondary button--block" href="./rest-v2-planning">v2 Plan</a>
+      <a className="button button--secondary button--block" href="/docs/api/rest-v2-planning">v2 Plan</a>
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@ Use the cards below to access detailed technical information about the system's 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛡️ Security and Licensing</h3>
       <p className="cardDescription">HMAC signing, API key management, and external license server communication protocols.</p>
-      <a className="button button--secondary button--block" href="./license-server-protocols">Security Details</a>
+      <a className="button button--secondary button--block" href="/docs/api/license-server-protocols">Security Details</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🔍 Audit and Architecture</h3>
       <p className="cardDescription">Controller audit, Nervous System hierarchy, and performance optimization reports.</p>
-      <a className="button button--secondary button--block" href="./api-nervous-system">Architecture Analysis</a>
+      <a className="button button--secondary button--block" href="/docs/api/api-nervous-system">Architecture Analysis</a>
     </div>
   </div>
 </div>

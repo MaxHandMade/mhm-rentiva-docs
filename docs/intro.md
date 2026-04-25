@@ -22,14 +22,14 @@ Looking for a specific feature? Use the main categories below to jump straight t
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Getting Started</h3>
       <p className="cardDescription">Get the system running in minutes. A step-by-step roadmap for requirements, activation, and initial configuration.</p>
-      <a className="button button--secondary button--block" href="./getting-started/reading-order">Start Now</a>
+      <a className="button button--secondary button--block" href="/docs/getting-started/reading-order">Start Now</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">⚙️ Core Configuration</h3>
       <p className="cardDescription">General settings, WooCommerce payment gateways, tax configuration, and email notification systems.</p>
-      <a className="button button--secondary button--block" href="./core-configuration/settings">Configure Settings</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">Configure Settings</a>
     </div>
   </div>
 </div>
@@ -39,14 +39,14 @@ Looking for a specific feature? Use the main categories below to jump straight t
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🚗 Features & Usage</h3>
       <p className="cardDescription">Make the most of vehicle management, booking tracking, the customer portal, and reporting modules.</p>
-      <a className="button button--secondary button--block" href="./features-usage/reading-order">User Guide</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/reading-order">User Guide</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Developer Guide</h3>
       <p className="cardDescription">REST API references, Hook/Filter lists, and database schema for those who want to customize the plugin.</p>
-      <a className="button button--secondary button--block" href="./developer/reading-order">Technical Details</a>
+      <a className="button button--secondary button--block" href="/docs/developer/reading-order">Technical Details</a>
     </div>
   </div>
 </div>

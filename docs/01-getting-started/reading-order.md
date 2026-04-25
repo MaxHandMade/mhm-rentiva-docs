@@ -24,14 +24,14 @@ Use the cards below to quickly access the critical getting-started documents: in
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">📦 1. Installation & Requirements</h3>
       <p className="cardDescription">Server compatibility check, plugin installation, and license activation steps.</p>
-      <a className="button button--secondary button--block" href="./installation">Installation Guide</a>
+      <a className="button button--secondary button--block" href="/docs/getting-started/installation">Installation Guide</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🧙 2. Setup Wizard</h3>
       <p className="cardDescription">A step-by-step Setup Wizard guide that gets your system ready in minutes.</p>
-      <a className="button button--secondary button--block" href="./setup-wizard">Start the Wizard</a>
+      <a className="button button--secondary button--block" href="/docs/getting-started/setup-wizard">Start the Wizard</a>
     </div>
   </div>
 </div>
@@ -41,7 +41,7 @@ Use the cards below to quickly access the critical getting-started documents: in
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">✅ 3. Pre-Launch Checklist</h3>
       <p className="cardDescription">Do a final review to make sure everything is in place before you go live.</p>
-      <a className="button button--secondary button--block" href="./post-install-checklist">Checklist</a>
+      <a className="button button--secondary button--block" href="/docs/getting-started/post-install-checklist">Checklist</a>
     </div>
   </div>
 </div>
