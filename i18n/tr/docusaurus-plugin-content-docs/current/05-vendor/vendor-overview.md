@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🤝 Vendor Ekonomisi ve Yönetimi
@@ -23,14 +25,14 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Vendor Oryantasyonu</h3>
       <p className="cardDescription">Yeni tedarikçi kaydı, profil onayı ve araçlarını sisteme yükleme rehberi.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/onboarding">Oryantasyon Rehberi</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/onboarding">Oryantasyon Rehberi</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">💳 Payout & Ledger</h3>
       <p className="cardDescription">Finansal defter kayıtları, hakediş talepleri ve ödeme periyotları yönetimi.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/payouts-ledger">Finansal Detaylar</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/payouts-ledger">Finansal Detaylar</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">📊 Analiz & Performans</h3>
       <p className="cardDescription">Tedarikçi bazlı gelir istatistikleri, araç doluluk oranları ve performans verileri.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/analytics">Vendor İstatistikleri</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/analytics">Vendor İstatistikleri</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🛡️ Güvenlik & Gizlilik</h3>
       <p className="cardDescription">Kişisel verilerin korunması, tedarikçi sözleşmeleri ve güvenli işlem protokolleri.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/security-privacy">Güvenlik Rehberi</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/security-privacy">Güvenlik Rehberi</Link>
     </div>
   </div>
 </div>
@@ -59,14 +61,14 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #7c3aed' }}>
       <h3 className="cardTitle">💰 Ücretli İlan Sistemi</h3>
       <p className="cardDescription">WooCommerce tabanlı ilan ücreti: yeni araç, yenileme ve yeniden listeleme için ödeme kapısı.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241">İlan Ücreti Detayları</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241">İlan Ücreti Detayları</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #059669' }}>
       <h3 className="cardTitle">🔄 Araç Yaşam Döngüsü</h3>
       <p className="cardDescription">90 günlük listeleme süresi, duraklatma, yenileme, geri çekilme ve güvenilirlik skoru.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-araç-yaşam-döngüsü-yönetimi-v4240">Yaşam Döngüsü</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/vendor-management#-araç-yaşam-döngüsü-yönetimi-v4240">Yaşam Döngüsü</Link>
     </div>
   </div>
 </div>

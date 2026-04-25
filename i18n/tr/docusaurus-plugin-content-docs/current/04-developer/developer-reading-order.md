@@ -7,6 +7,8 @@ slug: /developer/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 💻 Geliştirici Rehberi Yol Haritası
@@ -24,14 +26,14 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">⚙️ 1. Core & Mimari</h3>
       <p className="cardDescription">Modül yapısı, Transfer mimarisi ve Layout Pipeline gibi çekirdek bileşenler.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/core/framework-architecture">Çekirdek Yapı</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/core/framework-architecture">Çekirdek Yapı</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🌐 2. API & Haberleşme</h3>
       <p className="cardDescription">REST v1/v2 uç noktaları, Webhook güvenliği ve Sinir Sistemi hiyerarşisi.</p>
-      <a className="button button--secondary button--block" href="/docs/api/overview">API Rehberi</a>
+      <Link className="button button--secondary button--block" to="/docs/api/overview">API Rehberi</Link>
     </div>
   </div>
 </div>
@@ -41,14 +43,14 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💰 3. Finansal Motor</h3>
       <p className="cardDescription">Ledger modeli, Komisyon politikaları, Payout yönetimi ve Audit kripto bütünlüğü.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/financial/governance-controls">Finansal Mimari</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/financial/governance-controls">Finansal Mimari</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Test & Operasyon</h3>
       <p className="cardDescription">Unit test stratejileri, Webhook simülasyonları ve Go-Live kontrolleri.</p>
-      <a className="button button--secondary button--block" href="/docs/api/controller-audit">Test Rehberi</a>
+      <Link className="button button--secondary button--block" to="/docs/api/controller-audit">Test Rehberi</Link>
     </div>
   </div>
 </div>

@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Theme](https://img.shields.io/badge/theme-v0.3.0-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🎨 Theme & Visual Standards
@@ -23,14 +25,14 @@ Use the cards below to explore theme architecture, template hierarchy, and style
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏗️ Theme Architecture</h3>
       <p className="cardDescription">The plugin's impact on the theme, CSS/JS loading policies, and Asset Manager integration.</p>
-      <a className="button button--secondary button--block" href="/docs/theme/introduction">Architecture Overview</a>
+      <Link className="button button--secondary button--block" to="/docs/theme/introduction">Architecture Overview</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📦 Templates & Patterns</h3>
       <p className="cardDescription">Using Block Patterns, single vehicle page templates, and list views.</p>
-      <a className="button button--secondary button--block" href="/docs/theme/templates-patterns">Template Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/theme/templates-patterns">Template Guide</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Use the cards below to explore theme architecture, template hierarchy, and style
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛠️ theme.json Support</h3>
       <p className="cardDescription">Global color palettes, typography settings, and theme-specific style parameters for the plugin.</p>
-      <a className="button button--secondary button--block" href="/docs/theme/theme-json">Style Rules</a>
+      <Link className="button button--secondary button--block" to="/docs/theme/theme-json">Style Rules</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Theme Development</h3>
       <p className="cardDescription">Hooks and override mechanisms for developers who want to build a custom theme.</p>
-      <a className="button button--secondary button--block" href="/docs/theme/development">Development Details</a>
+      <Link className="button button--secondary button--block" to="/docs/theme/development">Development Details</Link>
     </div>
   </div>
 </div>

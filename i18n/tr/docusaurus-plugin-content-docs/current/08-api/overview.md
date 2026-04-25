@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🧠 REST API ve Sinir Sistemi
@@ -23,14 +25,14 @@ Aşağıdaki kartlar aracılığıyla sistemin asenkron katmanları, güvenli pr
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🌐 v1 Endpoints (Current)</h3>
       <p className="cardDescription">Mevcut aktif kullanılan REST uç noktaları. Kiralama, konum servisleri ve sağlık denetimi (Health) referansları.</p>
-      <a className="button button--secondary button--block" href="/docs/api/v1/rest-api-v1">v1 Referansı</a>
+      <Link className="button button--secondary button--block" to="/docs/api/v1/rest-api-v1">v1 Referansı</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🏗️ v2 Planning (Future)</h3>
       <p className="cardDescription">Sistemin API-First dönüşümü. Mobil uygulama desteği, JWT kurgusu ve gelecek nesil API mimarisi yol haritası.</p>
-      <a className="button button--secondary button--block" href="/docs/api/rest-v2-planning">v2 Planı</a>
+      <Link className="button button--secondary button--block" to="/docs/api/rest-v2-planning">v2 Planı</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Aşağıdaki kartlar aracılığıyla sistemin asenkron katmanları, güvenli pr
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛡️ Güvenlik ve Lisans</h3>
       <p className="cardDescription">HMAC imzalama, API anahtarı yönetimi ve harici lisans sunucusu haberleşme protokolleri.</p>
-      <a className="button button--secondary button--block" href="/docs/api/license-server-protocols">Güvenlik Detayları</a>
+      <Link className="button button--secondary button--block" to="/docs/api/license-server-protocols">Güvenlik Detayları</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🔍 Denetim ve Mimari</h3>
       <p className="cardDescription">Controller (Denetleyici) denetimi, Sinir Sistemi hiyerarşisi ve performans optimizasyon raporları.</p>
-      <a className="button button--secondary button--block" href="/docs/api/api-nervous-system">Mimari Analiz</a>
+      <Link className="button button--secondary button--block" to="/docs/api/api-nervous-system">Mimari Analiz</Link>
     </div>
   </div>
 </div>

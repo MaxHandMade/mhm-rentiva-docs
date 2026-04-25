@@ -7,6 +7,8 @@ slug: /core-configuration/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # ⚙️ Temel Yapılandırma Yol Haritası
@@ -24,21 +26,21 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏢 1. Genel Ayarlar</h3>
       <p className="cardDescription">Şirket bilgileri, para birimi ve temel çalışma modlarını belirleyin.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">Genel Ayarlar</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/settings">Genel Ayarlar</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📅 2. Rezervasyon</h3>
       <p className="cardDescription">Kiralama süreleri, depozito oranları ve rezervasyon davranışları.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/booking-settings">Rezervasyon</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/booking-settings">Rezervasyon</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 3. Ödemeler</h3>
       <p className="cardDescription">WooCommerce ödeme geçitleri ve tahsilat kurallarını yapılandırın.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/payments">Ödeme Ayarları</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/payments">Ödeme Ayarları</Link>
     </div>
   </div>
 </div>
@@ -48,21 +50,21 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">📧 4. Bildirimler</h3>
       <p className="cardDescription">E-posta şablonları, SMTP ayarları ve otomatik bilgilendirmeler.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/emails">E-posta Ayarları</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/emails">E-posta Ayarları</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #6366f1' }}>
       <h3 className="cardTitle">🏎️ 5. Araç Alanları</h3>
       <p className="cardDescription">Teknik veriler (yakıt, vites vb.) ve araç özellikleri tanımı.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/vehicle-settings">Araç Ayarları</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/vehicle-settings">Araç Ayarları</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #ec4899' }}>
       <h3 className="cardTitle">🔑 6. Lisans</h3>
       <p className="cardDescription">Pro özelliklerin kilidini açmak için anahtarınızı aktif edin.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/license">Lisans Yönetimi</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/license">Lisans Yönetimi</Link>
     </div>
   </div>
 </div>
@@ -72,14 +74,14 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #8b5cf6' }}>
       <h3 className="cardTitle">⚡ 7. Sistem & Performans</h3>
       <p className="cardDescription">Önbellekleme, güvenlik kuralları ve sistem sağlığı denetimi.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/system-performance">Sistem & Hız</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/system-performance">Sistem & Hız</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #10b981' }}>
       <h3 className="cardTitle">🛠️ 8. Bakım & Araçlar</h3>
       <p className="cardDescription">Veritabanı temizliği, cron izleme ve teşhis araçları.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/maintenance">Bakım Sayfası</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/maintenance">Bakım Sayfası</Link>
     </div>
   </div>
 </div>

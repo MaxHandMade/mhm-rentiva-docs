@@ -7,6 +7,8 @@ slug: /getting-started/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🚀 Getting Started Guide & Roadmap
@@ -24,14 +26,14 @@ Use the cards below to quickly access the critical getting-started documents: in
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">📦 1. Installation & Requirements</h3>
       <p className="cardDescription">Server compatibility check, plugin installation, and license activation steps.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/installation">Installation Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/installation">Installation Guide</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🧙 2. Setup Wizard</h3>
       <p className="cardDescription">A step-by-step Setup Wizard guide that gets your system ready in minutes.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/setup-wizard">Start the Wizard</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/setup-wizard">Start the Wizard</Link>
     </div>
   </div>
 </div>
@@ -41,7 +43,7 @@ Use the cards below to quickly access the critical getting-started documents: in
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">✅ 3. Pre-Launch Checklist</h3>
       <p className="cardDescription">Do a final review to make sure everything is in place before you go live.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/post-install-checklist">Checklist</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/post-install-checklist">Checklist</Link>
     </div>
   </div>
 </div>

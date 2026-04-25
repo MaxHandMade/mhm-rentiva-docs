@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🤝 Vendor Economy & Management
@@ -23,14 +25,14 @@ Use the cards below to find detailed information about vendor onboarding, payout
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Vendor Onboarding</h3>
       <p className="cardDescription">New vendor registration, profile approval, and a guide to uploading vehicles to the system.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/onboarding">Onboarding Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/onboarding">Onboarding Guide</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">💳 Payout & Ledger</h3>
       <p className="cardDescription">Financial ledger records, payout requests, and payment period management.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/payouts-ledger">Financial Details</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/payouts-ledger">Financial Details</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Use the cards below to find detailed information about vendor onboarding, payout
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">📊 Analytics & Performance</h3>
       <p className="cardDescription">Per-vendor revenue statistics, vehicle occupancy rates, and performance data.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/analytics">Vendor Statistics</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/analytics">Vendor Statistics</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🛡️ Security & Privacy</h3>
       <p className="cardDescription">Personal data protection, vendor agreements, and secure transaction protocols.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/security-privacy">Security Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/security-privacy">Security Guide</Link>
     </div>
   </div>
 </div>
@@ -59,14 +61,14 @@ Use the cards below to find detailed information about vendor onboarding, payout
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #7c3aed' }}>
       <h3 className="cardTitle">💰 Paid Listing System</h3>
       <p className="cardDescription">WooCommerce-based listing fee: payment gate for new vehicles, renewals, and relists.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-paid-listing-system-v4241">Listing Fee Details</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/vendor-management#-paid-listing-system-v4241">Listing Fee Details</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #059669' }}>
       <h3 className="cardTitle">🔄 Vehicle Lifecycle</h3>
       <p className="cardDescription">90-day listing period, pausing, renewal, withdrawal, and reliability score.</p>
-      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-vehicle-lifecycle-management-v4240">Lifecycle Details</a>
+      <Link className="button button--secondary button--block" to="/docs/vendor/vendor-management#-vehicle-lifecycle-management-v4240">Lifecycle Details</Link>
     </div>
   </div>
 </div>

@@ -7,6 +7,8 @@ slug: /core-configuration/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # ⚙️ Core Configuration Roadmap
@@ -24,21 +26,21 @@ Follow the categorized cards below to set up the system completely. Each card pr
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏢 1. General Settings</h3>
       <p className="cardDescription">Define company information, currency, and core operating modes.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">General Settings</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/settings">General Settings</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📅 2. Booking</h3>
       <p className="cardDescription">Rental durations, deposit rates, and booking behavior.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/booking-settings">Booking</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/booking-settings">Booking</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 3. Payments</h3>
       <p className="cardDescription">Configure WooCommerce payment gateways and collection rules.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/payments">Payment Settings</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/payments">Payment Settings</Link>
     </div>
   </div>
 </div>
@@ -48,21 +50,21 @@ Follow the categorized cards below to set up the system completely. Each card pr
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">📧 4. Notifications</h3>
       <p className="cardDescription">Email templates, SMTP settings, and automated notifications.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/emails">Email Settings</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/emails">Email Settings</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #6366f1' }}>
       <h3 className="cardTitle">🏎️ 5. Vehicle Fields</h3>
       <p className="cardDescription">Technical data (fuel type, transmission, etc.) and vehicle feature definitions.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/vehicle-settings">Vehicle Settings</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/vehicle-settings">Vehicle Settings</Link>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #ec4899' }}>
       <h3 className="cardTitle">🔑 6. License</h3>
       <p className="cardDescription">Activate your key to unlock Pro features.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/license">License Management</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/license">License Management</Link>
     </div>
   </div>
 </div>
@@ -72,14 +74,14 @@ Follow the categorized cards below to set up the system completely. Each card pr
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #8b5cf6' }}>
       <h3 className="cardTitle">⚡ 7. System & Performance</h3>
       <p className="cardDescription">Caching, security rules, and system health checks.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/system-performance">System & Speed</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/system-performance">System & Speed</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #10b981' }}>
       <h3 className="cardTitle">🛠️ 8. Maintenance & Tools</h3>
       <p className="cardDescription">Database cleanup, cron monitoring, and diagnostic tools.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/maintenance">Maintenance Page</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/maintenance">Maintenance Page</Link>
     </div>
   </div>
 </div>

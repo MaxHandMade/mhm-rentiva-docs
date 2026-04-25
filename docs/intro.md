@@ -5,6 +5,8 @@ title: Welcome
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # MHM Rentiva Documentation
@@ -22,14 +24,14 @@ Looking for a specific feature? Use the main categories below to jump straight t
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Getting Started</h3>
       <p className="cardDescription">Get the system running in minutes. A step-by-step roadmap for requirements, activation, and initial configuration.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/reading-order">Start Now</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/reading-order">Start Now</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">⚙️ Core Configuration</h3>
       <p className="cardDescription">General settings, WooCommerce payment gateways, tax configuration, and email notification systems.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">Configure Settings</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/settings">Configure Settings</Link>
     </div>
   </div>
 </div>
@@ -39,14 +41,14 @@ Looking for a specific feature? Use the main categories below to jump straight t
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🚗 Features & Usage</h3>
       <p className="cardDescription">Make the most of vehicle management, booking tracking, the customer portal, and reporting modules.</p>
-      <a className="button button--secondary button--block" href="/docs/features-usage/reading-order">User Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/features-usage/reading-order">User Guide</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Developer Guide</h3>
       <p className="cardDescription">REST API references, Hook/Filter lists, and database schema for those who want to customize the plugin.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/reading-order">Technical Details</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/reading-order">Technical Details</Link>
     </div>
   </div>
 </div>

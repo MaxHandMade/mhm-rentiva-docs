@@ -33,19 +33,29 @@ CI (`deploy.yml`) PR'da build + link-check çalıştırır, push to main'de bunl
 
 ## Sert Kurallar (Daha Önce Yandığımız Yerler)
 
-### 1. JSX `<a href>` her zaman absolute olmalı
+### 1. JSX'te `<a>` YASAK — Docusaurus `<Link>` component kullan
 
 ```jsx
-// ❌ KIRIK — sayfanın URL'ine göre çözülür, slug + trailing slash ile yanlış path üretir
+// ❌ KIRIK 1 — relative; sayfa URL'ine göre çözülür, trailing slash ile yanlış path
 <a href="./post-install-checklist">Checklist</a>
 
-// ✅ DOĞRU — absolute path, tarayıcı her sayfadan aynı yere gider
+// ❌ KIRIK 2 — absolute ama prefix'siz; production'da /mhm-rentiva-docs/ baseUrl atlanır → 404
 <a href="/docs/getting-started/post-install-checklist">Checklist</a>
+
+// ❌ KIRIK 3 — hardcoded baseUrl; TR locale'de duplicate prefix bug'ı
+<a href="/mhm-rentiva-docs/docs/getting-started/post-install-checklist">Checklist</a>
+
+// ✅ DOĞRU — <Link> baseUrl + locale prefix'i otomatik ekler
+import Link from '@docusaurus/Link';
+<Link to="/docs/getting-started/post-install-checklist">Checklist</Link>
 ```
 
-**Neden:** Docusaurus markdown `[text](./xxx)` link'lerini build-time'da çözer ve absolute URL üretir. Ama JSX `<a href>` raw HTML olarak HTML'e gider; browser path resolution kullanılır. Sayfa URL'i `/docs/<section>/reading-order/` (trailing slash) ise relative `./xxx` → `/docs/<section>/reading-order/xxx` (genelde 404).
+**Neden:** Docusaurus markdown `[text](./xxx)` link'lerini build-time'da transform eder; baseUrl + locale prefix otomatik. Ama JSX raw `<a href>` opaque kabul edilir, browser'a aynen gider. Sonuç:
+- Relative href → sayfa URL'ine göre çözülür (trailing slash bug)
+- Prefix'siz absolute → production'da `https://maxhandmade.github.io/docs/...` (yanlış root)
+- Hardcoded prefix → TR locale'de Docusaurus locale prefix'i araya sıkıştırır → `/mhm-rentiva-docs/tr/mhm-rentiva-docs/docs/...`
 
-`onBrokenLinks: 'throw'` bu hatayı yakalamaz — JSX raw href'leri opaque kabul eder. CI link-check yakalar; yine de yazarken kuralı uygula.
+**`<Link>` üçünü de çözer.** `onBrokenLinks: 'throw'` JSX'leri görmediği için yakalamaz. CI link-check (`scripts/check-links.sh`) **production layout'unu simüle ederek** (build'i `/mhm-rentiva-docs/` altına stage edip her href'i oradan çözerek) yakalar — ama kural yine de yazarken uygula, CI son ağ.
 
 ### 2. `slug:` frontmatter'ı sadece gerekirse override
 

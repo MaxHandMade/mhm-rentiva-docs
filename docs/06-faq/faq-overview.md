@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🛠️ FAQ & Troubleshooting
@@ -23,14 +25,14 @@ Browse the categorized guides below to find a solution. Most issues can be resol
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🆘 General Issues</h3>
       <p className="cardDescription">Solutions for error messages, post-installation gaps, and fundamental operational problems.</p>
-      <a className="button button--secondary button--block" href="/docs/faq/common-issues">View Solutions</a>
+      <Link className="button button--secondary button--block" to="/docs/faq/common-issues">View Solutions</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📧 Email Problems</h3>
       <p className="cardDescription">Undelivered emails, SMTP configuration, and email template rendering issues.</p>
-      <a className="button button--secondary button--block" href="/docs/faq/email-delivery">Email Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/faq/email-delivery">Email Guide</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Browse the categorized guides below to find a solution. Most issues can be resol
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 Payment Errors</h3>
       <p className="cardDescription">WooCommerce payment gateway conflicts and callback/webhook validation failures.</p>
-      <a className="button button--secondary button--block" href="/docs/faq/payment-troubleshooting">Payment Issues</a>
+      <Link className="button button--secondary button--block" to="/docs/faq/payment-troubleshooting">Payment Issues</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">⚡ Speed & Cache</h3>
       <p className="cardDescription">Dynamic calendars stuck in cache and SQL performance optimization questions.</p>
-      <a className="button button--secondary button--block" href="/docs/faq/performance-cache">Performance Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/faq/performance-cache">Performance Guide</Link>
     </div>
   </div>
 </div>

@@ -7,6 +7,8 @@ slug: /developer/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 💻 Developer Guide Roadmap
@@ -24,14 +26,14 @@ A hierarchical learning path has been designed, starting from the plugin's core 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">⚙️ 1. Core & Architecture</h3>
       <p className="cardDescription">Core components such as module structure, Transfer architecture, and Layout Pipeline.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/core/framework-architecture">Core Structure</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/core/framework-architecture">Core Structure</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🌐 2. API & Communication</h3>
       <p className="cardDescription">REST v1/v2 endpoints, Webhook security, and the service hierarchy.</p>
-      <a className="button button--secondary button--block" href="/docs/api/overview">API Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/api/overview">API Guide</Link>
     </div>
   </div>
 </div>
@@ -41,14 +43,14 @@ A hierarchical learning path has been designed, starting from the plugin's core 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💰 3. Financial Engine</h3>
       <p className="cardDescription">Ledger model, Commission policies, Payout management, and Audit cryptographic integrity.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/financial/governance-controls">Financial Architecture</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/financial/governance-controls">Financial Architecture</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Testing & Operations</h3>
       <p className="cardDescription">Unit test strategies, Webhook simulations, and Go-Live checklists.</p>
-      <a className="button button--secondary button--block" href="/docs/api/controller-audit">Testing Guide</a>
+      <Link className="button button--secondary button--block" to="/docs/api/controller-audit">Testing Guide</Link>
     </div>
   </div>
 </div>

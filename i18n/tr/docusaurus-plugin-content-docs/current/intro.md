@@ -5,6 +5,8 @@ title: Hoş Geldiniz
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # MHM Rentiva Dokümantasyonu
@@ -22,14 +24,14 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Başlangıç Rehberi</h3>
       <p className="cardDescription">Sistemi dakikalar içinde kurun. Gereksinimler, aktivasyon ve ilk ayarlar için adım adım yol haritası.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/reading-order">Hemen Başla</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/reading-order">Hemen Başla</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">⚙️ Temel Yapılandırma</h3>
       <p className="cardDescription">Genel ayarlar, WooCommerce ödeme ağ geçitleri, vergi yapılandırması ve e-posta bildirim sistemleri.</p>
-      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">Ayarları Yapılandır</a>
+      <Link className="button button--secondary button--block" to="/docs/core-configuration/settings">Ayarları Yapılandır</Link>
     </div>
   </div>
 </div>
@@ -39,14 +41,14 @@ Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla iht
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🚗 Özellikler ve Kullanım</h3>
       <p className="cardDescription">Araç yönetimi, rezervasyon takibi, müşteri portalı ve raporlama modüllerini en verimli şekilde kullanın.</p>
-      <a className="button button--secondary button--block" href="/docs/features-usage/reading-order">Kullanım Kılavuzu</a>
+      <Link className="button button--secondary button--block" to="/docs/features-usage/reading-order">Kullanım Kılavuzu</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Geliştirici Rehberi</h3>
       <p className="cardDescription">Eklentiyi özelleştirmek isteyenler için REST API referansları, Hook/Filter listeleri ve veritabanı şeması.</p>
-      <a className="button button--secondary button--block" href="/docs/developer/reading-order">Teknik Detaylar</a>
+      <Link className="button button--secondary button--block" to="/docs/developer/reading-order">Teknik Detaylar</Link>
     </div>
   </div>
 </div>

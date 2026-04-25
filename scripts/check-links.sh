@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 # Internal link verifier for the Docusaurus build output.
 #
-# Walks every rendered .html file under build/ and confirms that each
-# /mhm-rentiva-docs/... href resolves to a real file on disk. Catches
-# the runtime navigation bugs that Docusaurus' onBrokenLinks does not
-# flag (raw JSX <a href> elements, in particular).
+# Earlier versions of this script only inspected hrefs that already started
+# with the baseUrl prefix (/mhm-rentiva-docs/), and resolved them against
+# `build/` directly. That double-blind missed JSX <a href="/docs/..."> links
+# that are perfectly fine in a "cd build" preview but 404 in production
+# (because GitHub Pages serves the site under /mhm-rentiva-docs/, not /).
+#
+# This version simulates production layout instead:
+#   1. Stages the build under <staging>/mhm-rentiva-docs/  (same path as the
+#      live site).
+#   2. Walks every rendered .html file and extracts EVERY href that starts
+#      with "/" (any internal absolute link, prefixed or not).
+#   3. Resolves each href against the staging root. A bare /docs/... link
+#      now correctly fails because there is no /docs/ at the staging root —
+#      only /mhm-rentiva-docs/docs/... exists.
 #
 # Usage:
 #   bash scripts/check-links.sh             # uses ./build
@@ -13,19 +23,25 @@
 set -euo pipefail
 
 BUILD_DIR="${BUILD_DIR:-build}"
-BASE_PREFIX="/mhm-rentiva-docs/"
+BASE_URL_SEGMENT="mhm-rentiva-docs"
 
 if [ ! -d "$BUILD_DIR" ]; then
   echo "ERROR: build directory not found at '$BUILD_DIR'. Run 'npm run build' first." >&2
   exit 2
 fi
 
-cd "$BUILD_DIR"
+# Stage the build the way GitHub Pages serves it: under /<repo-name>/.
+STAGING="$(mktemp -d)"
+trap 'rm -rf "$STAGING"' EXIT
+cp -r "$BUILD_DIR" "$STAGING/$BASE_URL_SEGMENT"
 
-# Collect every internal href from every rendered HTML page.
+cd "$STAGING"
+
+# Collect every internal href (starts with "/") from every rendered HTML page.
+# Strip query strings and fragments before resolving on disk.
 mapfile -t hrefs < <(
-  grep -hroE "href=\"${BASE_PREFIX}[^\"#?]*\"" . 2>/dev/null \
-    | sed "s|^href=\"${BASE_PREFIX}||;s|\"$||" \
+  grep -hroE 'href="/[^"#?]*' "$BASE_URL_SEGMENT" 2>/dev/null \
+    | sed 's|^href="||' \
     | sort -u
 )
 
@@ -36,25 +52,36 @@ fi
 
 fail_count=0
 pass_count=0
+missing_prefix_count=0
 
 for href in "${hrefs[@]}"; do
   [ -z "$href" ] && continue
 
-  # Map URL path → filesystem path. Try as a literal file first (covers
-  # .html/.png/.pdf and the like); if that misses, treat the URL as a directory
-  # served by its index.html. This ordering avoids the trap of mis-classifying
-  # paths that contain a dot but are still directories (e.g. "v4.6.3-release").
-  candidate="${href%/}"
-  if [ -f "$candidate" ] || [ -f "$candidate.html" ] || [ -f "$candidate/index.html" ]; then
+  # Strip the leading '/' so we can resolve against the staging root.
+  rel="${href#/}"
+  rel="${rel%/}"
+
+  if [ -f "$rel" ] || [ -f "$rel.html" ] || [ -f "$rel/index.html" ]; then
     pass_count=$((pass_count + 1))
   else
-    echo "BROKEN: ${BASE_PREFIX}${href}  →  tried: ${candidate}, ${candidate}.html, ${candidate}/index.html"
     fail_count=$((fail_count + 1))
+    # Diagnose the most common cause: missing baseUrl prefix.
+    if [[ "$href" != /$BASE_URL_SEGMENT/* ]]; then
+      missing_prefix_count=$((missing_prefix_count + 1))
+      echo "BROKEN [missing baseUrl prefix]: $href"
+      echo "       fix: use <Link to=\"$href\"> (auto-prefixes) or absolute /$BASE_URL_SEGMENT$href"
+    else
+      echo "BROKEN [no such file]: $href  →  tried: $rel, $rel.html, $rel/index.html"
+    fi
   fi
 done
 
 echo ""
 echo "Internal link check: ${pass_count} OK, ${fail_count} broken (out of ${#hrefs[@]} unique hrefs)"
+if [ "$missing_prefix_count" -gt 0 ]; then
+  echo "  → ${missing_prefix_count} of those are JSX <a href> elements missing the baseUrl prefix."
+  echo "    Use the Docusaurus <Link> component or <a href={useBaseUrl('/path')}> instead."
+fi
 
 [ "$fail_count" -gt 0 ] && exit 1
 exit 0

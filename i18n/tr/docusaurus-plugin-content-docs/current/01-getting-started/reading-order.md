@@ -7,6 +7,8 @@ slug: /getting-started/reading-order
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🚀 Başlangıç Rehberi ve Yol Haritası
@@ -24,14 +26,14 @@ Aşağıdaki kartlar aracılığıyla kurulum, sihirbaz ve kontrol listesi gibi 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">📦 1. Kurulum ve Gereksinimler</h3>
       <p className="cardDescription">Sunucu uyumluluk kontrolü, eklenti yükleme ve lisans aktivasyon süreçleri.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/installation">Kurulum Rehberi</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/installation">Kurulum Rehberi</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🧙 2. Kurulum Sihirbazı</h3>
       <p className="cardDescription">Sistemi dakikalar içinde hazır hale getiren adım adım "Setup Wizard" rehberi.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/setup-wizard">Sihirbazı Başlat</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/setup-wizard">Sihirbazı Başlat</Link>
     </div>
   </div>
 </div>
@@ -41,7 +43,7 @@ Aşağıdaki kartlar aracılığıyla kurulum, sihirbaz ve kontrol listesi gibi 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">✅ 3. Yayın Öncesi Kontrol Listesi</h3>
       <p className="cardDescription">Sitenizi canlıya almadan önce her şeyin yerli yerinde olduğunu son kez denetleyin.</p>
-      <a className="button button--secondary button--block" href="/docs/getting-started/post-install-checklist">Kontrol Listesi</a>
+      <Link className="button button--secondary button--block" to="/docs/getting-started/post-install-checklist">Kontrol Listesi</Link>
     </div>
   </div>
 </div>

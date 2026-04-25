@@ -6,6 +6,8 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
+import Link from '@docusaurus/Link';
+
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 # 🧠 REST API and Nervous System
@@ -23,14 +25,14 @@ Use the cards below to access detailed technical information about the system's 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🌐 v1 Endpoints (Current)</h3>
       <p className="cardDescription">Currently active REST endpoints. References for rentals, location services, and health audits.</p>
-      <a className="button button--secondary button--block" href="/docs/api/v1/rest-api-v1">v1 Reference</a>
+      <Link className="button button--secondary button--block" to="/docs/api/v1/rest-api-v1">v1 Reference</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🏗️ v2 Planning (Future)</h3>
       <p className="cardDescription">The system's API-First transition. Mobile app support, JWT design, and next-generation API architecture roadmap.</p>
-      <a className="button button--secondary button--block" href="/docs/api/rest-v2-planning">v2 Plan</a>
+      <Link className="button button--secondary button--block" to="/docs/api/rest-v2-planning">v2 Plan</Link>
     </div>
   </div>
 </div>
@@ -40,14 +42,14 @@ Use the cards below to access detailed technical information about the system's 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛡️ Security and Licensing</h3>
       <p className="cardDescription">HMAC signing, API key management, and external license server communication protocols.</p>
-      <a className="button button--secondary button--block" href="/docs/api/license-server-protocols">Security Details</a>
+      <Link className="button button--secondary button--block" to="/docs/api/license-server-protocols">Security Details</Link>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🔍 Audit and Architecture</h3>
       <p className="cardDescription">Controller audit, Nervous System hierarchy, and performance optimization reports.</p>
-      <a className="button button--secondary button--block" href="/docs/api/api-nervous-system">Architecture Analysis</a>
+      <Link className="button button--secondary button--block" to="/docs/api/api-nervous-system">Architecture Analysis</Link>
     </div>
   </div>
 </div>
