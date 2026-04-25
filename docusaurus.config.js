@@ -30,11 +30,11 @@ const config = {
   organizationName: 'MaxHandMade', // Usually your GitHub org/user name.
   projectName: 'mhm-rentiva-docs', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownLinks: 'throw',
     },
   },
 

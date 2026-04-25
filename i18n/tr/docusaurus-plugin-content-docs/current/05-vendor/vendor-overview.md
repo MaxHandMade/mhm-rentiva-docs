@@ -23,14 +23,14 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🚀 Vendor Oryantasyonu</h3>
       <p className="cardDescription">Yeni tedarikçi kaydı, profil onayı ve araçlarını sisteme yükleme rehberi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/onboarding">Oryantasyon Rehberi</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/onboarding">Oryantasyon Rehberi</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">💳 Payout & Ledger</h3>
       <p className="cardDescription">Finansal defter kayıtları, hakediş talepleri ve ödeme periyotları yönetimi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/payouts-ledger">Finansal Detaylar</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/payouts-ledger">Finansal Detaylar</a>
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">📊 Analiz & Performans</h3>
       <p className="cardDescription">Tedarikçi bazlı gelir istatistikleri, araç doluluk oranları ve performans verileri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/analytics">Vendor İstatistikleri</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/analytics">Vendor İstatistikleri</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🛡️ Güvenlik & Gizlilik</h3>
       <p className="cardDescription">Kişisel verilerin korunması, tedarikçi sözleşmeleri ve güvenli işlem protokolleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/security-privacy">Güvenlik Rehberi</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/security-privacy">Güvenlik Rehberi</a>
     </div>
   </div>
 </div>
@@ -59,22 +59,22 @@ Aşağıdaki kartlar üzerinden tedarikçi oryantasyonu, hakediş (Payout) süre
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #7c3aed' }}>
       <h3 className="cardTitle">💰 Ücretli İlan Sistemi</h3>
       <p className="cardDescription">WooCommerce tabanlı ilan ücreti: yeni araç, yenileme ve yeniden listeleme için ödeme kapısı.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241">İlan Ücreti Detayları</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241">İlan Ücreti Detayları</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #059669' }}>
       <h3 className="cardTitle">🔄 Araç Yaşam Döngüsü</h3>
       <p className="cardDescription">90 günlük listeleme süresi, duraklatma, yenileme, geri çekilme ve güvenilirlik skoru.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/vendor/vendor-management#-araç-yaşam-döngüsü-yönetimi-v4240">Yaşam Döngüsü</a>
+      <a className="button button--secondary button--block" href="/docs/vendor/vendor-management#-araç-yaşam-döngüsü-yönetimi-v4240">Yaşam Döngüsü</a>
     </div>
   </div>
 </div>
 
 ## 🔝 Hızlı Başvurular
-- 💰 [Payout Talebi Nasıl Oluşturulur?](/mhm-rentiva-docs/docs/vendor/payout-requests)
-- 🏢 [Vendor Paneli Kullanım Kılavuzu](/mhm-rentiva-docs/docs/vendor/vendor-management)
-- 💳 [Ücretli İlan Sistemi](/mhm-rentiva-docs/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241)
+- 💰 [Payout Talebi Nasıl Oluşturulur?](/docs/vendor/payout-requests)
+- 🏢 [Vendor Paneli Kullanım Kılavuzu](/docs/vendor/vendor-management)
+- 💳 [Ücretli İlan Sistemi](/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241)
 
 ---
 

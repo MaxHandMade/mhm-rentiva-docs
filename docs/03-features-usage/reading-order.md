@@ -58,7 +58,7 @@ Use the categorized cards below to manage your daily rental operations, add vehi
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #8b5cf6' }}>
       <h3 className="cardTitle">📊 5. Reporting & Analytics</h3>
       <p className="cardDescription">Business performance charts, revenue reports, and data export.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/features-usage/reports">Reports & Export</a>
+      <a className="button button--secondary button--block" href="/docs/features-usage/reports">Reports & Export</a>
     </div>
   </div>
 </div>

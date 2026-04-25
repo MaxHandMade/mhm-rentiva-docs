@@ -23,14 +23,14 @@ Browse the categorized guides below to find a solution. Most issues can be resol
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🆘 General Issues</h3>
       <p className="cardDescription">Solutions for error messages, post-installation gaps, and fundamental operational problems.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/common-issues">View Solutions</a>
+      <a className="button button--secondary button--block" href="/docs/faq/common-issues">View Solutions</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📧 Email Problems</h3>
       <p className="cardDescription">Undelivered emails, SMTP configuration, and email template rendering issues.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/email-delivery">Email Guide</a>
+      <a className="button button--secondary button--block" href="/docs/faq/email-delivery">Email Guide</a>
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@ Browse the categorized guides below to find a solution. Most issues can be resol
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 Payment Errors</h3>
       <p className="cardDescription">WooCommerce payment gateway conflicts and callback/webhook validation failures.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/payment-troubleshooting">Payment Issues</a>
+      <a className="button button--secondary button--block" href="/docs/faq/payment-troubleshooting">Payment Issues</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">⚡ Speed & Cache</h3>
       <p className="cardDescription">Dynamic calendars stuck in cache and SQL performance optimization questions.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/faq/performance-cache">Performance Guide</a>
+      <a className="button button--secondary button--block" href="/docs/faq/performance-cache">Performance Guide</a>
     </div>
   </div>
 </div>

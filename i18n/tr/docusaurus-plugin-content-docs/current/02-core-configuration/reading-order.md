@@ -24,21 +24,21 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏢 1. Genel Ayarlar</h3>
       <p className="cardDescription">Şirket bilgileri, para birimi ve temel çalışma modlarını belirleyin.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/settings">Genel Ayarlar</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/settings">Genel Ayarlar</a>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📅 2. Rezervasyon</h3>
       <p className="cardDescription">Kiralama süreleri, depozito oranları ve rezervasyon davranışları.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/booking-settings">Rezervasyon</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/booking-settings">Rezervasyon</a>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 3. Ödemeler</h3>
       <p className="cardDescription">WooCommerce ödeme geçitleri ve tahsilat kurallarını yapılandırın.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/payments">Ödeme Ayarları</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/payments">Ödeme Ayarları</a>
     </div>
   </div>
 </div>
@@ -48,21 +48,21 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">📧 4. Bildirimler</h3>
       <p className="cardDescription">E-posta şablonları, SMTP ayarları ve otomatik bilgilendirmeler.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/emails">E-posta Ayarları</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/emails">E-posta Ayarları</a>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #6366f1' }}>
       <h3 className="cardTitle">🏎️ 5. Araç Alanları</h3>
       <p className="cardDescription">Teknik veriler (yakıt, vites vb.) ve araç özellikleri tanımı.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/vehicle-settings">Araç Ayarları</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/vehicle-settings">Araç Ayarları</a>
     </div>
   </div>
   <div className="col col--4 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #ec4899' }}>
       <h3 className="cardTitle">🔑 6. Lisans</h3>
       <p className="cardDescription">Pro özelliklerin kilidini açmak için anahtarınızı aktif edin.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/license">Lisans Yönetimi</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/license">Lisans Yönetimi</a>
     </div>
   </div>
 </div>
@@ -72,14 +72,14 @@ Sistemi eksiksiz kurmak için aşağıdaki kategorize edilmiş kartları takip e
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #8b5cf6' }}>
       <h3 className="cardTitle">⚡ 7. Sistem & Performans</h3>
       <p className="cardDescription">Önbellekleme, güvenlik kuralları ve sistem sağlığı denetimi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/system-performance">Sistem & Hız</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/system-performance">Sistem & Hız</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #10b981' }}>
       <h3 className="cardTitle">🛠️ 8. Bakım & Araçlar</h3>
       <p className="cardDescription">Veritabanı temizliği, cron izleme ve teşhis araçları.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/core-configuration/maintenance">Bakım Sayfası</a>
+      <a className="button button--secondary button--block" href="/docs/core-configuration/maintenance">Bakım Sayfası</a>
     </div>
   </div>
 </div>

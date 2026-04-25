@@ -24,14 +24,14 @@ A hierarchical learning path has been designed, starting from the plugin's core 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">⚙️ 1. Core & Architecture</h3>
       <p className="cardDescription">Core components such as module structure, Transfer architecture, and Layout Pipeline.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/core/framework-architecture">Core Structure</a>
+      <a className="button button--secondary button--block" href="/docs/developer/core/framework-architecture">Core Structure</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🌐 2. API & Communication</h3>
       <p className="cardDescription">REST v1/v2 endpoints, Webhook security, and the service hierarchy.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/overview">API Guide</a>
+      <a className="button button--secondary button--block" href="/docs/api/overview">API Guide</a>
     </div>
   </div>
 </div>
@@ -41,14 +41,14 @@ A hierarchical learning path has been designed, starting from the plugin's core 
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💰 3. Financial Engine</h3>
       <p className="cardDescription">Ledger model, Commission policies, Payout management, and Audit cryptographic integrity.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/financial/governance-controls">Financial Architecture</a>
+      <a className="button button--secondary button--block" href="/docs/developer/financial/governance-controls">Financial Architecture</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Testing & Operations</h3>
       <p className="cardDescription">Unit test strategies, Webhook simulations, and Go-Live checklists.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/controller-audit">Testing Guide</a>
+      <a className="button button--secondary button--block" href="/docs/api/controller-audit">Testing Guide</a>
     </div>
   </div>
 </div>
@@ -58,9 +58,9 @@ A hierarchical learning path has been designed, starting from the plugin's core 
 ## 🔝 Key Technical References
 Other documents developers frequently consult:
 
-- 📑 [Custom Post Types](/mhm-rentiva-docs/docs/developer/post-types)
-- 🎨 [UI Components & Dashboard](/mhm-rentiva-docs/docs/developer/ui-components/dashboard-widgets)
-- 🔒 [Security & Privacy Standards](/mhm-rentiva-docs/docs/vendor/security-privacy)
+- 📑 [Custom Post Types](/docs/developer/post-types)
+- 🎨 [UI Components & Dashboard](/docs/developer/ui-components/dashboard-widgets)
+- 🔒 [Security & Privacy Standards](/docs/vendor/security-privacy)
 
 ---
 

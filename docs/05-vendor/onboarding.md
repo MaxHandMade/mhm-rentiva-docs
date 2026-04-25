@@ -127,7 +127,7 @@ An insurance document can be uploaded in addition to the registration. Meta key:
 
 ### Paid Listing Gate (v4.24.1)
 
-If the paid listing system is enabled by the admin, the vehicle is saved as a **draft** when the vendor submits the form, and the vendor is redirected to the WooCommerce payment page. Once payment is complete, the vehicle automatically moves to the "Pending Review" status. See [Paid Listing System](/mhm-rentiva-docs/docs/vendor/vendor-management#-paid-listing-system-v4241) for details.
+If the paid listing system is enabled by the admin, the vehicle is saved as a **draft** when the vendor submits the form, and the vendor is redirected to the WooCommerce payment page. Once payment is complete, the vehicle automatically moves to the "Pending Review" status. See [Paid Listing System](/docs/vendor/vendor-management#-paid-listing-system-v4241) for details.
 
 ### Edit & Re-Review
 When a vendor makes a change to a critical field (make, model, plate number, etc.), the vehicle is automatically re-queued for review (`VendorVehicleReviewManager`). Minor changes (price, description) are published immediately.

@@ -89,7 +89,7 @@ Geliştiriciler için derinlemesine teknik dökümanlar:
 ## 🌐 Destek ve Topluluk
 - **Hata Bildirimi:** [GitHub Issues](https://github.com/MaxHandMade/mhm-rentiva/issues)
 - **Topluluk Forumu:** [WordPress Destek](https://wordpress.org/support/plugin/mhm-rentiva)
-- **Geliştirici Blogu:** [Blog](/mhm-rentiva-docs/blog)
+- **Geliştirici Blogu:** [Blog](/blog)
 
 ---
 

@@ -24,14 +24,14 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">⚙️ 1. Core & Mimari</h3>
       <p className="cardDescription">Modül yapısı, Transfer mimarisi ve Layout Pipeline gibi çekirdek bileşenler.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/core/framework-architecture">Çekirdek Yapı</a>
+      <a className="button button--secondary button--block" href="/docs/developer/core/framework-architecture">Çekirdek Yapı</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">🌐 2. API & Haberleşme</h3>
       <p className="cardDescription">REST v1/v2 uç noktaları, Webhook güvenliği ve Sinir Sistemi hiyerarşisi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/overview">API Rehberi</a>
+      <a className="button button--secondary button--block" href="/docs/api/overview">API Rehberi</a>
     </div>
   </div>
 </div>
@@ -41,14 +41,14 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💰 3. Finansal Motor</h3>
       <p className="cardDescription">Ledger modeli, Komisyon politikaları, Payout yönetimi ve Audit kripto bütünlüğü.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/developer/financial/governance-controls">Finansal Mimari</a>
+      <a className="button button--secondary button--block" href="/docs/developer/financial/governance-controls">Finansal Mimari</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">🧪 4. Test & Operasyon</h3>
       <p className="cardDescription">Unit test stratejileri, Webhook simülasyonları ve Go-Live kontrolleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/api/controller-audit">Test Rehberi</a>
+      <a className="button button--secondary button--block" href="/docs/api/controller-audit">Test Rehberi</a>
     </div>
   </div>
 </div>
@@ -58,9 +58,9 @@ Eklentinin çekirdek yapısından başlayarak, finansal motor ve API katmanları
 ## 🔝 Önemli Teknik Kaynaklar
 Geliştiricilerin sıkça başvurduğu diğer dökümanlar:
 
-- 📑 [Özel Yazı Tipleri (Post Types)](/mhm-rentiva-docs/docs/developer/post-types)
-- 🎨 [UI Bileşenleri & Dashboard](/mhm-rentiva-docs/docs/developer/ui-components/dashboard-widgets)
-- 🔒 [Güvenlik & Gizlilik Standartları](/mhm-rentiva-docs/docs/vendor/security-privacy)
+- 📑 [Özel Yazı Tipleri (Post Types)](/docs/developer/post-types)
+- 🎨 [UI Bileşenleri & Dashboard](/docs/developer/ui-components/dashboard-widgets)
+- 🔒 [Güvenlik & Gizlilik Standartları](/docs/vendor/security-privacy)
 
 ---
 

@@ -89,7 +89,7 @@ In-depth technical documentation for developers:
 ## 🌐 Support & Community
 - **Report an Issue:** [GitHub Issues](https://github.com/MaxHandMade/mhm-rentiva/issues)
 - **Community Forum:** [WordPress Support](https://wordpress.org/support/plugin/mhm-rentiva)
-- **Developer Blog:** [Blog](/mhm-rentiva-docs/blog)
+- **Developer Blog:** [Blog](/blog)
 
 ---
 

@@ -127,7 +127,7 @@ Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhm_rentiva_
 
 ### Ücretli İlan Kapısı (v4.24.1)
 
-Admin ücretli ilan sistemini etkinleştirdiyse, vendor araç formu gönderildiğinde araç **taslak** olarak kaydedilir ve vendor WooCommerce ödeme sayfasına yönlendirilir. Ödeme tamamlandığında araç otomatik olarak "İnceleme Bekliyor" durumuna geçer. Detaylar için [Ücretli İlan Sistemi](/mhm-rentiva-docs/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241) bölümüne bakın.
+Admin ücretli ilan sistemini etkinleştirdiyse, vendor araç formu gönderildiğinde araç **taslak** olarak kaydedilir ve vendor WooCommerce ödeme sayfasına yönlendirilir. Ödeme tamamlandığında araç otomatik olarak "İnceleme Bekliyor" durumuna geçer. Detaylar için [Ücretli İlan Sistemi](/docs/vendor/vendor-management#-ücretli-i̇lan-sistemi-v4241) bölümüne bakın.
 
 ### Düzenleme ve Yeniden İnceleme
 Vendor, aracında kritik alan degisikligi yaptiginda (marka, model, plaka vb.) araç otomatik olarak yeniden inceleme kuyuguna alınır (`VendorVehicleReviewManager`). Minor değişiklikler (fiyat, açıklama) aninda yayinlanir.

@@ -23,14 +23,14 @@ Aşağıdaki kartlar üzerinden tema mimarisi, şablon hiyerarşisi ve stil öze
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏗️ Tema Mimarisi</h3>
       <p className="cardDescription">Eklentinin tema üzerindeki etkisi, CSS/JS yükleme politikaları ve Asset Manager entegrasyonu.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/introduction">Mimarisi İlke</a>
+      <a className="button button--secondary button--block" href="/docs/theme/introduction">Mimarisi İlke</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📦 Şablon & Desenler</h3>
       <p className="cardDescription">Block Patterns kullanımı, tekil araç sayfası şablonları (Single Vehicle) ve Liste görünümleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/templates-patterns">Şablon Rehberi</a>
+      <a className="button button--secondary button--block" href="/docs/theme/templates-patterns">Şablon Rehberi</a>
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@ Aşağıdaki kartlar üzerinden tema mimarisi, şablon hiyerarşisi ve stil öze
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛠️ theme.json Desteği</h3>
       <p className="cardDescription">Global renk paletleri, tipografi ayarları ve eklentinin temaya has stil parametreleri.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/theme-json">Stil Kuralları</a>
+      <a className="button button--secondary button--block" href="/docs/theme/theme-json">Stil Kuralları</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Tema Geliştirme</h3>
       <p className="cardDescription">Özel tema geliştirmek isteyenler için kancalar (Hooks) ve override mekanizmaları rehberi.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/development">Geliştirme Detayları</a>
+      <a className="button button--secondary button--block" href="/docs/theme/development">Geliştirme Detayları</a>
     </div>
   </div>
 </div>

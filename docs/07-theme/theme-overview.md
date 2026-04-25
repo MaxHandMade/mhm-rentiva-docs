@@ -23,14 +23,14 @@ Use the cards below to explore theme architecture, template hierarchy, and style
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #0f766e' }}>
       <h3 className="cardTitle">🏗️ Theme Architecture</h3>
       <p className="cardDescription">The plugin's impact on the theme, CSS/JS loading policies, and Asset Manager integration.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/introduction">Architecture Overview</a>
+      <a className="button button--secondary button--block" href="/docs/theme/introduction">Architecture Overview</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #3578e5' }}>
       <h3 className="cardTitle">📦 Templates & Patterns</h3>
       <p className="cardDescription">Using Block Patterns, single vehicle page templates, and list views.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/templates-patterns">Template Guide</a>
+      <a className="button button--secondary button--block" href="/docs/theme/templates-patterns">Template Guide</a>
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@ Use the cards below to explore theme architecture, template hierarchy, and style
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">🛠️ theme.json Support</h3>
       <p className="cardDescription">Global color palettes, typography settings, and theme-specific style parameters for the plugin.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/theme-json">Style Rules</a>
+      <a className="button button--secondary button--block" href="/docs/theme/theme-json">Style Rules</a>
     </div>
   </div>
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #df3c29' }}>
       <h3 className="cardTitle">💻 Theme Development</h3>
       <p className="cardDescription">Hooks and override mechanisms for developers who want to build a custom theme.</p>
-      <a className="button button--secondary button--block" href="/mhm-rentiva-docs/docs/theme/development">Development Details</a>
+      <a className="button button--secondary button--block" href="/docs/theme/development">Development Details</a>
     </div>
   </div>
 </div>
