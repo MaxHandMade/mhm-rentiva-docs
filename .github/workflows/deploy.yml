@@ -1,9 +1,11 @@
-name: Deploy Documentation
+name: Build & Deploy Documentation
 
 on:
   push:
     branches: [ main ]
     paths: [ '**' ]
+  pull_request:
+    branches: [ main ]
   # Allow manual runs from the Actions web UI
   workflow_dispatch: {}
 
@@ -13,8 +15,8 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Build, link-check, deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -33,7 +35,11 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Verify all internal links resolve
+        run: bash scripts/check-links.sh
+
       - name: Deploy to GitHub Pages (peaceiris)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
