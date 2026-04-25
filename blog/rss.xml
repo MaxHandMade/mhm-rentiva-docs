@@ -4,10 +4,181 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 23 Apr 2026 19:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 25 Apr 2026 22:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[License Security Hardening Sprint: Rentiva v4.30.0 → v4.30.2 (with mhm-license-server v1.9.0–v1.9.3 and CS v0.5.x)]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x</guid>
+            <pubDate>Sat, 25 Apr 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[A two-day cross-plugin sprint that hardened the Rentiva (and Currency Switcher) Pro licensing layer against source-edit bypass attacks. Three Rentiva client releases (v4.30.0 / v4.30.1 / v4.30.2) shipped alongside four license-server releases (v1.9.0 → v1.9.3) and three Currency Switcher releases (v0.5.0 / v0.5.1 / v0.5.2). Live-deployed and verified end-to-end on mhmrentiva.com + wpalemi.com.]]></description>
+            <content:encoded><![CDATA[<p>A two-day cross-plugin sprint that hardened the Rentiva (and Currency Switcher) Pro licensing layer against source-edit bypass attacks. <strong>Three Rentiva client releases</strong> (v4.30.0 / v4.30.1 / v4.30.2) shipped alongside <strong>four license-server releases</strong> (v1.9.0 → v1.9.3) and <strong>three Currency Switcher releases</strong> (v0.5.0 / v0.5.1 / v0.5.2). Live-deployed and verified end-to-end on mhmrentiva.com + wpalemi.com.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-sprint-happened">Why this sprint happened<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#why-this-sprint-happened" class="hash-link" aria-label="Direct link to Why this sprint happened" title="Direct link to Why this sprint happened" translate="no">​</a></h2>
+<p>The Rentiva plugin source ships on a <strong>public GitHub repository</strong>. A motivated attacker can clone, patch <code>Mode::canUseVendorMarketplace()</code> to <code>return true;</code>, and unlock Pro features without ever calling the license server. v1.8.0 closed <em>cross-product</em> key reuse (Currency Switcher key on Rentiva) but did nothing about source-edit bypass. <strong>v4.30.x raises the cost: a crack now has to forge an HMAC signature, host a fake validator, AND keep emitting fresh feature tokens — and even then, tokens expire within 24 hours.</strong></p>
+<p>Five attack scenarios were used as the design target:</p>
+<table><thead><tr><th>Attack</th><th>Mechanism</th><th>Defended by</th></tr></thead><tbody><tr><td>Source-edit <code>isActive() { return true; }</code></td><td>Patch local Pro gate</td><td>Layer 4 (feature token)</td></tr><tr><td>Cross-product key reuse</td><td>Use CS key on Rentiva</td><td>Layer 1 (slug binding, v1.8.0)</td></tr><tr><td>Empty <code>product_slug</code> body</td><td>Strip the line, ride legacy compat</td><td>Layer 1 hardened in v1.9.3</td></tr><tr><td>Fake activate POST from script</td><td>No control over claimed site</td><td>Layer 3 (reverse site validation)</td></tr><tr><td>Pirated key + fake server</td><td>DNS hijack to lookalike</td><td>Layer 2 (response signing)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4300--phase-b-client-the-foundation-2026-04-24">v4.30.0 — Phase B Client (the foundation, 2026-04-24)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#v4300--phase-b-client-the-foundation-2026-04-24" class="hash-link" aria-label="Direct link to v4.30.0 — Phase B Client (the foundation, 2026-04-24)" title="Direct link to v4.30.0 — Phase B Client (the foundation, 2026-04-24)" translate="no">​</a></h2>
+<p>Companion to <strong>mhm-license-server v1.9.0</strong> (Phase A — server-side three-layer defense).</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="four-new-helpers-under-srcadminlicensing">Four new helpers under <code>src/Admin/Licensing/</code><a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#four-new-helpers-under-srcadminlicensing" class="hash-link" aria-label="Direct link to four-new-helpers-under-srcadminlicensing" title="Direct link to four-new-helpers-under-srcadminlicensing" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>ClientSecrets</code></strong> — resolves three new wp-config constants (<code>MHM_RENTIVA_LICENSE_RESPONSE_HMAC_SECRET</code>, <code>MHM_RENTIVA_LICENSE_FEATURE_TOKEN_KEY</code>, <code>MHM_RENTIVA_LICENSE_PING_SECRET</code>).</li>
+<li class=""><strong><code>ResponseVerifier</code></strong> — HMAC-SHA256 verification of every signed activate/validate response. Mirrors the server's recursive ksort + JSON_UNESCAPED_SLASHES|UNICODE canonicalization byte-for-byte — drift = legitimate responses look tampered.</li>
+<li class=""><strong><code>FeatureTokenVerifier</code></strong> — verifies <code>{base64(json)}.{hmac}</code> tokens issued by the server. 24h TTL. <code>hasFeature($payload, $flag)</code> accessor used by Mode gates.</li>
+<li class=""><strong><code>VerifyEndpoint</code></strong> — public REST route <code>/wp-json/mhm-rentiva-verify/v1/ping</code> answering the server's <code>X-MHM-Challenge</code> during reverse validation.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mode-gate-refactor">Mode gate refactor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#mode-gate-refactor" class="hash-link" aria-label="Direct link to Mode gate refactor" title="Direct link to Mode gate refactor" translate="no">​</a></h3>
+<p><code>canUseVendorMarketplace()</code>, <code>canUseMessages()</code>, <code>canUseAdvancedReports()</code>, <code>canUseVendorPayout()</code> now route through a single <code>featureGranted()</code> private helper that:</p>
+<ol>
+<li class="">Hard-checks <code>isPro()</code> first</li>
+<li class="">If <code>FEATURE_TOKEN_KEY</code> is unset → legacy <code>isPro()</code> fallback (existing customers don't break)</li>
+<li class="">Otherwise verifies the locally-stored feature token's HMAC</li>
+<li class="">Reads the specific flag from the payload (<code>vendor_marketplace</code>, <code>messaging</code>, <code>advanced_reports</code>, etc.)</li>
+</ol>
+<p>A <code>return true;</code> patch on <code>isActive()</code> no longer unlocks anything because the gate independently asks for a server-granted flag.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="licensemanager-wiring">LicenseManager wiring<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#licensemanager-wiring" class="hash-link" aria-label="Direct link to LicenseManager wiring" title="Direct link to LicenseManager wiring" translate="no">​</a></h3>
+<ul>
+<li class=""><code>activate()</code> request body now includes <code>client_version = MHM_RENTIVA_VERSION</code>. Server uses this for per-version reverse-validation enforcement (≥4.30.0 floor for Rentiva).</li>
+<li class="">Successful response's <code>feature_token</code> field is persisted alongside the existing license record.</li>
+<li class="">Daily verification cron refreshes the token on every tick.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="test-coverage">Test coverage<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#test-coverage" class="hash-link" aria-label="Direct link to Test coverage" title="Direct link to Test coverage" translate="no">​</a></h3>
+<p>6 new test files, <strong>36 new tests</strong> across <code>tests/Unit/Licensing/</code> and <code>tests/Integration/Licensing/</code>. Total: 776 / 2715, PHPCS clean, 3 new TR translations.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4301--reverse-validation-ux-fix-2026-04-25-morning">v4.30.1 — Reverse Validation UX Fix (2026-04-25 morning)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#v4301--reverse-validation-ux-fix-2026-04-25-morning" class="hash-link" aria-label="Direct link to v4.30.1 — Reverse Validation UX Fix (2026-04-25 morning)" title="Direct link to v4.30.1 — Reverse Validation UX Fix (2026-04-25 morning)" translate="no">​</a></h2>
+<p>v4.30.0 made <code>MHM_RENTIVA_LICENSE_PING_SECRET</code> <strong>mandatory</strong> — without it, <code>VerifyEndpoint</code> returned 503 <code>ping_secret_not_configured</code>, and the license server then rejected activation with <code>site_unreachable</code>. <strong>Every customer site needed an operator-pinned secret in <code>wp-config.php</code></strong> — unworkable for an end-customer product.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fix">Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#fix" class="hash-link" aria-label="Direct link to Fix" title="Direct link to Fix" translate="no">​</a></h3>
+<p><code>VerifyEndpoint::handle_ping()</code> falls back to the per-activation <code>site_hash</code> (computed the same way <code>LicenseManager::siteHash()</code> does — <code>sha256(home_url + site_url)</code> JSON-encoded) when <code>ClientSecrets::getPingSecret()</code> returns empty. Server-side <code>mhm-license-server v1.9.1+</code> applies the matching fallback in <code>Security\SiteVerifier</code>, so the HMAC challenge stays verifiable even though <code>site_hash</code> is technically not secret.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-its-still-safe">Why it's still safe<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#why-its-still-safe" class="hash-link" aria-label="Direct link to Why it's still safe" title="Direct link to Why it's still safe" translate="no">​</a></h3>
+<p><code>site_hash</code> is publicly derivable, but tampering still fails because the reverse ping targets the claimed <code>site_url</code>. An attacker that doesn't control that domain cannot intercept the GET and reply with a forged HMAC, regardless of whether the HMAC key is private.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="backward-compatibility">Backward compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#backward-compatibility" class="hash-link" aria-label="Direct link to Backward compatibility" title="Direct link to Backward compatibility" translate="no">​</a></h3>
+<p>When <code>MHM_RENTIVA_LICENSE_PING_SECRET</code> IS defined, <code>VerifyEndpoint</code> still uses it — v4.30.0 deploys with operator config baked in keep working unchanged.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4302--license-notice-defensive-fix-2026-04-25-afternoon">v4.30.2 — License Notice Defensive Fix (2026-04-25 afternoon)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#v4302--license-notice-defensive-fix-2026-04-25-afternoon" class="hash-link" aria-label="Direct link to v4.30.2 — License Notice Defensive Fix (2026-04-25 afternoon)" title="Direct link to v4.30.2 — License Notice Defensive Fix (2026-04-25 afternoon)" translate="no">​</a></h2>
+<p>Two layered bugs in <code>LicenseAdmin::admin_notices()</code>:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bug-a--empty-error_message-rendered-license-activation-failed--with-empty-trailing-space">Bug A — Empty error_message rendered "License activation failed: " (with empty trailing space)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#bug-a--empty-error_message-rendered-license-activation-failed--with-empty-trailing-space" class="hash-link" aria-label="Direct link to Bug A — Empty error_message rendered &quot;License activation failed: &quot; (with empty trailing space)" title="Direct link to Bug A — Empty error_message rendered &quot;License activation failed: &quot; (with empty trailing space)" translate="no">​</a></h3>
+<p>Stale URL state (<code>?license=error</code> without <code>&amp;message=...</code>, e.g. browser back/forward, bookmark, truncated copy-paste) leaked through the <code>match</code>'s default arm into a <code>sprintf("...: %s", '')</code> call. Visible at the top of the License page even though the customer hadn't pressed anything.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bug-b--missing-match-arms-for-v180v19x-server-error-codes">Bug B — Missing match arms for v1.8.0+/v1.9.x server error codes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#bug-b--missing-match-arms-for-v180v19x-server-error-codes" class="hash-link" aria-label="Direct link to Bug B — Missing match arms for v1.8.0+/v1.9.x server error codes" title="Direct link to Bug B — Missing match arms for v1.8.0+/v1.9.x server error codes" translate="no">​</a></h3>
+<p><code>site_unreachable</code>, <code>site_verification_failed</code>, <code>tampered_response</code>, <code>product_mismatch</code>, <code>product_slug_required</code> had no friendly translations. They fell through to the same default arm, leaking raw technical codes to end users ("License activation failed: site_unreachable").</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fix-three-layers">Fix (three layers)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#fix-three-layers" class="hash-link" aria-label="Direct link to Fix (three layers)" title="Direct link to Fix (three layers)" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>Defensive guard:</strong> <code>if ('' === $error_message) { break; }</code> skips the notice entirely when there's no actionable code.</li>
+<li class=""><strong>Five new match arms</strong> with customer-friendly EN strings + Turkish translations.</li>
+<li class=""><strong>Generic default + <code>data-error-code</code> attribute:</strong> unknown future codes render "License activation failed. Please try again." with the technical code exposed via a <code>data-error-code</code> HTML attribute (debug / support only — never inline text).</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="stable-tag-drift-caught">Stable tag drift caught<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#stable-tag-drift-caught" class="hash-link" aria-label="Direct link to Stable tag drift caught" title="Direct link to Stable tag drift caught" translate="no">​</a></h3>
+<p>While bumping the version, an audit caught that <code>readme.txt</code> Stable tag had been stuck at <code>4.30.0</code> — the v4.30.1 release accidentally skipped the bump. v4.30.2 corrects to <code>4.30.2</code>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="test-coverage-1">Test coverage<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#test-coverage-1" class="hash-link" aria-label="Direct link to Test coverage" title="Direct link to Test coverage" translate="no">​</a></h3>
+<p><code>tests/Unit/Licensing/LicenseAdminAdminNoticesTest.php</code> — 5 new tests covering empty defense, <code>site_unreachable</code> mapping, generic default + data attribute, and two regression cases (<code>activated</code>, no-license-query). Total: <strong>781 / 2726</strong>, PHPCS clean.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="live-verification">Live verification<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#live-verification" class="hash-link" aria-label="Direct link to Live verification" title="Direct link to Live verification" translate="no">​</a></h3>
+<p>Chrome DevTools MCP scripted a tour of mhmrentiva.com after v4.30.2 deployment:</p>
+<table><thead><tr><th>URL</th><th>Expected</th><th>Live result</th></tr></thead><tbody><tr><td><code>?license=error</code></td><td>No notice (defensive guard)</td><td>✅ 0 notice elements</td></tr><tr><td><code>?license=error&amp;message=site_unreachable</code></td><td>Friendly EN message + <code>data-error-code="site_unreachable"</code>, no raw code in inline text</td><td>✅ confirmed via DOM script</td></tr><tr><td><code>?license=error&amp;message=imaginary_code_42</code></td><td>Generic message + <code>data-error-code="imaginary_code_42"</code>, no raw code in inline text</td><td>✅ confirmed</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="companion-server-releases-mhm-license-server-on-wpalemicom">Companion server releases (mhm-license-server, on wpalemi.com)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#companion-server-releases-mhm-license-server-on-wpalemicom" class="hash-link" aria-label="Direct link to Companion server releases (mhm-license-server, on wpalemi.com)" title="Direct link to Companion server releases (mhm-license-server, on wpalemi.com)" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>v1.9.0</strong> — Phase A: HMAC response signing, reverse site validation, feature token issuer (24h TTL).</li>
+<li class=""><strong>v1.9.1</strong> — <code>site_hash</code> fallback inside <code>Security\SiteVerifier::verify()</code> (paired with v4.30.1 client).</li>
+<li class=""><strong>v1.9.2</strong> — <code>SecretManager::getPingSecret()</code> opt-in only (no file fallback) — closed an asymmetric HMAC bug where the server auto-generated <code>wp-uploads/mhm-license-secrets/ping.key</code> while customers ran zero-config and the two paths produced different HMAC keys.</li>
+<li class=""><strong>v1.9.3 (CRITICAL)</strong> — <code>LicenseActivator::activate()</code> now hard-rejects empty <code>product_slug</code> against a slug-bound license row. The previous code path let a single source edit drop the slug from the request body and slide through both v1.8.0 binding AND v1.9.0 reverse validation (because <code>REVERSE_VALIDATION_FLOOR[''] === null</code> took the legacy-pass branch).</li>
+</ul>
+<p>Combined: <strong>143 PHPUnit, 398 assertions, PHPCS clean</strong> on the server side.</p>
+<p>Three live attack scenarios were curl-verified against <code>wpalemi.com</code> after v1.9.3 deployment:</p>
+<table><thead><tr><th>Scenario</th><th>Expected</th><th>Live result</th></tr></thead><tbody><tr><td><code>product_slug</code> removed from body</td><td><code>product_slug_required</code> reject</td><td>✅ confirmed</td></tr><tr><td>Cross-product slug swap (CS slug + Rentiva site)</td><td><code>site_unreachable</code> (CS verify endpoint absent on Rentiva site)</td><td>✅ confirmed</td></tr><tr><td>Correct flow regression</td><td>200 active</td><td>✅ confirmed</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="companion-currency-switcher-releases">Companion Currency Switcher releases<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#companion-currency-switcher-releases" class="hash-link" aria-label="Direct link to Companion Currency Switcher releases" title="Direct link to Companion Currency Switcher releases" translate="no">​</a></h2>
+<p><code>mhm-currency-switcher v0.5.0</code> (Phase C client) → <code>v0.5.1</code> (CI hotfix: <code>str_ends_with</code> PHP 7.4 compat + <code>OrderFilterTest</code> <code>WC_Order</code> stub) → <code>v0.5.2</code> (<code>VerifyEndpoint</code> <code>site_hash</code> fallback). Same five-attack-surface defense applied to CS Mode gates with eight feature flags (<code>fixed_pricing</code>, <code>nav_menu_switcher</code>, <code>flag_library</code>, <code>geolocation</code>, <code>payment_restrictions</code>, <code>auto_rate_update</code>, <code>multilingual</code>, <code>rest_api_filter</code>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="customer-facing-impact">Customer-facing impact<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#customer-facing-impact" class="hash-link" aria-label="Direct link to Customer-facing impact" title="Direct link to Customer-facing impact" translate="no">​</a></h2>
+<p>After this sprint, customers on Rentiva v4.30.1+ (and CS v0.5.2+):</p>
+<ul>
+<li class=""><strong>Just enter the license key and click Activate.</strong> No <code>wp-config.php</code> edits.</li>
+<li class="">Server-side three-layer defense (slug binding + response signing + reverse validation) is fully active.</li>
+<li class="">License notice messages are friendly and locale-aware; no raw technical jargon visible.</li>
+<li class="">Existing v4.27.x installs keep working unchanged through legacy fallback paths until they upgrade.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="known-limitation-deferred">Known limitation (deferred)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#known-limitation-deferred" class="hash-link" aria-label="Direct link to Known limitation (deferred)" title="Direct link to Known limitation (deferred)" translate="no">​</a></h2>
+<p>A sufficiently determined attacker running a cracked plugin binary on <strong>their own</strong> site with <strong>their own</strong> product-matching license can still patch <code>Mode::canUse*()</code> directly when the customer has not defined <code>MHM_RENTIVA_LICENSE_FEATURE_TOKEN_KEY</code> in <code>wp-config.php</code> (zero-config deployment intentionally accepts this trade-off).</p>
+<p>Closing the source-edit + zero-config gap requires <strong>asymmetric crypto</strong> (RSA-signed feature tokens, public key embedded in the plugin source — open-source-safe). This is deferred to <strong>mhm-license-server v1.10.0 + mhm-rentiva v4.31.0 + mhm-currency-switcher v0.6.0</strong>, planned post-launch.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-lessons-captured-memory--kb">🎓 Lessons captured (memory + KB)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/license-security-sprint-v4.30.x#-lessons-captured-memory--kb" class="hash-link" aria-label="Direct link to 🎓 Lessons captured (memory + KB)" title="Direct link to 🎓 Lessons captured (memory + KB)" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>patterns/license-defense-in-depth-stack.md</code></strong> — five-layer defense documentation, attack matrix, asymmetric crypto roadmap.</li>
+<li class=""><strong><code>patterns/admin-notice-url-state-defense.md</code></strong> — three-layer defense for redirect-after-action notices (empty guard + generic default + data attribute).</li>
+<li class=""><strong><code>patterns/release-zip-audit.md</code></strong> — three audits before tag/release; caught three ZIP leaks during this sprint (<code>drafts/</code>, <code>bin/</code>, <code>*.po~</code>).</li>
+<li class=""><strong><code>standards/i18n-workflow.md</code></strong> — updated with <code>.po~</code> msgmerge backup pattern + <code>.l10n.php</code> deploy mandate.</li>
+<li class=""><strong><code>wp-conductor</code> skill</strong> — new "Long Session / Chained Release Discipline" gate with per-release verification requirements (8 release chain on 2026-04-25 was the baseline failure that motivated this).</li>
+</ul>
+<hr>
+<p><em>GitHub Releases:</em></p>
+<ul>
+<li class=""><em>Rentiva: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.0" target="_blank" rel="noopener noreferrer" class="">v4.30.0</a> · <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.1" target="_blank" rel="noopener noreferrer" class="">v4.30.1</a> · <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.2" target="_blank" rel="noopener noreferrer" class="">v4.30.2</a></em></li>
+<li class=""><em>License Server: <a href="https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.0" target="_blank" rel="noopener noreferrer" class="">v1.9.0</a> · <a href="https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.1" target="_blank" rel="noopener noreferrer" class="">v1.9.1</a> · <a href="https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.2" target="_blank" rel="noopener noreferrer" class="">v1.9.2</a> · <a href="https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.3" target="_blank" rel="noopener noreferrer" class="">v1.9.3</a></em></li>
+<li class=""><em>Currency Switcher: <a href="https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.0" target="_blank" rel="noopener noreferrer" class="">v0.5.0</a> · <a href="https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.1" target="_blank" rel="noopener noreferrer" class="">v0.5.1</a> · <a href="https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.2" target="_blank" rel="noopener noreferrer" class="">v0.5.2</a></em></li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>security</category>
+            <category>license</category>
+            <category>hardening</category>
+            <category>mhm-rentiva</category>
+            <category>mhm-license-server</category>
+            <category>mhm-currency-switcher</category>
+        </item>
+        <item>
+            <title><![CDATA[MHM Rentiva v4.27.4–v4.27.6: Migration Lane Architecture, License Slug Forwarding, WordPress.org Polish]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint</guid>
+            <pubDate>Thu, 23 Apr 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[A retrospective covering three patch releases shipped in succession on 2026-04-23: a critical migration architecture fix (v4.27.4), per-product license binding compatibility (v4.27.5), and WordPress.org submission readiness (v4.27.6). Backfilling these blog posts now in the wake of the v4.30.x security sprint.]]></description>
+            <content:encoded><![CDATA[<p>A retrospective covering three patch releases shipped in succession on 2026-04-23: a <strong>critical migration architecture fix</strong> (v4.27.4), <strong>per-product license binding compatibility</strong> (v4.27.5), and <strong>WordPress.org submission readiness</strong> (v4.27.6). Backfilling these blog posts now in the wake of the v4.30.x security sprint.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4274--migration-lane-architecture-fix-critical">v4.27.4 — Migration Lane Architecture Fix (CRITICAL)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#v4274--migration-lane-architecture-fix-critical" class="hash-link" aria-label="Direct link to v4.27.4 — Migration Lane Architecture Fix (CRITICAL)" title="Direct link to v4.27.4 — Migration Lane Architecture Fix (CRITICAL)" translate="no">​</a></h2>
+<p>The v4.27.1 (i18n locale leak) and v4.27.2 (Settings Testing pollution) data-cleanup migrations <strong>never actually ran on upgraded sites</strong> — the regression cleared during v4.27.0 prep had quietly broken the migration trigger.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="root-cause">Root cause<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#root-cause" class="hash-link" aria-label="Direct link to Root cause" title="Direct link to Root cause" translate="no">​</a></h3>
+<p><code>plugins_loaded</code> migration callback used a single short-circuit:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if ( $stored_version === MHM_RENTIVA_VERSION ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return; // skip ALL migrations</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>But <code>mhm_rentiva_single_site_activation()</code> (which fires BEFORE <code>plugins_loaded</code> on any ZIP-replace upgrade path) had already stamped the new version into the option. By the time <code>plugins_loaded</code> fired, <code>$stored === $current</code> was true → <strong>all flag-gated cleanups got skipped forever.</strong></p>
+<p>Live evidence at mhmrentiva.com: Brand Name displayed as <code>1</code>, currency stats rendered as <code>0,00 1</code> instead of <code>0,00 ₺</code> (because the v4.27.2 pollution migration never executed).</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fix--two-lane-architecture">Fix — two-lane architecture<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#fix--two-lane-architecture" class="hash-link" aria-label="Direct link to Fix — two-lane architecture" title="Direct link to Fix — two-lane architecture" translate="no">​</a></h3>
+<p><code>plugins_loaded</code> callback split into two independent lanes:</p>
+<ul>
+<li class=""><strong>Lane A (schema drift, version-gated):</strong> runs only when <code>$stored !== $current</code>. Idempotent across multiple loads of the same version.</li>
+<li class=""><strong>Lane B (flag-gated data cleanups):</strong> runs on every request, but each migration has its own <code>mhm_rentiva_&lt;flag&gt;</code> option that flips after successful run. Genuinely idempotent.</li>
+</ul>
+<p>Both lanes have their own error containment so a failure in Lane B never blocks Lane A or vice versa.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="test-coverage">Test coverage<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#test-coverage" class="hash-link" aria-label="Direct link to Test coverage" title="Direct link to Test coverage" translate="no">​</a></h3>
+<p><code>tests/Migration/MigrationLaneIndependenceTest.php</code> — 3 new tests, 8 assertions guarding the split.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="empirical-verification">Empirical verification<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#empirical-verification" class="hash-link" aria-label="Direct link to Empirical verification" title="Direct link to Empirical verification" translate="no">​</a></h3>
+<p>Chrome DevTools MCP browser tour of mhmrentiva.com after deployment: 0 duplicate notices, stats display <code>0,00 ₺</code> (U+20BA), Brand Name reads "MHM Rentiva". Manual one-time <strong>Reset to Defaults</strong> across 11 admin tabs cleared residual state from the period when migrations weren't running.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4275--license-client-per-product-slug-forwarding">v4.27.5 — License Client Per-Product Slug Forwarding<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#v4275--license-client-per-product-slug-forwarding" class="hash-link" aria-label="Direct link to v4.27.5 — License Client Per-Product Slug Forwarding" title="Direct link to v4.27.5 — License Client Per-Product Slug Forwarding" translate="no">​</a></h2>
+<p>Pairs with <code>mhm-license-server v1.8.0+</code> which introduced per-product license binding. Before v4.27.5, a customer could buy a cheap MHM Currency Switcher Monthly key and use it to activate Rentiva Pro — server had no way to enforce that the license was issued for a specific product.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="change">Change<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#change" class="hash-link" aria-label="Direct link to Change" title="Direct link to Change" translate="no">​</a></h3>
+<p><code>LicenseManager::activate()</code> and <code>validate()</code> request bodies now include <code>product_slug =&gt; 'mhm-rentiva'</code>. The server checks this against the license row's stored slug and rejects mismatches with a <code>product_mismatch</code> error.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bonus-fix">Bonus fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#bonus-fix" class="hash-link" aria-label="Direct link to Bonus fix" title="Direct link to Bonus fix" translate="no">​</a></h3>
+<p>Additional Services admin page rendered two <strong>Documentation</strong> buttons — the global <code>all_admin_notices</code> docs hook + the page's own header both fired. The hook now skips the <code>vehicle_addon</code> screen; the page header's button is the single source.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="v4276--wordpressorg-submission-polish">v4.27.6 — WordPress.org Submission Polish<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#v4276--wordpressorg-submission-polish" class="hash-link" aria-label="Direct link to v4.27.6 — WordPress.org Submission Polish" title="Direct link to v4.27.6 — WordPress.org Submission Polish" translate="no">​</a></h2>
+<p>Plugin Check (PCP) compliance for WordPress.org plugin directory submission: <strong>1 ERROR + 115 WARNING → 0 ERROR + 61 WARNING</strong>. The remaining warnings are all false positives caused by Plugin Check not reading the project's <code>phpcs.xml</code> prefix configuration.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="concrete-fixes">Concrete fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#concrete-fixes" class="hash-link" aria-label="Direct link to Concrete fixes" title="Direct link to Concrete fixes" translate="no">​</a></h3>
+<ul>
+<li class=""><code>unlink()</code> → <code>wp_delete_file()</code> in the demo image importer (the only real ERROR).</li>
+<li class="">Reasoned <code>phpcs:ignore</code> comments for warnings the project's ruleset already excludes (audit <code>error_log()</code> calls, <code>mhm_rentiva_</code> prefixed hooks Plugin Check refuses to recognise, accepted <code>meta_query</code> / <code>post__not_in</code> performance tradeoffs, ledger queries with core-controlled table names bound through <code>$wpdb-&gt;prepare()</code>).</li>
+<li class=""><code>$pending_messages</code> template-scope variable → <code>$mhm_rentiva_pending_messages</code> to honour Plugin Check's prefix convention.</li>
+<li class=""><code>readme.txt</code> Changelog section trimmed to fit WP.org's 5000-character limit; older releases linked to GitHub.</li>
+<li class=""><code>changelog-tr.json</code> backfill for v4.27.5 + new v4.27.6 entry.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="no-functional-change">No functional change<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#no-functional-change" class="hash-link" aria-label="Direct link to No functional change" title="Direct link to No functional change" translate="no">​</a></h3>
+<p>740/740 PHPUnit still passes. PHPCS clean. The plugin behaves identically — only the Plugin Check noise was reduced.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-verification-across-all-three">✅ Verification across all three<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#-verification-across-all-three" class="hash-link" aria-label="Direct link to ✅ Verification across all three" title="Direct link to ✅ Verification across all three" translate="no">​</a></h2>
+<table><thead><tr><th>Check</th><th>v4.27.4</th><th>v4.27.5</th><th>v4.27.6</th></tr></thead><tbody><tr><td>PHPUnit</td><td>740/740, 2642 assertions, 6 skipped</td><td>unchanged</td><td>unchanged</td></tr><tr><td>PHPCS</td><td>0 / 0</td><td>0 / 0</td><td>0 / 0</td></tr><tr><td>Plugin Check ERROR</td><td>unchanged</td><td>unchanged</td><td>1 → 0</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-lessons-captured-memory">🎓 Lessons captured (memory)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#-lessons-captured-memory" class="hash-link" aria-label="Direct link to 🎓 Lessons captured (memory)" title="Direct link to 🎓 Lessons captured (memory)" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>feedback_migration_lane_architecture.md</code></strong> — when activation hooks stamp version BEFORE <code>plugins_loaded</code>, the version gate breaks all flag-gated migrations. Always split version-drift and data-cleanup lanes.</li>
+<li class=""><strong><code>feedback_empirical_dom_verification.md</code></strong> — DOM-level verification through Chrome DevTools MCP is the only way to catch runtime-DB-state bugs that 100% PHPUnit + 0 PHPCS happily ship.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-next">🔜 Next<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.4-v4.27.6-stability-sprint#-next" class="hash-link" aria-label="Direct link to 🔜 Next" title="Direct link to 🔜 Next" translate="no">​</a></h2>
+<p>The v4.27.x umbrella closed here. Next major was v4.28.0 (Popular Routes) — but the security audit of the cross-product attack surface re-prioritised the roadmap into the <strong>License Security Hardening</strong> sprint (v4.30.x), shipped 2026-04-24/25.</p>
+<hr>
+<p><em>GitHub Releases: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.4" target="_blank" rel="noopener noreferrer" class="">v4.27.4</a> · <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.5" target="_blank" rel="noopener noreferrer" class="">v4.27.5</a> · <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.6" target="_blank" rel="noopener noreferrer" class="">v4.27.6</a></em></p>]]></content:encoded>
+            <category>release</category>
+            <category>patch</category>
+            <category>migration</category>
+            <category>license</category>
+            <category>wordpress-org</category>
+            <category>mhm-rentiva</category>
+        </item>
         <item>
             <title><![CDATA[MHM Rentiva v4.27.2: Settings Testing Pollution Hotfix + Duplicate Addon Notice Dedupe]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.2-settings-testing-pollution-hotfix</link>
@@ -1007,38 +1178,6 @@
             <category>update</category>
             <category>gutenberg</category>
             <category>ui-ux</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.9.6: Transfer Modülü ve Büyük Bakım]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary</guid>
-            <pubDate>Mon, 02 Feb 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.9.6 sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.6</strong> sürümü yayınlandı! Bu sürüm, Transfer Modülü entegrasyonu ve kapsamlı veritabanı taşıma mantığı gibi kritik güncellemeler içermektedir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 🚀 Değişiklik Kaydı" title="Direct link to 🚀 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Transfer Modülü: Ön ek standardizasyonu (rentiva_) ve veritabanı taşıma mantığı tamamlandı.</td></tr><tr><td>⚡ Performans</td><td>Genel kod optimizasyonu ve performans iyileştirmeleri yapıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Müsaitlik Takvimi için HTML yapısı daha iyi erişilebilirlik için güncellendi.</td></tr><tr><td>🎨 Stil</td><td>Daha iyi bakım için CSS mimarisi temizlendi ve yeniden yapılandırıldı.</td></tr><tr><td>🌐 i18n</td><td>Yeni çeviri dosyaları eklendi ve mevcut çeviriler iyileştirildi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.6-release-summary#detaylar" class="hash-link" aria-label="Direct link to Detaylar" title="Direct link to Detaylar" translate="no">​</a></h3>
-<p>Yüksek performanslı bir altyapı için CSS ve PHP tarafında büyük çaplı temizlik yapıldı. Transfer modülünün veritabanı yapısı standartlara uygun hale getirilerek sistem kararlılığı artırıldı.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>transfer</category>
-            <category>performance</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.6.7: Güvenlik ve Performans Optimizasyonu]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary</guid>
-            <pubDate>Sun, 01 Feb 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.6.7 sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.6.7</strong> sürümü yayınlandı! Bu güncelleme ile yönlendirme güvenliği, SQL optimizasyonu ve stil yönetimi modern standartlara taşındı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 🚀 Değişiklik Kaydı" title="Direct link to 🚀 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛡️ Güvenlik</td><td>Yönlendirme güvenliğini artırmak için <code>wp_safe_redirect</code> kullanımına geçildi.</td></tr><tr><td>🛡️ Güvenlik</td><td><code>SecurityHelper::safe_output()</code> metodu bağlam doğrulaması ve JSON desteğiyle modernize edildi.</td></tr><tr><td>⚡ Performans</td><td>SQL transient silme işlemi, native <code>delete_transient()</code> fonksiyonuna çevrildi.</td></tr><tr><td>🎨 Stil</td><td>Satır içi CSS kodları <code>wp_add_inline_style</code> API'sine taşınarak standartlaştırıldı.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.6.7-release-summary#detaylar" class="hash-link" aria-label="Direct link to Detaylar" title="Direct link to Detaylar" translate="no">​</a></h3>
-<p>Eklentinin çekirdek fonksiyonları daha güvenli ve performanslı hale getirildi. Özellikle yönlendirme ve veri çıktı işlemleri WordPress'in en güncel güvenlik protokollerine göre optimize edildi.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>security</category>
-            <category>performance</category>
         </item>
     </channel>
 </rss>
