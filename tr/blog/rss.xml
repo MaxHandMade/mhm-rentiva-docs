@@ -4,10 +4,61 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sat, 25 Apr 2026 22:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 27 Apr 2026 08:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.32.0 — Aboneliğinizi eklenti içinden yönetin]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release</guid>
+            <pubDate>Mon, 27 Apr 2026 08:00:00 GMT</pubDate>
+            <description><![CDATA[Lisans sayfasında artık yeni sekmede Polar müşteri portalını açan bir Aboneliği Yönet butonu var. Otomatik yenilemeyi iptal et, kart bilgini güncelle, plan değiştir veya yeniden abone ol — WordPress yöneticisinden çıkmadan.]]></description>
+            <content:encoded><![CDATA[<p>Lisans sayfasında artık yeni sekmede <strong>Polar müşteri portalını</strong> açan bir <strong>Aboneliği Yönet</strong> butonu var. Otomatik yenilemeyi iptal et, kart bilgini güncelle, plan değiştir veya yeniden abone ol — WordPress yöneticisinden çıkmadan.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne değişti doğrudan bağlantı" title="Ne değişti doğrudan bağlantı" translate="no">​</a></h2>
+<p>License Management bölümünde (lisans aktifken görünür) artık üç buton bulunuyor:</p>
+<ol>
+<li class=""><strong>Aboneliği Yönet</strong> — Polar müşteri portalını açar (bu sürüm)</li>
+<li class="">Re-validate Now (v4.31.2)</li>
+<li class="">Deactivate License</li>
+</ol>
+<p>Yeni buton, Polar'a halihazırda kullandığımız aynı lisans sunucusu üzerinden erişir. Sitenizden bakıldığında yeni bir dış servisle iletişim yok. Şema ve imza bütünlüğü RSA ile korunmaya devam ediyor (v4.30.0+ pipeline).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="duruma-göre-vurgu">Duruma göre vurgu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#duruma-g%C3%B6re-vurgu" class="hash-link" aria-label="Duruma göre vurgu doğrudan bağlantı" title="Duruma göre vurgu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Buton, yenilemeye olan uzaklığa göre renk değiştiriyor:</p>
+<table><thead><tr><th>Kalan gün</th><th>Renk</th><th>Niyet</th></tr></thead><tbody><tr><td>&gt; 30</td><td>Standart birincil mavi</td><td>"Bolca süre var"</td></tr><tr><td>≤ 30</td><td>Sarı</td><td>"Dikkat — yenileme yaklaşıyor"</td></tr><tr><td>≤ 7</td><td>Kehribar + parlama</td><td>"Şimdi karar ver"</td></tr><tr><td>Süresi dolmuş (0)</td><td>Kehribar + parlama</td><td>"Pro'yu sürdürmek için yeniden abone ol"</td></tr></tbody></table>
+<p>Müşteri, e-posta hatırlatmalarını okumasa bile yenilemenin ne kadar yakın olduğunu tek bakışta görür.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hata-durumu-yönetimi">Hata durumu yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#hata-durumu-y%C3%B6netimi" class="hash-link" aria-label="Hata durumu yönetimi doğrudan bağlantı" title="Hata durumu yönetimi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Portal oturumu üretilemezse (sunucu hatası, ağ kesintisi, sayfa açıldıktan sonra lisansın iptal edilmesi), yönetici License sayfasına geri döner ve müşteri-dostu, çevirili bir uyarı görür:</p>
+<blockquote>
+<p>ℹ️ Abonelik yönetimi şu an mümkün değil (servis kullanılamıyor). Lütfen daha sonra tekrar deneyin veya <a href="mailto:support@wpalemi.com" target="_blank" rel="noopener noreferrer" class="">support@wpalemi.com</a> ile iletişime geçin.</p>
+</blockquote>
+<p>Beş hata kodu kısa Türkçe etiketlere maplanır (<code>get_manage_unavailable_label()</code>). Ham teknik string son kullanıcıya asla sızmaz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mimari">Mimari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#mimari" class="hash-link" aria-label="Mimari doğrudan bağlantı" title="Mimari doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">Yeni public method <code>LicenseManager::createCustomerPortalSession(string $return_url): array</code></li>
+<li class="">Yeni admin-post handler <code>LicenseAdmin::handle_manage_subscription()</code> — yetki + nonce kapılı</li>
+<li class=""><code>assets/css/admin/license-admin.css</code> dosyasına yeni CSS kuralları, <code>filemtime</code> ile cache-bust</li>
+<li class="">9 yeni çevirilebilir string, hepsi Türkçeye çevrildi</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="uyumluluk">Uyumluluk<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#uyumluluk" class="hash-link" aria-label="Uyumluluk doğrudan bağlantı" title="Uyumluluk doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Bileşen</th><th>Gerekli sürüm</th></tr></thead><tbody><tr><td><code>mhm-license-server</code></td><td>v1.11.0+ (yeni <code>/customer-portal-session</code> endpoint'i)</td></tr><tr><td><code>mhm-polar-bridge</code></td><td>v1.9.0+ (yenileme hatırlatma cron'u)</td></tr><tr><td>WordPress</td><td>6.7+</td></tr><tr><td>PHP</td><td>8.1+</td></tr></tbody></table>
+<p><code>/customer-portal-session</code> endpoint'ine sahip olmayan eski lisans sunucu sürümleri, kırılmak yerine zarif bir <code>manage_unavailable</code> bildirimi döner — müşteri bozuk redirect değil, çevirili bir uyarı görür.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bu-sürümde-yok-kapsam-dışı">Bu sürümde yok (kapsam dışı)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#bu-s%C3%BCr%C3%BCmde-yok-kapsam-d%C4%B1%C5%9F%C4%B1" class="hash-link" aria-label="Bu sürümde yok (kapsam dışı) doğrudan bağlantı" title="Bu sürümde yok (kapsam dışı) doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Past-due / dunning bildirimleri</strong> — Polar bunları doğrudan e-postayla yönetiyor.</li>
+<li class=""><strong>Yıllık abonelik yenileme hatırlatmaları</strong> — Polar bunları otomatik olarak yenilemeden 7 gün önce gönderiyor.</li>
+</ul>
+<p>Aylık abonelere <code>mhm-polar-bridge v1.9.0+</code> üzerinden 7 gün önceden ek bir hatırlatma e-postası gidiyor; çünkü Polar kısa fatura döngüleri için bunu üretmiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.32.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">793 → 807 PHPUnit (+14 yeni, 3 test dosyasında)</li>
+<li class="">PHPCS: 0 hata</li>
+<li class="">i18n: yeni string'lerde 0 fuzzy, 9 string tamamen çevrildi</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>license</category>
+        </item>
         <item>
             <title><![CDATA[Lisans Güvenlik Sertleştirme Sprint'i: Rentiva v4.30.0 → v4.30.2 (mhm-license-server v1.9.0–v1.9.3 ve CS v0.5.x ile)]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/license-security-sprint-v4.30.x</link>
@@ -1162,22 +1213,6 @@
             <category>update</category>
             <category>woocommerce</category>
             <category>mhm-rentiva</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.9.7: Gutenberg UI/UX Standardizasyonu]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary</guid>
-            <pubDate>Sun, 08 Feb 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.9.7 sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.7</strong> sürümü yayınlandı! Bu güncelleme ile Gutenberg blok editörü deneyimi standartlaştırıldı ve konsol uyarıları temizlendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Özellik</td><td>Gutenberg blok kenar çubukları (InspectorControls) tutarlı UI/UX için standartlaştırıldı.</td></tr><tr><td>🛠️ Düzeltme</td><td>Blok editöründeki konsol uyarıları giderilerek kararlılık artırıldı.</td></tr><tr><td>⚡ İyileştirme</td><td>Proje dokümantasyonu ve kuralları güncellendi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.9.7-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
-<p>Editör tarafındaki kullanıcı deneyimini iyileştirmek adına Gutenberg blok kontrolleri daha düzenli hale getirildi. Arka planda çalışan scriptlerdeki ufak hatalar giderilerek temiz bir çalışma ortamı sağlandı.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>gutenberg</category>
-            <category>ui-ux</category>
         </item>
     </channel>
 </rss>
