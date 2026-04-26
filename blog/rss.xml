@@ -4,10 +4,64 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 27 Apr 2026 08:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 27 Apr 2026 08:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Currency Switcher v0.7.0 — Manage your subscription from the plugin]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release</guid>
+            <pubDate>Mon, 27 Apr 2026 08:30:00 GMT</pubDate>
+            <description><![CDATA[The License tab now has a Manage Subscription button that opens the Polar customer portal in a new tab. Cancel auto-renewal, update your card, switch plans, or resubscribe — all without leaving WordPress admin. Snake-case + REST/React parity to MHM Rentiva v4.32.0.]]></description>
+            <content:encoded><![CDATA[<p>The License tab now has a <strong>Manage Subscription</strong> button that opens the Polar customer portal in a new tab. Cancel auto-renewal, update your card, switch plans, or resubscribe — all without leaving WordPress admin. Snake-case + REST/React parity to <strong>MHM Rentiva v4.32.0</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#what-changed" class="hash-link" aria-label="Direct link to What changed" title="Direct link to What changed" translate="no">​</a></h2>
+<p>Inside the License tab's <strong>License Management</strong> zone (visible when a Pro license is active), a third button joins the existing two:</p>
+<ol>
+<li class=""><strong>Manage Subscription</strong> — opens Polar customer portal (this release)</li>
+<li class="">Re-validate Now</li>
+<li class="">Deactivate License</li>
+</ol>
+<p>The plugin reaches Polar through the same license server already in use. No new external services contacted from your site's perspective. Schema and signature integrity remain RSA-protected (v0.6.0+ pipeline).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="state-driven-emphasis">State-driven emphasis<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#state-driven-emphasis" class="hash-link" aria-label="Direct link to State-driven emphasis" title="Direct link to State-driven emphasis" translate="no">​</a></h2>
+<p>The button changes color based on how close your subscription is to renewal:</p>
+<table><thead><tr><th>Days remaining</th><th>Color</th><th>Intent</th></tr></thead><tbody><tr><td>&gt; 30</td><td>Standard primary blue</td><td>"Plenty of runway"</td></tr><tr><td>≤ 30</td><td>Yellow</td><td>"Heads up — renewal is coming"</td></tr><tr><td>≤ 7</td><td>Amber + glow</td><td>"Decide now"</td></tr><tr><td>Expired (0)</td><td>Amber + glow</td><td>"Resubscribe to keep Pro"</td></tr></tbody></table>
+<p>While the portal session is being minted (a brief async call), the button text becomes "Opening…" and the styling dims to communicate the click registered.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="failure-handling">Failure handling<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#failure-handling" class="hash-link" aria-label="Direct link to Failure handling" title="Direct link to Failure handling" translate="no">​</a></h2>
+<p>If the portal session can't be minted (server error, network blip, license revoked between page load and click), the button surfaces an in-tab notice instead of breaking:</p>
+<blockquote>
+<p>Subscription management is not available right now. Please try again later or contact <a href="mailto:support@wpalemi.com" target="_blank" rel="noopener noreferrer" class="">support@wpalemi.com</a>.</p>
+</blockquote>
+<p>No raw technical strings ever leak to end users.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture">Architecture<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#architecture" class="hash-link" aria-label="Direct link to Architecture" title="Direct link to Architecture" translate="no">​</a></h2>
+<ul>
+<li class="">New public method <code>LicenseManager::create_customer_portal_session(string $return_url): array</code> (snake_case parity to Rentiva's camelCase)</li>
+<li class="">New REST endpoint <code>POST /mhm-currency/v1/license/manage-subscription</code> (manage_options gated)</li>
+<li class="">New React state + callback in <code>License.jsx</code>, button rendered before Deactivate when <code>isActive &amp;&amp; license.maskedKey</code></li>
+<li class="">New CSS rules using compound selectors (<code>.button.mhm-cs-license-warning</code> / <code>.mhm-cs-license-urgent</code>) to avoid colliding with the existing <code>.mhm-cs-license-warning</code> alert pill</li>
+<li class="">4 new translatable strings, all translated to Turkish</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compatibility">Compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#compatibility" class="hash-link" aria-label="Direct link to Compatibility" title="Direct link to Compatibility" translate="no">​</a></h2>
+<table><thead><tr><th>Component</th><th>Required version</th></tr></thead><tbody><tr><td><code>mhm-license-server</code></td><td>v1.11.0+ (new <code>/customer-portal-session</code> endpoint)</td></tr><tr><td><code>mhm-polar-bridge</code></td><td>v1.9.0+ (renewal reminder cron)</td></tr><tr><td>WordPress</td><td>6.0+</td></tr><tr><td>PHP</td><td>7.4+</td></tr></tbody></table>
+<p>Older license-server versions without the customer-portal endpoint return a graceful in-tab notice instead of breaking.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="out-of-scope-not-in-this-release">Out of scope (not in this release)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#out-of-scope-not-in-this-release" class="hash-link" aria-label="Direct link to Out of scope (not in this release)" title="Direct link to Out of scope (not in this release)" translate="no">​</a></h2>
+<ul>
+<li class="">Past-due / dunning notifications — Polar handles these directly via email.</li>
+<li class="">Yearly subscription renewal reminders — Polar sends these 7 days before renewal automatically.</li>
+</ul>
+<p>Monthly subscribers receive an additional 7-day-out reminder email from <code>mhm-polar-bridge v1.9.0+</code>, since Polar doesn't generate these for short billing cycles.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/cs-v0.7.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<ul>
+<li class="">148 → 158 PHPUnit (+10 new across 2 test files)</li>
+<li class="">PHPCS new files: 0 errors (after PHPCBF)</li>
+<li class="">PHPStan level 6: 0 errors</li>
+<li class="">npm run build: success</li>
+<li class="">i18n: 0 fuzzy on new strings, all 4 translated</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>currency-switcher</category>
+            <category>license</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.32.0 — Manage your subscription from the plugin]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.32.0-release</link>
@@ -1196,22 +1250,6 @@
             <category>gutenberg</category>
             <category>blocks</category>
             <category>shortcode</category>
-            <category>mhm-rentiva</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.9.8: URL Tutarlılığı ve WooCommerce İyileştirmeleri]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary</guid>
-            <pubDate>Mon, 09 Feb 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.9.8 sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.9.8</strong> sürümü yayınlandı! Bu güncelleme ile WooCommerce entegrasyonu güçlendirildi ve kalıcı link (permalink) yapısındaki tutarlılık artırıldı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 🚀 Değişiklik Kaydı" title="Direct link to 🚀 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🛠️ Düzeltme</td><td>WooCommerce Hesabım uç noktalarında fiziksel sayfa kısa isimlerine (slug) mutlak öncelik verildi.</td></tr><tr><td>⚡ İyileştirme</td><td>Entegre panel düzeni korundu; özel linklerde (örn. /favorilerim/) dışa yönlendirme sorunu giderildi.</td></tr><tr><td>⚙️ Kararlılık</td><td>URL tutarlılığı için kalıcı linklerin (rewrite rules) otomatik yenilenmesi sağlandı.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.9.8-release-summary#detaylar" class="hash-link" aria-label="Direct link to Detaylar" title="Direct link to Detaylar" translate="no">​</a></h3>
-<p>Bu sürüm, kullanıcılarımızın "Hesabım" panelindeki deneyimini pürüzsüz hale getirmeye odaklanıyor. Özellikle özel sayfa yapısı kullanan temalarda yaşanan yönlendirme sorunları giderilerek sistem daha kararlı hale getirildi.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>woocommerce</category>
             <category>mhm-rentiva</category>
         </item>
     </channel>
