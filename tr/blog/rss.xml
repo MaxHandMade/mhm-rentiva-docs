@@ -4,10 +4,84 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 27 Apr 2026 08:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 27 Apr 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.33.0 — Pro Gate Unification]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release</guid>
+            <pubDate>Mon, 27 Apr 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[v4.33.0 closes three holes left over from the v4.31.0 RSA token migration: 22 callsites that bypassed the token check, a misleading License Admin message, and the impossibility of testing Pro features locally without running a license server.]]></description>
+            <content:encoded><![CDATA[<p>v4.33.0 closes three holes left over from the v4.31.0 RSA token migration: 22 callsites that bypassed the token check, a misleading License Admin message, and the impossibility of testing Pro features locally without running a license server.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-release-exists">Why this release exists<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#why-this-release-exists" class="hash-link" aria-label="Why this release exists doğrudan bağlantı" title="Why this release exists doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.31.0 introduced RSA-signed feature tokens as the single Pro authority via <code>Mode::featureGranted()</code>. Every Pro feature gate was supposed to call this method (or one of the <code>canUse*()</code> wrappers that delegate to it). But 22 places in the codebase still called the old <code>Mode::featureEnabled()</code> API, which only checked <code>isPro()</code> — no token verify. A cracked binary patching <code>LicenseManager::isActive()</code> to return <code>true</code> could unlock messages, advanced reports, and exports at those callsites without ever having a valid token.</p>
+<p>This release migrates every callsite, soft-deprecates the old API, and adds two UX fixes that were piling up.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="changes">Changes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#changes" class="hash-link" aria-label="Changes doğrudan bağlantı" title="Changes doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-security-22-callsites-now-token-verify">🔒 Security: 22 callsites now token-verify<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#-security-22-callsites-now-token-verify" class="hash-link" aria-label="🔒 Security: 22 callsites now token-verify doğrudan bağlantı" title="🔒 Security: 22 callsites now token-verify doğrudan bağlantı" translate="no">​</a></h3>
+<table><thead><tr><th>File</th><th>Callsites</th></tr></thead><tbody><tr><td><code>Frontend/Account/AccountRenderer.php</code></td><td>1</td></tr><tr><td><code>Frontend/Account/WooCommerceIntegration.php</code></td><td>2</td></tr><tr><td><code>Messages/Core/Messages.php</code></td><td>1</td></tr><tr><td><code>Messages/Frontend/CustomerMessages.php</code></td><td>1</td></tr><tr><td><code>Messages/REST/*.php</code> (3 files)</td><td>3</td></tr><tr><td><code>Reports/Reports.php</code></td><td>2</td></tr><tr><td><code>Utilities/Export/Export.php</code></td><td>3</td></tr><tr><td><code>Utilities/Export/ExportReports.php</code></td><td>6</td></tr><tr><td><code>Utilities/Menu/Menu.php</code></td><td>3</td></tr></tbody></table>
+<p>All migrated to the appropriate <code>Mode::canUse*()</code> method. <code>Mode::featureEnabled()</code> is now a soft-deprecated wrapper that emits a <code>_deprecated_function()</code> notice in <code>WP_DEBUG</code>. The body is preserved for any third-party callers; hard removal slated for v5.0.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-license-admin-actual-state-instead-of-static-text">🔧 License Admin: actual state instead of static text<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#-license-admin-actual-state-instead-of-static-text" class="hash-link" aria-label="🔧 License Admin: actual state instead of static text doğrudan bağlantı" title="🔧 License Admin: actual state instead of static text doğrudan bağlantı" translate="no">​</a></h3>
+<p>The License page used to print <strong>"All Pro features active: Unlimited vehicles/bookings, export, advanced reports, Vendor &amp; Payout."</strong> every time a license was active — regardless of which feature tokens the server had actually granted. Customers with empty or partial tokens would read that line and then wonder why the Vendor menu was missing.</p>
+<p>The new rendering derives the list from real gate decisions:</p>
+<blockquote>
+<p>Active Pro features: Vendor &amp; Payout, Advanced Reports, Messages, Expanded Export</p>
+</blockquote>
+<p>If no gates are active (license active but token empty — a state that shouldn't normally happen but did during the v4.30.x → v4.31.0 transition), the page now shows a warning notice with a "Re-validate Now" CTA instead of the misleading text.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-developer-mode-for-local-pro-testing">✨ Developer Mode for local Pro testing<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#-developer-mode-for-local-pro-testing" class="hash-link" aria-label="✨ Developer Mode for local Pro testing doğrudan bağlantı" title="✨ Developer Mode for local Pro testing doğrudan bağlantı" translate="no">​</a></h3>
+<p>Adding a Pro feature locally has been awkward since v4.31.0: the RSA-signed feature token is issued by the license server, which devs may not run on their machine. The result was a fail-closed gate — local Pro features were untestable without copying tokens from production (which you shouldn't).</p>
+<p>Two new constants enable a bypass:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// wp-config.php (development only)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">define( 'WP_DEBUG', true );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">define( 'MHM_RENTIVA_DEV_PRO', true );</span><br></span></code></pre></div></div>
+<p>When <strong>both</strong> are true, <code>Mode::featureGranted()</code> skips the token verification step and returns <code>true</code>. The <code>isPro()</code> check still runs first, so a Lite license cannot bypass to Pro — you still need an active license, just not a valid token.</p>
+<p>Production safety: Hostinger production environments have <code>WP_DEBUG=false</code> by default, so even if <code>MHM_RENTIVA_DEV_PRO</code> slipped into a production <code>wp-config.php</code> (it shouldn't), the bypass would not engage.</p>
+<p>The yellow "Geliştirici Modu" banner subtitle now reflects whether the bypass is actually active or just dormant.</p>
+<p>A new filter <code>mhm_rentiva_dev_pro_bypass</code> exposes the bypass decision for testability — PHPUnit cannot toggle PHP defines within a single process.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-breaking-lite-users-lose-xlsxpdf-export-access">⚠️ BREAKING: Lite users lose xlsx/pdf export access<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#%EF%B8%8F-breaking-lite-users-lose-xlsxpdf-export-access" class="hash-link" aria-label="⚠️ BREAKING: Lite users lose xlsx/pdf export access doğrudan bağlantı" title="⚠️ BREAKING: Lite users lose xlsx/pdf export access doğrudan bağlantı" translate="no">​</a></h3>
+<p>Old <code>featureEnabled(FEATURE_EXPORT)</code> returned <code>true</code> unconditionally for Lite users. This was a bug — the format check in callers (<code>! in_array($format, ['csv', 'json'])</code>) was supposed to be the second gate, but <code>featureEnabled</code> short-circuited it. So Lite users could request xlsx and pdf exports.</p>
+<p><code>canUseExport()</code> correctly returns <code>false</code> for Lite. CSV and JSON are still free; xlsx and pdf are now Pro-only as intended.</p>
+<p>Migration path for affected Lite users: upgrade to Pro for full format access, or stick with CSV/JSON.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-translation-quality-collateral">🌐 Translation quality (collateral)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#-translation-quality-collateral" class="hash-link" aria-label="🌐 Translation quality (collateral) doğrudan bağlantı" title="🌐 Translation quality (collateral) doğrudan bağlantı" translate="no">​</a></h3>
+<p>The v4.33.0 i18n pass triggered a <code>msgmerge</code> over the entire TR catalog. Some pre-existing translations had been auto-flagged as fuzzy in earlier releases and never reviewed. We fixed 22 of them in this pass:</p>
+<ul>
+<li class=""><strong>"Airport Transfer"</strong> had been mistranslated as <strong>"Aktarımı İzin Ver"</strong> (literally "Allow Transfer"). Now correctly <strong>"Havalimanı Transferi"</strong>.</li>
+<li class=""><strong>"Report Issue"</strong> was <strong>"Raporlar"</strong> (Reports). Now <strong>"Sorun Bildir"</strong>.</li>
+<li class="">Multiple plural forms shifted from <code>%d/%d</code> to positional <code>%1$d/%2$d</code> (matches the source argument order).</li>
+<li class="">A handful of email label colons that had been dropped in earlier passes were restored.</li>
+</ul>
+<p><code>msgmerge</code> fuzzy count post-merge: 0 — verified by automation.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compatibility">Compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#compatibility" class="hash-link" aria-label="Compatibility doğrudan bağlantı" title="Compatibility doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Component</th><th>Required version</th></tr></thead><tbody><tr><td><code>mhm-license-server</code></td><td><strong>v1.11.2</strong> (adds <code>'export'</code> to the issued feature-token allowlist)</td></tr><tr><td><code>mhm-polar-bridge</code></td><td>v1.9.0+</td></tr><tr><td>WordPress</td><td>6.7+</td></tr><tr><td>PHP</td><td>8.1+</td></tr></tbody></table>
+<p>If v4.33.0 ships before mhm-license-server v1.11.2, <strong>Pro users will lose xlsx/pdf export for up to 24 hours</strong> — the new <code>canUseExport()</code> gate looks for an <code>'export'</code> token claim that the server doesn't issue yet. The server's daily cron reissues tokens; manually clicking "Re-validate Now" on the License page refreshes immediately.</p>
+<p>That's why the release chain order is server v1.11.2 first, then plugin v4.33.0.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#tests" class="hash-link" aria-label="Tests doğrudan bağlantı" title="Tests doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">807 → 822 PHPUnit (+15)<!-- -->
+<ul>
+<li class="">5 in <code>ModeDevBypassTest</code></li>
+<li class="">4 in <code>LicenseAdminActiveFeaturesTest</code></li>
+<li class="">6 in <code>ModeGateMigrationTest</code></li>
+</ul>
+</li>
+<li class="">PHPCS: 0 errors, 0 warnings (release scope)</li>
+<li class="">Plugin Check (WordPress.org compliance): 0 ERROR, 27 WARNING (all pre-existing, all known false-positives from Plugin Check not reading <code>phpcs.xml</code> prefix config)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrade-notes">Upgrade notes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#upgrade-notes" class="hash-link" aria-label="Upgrade notes doğrudan bağlantı" title="Upgrade notes doğrudan bağlantı" translate="no">​</a></h2>
+<ol>
+<li class="">Wait until mhm-license-server v1.11.2 is live (otherwise Pro export breaks for ~24h).</li>
+<li class="">Update the plugin via WP Admin → Plugins → Upload, or replace the ZIP via FTP.</li>
+<li class="">After update, click "Re-validate Now" on the License page once. This forces the client to fetch a fresh token from the server — without it, the daily cron is the next refresh window.</li>
+<li class="">Lite users who relied on (bug-enabled) xlsx exports: upgrade to Pro, or switch to CSV/JSON.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="local-development">Local development<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release#local-development" class="hash-link" aria-label="Local development doğrudan bağlantı" title="Local development doğrudan bağlantı" translate="no">​</a></h2>
+<p>If you maintain a fork or extend the plugin:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// wp-config.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">define( 'WP_DEBUG', true );</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">define( 'MHM_RENTIVA_DEV_PRO', true );  // skip token check, exercise Pro gates</span><br></span></code></pre></div></div>
+<p>This unlocks Vendor Marketplace, Advanced Reports, Messages, and Expanded Export against an active license without a real RSA-signed token. Don't ship this to production.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>license</category>
+            <category>security</category>
+        </item>
         <item>
             <title><![CDATA[Currency Switcher v0.7.0 — Aboneliğinizi eklenti içinden yönetin]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/cs-v0.7.0-release</link>
@@ -1230,26 +1304,6 @@
             <category>finance</category>
             <category>payment</category>
             <category>vip-transfer</category>
-            <category>mhm-rentiva</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.10.0: Block/Shortcode Parity Stabilizasyonu]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary</guid>
-            <pubDate>Wed, 18 Feb 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.10.0 sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.10.0</strong> sürümü yayınlandı! Bu büyük güncelleme ile Gutenberg blokları ve kısa kodlar (shortcode) arasındaki tam eşlik (parity) sağlandı; 19/19 deterministic yüzey doğrulandı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">🚀 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="🚀 Değişiklik Kaydı doğrudan bağlantı" title="🚀 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🎯 Eşlik (Parity)</td><td>Block ↔ Shortcode tam eşliği sağlandı — 19/19 deterministic yüzey doğrulandı.</td></tr><tr><td>🔗 Eşleme (Mapping)</td><td><code>vehicle-comparison</code>, <code>booking-form</code> ve <code>testimonials</code> blokları için deterministik alias eşlemesi eklendi.</td></tr><tr><td>🔄 Dönüşüm (Transform)</td><td><code>showFeatures</code> değer dönüşümü kapsam izolasyonuyla stabilize edildi (boolean → <code>all</code>/<code>basic</code>).</td></tr><tr><td>🛡️ Güvenlik</td><td>Booking form dinamik varsayılan koruması eklendi (<code>defaultDays</code>/<code>minDays</code>/<code>maxDays</code> statik override engellendi).</td></tr><tr><td>📋 Denetim</td><td>19/19 Light Parity Audit tam kanıt zinciriyle tamamlandı.</td></tr><tr><td>✅ Kalite Kapıları</td><td>PHPCS, Plugin Check, PHPUnit — 0 hata, tam suite geçişi.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detaylar">Detaylar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.10.0-release-summary#detaylar" class="hash-link" aria-label="Detaylar doğrudan bağlantı" title="Detaylar doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu sürüm, MHM Rentiva'nın blok ve kısa kod çıktılarını birbirinin aynısı haline getiren kapsamlı bir stabilizasyon çalışmasının ürünüdür. Artık aynı içerik hem Gutenberg bloğu hem de <code>[mhm_rentiva_*]</code> kısa kodu olarak eklendiğinde birebir aynı HTML çıktısı ve davranış elde edilmektedir.</p>
-<p>Kalite kapıları post-bump olarak doğrulandı:</p>
-<table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPCS</td><td>✅ 0 hata</td></tr><tr><td>Plugin Check</td><td>✅ PASS (exit code 0)</td></tr><tr><td>PHPUnit</td><td>✅ 216 test, 0 başarısızlık</td></tr></tbody></table>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>gutenberg</category>
-            <category>blocks</category>
-            <category>shortcode</category>
             <category>mhm-rentiva</category>
         </item>
     </channel>
