@@ -4,10 +4,59 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 27 Apr 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 29 Apr 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v4.33.1 — Search Polish & Vendor Name Fix]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release</guid>
+            <pubDate>Wed, 29 Apr 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[A focused patch bundling three fixes around vehicle admin and the Featured Vehicles surface — the Lifecycle meta box now identifies the vendor by name, the Featured Vehicles slider stops flickering on short lists, and Featured Vehicles gains a "View All" link in parity with Vehicles Grid.]]></description>
+            <content:encoded><![CDATA[<p>A focused patch bundling three fixes around vehicle admin and the Featured Vehicles surface — the Lifecycle meta box now identifies the vendor by name, the Featured Vehicles slider stops flickering on short lists, and Featured Vehicles gains a "View All" link in parity with Vehicles Grid.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-release-exists">Why this release exists<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#why-this-release-exists" class="hash-link" aria-label="Direct link to Why this release exists" title="Direct link to Why this release exists" translate="no">​</a></h2>
+<p>Three small frictions had been piling up:</p>
+<ol>
+<li class="">The Lifecycle meta box on the vehicle edit screen rendered the vendor's reliability score (e.g. <em>Vendor Score: 100/100 — Excellent</em>) without saying which vendor the score belonged to. Admins had to cross-reference the users list to find out.</li>
+<li class="">The Featured Vehicles slider used Swiper's <code>loop: true</code> unconditionally. On short lists (slide count ≤ columns × 2) Swiper's loop algorithm doesn't have enough duplicate slides to cycle, and the slider rotates through blank frames.</li>
+<li class="">Vehicles Grid had a <em>View All</em> link below the grid (<code>view_all_url</code> / <code>view_all_text</code> attributes); Featured Vehicles did not. Two shortcodes that should behave consistently were not.</li>
+</ol>
+<p>This release fixes all three.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="changes">Changes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#changes" class="hash-link" aria-label="Direct link to Changes" title="Direct link to Changes" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed-lifecycle-meta-box-now-identifies-the-vendor-by-name">Fixed: Lifecycle meta box now identifies the vendor by name<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#fixed-lifecycle-meta-box-now-identifies-the-vendor-by-name" class="hash-link" aria-label="Direct link to Fixed: Lifecycle meta box now identifies the vendor by name" title="Direct link to Fixed: Lifecycle meta box now identifies the vendor by name" translate="no">​</a></h3>
+<p><code>src/Admin/Vehicle/Meta/LifecycleMetaBox.php</code> now resolves the vendor from <code>$post-&gt;post_author</code> and renders a <strong>Vendor:</strong> row above the reliability score:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Status: Active</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Started: 30 Mar 2026</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Expires: 28 Jun 2026 (60 days)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">────────────────────────</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Vendor: Acme Filo Kiralama</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Vendor Score: 100/100 — Excellent</span><br></span></code></pre></div></div>
+<p>Resolution chain: <code>$user-&gt;display_name</code> → <code>$user-&gt;user_login</code> (fallback when display name is empty). The vendor row is never blank for a non-zero <code>post_author</code>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed-featured-vehicles-slider-stops-flickering-on-short-lists">Fixed: Featured Vehicles slider stops flickering on short lists<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#fixed-featured-vehicles-slider-stops-flickering-on-short-lists" class="hash-link" aria-label="Direct link to Fixed: Featured Vehicles slider stops flickering on short lists" title="Direct link to Fixed: Featured Vehicles slider stops flickering on short lists" translate="no">​</a></h3>
+<p><code>assets/js/frontend/featured-vehicles.js</code> now counts <code>.swiper-slide</code> elements on the page before initializing Swiper, and only enables <code>loop: true</code> when there are more slides than <code>columns × 2</code>:</p>
+<div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> slideCount </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> container</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access" style="color:#d73a49">find</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'.swiper-slide'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">length</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> enableLoop </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> slideCount </span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> columns </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">Swiper</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">container</span><span class="token punctuation" style="color:#393A34">[</span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token literal-property property" style="color:#36acaa">loop</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> enableLoop</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>Few slides = plain swipe (no loop, no flicker). Many slides = infinite loop (the original behavior). Automatic; no user-facing setting.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="added-view_all_url-and-view_all_text-for-featured-vehicles">Added: <code>view_all_url</code> and <code>view_all_text</code> for Featured Vehicles<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#added-view_all_url-and-view_all_text-for-featured-vehicles" class="hash-link" aria-label="Direct link to added-view_all_url-and-view_all_text-for-featured-vehicles" title="Direct link to added-view_all_url-and-view_all_text-for-featured-vehicles" translate="no">​</a></h3>
+<p>Parity with Vehicles Grid. Three surfaces:</p>
+<p><strong>Shortcode:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[rentiva_featured_vehicles limit="6" view_all_url="/vehicles/" view_all_text="See All Cars"]</span><br></span></code></pre></div></div>
+<p><strong>Elementor widget:</strong> Two new fields in the <em>Carousel Options</em> panel (<em>View All URL</em> and <em>View All Button Text</em>).</p>
+<p><strong>Gutenberg block:</strong> Two new TextControls in Inspector Controls (visible after a URL is entered).</p>
+<p>The link renders in the template footer when <code>view_all_url</code> is non-empty. Default text is "View All Vehicles" (translatable).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<ul>
+<li class="">822 → <strong>824 PHPUnit</strong> (+2: <code>lifecycle_meta_box_renders_vendor_display_name</code>, <code>lifecycle_meta_box_falls_back_to_user_login_when_display_name_is_empty</code>)</li>
+<li class=""><code>FeaturedVehiclesDefaultsParityTest</code> extended with two new mappings (<code>view_all_url</code>, <code>view_all_text</code>)</li>
+<li class="">PHPCS: 0 errors across the six changed files</li>
+<li class="">i18n: 2 new strings (<em>Vendor:</em>, <em>Adds a "View All" link below the carousel...</em>) with Turkish translations; existing <em>View All Vehicles</em> / <em>View All URL</em> / <em>View All Button Text</em> translations reused from Vehicles Grid via <code>msgmerge</code> (fuzzy=0)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compatibility">Compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#compatibility" class="hash-link" aria-label="Direct link to Compatibility" title="Direct link to Compatibility" translate="no">​</a></h2>
+<p>No license-server upgrade required. Drop-in replacement for v4.33.0.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="links">Links<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.1-release#links" class="hash-link" aria-label="Direct link to Links" title="Direct link to Links" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.33.1" target="_blank" rel="noopener noreferrer" class="">GitHub Release</a></li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>ux</category>
+            <category>patch</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.33.0 — Pro Gate Unification]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.33.0-release</link>
@@ -1255,55 +1304,6 @@
             <category>dashboard</category>
             <category>export</category>
             <category>search</category>
-            <category>mhm-rentiva</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.21.2: Vendor Yönetimi ve Finansal Mimari Devrimi]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary</guid>
-            <pubDate>Wed, 11 Mar 2026 16:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva v4.21.2 sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva <strong>v4.21.2</strong> sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="Direct link to 🚀 Öne Çıkan Yenilikler" title="Direct link to 🚀 Öne Çıkan Yenilikler" translate="no">​</a></h2>
-<p>Bu güncelleme, MHM Rentiva'yı sadece bir rezervasyon motoru olmaktan çıkarıp, tam teşekküllü bir pazaryeri (marketplace) ve transfer yönetim platformuna dönüştürüyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-tedarikçi-yönetimi">🏢 Vendor (Tedarikçi) Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-vendor-tedarik%C3%A7i-y%C3%B6netimi" class="hash-link" aria-label="Direct link to 🏢 Vendor (Tedarikçi) Yönetimi" title="Direct link to 🏢 Vendor (Tedarikçi) Yönetimi" translate="no">​</a></h3>
-<p>Artık platformunuzda birden fazla tedarikçiyi yönetebilirsiniz. Her tedarikçi kendi araçlarını, fiyatlandırmasını ve rezervasyonlarını kontrol edebilir.</p>
-<ul>
-<li class=""><strong>Tedarikçi Paneli:</strong> Özelleştirilmiş admin arayüzü.</li>
-<li class=""><strong>Performans Takibi:</strong> Tedarikçi bazlı doluluk ve gelir raporları.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-finansal-mimari">💰 Yeni Finansal Mimari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-yeni-finansal-mimari" class="hash-link" aria-label="Direct link to 💰 Yeni Finansal Mimari" title="Direct link to 💰 Yeni Finansal Mimari" translate="no">​</a></h3>
-<p>Ödeme yönetimi ve komisyon hesaplamaları tamamen standardize edildi.</p>
-<ul>
-<li class=""><strong>Commission Management:</strong> Esnek komisyon oranları ve otomatik hesaplama.</li>
-<li class=""><strong>Ledger System:</strong> Tüm finansal hareketlerin şeffaf bir şekilde kaydedildiği muhasebe defteri.</li>
-<li class=""><strong>Payouts:</strong> Tedarikçi ödemelerinin merkezi takibi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü">🚐 VIP Transfer Modülü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-vip-transfer-mod%C3%BCl%C3%BC" class="hash-link" aria-label="Direct link to 🚐 VIP Transfer Modülü" title="Direct link to 🚐 VIP Transfer Modülü" translate="no">​</a></h3>
-<p>Noktadan noktaya rota bazlı fiyatlandırma ve rezervasyon sistemi.</p>
-<ul>
-<li class=""><strong>Rota Bazlı Fiyatlandırma:</strong> Mesafe veya rota bazlı dinamik fiyat tanımlama.</li>
-<li class=""><strong>Transfer Rezervasyonu:</strong> Araç kiralama akışından bağımsız, optimize edilmiş transfer deneyimi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler-ve-güvenlik">🛠️ Teknik İyileştirmeler ve Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler-ve-g%C3%BCvenlik" class="hash-link" aria-label="Direct link to 🛠️ Teknik İyileştirmeler ve Güvenlik" title="Direct link to 🛠️ Teknik İyileştirmeler ve Güvenlik" translate="no">​</a></h2>
-<p>Sadece özellik değil, altyapı olarak da güçlendik:</p>
-<ul>
-<li class=""><strong>Hardened REST API:</strong> <code>SecurityHelper</code> ve <code>AuthHelper</code> ile API uç noktaları daha güvenli hale getirildi.</li>
-<li class=""><strong>WP 6.7+ Uyumlu:</strong> En son WordPress sürümleriyle tam uyumluluk ve performans optimizasyonu.</li>
-<li class=""><strong>Modern Gereksinimler:</strong> Minimum PHP 8.1+ ve WP 6.7+ standartlarına geçiş yapıldı.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 📋 Değişiklik Kaydı" title="Direct link to 📋 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni Modül</td><td>Vendor Yönetim Sistemi (Multi-vendor desteği).</td></tr><tr><td>💸 Finans</td><td>Gelişmiş finansal mimari, komisyon ve defter (ledger) sistemi.</td></tr><tr><td>🛫 Transfer</td><td>VIP Transfer modülü ve rota bazlı fiyatlandırma motoru.</td></tr><tr><td>🛡️ Güvenlik</td><td>REST API güvenlik katmanları (<code>AuthHelper</code> entegrasyonu).</td></tr><tr><td>🚀 Performans</td><td>PHP 8.1+ optimizasyonu ve autoloader iyileştirmeleri.</td></tr><tr><td>🧹 Paketleme</td><td><code>.distignore</code> ile optimize edilmiş, tertemiz eklenti paketi yapısı.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.21.2-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Direct link to Sürüm Notları" title="Direct link to Sürüm Notları" translate="no">​</a></h3>
-<p>Bu sürüm, <code>mhm-rentiva</code> ekosisteminde bugüne kadar yapılmış en kapsamlı modüler genişletmedir. Modüller arası veri bütünlüğü <code>Util::has_overlap()</code> ve <code>DepositCalculator</code> gibi merkezi sınıflar üzerinden garanti altına alınmıştır.</p>
-<hr>
-<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>vendor</category>
-            <category>finance</category>
-            <category>payment</category>
-            <category>vip-transfer</category>
             <category>mhm-rentiva</category>
         </item>
     </channel>

@@ -2,11 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-27T18:00:00.000Z</updated>
+    <updated>2026-04-29T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.33.1 — Arama Cilası ve Bayi Adı Düzeltmesi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release"/>
+        <updated>2026-04-29T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Araç yönetimi ve Öne Çıkan Araçlar yüzeyinde üç düzeltmeyi paketleyen odaklı bir patch — Yaşam Döngüsü meta kutusu artık bayiyi adıyla tanıyor, Öne Çıkan Araçlar slider'ı az araçlı listelerde flicker yapmayı bırakıyor, ve Öne Çıkan Araçlar Araç Izgarası ile parite olarak bir "Tümünü Gör" linki kazanıyor.]]></summary>
+        <content type="html"><![CDATA[<p>Araç yönetimi ve Öne Çıkan Araçlar yüzeyinde üç düzeltmeyi paketleyen odaklı bir patch — Yaşam Döngüsü meta kutusu artık bayiyi adıyla tanıyor, Öne Çıkan Araçlar slider'ı az araçlı listelerde flicker yapmayı bırakıyor, ve Öne Çıkan Araçlar Araç Izgarası ile parite olarak bir "Tümünü Gör" linki kazanıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bu-sürüm-neden-var">Bu sürüm neden var<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#bu-s%C3%BCr%C3%BCm-neden-var" class="hash-link" aria-label="Bu sürüm neden var doğrudan bağlantı" title="Bu sürüm neden var doğrudan bağlantı" translate="no">​</a></h2>
+<p>Üç küçük sürtünme birikmişti:</p>
+<ol>
+<li class="">Araç düzenleme ekranındaki Yaşam Döngüsü meta kutusu bayinin güvenilirlik puanını gösteriyordu (ör. <em>Satıcı Skoru: 100/100 — Mükemmel</em>) ama puanın hangi bayiye ait olduğunu söylemiyordu. Admin'ler bayiyi bulmak için kullanıcı listesine geçmek zorundaydı.</li>
+<li class="">Öne Çıkan Araçlar slider'ı Swiper'in <code>loop: true</code> modunu koşulsuz kullanıyordu. Az araçlı listelerde (slide sayısı ≤ columns × 2) Swiper'in loop algoritması yeterli duplicate slide'a sahip olmuyor ve slider boş kareler üzerinde dönüyor.</li>
+<li class="">Araç Izgarası'nın altında bir <em>Tümünü Gör</em> linki vardı (<code>view_all_url</code> / <code>view_all_text</code> özellikleri); Öne Çıkan Araçlar'da yoktu. Tutarlı davranması gereken iki shortcode tutarsızdı.</li>
+</ol>
+<p>Bu sürüm üçünü de çözüyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="değişiklikler">Değişiklikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#de%C4%9Fi%C5%9Fiklikler" class="hash-link" aria-label="Değişiklikler doğrudan bağlantı" title="Değişiklikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltildi-yaşam-döngüsü-meta-kutusu-artık-bayiyi-adıyla-tanıyor">Düzeltildi: Yaşam Döngüsü meta kutusu artık bayiyi adıyla tanıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#d%C3%BCzeltildi-ya%C5%9Fam-d%C3%B6ng%C3%BCs%C3%BC-meta-kutusu-art%C4%B1k-bayiyi-ad%C4%B1yla-tan%C4%B1yor" class="hash-link" aria-label="Düzeltildi: Yaşam Döngüsü meta kutusu artık bayiyi adıyla tanıyor doğrudan bağlantı" title="Düzeltildi: Yaşam Döngüsü meta kutusu artık bayiyi adıyla tanıyor doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>src/Admin/Vehicle/Meta/LifecycleMetaBox.php</code> artık <code>$post-&gt;post_author</code>'dan bayiyi çözüp güvenilirlik puanının üstünde bir <strong>Satıcı:</strong> satırı render ediyor:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Durum: Aktif</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Başlangıç: 30 Mar 2026</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Bitiş: 28 Haz 2026 (60 gün)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">────────────────────────</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Satıcı: Acme Filo Kiralama</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Satıcı Skoru: 100/100 — Mükemmel</span><br></span></code></pre></div></div>
+<p>Çözümleme zinciri: <code>$user-&gt;display_name</code> → <code>$user-&gt;user_login</code> (display_name boşsa fallback). Sıfır olmayan <code>post_author</code> için bayi satırı asla boş görünmez.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltildi-öne-çıkan-araçlar-sliderı-az-araçlı-listelerde-flicker-yapmıyor">Düzeltildi: Öne Çıkan Araçlar slider'ı az araçlı listelerde flicker yapmıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#d%C3%BCzeltildi-%C3%B6ne-%C3%A7%C4%B1kan-ara%C3%A7lar-slider%C4%B1-az-ara%C3%A7l%C4%B1-listelerde-flicker-yapm%C4%B1yor" class="hash-link" aria-label="Düzeltildi: Öne Çıkan Araçlar slider'ı az araçlı listelerde flicker yapmıyor doğrudan bağlantı" title="Düzeltildi: Öne Çıkan Araçlar slider'ı az araçlı listelerde flicker yapmıyor doğrudan bağlantı" translate="no">​</a></h3>
+<p><code>assets/js/frontend/featured-vehicles.js</code> artık Swiper başlatılmadan önce sayfadaki <code>.swiper-slide</code> elementlerini sayıyor ve <code>loop: true</code>'yu yalnızca slide sayısı <code>columns × 2</code>'den fazlaysa açıyor:</p>
+<div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> slideCount </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> container</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access" style="color:#d73a49">find</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'.swiper-slide'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">length</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> enableLoop </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> slideCount </span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> columns </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">Swiper</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">container</span><span class="token punctuation" style="color:#393A34">[</span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token literal-property property" style="color:#36acaa">loop</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> enableLoop</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>Az slide = düz kaydırma (loop yok, flicker yok). Çok slide = sonsuz loop (orijinal davranış). Otomatik; kullanıcı tarafında ayar yok.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="eklendi-öne-çıkan-araçlar-için-view_all_url-ve-view_all_text">Eklendi: Öne Çıkan Araçlar için <code>view_all_url</code> ve <code>view_all_text</code><a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#eklendi-%C3%B6ne-%C3%A7%C4%B1kan-ara%C3%A7lar-i%C3%A7in-view_all_url-ve-view_all_text" class="hash-link" aria-label="eklendi-öne-çıkan-araçlar-için-view_all_url-ve-view_all_text doğrudan bağlantı" title="eklendi-öne-çıkan-araçlar-için-view_all_url-ve-view_all_text doğrudan bağlantı" translate="no">​</a></h3>
+<p>Araç Izgarası ile parite. Üç yüzey:</p>
+<p><strong>Shortcode:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[rentiva_featured_vehicles limit="6" view_all_url="/araclar/" view_all_text="Tüm Araçları Gör"]</span><br></span></code></pre></div></div>
+<p><strong>Elementor widget:</strong> <em>Carousel Options</em> panelinde iki yeni alan (<em>View All URL</em> ve <em>View All Button Text</em>).</p>
+<p><strong>Gutenberg blok:</strong> Inspector Controls'te iki yeni TextControl (URL girilince ikincisi görünür).</p>
+<p><code>view_all_url</code> boş değilse template footer'ında link render ediliyor. Varsayılan metin "Tüm Araçları Görüntüle" (çevrilebilir).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">822 → <strong>824 PHPUnit</strong> (+2: <code>lifecycle_meta_box_renders_vendor_display_name</code>, <code>lifecycle_meta_box_falls_back_to_user_login_when_display_name_is_empty</code>)</li>
+<li class=""><code>FeaturedVehiclesDefaultsParityTest</code> iki yeni mapping ile genişletildi (<code>view_all_url</code>, <code>view_all_text</code>)</li>
+<li class="">PHPCS: değişen 6 dosyada 0 hata</li>
+<li class="">i18n: 2 yeni string (<em>Satıcı:</em>, <em>Galerinin altına "Tümünü Gör" linki ekler...</em>) Türkçe çevirileriyle; mevcut <em>Tüm Araçları Görüntüle</em> / <em>Tümünü Gör URL'si</em> / <em>Tümünü Gör Düğme Metni</em> çevirileri Araç Izgarası'ndan <code>msgmerge</code> ile reuse edildi (fuzzy=0)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="uyumluluk">Uyumluluk<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#uyumluluk" class="hash-link" aria-label="Uyumluluk doğrudan bağlantı" title="Uyumluluk doğrudan bağlantı" translate="no">​</a></h2>
+<p>Lisans-sunucu güncellemesi gerektirmez. v4.33.0 için drop-in yedek.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bağlantılar">Bağlantılar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.1-release#ba%C4%9Flant%C4%B1lar" class="hash-link" aria-label="Bağlantılar doğrudan bağlantı" title="Bağlantılar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.33.1" target="_blank" rel="noopener noreferrer" class="">GitHub Release</a></li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="ux" term="ux"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.33.0 — Pro Gate Unification]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.33.0-release</id>
@@ -1330,59 +1383,6 @@
         <category label="dashboard" term="dashboard"/>
         <category label="export" term="export"/>
         <category label="search" term="search"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.21.2: Vendor Yönetimi ve Finansal Mimari Devrimi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary"/>
-        <updated>2026-03-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva v4.21.2 sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva <strong>v4.21.2</strong> sürümü yayınlandı! Bu sürüm, eklentinin ticaret ve operasyon yeteneklerini kökten değiştiren "Vendor Management", "Financial Architecture" ve "VIP Transfer" modüllerini beraberinde getiriyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilikler">🚀 Öne Çıkan Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilikler" class="hash-link" aria-label="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" title="🚀 Öne Çıkan Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<p>Bu güncelleme, MHM Rentiva'yı sadece bir rezervasyon motoru olmaktan çıkarıp, tam teşekküllü bir pazaryeri (marketplace) ve transfer yönetim platformuna dönüştürüyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vendor-tedarikçi-yönetimi">🏢 Vendor (Tedarikçi) Yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-vendor-tedarik%C3%A7i-y%C3%B6netimi" class="hash-link" aria-label="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" title="🏢 Vendor (Tedarikçi) Yönetimi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Artık platformunuzda birden fazla tedarikçiyi yönetebilirsiniz. Her tedarikçi kendi araçlarını, fiyatlandırmasını ve rezervasyonlarını kontrol edebilir.</p>
-<ul>
-<li class=""><strong>Tedarikçi Paneli:</strong> Özelleştirilmiş admin arayüzü.</li>
-<li class=""><strong>Performans Takibi:</strong> Tedarikçi bazlı doluluk ve gelir raporları.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-finansal-mimari">💰 Yeni Finansal Mimari<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-yeni-finansal-mimari" class="hash-link" aria-label="💰 Yeni Finansal Mimari doğrudan bağlantı" title="💰 Yeni Finansal Mimari doğrudan bağlantı" translate="no">​</a></h3>
-<p>Ödeme yönetimi ve komisyon hesaplamaları tamamen standardize edildi.</p>
-<ul>
-<li class=""><strong>Commission Management:</strong> Esnek komisyon oranları ve otomatik hesaplama.</li>
-<li class=""><strong>Ledger System:</strong> Tüm finansal hareketlerin şeffaf bir şekilde kaydedildiği muhasebe defteri.</li>
-<li class=""><strong>Payouts:</strong> Tedarikçi ödemelerinin merkezi takibi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vip-transfer-modülü">🚐 VIP Transfer Modülü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-vip-transfer-mod%C3%BCl%C3%BC" class="hash-link" aria-label="🚐 VIP Transfer Modülü doğrudan bağlantı" title="🚐 VIP Transfer Modülü doğrudan bağlantı" translate="no">​</a></h3>
-<p>Noktadan noktaya rota bazlı fiyatlandırma ve rezervasyon sistemi.</p>
-<ul>
-<li class=""><strong>Rota Bazlı Fiyatlandırma:</strong> Mesafe veya rota bazlı dinamik fiyat tanımlama.</li>
-<li class=""><strong>Transfer Rezervasyonu:</strong> Araç kiralama akışından bağımsız, optimize edilmiş transfer deneyimi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-teknik-i̇yileştirmeler-ve-güvenlik">🛠️ Teknik İyileştirmeler ve Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#%EF%B8%8F-teknik-i%CC%87yile%C5%9Ftirmeler-ve-g%C3%BCvenlik" class="hash-link" aria-label="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" title="🛠️ Teknik İyileştirmeler ve Güvenlik doğrudan bağlantı" translate="no">​</a></h2>
-<p>Sadece özellik değil, altyapı olarak da güçlendik:</p>
-<ul>
-<li class=""><strong>Hardened REST API:</strong> <code>SecurityHelper</code> ve <code>AuthHelper</code> ile API uç noktaları daha güvenli hale getirildi.</li>
-<li class=""><strong>WP 6.7+ Uyumlu:</strong> En son WordPress sürümleriyle tam uyumluluk ve performans optimizasyonu.</li>
-<li class=""><strong>Modern Gereksinimler:</strong> Minimum PHP 8.1+ ve WP 6.7+ standartlarına geçiş yapıldı.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni Modül</td><td>Vendor Yönetim Sistemi (Multi-vendor desteği).</td></tr><tr><td>💸 Finans</td><td>Gelişmiş finansal mimari, komisyon ve defter (ledger) sistemi.</td></tr><tr><td>🛫 Transfer</td><td>VIP Transfer modülü ve rota bazlı fiyatlandırma motoru.</td></tr><tr><td>🛡️ Güvenlik</td><td>REST API güvenlik katmanları (<code>AuthHelper</code> entegrasyonu).</td></tr><tr><td>🚀 Performans</td><td>PHP 8.1+ optimizasyonu ve autoloader iyileştirmeleri.</td></tr><tr><td>🧹 Paketleme</td><td><code>.distignore</code> ile optimize edilmiş, tertemiz eklenti paketi yapısı.</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürüm-notları">Sürüm Notları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.21.2-release-summary#s%C3%BCr%C3%BCm-notlar%C4%B1" class="hash-link" aria-label="Sürüm Notları doğrudan bağlantı" title="Sürüm Notları doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu sürüm, <code>mhm-rentiva</code> ekosisteminde bugüne kadar yapılmış en kapsamlı modüler genişletmedir. Modüller arası veri bütünlüğü <code>Util::has_overlap()</code> ve <code>DepositCalculator</code> gibi merkezi sınıflar üzerinden garanti altına alınmıştır.</p>
-<hr>
-<p>MHM Rentiva hakkında daha fazla bilgi ve dokümantasyon için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edebilirsiniz.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="update" term="update"/>
-        <category label="vendor" term="vendor"/>
-        <category label="finance" term="finance"/>
-        <category label="payment" term="payment"/>
-        <category label="vip-transfer" term="vip-transfer"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
 </feed>
