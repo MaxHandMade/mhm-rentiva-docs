@@ -4,10 +4,69 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 30 Apr 2026 00:15:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 30 Apr 2026 00:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v4.35.0 — Vendor Report & Appeal System]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release</guid>
+            <pubDate>Thu, 30 Apr 2026 00:30:00 GMT</pubDate>
+            <description><![CDATA[A shared infrastructure for vendor → admin reports lands in v4.35.0. Five contexts, one custom table, one shared modal, one admin "Bayi Raporları" page. Plus the withdrawal/pause reason capture flow: when a vendor withdraws a vehicle and explains why, the penalty is suspended until an admin reviews the appeal — accept, the vendor keeps their score; reject, the penalty applies retroactively.]]></description>
+            <content:encoded><![CDATA[<p>A shared infrastructure for vendor → admin reports lands in v4.35.0. Five contexts, one custom table, one shared modal, one admin "Bayi Raporları" page. Plus the <strong>withdrawal/pause reason capture</strong> flow: when a vendor withdraws a vehicle and explains why, the penalty is suspended until an admin reviews the appeal — accept, the vendor keeps their score; reject, the penalty applies retroactively.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why">Why<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#why" class="hash-link" aria-label="Direct link to Why" title="Direct link to Why" translate="no">​</a></h2>
+<p>Until v4.35.0 vendors had no structured way to talk back to the admin. Booking issues (no-show customer, damage), vehicle actions that triggered automatic penalties, score deductions they thought were unfair — all of these went straight to email or Slack, off the platform. The marketplace had a one-way feedback loop.</p>
+<p>v4.35.0 closes the loop with a single piece of shared infrastructure. The same modal, table, and admin page handle all five contexts. The only thing that varies is the trigger location and the side-effect on resolution.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-five-contexts">The five contexts<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#the-five-contexts" class="hash-link" aria-label="Direct link to The five contexts" title="Direct link to The five contexts" translate="no">​</a></h2>
+<table><thead><tr><th style="text-align:left">Context</th><th style="text-align:left">When</th><th style="text-align:left">Trigger</th><th style="text-align:left">Resolution side-effect</th></tr></thead><tbody><tr><td style="text-align:left"><code>booking</code></td><td style="text-align:left">Customer issue (no-show, damage, dispute)</td><td style="text-align:left">"Sorun Bildir" on the vendor booking card (button existed since v4.26.5, JS now wired)</td><td style="text-align:left">None — informational</td></tr><tr><td style="text-align:left"><code>vehicle</code></td><td style="text-align:left">Appeal a paused/withdrawn vehicle action</td><td style="text-align:left">"İtiraz Et" on listings page (paused/withdrawn states only)</td><td style="text-align:left">None — admin guidance</td></tr><tr><td style="text-align:left"><code>vehicle_action</code></td><td style="text-align:left"><strong>Reason capture during withdraw/pause</strong></td><td style="text-align:left">Modal automatically opens when a vendor clicks Withdraw or Pause</td><td style="text-align:left">Reject → deferred penalty applied; resolve → vendor keeps score</td></tr><tr><td style="text-align:left"><code>penalty</code></td><td style="text-align:left">Appeal an already-applied penalty</td><td style="text-align:left">"Appeal" button on each penalty row in score history</td><td style="text-align:left">(v4.36.0+ — ledger compensating entry helper)</td></tr><tr><td style="text-align:left"><code>general</code></td><td style="text-align:left">"Yöneticiye Yaz" — direct line to admin</td><td style="text-align:left">Footer link on every vendor panel page</td><td style="text-align:left">None</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-not-2-augment--withdrawal-reason-capture">The Not 2 augment — withdrawal reason capture<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#the-not-2-augment--withdrawal-reason-capture" class="hash-link" aria-label="Direct link to The Not 2 augment — withdrawal reason capture" title="Direct link to The Not 2 augment — withdrawal reason capture" translate="no">​</a></h2>
+<p>Before v4.35.0, withdrawing a vehicle meant a <code>confirm()</code> dialog ("Are you sure? A penalty may apply.") and an immediate score deduction + ledger debit. There was no way to tell the platform why the vehicle had to leave.</p>
+<p>Now the lifecycle JS captures the reason in a proper modal and POSTs it alongside the <code>mhm_vehicle_lifecycle_withdraw</code> AJAX call. The AJAX handler creates a <code>vehicle_action</code> report <strong>before</strong> calling the Manager. Inside the Manager, a new filter — <code>mhm_rentiva_before_apply_penalty</code> — fires:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$apply_penalty = (bool) apply_filters(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_before_apply_penalty',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $vehicle_id,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $vendor_id,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'withdrawal',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $penalty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if ($apply_penalty) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ReliabilityScoreCalculator::update($vendor_id, 'withdraw', $vehicle_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>The same filter wraps <code>PenaltyRecorder::record_penalty()</code> so the ledger debit stays in lockstep with the score. <code>PenaltySuspensionHook::maybe_suspend()</code> returns <code>false</code> when an open <code>vehicle_action</code> report exists for the vendor + vehicle pair.</p>
+<p>State and side-effects are decoupled: the vehicle still transitions to <code>withdrawn</code> (post status, lifecycle meta, cooldown date — all set), but the score and ledger are paused. When the admin resolves the report:</p>
+<ul>
+<li class=""><strong>Resolved</strong> (vendor wins) — no-op. Score and ledger were never touched. The vendor lost zero points and zero TL.</li>
+<li class=""><strong>Rejected</strong> — <code>VendorReportService::apply_deferred_penalty()</code> calls <code>ReliabilityScoreCalculator::update()</code> to recompute (the withdrawal is in state, so the score now drops) and re-runs <code>PenaltyRecorder::record_penalty()</code> to write the ledger debit. The penalty applies retroactively.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture-in-one-paragraph">Architecture in one paragraph<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#architecture-in-one-paragraph" class="hash-link" aria-label="Direct link to Architecture in one paragraph" title="Direct link to Architecture in one paragraph" translate="no">​</a></h2>
+<p><code>VendorReportRepository</code> is the DB layer (CRUD on the new <code>wp_mhm_rentiva_vendor_reports</code> custom table; per-request <code>has_open_report_for()</code> cache so the dual filter hook costs one DB query). <code>VendorReportService</code> is the business layer (validation, FSM, side-effects, hook firing for emails). <code>VendorReportAjaxHandler</code> is the transport. <code>PenaltySuspensionHook</code> is the bridge to the existing penalty pipeline. <code>VendorReportsAdminPage</code> is the admin UI. <code>VendorReportAssets</code> enqueues the shared modal and JS on every vendor-facing page. The only thing that touches multiple layers is the filter hook itself, and that's deliberate — the hook is the seam between the vendor-report subsystem and the lifecycle subsystem.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="plan-vs-codebase-reconciliation">Plan-vs-codebase reconciliation<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#plan-vs-codebase-reconciliation" class="hash-link" aria-label="Direct link to Plan-vs-codebase reconciliation" title="Direct link to Plan-vs-codebase reconciliation" translate="no">​</a></h2>
+<p>The original plan was written 2026-04-15 and assumed nine things about the codebase that turned out to be false. A comprehensive pre-implementation audit caught all of them:</p>
+<ol>
+<li class=""><code>src/Admin/Penalty/</code> directory — does not exist; penalty code lives in <code>src/Admin/Vehicle/</code>.</li>
+<li class=""><code>PenaltyService::cancel()</code> / <code>apply_pending()</code> — no such class. Removed from design; service layer calls <code>ReliabilityScoreCalculator</code> and <code>PenaltyRecorder</code> directly.</li>
+<li class=""><code>mhm_rentiva_before_apply_penalty</code> filter — did not exist. Introduced in this release.</li>
+<li class=""><code>penalty_record_id</code> is BIGINT — penalties are anonymous ledger entries with UUIDs. Schema changed to <code>VARCHAR(64) context_id</code>.</li>
+<li class="">Score deduction is hook-suspendable — actually synchronous before any hook fires. Filter must wrap the score update inline.</li>
+<li class="">Migration file <code>0042_create_vendor_reports.php</code> — no sequential numbering convention. Renamed <code>VendorReportsMigration</code>, registered via <code>DatabaseMigrator::run_migrations()</code> after <code>CURRENT_VERSION</code> bump.</li>
+<li class="">"Sorun Bildir" button needs adding to vendor-bookings.php — already exists since v4.26.5. Build sequence simplified.</li>
+<li class="">"Report Issue" string needs adding to .po — already translated. List trimmed.</li>
+<li class="">No Mode gating mentioned — <code>Mode::canUseVendorMarketplace()</code> required on all new admin pages, AJAX handlers, email registrations, and asset enqueues.</li>
+</ol>
+<p>The user explicitly requested "Vendor ile ilgili tüm dosyaları detaylı incele. Eksik, gözden kaçan bir şey olmasın" before implementation began. That nudge is what surfaced these. Plan files written months earlier are not authoritative; the codebase is.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<ul>
+<li class="">PHPUnit: 840 → 864 (+24 — Repository 10, Service 8, PenaltySuspensionHook 6)</li>
+<li class="">PHPCS: 0 errors</li>
+<li class="">Runtime smoke test: admin "Bayi Raporları" page renders, all status + context filters in TR, empty state correctly shown, full migration applied via <code>DatabaseMigrator</code> on plugin activate.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compatibility">Compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#compatibility" class="hash-link" aria-label="Direct link to Compatibility" title="Direct link to Compatibility" translate="no">​</a></h2>
+<ul>
+<li class="">No license-server upgrade required.</li>
+<li class="">Backwards compatible: lifecycle AJAX submissions without a <code>reason</code> POST parameter behave exactly as in v4.34.x (no report created, normal penalty applied). Older vendors don't break.</li>
+<li class="">Dev sites need <code>define('MHM_RENTIVA_DEV_PRO', true);</code> in <code>wp-config.php</code> to bypass the Pro gate while testing.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-next">What's next<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.35.0-release#whats-next" class="hash-link" aria-label="Direct link to What's next" title="Direct link to What's next" translate="no">​</a></h2>
+<p>The roadmap continues with the <strong>transfer wave</strong>: v4.36.0 adds context-aware add-ons (extending <code>vehicle_addon</code> CPT with an <code>addon_context</code> taxonomy), v4.37.0 adds a transfer-locations map view. After that the <strong>vendor wave</strong> picks up — directory page (v4.38.0) and the long-deferred Phase 5 vendor public profile (v4.39.0).</p>
+<p>— <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.35.0" target="_blank" rel="noopener noreferrer" class="">GitHub release</a></p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>vendor</category>
+            <category>marketplace</category>
+            <category>penalty</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.34.2 — Transfer-card icon styling hotfix]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.34.2-release</link>
@@ -1201,56 +1260,6 @@
             <category>checkout</category>
             <category>cart</category>
             <category>booking</category>
-            <category>bugfix</category>
-            <category>mhm-rentiva</category>
-        </item>
-        <item>
-            <title><![CDATA[MHM Rentiva v4.26.0: Depozito Rezervasyonlarında Kalan Ödeme]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary</guid>
-            <pubDate>Tue, 07 Apr 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.]]></description>
-            <content:encoded><![CDATA[<p>v4.26.0, depozito ile oluşturulan rezervasyonlarda müşterilerin kalan bakiyeyi doğrudan Hesabım ekranından ödeyebilmesini sağlıyor. WooCommerce'in native ödeme altyapısı kullanıldığından aktif tüm ödeme yöntemleri otomatik olarak çalışıyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-yenilik">🚀 Öne Çıkan Yenilik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-yenilik" class="hash-link" aria-label="Direct link to 🚀 Öne Çıkan Yenilik" title="Direct link to 🚀 Öne Çıkan Yenilik" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kalan-ödeme--depozito-rezervasyonları-için">💳 Kalan Ödeme — Depozito Rezervasyonları için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-kalan-%C3%B6deme--depozito-rezervasyonlar%C4%B1-i%C3%A7in" class="hash-link" aria-label="Direct link to 💳 Kalan Ödeme — Depozito Rezervasyonları için" title="Direct link to 💳 Kalan Ödeme — Depozito Rezervasyonları için" translate="no">​</a></h3>
-<p>Depozito ile rezervasyon oluşturulduğunda kalan bakiye daha önce yalnızca manuel takip ya da operatörle iletişim gerektiriyordu. v4.26.0 ile müşteriler bu adımı tamamen kendi başlarına tamamlayabiliyor.</p>
-<p><strong>Nasıl çalışır:</strong></p>
-<ol>
-<li class="">Müşteri <strong>Hesabım → Rezervasyon Detayı</strong> sayfasına gider</li>
-<li class="">Kalan bakiye &gt; 0 ise <strong>"Kalan Ödemeyi Yap"</strong> butonu görünür</li>
-<li class="">Butona tıklandığında tam tutar için minimal bir WC siparişi arka planda oluşturulur</li>
-<li class="">Müşteri WooCommerce'in native order-pay sayfasına yönlendirilir</li>
-<li class="">Ödeme başarılı olduğunda rezervasyon güncellenir: kalan bakiye sıfırlanır, durum onaylanır</li>
-</ol>
-<p><strong>Teknik özellikler:</strong></p>
-<ul>
-<li class=""><code>RemainingPaymentHandler</code> — AJAX endpoint, nonce + sahiplik doğrulaması</li>
-<li class=""><strong>Tekrar sipariş koruması:</strong> Bekleyen kalan ödeme siparişi varsa yeni sipariş oluşturulmaz, mevcut sipariş yeniden kullanılır (<code>_mhm_remaining_order_id</code> meta)</li>
-<li class=""><strong>HPOS uyumlu:</strong> Tüm WC sipariş işlemleri <code>$order-&gt;update_meta_data() + $order-&gt;save()</code> ile yapılır</li>
-<li class=""><code>WooCommerceBridge</code>: processing durumunda <code>_mhm_is_remaining_payment</code> bayrağı varsa <code>_mhm_remaining_amount</code> sıfırlanır</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-hata-düzeltmeleri">🛠️ Hata Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#%EF%B8%8F-hata-d%C3%BCzeltmeleri" class="hash-link" aria-label="Direct link to 🛠️ Hata Düzeltmeleri" title="Direct link to 🛠️ Hata Düzeltmeleri" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="css-kapsam-düzeltmesi">CSS Kapsam Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#css-kapsam-d%C3%BCzeltmesi" class="hash-link" aria-label="Direct link to CSS Kapsam Düzeltmesi" title="Direct link to CSS Kapsam Düzeltmesi" translate="no">​</a></h3>
-<p>Tüm genel hesap sayfası sınıfları (<code>.btn</code>, <code>.booking-item</code>, <code>.stat-card</code> vb.) artık <code>.mhm-rentiva-account-page</code> sarmalayıcısı altına alındı. Bu değişiklik WoodMart, Flatsome gibi premium temalarla yaşanan görsel çakışmaları engelliyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wc-hesabım-izgara-düzeni">WC Hesabım Izgara Düzeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#wc-hesab%C4%B1m-izgara-d%C3%BCzeni" class="hash-link" aria-label="Direct link to WC Hesabım Izgara Düzeni" title="Direct link to WC Hesabım Izgara Düzeni" translate="no">​</a></h3>
-<p>Entegre modda ızgara tabanlı temalarda yaşanan <code>grid-column</code> düzeni sorunu giderildi (<code>grid-column: 1/-1</code>).</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 📋 Değişiklik Kaydı" title="Direct link to 📋 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>✨ Yeni</td><td>Kalan ödeme butonu — Hesabım → Rezervasyon Detayı</td></tr><tr><td>✨ Yeni</td><td><code>RemainingPaymentHandler</code> sınıfı (AJAX + doğrulama)</td></tr><tr><td>✨ Yeni</td><td>Tekrar sipariş koruması (<code>_mhm_remaining_order_id</code> meta)</td></tr><tr><td>🐛 Düzeltme</td><td>CSS kapsam — tüm sınıflar <code>.mhm-rentiva-account-page</code> altına alındı</td></tr><tr><td>🐛 Düzeltme</td><td>WC Hesabım ızgara düzeni (grid-column: 1/-1)</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.0-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="Direct link to 📁 Değiştirilen Dosyalar" title="Direct link to 📁 Değiştirilen Dosyalar" translate="no">​</a></h2>
-<ul>
-<li class=""><code>src/Admin/Payment/WooCommerce/RemainingPaymentHandler.php</code> <em>(yeni)</em></li>
-<li class=""><code>src/Admin/Payment/WooCommerce/WooCommerceBridge.php</code></li>
-<li class=""><code>src/Admin/Frontend/Account/AccountController.php</code></li>
-<li class=""><code>templates/account/booking-detail.php</code></li>
-<li class=""><code>mhm-rentiva.php</code> <em>(versiyon güncelleme)</em></li>
-</ul>
-<hr>
-<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content:encoded>
-            <category>release</category>
-            <category>update</category>
-            <category>payment</category>
-            <category>woocommerce</category>
-            <category>deposit</category>
             <category>bugfix</category>
             <category>mhm-rentiva</category>
         </item>
