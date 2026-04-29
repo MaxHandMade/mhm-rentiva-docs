@@ -87,6 +87,21 @@ A graduated penalty is applied to discourage arbitrary vehicle withdrawals by ve
 
 Deductions are automatically recorded in the ledger and subtracted from the next payout calculation.
 
+### Withdrawal reason capture & appeal (v4.35.0)
+
+Since [v4.35.0](/blog/rentiva-v4.35.0-release), vendors can capture a reason while withdrawing a vehicle. The previous browser `confirm()` dialog has been replaced by the shared **vendor report modal** that prompts for a reason (minimum 20 characters). When a reason is provided:
+
+1. A `vehicle_action` report is filed with `status=open` before the withdrawal AJAX runs.
+2. Inside `VehicleLifecycleManager::withdraw()`, the new `mhm_rentiva_before_apply_penalty` filter checks for the open report. The `PenaltySuspensionHook` callback returns `false`, **suspending both the score deduction and the ledger debit**.
+3. The vehicle still transitions to `withdrawn` (post status, lifecycle meta, cooldown date all set), but the financial penalty is paused pending admin review.
+
+The admin reviews the appeal in **MHM Rentiva → Bayi Raporları**:
+
+- **Resolved** (vendor's reason accepted) → no-op. Score and ledger were never touched. Vendor lost zero points and zero TL.
+- **Rejected** (admin upholds the penalty) → `apply_deferred_penalty()` runs: `ReliabilityScoreCalculator::update()` recomputes (the withdrawal is in state, so score drops), and `PenaltyRecorder::record_penalty()` writes the deferred ledger debit. The penalty applies retroactively.
+
+Submissions without a `reason` POST parameter remain backwards compatible — they apply the penalty immediately as before. See the [Vendor Reports](./vendor-reports) page for the full system documentation.
+
 ---
 
 ## Anti-Gaming: Blocked Date Protection
