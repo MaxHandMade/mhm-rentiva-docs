@@ -2,11 +2,67 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-04-30T00:30:00.000Z</updated>
+    <updated>2026-04-30T01:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.36.0 — Transfer Rezervasyonlarına Ek Hizmet Desteği]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release"/>
+        <updated>2026-04-30T01:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Transfer müşterileri artık ek hizmet seçebiliyor. v4.36.0, mevcut vehicle_addon post type'a bir bağlam taxonomy'si (kiralama / transfer / her ikisi) ve üç fiyatlandırma tipi (rezervasyon başına / günlük / yolcu başına) ekliyor. Müşteri transfer arama sonucunda "Sepete ekle" tuşuna bastığında, ilgili ek hizmetleri canlı çarpan-uyumlu bir toplamla gösteren bir modal açılıyor.]]></summary>
+        <content type="html"><![CDATA[<p>Transfer müşterileri artık ek hizmet seçebiliyor. v4.36.0, mevcut <code>vehicle_addon</code> post type'a bir bağlam taxonomy'si (kiralama / transfer / her ikisi) ve üç fiyatlandırma tipi (rezervasyon başına / günlük / yolcu başına) ekliyor. Müşteri transfer arama sonucunda "Sepete ekle" tuşuna bastığında, ilgili ek hizmetleri canlı çarpan-uyumlu bir toplamla gösteren bir modal açılıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="neden">Neden<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#neden" class="hash-link" aria-label="Neden doğrudan bağlantı" title="Neden doğrudan bağlantı" translate="no">​</a></h2>
+<p>v4.35.0'a kadar ek hizmet sistemi yalnızca kiralama içindi. Transfer sepet ekleme handler'ında <code>'selected_addons' =&gt; array()</code> şeklinde sabit kodlu bir yer tutucu vardı — kiralama akışında müşterinin seçimlerini taşıyan kısım, transferde boş geçiyordu. Bu, transfer üzerinde sıfır ek gelir demekti — çocuk koltuğu yok, ekstra bekleme süresi yok, welcome banner yok, VIP asistan yok. Halihazırda iyi bir ek hizmet kataloğu olan bayiler, bunu transfer tarafında hiç gösteremiyordu.</p>
+<p>v4.36.0 bu açığı <strong>veri modelini ikiye bölmeden</strong> kapatıyor. Tek CPT, tek katalog, bayinin ek hizmetleri yönettiği tek yer. Aynı kayıt bir kiralamayı, bir transferi veya ikisini birden hedefleyebiliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="veri-modeli-kısaca">Veri modeli kısaca<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#veri-modeli-k%C4%B1saca" class="hash-link" aria-label="Veri modeli kısaca doğrudan bağlantı" title="Veri modeli kısaca doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>vehicle_addon</code>'a üç default term'le yeni bir <code>addon_context</code> taxonomy'si eklendi — <code>rental</code>, <code>transfer</code>, <code>both</code> — ve üç enum değerli yeni bir <code>_mhm_addon_pricing_type</code> post meta'sı geldi — <code>per_booking</code> (sabit), <code>per_day</code> (kiralama günü × fiyat), <code>per_passenger</code> (yolcu sayısı × fiyat). Fiyatlandırma tipleri <code>(izin verilen × bağlam)</code> matrisi oluşturuyor: <code>per_day</code> yalnız kiralamada mantıklı, <code>per_passenger</code> yalnız transferde, <code>per_booking</code> ikisinde de çalışır. Admin düzenleme ekranındaki radio metabox, JS tarafından kontrol edilen dinamik select ve sunucu tarafı validatör hepsi aynı kuralı uygular.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="transfer-modalı">Transfer modalı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#transfer-modal%C4%B1" class="hash-link" aria-label="Transfer modalı doğrudan bağlantı" title="Transfer modalı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir arama sonucunun "Sepete ekle" tuşuna tıklanınca, mevcut transfer ek hizmetlerini içeren vanilla-JS bir modal açılır. Zorunlu ek hizmetler önceden işaretli ve kilitli gelir. Opsiyonel olanların yanında fiyatlandırma tipine göre canlı toplam görünür:</p>
+<ul>
+<li class=""><code>per_booking</code> <code>+ 50 ₺</code> gösterir (sabit).</li>
+<li class=""><code>per_passenger</code> <code>+ 15 ₺ × 3 yolcu = 45 ₺</code> gösterir (yolcu sayısıyla canlı çarpılmış).</li>
+</ul>
+<p>Footer satırı genel toplamı tutar: <code>Araç 280 ₺ + ek hizmetler 95 ₺ = 375 ₺</code>. "Vazgeç" hiçbir şey göndermeden modaldan çıkar; "Sepete ekle" seçili ID'leri mevcut araç/origin/destination/tarih payload'ı yanında gönderir.</p>
+<p>Bayi sıfır transfer-bağlamlı ek hizmet yapılandırdıysa modal hiç açılmaz — mevcut direct-add davranışı dokunulmadan devreye girer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hiçbir-zaman-üzerine-yazmayan-migration">Hiçbir zaman üzerine yazmayan migration<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#hi%C3%A7bir-zaman-%C3%BCzerine-yazmayan-migration" class="hash-link" aria-label="Hiçbir zaman üzerine yazmayan migration doğrudan bağlantı" title="Hiçbir zaman üzerine yazmayan migration doğrudan bağlantı" translate="no">​</a></h2>
+<p>Mevcut ek hizmet kayıtları, yükseltme sonrası ilk <code>init</code>'te otomatik olarak <code>rental</code> bağlamına ve <code>per_booking</code> fiyatlandırmasına atanır. Veri şeridi (data lane) bir option flag ile kapatılmıştır ve operatörün önceden ayarladığı bir değeri asla üzerine yazmaz. Flag manuel olarak sıfırlanırsa migration tekrar idempotent şekilde çalışır — operatör override'ları yaşar.</p>
+<p>Bu, codebase'in v4.27.4'ten beri kullandığı schema/data lane ayrımının aynısı: schema şeridi (taxonomy register + default term seed) her istekte normal WP API çağrısı olarak çalışır; data şeridi (legacy backfill) bir kez çalışır ve durur.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tek-fiyat-hesaplayıcı-iki-akış">Tek fiyat hesaplayıcı, iki akış<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#tek-fiyat-hesaplay%C4%B1c%C4%B1-iki-ak%C4%B1%C5%9F" class="hash-link" aria-label="Tek fiyat hesaplayıcı, iki akış doğrudan bağlantı" title="Tek fiyat hesaplayıcı, iki akış doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>AddonPricingCalculator::calculate( $addon_id, $context )</code> tek doğru kaynaktır. Kiralama booking total filter'ı, transfer cart AJAX handler'ı, admin booking detay sayfası, WC order item meta — hepsi bu tek helper'dan geçer. Context array <code>{rental_days?, adults?, children?}</code> şeklindedir; kiralama <code>rental_days</code>'ı doldurur, transfer <code>adults</code> ve <code>children</code>'ı doldurur, hesaplayıcı addon'un fiyatlandırma tipine göre hangisini ihtiyaç duyduğunu seçer.</p>
+<p>Bu, kiralama ve transfer hesabının zamanla birbirinden uzaklaşmasına karşı en ucuz sigortadır.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="lite-limit-değişmedi">Lite limit değişmedi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#lite-limit-de%C4%9Fi%C5%9Fmedi" class="hash-link" aria-label="Lite limit değişmedi doğrudan bağlantı" title="Lite limit değişmedi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Lite hâlâ toplam 4 published ek hizmetle sınırlı — kiralama ve transfer ortak. Bayi slot'ları nasıl bölüştüreceğine karar verir. Admin notice metni bunu netleştirecek şekilde güncellendi ("Lite sürümünde en fazla 4 ek hizmet ekleyebilirsiniz (kiralama + transfer ortak)…").</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇statistikler">İstatistikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#i%CC%87statistikler" class="hash-link" aria-label="İstatistikler doğrudan bağlantı" title="İstatistikler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>PHPUnit:</strong> 864 → <strong>904</strong> (+40, 7 yeni test sınıfı)</li>
+<li class=""><strong>PHPCS:</strong> 0 hata</li>
+<li class=""><strong>Dosyalar:</strong> 7 yeni PHP sınıfı, 3 yeni CSS/JS dosyası, ~10 modify PHP</li>
+<li class=""><strong>i18n:</strong> tüm source EN; Türkçe çeviri <code>mhm-rentiva-tr_TR.po</code>'da; JS string'leri <code>wp_localize_script</code> ile lokalize edildi</li>
+<li class=""><strong>Şema:</strong> <code>CURRENT_VERSION</code> 3.6.0 → 3.7.0</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sıradaki">Sıradaki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#s%C4%B1radaki" class="hash-link" aria-label="Sıradaki doğrudan bağlantı" title="Sıradaki doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>v4.37.0</strong> — Transfer Lokasyonları Harita Görünümü. Ertelenen <code>per_km</code> fiyatlandırma tipi orada gelecek; UX değeri (mesafeyi haritada görselleştirme) bağlamı orada netleşiyor.</li>
+<li class=""><strong>v4.38.0</strong> — Bayi Dizin Sayfası (Dokan-tarzı standalone katalog).</li>
+<li class=""><strong>v4.39.0</strong> — Bayi Profil Sayfası (Vehicle Lifecycle Phase 5'i unblocklar).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bağlantılar">Bağlantılar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.36.0-release#ba%C4%9Flant%C4%B1lar" class="hash-link" aria-label="Bağlantılar doğrudan bağlantı" title="Bağlantılar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.36.0" target="_blank" rel="noopener noreferrer" class="">GitHub release</a></li>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/pull/3" target="_blank" rel="noopener noreferrer" class="">Pull request #3</a></li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="transfer" term="transfer"/>
+        <category label="add-ons" term="add-ons"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.35.0 — Bayi Rapor & İtiraz Sistemi]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.35.0-release</id>
@@ -1284,62 +1340,6 @@
         <category label="uninstall" term="uninstall"/>
         <category label="cli" term="cli"/>
         <category label="migration" term="migration"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.26.1: Araç Detayları, Rezervasyon, Ödeme ve Sepet Görsel Cilası]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary"/>
-        <updated>2026-04-08T09:00:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.]]></summary>
-        <content type="html"><![CDATA[<p>v4.26.1, v4.26.0 ile devreye giren rezervasyon-ödeme akışının üstüne gelen görsel tutarsızlıkları temizliyor. Araç detay sayfasından sepete, sepetten ödeme sayfasına kadar müşterinin gördüğü her ekranda kart, ikon ve hizalama sorunları giderildi. Fonksiyonel bir değişiklik yok — sadece deneyim daha temiz.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-detayları-kenar-çubuğu">🎨 Araç Detayları Kenar Çubuğu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-ara%C3%A7-detaylar%C4%B1-kenar-%C3%A7ubu%C4%9Fu" class="hash-link" aria-label="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" title="🎨 Araç Detayları Kenar Çubuğu doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Özellik etiketleri taşma sorunu:</strong> Vites, yakıt, koltuk sayısı gibi spec chip'leri dar ekranlarda kart kenarından taşıyordu. Artık kart sınırları içinde kalıyor ve uzun etiketler doğru şekilde sarmalanıyor.</li>
-<li class=""><strong>Hibrit yakıt ikonu:</strong> Yakıt türü "hybrid" seçili araçlarda yanlış ikon gösteriliyordu. Doğru simgeyle değiştirildi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-takvim">📅 Takvim<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-takvim" class="hash-link" aria-label="📅 Takvim doğrudan bağlantı" title="📅 Takvim doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Boş satır kaldırıldı:</strong> Takvim bileşeninin altında fazladan bir boş satır render ediliyordu — kaldırıldı.</li>
-<li class=""><strong>Kutu içinde kutu görünümü:</strong> Kenar çubuğunda takvim widget'ının kendi arka planı ile dış kart arka planı iç içe iki kutu izlenimi yaratıyordu. İç kaynağın arka planı nötrleştirildi, artık tek bir kart olarak görünüyor.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-rezervasyon-formu">📝 Rezervasyon Formu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-rezervasyon-formu" class="hash-link" aria-label="📝 Rezervasyon Formu doğrudan bağlantı" title="📝 Rezervasyon Formu doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Araç görseli görünürlüğü:</strong> Form başlığındaki araç görseli açık arka planlarda düşük kontrasta sahipti. Altına bir degrade arka plan eklenerek araç her zaman görünür durumda tutuluyor.</li>
-<li class=""><strong>Kart başlık stili birleşimi:</strong> Rezervasyon formunun farklı bölümleri (tarih, müşteri bilgisi, ek hizmetler, fiyat özeti) birbirinden farklı başlık stillerine sahipti. Tüm bölümler artık aynı başlık tipografisi ve padding değerlerini kullanıyor.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-ödeme-sayfası">💳 Ödeme Sayfası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-%C3%B6deme-sayfas%C4%B1" class="hash-link" aria-label="💳 Ödeme Sayfası doğrudan bağlantı" title="💳 Ödeme Sayfası doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Ödeme yöntemleri dikey:</strong> Çoklu ödeme yöntemi (kart, havale, kapıda ödeme) etkin olduğunda seçenekler yatay olarak sıralanıyor ve mobilde taşıyordu. Artık tek sütun, dikey stack — her ekran genişliğinde tutarlı.</li>
-<li class=""><strong>Kupon alanı ikon:</strong> "Kupon kodunuz var mı?" uyarı satırındaki ikon belirli tema kombinasyonlarında bozuk (kare/?) görünüyordu. İkon emoji ile değiştirildi, her temada render oluyor.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-sepet">🛒 Sepet<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-sepet" class="hash-link" aria-label="🛒 Sepet doğrudan bağlantı" title="🛒 Sepet doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Rezervasyon meta satırlarında yeniden düzen:</strong> Rezervasyon detayları (tarih aralığı, ek hizmetler, teslim lokasyonu) daha önce tek bir cümle içinde virgülle ayrılmış şekilde gösteriliyordu — okunması zor. Artık her bilgi <code>Etiket: Değer</code> formatında ayrı satırlar halinde gösteriliyor.</li>
-<li class=""><strong>Ödemeye git butonu hover:</strong> Buton üzerine gelindiğinde yazı rengi arka planla aynı tonda kalıp okunamıyordu. Hover state rengi düzeltildi, yazı her durumda okunur.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="📋 Değişiklik Kaydı doğrudan bağlantı" title="📋 Değişiklik Kaydı doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Alan</th><th>Açıklama</th></tr></thead><tbody><tr><td>🔧 Araç Detayları</td><td>Spec chip taşma + hibrit yakıt ikonu</td></tr><tr><td>🔧 Takvim</td><td>Fazladan boş satır + kutu içinde kutu görünümü</td></tr><tr><td>🔧 Rezervasyon Formu</td><td>Araç görseli degrade arka plan + kart başlık birleştirme</td></tr><tr><td>🔧 Ödeme</td><td>Dikey ödeme yöntemleri + kupon ikon emoji</td></tr><tr><td>🔧 Sepet</td><td>Meta etiket/değer satırları + ödemeye git hover</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.1-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="⬆️ Güncelleme Notu doğrudan bağlantı" title="⬆️ Güncelleme Notu doğrudan bağlantı" translate="no">​</a></h2>
-<p>v4.26.1 <strong>yalnızca CSS ve şablon düzeltmeleri</strong> içerir — fonksiyonel değişiklik, DB şema güncellemesi veya yeni ayar yoktur. v4.26.0'dan güncellemek için herhangi bir işlem gerekmez:</p>
-<ul>
-<li class="">WordPress admin → Eklentiler → Güncelle</li>
-<li class="">Veya <code>wp plugin update mhm-rentiva --allow-root</code></li>
-</ul>
-<p>Özel tema override'ları yapmadıysanız güncelleme sonrası ek adım gerekmez. Child theme ile <code>cart.php</code>, <code>checkout/form.php</code> veya rezervasyon formu şablonlarını override ettiyseniz, yeni sürümle uyumluluk için şablonlarınızı karşılaştırmanızı öneririz.</p>
-<hr>
-<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="patch" term="patch"/>
-        <category label="ui" term="ui"/>
-        <category label="checkout" term="checkout"/>
-        <category label="cart" term="cart"/>
-        <category label="booking" term="booking"/>
         <category label="bugfix" term="bugfix"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
