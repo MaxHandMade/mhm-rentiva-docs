@@ -2,11 +2,67 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-05-05T05:00:00.000Z</updated>
+    <updated>2026-05-05T07:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.37.1 — Vendor profile hotfix]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release"/>
+        <updated>2026-05-05T07:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Three smoke-test findings on the freshly-shipped v4.37.0 vendor profile page are closed in v4.37.1: a badge that defaulted to "New Vendor" for every vendor regardless of their score, a misleading "X reviews" label whose number was actually the count of booking-time star ratings, and review stars that disappeared on the public profile when reviews were imported from third-party plugins.]]></summary>
+        <content type="html"><![CDATA[<p>Three smoke-test findings on the freshly-shipped v4.37.0 vendor profile page are closed in v4.37.1: a badge that defaulted to "New Vendor" for every vendor regardless of their score, a misleading "X reviews" label whose number was actually the count of booking-time star ratings, and review stars that disappeared on the public profile when reviews were imported from third-party plugins.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-a-hotfix-on-the-same-day">Why a hotfix on the same day<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#why-a-hotfix-on-the-same-day" class="hash-link" aria-label="Direct link to Why a hotfix on the same day" title="Direct link to Why a hotfix on the same day" translate="no">​</a></h2>
+<p>v4.37.0 shipped this morning with a Pro feature spread across nine implementation phases and 78 new tests. PHPUnit was green, PHPCS was clean, the dispatch path worked end to end. But three of the bugs that made it into production were the kind that a unit test cannot easily catch:</p>
+<ul>
+<li class="">A wiring bug — registration in the wrong init bucket — that a test fixture papers over by adding the filter callback explicitly.</li>
+<li class="">A semantic bug — the wrong word in a translatable string — that no machine-readable check flags.</li>
+<li class="">A defensive gap — only checking the canonical meta key, not the WC-standard alternative — that bites the day a third-party plugin imports a review.</li>
+</ul>
+<p>Browser smoke surfaced all three within minutes of seeding three test vendors. The fix matrix is small enough that a same-day patch is the right call.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="b1--badge-stuck-on-new-vendor">B1 — Badge stuck on "New Vendor"<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#b1--badge-stuck-on-new-vendor" class="hash-link" aria-label="Direct link to B1 — Badge stuck on &quot;New Vendor&quot;" title="Direct link to B1 — Badge stuck on &quot;New Vendor&quot;" translate="no">​</a></h2>
+<p>The badge evaluator checks three thresholds: account age, reliability score, and lifetime completed bookings. The completed-bookings count comes from a filter:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$completed = (int) apply_filters(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_vendor_completed_bookings_count',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    0, // default</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $user_id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span></code></pre></div></div>
+<p>The production callback for that filter is registered in <code>VendorProfileExtension::register()</code>, which Plugin.php calls from <code>initialize_admin_services()</code> — the <strong>admin-only</strong> init bucket. On public requests (<code>is_admin() === false</code>), the bucket never runs and the callback never registers, so the count defaults to <code>0</code>. Every vendor falls into the <code>STATUS_NEW</code> branch, no matter their actual booking history.</p>
+<p>This is the same <code>is_admin()</code> bucket trap we surfaced in Phase 9 — <code>VendorProfileSchema::register()</code> was originally placed in the admin-only bucket and got moved to a context-agnostic bucket once browser smoke caught the absent JSON-LD. <code>VendorProfileExtension::register()</code> legitimately belongs in the admin bucket (it owns admin-only profile screen hooks), but its filter-callback side effect leaked the bug into the frontend.</p>
+<p>The fix is to make the badge work without depending on that wiring at all:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$default_completed = class_exists(ReliabilityScoreCalculator::class)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ? ReliabilityScoreCalculator::count_completed_bookings($user_id, 9999)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    : 0;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$completed = (int) apply_filters(</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    'mhm_rentiva_vendor_completed_bookings_count',</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $default_completed,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $user_id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">);</span><br></span></code></pre></div></div>
+<p>Filter callbacks can still override the count for special cases (lifecycle penalty suppressions, manual admin overrides, etc.). The default is now a real number, not a placeholder waiting for someone to wire it up.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="b2--hero-label-x-reviews-was-the-wrong-word">B2 — Hero label "X reviews" was the wrong word<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#b2--hero-label-x-reviews-was-the-wrong-word" class="hash-link" aria-label="Direct link to B2 — Hero label &quot;X reviews&quot; was the wrong word" title="Direct link to B2 — Hero label &quot;X reviews&quot; was the wrong word" translate="no">​</a></h2>
+<p>The vendor profile hero shows aggregate rating data:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">★★★★½ 4,8 ( 25 değerlendirme )</span><br></span></code></pre></div></div>
+<p>That <code>25</code> is the sum of <code>_mhm_rentiva_rating_count</code> across the vendor's active vehicles — booking-time star ratings, set when a customer completes a rental and rates the vehicle. The <code>Recent Reviews</code> section below the hero is a separate stream — WP review comments on the same vehicle posts. A vendor can easily have 25 booking ratings and 4 written review comments. The hero said "25 reviews", the section showed 4, and the math didn't add up.</p>
+<p>The fix is the easy half of the problem: change the i18n string from <code>%d review</code> / <code>%d reviews</code> to <code>%d rating</code> / <code>%d ratings</code> (Turkish: <code>%d değerlendirme</code>). Same number, honest label.</p>
+<p>The harder version of this question — should the hero show the WP comment count instead of the booking-rating count? — is deferred. The booking-rating average is the more useful metric for buyers because it's tied to completed transactions, not opinions. Renaming the label preserves that information.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="b3--review-stars-empty-for-third-party-imports">B3 — Review stars empty for third-party imports<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#b3--review-stars-empty-for-third-party-imports" class="hash-link" aria-label="Direct link to B3 — Review stars empty for third-party imports" title="Direct link to B3 — Review stars empty for third-party imports" translate="no">​</a></h2>
+<p><code>VendorProfileProvider::collect_reviews()</code> builds the per-review render data:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">'rating' =&gt; (int) get_comment_meta($comment_id, 'mhm_rating', true),</span><br></span></code></pre></div></div>
+<p><code>mhm_rating</code> is Rentiva's canonical key, set by <code>VehicleRatingForm</code> and the <code>ReviewEnforcer</code> normalization hook. Reviews submitted through Rentiva's own form get this key reliably. But a vendor whose reviews are imported from a third-party plugin — WC product reviews migrated into vehicles, Site Reviews / Customer Reviews for WooCommerce, manual database seeds — typically writes the WC-standard <code>rating</code> key. Without a fallback, those reviews show up on the profile with empty stars even though the rating value is right there in the database.</p>
+<p>The fix is a one-helper change:</p>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">private static function resolve_review_rating(int $comment_id): int</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $rating = (int) get_comment_meta($comment_id, 'mhm_rating', true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ($rating &gt; 0) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return $rating;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return (int) get_comment_meta($comment_id, 'rating', true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<p>Canonical wins when present; WC-standard falls through when it doesn't.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="validation">Validation<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#validation" class="hash-link" aria-label="Direct link to Validation" title="Direct link to Validation" translate="no">​</a></h2>
+<p>Three test vendors, seeded directly into the local DB:</p>
+<table><thead><tr><th>Vendor</th><th>Score</th><th>Bookings</th><th>Approved</th><th>Expected</th><th>Got</th></tr></thead><tbody><tr><td>Akif Yıldız</td><td>92</td><td>20</td><td>200 days ago</td><td>Verified</td><td>✓ Doğrulanmış Bayi</td></tr><tr><td>Zeynep Demir</td><td>88</td><td>11</td><td>335 days ago</td><td>Verified</td><td>✓ Doğrulanmış Bayi</td></tr><tr><td>Mehmet Çelik</td><td>45</td><td>2</td><td>21 days ago</td><td>New</td><td>Yeni Bayi</td></tr></tbody></table>
+<p>All three render star ratings on every review item; the hero label reads <code>X değerlendirme</code> (TR) / <code>X ratings</code> (EN).</p>
+<p>PHPUnit went from <strong>982 → 987</strong> with the two new regression test classes (<code>VendorBadgeDefaultFallbackTest</code> 2 tests, <code>VendorProfileReviewRatingFallbackTest</code> 3 tests). The badge fallback test deliberately omits the filter callback registration so it would have failed against v4.37.0.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="links">Links<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.1-release#links" class="hash-link" aria-label="Direct link to Links" title="Direct link to Links" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.37.1" target="_blank" rel="noopener noreferrer" class="">GitHub release</a></li>
+<li class=""><a href="https://github.com/MaxHandMade/mhm-rentiva/pull/5" target="_blank" rel="noopener noreferrer" class="">Pull request #5</a></li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="profile" term="profile"/>
+        <category label="hotfix" term="hotfix"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.37.0 — Vendor Public Profile Page]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.0-release</id>
@@ -1271,97 +1327,6 @@
         <category label="elementor" term="elementor"/>
         <category label="blocks" term="blocks"/>
         <category label="parity" term="parity"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.26.3: Araç Kartı Görsel Kalitesi, Admin Toast Kesilmesi ve ZIP Chart.js Düzeltmesi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary"/>
-        <updated>2026-04-11T09:00:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.26.3, listeleme/arama sayfalarındaki araç görsellerinin bulanık yüklenmesine neden olan responsive sizes hatasını, ayarlar sayfasındaki "kaydedildi" toast bildirimlerinin kesilip ekrandan taşmasını ve release ZIP'inden Chart.js'in çıkarılmasına yol açan .distignore kök-sabitleme hatasını gideriyor. Üçü de üretimde gözle görülen ama console.log'a düşmeyen sessiz sorunlardı.]]></summary>
-        <content type="html"><![CDATA[<p>v4.26.3, listeleme/arama sayfalarındaki araç görsellerinin bulanık yüklenmesine neden olan responsive <code>sizes</code> hatasını, ayarlar sayfasındaki "kaydedildi" toast bildirimlerinin kesilip ekrandan taşmasını ve release ZIP'inden Chart.js'in çıkarılmasına yol açan <code>.distignore</code> kök-sabitleme hatasını gideriyor. Üçü de üretimde gözle görülen ama <code>console.log</code>'a düşmeyen sessiz sorunlardı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-araç-kartı-görsel-kalitesi--220px-tuzağı">🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#%EF%B8%8F-ara%C3%A7-kart%C4%B1-g%C3%B6rsel-kalitesi--220px-tuza%C4%9F%C4%B1" class="hash-link" aria-label="Direct link to 🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı" title="Direct link to 🖼️ Araç Kartı Görsel Kalitesi — 220px Tuzağı" translate="no">​</a></h2>
-<p>Araç kartı partialında (<code>templates/partials/vehicle-card.php</code>) yıllardır sabit kodlanmış bir <code>sizes</code> özniteliği vardı:</p>
-<div class="language-html codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-html codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sizes="(max-width: 782px) 100vw, (max-width: 900px) 180px, 220px"</span><br></span></code></pre></div></div>
-<p>Bu öznitelik tarayıcıya "bu görselin ekranda kaplayacağı alan en fazla 220px" diyordu. Tarayıcı da doğal olarak <code>srcset</code>'teki en küçük uygun varyantı — <strong>300w thumbnail</strong>'ı — seçiyordu. Ancak kartların gerçek görünen genişliği 350-440px arasındaydı. Sonuç: retina ekranlarda bile bulanık araç görselleri.</p>
-<p><strong>En belirgin olduğu yer:</strong> Arama sonuçları sayfası, çünkü oradaki kartlar en geniş olanlardı. Ayrıca arama kodu (<code>SearchResults::format_vehicle_data()</code>) varsayılan olarak zaten <code>'medium'</code> (300px) istiyordu — yani hem kaynak görsel small'dı, hem de browser daha da küçüğünü seçiyordu.</p>
-<p><strong>Çözüm iki katmanlı:</strong></p>
-<ol>
-<li class=""><code>SearchResults</code> varsayılan <code>image_size</code>'ı <code>'medium'</code> → <code>'large'</code> (1024px) oldu — araç ızgarası, araç listesi ve öne çıkan araçlar zaten <code>'large'</code> kullanıyordu</li>
-<li class=""><code>vehicle-card.php</code> <code>sizes</code> özniteliği → <code>(max-width: 782px) 100vw, 500px</code> — retina ekranlarda browser artık 1024w varyantı seçiyor, geniş kartlar keskin</li>
-</ol>
-<p>Bu düzeltme <strong>tek bir partial dosyası</strong> değiştiği için listeleme, favoriler, araç arşivi ve arama sonuçları — hepsi birlikte düzeldi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-admin-settings-toast--kaydedildi-bildiriminin-kesilmesi">🔔 Admin Settings Toast — "Kaydedildi" Bildiriminin Kesilmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-admin-settings-toast--kaydedildi-bildiriminin-kesilmesi" class="hash-link" aria-label="Direct link to 🔔 Admin Settings Toast — &quot;Kaydedildi&quot; Bildiriminin Kesilmesi" title="Direct link to 🔔 Admin Settings Toast — &quot;Kaydedildi&quot; Bildiriminin Kesilmesi" translate="no">​</a></h2>
-<p>Ayarlar sayfasında herhangi bir değişikliği kaydettiğinizde çıkan "Ayarlar kaydedildi" bildirimi, özellikle uzun mesajlarda sağ tarafı kesilmiş olarak görünüyordu. Sorun tek bir yerde değildi — iki ayrı bozukluk üst üste binmişti:</p>
-<p><strong>1. WordPress bildirimi header flex konteynerine hapsediliyordu.</strong> <code>render_admin_header()</code> helper'ı H1, alt başlık ve aksiyonlar için bir flex konteyner kuruyor ama sonuna <code>&lt;hr class="wp-header-end" /&gt;</code> koymuyordu. WordPress <code>common.js</code>'in bildirimleri yerleştirmek için kullandığı resmi API tam olarak bu işaretçi. İşaretçi yokken WordPress ilk H1'i arıyor ve bildirimi dar flex kolonunun içine sıkıştırıyordu.</p>
-<p><strong>2. Özel toast CSS'i her şeyi tek satıra zorluyordu.</strong> Plugin'in <code>convertWPNoticesToToasts()</code> helper'ı WordPress bildirimini gizleyip özel bir <code>.rv-notification.mhm-admin-toast</code> div'i oluşturuyor. Bu div'in CSS'i <code>white-space: nowrap</code>, <code>max-width: 350px</code>, <code>height: 50px</code> içeriyordu — yani uzun mesajları taşırıyor, kelime kaydırma yapmıyor, ve birden fazla toast üst üste geldiğinde istiflenmiyordu.</p>
-<p><strong>Çözüm:</strong></p>
-<ul>
-<li class=""><code>render_admin_header()</code> flex konteynerin kapanışından hemen sonra <code>&lt;hr class="wp-header-end" /&gt;</code> yayınlıyor — artık bildirimler konteynerin altında tam genişlikte beliriyor</li>
-<li class="">Toast CSS'i baştan yazıldı: sabit <code>height</code>/<code>max-width</code>/<code>nowrap</code> kaldırıldı; <code>min-width: 280px</code>, <code>max-width: min(480px, calc(100vw - 60px))</code>, <code>white-space: normal</code>, <code>overflow-wrap: break-word</code></li>
-<li class="">Toastlar için <code>#mhm-admin-toast-container</code> adında sabit konumlu flex konteyner eklendi; yeni toastlar <code>prepend</code> ile en üste giriyor — böylece birden fazla toast istifleniyor ve en yenisi her zaman üstte</li>
-<li class="">XSS güvenliği: toast mesajları artık template literal ile değil <code>.text(message)</code> ile yazılıyor — gelecekte bir hook'un bildirim içeriğine HTML enjekte etme riski yok</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-release-zip-chartjs-404--distignoreun-gizli-hatası">📦 Release ZIP Chart.js 404 — <code>.distignore</code>'un Gizli Hatası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-release-zip-chartjs-404--distignoreun-gizli-hatas%C4%B1" class="hash-link" aria-label="Direct link to -release-zip-chartjs-404--distignoreun-gizli-hatası" title="Direct link to -release-zip-chartjs-404--distignoreun-gizli-hatası" translate="no">​</a></h2>
-<p>WordPress.org üzerinden kurulan kopyalarda admin dashboard'daki grafikler 404 veriyordu. Kök nedeni <code>.distignore</code> dosyasının <code>vendor/</code> paterniydi.</p>
-<p>Release ZIP'i oluşturan <code>bin/build-release.py</code> Python script'i, paterndeki trailing <code>/</code> karakterini siliyor ve kalan <code>vendor</code>'u "herhangi bir yol segmenti" olarak eşleştiriyordu. Bu mantıkla:</p>
-<ul>
-<li class="">✅ <code>vendor/composer/...</code> eşleşti — doğru (Composer klasörünü atlamak istiyoruz)</li>
-<li class="">❌ <code>assets/js/vendor/chart.min.js</code> <strong>de</strong> eşleşti — yanlış (bu dosya kargoda olmalıydı)</li>
-</ul>
-<p>Sonuç: <code>chart.min.js</code>, <code>flatpickr/</code>, <code>swiper-bundle.min.js</code> ve diğer ağaç içi vendor kütüphaneleri release ZIP'inden düşüyordu. Lokal geliştirmede görünmüyordu çünkü build süreci atlanıyordu. Ancak WordPress.org ya da GitHub Release ZIP'i üzerinden kurulum yapıldığında dashboard boş kalıyordu.</p>
-<p><strong>Çözüm:</strong></p>
-<ul>
-<li class=""><code>bin/build-release.py</code> artık <code>.gitignore</code> tarzı kök sabitlemeyi destekliyor — bir patern <code>/</code> ile başlarsa yalnızca plugin kök dizinindeki o yola eşleşiyor, alt dizinlerdeki aynı isimli klasörlere dokunmuyor</li>
-<li class=""><code>.distignore</code> güncellendi: <code>vendor/</code> → <code>/vendor/</code></li>
-</ul>
-<p>Doğrulama: Yeni ZIP'te <code>assets/js/vendor/chart.min.js</code>, <code>assets/vendor/flatpickr/*</code>, <code>assets/vendor/swiper-bundle.min.js</code> mevcut; Composer <code>vendor/</code> kök dizini dışlandı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-setup-wizard--versiyon-badge-ve-litepro-cta-toplu-batchten">🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-setup-wizard--versiyon-badge-ve-litepro-cta-toplu-batchten" class="hash-link" aria-label="Direct link to 🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten)" title="Direct link to 🧙 Setup Wizard — Versiyon Badge ve Lite/Pro CTA (Toplu Batch'ten)" translate="no">​</a></h2>
-<p>Bu release'e toplu halde giren bir dizi kullanıcı arayüzü iyileştirmesi:</p>
-<ul>
-<li class=""><strong>Kurulum Sihirbazı başlığı</strong> artık plugin versiyonunu + Lite/Pro rozetini gösteriyor</li>
-<li class=""><strong>Lisans sekmesi + Lisans menü sayfası</strong> "Ürün Sayfasını Aç" CTA butonu kazandı — kullanıcı ürünün satın alma sayfasına tek tıkla gidebiliyor</li>
-<li class=""><strong>Geliştirici modu guardı:</strong> <code>has_real_license()</code> artık dev mode'da CTA görünmesini engellemiyor — geliştirme ortamlarında da CTA test edilebiliyor</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değişiklik-kaydı">📋 Değişiklik Kaydı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-de%C4%9Fi%C5%9Fiklik-kayd%C4%B1" class="hash-link" aria-label="Direct link to 📋 Değişiklik Kaydı" title="Direct link to 📋 Değişiklik Kaydı" translate="no">​</a></h2>
-<table><thead><tr><th>Tür</th><th>Açıklama</th></tr></thead><tbody><tr><td>🖼️ Düzeltme</td><td>Araç kartı <code>sizes</code> özniteliği 220px → 500px (listeleme + favoriler + arşiv + arama sonuçları)</td></tr><tr><td>🖼️ Düzeltme</td><td><code>SearchResults</code> varsayılan <code>image_size</code> <code>'medium'</code> → <code>'large'</code></td></tr><tr><td>🔔 Düzeltme</td><td><code>render_admin_header()</code> <code>&lt;hr class="wp-header-end" /&gt;</code> emit ediyor — bildirimler artık header flex'ten çıkıyor</td></tr><tr><td>🔔 Düzeltme</td><td>Admin toast CSS: sabit <code>height</code>/<code>nowrap</code> kaldırıldı, kelime kaydırma eklendi</td></tr><tr><td>🔔 Düzeltme</td><td>Admin toast istifleme: <code>#mhm-admin-toast-container</code> + <code>prepend</code> — birden fazla toast üst üste binmiyor</td></tr><tr><td>🛡️ Güvenlik</td><td>Admin toast mesajları artık <code>.text()</code> ile yazılıyor — HTML enjeksiyonuna karşı güvende</td></tr><tr><td>📦 Düzeltme</td><td><code>.distignore</code> <code>/vendor/</code> kök sabitlemesi — <code>chart.min.js</code>, <code>flatpickr</code>, <code>swiper</code> artık ZIP'te</td></tr><tr><td>🔧 Build</td><td><code>bin/build-release.py</code> <code>.gitignore</code> tarzı leading-slash anchoring desteği</td></tr><tr><td>🧙 UX</td><td>Setup Wizard header versiyon + Lite/Pro badge</td></tr><tr><td>🧙 UX</td><td>Setup Wizard Lisans sekmesi + Lisans menüde "Ürün Sayfasını Aç" CTA</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-değiştirilen-dosyalar">📁 Değiştirilen Dosyalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-de%C4%9Fi%C5%9Ftirilen-dosyalar" class="hash-link" aria-label="Direct link to 📁 Değiştirilen Dosyalar" title="Direct link to 📁 Değiştirilen Dosyalar" translate="no">​</a></h2>
-<ul>
-<li class=""><code>templates/partials/vehicle-card.php</code> <em>(sizes 220px → 500px)</em></li>
-<li class=""><code>src/Admin/Frontend/Shortcodes/SearchResults.php</code> <em>(image_size 'medium' → 'large')</em></li>
-<li class=""><code>src/Admin/Core/Traits/AdminHelperTrait.php</code> <em>(wp-header-end marker)</em></li>
-<li class=""><code>assets/css/admin/settings.css</code> <em>(toast wrap + stacking CSS redesign)</em></li>
-<li class=""><code>assets/js/admin/settings.js</code> <em>(container + prepend + .text XSS guard)</em></li>
-<li class=""><code>.distignore</code> <em>(/vendor/ kök sabitleme)</em></li>
-<li class=""><code>bin/build-release.py</code> <em>(anchored pattern support)</em></li>
-<li class=""><code>src/Admin/Setup/SetupWizard.php</code> <em>(versiyon badge + CTA)</em></li>
-<li class=""><code>src/Admin/Licensing/LicenseAdmin.php</code> <em>(CTA)</em></li>
-<li class=""><code>mhm-rentiva.php</code>, <code>readme.txt</code>, <code>README.md</code>, <code>README-tr.md</code>, <code>changelog.json</code>, <code>changelog-tr.json</code> <em>(versiyon yükseltme)</em></li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kalite">✅ Kalite<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#-kalite" class="hash-link" aria-label="Direct link to ✅ Kalite" title="Direct link to ✅ Kalite" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>720 test, 2470 assertion, 6 atlandı</strong> (v4.25.0 baseline'ı 683/2277 idi)</li>
-<li class="">PHPUnit tam yeşil</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-güncelleme-notu">⬆️ Güncelleme Notu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.3-release-summary#%EF%B8%8F-g%C3%BCncelleme-notu" class="hash-link" aria-label="Direct link to ⬆️ Güncelleme Notu" title="Direct link to ⬆️ Güncelleme Notu" translate="no">​</a></h2>
-<p>v4.26.3 tamamen geriye dönük uyumlu bir patch sürümüdür — DB şemasında değişiklik yoktur, migration çalışmaz, ek bir yapılandırma gerekmez. Güncelleme yolları:</p>
-<ul>
-<li class="">WordPress admin → Eklentiler → Güncelle</li>
-<li class=""><code>wp plugin update mhm-rentiva --allow-root</code></li>
-<li class="">Manuel ZIP yükleme (v4.26.2'den itibaren otomatik migration destekleniyor)</li>
-</ul>
-<hr>
-<p>Daha fazla bilgi için <a href="https://maxhandmade.github.io/mhm-rentiva-docs/" target="_blank" rel="noopener noreferrer" class="">Doküman Sayfamızı</a> ziyaret edin.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="patch" term="patch"/>
-        <category label="frontend" term="frontend"/>
-        <category label="admin-ux" term="admin-ux"/>
-        <category label="build" term="build"/>
         <category label="bugfix" term="bugfix"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
