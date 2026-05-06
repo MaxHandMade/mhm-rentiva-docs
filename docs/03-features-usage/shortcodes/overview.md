@@ -22,7 +22,7 @@ In both cases, the rendering backend (Render Parity) is powered by a single sour
 
 ---
 
-## 📋 24 Active Shortcodes and Their Usage
+## 📋 28 Active Shortcodes and Their Usage
 
 The system provides shortcodes organized into 6 main categories by function. Below you will find each shortcode with parameter examples.
 
@@ -39,45 +39,40 @@ Essential shortcodes for starting and completing the rental flow:
 *   **Key Parameters:** `vehicle_id`, `months_to_show`, `show_pricing`
 *   **Example:** `[rentiva_availability_calendar vehicle_id="101" months_to_show="2" show_pricing="1"]`
 
-**3. Booking Confirmation:** Payment and booking detail verification page.
-*   **Shortcode:** `[rentiva_booking_confirmation]`
-*   **Key Parameters:** `show_print_btn`, `show_download_pdf`
-*   **Example:** `[rentiva_booking_confirmation show_print_btn="1" show_download_pdf="1"]`
-
 ### 2. Vehicle Listing & Search Module
 Visualizes vehicle filtering and vehicle detail processes for customers:
 
-**4. Vehicle Details:** Lists all attributes of a single vehicle.
+**3. Vehicle Details:** Lists all attributes of a single vehicle.
 *   **Shortcode:** `[rentiva_vehicle_details]`
 *   **Key Parameters:** `vehicle_id`, `show_gallery`, `show_features`, `show_similar_vehicles`
 *   **Example:** `[rentiva_vehicle_details vehicle_id="45" show_gallery="1"]`
 
-**5. Vehicles List (List View):**
+**4. Vehicles List (List View):**
 *   **Shortcode:** `[rentiva_vehicles_list]`
 *   **Key Parameters:** `limit`, `category`, `orderby`, `order`
 *   **Example:** `[rentiva_vehicles_list limit="10" order="asc"]`
 
-**6. Featured Vehicles:**
+**5. Featured Vehicles:**
 *   **Shortcode:** `[rentiva_featured_vehicles]`
 *   **Key Parameters:** `limit`, `autoplay`, `layout`
 *   **Example:** `[rentiva_featured_vehicles limit="6" autoplay="1" layout="grid"]`
 
-**7. Vehicles Grid (Grid View):**
+**6. Vehicles Grid (Grid View):**
 *   **Shortcode:** `[rentiva_vehicles_grid]`
 *   **Key Parameters:** `limit`, `columns`, `category`, `show_price`
 *   **Example:** `[rentiva_vehicles_grid limit="12" columns="3" category="suv"]`
 
-**8. Unified Search:** Combined rental search form.
+**7. Unified Search:** Combined rental search form.
 *   **Shortcode:** `[rentiva_unified_search]`
 *   **Key Parameters:** `default_tab`, `show_location_select`, `style`
 *   **Example:** `[rentiva_unified_search default_tab="rental" style="glass"]`
 
-**9. Search Results View:** Vehicle grid format returned from search.
+**8. Search Results View:** Vehicle grid format returned from search.
 *   **Shortcode:** `[rentiva_search_results]`
 *   **Key Parameters:** `layout`, `results_per_page`, `show_filters`
 *   **Example:** `[rentiva_search_results layout="grid" results_per_page="12"]`
 
-**10. Vehicle Comparison:** Side-by-side feature comparison.
+**9. Vehicle Comparison:** Side-by-side feature comparison.
 *   **Shortcode:** `[rentiva_vehicle_comparison]`
 *   **Key Parameters:** `max_vehicles`, `show_technical_specs`
 *   **Example:** `[rentiva_vehicle_comparison max_vehicles="4" show_technical_specs="1"]`
@@ -85,42 +80,48 @@ Visualizes vehicle filtering and vehicle detail processes for customers:
 ### 3. User Account Module
 (**Auth=Yes** — only active for logged-in users):
 
-**11. Customer Dashboard:** Customer summary screen.
+**10. Customer Dashboard:** Customer summary screen.
 *   **Shortcode:** `[rentiva_user_dashboard]`
 *   **Key Parameters:** (Standard dashboard with no additional required parameters)
 *   **Example:** `[rentiva_user_dashboard]`
 
-**12. My Bookings:** Active or historical booking list.
+**11. My Bookings:** Active or historical booking list.
 *   **Shortcode:** `[rentiva_my_bookings]`
 *   **Key Parameters:** `limit`, `status`
 *   **Example:** `[rentiva_my_bookings limit="10" status="confirmed"]`
 
-**13. My Favorites:** Vehicles saved to favorites by the user.
+**12. My Favorites:** Vehicles saved to favorites by the user.
 *   **Shortcode:** `[rentiva_my_favorites]`
 *   **Key Parameters:** `limit`, `columns`, `show_availability_status`
 *   **Example:** `[rentiva_my_favorites columns="4"]`
 
-**14. Payment History:** Transaction receipts and records.
+**13. Payment History:** Transaction receipts and records.
 *   **Shortcode:** `[rentiva_payment_history]`
 *   **Key Parameters:** `limit`, `show_invoice_download`
 *   **Example:** `[rentiva_payment_history limit="20" show_invoice_download="1"]`
 
-**15. Commission Resolver:** Affiliate / Vendor-specific system.
+**14. Commission Resolver:** Affiliate / Vendor-specific system.
 *   **Shortcode:** `[rentiva_commission_resolver]`
 *   **Key Parameters:** -
 *   **Example:** `[rentiva_commission_resolver]`
 
 ### 4. Transfer Services Module
 
-**16. Transfer Search Form:** Passenger pickup / drop-off selection.
+**15. Transfer Search Form:** Passenger pickup / drop-off selection.
 *   **Shortcode:** `[rentiva_transfer_search]`
 *   **Key Parameters:** `show_pickup`, `show_dropoff`
 *   **Example:** `[rentiva_transfer_search show_pickup="1" show_dropoff="1"]`
 
-**17. Transfer Results:** Transfer tariff listing.
+**16. Transfer Results:** Transfer tariff listing.
 *   **Shortcode:** `[rentiva_transfer_results]`
 *   **Key Parameters:** `limit`, `show_luggage_info`
 *   **Example:** `[rentiva_transfer_results limit="10" show_luggage_info="1"]`
+
+**17. Popular Routes (v4.34.0+):** Homepage showcase of VIP transfer routes; clickable cards deep-link into transfer search.
+*   **Shortcode:** `[rentiva_popular_routes]`
+*   **Key Parameters:** `limit`, `columns`, `order`, `featured_only`, `filter_origin_city`
+*   **Example:** `[rentiva_popular_routes columns="3" limit="6" order="featured"]`
+*   **Reference:** [Popular routes](./popular-routes)
 
 ### 5. Support & Engagement Module
 
@@ -199,5 +200,3 @@ The MHM Rentiva > Shortcode Pages (Dashboard screen) provides the following info
 - **28 Shortcodes:** Covers every point in your project from bookings to B2B.
 - **Single-Point Rendering:** Use shortcodes in the classic editor, Elementor, or Gutenberg — all are powered by the same core system.
 - **Parametric Flexibility:** Pass external data to each shortcode to change layout, query limits, and more.
-
-
