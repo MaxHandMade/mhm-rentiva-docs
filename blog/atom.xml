@@ -2,11 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-05-06T01:00:00.000Z</updated>
+    <updated>2026-05-06T03:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.38.1 — Audit-driven patch]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release"/>
+        <updated>2026-05-06T03:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A small but important patch on top of v4.38.0. After the Vendor Directory release we ran a /wp-conductor post-merge audit on the v4.37.0 → v4.38.0 chain — two real findings and a dormant production defect surfaced from the new test coverage. v4.38.1 closes them all so the six-release deploy bundle is clean.]]></summary>
+        <content type="html"><![CDATA[<p>A small but important patch on top of v4.38.0. After the Vendor Directory release we ran a <code>/wp-conductor</code> post-merge audit on the v4.37.0 → v4.38.0 chain — two real findings and a dormant production defect surfaced from the new test coverage. v4.38.1 closes them all so the six-release deploy bundle is clean.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#what-changed" class="hash-link" aria-label="Direct link to What changed" title="Direct link to What changed" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yüksek--admin-slug-edit-collision">🔴 YÜKSEK — Admin slug edit collision<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#-y%C3%BCksek--admin-slug-edit-collision" class="hash-link" aria-label="Direct link to 🔴 YÜKSEK — Admin slug edit collision" title="Direct link to 🔴 YÜKSEK — Admin slug edit collision" translate="no">​</a></h3>
+<p>When you edited a vendor's profile slug from the WordPress admin, the save path was writing the slug directly via <code>update_user_meta()</code> instead of going through <code>VendorSlugManager::change_slug()</code>. A leftover <code>// later</code> TODO from v4.37.0 Phase 1.3.</p>
+<p>The practical impact: two admins (or admin + a vendor self-editing) submitting the same raw slug to different vendors would both succeed. <code>VendorProfileProvider::lookup_by_slug()</code> returns the first match, so the second vendor's public profile URL silently rendered the wrong vendor — for paying Pro customers, on a marketplace, indefinitely.</p>
+<p>The save path now routes through <code>change_slug()</code>, which already handles sanitize + collision suffix (<code>-2</code>, <code>-3</code>...) + history sanitize atomically.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-orta--directory-vehicle_count-vs-profile-inconsistency">🟡 ORTA — Directory vehicle_count vs Profile inconsistency<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#-orta--directory-vehicle_count-vs-profile-inconsistency" class="hash-link" aria-label="Direct link to 🟡 ORTA — Directory vehicle_count vs Profile inconsistency" title="Direct link to 🟡 ORTA — Directory vehicle_count vs Profile inconsistency" translate="no">​</a></h3>
+<p><code>VendorDirectoryProvider::count_active_vehicles_for()</code> counted every <code>publish</code> vehicle, regardless of <code>_mhm_vehicle_lifecycle_status</code>. Profile-side <code>collect_vehicles()</code> filters by <code>lifecycle='active'</code>. So a vendor with 2 active + 3 paused vehicles showed "5 vehicles" on the directory card and "2 vehicles" on the profile page. Marketplace data inconsistency = trust degradation.</p>
+<p>Fixed by adding the same <code>meta_query</code> lifecycle filter to the count query.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-dormant-production-defect--pagination-strict-type-typeerror">🐛 Dormant production defect — pagination strict-type TypeError<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#-dormant-production-defect--pagination-strict-type-typeerror" class="hash-link" aria-label="Direct link to 🐛 Dormant production defect — pagination strict-type TypeError" title="Direct link to 🐛 Dormant production defect — pagination strict-type TypeError" translate="no">​</a></h3>
+<p>The new combination tests in this patch surfaced something the existing v4.38.0 tests had never exercised: the directory pagination partial passed <code>$big = 999999999</code> (int) as the first argument to <code>str_replace()</code>. PHP 8.1+ strict types throw <code>TypeError</code>.</p>
+<p>Existing tests never seeded enough vendors to push past <code>per_page=12</code>, so the bug stayed dormant. Production sites running PHP 8.x would have crashed the directory page the moment a 13th active vendor pushed the result set past one page. Cast to string explicitly — same pattern WP core uses in identical callers.</p>
+<p>This is the strongest argument for not having shipped v4.38.0 alone.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-phase-567-paper-cuts">📌 Phase 5/6/7 paper-cuts<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#-phase-567-paper-cuts" class="hash-link" aria-label="Direct link to 📌 Phase 5/6/7 paper-cuts" title="Direct link to 📌 Phase 5/6/7 paper-cuts" translate="no">​</a></h3>
+<p>Three small parity fixes that the v4.38.0 audit had pre-documented as deferred:</p>
+<ul>
+<li class=""><strong>VendorDirectorySeo register guard</strong> — early return when an SEO plugin (Yoast / Rank Math / AIOSEO / SEOPress / The SEO Framework / SmartCrawl) owns the contract or the <code>mhm_rentiva_vendor_directory_seo_disable</code> filter is true. Parity with <code>VendorProfileSeo</code>'s register guard. Plus a DocBlock spelling out the 3-arg filter signature for <code>build_meta_description($default, $vendor_count, $vehicle_count)</code>.</li>
+<li class=""><strong>VendorDirectoryCacheInvalidator</strong> — two parity guards: <code>!is_string($meta_key)</code> short-circuit on the user_meta hooks (rare WP edge case where <code>meta_key</code> arrives as an array — <code>VendorProfileCacheInvalidator</code> already had this guard), and a no-op early-return when <code>$new_status === $old_status</code> on the lifecycle hook (parity with the existing <code>on_comment_status</code> no-op in the same class). Avoids spurious cache flushes that defeat the 30-min directory cache.</li>
+<li class=""><strong>Pagination/sort combination tests + <code>.current</code> scope</strong> — three new tests covering pagination overflow, alpha sort with city filter, and paged query string on page 2. Verifies the <code>.current</code> pagination class stays scoped under <code>.mhm-vendor-directory-pagination</code> so theme <code>.current</code> rules can't hijack the styling.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pipeline-gates">Pipeline gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#pipeline-gates" class="hash-link" aria-label="Direct link to Pipeline gates" title="Direct link to Pipeline gates" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>PHPUnit</strong>: 1044 → <strong>1058</strong> tests, 3289 → <strong>3320</strong> assertions, 7 skipped, 0 fail</li>
+<li class=""><strong>PHPCS</strong>: <strong>0 errors</strong> (full project, CI parity gate)</li>
+<li class=""><strong>Independent code review</strong>: <code>merge ready, no KRİTİK/YÜKSEK findings</code></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="deploy-notice">Deploy notice<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.1-release#deploy-notice" class="hash-link" aria-label="Direct link to Deploy notice" title="Direct link to Deploy notice" translate="no">​</a></h2>
+<p>Ship v4.38.1 together with the v4.37.0 + v4.37.1 + v4.37.2 + v4.37.3 + v4.38.0 chain — six releases in a single mhmrentiva.com deploy. No separate upgrade path needed.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="directory" term="directory"/>
+        <category label="marketplace" term="marketplace"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.38.0 — Vendor Directory Page]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release</id>
@@ -1253,90 +1297,5 @@
         <category label="i18n" term="i18n"/>
         <category label="bugfix" term="bugfix"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.27.0: WordPress.org Submission Readiness — Zero PHPCS Errors, Zero PCP Errors]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary"/>
-        <updated>2026-04-23T14:00:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.27.0 is a milestone release completing the code quality audit ahead of submitting the plugin to the official WordPress.org plugin directory. The entire distributed codebase now passes the project's strict PHPCS ruleset with zero errors, zero warnings, and achieves zero errors against Plugin Check (PCP) — the official WordPress.org review tool. Four real defects uncovered during the process have also been closed.]]></summary>
-        <content type="html"><![CDATA[<p>v4.27.0 is a milestone release completing the code quality audit ahead of submitting the plugin to the official WordPress.org plugin directory. The entire distributed codebase now passes the project's strict PHPCS ruleset with <strong>zero errors, zero warnings</strong>, and achieves <strong>zero errors</strong> against Plugin Check (PCP) — the official WordPress.org review tool. Four real defects uncovered during the process have also been closed.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-why-this-release">🎯 Why This Release?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-why-this-release" class="hash-link" aria-label="Direct link to 🎯 Why This Release?" title="Direct link to 🎯 Why This Release?" translate="no">​</a></h2>
-<p>WordPress.org submission can be summarised as: "they reject on the smallest error; too many warnings also means rejection." Therefore:</p>
-<ol>
-<li class=""><strong>Plugin Check (PCP) zero errors required</strong> — the official review tool; human reviewers run this first.</li>
-<li class=""><strong>Zero errors under strict PHPCS ruleset</strong> — so human reviewers don't see a messy codebase when scanning manually.</li>
-<li class=""><strong>PHPUnit 728/728 green</strong> — functionality must be preserved.</li>
-</ol>
-<p>All three were achieved.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-verification-summary">📊 Verification Summary<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-verification-summary" class="hash-link" aria-label="Direct link to 📊 Verification Summary" title="Direct link to 📊 Verification Summary" translate="no">​</a></h2>
-<table><thead><tr><th>Check</th><th>Before</th><th>After</th></tr></thead><tbody><tr><td>PHPCS errors</td><td>5158</td><td><strong>0</strong></td></tr><tr><td>PHPCS warnings</td><td>1273</td><td><strong>0</strong></td></tr><tr><td>Plugin Check errors</td><td>37</td><td><strong>0</strong></td></tr><tr><td>Plugin Check warnings</td><td>326</td><td>3 trivial (excluded from release ZIP)</td></tr><tr><td>PHPUnit</td><td>720/720</td><td><strong>728/728</strong> (+8 new tests, 0 regressions)</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-real-defects-found-along-the-way">🔧 Real Defects (Found Along the Way)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-real-defects-found-along-the-way" class="hash-link" aria-label="Direct link to 🔧 Real Defects (Found Along the Way)" title="Direct link to 🔧 Real Defects (Found Along the Way)" translate="no">​</a></h2>
-<p>Four real bugs were identified during the cleanup:</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-currencyhelper--duplicate-try-aliases">1. CurrencyHelper — Duplicate <code>"TRY"</code> Aliases<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#1-currencyhelper--duplicate-try-aliases" class="hash-link" aria-label="Direct link to 1-currencyhelper--duplicate-try-aliases" title="Direct link to 1-currencyhelper--duplicate-try-aliases" translate="no">​</a></h3>
-<p>The Turkish Lira normalisation map defined the <code>"₺" =&gt; 'TRY'</code> key silently twice. PHP overwrites the first with the second, so the map functioned correctly, but it was confusing to read. Removed.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-searchresults--duplicate-error-i18n-key">2. SearchResults — Duplicate <code>error</code> i18n Key<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#2-searchresults--duplicate-error-i18n-key" class="hash-link" aria-label="Direct link to 2-searchresults--duplicate-error-i18n-key" title="Direct link to 2-searchresults--duplicate-error-i18n-key" translate="no">​</a></h3>
-<p>The i18n dictionary passed to Search Results JavaScript defined the <code>error</code> key twice:</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('An error occurred. Please try again.', 'mhm-rentiva'),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">'error' =&gt; __('Error', 'mhm-rentiva'),  // This overwrote the first</span><br></span></code></pre></div></div>
-<p>The long message was dead code; users only ever saw "Error". Restructured as a single key.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-woocommercebridge--unreachable-duplicate-return">3. WooCommerceBridge — Unreachable Duplicate <code>return</code><a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#3-woocommercebridge--unreachable-duplicate-return" class="hash-link" aria-label="Direct link to 3-woocommercebridge--unreachable-duplicate-return" title="Direct link to 3-woocommercebridge--unreachable-duplicate-return" translate="no">​</a></h3>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if (! $order) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return;  // This line was never reached</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
-<p>The second <code>return</code> was removed.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-cron-sweep-silent-exception-swallowing">4. Cron Sweep Silent Exception Swallowing<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#4-cron-sweep-silent-exception-swallowing" class="hash-link" aria-label="Direct link to 4. Cron Sweep Silent Exception Swallowing" title="Direct link to 4. Cron Sweep Silent Exception Swallowing" translate="no">​</a></h3>
-<p>The <code>AutoCancel</code> and <code>AutoComplete</code> cron jobs processed each booking inside a <code>try/catch</code>, but the <code>catch</code> blocks were completely empty:</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Handle silently in production</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
-<p>The problem: an error in a single booking would stall the entire loop while leaving no trace in logs. Fix — the error is logged and the loop continues:</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">} catch (\Throwable $e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    error_log('[mhm-rentiva] auto-cancel skipped booking ' . $bid . ': ' . $e-&gt;getMessage());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-i18n-gaps">🌍 i18n Gaps<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-i18n-gaps" class="hash-link" aria-label="Direct link to 🌍 i18n Gaps" title="Direct link to 🌍 i18n Gaps" translate="no">​</a></h2>
-<p>24 lines using <code>sprintf</code> / <code>_n</code> / <code>__</code> with placeholders (<code>%s</code>, <code>%d</code>, <code>%1$d</code>) were missing translator comments. The standard comment was added to each:</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">/* translators: %d: maximum number of vehicles allowed in Lite tier */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sprintf( __( '%d vehicles', 'mhm-rentiva' ), $max_vehicles );</span><br></span></code></pre></div></div>
-<p>Affected areas: license dashboard Lite limits, message widget, dashboard countdown, vehicle lifecycle error messages, vendor settings, vendor booking detail, upcoming operations table.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-mechanical-updates">🏗️ Mechanical Updates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#%EF%B8%8F-mechanical-updates" class="hash-link" aria-label="Direct link to 🏗️ Mechanical Updates" title="Direct link to 🏗️ Mechanical Updates" translate="no">​</a></h2>
-<ul>
-<li class=""><strong><code>json_encode()</code> → <code>wp_json_encode()</code></strong>: 18 call sites updated (CLI commands, REST helpers, reports, exports, notifications, GDPR tools).</li>
-<li class=""><strong><code>declare(strict_types=1)</code></strong>: Added to two block placeholder files.</li>
-<li class=""><strong>Control structure assignments</strong>: Two instances of the <code>if ($cached = ...)</code> pattern split into two-line form.</li>
-<li class=""><strong>Loop condition <code>count()</code></strong>: Computed once and stored in a variable inside the IP masking helper.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-phpcsxml--defensible-suppress-block">📋 phpcs.xml — Defensible Suppress Block<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-phpcsxml--defensible-suppress-block" class="hash-link" aria-label="Direct link to 📋 phpcs.xml — Defensible Suppress Block" title="Direct link to 📋 phpcs.xml — Defensible Suppress Block" translate="no">​</a></h2>
-<p>Most of the 678 remaining violations were not "real defects" from a WordPress.org perspective, but the ruleset flagged them anyway. Each sniff was suppressed with a documented justification:</p>
-<ul>
-<li class=""><strong>Public API Stability</strong>: <code>ValidFunctionName.MethodNameInvalid</code> (194), <code>ValidHookName.UseUnderscores</code> (45), reserved keyword parameter names — renaming these would break all Elementor widgets, theme overrides, and third-party integrations. Addressed in a v5.0 major release with documented migration.</li>
-<li class=""><strong>Discouraged-but-not-forbidden PHP functions</strong>: <code>base64_encode/decode</code> (HMAC signature), <code>serialize</code> (legacy WP options), <code>urlencode</code> (RFC 3986), <code>file_get_contents</code> (local asset), <code>error_log</code> (structured log) — WordPress core uses the same functions.</li>
-<li class=""><strong>Performance heuristics</strong>: <code>meta_query</code>, <code>posts_per_page</code>, <code>post__not_in</code> — each usage is justified; the alternative (custom tables) requires a major migration.</li>
-<li class=""><strong>Codex quality noise</strong>: <code>unused-after-last-used</code> (hook callback signatures), <code>loose-equal</code>, <code>short-ternary</code> (standard PHP feature), <code>current_time('timestamp')</code> — intentional choices.</li>
-<li class=""><strong>WP global accessor pattern</strong>: <code>$wp_query</code>, <code>$post</code>, <code>$wpdb</code> — WP public API.</li>
-<li class=""><strong>Sub-15-minute cron</strong>: <code>CronSchedulesInterval</code> — booking auto-cancel runs every 5 minutes; this is a UX decision.</li>
-<li class=""><strong>Template strict types</strong>: The <code>templates/</code> directory is excluded from the <code>RequireStrictTypes</code> rule (type juggling required).</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-tooling">🛠️ Tooling<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#%EF%B8%8F-tooling" class="hash-link" aria-label="Direct link to 🛠️ Tooling" title="Direct link to 🛠️ Tooling" translate="no">​</a></h2>
-<ul>
-<li class=""><strong><code>phpcompatibility/phpcompatibility-wp</code></strong> added as a dev dependency; <code>PHPCompatibilityWP</code> rule re-enabled with <code>testVersion=8.1-</code>.</li>
-<li class="">Composer scripts: <code>phpcs:release</code>, <code>phpcbf:release</code>, <code>plugin-check:release</code> — repeatable verification.</li>
-<li class="">Local <code>*fixer*.php</code> dev tools and the <code>.worktrees/</code> directory excluded from the release ZIP via <code>.distignore</code>.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-installation">📦 Installation<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-installation" class="hash-link" aria-label="Direct link to 📦 Installation" title="Direct link to 📦 Installation" translate="no">​</a></h2>
-<p>Download <code>mhm-rentiva.4.27.0.zip</code> and install via <strong>Plugins → Add New → Upload Plugin</strong>, or use the Rentiva Pro auto-updater.</p>
-<p><strong>Requirements:</strong> PHP 8.1+, WordPress 6.7+.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-next">🔜 Next<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.27.0-release-summary#-next" class="hash-link" aria-label="Direct link to 🔜 Next" title="Direct link to 🔜 Next" translate="no">​</a></h2>
-<ul>
-<li class="">v4.26.8 shortcode review backlog</li>
-<li class="">v4.26.9 Popular Routes shortcode (transfer location showcase)</li>
-<li class="">v4.27.x: WP 6.9 final test pass and official WordPress.org submission</li>
-</ul>
-<hr>
-<p><em>GitHub Release: <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.27.0" target="_blank" rel="noopener noreferrer" class="">v4.27.0</a></em></p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="minor" term="minor"/>
-        <category label="wpcs" term="wpcs"/>
-        <category label="phpcs" term="phpcs"/>
-        <category label="plugin-check" term="plugin-check"/>
-        <category label="wordpress-org" term="wordpress-org"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
-        <category label="quality" term="quality"/>
     </entry>
 </feed>
