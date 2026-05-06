@@ -272,5 +272,5 @@ Upgrade prompts live on `/pricing` and the existing `[mhm_rentiva_pricing_table]
 - [v4.38.0 release notes](/blog/rentiva-v4.38.0-release) — original feature introduction
 - [v4.38.1 release notes](/blog/rentiva-v4.38.1-release) — vehicle-count lifecycle parity, pagination strict-type fix, SEO/cache parity guards
 - [Vendor public profile shortcode](./vendor-profile) — the destination page each directory card links to
-- [Pricing table shortcode](./pricing-table) — Lite-to-Pro upgrade prompt
+- [Vendor application form shortcode](./vendor-apply) — the onboarding form
 - [Vendor onboarding](/docs/vendor/onboarding) — how vendors get into the directory in the first place

@@ -272,5 +272,5 @@ Yükseltme istemleri `/pricing` ve mevcut `[mhm_rentiva_pricing_table]` kısa ko
 - [v4.38.0 sürüm notları](/blog/rentiva-v4.38.0-release) — orijinal özellik tanıtımı
 - [v4.38.1 sürüm notları](/blog/rentiva-v4.38.1-release) — araç sayısı lifecycle paritesi, pagination strict-type fix, SEO/cache parite guard'ları
 - [Bayi profil sayfası kısa kodu](./vendor-profile) — her dizin kartının yönlendirdiği hedef sayfa
-- [Fiyatlandırma tablosu kısa kodu](./pricing-table) — Lite-to-Pro yükseltme istemi
+- [Bayi başvuru formu kısa kodu](./vendor-apply) — onboarding formu
 - [Bayi onboarding](/docs/vendor/onboarding) — bayilerin dizine nasıl girdiği
