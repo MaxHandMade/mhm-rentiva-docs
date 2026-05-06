@@ -2,11 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-05-05T11:00:00.000Z</updated>
+    <updated>2026-05-06T01:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.38.0 — Vendor Directory Page]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release"/>
+        <updated>2026-05-06T01:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A public, Pro-gated vendor catalogue lands in Rentiva. Customers can now discover all your active vendors in one place — filter by city, badge status, and minimum rating; sort by reputation, recency, or alphabetically; click any card to land on the vendor's public profile (introduced in v4.37.0). This release closes the marketplace discovery loop.]]></summary>
+        <content type="html"><![CDATA[<p>A public, Pro-gated vendor catalogue lands in Rentiva. Customers can now discover all your active vendors in one place — filter by city, badge status, and minimum rating; sort by reputation, recency, or alphabetically; click any card to land on the vendor's public profile (introduced in v4.37.0). This release closes the marketplace discovery loop.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's new<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#whats-new" class="hash-link" aria-label="Direct link to What's new" title="Direct link to What's new" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>/vendors/</code> directory page</strong> (TR <code>/bayiler/</code>) — single-page catalogue, server-rendered, no-JS friendly, SEO-first.</li>
+<li class=""><strong>Filter set</strong> — city dropdown (combined from vendor headquarters + vehicle pickup locations), badge toggle (Verified / New), minimum rating (3+ / 4+ / 5).</li>
+<li class=""><strong>Default sort</strong> — Highest rated first, with newest member as tie-breaker. Newest and alphabetical sort options also available.</li>
+<li class=""><strong>Trio renderer</strong> — <code>[rentiva_vendor_directory]</code> shortcode, Gutenberg block (<code>mhm-rentiva/vendor-directory</code>), Elementor widget. All three delegate to the same canonical render via <code>do_shortcode()</code> — no dual pipeline.</li>
+<li class=""><strong>SEO</strong> — Schema.org <code>ItemList</code> + <code>BreadcrumbList</code> JSON-LD with automatic SEO plugin probe (Yoast / Rank Math / AIOSEO / SEOPress / The SEO Framework / SmartCrawl). Plugin emits its own breadcrumb only when no SEO plugin is active. Filter args are reflected in the schema (canonical/render parity for crawlers).</li>
+<li class=""><strong>30-min transient cache</strong> — fast page loads, prefix-wildcard SQL invalidation when vendor data changes (status, city, reliability score, vehicle save, comment status, lifecycle, profile update). Bio and avatar changes intentionally don't invalidate (deliberate scope reduction — directory cards don't render those, would cause spurious flushes).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-gate">Pro Gate<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#pro-gate" class="hash-link" aria-label="Direct link to Pro Gate" title="Direct link to Pro Gate" translate="no">​</a></h2>
+<p>The Vendor Directory is a Pro feature (<code>vendor_marketplace</code> flag). Lite users see a WordPress 404 on <code>/vendors/</code> (dispatch-time gate) and any block/widget/manual shortcode usage returns empty (render-time gate). Upgrade prompts live on <code>/pricing</code> and the existing pricing-table shortcode.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compact-card-design">Compact card design<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#compact-card-design" class="hash-link" aria-label="Direct link to Compact card design" title="Direct link to Compact card design" translate="no">​</a></h2>
+<p>Each vendor card shows: avatar (SVG initials fallback inherited from v4.37.2), display name, city, vehicle count (singular/plural), badge label (✓ Doğrulanmış Bayi / Yeni Bayi), rating bar with count, "Profili görüntüle →" CTA. The whole card is clickable (Popular Routes v4.34.1 pattern parity).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobile-first-responsive-grid">Mobile-first responsive grid<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#mobile-first-responsive-grid" class="hash-link" aria-label="Direct link to Mobile-first responsive grid" title="Direct link to Mobile-first responsive grid" translate="no">​</a></h2>
+<ul>
+<li class="">Desktop (≥1024px): 4-col</li>
+<li class="">Tablet (≥600px): 2-col</li>
+<li class="">Phone (<code>&lt;600px</code>): 1-col stack with native HTML5 <code>&lt;details&gt;</code> filter sheet (no-JS friendly)</li>
+</ul>
+<p>The 600px breakpoint matches v4.37.2 B10 (phone-landscape 568px collapses cleanly). All CSS classes are scoped under <code>.mhm-vendor-directory-*</code> namespace — zero risk of theme/plugin generic class collision (<code>.label</code>, <code>.card</code>, <code>.filter-bar</code>, <code>.pagination</code> all forbidden per v4.37.2 B7 lesson).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n">i18n<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#i18n" class="hash-link" aria-label="Direct link to i18n" title="Direct link to i18n" translate="no">​</a></h2>
+<p><code>_x('vendors', 'URL slug', 'mhm-rentiva')</code> translates to <code>bayiler</code> in TR. Filter override <code>mhm_rentiva_vendor_directory_url_base</code> lets site owners set custom slugs (e.g., <code>dealers</code>, <code>firmalar</code>). Defensive ASCII sanitize + empty fallback. Locale change auto-flushes rewrite rules.</p>
+<p>~25 new EN source strings, all TR-translated. Plus 5 new filter hooks for developers:</p>
+<ul>
+<li class=""><code>mhm_rentiva_vendor_directory_url_base</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_per_page</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_empty_message</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_page_title</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_meta_description</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_seo_disable</code> (global kill switch)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="behind-the-scenes">Behind the scenes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#behind-the-scenes" class="hash-link" aria-label="Direct link to Behind the scenes" title="Direct link to Behind the scenes" translate="no">​</a></h2>
+<p>Three reviewer-caught bugs were closed before this release:</p>
+<ol>
+<li class=""><strong>Phase 3 spec drift (KRITIK):</strong> <code>VendorProfileProvider::aggregate_rating_for_vendor()</code> did not exist (Profile had a private <code>aggregate_rating()</code> with <code>average</code> key, not <code>avg</code>). The directory's test seam masked the bug — production rating filter, sort, and card data would have silently returned 0.0. New public wrapper added (additive, no internal Profile change).</li>
+<li class=""><strong>Phase 7 dispatch gap (KRITIK):</strong> <code>template_include</code> filter was missing — the page wrapper would never serve. Closed in Phase 9 wiring.</li>
+<li class=""><strong>Phase 10 UI bug:</strong> Browser smoke test caught a <code>&lt;details&gt;</code> collapse bug — filter dropdowns rendered in DOM but invisible (width: 0px) on desktop because the native UA stylesheet hides children of a closed <code>&lt;details&gt;</code>. Fixed with <code>&lt;details open&gt;</code> initial state.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compatibility">Compatibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#compatibility" class="hash-link" aria-label="Direct link to Compatibility" title="Direct link to Compatibility" translate="no">​</a></h2>
+<ul>
+<li class="">WordPress 6.7+</li>
+<li class="">WooCommerce 8.0+ (existing vendor marketplace requirement)</li>
+<li class="">Elementor 3.20+ (optional, only if you use the widget)</li>
+<li class="">All 6 major SEO plugins coexist cleanly via class/constant probe — your existing SEO setup is preserved</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests--metrics">Tests &amp; metrics<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#tests--metrics" class="hash-link" aria-label="Direct link to Tests &amp; metrics" title="Direct link to Tests &amp; metrics" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>1044 PHPUnit tests</strong> (1007 baseline + 37 new directory tests) — <code>OK, 3289 assertions, 7 skipped</code></li>
+<li class=""><strong>0 PHPCS errors</strong> full project (CI parity gate)</li>
+<li class=""><strong>8-checkpoint Chrome DevTools MCP browser smoke</strong> green at desktop (1280px) and mobile (390px)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="get-the-release">Get the release<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.38.0-release#get-the-release" class="hash-link" aria-label="Direct link to Get the release" title="Direct link to Get the release" translate="no">​</a></h2>
+<p><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.38.0" target="_blank" rel="noopener noreferrer" class="">Download v4.38.0 ZIP from GitHub</a>.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="directory" term="directory"/>
+        <category label="marketplace" term="marketplace"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.37.3 — CI lint hotfix]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.37.3-release</id>
@@ -1268,60 +1338,5 @@
         <category label="wordpress-org" term="wordpress-org"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
         <category label="quality" term="quality"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.26.6: Vehicles Grid Shortcode Review Fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary"/>
-        <updated>2026-04-15T23:00:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.26.6 is the product of a shortcode review session during YouTube stream preparation. Accumulated silent bugs in the rentivavehiclesgrid and rentivafeaturedvehicles shortcodes have been resolved, and two new features — viewallurl and a service type badge — have been added.]]></summary>
-        <content type="html"><![CDATA[<p>v4.26.6 is the product of a shortcode review session during YouTube stream preparation. Accumulated silent bugs in the <code>rentiva_vehicles_grid</code> and <code>rentiva_featured_vehicles</code> shortcodes have been resolved, and two new features — <code>view_all_url</code> and a service type badge — have been added.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-vehicles-grid-price-sort-fix">🔧 Vehicles Grid: Price Sort Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-vehicles-grid-price-sort-fix" class="hash-link" aria-label="Direct link to 🔧 Vehicles Grid: Price Sort Fix" title="Direct link to 🔧 Vehicles Grid: Price Sort Fix" translate="no">​</a></h2>
-<p>The <code>sort_by="price"</code> option had not been working correctly for some time. Root cause: the <strong>named meta_query clause</strong> approach used alongside the vehicle availability filter was generating incorrect SQL ordering.</p>
-<p><strong>Fix:</strong> Switched to WordPress's standard <code>meta_key + meta_value_num</code> pattern.</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if ( $orderby_key === 'price' ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['meta_key'] = MetaKeys::VEHICLE_PRICE_PER_DAY;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['orderby']  = 'meta_value_num';</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['order']    = $sort_order;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
-<p>Both ascending and descending sort were verified via WP-CLI.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-cache-logic-repaired">⚡ Cache Logic Repaired<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-cache-logic-repaired" class="hash-link" aria-label="Direct link to ⚡ Cache Logic Repaired" title="Direct link to ⚡ Cache Logic Repaired" translate="no">​</a></h2>
-<p>Two silent cache bugs:</p>
-<ol>
-<li class=""><strong>Always disabled</strong> — The condition logic had an inverted check. Cache is now active in production.</li>
-<li class=""><strong>Cleared on every <code>wp_head</code> call</strong> — Invalidation now fires only when a vehicle is saved or deleted.</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-orderby-injection-removed-from-9-blocks">🧹 Orderby Injection Removed from 9 Blocks<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-orderby-injection-removed-from-9-blocks" class="hash-link" aria-label="Direct link to 🧹 Orderby Injection Removed from 9 Blocks" title="Direct link to 🧹 Orderby Injection Removed from 9 Blocks" translate="no">​</a></h2>
-<p>Nine Gutenberg blocks were silently overriding the <code>sort_by</code> attribute from the CAM pipeline with <code>orderby=title, order=ASC</code> defaults on every render. Those defaults have been removed.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-new-view-all-link">✨ New: "View All" Link<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-new-view-all-link" class="hash-link" aria-label="Direct link to ✨ New: &quot;View All&quot; Link" title="Direct link to ✨ New: &quot;View All&quot; Link" translate="no">​</a></h2>
-<p>The <code>view_all_url</code> and <code>view_all_text</code> attributes have been added. Supported in the block editor, Elementor, and classic shortcode.</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[rentiva_vehicles_grid view_all_url="/araclar/" view_all_text="Tüm Araçları Gör"]</span><br></span></code></pre></div></div>
-<p>Renders as a properly aligned button in the section footer.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-new-service-type-badge">🏷️ New: Service Type Badge<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#%EF%B8%8F-new-service-type-badge" class="hash-link" aria-label="Direct link to 🏷️ New: Service Type Badge" title="Direct link to 🏷️ New: Service Type Badge" translate="no">​</a></h2>
-<p>Vehicle cards now display a badge based on the <code>_rentiva_vehicle_service_type</code> meta value:</p>
-<ul>
-<li class=""><strong>Transfer Only</strong> — blue badge</li>
-<li class=""><strong>Transfer + Rental</strong> — green badge</li>
-<li class="">Standard rental vehicles show no badge.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-featured-vehicles-init-flash-fixed">🚫 Featured Vehicles: Init Flash Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-featured-vehicles-init-flash-fixed" class="hash-link" aria-label="Direct link to 🚫 Featured Vehicles: Init Flash Fixed" title="Direct link to 🚫 Featured Vehicles: Init Flash Fixed" translate="no">​</a></h2>
-<p>Raw flex markup was visible before Swiper initialized (5 vehicles horizontal → 3-column slider). Fix: <code>opacity:0</code> + CSS transition.</p>
-<div class="language-css codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-css codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">transition</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> opacity </span><span class="token number" style="color:#36acaa">0.2</span><span class="token unit">s</span><span class="token plain"> ease</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token selector pseudo-class" style="color:#00009f">:not</span><span class="token selector punctuation" style="color:#393A34">(</span><span class="token selector class" style="color:#00009f">.swiper-initialized</span><span class="token selector punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">opacity</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">pointer-events</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> none</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
-<p>Layout space is preserved (zero CLS); once Swiper is ready, it fades in with a 0.2s transition.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-other-fixes">🔧 Other Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/v4.26.6-release-summary#-other-fixes" class="hash-link" aria-label="Direct link to 🔧 Other Fixes" title="Direct link to 🔧 Other Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong><code>show_book_button</code> dead attribute:</strong> Featured Vehicles and the Elementor widget were sending this key, but the template only checked <code>show_booking_button</code>. Both keys are now accepted.</li>
-<li class=""><strong>Search Results <code>default_sort</code>:</strong> Now applied when no sort parameter is present in the URL.</li>
-<li class=""><strong>Unified Search luggage tooltip:</strong> A hover/focus tooltip has been added for the luggage capacity field.</li>
-</ul>
-<hr>
-<p><em>Next: v4.26.7/v4.26.8 — Popular Routes shortcode and Swiper loop mode fix.</em></p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="patch" term="patch"/>
-        <category label="shortcode" term="shortcode"/>
-        <category label="vehicles-grid" term="vehicles-grid"/>
-        <category label="featured-vehicles" term="featured-vehicles"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
 </feed>

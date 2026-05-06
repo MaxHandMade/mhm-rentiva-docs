@@ -2,11 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-05-05T11:00:00.000Z</updated>
+    <updated>2026-05-06T01:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.38.0 — Bayi Dizini Sayfası]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release"/>
+        <updated>2026-05-06T01:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Rentiva'ya yeni bir Pro özelliği katıldı: herkese açık bayi dizini. Müşterileriniz aktif bayilerinizi tek bir sayfada keşfedebilir — şehre, rozet durumuna ve minimum puana göre filtreleyebilir; en yüksek puanlı, en yeni veya alfabetik olarak sıralayabilir; herhangi bir bayi kartına tıklayarak v4.37.0 ile gelen bayi profil sayfasına gidebilir. Bu sürüm marketplace keşif döngüsünü tamamlıyor.]]></summary>
+        <content type="html"><![CDATA[<p>Rentiva'ya yeni bir Pro özelliği katıldı: herkese açık bayi dizini. Müşterileriniz aktif bayilerinizi tek bir sayfada keşfedebilir — şehre, rozet durumuna ve minimum puana göre filtreleyebilir; en yüksek puanlı, en yeni veya alfabetik olarak sıralayabilir; herhangi bir bayi kartına tıklayarak v4.37.0 ile gelen bayi profil sayfasına gidebilir. Bu sürüm marketplace keşif döngüsünü tamamlıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong><code>/bayiler/</code> dizin sayfası</strong> (EN <code>/vendors/</code>) — tek sayfa katalog, sunucu-render, JS gerektirmez, SEO odaklı.</li>
+<li class=""><strong>Filtre seti</strong> — şehir dropdown (bayi merkezi + araç teslim noktası birleşik), rozet (Doğrulanmış / Yeni), minimum puan (3+ / 4+ / 5).</li>
+<li class=""><strong>Varsayılan sıralama</strong> — Puanı en yüksek önde; eşitlikte en yeni üye. En yeni ve alfabetik sıralama opsiyonları da mevcut.</li>
+<li class=""><strong>Üçlü render</strong> — <code>[rentiva_vendor_directory]</code> kısa kodu, Gutenberg bloğu (<code>mhm-rentiva/vendor-directory</code>), Elementor widget'ı. Üçü de aynı kanonik render'a <code>do_shortcode()</code> üzerinden delege eder — çift hat yok.</li>
+<li class=""><strong>SEO</strong> — Schema.org <code>ItemList</code> + <code>BreadcrumbList</code> JSON-LD, otomatik SEO eklenti algılayıcısı (Yoast / Rank Math / AIOSEO / SEOPress / The SEO Framework / SmartCrawl). SEO eklentisi yoksa eklenti kendi breadcrumb'ını yayınlar. Filtre argümanları schema'ya yansıtılır (crawler'lar için canonical/render paritesi).</li>
+<li class=""><strong>30 dakikalık transient önbellek</strong> — hızlı sayfa yüklemesi, bayi verisi değişince prefix-wildcard SQL ile temizlenir (durum, şehir, güvenilirlik puanı, araç kaydı, yorum durumu, lifecycle, profil güncelleme). Bio ve avatar değişimi bilerek invalidate etmiyor (kasıtlı scope reduction — dizin kartları bunları render etmiyor, gereksiz flush yapardı).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-kilidi">Pro Kilidi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#pro-kilidi" class="hash-link" aria-label="Pro Kilidi doğrudan bağlantı" title="Pro Kilidi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bayi Dizini bir Pro özelliğidir (<code>vendor_marketplace</code> bayrağı). Lite kullanıcılar <code>/bayiler/</code> adresinde WordPress 404 görür (dispatch-time kilidi); herhangi bir blok/widget/manuel kısa kod kullanımı boş döner (render-time kilidi). Yükseltme çağrıları <code>/pricing</code> sayfasında ve mevcut fiyatlandırma tablosu kısa kodunda mevcuttur.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kompakt-kart-tasarımı">Kompakt kart tasarımı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#kompakt-kart-tasar%C4%B1m%C4%B1" class="hash-link" aria-label="Kompakt kart tasarımı doğrudan bağlantı" title="Kompakt kart tasarımı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Her bayi kartı şunları gösterir: avatar (v4.37.2'den miras SVG initials fallback), display name, şehir, araç sayısı (tekil/çoğul), rozet etiketi (✓ Doğrulanmış Bayi / Yeni Bayi), puan barı + sayı, "Profili görüntüle →" CTA. Kart tamamen tıklanabilir (Popular Routes v4.34.1 pattern paritesi).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobile-first-responsive-grid">Mobile-first responsive grid<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#mobile-first-responsive-grid" class="hash-link" aria-label="Mobile-first responsive grid doğrudan bağlantı" title="Mobile-first responsive grid doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">Desktop (≥1024px): 4 sütun</li>
+<li class="">Tablet (≥600px): 2 sütun</li>
+<li class="">Telefon (<code>&lt;600px</code>): 1 sütun stack + native HTML5 <code>&lt;details&gt;</code> filtre sheet (JS gerektirmez)</li>
+</ul>
+<p>600px breakpoint v4.37.2 B10 ile aynı (phone-landscape 568px temiz şekilde tek sütuna düşer). Tüm CSS class'ları <code>.mhm-vendor-directory-*</code> namespace'inde scoped — tema/eklenti jenerik class çakışma riski sıfır (<code>.label</code>, <code>.card</code>, <code>.filter-bar</code>, <code>.pagination</code> v4.37.2 B7 dersi gereği yasak).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n">i18n<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#i18n" class="hash-link" aria-label="i18n doğrudan bağlantı" title="i18n doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>_x('vendors', 'URL slug', 'mhm-rentiva')</code> TR'de <code>bayiler</code>'e çevrilir. Filter override <code>mhm_rentiva_vendor_directory_url_base</code> site sahiplerine özel slug imkanı sağlar (örn. <code>dealers</code>, <code>firmalar</code>). Defansif ASCII sanitize + boş fallback. Locale değişimi rewrite rule'larını otomatik flush eder.</p>
+<p>~25 yeni EN kaynak string, hepsi TR-çevrili. Geliştiriciler için 5 yeni filter hook:</p>
+<ul>
+<li class=""><code>mhm_rentiva_vendor_directory_url_base</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_per_page</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_empty_message</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_page_title</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_meta_description</code></li>
+<li class=""><code>mhm_rentiva_vendor_directory_seo_disable</code> (global kapama anahtarı)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="perde-arkası">Perde arkası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#perde-arkas%C4%B1" class="hash-link" aria-label="Perde arkası doğrudan bağlantı" title="Perde arkası doğrudan bağlantı" translate="no">​</a></h2>
+<p>Reviewer agent tarafından bu sürüm öncesi 3 hata yakalanıp kapatıldı:</p>
+<ol>
+<li class=""><strong>Phase 3 spec drift (KRITIK):</strong> <code>VendorProfileProvider::aggregate_rating_for_vendor()</code> mevcut değildi (Profile'da private <code>aggregate_rating()</code> <code>average</code> anahtarıyla, <code>avg</code> değil). Dizinin test seam'i bug'ı maskeliyordu — production'da rating filter, sort ve kart verisi sessizce 0.0 dönerdi. Yeni public wrapper eklendi (additive, Profile iç değişikliği yok).</li>
+<li class=""><strong>Phase 7 dispatch gap (KRITIK):</strong> <code>template_include</code> filter eksikti — sayfa wrapper'ı hiç servis edilmezdi. Phase 9 wiring'de kapatıldı.</li>
+<li class=""><strong>Phase 10 UI bug:</strong> Browser smoke test bir <code>&lt;details&gt;</code> collapse bug'ı yakaladı — filtre dropdown'ları DOM'da render olmuştu ama desktop'ta görünmezdi (width: 0px) çünkü native UA stylesheet kapalı <code>&lt;details&gt;</code>'in çocuklarını gizler. <code>&lt;details open&gt;</code> initial state ile düzeltildi.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="uyumluluk">Uyumluluk<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#uyumluluk" class="hash-link" aria-label="Uyumluluk doğrudan bağlantı" title="Uyumluluk doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">WordPress 6.7+</li>
+<li class="">WooCommerce 8.0+ (mevcut bayi marketplace gereksinimi)</li>
+<li class="">Elementor 3.20+ (opsiyonel, sadece widget kullanırsanız)</li>
+<li class="">6 büyük SEO eklentisi class/constant probe ile temiz birlikte çalışır — mevcut SEO kurulumunuz korunur</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="test--metrikler">Test &amp; metrikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#test--metrikler" class="hash-link" aria-label="Test &amp; metrikler doğrudan bağlantı" title="Test &amp; metrikler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>1044 PHPUnit testi</strong> (1007 baseline + 37 yeni dizin testi) — <code>OK, 3289 assertion, 7 skipped</code></li>
+<li class=""><strong>0 PHPCS hata</strong> tüm proje (CI paritesi)</li>
+<li class=""><strong>8-checkpoint Chrome DevTools MCP browser smoke</strong> desktop (1280px) ve mobile (390px) yeşil</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sürümü-indirin">Sürümü indirin<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.38.0-release#s%C3%BCr%C3%BCm%C3%BC-indirin" class="hash-link" aria-label="Sürümü indirin doğrudan bağlantı" title="Sürümü indirin doğrudan bağlantı" translate="no">​</a></h2>
+<p><a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.38.0" target="_blank" rel="noopener noreferrer" class="">GitHub'dan v4.38.0 ZIP indirin</a>.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="directory" term="directory"/>
+        <category label="marketplace" term="marketplace"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.37.3 — CI lint hotfix'i]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.37.3-release</id>
@@ -1269,60 +1339,5 @@
         <category label="wordpress-org" term="wordpress-org"/>
         <category label="mhm-rentiva" term="mhm-rentiva"/>
         <category label="quality" term="quality"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MHM Rentiva v4.26.6: Araç Izgarası Shortcode İnceleme Düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary"/>
-        <updated>2026-04-15T23:00:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.26.6, YouTube yayın hazırlığı kapsamındaki shortcode inceleme seansının ürünüdür. rentivavehiclesgrid ve rentivafeaturedvehicles shortcode'larında biriken sessiz hatalar giderildi; yeni viewallurl ve servis tipi rozeti özellikleri eklendi.]]></summary>
-        <content type="html"><![CDATA[<p>v4.26.6, YouTube yayın hazırlığı kapsamındaki shortcode inceleme seansının ürünüdür. <code>rentiva_vehicles_grid</code> ve <code>rentiva_featured_vehicles</code> shortcode'larında biriken sessiz hatalar giderildi; yeni <code>view_all_url</code> ve servis tipi rozeti özellikleri eklendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-araç-izgarası-fiyat-sıralaması-düzeltmesi">🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-ara%C3%A7-izgaras%C4%B1-fiyat-s%C4%B1ralamas%C4%B1-d%C3%BCzeltmesi" class="hash-link" aria-label="🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi doğrudan bağlantı" title="🔧 Araç Izgarası: Fiyat Sıralaması Düzeltmesi doğrudan bağlantı" translate="no">​</a></h2>
-<p><code>sort_by="price"</code> ayarı uzun süredir doğru çalışmıyordu. Kök neden: araç uygunluk filtresiyle birlikte kullanılan <strong>named meta_query clause</strong> yaklaşımı yanlış SQL sıralaması üretiyordu.</p>
-<p><strong>Çözüm:</strong> WordPress'in standart <code>meta_key + meta_value_num</code> kalıbına geçiş.</p>
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">if ( $orderby_key === 'price' ) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['meta_key'] = MetaKeys::VEHICLE_PRICE_PER_DAY;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['orderby']  = 'meta_value_num';</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    $args['order']    = $sort_order;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
-<p>WP-CLI üzerinden hem artan hem azalan sıralama doğrulandı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-önbellek-mantığı-onarıldı">⚡ Önbellek Mantığı Onarıldı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-%C3%B6nbellek-mant%C4%B1%C4%9F%C4%B1-onar%C4%B1ld%C4%B1" class="hash-link" aria-label="⚡ Önbellek Mantığı Onarıldı doğrudan bağlantı" title="⚡ Önbellek Mantığı Onarıldı doğrudan bağlantı" translate="no">​</a></h2>
-<p>İki sessiz önbellek hatası:</p>
-<ol>
-<li class=""><strong>Her zaman kapalıydı</strong> — Koşul mantığında ters kontrol vardı. Üretimde önbellek artık aktif.</li>
-<li class=""><strong>Her <code>wp_head</code> çağrısında temizleniyordu</strong> — Geçersizleştirme artık yalnızca araç kaydedildiğinde veya silindiğinde tetikleniyor.</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-9-blokta-sıralama-enjeksiyonu-kaldırıldı">🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-9-blokta-s%C4%B1ralama-enjeksiyonu-kald%C4%B1r%C4%B1ld%C4%B1" class="hash-link" aria-label="🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı doğrudan bağlantı" title="🧹 9 Blokta Sıralama Enjeksiyonu Kaldırıldı doğrudan bağlantı" translate="no">​</a></h2>
-<p>Dokuz Gutenberg bloğu, CAM pipeline'dan gelen <code>sort_by</code> özniteliğini her render işleminde <code>orderby=title, order=ASC</code> varsayılanlarıyla sessizce geçersiz kılıyordu. Bu varsayılanlar kaldırıldı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yeni-tümünü-gör-linki">✨ Yeni: "Tümünü Gör" Linki<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-yeni-t%C3%BCm%C3%BCn%C3%BC-g%C3%B6r-linki" class="hash-link" aria-label="✨ Yeni: &quot;Tümünü Gör&quot; Linki doğrudan bağlantı" title="✨ Yeni: &quot;Tümünü Gör&quot; Linki doğrudan bağlantı" translate="no">​</a></h2>
-<p><code>view_all_url</code> ve <code>view_all_text</code> öznitelikleri eklendi. Blok editörü, Elementor ve klasik shortcode'da destekleniyor.</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[rentiva_vehicles_grid view_all_url="/araclar/" view_all_text="Tüm Araçları Gör"]</span><br></span></code></pre></div></div>
-<p>Bölüm altbilgisinde düzgün hizalanmış buton olarak render edilir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-yeni-servis-tipi-rozeti">🏷️ Yeni: Servis Tipi Rozeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#%EF%B8%8F-yeni-servis-tipi-rozeti" class="hash-link" aria-label="🏷️ Yeni: Servis Tipi Rozeti doğrudan bağlantı" title="🏷️ Yeni: Servis Tipi Rozeti doğrudan bağlantı" translate="no">​</a></h2>
-<p>Araç kartları artık <code>_rentiva_vehicle_service_type</code> meta değerine göre rozet gösteriyor:</p>
-<ul>
-<li class=""><strong>Yalnızca Transfer</strong> — mavi rozet</li>
-<li class=""><strong>Transfer + Kiralık</strong> — yeşil rozet</li>
-<li class="">Standart kiralık araçlarda rozet gösterilmez.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-öne-çıkan-araçlar-başlatma-flashı-giderildi">🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-%C3%B6ne-%C3%A7%C4%B1kan-ara%C3%A7lar-ba%C5%9Flatma-flash%C4%B1-giderildi" class="hash-link" aria-label="🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi doğrudan bağlantı" title="🚫 Öne Çıkan Araçlar: Başlatma Flash'ı Giderildi doğrudan bağlantı" translate="no">​</a></h2>
-<p>Swiper başlatılmadan önce ham flex işaretlemesi görünüyordu (5 araç yatay → 3 sütunlu slider). Çözüm: <code>opacity:0</code> + CSS geçişi.</p>
-<div class="language-css codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-css codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">transition</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> opacity </span><span class="token number" style="color:#36acaa">0.2</span><span class="token unit">s</span><span class="token plain"> ease</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token selector class" style="color:#00009f">.mhm-featured-swiper</span><span class="token selector pseudo-class" style="color:#00009f">:not</span><span class="token selector punctuation" style="color:#393A34">(</span><span class="token selector class" style="color:#00009f">.swiper-initialized</span><span class="token selector punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">opacity</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">pointer-events</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> none</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
-<p>Düzen boşluk korunur (sıfır CLS), Swiper hazır olunca 0,2 saniyelik geçişle beliriyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-diğer-düzeltmeler">🔧 Diğer Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/v4.26.6-release-summary#-di%C4%9Fer-d%C3%BCzeltmeler" class="hash-link" aria-label="🔧 Diğer Düzeltmeler doğrudan bağlantı" title="🔧 Diğer Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong><code>show_book_button</code> ölü öznitelik:</strong> Öne Çıkan Araçlar ve Elementor widget'ı bu anahtarı gönderiyordu ama şablon yalnızca <code>show_booking_button</code> kontrol ediyordu. Artık her iki anahtar da kabul ediliyor.</li>
-<li class=""><strong>Arama Sonuçları <code>default_sort</code>:</strong> URL'de sıralama parametresi yoksa artık uygulanıyor.</li>
-<li class=""><strong>Birleşik Arama bagaj ipucu:</strong> Bagaj kapasitesi alanı için hover/focus ipucu eklendi.</li>
-</ul>
-<hr>
-<p><em>Sıradaki: v4.26.7/v4.26.8 — Popüler Rotalar shortcode'u ve Swiper loop modu düzeltmesi.</em></p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="patch" term="patch"/>
-        <category label="shortcode" term="shortcode"/>
-        <category label="vehicles-grid" term="vehicles-grid"/>
-        <category label="featured-vehicles" term="featured-vehicles"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="mhm-rentiva" term="mhm-rentiva"/>
     </entry>
 </feed>
