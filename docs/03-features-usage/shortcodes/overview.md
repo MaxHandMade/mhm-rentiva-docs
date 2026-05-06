@@ -7,13 +7,13 @@ slug: /features-usage/shortcodes/overview
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
-The Shortcodes section is the central hub of the architecture that integrates all of MHM Rentiva's frontend functionality with WordPress. The system includes **24 active shortcodes** in total. You can place these anywhere on your site using either the classic text editor or page builder integrations.
+The Shortcodes section is the central hub of the architecture that integrates all of MHM Rentiva's frontend functionality with WordPress. The system includes **26 active shortcodes** in total. You can place these anywhere on your site using either the classic text editor or page builder integrations.
 
 ---
 
 ## 🏗️ Gutenberg Blocks and Elementor Support
 
-MHM Rentiva embraces modern WordPress architecture. All **24 listed shortcodes** here produce a standard "Render Output" under the hood.
+MHM Rentiva embraces modern WordPress architecture. All **26 listed shortcodes** here produce a standard "Render Output" under the hood.
 
 - **Gutenberg Blocks:** All shortcodes are available as native drag-and-drop blocks in the Gutenberg editor — no manual shortcode entry required. Shortcode parameters are reflected in the block settings (Inspector) panel on the right.
 - **Elementor Widgets:** The plugin's own components are available as widgets in the Elementor panel. When using Elementor, you can add the relevant component and configure its visual settings without entering a shortcode (`[rentiva_...]`).
@@ -162,6 +162,18 @@ For business partners who want to list their vehicles for rental on the platform
 *   **Key Parameters:** (Account verification parameters)
 *   **Example:** `[rentiva_vehicle_submit]`
 
+**25. Vendor Public Profile (v4.37.0+):**
+*   **Shortcode:** `[rentiva_vendor_profile]`
+*   **Key Parameters:** `slug`, `show_badge`, `show_about`, `show_vehicles`, `show_reviews`, `show_location`, `max_vehicles`, `max_reviews`
+*   **Example:** `[rentiva_vendor_profile slug="akif-otomotiv"]`
+*   **Reference:** [Vendor public profile](./vendor-profile)
+
+**26. Vendor Directory (v4.38.0+):**
+*   **Shortcode:** `[rentiva_vendor_directory]`
+*   **Key Parameters:** `per_page`, `default_sort`, `show_filter_bar`, `show_breadcrumb`, `show_pagination`, `empty_message`
+*   **Example:** `[rentiva_vendor_directory per_page="12" default_sort="rating"]`
+*   **Reference:** [Vendor directory](./vendor-directory)
+
 ---
 
 ## 🛠️ Management and Missing Page Check
@@ -172,7 +184,7 @@ The MHM Rentiva > Shortcode Pages (Dashboard screen) provides the following info
 *   **Debugging & Caching:** If a shortcode is accidentally removed from a page, the **"Missing Pages"** counter and the "Debug" button in the panel allow you to identify which function is no longer live.
 
 ### Section Summary
-- **24 Shortcodes:** Covers every point in your project from bookings to B2B.
+- **26 Shortcodes:** Covers every point in your project from bookings to B2B.
 - **Single-Point Rendering:** Use shortcodes in the classic editor, Elementor, or Gutenberg — all are powered by the same core system.
 - **Parametric Flexibility:** Pass external data to each shortcode to change layout, query limits, and more.
 
