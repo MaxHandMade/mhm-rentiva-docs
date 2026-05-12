@@ -8,6 +8,10 @@ slug: /features-usage/vendor-reports
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (since v4.40.0)
+The Vendor Reports admin page was migrated to a **React SPA** in v4.40.0 (Faz 6). Data is fetched via `/wp-json/mhm-rentiva/v1/vendor-reports/*` REST endpoints. Components: `VendorReportsPage`, `FilterBar`, `ReportTable`, `DetailView`, `ActionForm`, `StatusBadge`. Flash messages use the `window.mhmRentivaVendorReports.flash` pattern (PHP `enqueue_assets()` reads `$_GET['updated']`/`$_GET['error']` before `history.replaceState` strips params).
+:::
+
 The Vendor Report system gives vendors a structured channel to escalate issues to the platform administrator and to appeal automated actions (like withdrawal penalties). One custom table, one shared modal, one admin page — five different contexts trigger it. **Requires a Pro license.**
 
 Introduced in [v4.35.0](/blog/rentiva-v4.35.0-release).
@@ -191,6 +195,35 @@ For local testing without a real Pro token, add `define('MHM_RENTIVA_DEV_PRO', t
 | `mhm_rentiva_vendor_report_resolved` | Action — fires after status changes to terminal. 3 args (report_id, vendor_id, new_status). |
 | `VendorReportRepository` | Public API: `create()`, `find()`, `update_status()`, `find_by_vendor()`, `has_open_report_for()`, `reset_has_open_cache()` |
 | `VendorReportService` | Public API: `create_report()`, `resolve_report()`, `reject_report()` |
+
+---
+
+## React Components (v4.40.0+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `VendorReportsPage` | Root — list view + detail view orchestration |
+| `FilterBar` | Status and context filter controls |
+| `ReportTable` | Paginated, filterable report list |
+| `DetailView` | Full report detail with vendor info and description |
+| `ActionForm` | Resolve / Reject / Mark In Review form with admin note |
+| `StatusBadge` | Color-coded status pill (open / in_review / resolved / rejected) |
+
+**REST Endpoints:**
+- `GET /wp-json/mhm-rentiva/v1/vendor-reports` — paginated list, filterable by status and context
+- `GET /wp-json/mhm-rentiva/v1/vendor-reports/{id}` — single report detail
+
+All endpoints require `manage_options` capability.
+
+---
+
+### Changelog
+
+| Date | Version | Note |
+| :--- | :--- | :--- |
+| 06.05.2026 | 4.40.0 | Full React SPA migration. VendorReportsPage, FilterBar, ReportTable, DetailView, ActionForm, StatusBadge. Flash flag pattern via `window.mhmRentivaVendorReports.flash`. |
+| 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
+| 05.04.2026 | 4.35.0 | Initial version — vendor report system introduced. 5 contexts (booking, vehicle, vehicle_action, penalty, general), penalty suspension filter, custom DB table. |
 
 ---
 

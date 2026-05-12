@@ -6,6 +6,10 @@ slug: /features-usage/messages
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (since v4.40.0)
+The Messages admin page was fully migrated to a **React SPA** in v4.40.0 (CSS polish finalized in v4.41.0). All 6 React components are served from `build/admin/messages.js`. The page loads without a PHP full-page render — data is fetched via `/wp-json/mhm-rentiva/v1/messages/*` REST endpoints. Legacy PHP render methods were removed.
+:::
+
 The Messaging System is a centralized support channel that lets you communicate directly and securely with your customers before or after a rental. Manage all incoming requests via **MHM Rentiva > Messages**.
 
 ---
@@ -45,6 +49,25 @@ The message editing screen has a critical feature for maintaining operational co
 
 ---
 
+## 📱 Mobile Responsive (v4.48.0+)
+
+The message table switches to a **stacked card layout** on small screens (≤782px). Column headers are injected inline via CSS `attr(data-label)` — no horizontal scroll. Thread view also stacks vertically.
+
+---
+
+## React Components (v4.40.0+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `MessagesPage` | Root — list view + thread view + settings view |
+| `MessageTable` | Sortable, filterable message inbox |
+| `ThreadView` | Chat-bubble thread with reply form |
+| `SettingsView` | Category and status management |
+
+**REST Namespace:** `GET/POST /wp-json/mhm-rentiva/v1/messages/*`
+
+---
+
 ### Section Summary
 - Organize support requests with **Message Filtering**.
 - Improve customer satisfaction with **Reply Flow**.
@@ -53,6 +76,9 @@ The message editing screen has a critical feature for maintaining operational co
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 11.05.2026 | 4.48.0 | Mobile stacked layout for message table (≤782px). |
+| 11.05.2026 | 4.41.0 | CSS polish finalized. Payouts admin menu added. |
+| 11.05.2026 | 4.40.0 | Full React SPA migration. MessagesPage, MessageTable, ThreadView, SettingsView components. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 19.03.2026 | 4.21.2 | Message documentation updated with reply flow and booking association features against the real interface. |
 | 26.02.2026 | 4.21.0 | Initial version created. |

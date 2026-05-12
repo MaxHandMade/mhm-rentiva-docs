@@ -7,6 +7,10 @@ sidebar_position: 1
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA — Admin Page (since v4.40.0)
+The **Vendor Management** admin page was migrated to a **React SPA** in v4.40.0. `VendorManagementRestController` registers 7 REST routes under `/wp-json/mhm-rentiva/v1/vendor-management/*`. Components: `VendorManagementPage`, `ApplicationTable`, `VendorTable`, `VendorDetailPanel`, `ActionBar`. Data is fetched client-side — no full PHP page render.
+:::
+
 :::info Purpose
 Rentiva can transform from a centralized vehicle rental system into a Multi-Vendor marketplace. This document explains the vendor lifecycle in technical detail.
 :::
@@ -215,6 +219,53 @@ Users with the vendor role see a **"Vendor Dashboard"** menu link in the sidebar
 
 ---
 
+## 🔓 Unsuspend Action (v4.43.0)
+
+Admins can now **unsuspend** a vendor directly from the Vendor Management admin page without navigating to the user profile. The unsuspend action:
+
+- Restores the vendor's `rentiva_vendor` role (from suspended state).
+- Re-publishes any vehicles that were unpublished at suspension time.
+- Sends a reactivation email to the vendor.
+- Logs the action in the commission audit log.
+
+**REST endpoint:** `POST /wp-json/mhm-rentiva/v1/vendor-management/unsuspend` (requires `manage_options`).
+
+---
+
+## 📋 Commission Audit Log (v4.43.0)
+
+Every commission transaction is now written to a persistent audit log, accessible from the Vendor Management detail panel. Each entry records:
+
+| Field | Description |
+| :--- | :--- |
+| `event_type` | `commission_applied`, `commission_reversed`, `vendor_suspended`, `vendor_unsuspended`, `penalty_applied`, `penalty_deferred` |
+| `vendor_id` | Vendor user ID |
+| `booking_id` | Associated booking (where applicable) |
+| `amount` | Commission or penalty amount (signed float) |
+| `note` | Admin or system-generated note |
+| `created_at` | Timestamp |
+| `admin_user_id` | Admin who triggered the event (NULL for system events) |
+
+The audit log is append-only — entries are never deleted or modified. Use it to trace disputes, verify payouts, and audit automated penalty events.
+
+**REST endpoint:** `GET /wp-json/mhm-rentiva/v1/vendor-management/{vendor_id}/audit-log`
+
+---
+
+## React Components (v4.40.0+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `VendorManagementPage` | Root — tab navigation (Applications / Vendors / Audit) |
+| `ApplicationTable` | Paginated pending application list with approve/reject actions |
+| `VendorTable` | Active vendor list with search and status filter |
+| `VendorDetailPanel` | Slide-in panel: IBAN (masked), documents, audit log, actions |
+| `ActionBar` | Suspend / Unsuspend / Edit quick-action row |
+
+**REST Namespace:** `GET/POST /wp-json/mhm-rentiva/v1/vendor-management/*`
+
+---
+
 ## Known Issues (Discovered in v4.23.1)
 
 | Issue | Detail | Status |
@@ -238,7 +289,9 @@ Users with the vendor role see a **"Vendor Dashboard"** menu link in the sidebar
 
 ## Changelog
 | Date | Version | Note |
-|---|---|---|
+| :--- | :--- | :--- |
+| 07.05.2026 | 4.43.0 | Unsuspend action (role restore + vehicle re-publish + email). Commission audit log (append-only, 6 event types). |
+| 06.05.2026 | 4.40.0 | Full React SPA migration. VendorManagementRestController (7 REST routes). VendorManagementPage, ApplicationTable, VendorTable, VendorDetailPanel, ActionBar components. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 01.04.2026 | 4.24.1 | Paid listing system (ListingFeeManager), remaining time display, WC My Account "Vendor Dashboard" menu link, 18 new tests. |
 | 29.03.2026 | 4.24.0 | Vehicle lifecycle system implemented (Phases 0-4, 6-7). Pause, renewal, withdrawal, reliability score. |

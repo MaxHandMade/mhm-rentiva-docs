@@ -77,13 +77,86 @@ On error:
 }
 ```
 
+---
+
+## ⚛️ 5. Admin React SPA Endpoints (v4.36.0+)
+
+Starting in v4.36.0, all major admin pages were migrated to React SPAs. Each page is backed by a dedicated REST controller. All endpoints require `manage_options` capability.
+
+### Dashboard (v4.36.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/dashboard/stats` | KPI cards: total bookings, revenue, active vehicles, customers |
+| `GET` | `/dashboard/recent-bookings` | Paginated recent bookings widget |
+| `GET` | `/dashboard/recent-transfers` | Upcoming transfers overview |
+
+### Reports (v4.37.x)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/reports/overview` | Cross-tab summary stats |
+| `GET` | `/reports/revenue` | Revenue bar chart data + daily detail list |
+| `GET` | `/reports/bookings` | Booking status distribution |
+| `GET` | `/reports/vehicles` | Vehicle performance KPIs + top vehicles |
+| `GET` | `/reports/customers` | Customer lifecycle chart + summary metrics |
+
+All report endpoints accept `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` for date-range filtering.
+
+### Customers (v4.39.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/customers` | Paginated list — supports `?search=`, `?sort_by=`, `?sort_order=`, `?page=` |
+| `GET` | `/customers/{id}` | Single customer detail (bookings count, total spent, first/last booking) |
+| `DELETE` | `/customers/bulk` | Bulk delete — accepts `ids[]` array in request body |
+
+### Messages (v4.40.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/messages` | Paginated inbox — filterable by status, priority, category |
+| `GET` | `/messages/{id}` | Thread view for a single message |
+| `POST` | `/messages/{id}/reply` | Send a reply in a thread |
+| `POST` | `/messages/{id}/status` | Update message status (pending/replied/closed) |
+
+### Vendor Reports (v4.40.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/vendor-reports` | Paginated list — filterable by status and context type |
+| `GET` | `/vendor-reports/{id}` | Single report detail with full description and audit trail |
+| `POST` | `/vendor-reports/{id}/resolve` | Mark as resolved (triggers penalty release or apply depending on context) |
+| `POST` | `/vendor-reports/{id}/reject` | Reject report (triggers deferred penalty for vehicle_action context) |
+
+### Vendor Management (v4.40.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/vendor-management/applications` | Pending vendor applications |
+| `GET` | `/vendor-management/vendors` | Active vendor list with search/filter |
+| `GET` | `/vendor-management/{id}` | Vendor detail (masked IBAN, documents, stats) |
+| `POST` | `/vendor-management/{id}/approve` | Approve a pending application |
+| `POST` | `/vendor-management/{id}/reject` | Reject a pending application |
+| `POST` | `/vendor-management/{id}/suspend` | Suspend an active vendor |
+| `POST` | `/vendor-management/{id}/unsuspend` | Unsuspend a vendor (v4.43.0) |
+| `GET` | `/vendor-management/{id}/audit-log` | Commission + penalty audit log (v4.43.0) |
+
+---
+
 ## Section Summary
 - v1 API serves under `mhm-rentiva/v1`.
 - Authentication method varies based on the criticality of the operation.
 - All operations are audited via the central `AuthHelper` and `ErrorHandler`.
+- Admin React SPA endpoints (v4.36.0+) all require `manage_options` capability.
 
 ## Changelog
 | Date | Version | Note |
-|---|---|---|
+| :--- | :--- | :--- |
+| 07.05.2026 | 4.43.0 | `/vendor-management/{id}/unsuspend` + `/vendor-management/{id}/audit-log` endpoints added. |
+| 06.05.2026 | 4.40.0 | Messages, Vendor Reports, Vendor Management REST controllers added (12 new endpoints). |
+| 10.04.2026 | 4.39.0 | Customers REST controller: GET /customers, /customers/{id}, DELETE /customers/bulk. |
+| 05.04.2026 | 4.37.x | Reports REST controller: 5 tab endpoints with date range filter. |
+| 10.05.2026 | 4.36.0 | Dashboard REST controller: /dashboard/stats, /dashboard/recent-bookings, /dashboard/recent-transfers. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | v1 API architecture and security layers updated. |

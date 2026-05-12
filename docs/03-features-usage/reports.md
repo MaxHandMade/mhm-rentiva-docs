@@ -6,6 +6,10 @@ slug: /features-usage/reports
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (since v4.37.x)
+The Reports page was migrated to a **React SPA with Chart.js** in v4.37.x (Faz 1b). All chart rendering and data fetching is done client-side via REST API. 9 legacy PHP/JS report files were deleted. The date filter and 5 tab components are React components.
+:::
+
 Reports is the advanced analytics hub that converts all of MHM Rentiva's operational data into financial and statistical outputs. Monitor your business's growth trends and efficiency via **MHM Rentiva > Reports**.
 
 :::caution Lite / Pro Difference
@@ -77,9 +81,28 @@ Tracks customer loyalty and spending habits.
 - Identify the most profitable segments with **Revenue/Vehicle Reports**.
 - Develop loyalty strategies with **Customer Reports**.
 
+## React Components (v4.37.x+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `ReportsPage` | Root — header stats + tab navigation + date range filter |
+| `BookingsTab` | Booking distribution chart + status table |
+| `RevenueTab` | Revenue bar chart (Chart.js) + daily detail list |
+| `VehiclesTab` | Vehicle performance KPI + top vehicles table |
+| `CustomersTab` | Customer lifecycle chart + summary metrics |
+
+**Date filter:** Stacks vertically on mobile (≤782px) — class `.mhm-reports__date-filter`.
+
+**REST Namespace:** `GET /wp-json/mhm-rentiva/v1/reports/*`
+
+---
+
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.49.0 | Date filter vertical stack mobile fix (782px breakpoint). |
+| 11.05.2026 | 4.48.0 | Stats grid 2-column mobile layout. |
+| 06.05.2026 | 4.37.x | Full React SPA migration with Chart.js. 9 legacy PHP/JS files removed. ReportsRestController + 5 tab components. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 27.03.2026 | 4.23.0 | Lite/Pro gating (Revenue Chart + Upcoming Ops), stats widget 2x2 grid design, timezone fixes (`wp_date`), cancellation dataset, and cache key prefix fix documented. |
 | 19.03.2026 | 4.21.2 | Reports page updated against the real interface with 5 tabs and all chart details. |

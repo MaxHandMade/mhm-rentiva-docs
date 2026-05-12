@@ -8,6 +8,10 @@ slug: /features-usage/dashboard
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (since v4.36.0)
+The Dashboard was fully migrated to a **React SPA** backed by a dedicated REST API in v4.36.0. The page loads without a PHP full-page render — all data is fetched asynchronously via `/wp-json/mhm-rentiva/v1/dashboard/*` endpoints. No jQuery dependency. Legacy PHP widgets were removed.
+:::
+
 The Dashboard is the heart of MHM Rentiva. It lets you see your business's real-time status, financial performance, and pending operational tasks on a single screen. Access it via **MHM Rentiva > Dashboard**.
 
 This is the first screen you see after installing the plugin, and it presents the critical metrics you need to make data-driven decisions.
@@ -94,9 +98,25 @@ In v4.23.0, a comprehensive audit and improvement of Dashboard widgets was carri
 - Use **Color Codes** to instantly see which vehicle is available on which date.
 - Reach booking details in seconds with **Customer Cards**.
 
+### React Components (v4.36.0+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `DashboardPage` | Root layout — fetches all data, manages loading state |
+| `StatsCards` | Four KPI gradient cards (total bookings, revenue, active vehicles, customers) |
+| `RecentBookings` | Paginated recent-bookings widget with REST fetch |
+| `TransferWidget` | Upcoming transfers overview |
+| `QuickActions` | Quick-link grid to common admin tasks |
+
+**REST Namespace:** `GET /wp-json/mhm-rentiva/v1/dashboard/stats`, `/dashboard/recent-bookings`, `/dashboard/recent-transfers`
+
+**Mobile responsive:** Dashboard widget rows collapse to a single column at ≤782px (WP admin breakpoint). Quick actions grid reduces to 3 columns.
+
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.49.0 | Dashboard widget rows mobile responsive fix (782px breakpoint). |
+| 10.05.2026 | 4.36.0 | Full React SPA migration. Legacy PHP widgets removed. REST API endpoints added. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 26.03.2026 | 4.23.0 | 11 widget bug fixes, timezone consistency, cache fix, design improvements, and Lite gating added. |
 | 19.03.2026 | 4.6.3 | Dashboard guide updated with real interface metrics and calendar details. |
