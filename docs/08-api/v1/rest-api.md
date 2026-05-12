@@ -155,7 +155,7 @@ All report endpoints accept `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` for dat
 | :--- | :--- | :--- |
 | 07.05.2026 | 4.43.0 | `/vendor-management/{id}/unsuspend` + `/vendor-management/{id}/audit-log` endpoints added. |
 | 06.05.2026 | 4.40.0 | Messages, Vendor Reports, Vendor Management REST controllers added (12 new endpoints). |
-| 10.04.2026 | 4.39.0 | Customers REST controller: GET /customers, /customers/{id}, DELETE /customers/bulk. |
+| 10.04.2026 | 4.39.0 | Customers REST controller: `GET /customers`, `/customers/{id}`, `DELETE /customers/bulk`. |
 | 05.04.2026 | 4.37.x | Reports REST controller: 5 tab endpoints with date range filter. |
 | 10.05.2026 | 4.36.0 | Dashboard REST controller: /dashboard/stats, /dashboard/recent-bookings, /dashboard/recent-transfers. |
 | 23.04.2026 | 4.27.2 | English translation added. |
