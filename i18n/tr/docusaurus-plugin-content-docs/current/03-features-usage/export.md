@@ -8,6 +8,10 @@ slug: /features-usage/export
 
 Dışa Aktar aracı, kiralama verilerinizi analiz, muhasebe veya yedekleme amacıyla farklı formatlarda sistem dışına almanızı sağlar. **MHM Rentiva > Dışa Aktar** menüsü üzerinden kapsamlı veri ihracatı yapabilirsiniz.
 
+:::info React SPA (v4.52.0'dan beri)
+Dışa Aktar sayfası v4.52.0 sürümünde tamamen **REST API destekli bir React SPA**'ya taşındı. Yaklaşık 780 satırlık eski PHP render kodu değiştirildi ve üç eski AJAX işleyicisi (`wp_ajax_mhm_export_*`) kaldırıldı. Sayfa artık canlı kayıt önizlemesi, girdi başına silme özellikli REST destekli dışa aktarma geçmişi ve korunan `admin-post.php` CSV indirme akışı sunuyor — tamamı sayfa yenilemesi olmadan.
+:::
+
 ---
 
 ## 📂 Veri İhracat Modülleri
@@ -57,6 +61,31 @@ Bu sürümde dışa aktarım modülünde 4 kritik hata düzeltilmiştir:
 
 ---
 
+## 🔎 Canlı Önizleme (v4.52.0+)
+
+Dışa aktarmayı onaylamadan önce **Önizleme** eylemi, seçili post türü ve tarih filtreleri için toplam kayıt sayısını artı 5 satırlık bir örnek döndürür. Kayıt sayısı `0` olduğunda **CSV Dışa Aktar** butonu otomatik devre dışı bırakılır, böylece boş bir dışa aktarım tetiklemezsiniz.
+
+---
+
+## React Bileşenleri (v4.52.0+)
+
+| Bileşen | Amaç |
+| :--- | :--- |
+| `ExportCards` | Üç dışa aktarma türü için görsel kart seçici (Rezervasyonlar, Araçlar, Uygulama Logları) |
+| `AdvancedFilters` | Katlanabilir tarih filtresi paneli — hazır aralıklar + özel başlangıç/bitiş girdileri |
+| `PreviewBar` | Önizleme çağrısı sonrası kayıt sayısı + 5 satırlık örnek gösterir; sayı 0'da dışa aktarmayı devre dışı bırakır |
+| `ExportForm` | `useRef` ile gizli bir `admin-post.php` form gönderimi tetikler — yenileme yok, SPA navigasyonu yok |
+| `ExportHistory` | Mount sırasında REST üzerinden dışa aktarma logunu yükler; satır başına satır içi silme, iyimser kaldırma |
+
+**REST Uç Noktaları:**
+- `GET /wp-json/mhm-rentiva/v1/admin/export/history` — sayfalandırılmış dışa aktarma logu (transient tabanlı, maks. 50 kayıt, 1 hafta TTL)
+- `DELETE /wp-json/mhm-rentiva/v1/admin/export/{id}` — belirli bir geçmiş kaydını siler
+- `POST /wp-json/mhm-rentiva/v1/admin/export/preview` — seçili tür ve tarih filtreleri için kayıt sayısı + 5 satırlık örnek
+
+Tüm uç noktalar `manage_options` yetkisi gerektirir.
+
+---
+
 ### Bölüm Özeti
 - **CSV ve JSON** desteği ile verilerinizi üçüncü taraf yazılımlara taşıyın.
 - **Miktar Bazlı Filtrelemesi** ile finansal segmentasyon yapın.
@@ -65,6 +94,7 @@ Bu sürümde dışa aktarım modülünde 4 kritik hata düzeltilmiştir:
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.52.0 | Tam React SPA geçişi. Canlı kayıt önizlemesi, girdi başına silme özellikli REST destekli dışa aktarma geçmişi, korunan admin-post.php CSV indirme. ~780 satır eski PHP render kaldırıldı. |
 | 26.03.2026 | 4.23.0 | 4 kritik dışa aktarım hatası düzeltildi (post_type, kayıt sayısı, geçmiş silme, PHP 8 tip hatası). |
 | 19.03.2026 | 4.21.2 | Dışa aktarma modülleri, filtreleme seçenekleri ve ihracat geçmişi gerçek arayüze göre açıklandı. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

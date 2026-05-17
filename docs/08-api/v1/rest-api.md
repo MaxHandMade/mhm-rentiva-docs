@@ -142,6 +142,14 @@ All report endpoints accept `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` for dat
 | `POST` | `/vendor-management/{id}/unsuspend` | Unsuspend a vendor (v4.43.0) |
 | `GET` | `/vendor-management/{id}/audit-log` | Commission + penalty audit log (v4.43.0) |
 
+### Export (v4.52.0)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/admin/export/history` | Paginated export log — transient-backed, max 50 entries, 1-week TTL |
+| `DELETE` | `/admin/export/{id}` | Remove a specific export history entry |
+| `POST` | `/admin/export/preview` | Total record count + 5-row sample for the selected post type and date filters |
+
 ---
 
 ## Section Summary
@@ -153,6 +161,7 @@ All report endpoints accept `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` for dat
 ## Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.52.0 | Export REST controller: `/admin/export/history`, `/admin/export/{id}`, `/admin/export/preview`. |
 | 07.05.2026 | 4.43.0 | `/vendor-management/{id}/unsuspend` + `/vendor-management/{id}/audit-log` endpoints added. |
 | 06.05.2026 | 4.40.0 | Messages, Vendor Reports, Vendor Management REST controllers added (12 new endpoints). |
 | 10.04.2026 | 4.39.0 | Customers REST controller: `GET /customers`, `/customers/{id}`, `DELETE /customers/bulk`. |

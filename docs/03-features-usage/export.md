@@ -8,6 +8,10 @@ slug: /features-usage/export
 
 The Export tool lets you extract your rental data in various formats for analysis, accounting, or backup purposes. Access comprehensive data exports via **MHM Rentiva > Export**.
 
+:::info React SPA (since v4.52.0)
+The Export page was fully migrated to a **React SPA** backed by the REST API in v4.52.0. About 780 lines of legacy PHP render code were replaced, and three legacy AJAX handlers (`wp_ajax_mhm_export_*`) were removed. The page now offers a live record preview, REST-backed export history with per-entry delete, and a preserved `admin-post.php` CSV download flow — all without page reloads.
+:::
+
 ---
 
 ## 📂 Data Export Modules
@@ -57,6 +61,31 @@ Four critical bugs were fixed in the export module in this release:
 
 ---
 
+## 🔎 Live Preview (v4.52.0+)
+
+Before committing to an export, the **Preview** action returns the total record count plus a 5-row sample for the selected post type and date filters. The **Export CSV** button is automatically disabled when the count is `0`, so you never trigger an empty export.
+
+---
+
+## React Components (v4.52.0+)
+
+| Component | Purpose |
+| :--- | :--- |
+| `ExportCards` | Visual card selector for the three export types (Bookings, Vehicles, App Logs) |
+| `AdvancedFilters` | Collapsible date filter panel — preset ranges + custom from/to inputs |
+| `PreviewBar` | Shows record count + 5-row sample after a preview call; disables export at count 0 |
+| `ExportForm` | Triggers a hidden `admin-post.php` form submit via `useRef` — no reload, no SPA navigation |
+| `ExportHistory` | Loads the export log on mount via REST; per-row inline delete with optimistic removal |
+
+**REST Endpoints:**
+- `GET /wp-json/mhm-rentiva/v1/admin/export/history` — paginated export log (transient-backed, max 50 entries, 1-week TTL)
+- `DELETE /wp-json/mhm-rentiva/v1/admin/export/{id}` — remove a specific history entry
+- `POST /wp-json/mhm-rentiva/v1/admin/export/preview` — record count + 5-row sample for the selected type and date filters
+
+All endpoints require `manage_options` capability.
+
+---
+
 ### Section Summary
 - Move your data to third-party software with **CSV and JSON** support.
 - Perform financial segmentation with **Amount-Based Filtering**.
@@ -65,6 +94,7 @@ Four critical bugs were fixed in the export module in this release:
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.52.0 | Full React SPA migration. Live record preview, REST-backed export history with per-entry delete, preserved admin-post.php CSV download. ~780 lines of legacy PHP render removed. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 26.03.2026 | 4.23.0 | 4 critical export bugs fixed (post_type, record count, history deletion, PHP 8 type error). |
 | 19.03.2026 | 4.21.2 | Export modules, filter options, and export history explained against the real interface. |

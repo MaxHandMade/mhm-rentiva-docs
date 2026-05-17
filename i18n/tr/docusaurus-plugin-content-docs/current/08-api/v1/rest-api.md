@@ -77,6 +77,24 @@ Hata durumunda:
 }
 ```
 
+---
+
+## ⚛️ 5. Admin React SPA Uç Noktaları — Export (v4.52.0)
+
+:::note Parite notu
+Diğer admin React SPA uç noktalarının (Dashboard, Reports, Customers, Messages, Vendor Management, Vendor Reports) Türkçe dokümantasyonu ayrı bir parite çalışmasında tamamlanacaktır. Tam liste için şimdilik İngilizce REST API sayfasına bakın.
+:::
+
+v4.52.0 sürümünde Dışa Aktar yönetici sayfası bir React SPA'ya taşındı ve özel bir REST denetleyicisiyle desteklendi. Tüm uç noktalar `manage_options` yetkisi gerektirir.
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/admin/export/history` | Sayfalandırılmış dışa aktarma logu — transient tabanlı, maks. 50 kayıt, 1 hafta TTL |
+| `DELETE` | `/admin/export/{id}` | Belirli bir dışa aktarma geçmiş kaydını siler |
+| `POST` | `/admin/export/preview` | Seçili post türü ve tarih filtreleri için toplam kayıt sayısı + 5 satırlık örnek |
+
+---
+
 ## Bölüm Sonu Özeti
 - v1 API, `mhm-rentiva/v1` altında hizmet verir.
 - Kimlik doğrulama, işlemin kritiklik seviyesine göre değişkenlik gösterir.
@@ -85,4 +103,5 @@ Hata durumunda:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 12.05.2026 | 4.52.0 | Export REST denetleyicisi: `/admin/export/history`, `/admin/export/{id}`, `/admin/export/preview`. |
 | 19.03.2026 | 4.21.2 | v1 API mimarisi ve güvenlik katmanları güncellendi. |
