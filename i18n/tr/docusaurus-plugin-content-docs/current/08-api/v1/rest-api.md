@@ -79,13 +79,70 @@ Hata durumunda:
 
 ---
 
-## ⚛️ 5. Admin React SPA Uç Noktaları — Export (v4.52.0)
+## ⚛️ 5. Admin React SPA Uç Noktaları (v4.36.0+)
 
-:::note Parite notu
-Diğer admin React SPA uç noktalarının (Dashboard, Reports, Customers, Messages, Vendor Management, Vendor Reports) Türkçe dokümantasyonu ayrı bir parite çalışmasında tamamlanacaktır. Tam liste için şimdilik İngilizce REST API sayfasına bakın.
-:::
+v4.36.0 sürümünden itibaren tüm büyük yönetici sayfaları React SPA'lara taşındı. Her sayfa özel bir REST denetleyicisiyle desteklenir. Tüm uç noktalar `manage_options` yetkisi gerektirir.
 
-v4.52.0 sürümünde Dışa Aktar yönetici sayfası bir React SPA'ya taşındı ve özel bir REST denetleyicisiyle desteklendi. Tüm uç noktalar `manage_options` yetkisi gerektirir.
+### Kontrol Paneli (v4.36.0)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/dashboard/stats` | KPI kartları: toplam rezervasyon, gelir, aktif araçlar, müşteriler |
+| `GET` | `/dashboard/recent-bookings` | Sayfalandırılmış son rezervasyonlar widget'ı |
+| `GET` | `/dashboard/recent-transfers` | Yaklaşan transferlere genel bakış |
+
+### Raporlar (v4.37.x)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/reports/overview` | Sekmeler arası özet istatistikler |
+| `GET` | `/reports/revenue` | Gelir çubuk grafiği verisi + günlük detay listesi |
+| `GET` | `/reports/bookings` | Rezervasyon durumu dağılımı |
+| `GET` | `/reports/vehicles` | Araç performans KPI'ları + en iyi araçlar |
+| `GET` | `/reports/customers` | Müşteri yaşam döngüsü grafiği + özet metrikler |
+
+Tüm rapor uç noktaları tarih aralığı filtrelemesi için `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` kabul eder.
+
+### Müşteriler (v4.39.0)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/customers` | Sayfalandırılmış liste — `?search=`, `?sort_by=`, `?sort_order=`, `?page=` destekler |
+| `GET` | `/customers/{id}` | Tekil müşteri detayı (rezervasyon sayısı, toplam harcama, ilk/son rezervasyon) |
+| `DELETE` | `/customers/bulk` | Toplu silme — istek gövdesinde `ids[]` dizisi kabul eder |
+
+### Mesajlar (v4.40.0)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/messages` | Sayfalandırılmış gelen kutusu — duruma, önceliğe, kategoriye göre filtrelenebilir |
+| `GET` | `/messages/{id}` | Tek bir mesaj için ileti dizisi görünümü |
+| `POST` | `/messages/{id}/reply` | Bir ileti dizisinde yanıt gönder |
+| `POST` | `/messages/{id}/status` | Mesaj durumunu güncelle (beklemede/yanıtlandı/kapatıldı) |
+
+### Bayi Raporları (v4.40.0)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/vendor-reports` | Sayfalandırılmış liste — duruma ve bağlam tipine göre filtrelenebilir |
+| `GET` | `/vendor-reports/{id}` | Tam açıklama ve denetim izi ile tekil rapor detayı |
+| `POST` | `/vendor-reports/{id}/resolve` | Çözüldü olarak işaretle (bağlama göre ceza serbest bırakma veya uygulama tetikler) |
+| `POST` | `/vendor-reports/{id}/reject` | Raporu reddet (vehicle_action bağlamı için ertelenmiş ceza tetikler) |
+
+### Bayi Yönetimi (v4.40.0)
+
+| Metot | Uç Nokta | Açıklama |
+| :--- | :--- | :--- |
+| `GET` | `/vendor-management/applications` | Bekleyen bayi başvuruları |
+| `GET` | `/vendor-management/vendors` | Arama/filtre ile aktif bayi listesi |
+| `GET` | `/vendor-management/{id}` | Bayi detayı (maskeli IBAN, belgeler, istatistikler) |
+| `POST` | `/vendor-management/{id}/approve` | Bekleyen bir başvuruyu onayla |
+| `POST` | `/vendor-management/{id}/reject` | Bekleyen bir başvuruyu reddet |
+| `POST` | `/vendor-management/{id}/suspend` | Aktif bir bayiyi askıya al |
+| `POST` | `/vendor-management/{id}/unsuspend` | Bir bayiyi askıdan al (v4.43.0) |
+| `GET` | `/vendor-management/{id}/audit-log` | Komisyon + ceza denetim günlüğü (v4.43.0) |
+
+### Export (v4.52.0)
 
 | Metot | Uç Nokta | Açıklama |
 | :--- | :--- | :--- |
@@ -99,9 +156,15 @@ v4.52.0 sürümünde Dışa Aktar yönetici sayfası bir React SPA'ya taşındı
 - v1 API, `mhm-rentiva/v1` altında hizmet verir.
 - Kimlik doğrulama, işlemin kritiklik seviyesine göre değişkenlik gösterir.
 - Tüm operasyonlar merkezi `AuthHelper` ve `ErrorHandler` ile denetlenir.
+- Admin React SPA uç noktalarının (v4.36.0+) tamamı `manage_options` yetkisi gerektirir.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
-|---|---|---|
+| :--- | :--- | :--- |
 | 12.05.2026 | 4.52.0 | Export REST denetleyicisi: `/admin/export/history`, `/admin/export/{id}`, `/admin/export/preview`. |
+| 07.05.2026 | 4.43.0 | `/vendor-management/{id}/unsuspend` + `/vendor-management/{id}/audit-log` uç noktaları eklendi. |
+| 06.05.2026 | 4.40.0 | Messages, Bayi Raporları, Bayi Yönetimi REST denetleyicileri eklendi (12 yeni uç nokta). |
+| 10.04.2026 | 4.39.0 | Müşteriler REST denetleyicisi: `GET /customers`, `/customers/{id}`, `DELETE /customers/bulk`. |
+| 05.04.2026 | 4.37.x | Raporlar REST denetleyicisi: tarih aralığı filtreli 5 sekme uç noktası. |
+| 10.05.2026 | 4.36.0 | Kontrol Paneli REST denetleyicisi: /dashboard/stats, /dashboard/recent-bookings, /dashboard/recent-transfers. |
 | 19.03.2026 | 4.21.2 | v1 API mimarisi ve güvenlik katmanları güncellendi. |

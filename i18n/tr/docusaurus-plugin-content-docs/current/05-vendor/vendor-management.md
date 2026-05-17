@@ -7,6 +7,10 @@ sidebar_position: 1
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA — Yönetici Sayfası (v4.40.0'dan beri)
+**Bayi Yönetimi** yönetici sayfası v4.40.0 sürümünde bir **React SPA**'ya taşındı. `VendorManagementRestController`, `/wp-json/mhm-rentiva/v1/vendor-management/*` altında 7 REST rotası kaydeder. Bileşenler: `VendorManagementPage`, `ApplicationTable`, `VendorTable`, `VendorDetailPanel`, `ActionBar`. Veri istemci tarafında çekilir — tam PHP sayfa render'ı yok.
+:::
+
 :::info Amaç
 Rentiva, merkezi bir araç kiralama sisteminden çoklu tedarikçili (Multi-Vendor) bir pazar yerine dönüşebilir. Bu doküman, tedarikçi döngüsünü teknik detaylarıyla açıklar.
 :::
@@ -215,6 +219,53 @@ Vendor rolündeki kullanıcılar WooCommerce Hesabım sayfasında sidebar'da **"
 
 ---
 
+## 🔓 Askıdan Alma Eylemi (v4.43.0)
+
+Yöneticiler artık bir bayiyi kullanıcı profiline gitmeden doğrudan Bayi Yönetimi yönetici sayfasından **askıdan alabilir**. Askıdan alma eylemi:
+
+- Bayinin `rentiva_vendor` rolünü (askıya alınmış durumdan) geri yükler.
+- Askıya alma sırasında yayından kaldırılan araçları yeniden yayınlar.
+- Bayiye bir yeniden etkinleştirme e-postası gönderir.
+- Eylemi komisyon denetim günlüğüne kaydeder.
+
+**REST uç noktası:** `POST /wp-json/mhm-rentiva/v1/vendor-management/unsuspend` (`manage_options` gerektirir).
+
+---
+
+## 📋 Komisyon Denetim Günlüğü (v4.43.0)
+
+Her komisyon işlemi artık kalıcı bir denetim günlüğüne yazılır ve Bayi Yönetimi detay panelinden erişilebilir. Her girdi şunları kaydeder:
+
+| Alan | Açıklama |
+| :--- | :--- |
+| `event_type` | `commission_applied`, `commission_reversed`, `vendor_suspended`, `vendor_unsuspended`, `penalty_applied`, `penalty_deferred` |
+| `vendor_id` | Bayi kullanıcı ID'si |
+| `booking_id` | İlişkili rezervasyon (varsa) |
+| `amount` | Komisyon veya ceza tutarı (işaretli float) |
+| `note` | Yönetici veya sistem tarafından üretilen not |
+| `created_at` | Zaman damgası |
+| `admin_user_id` | Olayı tetikleyen yönetici (sistem olayları için NULL) |
+
+Denetim günlüğü yalnızca eklenebilir (append-only) — girdiler asla silinmez veya değiştirilmez. Anlaşmazlıkları izlemek, ödemeleri doğrulamak ve otomatik ceza olaylarını denetlemek için kullanın.
+
+**REST uç noktası:** `GET /wp-json/mhm-rentiva/v1/vendor-management/{vendor_id}/audit-log`
+
+---
+
+## React Bileşenleri (v4.40.0+)
+
+| Bileşen | Amaç |
+| :--- | :--- |
+| `VendorManagementPage` | Kök — sekme navigasyonu (Başvurular / Bayiler / Denetim) |
+| `ApplicationTable` | Onayla/reddet eylemli sayfalandırılmış bekleyen başvuru listesi |
+| `VendorTable` | Arama ve durum filtreli aktif bayi listesi |
+| `VendorDetailPanel` | Kayan panel: IBAN (maskeli), belgeler, denetim günlüğü, eylemler |
+| `ActionBar` | Askıya Al / Askıdan Al / Düzenle hızlı eylem satırı |
+
+**REST Ad Alanı:** `GET/POST /wp-json/mhm-rentiva/v1/vendor-management/*`
+
+---
+
 ## Bilinen Sorunlar (v4.23.1 Keşfedilen)
 
 | Sorun | Detay | Durum |
@@ -238,7 +289,9 @@ Vendor rolündeki kullanıcılar WooCommerce Hesabım sayfasında sidebar'da **"
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
-|---|---|---|
+| :--- | :--- | :--- |
+| 07.05.2026 | 4.43.0 | Askıdan alma eylemi (rol geri yükleme + araç yeniden yayınlama + e-posta). Komisyon denetim günlüğü (append-only, 6 olay tipi). |
+| 06.05.2026 | 4.40.0 | Tam React SPA geçişi. VendorManagementRestController (7 REST rotası). VendorManagementPage, ApplicationTable, VendorTable, VendorDetailPanel, ActionBar bileşenleri. |
 | 01.04.2026 | 4.24.1 | Ücretli ilan sistemi (ListingFeeManager), kalan süre gösterimi, WC Hesabım "Satıcı Paneli" menü linki, 18 yeni test. |
 | 29.03.2026 | 4.24.0 | Araç yaşam döngüsü sistemi uygulandı (Faz 0-4, 6-7). Duraklatma, yenileme, geri çekilme, güvenilirlik skoru. |
 | 28.03.2026 | 4.23.1 | Vendor ayarlar sayfası yeniden tasarımı, Hesap Sahibi ve Vergi Dairesi alanları, şehir SelectWoo migrasyonu. |

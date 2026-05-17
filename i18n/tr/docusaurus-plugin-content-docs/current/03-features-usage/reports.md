@@ -6,6 +6,10 @@ slug: /features-usage/reports
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (v4.37.x'ten beri)
+Raporlar sayfası v4.37.x sürümünde (Faz 1b) **Chart.js'li bir React SPA**'ya taşındı. Tüm grafik render'ı ve veri çekimi REST API üzerinden istemci tarafında yapılır. 9 eski PHP/JS rapor dosyası silindi. Tarih filtresi ve 5 sekme bileşeni React bileşenleridir.
+:::
+
 Raporlar, MHM Rentiva'nin tum operasyonel verilerini finansal ve istatistiksel çıktılara dönüşturen gelişmiş analiz merkezidir. **MHM Rentiva > Raporlar** menusu üzerinden işletmenizin buyume trendlerini ve verimliligini izleyebilirsiniz.
 
 :::caution Lite / Pro Farki
@@ -77,9 +81,28 @@ Müşteri sadakatini ve harcama alışkanlıklarını takip eder.
 - **Gelir/Araç Raporları** ile en karlı segmentleri belirleyin.
 - **Müşteri Raporları** ile sadakat stratejileri geliştirin.
 
+## React Bileşenleri (v4.37.x+)
+
+| Bileşen | Amaç |
+| :--- | :--- |
+| `ReportsPage` | Kök — başlık istatistikleri + sekme navigasyonu + tarih aralığı filtresi |
+| `BookingsTab` | Rezervasyon dağılım grafiği + durum tablosu |
+| `RevenueTab` | Gelir çubuk grafiği (Chart.js) + günlük detay listesi |
+| `VehiclesTab` | Araç performans KPI + en iyi araçlar tablosu |
+| `CustomersTab` | Müşteri yaşam döngüsü grafiği + özet metrikler |
+
+**Tarih filtresi:** Mobilde (≤782px) dikey olarak yığılır — sınıf `.mhm-reports__date-filter`.
+
+**REST Ad Alanı:** `GET /wp-json/mhm-rentiva/v1/reports/*`
+
+---
+
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.49.0 | Tarih filtresi dikey yığılma mobil düzeltmesi (782px breakpoint). |
+| 11.05.2026 | 4.48.0 | İstatistik grid'i 2 sütun mobil düzen. |
+| 06.05.2026 | 4.37.x | Chart.js ile tam React SPA geçişi. 9 eski PHP/JS dosyası kaldırıldı. ReportsRestController + 5 sekme bileşeni. |
 | 27.03.2026 | 4.23.0 | Lite/Pro gating (Gelir Grafigi + Yaklasan Ops), stats widget 2x2 grid tasarimi, timezone düzeltmeleri (`wp_date`), iptal dataset'i, cache key prefix düzeltmesi dokumante edildi. |
 | 19.03.2026 | 4.21.2 | Raporlar sayfası 5 farkli sekme ve tum grafik detaylariyla gerçek arayuze gore güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

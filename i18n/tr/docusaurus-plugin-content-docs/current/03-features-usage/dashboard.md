@@ -8,6 +8,10 @@ slug: /features-usage/dashboard
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (v4.36.0'dan beri)
+Kontrol Paneli v4.36.0 sürümünde, özel bir REST API ile desteklenen tam bir **React SPA**'ya taşındı. Sayfa, PHP tam sayfa render'ı olmadan yüklenir — tüm veriler `/wp-json/mhm-rentiva/v1/dashboard/*` uç noktaları üzerinden asenkron çekilir. jQuery bağımlılığı yok. Eski PHP widget'ları kaldırıldı.
+:::
+
 Kontrol Paneli, MHM Rentiva'nın kalbidir. İşletmenizin anlık durumunu, finansal performansını ve bekleyen operasyonel görevleri tek bir ekranda görmenizi sağlar. **MHM Rentiva > Kontrol Paneli** menüsünden ulaşılır.
 
 Eklenti yüklendiğinde sizi karşılayan bu ekran, veriye dayalı kararlar almanız için kritik metrikleri sunar.
@@ -94,8 +98,24 @@ v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileşt
 - **Renk Kodları** ile hangi aracın hangi tarihte müsait olduğunu anında anlayın.
 - **Müşteri Kartları** ile rezervasyon detaylarına saniyeler içinde ulaşın.
 
+### React Bileşenleri (v4.36.0+)
+
+| Bileşen | Amaç |
+| :--- | :--- |
+| `DashboardPage` | Kök yerleşim — tüm veriyi çeker, yükleme durumunu yönetir |
+| `StatsCards` | Dört KPI gradyan kartı (toplam rezervasyon, gelir, aktif araçlar, müşteriler) |
+| `RecentBookings` | REST çekimli sayfalandırılmış son rezervasyonlar widget'ı |
+| `TransferWidget` | Yaklaşan transferlere genel bakış |
+| `QuickActions` | Sık kullanılan yönetici görevlerine hızlı bağlantı grid'i |
+
+**REST Ad Alanı:** `GET /wp-json/mhm-rentiva/v1/dashboard/stats`, `/dashboard/recent-bookings`, `/dashboard/recent-transfers`
+
+**Mobil duyarlı:** Kontrol Paneli widget satırları ≤782px'te (WP yönetici breakpoint) tek sütuna iner. Hızlı işlemler grid'i 3 sütuna düşer.
+
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 12.05.2026 | 4.49.0 | Kontrol Paneli widget satırları mobil duyarlılık düzeltmesi (782px breakpoint). |
+| 10.05.2026 | 4.36.0 | Tam React SPA geçişi. Eski PHP widget'ları kaldırıldı. REST API uç noktaları eklendi. |
 | 26.03.2026 | 4.23.0 | 11 widget hata düzeltmesi, timezone tutarlılığı, cache fix, tasarım iyileştirmeleri ve Lite gating eklendi. |
 | 19.03.2026 | 4.6.3 | Kontrol Paneli rehberi gerçek arayüz metrikleri ve takvim detaylarıyla güncellendi. |

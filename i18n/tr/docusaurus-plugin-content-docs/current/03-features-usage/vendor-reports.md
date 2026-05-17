@@ -8,6 +8,10 @@ slug: /features-usage/vendor-reports
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info React SPA (v4.40.0'dan beri)
+Bayi Raporları yönetici sayfası v4.40.0 sürümünde (Faz 6) bir **React SPA**'ya taşındı. Veri `/wp-json/mhm-rentiva/v1/vendor-reports/*` REST uç noktaları üzerinden çekilir. Bileşenler: `VendorReportsPage`, `FilterBar`, `ReportTable`, `DetailView`, `ActionForm`, `StatusBadge`. Flash mesajları `window.mhmRentivaVendorReports.flash` desenini kullanır (PHP `enqueue_assets()`, `history.replaceState` parametreleri silmeden önce `$_GET['updated']`/`$_GET['error']` okur).
+:::
+
 Bayi Rapor sistemi bayilere platform yöneticisine sorun iletmeleri ve otomatik aksiyonlara (örn. çekme cezaları) itiraz etmeleri için yapılandırılmış bir kanal sunar. Tek custom table, tek paylaşılan modal, tek admin sayfası — beş farklı bağlam tetikliyor. **Pro lisans gerektirir.**
 
 [v4.35.0](/blog/rentiva-v4.35.0-release) ile tanıtıldı.
@@ -191,6 +195,35 @@ Gerçek Pro token olmadan yerel test için `wp-config.php`'ye `define('MHM_RENTI
 | `mhm_rentiva_vendor_report_resolved` | Action — durum terminal'e değiştikten sonra ateşlenir. 3 arg (report_id, vendor_id, new_status). |
 | `VendorReportRepository` | Public API: `create()`, `find()`, `update_status()`, `find_by_vendor()`, `has_open_report_for()`, `reset_has_open_cache()` |
 | `VendorReportService` | Public API: `create_report()`, `resolve_report()`, `reject_report()` |
+
+---
+
+## React Bileşenleri (v4.40.0+)
+
+| Bileşen | Amaç |
+| :--- | :--- |
+| `VendorReportsPage` | Kök — liste görünümü + detay görünümü orkestrasyonu |
+| `FilterBar` | Durum ve bağlam filtre kontrolleri |
+| `ReportTable` | Sayfalandırılmış, filtrelenebilir rapor listesi |
+| `DetailView` | Bayi bilgisi ve açıklamayla tam rapor detayı |
+| `ActionForm` | Yönetici notuyla Çöz / Reddet / İncelemeye Al formu |
+| `StatusBadge` | Renk kodlu durum etiketi (open / in_review / resolved / rejected) |
+
+**REST Uç Noktaları:**
+- `GET /wp-json/mhm-rentiva/v1/vendor-reports` — sayfalandırılmış liste, duruma ve bağlama göre filtrelenebilir
+- `GET /wp-json/mhm-rentiva/v1/vendor-reports/{id}` — tekil rapor detayı
+
+Tüm uç noktalar `manage_options` yetkisi gerektirir.
+
+---
+
+### Değişiklik Günlüğü
+
+| Tarih | Sürüm | Not |
+| :--- | :--- | :--- |
+| 06.05.2026 | 4.40.0 | Tam React SPA geçişi. VendorReportsPage, FilterBar, ReportTable, DetailView, ActionForm, StatusBadge. `window.mhmRentivaVendorReports.flash` üzerinden flash flag deseni. |
+| 23.04.2026 | 4.27.2 | Dokümantasyon mevcut eklenti sürümüyle senkronize edildi. |
+| 05.04.2026 | 4.35.0 | İlk sürüm — bayi rapor sistemi tanıtıldı. 5 bağlam (booking, vehicle, vehicle_action, penalty, general), ceza askıya alma filtresi, özel DB tablosu. |
 
 ---
 
