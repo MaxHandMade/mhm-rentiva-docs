@@ -4,10 +4,76 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Fri, 15 May 2026 10:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 21 May 2026 22:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.58.2 — Transfer Şehir Filtresi + Arayüz İyileştirmeleri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release</guid>
+            <pubDate>Thu, 21 May 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[TransferSearchEngine'de lokasyon filtresi yoktu — bir İstanbul rotası aramasında Ankara ve Antalya'daki araçlar da çıkıyordu. Bu sürüm şehir-bazlı araç eşleştirmesi ekliyor (rotanın kalkış şehri), kiralama modülünün 3-katmanlı hibrit filtresini (araç → bayi devralma → global varsayılan) yeni expandtocity moduyla yeniden kullanarak. Ayrıca bir dizi arayüz/içerik iyileştirmesi: liste-tablo sayfalarında KPI kart boşluğu, kontrol paneli kart yükseklikleri, Hakkında sayfası sağlamlaştırması ve Araçlar takviminin Rezervasyonlar sayfasıyla görsel pariteye getirilmesi.]]></description>
+            <content:encoded><![CDATA[<p><code>TransferSearchEngine</code>'de lokasyon filtresi yoktu — bir İstanbul rotası aramasında Ankara ve Antalya'daki araçlar da çıkıyordu. Bu sürüm şehir-bazlı araç eşleştirmesi ekliyor (rotanın kalkış şehri), kiralama modülünün 3-katmanlı hibrit filtresini (araç → bayi devralma → global varsayılan) yeni <code>expand_to_city</code> moduyla yeniden kullanarak. Ayrıca bir dizi arayüz/içerik iyileştirmesi: liste-tablo sayfalarında KPI kart boşluğu, kontrol paneli kart yükseklikleri, Hakkında sayfası sağlamlaştırması ve Araçlar takviminin Rezervasyonlar sayfasıyla görsel pariteye getirilmesi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Transfer araması artık araçları rotanın kalkış şehrine göre filtreliyor.</strong> Farklı şehirdeki araçlar (örn. İstanbul rotası için Ankara aracı) hariç tutulur. Kiralama ile aynı 3-katmanlı hibrit filtre (araç meta → bayi devralma → global varsayılan), kalkış şehrini paylaşan tüm lokasyonlara genişletilir.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-özellik">Yeni Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#yeni-%C3%B6zellik" class="hash-link" aria-label="Yeni Özellik doğrudan bağlantı" title="Yeni Özellik doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>QueryHelper::get_location_subquery()</code></strong> opsiyonel <code>$expand_to_city</code> parametresi kazandı. Geriye uyumlu: kiralamanın katı eşleşmesi değişmedi.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Hakkında sayfası geliştirici iletişim bilgileri sabit</strong> — WordPress <code>admin_email</code> sızıntısına karşı korumalı (örn. dev/temiz kurulumda <code>admin@localhost.com</code> görünmesi engellendi).</li>
+<li class=""><strong>Hakkında 'Test ve Doğrulama' kartı</strong> güncel baseline'a güncellendi (1.237 PHPUnit testi, 3.736 assertion) ve <code>Test edildi: WP 7.0</code>. Plugin header ve <code>readme.txt</code> <code>Tested up to</code> 7.0'a hizalandı.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="stil">Stil<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#stil" class="hash-link" aria-label="Stil doğrudan bağlantı" title="Stil doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>KPI istatistik grid'i üst boşluğu</strong> yönetici liste-tablo sayfalarında (Araçlar, Rezervasyonlar, Ek Hizmetler, Transfer) — kartlar artık sayfa kenarına yapışık değil.</li>
+<li class=""><strong>Kontrol paneli Bekleyen Ödemeler + Gelir kartları</strong> artık uzun boş yüksekliğe esnemiyor. <code>RevenueChart</code> 250px maks yüksekliğe sabitlendi; Row 4 kartları kendi içeriklerine göre boyutlanıyor.</li>
+<li class=""><strong>Araçlar takvimi boşlukları</strong> Rezervasyonlar takvimiyle görsel pariteye getirildi — wrapper üst margin + card-pattern iç padding.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Transfer lokasyon filtresi için 6 yeni PHPUnit testi (şehir genişletme + bayi devralma) — toplam <strong>1.237 test / 3.736 assertion</strong>, 7 dokümante <code>saas_block</code> env-quota baseline başarısızlığı, 15 atlanmış. Regresyon yok.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>transfer</category>
+            <category>dashboard</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva v4.58.1 — Kritik: Aynı Gün İadelerinde Çift-Rezervasyon Düzeltmesi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release</guid>
+            <pubDate>Thu, 21 May 2026 16:00:00 GMT</pubDate>
+            <description><![CDATA[AutoComplete cron'u dropoffdate < NOW() karşılaştırmasını tarih-only granülerlikte yapıyordu. MySQL YYYY-MM-DD değerini YYYY-MM-DD 0000 olarak yorumladığından, dropoff'u aynı gün olan herhangi bir confirmed rezervasyon gece 00:00'da otomatik 'completed' işaretleniyordu — gerçek iade saatinden saatler önce. hasoverlap() bu yanlış-completed kayıtları status filtresinden hariç tutuyordu ('completed' listede yoktu), aynı araç kalan kira saatleri için çift-rezervasyona açık kalıyordu. Bu sürüm cron'u düzeltir, hasoverlap() katmanında defansif koruma ekler, completed → inprogress Status geçişini açar ve mevcut kontamine kayıtları geri almak için bir bakım script'i içerir.]]></description>
+            <content:encoded><![CDATA[<p>AutoComplete cron'u <code>dropoff_date &lt; NOW()</code> karşılaştırmasını tarih-only granülerlikte yapıyordu. MySQL <code>YYYY-MM-DD</code> değerini <code>YYYY-MM-DD 00:00:00</code> olarak yorumladığından, dropoff'u aynı gün olan herhangi bir confirmed rezervasyon gece 00:00'da otomatik 'completed' işaretleniyordu — gerçek iade saatinden saatler önce. <code>has_overlap()</code> bu yanlış-completed kayıtları status filtresinden hariç tutuyordu (<code>'completed'</code> listede yoktu), aynı araç kalan kira saatleri için çift-rezervasyona açık kalıyordu. Bu sürüm cron'u düzeltir, <code>has_overlap()</code> katmanında defansif koruma ekler, <code>completed → in_progress</code> Status geçişini açar ve mevcut kontamine kayıtları geri almak için bir bakım script'i içerir.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Yükseltme sonrası önerilen (opsiyonel)</div><div class="admonitionContent_BuS1"><p>Bakım script'i GitHub deposundadır: <code>bin/cleanup-early-completed-bookings.php</code> (üretim ZIP'ine kasıtlı olarak dahil edilmedi). Kontamine rezervasyon şüpheniz varsa (statü <code>completed</code> ama gerçek <code>end_ts</code> hâlâ gelecekte), dosyayı deploy edilmiş bir siteye kopyalayın ve çalıştırın:</p><div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># dry-run (varsayılan)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># in_progress'e geri al</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php apply</span><br></span></code></pre></div></div><p>Script <code>Status::update_status()</code> üzerinden gider, böylece audit hook'lar tetiklenir ve cache her düzeltme için invalidate olur. İdempotenttir — apply sonrası tekrar çalıştırıldığında sıfır kayıt döner.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>AutoComplete cron'u artık datetime kullanıyor.</strong> Birincil sinyal: <code>_mhm_end_ts</code> (UNIX timestamp). Yedek: <code>CONCAT(_mhm_dropoff_date, ' ', _mhm_dropoff_time)</code>, eksik <code>dropoff_time</code> için <code>23:59:59</code> — gün-içi erken completed yapmaz. Legacy <code>_mhm_end_date</code> yedeği korundu.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="defansif-katman">Defansif Katman<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#defansif-katman" class="hash-link" aria-label="Defansif Katman doğrudan bağlantı" title="Defansif Katman doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>has_overlap()</code> artık end_ts'i gelecekte olan <code>'completed'</code> rezervasyonları yakalıyor</strong>, ileride bir cron bug'ı veya manuel hata bir rezervasyonu erken complete işaretlese bile müsaitlik bloke edilir.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-özellik">Yeni Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#yeni-%C3%B6zellik" class="hash-link" aria-label="Yeni Özellik doğrudan bağlantı" title="Yeni Özellik doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>Status</code> geçiş matrisi</strong> erken-completion düzeltmesi için <code>completed</code> → <code>in_progress</code> geçişine izin veriyor (temizlik script'inin audit'li update zinciri için gerekli).</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="araç">Araç<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#ara%C3%A7" class="hash-link" aria-label="Araç doğrudan bağlantı" title="Araç doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>bin/cleanup-early-completed-bookings.php</code></strong> — <code>wp eval-file</code> script'i. Varsayılan dry-run; pozisyonel <code>apply</code> ile kontamine satırları <code>Status::update_status()</code> üzerinden geri alır, böylece <code>mhm_rentiva_booking_status_changed</code> hook'u audit/cache invalidation için tetiklenir. İdempotent.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>AutoCompleteCronDatetime, HasOverlapStatusFilter ve StatusTransition suite'lerinde 11 yeni PHPUnit testi — toplam <strong>1.231 test / 3.726 assertion</strong>, 7 dokümante <code>saas_block</code> env-quota baseline başarısızlığı, 15 atlanmış. Regresyon yok.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>booking</category>
+            <category>critical</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.58.0 — Finansal Hata Düzeltmeleri, Kontrol Paneli İyileştirmeleri, Genişletilmiş Çeviri]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release</link>
@@ -495,91 +561,6 @@
             <category>release</category>
             <category>rentiva</category>
             <category>messages</category>
-            <category>react</category>
-            <category>spa</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.40.0 — Bayi Yönetimi Faz A: React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release</guid>
-            <pubDate>Mon, 11 May 2026 08:58:00 GMT</pubDate>
-            <description><![CDATA[Bekleyen Başvurular ve IBAN Talepleri admin tab'ları, özel bir REST API ile desteklenen tam bir React SPA olarak yeniden yazıldı. Tam sayfa PHP render'ları ortadan kalkıyor; programatik erişim için 7 yeni REST endpoint eklendi.]]></description>
-            <content:encoded><![CDATA[<p>Bekleyen Başvurular ve IBAN Talepleri admin tab'ları, özel bir REST API ile desteklenen tam bir React SPA olarak yeniden yazıldı. Tam sayfa PHP render'ları ortadan kalkıyor; programatik erişim için 7 yeni REST endpoint eklendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-yönetimi--react-spa-geçişi-faz-a">Bayi Yönetimi — React SPA Geçişi (Faz A)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#bayi-y%C3%B6netimi--react-spa-ge%C3%A7i%C5%9Fi-faz-a" class="hash-link" aria-label="Bayi Yönetimi — React SPA Geçişi (Faz A) doğrudan bağlantı" title="Bayi Yönetimi — React SPA Geçişi (Faz A) doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu, tam Bayi Yönetimi React geçişinin ilk fazı. Faz A en karmaşık iki tab'ı kapsıyor: başvuru inceleme ve IBAN değişikliği yönetimi.</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-rest-endpointleri-7">Yeni REST Endpoint'leri (7)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#yeni-rest-endpointleri-7" class="hash-link" aria-label="Yeni REST Endpoint'leri (7) doğrudan bağlantı" title="Yeni REST Endpoint'leri (7) doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/applications</code> — sayfalandırılmış başvuru listesi, durum/sıralama filtreleriyle</li>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/applications/{id}</code> — IBAN maskeleme ile başvuru detayı (ham şifreli değer hiç açığa çıkmaz)</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/applications/{id}/approve</code> — rol yükseltmesiyle onaylama</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/applications/{id}/reject</code> — zorunlu gerekçe + 24 saatlik bekleme süresiyle reddetme</li>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/iban-requests</code> — bekleyen IBAN değişikliği talepleri</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/iban-requests/{vendor_id}/approve</code> — bekleyen IBAN'ı aktif yap</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/iban-requests/{vendor_id}/reject</code> — bekleyen IBAN'ı sil, mevcut aktif kalsın</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-react-bileşenleri">Yeni React Bileşenleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#yeni-react-bile%C5%9Fenleri" class="hash-link" aria-label="Yeni React Bileşenleri doğrudan bağlantı" title="Yeni React Bileşenleri doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>VendorManagementPage</code></strong> — tab navigasyonu ve flash notice sistemiyle kök bileşen</li>
-<li class=""><strong><code>ApplicationTable</code></strong> — onayla/reddet hızlı eylemleriyle sayfalandırılmış liste</li>
-<li class=""><strong><code>ApplicationRow</code></strong> — durum rozeti ve satır içi eylem butonlarıyla satır</li>
-<li class=""><strong><code>ApplicationDetailPage</code></strong> — <code>ApproveForm</code> + <code>RejectForm</code> içeren tam detay görünümü</li>
-<li class=""><strong><code>IbanRequestsTab</code></strong> — bekleyen IBAN değişiklik kuyruğu</li>
-<li class=""><strong><code>IbanRequestRow</code></strong> — maskeli IBAN karşılaştırması (mevcut vs. talep edilen) onayla/reddet ile</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="güvenlik">Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#g%C3%BCvenlik" class="hash-link" aria-label="Güvenlik doğrudan bağlantı" title="Güvenlik doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class="">IBAN verisi hiçbir zaman ham haliyle açığa çıkmaz — tüm REST yanıtları maskeli değerler döndürür (<code>TR***5678</code>)</li>
-<li class="">Reddedilen başvurularda 24 saatlik bekleme süresi sunucu tarafında zorunlu</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.40.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p><code>VendorManagementRESTApplicationsFazATest</code> ve <code>VendorManagementRESTIbanFazATest</code> genelinde 14 yeni PHPUnit entegrasyon testi. Tümü geçiyor. PHPCS: 0 hata.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
-            <category>react</category>
-            <category>spa</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.39.0 — Müşteriler Sayfası React SPA (Faz 2)]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release</guid>
-            <pubDate>Sun, 10 May 2026 09:00:00 GMT</pubDate>
-            <description><![CDATA[Eski jQuery / WPListTable tabanlı Müşteriler admin sayfası tarihe karıştı. v4.39.0, özel bir REST API ile desteklenen tam bir React SPA ile değiştiriyor — canlı arama, sıralanabilir sütunlar, kayar detay paneli ve toplu silme, hepsi sayfa yenilemeden.]]></description>
-            <content:encoded><![CDATA[<p>Eski jQuery / <code>WP_List_Table</code> tabanlı Müşteriler admin sayfası tarihe karıştı. v4.39.0, özel bir REST API ile desteklenen tam bir React SPA ile değiştiriyor — canlı arama, sıralanabilir sütunlar, kayar detay paneli ve toplu silme, hepsi sayfa yenilemeden.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="müşteriler-sayfası--react-spa-geçişi">Müşteriler Sayfası — React SPA Geçişi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#m%C3%BC%C5%9Fteriler-sayfas%C4%B1--react-spa-ge%C3%A7i%C5%9Fi" class="hash-link" aria-label="Müşteriler Sayfası — React SPA Geçişi doğrudan bağlantı" title="Müşteriler Sayfası — React SPA Geçişi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu, PHP render'dan React SPA'ya geçen ikinci büyük admin sayfası (Faz 1 Dashboard'un ardından Faz 2).</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-rest-endpointleri">Yeni REST Endpoint'leri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#yeni-rest-endpointleri" class="hash-link" aria-label="Yeni REST Endpoint'leri doğrudan bağlantı" title="Yeni REST Endpoint'leri doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/customers</code> — arama, sıralama ve sayfa başına kayıt kontrolüyle sayfalandırılmış müşteri listesi</li>
-<li class=""><code>GET /mhm-rentiva/v1/customers/{id}</code> — tam müşteri detayı (ad, e-posta, telefon, adres, rezervasyon istatistikleri, ilk/son rezervasyon)</li>
-<li class=""><code>DELETE /mhm-rentiva/v1/customers/bulk</code> — <code>manage_options</code> korumasıyla ID dizisine göre toplu silme</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-react-bileşenleri">Yeni React Bileşenleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#yeni-react-bile%C5%9Fenleri" class="hash-link" aria-label="Yeni React Bileşenleri doğrudan bağlantı" title="Yeni React Bileşenleri doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>CustomersPage</code></strong> — arama, sayfalama ve panel durumunu birbirine bağlayan kök durum orkestratörü</li>
-<li class=""><strong><code>CustomerTable</code></strong> — <code>WP_List_Table</code>'ın yerini alan sıralanabilir tablo; sütunlar: Ad, E-posta, Rezervasyonlar, Toplam Harcama, Son Rezervasyon, Kayıt Tarihi</li>
-<li class=""><strong><code>CustomerDetailPanel</code></strong> — satıra tıklandığında açılan kayar panel; Düzenle ve Rezervasyonları Görüntüle hızlı bağlantılarıyla tam profil gösterimi</li>
-<li class=""><strong><code>FilterBar</code></strong> — 300 ms geciktirmeli canlı arama girişi ve toplu silme tetikleyicisi</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="kaldırılan-eski-kod">Kaldırılan Eski Kod<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#kald%C4%B1r%C4%B1lan-eski-kod" class="hash-link" aria-label="Kaldırılan Eski Kod doğrudan bağlantı" title="Kaldırılan Eski Kod doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><code>CustomersListTable.php</code> — silindi</li>
-<li class=""><code>CustomersListPage.php</code> — silindi</li>
-<li class=""><code>customers.js</code>, <code>customers-calendar.js</code>, <code>customers.css</code>, <code>simple-calendars.css</code> — silindi</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="diğer-değişiklikler">Diğer Değişiklikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#di%C4%9Fer-de%C4%9Fi%C5%9Fiklikler" class="hash-link" aria-label="Diğer Değişiklikler doğrudan bağlantı" title="Diğer Değişiklikler doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><code>CustomersOptimizer</code>; <code>sort_by</code> / <code>sort_dir</code> parametreleri ve güvenli <code>ORDER BY</code> enjeksiyonu için PHP taraflı sütun beyaz listesiyle genişletildi</li>
-<li class="">CSV Dışa Aktarma hâlâ <code>admin-post.php</code> üzerinden akış olarak çalışıyor — indirme akışı SPA ile birlikte korunuyor</li>
-<li class=""><code>CustomersPage::register()</code> artık <code>rest_api_init</code>'e doğrudan bağlanmıyor; rotalar, <code>admin_menu</code> tetiklenmeden önce kullanılabilir olması için <code>Plugin.php</code> üzerinden kaydoluyor</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.39.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>13 yeni PHPUnit entegrasyon testi (10 REST uç nokta testi + 3 dışa aktarıcı testi). Tam süit: <strong>1115 test, 3425 assertion</strong>. PHPCS: 0 hata.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>customers</category>
             <category>react</category>
             <category>spa</category>
         </item>

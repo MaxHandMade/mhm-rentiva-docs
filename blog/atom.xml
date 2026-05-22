@@ -2,11 +2,85 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-05-15T10:00:00.000Z</updated>
+    <updated>2026-05-21T22:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.58.2 — Transfer City Filter + UI Polish]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release"/>
+        <updated>2026-05-21T22:00:00.000Z</updated>
+        <summary type="html"><![CDATA[TransferSearchEngine had no location filter — a search for an İstanbul route returned vehicles parked in Ankara and Antalya. This release adds city-based vehicle matching (route origin's city), reusing the rental module's 3-layer hybrid filter (vehicle → vendor inheritance → global default) via a new expandtocity mode. Plus a batch of UI/content polish: KPI spacing on list-table pages, dashboard card heights, About page hardening, and Vehicles calendar parity with the Bookings page.]]></summary>
+        <content type="html"><![CDATA[<p><code>TransferSearchEngine</code> had no location filter — a search for an İstanbul route returned vehicles parked in Ankara and Antalya. This release adds city-based vehicle matching (route origin's city), reusing the rental module's 3-layer hybrid filter (vehicle → vendor inheritance → global default) via a new <code>expand_to_city</code> mode. Plus a batch of UI/content polish: KPI spacing on list-table pages, dashboard card heights, About page hardening, and Vehicles calendar parity with the Bookings page.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Transfer search filters by route origin city.</strong> A vehicle parked in Ankara no longer appears for an İstanbul route. Same 3-layer hybrid filter as rental (vehicle direct meta → vendor inheritance → global default), expanded to all locations sharing the origin's city.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="feature">Feature<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#feature" class="hash-link" aria-label="Direct link to Feature" title="Direct link to Feature" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>QueryHelper::get_location_subquery()</code></strong> gains an optional <code>$expand_to_city</code> parameter. Backward-compatible: rental's strict matching is unchanged.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>About page developer contact info hardcoded</strong> — defensive against a DB option leaking the WordPress <code>admin_email</code> (e.g. <code>admin@localhost.com</code> on dev/clean installs).</li>
+<li class=""><strong>About <code>Tests &amp; Verification</code> card</strong> updated to the current baseline (1,237 PHPUnit tests, 3,736 assertions) and <code>Tested with: WP 7.0</code>. Plugin header and <code>readme.txt</code> <code>Tested up to</code> aligned to 7.0.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="style">Style<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#style" class="hash-link" aria-label="Direct link to Style" title="Direct link to Style" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>KPI stats grid top spacing</strong> on admin list-table pages (Vehicles, Bookings, Add-ons, Transfer) — cards no longer sit flush against the page edge.</li>
+<li class=""><strong>Dashboard Pending Payments + Revenue cards</strong> no longer stretch to a tall empty height. <code>RevenueChart</code> is bound to a 250px max height; Row 4 cards size to their own content.</li>
+<li class=""><strong>Vehicles calendar spacing parity</strong> with the Bookings calendar — wrapper top margin + card-pattern inner padding.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<p>6 new PHPUnit tests cover the transfer location filter (city expansion + vendor inheritance) — total <strong>1,237 tests / 3,736 assertions</strong>, 7 documented <code>saas_block</code> env-quota baseline failures, 15 skipped. No regression.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="transfer" term="transfer"/>
+        <category label="dashboard" term="dashboard"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.58.1 — Critical: Double-Booking Fix on Same-Day Returns]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release"/>
+        <updated>2026-05-21T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[AutoComplete cron compared dropoffdate < NOW() at date-only granularity. MySQL cast YYYY-MM-DD to YYYY-MM-DD 0000, so any confirmed booking with a same-day dropoff was auto-completed at midnight — long before the actual return time. hasoverlap() then skipped these wrongly-completed bookings (status filter excluded 'completed'), allowing the same vehicle to be double-booked for the remaining rental hours. This release fixes the cron, adds defense-in-depth at hasoverlap(), opens a completed → inprogress Status transition, and ships a maintenance script to revert already-contaminated bookings.]]></summary>
+        <content type="html"><![CDATA[<p>AutoComplete cron compared <code>dropoff_date &lt; NOW()</code> at date-only granularity. MySQL cast <code>YYYY-MM-DD</code> to <code>YYYY-MM-DD 00:00:00</code>, so any confirmed booking with a same-day dropoff was auto-completed at midnight — long before the actual return time. <code>has_overlap()</code> then skipped these wrongly-completed bookings (status filter excluded <code>'completed'</code>), allowing the same vehicle to be double-booked for the remaining rental hours. This release fixes the cron, adds defense-in-depth at <code>has_overlap()</code>, opens a <code>completed → in_progress</code> Status transition, and ships a maintenance script to revert already-contaminated bookings.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Optional after upgrade</div><div class="admonitionContent_BuS1"><p>A maintenance script lives in the GitHub repository at <code>bin/cleanup-early-completed-bookings.php</code> (intentionally not bundled in the production ZIP). If you suspect contaminated bookings (status <code>completed</code> while the real <code>end_ts</code> is still in the future), copy the file onto a deployed site and run:</p><div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># dry-run (default)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># revert to in_progress</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php apply</span><br></span></code></pre></div></div><p>The script routes through <code>Status::update_status()</code>, so audit hooks fire and the cache invalidates per fix. Idempotent — re-running after apply finds zero rows.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>AutoComplete cron now uses datetime.</strong> Primary signal: <code>_mhm_end_ts</code> (UNIX timestamp). Fallback: <code>CONCAT(_mhm_dropoff_date, ' ', _mhm_dropoff_time)</code>, with <code>23:59:59</code> if <code>dropoff_time</code> is missing — never auto-completes mid-day. Legacy <code>_mhm_end_date</code> fallback preserved.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="defense-in-depth">Defense-in-Depth<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#defense-in-depth" class="hash-link" aria-label="Direct link to Defense-in-Depth" title="Direct link to Defense-in-Depth" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>has_overlap()</code> now flags <code>'completed'</code> bookings whose <code>end_ts</code> is still in the future</strong>, blocking availability even if a future cron bug or manual mishap marks a booking complete early.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="feature">Feature<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#feature" class="hash-link" aria-label="Direct link to Feature" title="Direct link to Feature" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>Status</code> transition matrix</strong> allows <code>completed</code> → <code>in_progress</code> for early-completion correction (required by the cleanup script's audited update chain).</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tools">Tools<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#tools" class="hash-link" aria-label="Direct link to Tools" title="Direct link to Tools" translate="no">​</a></h3>
+<ul>
+<li class=""><strong><code>bin/cleanup-early-completed-bookings.php</code></strong> — <code>wp eval-file</code> script. Default is dry-run; positional <code>apply</code> reverts contaminated rows via <code>Status::update_status()</code> so <code>mhm_rentiva_booking_status_changed</code> fires for audit/cache invalidation. Idempotent.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<p>11 new PHPUnit tests across AutoCompleteCronDatetime, HasOverlapStatusFilter, and StatusTransition suites — total <strong>1,231 tests / 3,726 assertions</strong>, 7 documented <code>saas_block</code> env-quota baseline failures, 15 skipped. No regression.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="booking" term="booking"/>
+        <category label="critical" term="critical"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.58.0 — Financial Bug Fixes, Dashboard Polish, Expanded i18n]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release</id>
@@ -566,99 +640,6 @@
         <category label="release" term="release"/>
         <category label="rentiva" term="rentiva"/>
         <category label="messages" term="messages"/>
-        <category label="react" term="react"/>
-        <category label="spa" term="spa"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.40.0 — Vendor Management Phase A: React SPA]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release"/>
-        <updated>2026-05-11T08:58:00.000Z</updated>
-        <summary type="html"><![CDATA[The Pending Applications and IBAN Requests admin tabs have been completely rewritten as a React SPA backed by a dedicated REST API — eliminating full-page PHP renders and introducing 7 new REST endpoints for programmatic access.]]></summary>
-        <content type="html"><![CDATA[<p>The Pending Applications and IBAN Requests admin tabs have been completely rewritten as a React SPA backed by a dedicated REST API — eliminating full-page PHP renders and introducing 7 new REST endpoints for programmatic access.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-management--react-spa-migration-phase-a">Vendor Management — React SPA Migration (Phase A)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#vendor-management--react-spa-migration-phase-a" class="hash-link" aria-label="Direct link to Vendor Management — React SPA Migration (Phase A)" title="Direct link to Vendor Management — React SPA Migration (Phase A)" translate="no">​</a></h3>
-<p>This is the first phase of the full Vendor Management React migration. Phase A covers the two most complex tabs: application review and IBAN change management.</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-rest-endpoints-7">New REST Endpoints (7)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#new-rest-endpoints-7" class="hash-link" aria-label="Direct link to New REST Endpoints (7)" title="Direct link to New REST Endpoints (7)" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/applications</code> — paginated applications list with status/sort filters</li>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/applications/{id}</code> — application detail with IBAN masking (raw encrypted value never exposed)</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/applications/{id}/approve</code> — approve with role promotion</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/applications/{id}/reject</code> — reject with mandatory reason + 24 h cooldown</li>
-<li class=""><code>GET /mhm-rentiva/v1/vendors/iban-requests</code> — paginated pending IBAN change requests</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/iban-requests/{vendor_id}/approve</code> — swap active IBAN from pending</li>
-<li class=""><code>POST /mhm-rentiva/v1/vendors/iban-requests/{vendor_id}/reject</code> — discard pending IBAN, keep active</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-react-components">New React Components<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#new-react-components" class="hash-link" aria-label="Direct link to New React Components" title="Direct link to New React Components" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>VendorManagementPage</code></strong> — root with tab navigation and flash notice system</li>
-<li class=""><strong><code>ApplicationTable</code></strong> — paginated list with approve/reject quick-actions</li>
-<li class=""><strong><code>ApplicationRow</code></strong> — row with status badge and inline action buttons</li>
-<li class=""><strong><code>ApplicationDetailPage</code></strong> — full detail view with <code>ApproveForm</code> + <code>RejectForm</code></li>
-<li class=""><strong><code>IbanRequestsTab</code></strong> — pending IBAN change queue</li>
-<li class=""><strong><code>IbanRequestRow</code></strong> — masked IBAN comparison (current vs. requested) with approve/reject</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="security">Security<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security" translate="no">​</a></h4>
-<ul>
-<li class="">IBAN data is never exposed in raw form — all REST responses return masked values (<code>TR***5678</code>)</li>
-<li class="">24-hour cooldown enforced server-side on rejected applications</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.40.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>New: 14 PHPUnit integration tests across <code>VendorManagementRESTApplicationsFazATest</code> and <code>VendorManagementRESTIbanFazATest</code>. All passing. PHPCS: 0 errors.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="react" term="react"/>
-        <category label="spa" term="spa"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.39.0 — Customers Page React SPA (Faz 2)]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release"/>
-        <updated>2026-05-10T09:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The legacy jQuery / WPListTable Customers admin page is gone. v4.39.0 replaces it with a full React SPA backed by a dedicated REST API — live search, sortable columns, a slide-in detail panel, and bulk delete, all without page reloads.]]></summary>
-        <content type="html"><![CDATA[<p>The legacy jQuery / <code>WP_List_Table</code> Customers admin page is gone. v4.39.0 replaces it with a full React SPA backed by a dedicated REST API — live search, sortable columns, a slide-in detail panel, and bulk delete, all without page reloads.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="customers-page--react-spa-migration">Customers Page — React SPA Migration<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#customers-page--react-spa-migration" class="hash-link" aria-label="Direct link to Customers Page — React SPA Migration" title="Direct link to Customers Page — React SPA Migration" translate="no">​</a></h3>
-<p>This is the second major admin page migrated from PHP-rendered output to a React SPA (Faz 2, following the Dashboard in Faz 1).</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-rest-endpoints">New REST Endpoints<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#new-rest-endpoints" class="hash-link" aria-label="Direct link to New REST Endpoints" title="Direct link to New REST Endpoints" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/customers</code> — paginated customer list with search, sort, and per-page controls</li>
-<li class=""><code>GET /mhm-rentiva/v1/customers/{id}</code> — full customer detail (name, email, phone, address, booking stats, first/last booking)</li>
-<li class=""><code>DELETE /mhm-rentiva/v1/customers/bulk</code> — bulk delete by ID array with <code>manage_options</code> gate</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-react-components">New React Components<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#new-react-components" class="hash-link" aria-label="Direct link to New React Components" title="Direct link to New React Components" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>CustomersPage</code></strong> — root state orchestrator wiring search, pagination, and panel state</li>
-<li class=""><strong><code>CustomerTable</code></strong> — sortable table replacing <code>WP_List_Table</code>; columns: Name, Email, Bookings, Total Spent, Last Booking, Registered</li>
-<li class=""><strong><code>CustomerDetailPanel</code></strong> — slide-in panel on row click; shows full profile with Edit and View Bookings quick links</li>
-<li class=""><strong><code>FilterBar</code></strong> — live search input with 300 ms debounce and bulk delete trigger</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="removed-legacy-code">Removed Legacy Code<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#removed-legacy-code" class="hash-link" aria-label="Direct link to Removed Legacy Code" title="Direct link to Removed Legacy Code" translate="no">​</a></h4>
-<ul>
-<li class=""><code>CustomersListTable.php</code> — deleted</li>
-<li class=""><code>CustomersListPage.php</code> — deleted</li>
-<li class=""><code>customers.js</code>, <code>customers-calendar.js</code>, <code>customers.css</code>, <code>simple-calendars.css</code> — deleted</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="other-changes">Other Changes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#other-changes" class="hash-link" aria-label="Direct link to Other Changes" title="Direct link to Other Changes" translate="no">​</a></h4>
-<ul>
-<li class=""><code>CustomersOptimizer</code> extended with <code>sort_by</code> / <code>sort_dir</code> parameters and a PHP-side column whitelist for safe <code>ORDER BY</code> injection</li>
-<li class="">Export CSV still streams via <code>admin-post.php</code> — the download flow is preserved alongside the SPA</li>
-<li class=""><code>CustomersPage::register()</code> no longer hooks <code>rest_api_init</code> directly; routes register through <code>Plugin.php</code> so they're available before <code>admin_menu</code> fires</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.39.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>13 new PHPUnit integration tests (10 REST endpoint tests + 3 exporter tests). Full suite: <strong>1115 tests, 3425 assertions</strong>. PHPCS: 0 errors.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="customers" term="customers"/>
         <category label="react" term="react"/>
         <category label="spa" term="spa"/>
     </entry>
