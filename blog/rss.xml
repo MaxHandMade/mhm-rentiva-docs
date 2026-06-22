@@ -4,10 +4,33 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 21 May 2026 22:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 Jun 2026 12:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v4.60.0 — Matured Payout Fix + Dead SaaS Scaffolding Removal]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release</guid>
+            <pubDate>Tue, 23 Jun 2026 12:00:00 GMT</pubDate>
+            <description><![CDATA[Matured vendor payouts were silently skipped on single-site installs: a dead SaaS "control plane" gate in the matured-payout worker required a multi-tenant registry row that a normal install never provisions, so no scheduled payout ever finalized automatically. This release removes that gate — the worker now runs unconditionally — and clears out the unused multi-tenant orchestration scaffolding that caused it.]]></description>
+            <content:encoded><![CDATA[<p>Matured vendor payouts were silently skipped on single-site installs: a dead SaaS "control plane" gate in the matured-payout worker required a multi-tenant registry row that a normal install never provisions, so no scheduled payout ever finalized automatically. This release removes that gate — the worker now runs unconditionally — and clears out the unused multi-tenant orchestration scaffolding that caused it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Matured vendor payouts now process on single-site installs.</strong> The matured-payout worker (<code>MaturedPayoutJob::run()</code>) was gated behind a SaaS control-plane <code>is_operational()</code> check that required a tenant-registry row which a normal (non-SaaS-hosted) install never creates — so every scheduled run exited early without finalizing a single payout. The gate has been removed; the worker now runs unconditionally. A regression test reproduces the production state (no tenant row present) and asserts the matured payout is finalized.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="change">Change<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#change" class="hash-link" aria-label="Direct link to Change" title="Direct link to Change" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Removed unused multi-tenant SaaS orchestration scaffolding.</strong> Six dead classes — the control-plane guard, usage metering, cycle manager, tenant provisioner, quota exception, and their migration — were deleted, the usage-metering call sites were stripped from the financial layer, and a one-time <code>v3.9.0</code> upgrade migration drops the two now-empty database tables. The tenant-context layer used for financial data scoping is intentionally retained.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<p>The full suite stays green at <strong>1,263 tests / 3,839 assertions</strong>, 0 failures. The four obsolete orchestration test files were removed and a <code>MaturedPayoutJob</code> regression test was added. No regression.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>vendor</category>
+            <category>payouts</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.58.2 — Transfer City Filter + UI Polish]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release</link>
@@ -527,42 +550,6 @@
             <category>rentiva</category>
             <category>admin</category>
             <category>ui</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.41.0 — Messages Phase 3: Full React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release</guid>
-            <pubDate>Mon, 11 May 2026 09:31:00 GMT</pubDate>
-            <description><![CDATA[The Messages admin page has been completely rewritten as a React SPA, replacing the legacy jQuery/WPListTable implementation. Real-time filtering, bulk actions, thread view, reply forms, and settings management — all without page reloads.]]></description>
-            <content:encoded><![CDATA[<p>The Messages admin page has been completely rewritten as a React SPA, replacing the legacy jQuery/WP_List_Table implementation. Real-time filtering, bulk actions, thread view, reply forms, and settings management — all without page reloads.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="messages--full-react-spa-phase-3">Messages — Full React SPA (Phase 3)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#messages--full-react-spa-phase-3" class="hash-link" aria-label="Direct link to Messages — Full React SPA (Phase 3)" title="Direct link to Messages — Full React SPA (Phase 3)" translate="no">​</a></h3>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-react-components">New React Components<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#new-react-components" class="hash-link" aria-label="Direct link to New React Components" title="Direct link to New React Components" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>MessagesPage</code></strong> — root with URL-param routing (<code>?id</code> for thread, <code>?tab=settings</code> for settings)</li>
-<li class=""><strong><code>FilterBar</code></strong> — search + status/category/priority dropdowns with 300 ms debounce</li>
-<li class=""><strong><code>MessageTable</code></strong> — checkbox bulk-select, unread dot indicator, row-click to thread</li>
-<li class=""><strong><code>Pagination</code></strong> — prev/next, hidden when single page</li>
-<li class=""><strong><code>BulkBar</code></strong> — parallel REST status updates + hidden admin-post form for bulk delete</li>
-<li class=""><strong><code>ThreadView</code></strong> — full message thread with inline status dropdown</li>
-<li class=""><strong><code>ReplyForm</code></strong> — "Send" (keep open) + "Send &amp; Close" dual-action buttons</li>
-<li class=""><strong><code>SettingsView</code></strong> — Email / Categories / Statuses tabs, admin-post save</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="rest-api-extensions">REST API Extensions<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#rest-api-extensions" class="hash-link" aria-label="Direct link to REST API Extensions" title="Direct link to REST API Extensions" translate="no">​</a></h4>
-<p>Two new filter parameters added to the existing <code>GET /mhm-rentiva/v1/messages</code> endpoint:</p>
-<ul>
-<li class=""><code>search</code> — debounced full-text filter (subject + sender name)</li>
-<li class=""><code>priority</code> — filter by message priority level</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="bulk-delete">Bulk Delete<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#bulk-delete" class="hash-link" aria-label="Direct link to Bulk Delete" title="Direct link to Bulk Delete" translate="no">​</a></h4>
-<p>New <code>MessageDeleteHandler</code> admin-post handler with nonce gate for bulk message trash operations. Runs outside the REST layer to leverage WP's post status management.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-react">Why React?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.41.0-release#why-react" class="hash-link" aria-label="Direct link to Why React?" title="Direct link to Why React?" translate="no">​</a></h2>
-<p>The old WP_List_Table implementation required a full PHP page reload for every filter change, bulk action, or thread view. With 300 ms debounced search and parallel REST updates, the new SPA feels instant.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>messages</category>
-            <category>react</category>
-            <category>spa</category>
         </item>
     </channel>
 </rss>

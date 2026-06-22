@@ -4,10 +4,33 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 21 May 2026 22:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 Jun 2026 12:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.60.0 — Olgunlaşmış Ödeme Düzeltmesi + Ölü SaaS İskelet Kaldırma]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release</guid>
+            <pubDate>Tue, 23 Jun 2026 12:00:00 GMT</pubDate>
+            <description><![CDATA[Olgunlaşmış bayi ödemeleri tek-siteli kurulumlarda sessizce atlanıyordu: olgunlaşmış-ödeme işçisindeki ölü bir SaaS "kontrol düzlemi" gate'i, normal bir kurulumun hiç oluşturmadığı çok-kiracılı bir kayıt satırı gerektiriyordu; bu yüzden hiçbir zamanlanmış ödeme otomatik olarak sonuçlanmıyordu. Bu sürüm o gate'i kaldırıyor — işçi artık koşulsuz çalışıyor — ve buna neden olan kullanılmayan çok-kiracılı orkestrasyon iskeletini temizliyor.]]></description>
+            <content:encoded><![CDATA[<p>Olgunlaşmış bayi ödemeleri tek-siteli kurulumlarda sessizce atlanıyordu: olgunlaşmış-ödeme işçisindeki ölü bir SaaS "kontrol düzlemi" gate'i, normal bir kurulumun hiç oluşturmadığı çok-kiracılı bir kayıt satırı gerektiriyordu; bu yüzden hiçbir zamanlanmış ödeme otomatik olarak sonuçlanmıyordu. Bu sürüm o gate'i kaldırıyor — işçi artık koşulsuz çalışıyor — ve buna neden olan kullanılmayan çok-kiracılı orkestrasyon iskeletini temizliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Olgunlaşmış bayi ödemeleri artık tek-siteli kurulumlarda işleniyor.</strong> Olgunlaşmış-ödeme işçisi (<code>MaturedPayoutJob::run()</code>), normal (SaaS-barındırmalı olmayan) bir kurulumun hiç oluşturmadığı bir kiracı-kayıt satırı gerektiren bir SaaS kontrol-düzlemi <code>is_operational()</code> kontrolünün arkasındaydı — bu yüzden her zamanlanmış çalışma tek bir ödemeyi bile sonuçlandırmadan erken çıkıyordu. Gate kaldırıldı; işçi artık koşulsuz çalışıyor. Bir regresyon testi üretim durumunu (kiracı satırı yok) yeniden üretiyor ve olgunlaşmış ödemenin sonuçlandığını doğruluyor.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="değişiklik">Değişiklik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#de%C4%9Fi%C5%9Fiklik" class="hash-link" aria-label="Değişiklik doğrudan bağlantı" title="Değişiklik doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Kullanılmayan çok-kiracılı SaaS orkestrasyon iskeleti kaldırıldı.</strong> Altı ölü sınıf — kontrol-düzlemi guard, kullanım sayacı, döngü yöneticisi, kiracı sağlayıcı, kota istisnası ve migration'ları — silindi, kullanım-sayacı çağrıları finansal katmandan temizlendi ve tek seferlik bir <code>v3.9.0</code> yükseltme migration'ı artık boş olan iki veritabanı tablosunu düşürüyor. Finansal veri kapsamlaması için kullanılan kiracı-bağlam katmanı kasıtlı olarak korundu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Tam suite <strong>1.263 test / 3.839 doğrulama</strong> ile yeşil kalıyor, 0 başarısızlık. Dört eski orkestrasyon test dosyası kaldırıldı ve bir <code>MaturedPayoutJob</code> regresyon testi eklendi. Regresyon yok.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>vendor</category>
+            <category>payouts</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.58.2 — Transfer Şehir Filtresi + Arayüz İyileştirmeleri]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release</link>
@@ -527,42 +550,6 @@
             <category>rentiva</category>
             <category>admin</category>
             <category>ui</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.41.0 — Mesajlar Faz 3: Tam React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release</guid>
-            <pubDate>Mon, 11 May 2026 09:31:00 GMT</pubDate>
-            <description><![CDATA[Mesajlar admin sayfası, eski jQuery/WPListTable implementasyonunun yerini alacak şekilde tam bir React SPA olarak yeniden yazıldı. Gerçek zamanlı filtreleme, toplu işlemler, thread görünümü, yanıt formları ve ayar yönetimi — hepsi sayfa yenilemesi olmadan.]]></description>
-            <content:encoded><![CDATA[<p>Mesajlar admin sayfası, eski jQuery/WP_List_Table implementasyonunun yerini alacak şekilde tam bir React SPA olarak yeniden yazıldı. Gerçek zamanlı filtreleme, toplu işlemler, thread görünümü, yanıt formları ve ayar yönetimi — hepsi sayfa yenilemesi olmadan.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mesajlar--tam-react-spa-faz-3">Mesajlar — Tam React SPA (Faz 3)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#mesajlar--tam-react-spa-faz-3" class="hash-link" aria-label="Mesajlar — Tam React SPA (Faz 3) doğrudan bağlantı" title="Mesajlar — Tam React SPA (Faz 3) doğrudan bağlantı" translate="no">​</a></h3>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-react-bileşenleri">Yeni React Bileşenleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#yeni-react-bile%C5%9Fenleri" class="hash-link" aria-label="Yeni React Bileşenleri doğrudan bağlantı" title="Yeni React Bileşenleri doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>MessagesPage</code></strong> — URL parametre yönlendirmeli kök bileşen (<code>?id</code> thread için, <code>?tab=settings</code> ayarlar için)</li>
-<li class=""><strong><code>FilterBar</code></strong> — 300 ms debounce ile arama + durum/kategori/öncelik açılır menüleri</li>
-<li class=""><strong><code>MessageTable</code></strong> — onay kutusu toplu seçim, okunmamış nokta göstergesi, satıra tıklama ile thread</li>
-<li class=""><strong><code>Pagination</code></strong> — önceki/sonraki, tek sayfa olduğunda gizli</li>
-<li class=""><strong><code>BulkBar</code></strong> — paralel REST durum güncellemeleri + toplu silme için gizli admin-post formu</li>
-<li class=""><strong><code>ThreadView</code></strong> — satır içi durum açılır menüsüyle tam mesaj thread'i</li>
-<li class=""><strong><code>ReplyForm</code></strong> — "Gönder" (açık tut) + "Gönder &amp; Kapat" çift eylemli butonlar</li>
-<li class=""><strong><code>SettingsView</code></strong> — E-posta / Kategoriler / Durumlar tab'ları, admin-post kayıt</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="rest-api-genişletmeleri">REST API Genişletmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#rest-api-geni%C5%9Fletmeleri" class="hash-link" aria-label="REST API Genişletmeleri doğrudan bağlantı" title="REST API Genişletmeleri doğrudan bağlantı" translate="no">​</a></h4>
-<p>Mevcut <code>GET /mhm-rentiva/v1/messages</code> endpoint'ine iki yeni filtre parametresi eklendi:</p>
-<ul>
-<li class=""><code>search</code> — debounce'lu tam metin filtresi (konu + gönderen adı)</li>
-<li class=""><code>priority</code> — mesaj öncelik seviyesine göre filtre</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="toplu-silme">Toplu Silme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#toplu-silme" class="hash-link" aria-label="Toplu Silme doğrudan bağlantı" title="Toplu Silme doğrudan bağlantı" translate="no">​</a></h4>
-<p>Toplu mesaj çöp kutusu işlemleri için nonce korumalı yeni <code>MessageDeleteHandler</code> admin-post handler. WP'nin gönderi durumu yönetiminden yararlanmak için REST katmanı dışında çalışır.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="neden-react">Neden React?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.41.0-release#neden-react" class="hash-link" aria-label="Neden React? doğrudan bağlantı" title="Neden React? doğrudan bağlantı" translate="no">​</a></h2>
-<p>Eski WP_List_Table implementasyonu her filtre değişikliği, toplu işlem veya thread görünümü için tam bir PHP sayfa yenilemesi gerektiriyordu. 300 ms debounce arama ve paralel REST güncellemeleriyle yeni SPA anlık hissettiriyor.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>messages</category>
-            <category>react</category>
-            <category>spa</category>
         </item>
     </channel>
 </rss>
