@@ -2,11 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-23T12:00:00.000Z</updated>
+    <updated>2026-06-29T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.61.0 — Komisyon Dökümlü Bayi Hakediş Makbuzları]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release"/>
+        <updated>2026-06-29T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Bir bayi ödemesini onayladığınızda Rentiva artık döneme ait yazdırılabilir, sıra numaralı bir ödeme makbuzu oluşturuyor — hakedişler, her birinden kesilen platform komisyonu, cezalar ve ödenen net tutar — değiştirilemez bir kayıt olarak dondurulup bayiye e-postayla gönderiliyor. Bu sürüm ayrıca başvuru formuna bayi sözleşmesi onayı, operatör ve bayi araçlarını ayıran bir "Ekleyen" sütunu ve Aylık Rezervasyon Takvimi'nde tek tıkla gün bloklama ekliyor.]]></summary>
+        <content type="html"><![CDATA[<p>Bir bayi ödemesini onayladığınızda Rentiva artık döneme ait yazdırılabilir, sıra numaralı bir ödeme makbuzu oluşturuyor — hakedişler, her birinden kesilen platform komisyonu, cezalar ve ödenen net tutar — değiştirilemez bir kayıt olarak dondurulup bayiye e-postayla gönderiliyor. Bu sürüm ayrıca başvuru formuna bayi sözleşmesi onayı, operatör ve bayi araçlarını ayıran bir "Ekleyen" sütunu ve Aylık Rezervasyon Takvimi'nde tek tıkla gün bloklama ekliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-hakediş-makbuzları">Bayi Hakediş Makbuzları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#bayi-hakedi%C5%9F-makbuzlar%C4%B1" class="hash-link" aria-label="Bayi Hakediş Makbuzları doğrudan bağlantı" title="Bayi Hakediş Makbuzları doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Onayda numaralı, yazdırılabilir makbuzlar.</strong> Bir bayi ödemesini onaylamak, kapsanan döneme ait bir ödeme makbuzu oluşturur — hakedişler, cezalar ve net tutar — sıra numaralı ve onay anında değiştirilemez bir anlık görüntü olarak dondurulmuş. Bayi, panelinden görüntüleyip yazdırabileceği bir bağlantıyı e-postayla alır. Yöneticiler makbuz numarasını ve görüntüleme bağlantısını Ödeme Talepleri listesinde, bayiler ise ödeme geçmişlerinde görür.</li>
+<li class=""><strong>Komisyon dökümü.</strong> Makbuzdaki her hakediş satırı <strong>Brüt</strong> tutarı, <strong>Komisyon</strong>u (oranı ve tutarı) ve bayinin aldığı <strong>Net</strong> tutarı gösterir; ayrıca döneme ait <strong>"Toplam komisyon kesintisi"</strong> toplamı eklenir. Bu sürümden önce oluşturulmuş makbuzlar yalnızca net tutarı gösterir — mevcut kayıtlar asla yeniden yazılmaz.</li>
+<li class=""><strong>Makbuz markalama.</strong> Firma kimliğiniz — ad, adres, vergi dairesi ve numarası, telefon, e-posta ve logo — ve özel bir dipnot makbuzda yer alır. Bunlar yeni makbuz markalama ayarlarından yapılandırılır ve makbuz görüntülendiğinde uygulanır.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-pazaryeri">Bayi Pazaryeri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#bayi-pazaryeri" class="hash-link" aria-label="Bayi Pazaryeri doğrudan bağlantı" title="Bayi Pazaryeri doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Bayi sözleşmesi onayı.</strong> Başvuru formunda adayların bir bayi sözleşmesini okuyup kabul etmesini zorunlu kılabilirsiniz. Kabul, zaman damgasıyla birlikte saklanır ve başvuru detayında gösterilir. Aç/kapa ve sözleşme metni bayi ayarlarında yer alır.</li>
+<li class=""><strong>Araçlar için "Ekleyen" sütunu.</strong> Yönetici araç listesi artık her aracı kimin eklediğini — bayi mi operatör mü — gösterir ve filtreler; böylece ikisi kolayca ayırt edilir.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="takvim">Takvim<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#takvim" class="hash-link" aria-label="Takvim doğrudan bağlantı" title="Takvim doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Hızlı gün bloklama.</strong> Aylık Rezervasyon Takvimi'nde boş bir güne tıklayarak rezervasyona kapatın, kapalı bir güne tıklayarak yeniden açın — araç düzenlemeye gerek yok. Rezervasyonlu günler değişmez ve popup'larını korur.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">Bir bayi yayındaki bir ilanın kritik alanlarını düzenlediğinde, ilan artık incelenmemiş değişikliklerle yayında kalmak yerine yönetici yeniden incelemesine alınmak üzere yayından kaldırılıyor.</li>
+<li class="">Yönetici artık bir bayinin ilini düzenleyebilir ve bayinin ili panel genelinde kanonik alandan okunur.</li>
+<li class="">Pasif rezervasyonlar için artık rezervasyon hatırlatma e-postası gönderilmez.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
+<p>Tam suite <strong>1.331 test / 4.021 doğrulama</strong> ile yeşil, 0 başarısızlık, 0 Plugin Check hatası. Regresyon yok.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="payouts" term="payouts"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.60.0 — Olgunlaşmış Ödeme Düzeltmesi + Ölü SaaS İskelet Kaldırma]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release</id>
@@ -601,33 +641,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="vendor" term="vendor"/>
         <category label="commission" term="commission"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.42.0 — Ödeme Talepleri sayfası + admin temizliği]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release"/>
-        <updated>2026-05-11T11:58:00.000Z</updated>
-        <summary type="html"><![CDATA[Ödeme Talepleri admin sayfasını ekliyor, bayi ile ilgili menüleri kenar çubuğunun altında gruplandırıyor ve Lisans ile Kurulum Sihirbazı admin sayfalarında PHP temizliği yapıyor.]]></summary>
-        <content type="html"><![CDATA[<p>Ödeme Talepleri admin sayfasını ekliyor, bayi ile ilgili menüleri kenar çubuğunun altında gruplandırıyor ve Lisans ile Kurulum Sihirbazı admin sayfalarında PHP temizliği yapıyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-ödeme-talepleri-admin-sayfası">Bayi Ödeme Talepleri Admin Sayfası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release#bayi-%C3%B6deme-talepleri-admin-sayfas%C4%B1" class="hash-link" aria-label="Bayi Ödeme Talepleri Admin Sayfası doğrudan bağlantı" title="Bayi Ödeme Talepleri Admin Sayfası doğrudan bağlantı" translate="no">​</a></h3>
-<p>Menüye yeni bir <strong>Bayi Ödeme Talepleri</strong> admin sayfası eklendi. Bayiler pano üzerinden ödeme talebi oluşturabilir; adminler burada inceler ve onaylar.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="menü-gruplandırması">Menü Gruplandırması<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release#men%C3%BC-grupland%C4%B1rmas%C4%B1" class="hash-link" aria-label="Menü Gruplandırması doğrudan bağlantı" title="Menü Gruplandırması doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bayi ile ilgili admin menüleri — Bayi Yönetimi, Bayi Raporları ve Bayi Ödeme Talepleri — artık priority-15 hook üzerinden <strong>kenar çubuğunun altında</strong> gruplandırılıyor; temel rezervasyon/araç menülerinden görsel olarak ayrışıyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="php-temizliği">PHP Temizliği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release#php-temizli%C4%9Fi" class="hash-link" aria-label="PHP Temizliği doğrudan bağlantı" title="PHP Temizliği doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Lisans admin sayfası:</strong> Son kullanma tarihi satır render'ı ayrı bir metoda çıkarıldı; bildirim pipeline'ından ölü kod kaldırıldı.</li>
-<li class=""><strong>Kurulum Sihirbazı:</strong> Satır içi CSS ve JS ayrı asset dosyalarına çıkarıldı; adım tamamlanma mantığı düzeltildi; kullanılmayan <code>is_payment_ready()</code> metodu kaldırıldı.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n-düzeltmesi">i18n Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.42.0-release#i18n-d%C3%BCzeltmesi" class="hash-link" aria-label="i18n Düzeltmesi doğrudan bağlantı" title="i18n Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
-<p><code>.l10n.php</code> yeniden üretildi; WordPress 6.5+, ikili arama optimizasyonu ile güncel Türkçe çevirileri doğru okuyor.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="ui" term="ui"/>
     </entry>
 </feed>

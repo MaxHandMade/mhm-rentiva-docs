@@ -2,11 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-23T12:00:00.000Z</updated>
+    <updated>2026-06-29T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.61.0 — Vendor Payout Statements with Commission Breakdown]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release"/>
+        <updated>2026-06-29T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[When you approve a vendor payout, Rentiva now generates a printable, sequentially-numbered payment statement for the period — earnings, the platform commission deducted from each, penalties, and the net paid — frozen as an immutable record and emailed to the vendor. This release also adds a vendor agreement acceptance gate on the application form, an "Added by" column that distinguishes operator and vendor vehicles, and one-click day blocking in the Monthly Reservation Calendar.]]></summary>
+        <content type="html"><![CDATA[<p>When you approve a vendor payout, Rentiva now generates a printable, sequentially-numbered payment statement for the period — earnings, the platform commission deducted from each, penalties, and the net paid — frozen as an immutable record and emailed to the vendor. This release also adds a vendor agreement acceptance gate on the application form, an "Added by" column that distinguishes operator and vendor vehicles, and one-click day blocking in the Monthly Reservation Calendar.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-payout-statements">Vendor Payout Statements<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#vendor-payout-statements" class="hash-link" aria-label="Direct link to Vendor Payout Statements" title="Direct link to Vendor Payout Statements" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Numbered, printable statements on approval.</strong> Approving a vendor payout generates a payment statement for the period covered — earnings, penalties, and net — with a sequential number, frozen as an immutable snapshot at the moment of approval. The vendor receives an email with a link to view and print it from their panel. Admins see the statement number and a view link on the Payout Requests list; vendors find it in their payout history.</li>
+<li class=""><strong>Commission breakdown.</strong> Each earning line on the statement shows <strong>Gross</strong>, the <strong>Commission</strong> (its rate and amount), and the <strong>Net</strong> the vendor received, plus a period <strong>"Total commission deducted"</strong> total. Statements issued before this version show net only — existing records are never rewritten.</li>
+<li class=""><strong>Statement branding.</strong> Your company identity — name, address, tax office and number, phone, email, and logo — and a custom footer note appear on the statement. These are configured under the new statement branding settings and applied when the statement is viewed.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-marketplace">Vendor Marketplace<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#vendor-marketplace" class="hash-link" aria-label="Direct link to Vendor Marketplace" title="Direct link to Vendor Marketplace" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Vendor agreement gate.</strong> You can require applicants to read and accept a vendor agreement on the application form. The acceptance, with a timestamp, is stored and shown on the application detail. The toggle and the agreement text live in the vendor settings.</li>
+<li class=""><strong>"Added by" column for vehicles.</strong> The admin vehicle list now shows and filters who added each vehicle — vendor or operator — so the two are easy to tell apart.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="calendar">Calendar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#calendar" class="hash-link" aria-label="Direct link to Calendar" title="Direct link to Calendar" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Quick day block.</strong> Click an empty day in the Monthly Reservation Calendar to close it for reservations, and click a blocked day to re-open it — no vehicle-edit detour needed. Booked days are unchanged and keep their reservation popup.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">When a vendor edits critical fields of a live listing, the listing is now unpublished for admin re-review instead of staying live with unreviewed changes.</li>
+<li class="">An admin can now edit a vendor's city, and the vendor's city is read from the canonical field across the panel.</li>
+<li class="">Booking reminder emails are no longer sent for inactive bookings.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
+<p>The full suite is green at <strong>1,331 tests / 4,021 assertions</strong>, 0 failures, with 0 Plugin Check errors. No regression.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="payouts" term="payouts"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.60.0 — Matured Payout Fix + Dead SaaS Scaffolding Removal]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release</id>
@@ -601,33 +641,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="vendor" term="vendor"/>
         <category label="commission" term="commission"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.42.0 — Payout Requests page + admin cleanup]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release"/>
-        <updated>2026-05-11T11:58:00.000Z</updated>
-        <summary type="html"><![CDATA[Adds the Payout Requests admin page, groups vendor-related menus at the sidebar bottom, and includes a round of PHP cleanup across the License and Setup Wizard admin pages.]]></summary>
-        <content type="html"><![CDATA[<p>Adds the Payout Requests admin page, groups vendor-related menus at the sidebar bottom, and includes a round of PHP cleanup across the License and Setup Wizard admin pages.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="payout-requests-admin-page">Payout Requests Admin Page<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release#payout-requests-admin-page" class="hash-link" aria-label="Direct link to Payout Requests Admin Page" title="Direct link to Payout Requests Admin Page" translate="no">​</a></h3>
-<p>A new <strong>Bayi Ödeme Talepleri</strong> (Vendor Payout Requests) admin page is now registered in the menu. Vendors can submit payout requests from their dashboard; admins review and approve them here.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="menu-grouping">Menu Grouping<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release#menu-grouping" class="hash-link" aria-label="Direct link to Menu Grouping" title="Direct link to Menu Grouping" translate="no">​</a></h3>
-<p>Vendor-related admin menus — Vendor Management, Vendor Reports, and Payout Requests — are now grouped at the <strong>bottom of the sidebar</strong> via a priority-15 hook, keeping them visually separated from core booking/vehicle menus.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="php-cleanup">PHP Cleanup<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release#php-cleanup" class="hash-link" aria-label="Direct link to PHP Cleanup" title="Direct link to PHP Cleanup" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>License admin page:</strong> Extracted expiry row rendering into a dedicated method; removed dead code from the notice pipeline.</li>
-<li class=""><strong>Setup Wizard:</strong> Extracted inline CSS and JS to separate asset files; fixed step completion logic; removed the unused <code>is_payment_ready()</code> method.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n-fix">i18n Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.42.0-release#i18n-fix" class="hash-link" aria-label="Direct link to i18n Fix" title="Direct link to i18n Fix" translate="no">​</a></h3>
-<p>Regenerated <code>.l10n.php</code> so WordPress 6.5+ reads updated Turkish translations correctly via the binary search optimisation.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="ui" term="ui"/>
     </entry>
 </feed>
