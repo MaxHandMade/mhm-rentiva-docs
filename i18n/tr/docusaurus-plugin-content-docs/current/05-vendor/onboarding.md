@@ -51,6 +51,14 @@ Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen b
 - **Vergi Dairesi:** Yeni opsiyonel alan.
 :::
 
+### Bayi Sözleşmesi (v4.61.0)
+
+Adayların, başvuruyu gönderebilmeden önce bir **bayi sözleşmesini** okuyup kabul etmesini zorunlu kılabilirsiniz.
+
+- **Ayarlar → Vendor Marketplace → Bayi Sözleşmesi** altından etkinleştirin; adaylara gösterilecek sözleşme metnini de burada yazarsınız.
+- Etkinleştirildiğinde başvuru formu, sözleşmeyi ve **zorunlu bir onay kutusunu** gösterir — kutu işaretlenmeden form gönderilemez. Aynı zorunluluk **sunucu tarafında** da uygulanır; dolayısıyla form üzerinde oynanarak bu kapı atlatılamaz.
+- Kabul, başvuruda kanıt olarak (bir **zaman damgasıyla**) saklanır ve başvuru detayında gösterilir; böylece kimin ne zaman kabul ettiğine dair kaydınız olur.
+
 ---
 
 ## 🛡️ 2. Uygünlük Kontrolleri (`Eligibility`)
@@ -149,6 +157,7 @@ Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 29.06.2026 | 4.61.0 | Bayi sözleşmesi onayı dokümante edildi: başvuru formunda zorunlu onay kutusu, sunucu tarafı uygulama ve başvuruda zaman damgalı kabul kanıtı. |
 | 01.04.2026 | 4.24.1 | Ücretli ilan kapısı: araç ekleme → taslak → WC ödeme → inceleme bekliyor akışı eklendi. |
 | 28.03.2026 | 4.23.1 | Başvuru formu: Hizmet Alanları ve Araç Sigortası kaldırıldı. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Şehir seçimi SelectWoo'ya dönüştürüldü. Araç sigorta belgesi araç ekleme formuna taşındı. Meta senkronizasyonu güncellendi. |
 | 27.03.2026 | 4.23.0 | Belge yüklemeleri (4 tip), araç ekleme süreci, şehir-filtrelenmiş rota seçimi, rota fiyatlandırma, kapasite alanları, yeniden inceleme mekanizması eklendi. |

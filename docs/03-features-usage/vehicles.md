@@ -17,6 +17,7 @@ Vehicles are the fundamental building blocks of the MHM Rentiva system. **MHM Re
 The vehicle list provides a general overview of your fleet. Use the **"Quick Edit"** option to update plate, price, and availability status without reloading the page.
 
 - **List Columns:** Title, Vehicle Categories, Plate, Daily Price, Seat Count, Transmission, Fuel, and Availability (Active/Passive).
+- **Added by (v4.61.0):** An **"Added by"** column shows who created each vehicle — a **vendor** or the **operator** — and the list can be filtered by it, so vendor-submitted listings and your own fleet are easy to tell apart.
 - **Filtering:** Filter vehicles by category, date, or current status.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
@@ -94,6 +95,15 @@ Use the **Blocked Dates** meta box to prevent a vehicle from being rented on spe
 - **New behavior (v4.23.0):** JS now sends `dates` + `notes` data as a JSON payload. PHP reads from the payload first; if not found, it falls back to the DB.
 - **Relevant files:** `BlockedDatesMetaBox.php`, `assets/js/admin/blocked-dates.js`
 
+### Quick block from the Monthly Reservation Calendar (v4.61.0)
+
+You can also block or open a single day directly from the **Monthly Reservation Calendar**, without opening the vehicle for editing:
+
+- **Click an empty day** to close it for new reservations.
+- **Click a blocked day** to re-open it.
+
+Days that already have a booking are unchanged — they keep their reservation popup and cannot be blocked this way.
+
 ---
 
 ## AssetManager Admin Scope
@@ -111,6 +121,7 @@ As of v4.22.0, `AssetManager::enqueue_admin_assets()` runs only on Rentiva admin
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 29.06.2026 | 4.61.0 | "Added by" (vendor/operator) vehicle-list column and quick day block from the Monthly Reservation Calendar documented. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 28.03.2026 | 4.23.1 | Vehicle insurance document upload section added. City selection converted to SelectWoo. |
 | 27.03.2026 | 4.23.0 | Blocked Dates "Apply to All" fix and AssetManager admin guard documented. |

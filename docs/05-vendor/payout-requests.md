@@ -35,9 +35,44 @@ The system accounts for the following items:
 
 ---
 
+## 📄 Payout Statements (v4.61.0)
+
+When you approve a payout, the system automatically generates a **payment statement** (_hakediş makbuzu_) for the period that payout covers. The statement is **sequentially numbered** (e.g. `MKB-2026-0001`) and frozen as an **immutable record** at the moment of approval — it is never rewritten afterwards, so it always reflects the figures as they were when the vendor was paid.
+
+The statement lists every ledger movement in the period — earnings and any penalties — with the period totals and the amount paid. The vendor automatically receives an **email** with a link to view and print it from their panel.
+
+### Where to find it
+
+- **Admin:** the statement number and a **View** link appear on the **All Payout Requests** list, next to the approved payout.
+- **Vendor:** the statement appears in the vendor's payout history, and the email links straight to it (opened from inside the vendor's own session in the panel).
+
+### Commission breakdown
+
+Each earning line on the statement shows the full split, so the vendor sees exactly how their net was calculated:
+
+| Column | Meaning |
+| :--- | :--- |
+| **Gross** | The total booking amount before commission. |
+| **Commission** | The platform's rate and the amount deducted (e.g. `%20 · 400.00`). |
+| **Net** | What the vendor actually earned (Gross − Commission). |
+
+A period **"Total commission deducted"** row sums the commission across all earnings in the statement. Penalty and refund lines show "—" for Gross/Commission (they carry no commission). Statements issued **before v4.61.0** were not captured with this detail and show the net only.
+
+### Statement branding
+
+The statement carries your company identity. Under **Settings → Vendor Marketplace → Statement Branding** you can set:
+
+- Company name, address, tax office and tax number, phone, and email
+- A company **logo**
+- A custom **footer note** (e.g. a legal disclaimer)
+
+Branding is applied **when the statement is viewed**, so updating these settings is reflected on every statement immediately — including ones already issued.
+
+---
+
 ## 🛠️ Technical Infrastructure
 
-All earnings logs are stored atomically in the `mhm_rentiva_vendor_transactions` table. When a booking is cancelled, it is reflected as a debit on the vendor's account.
+All earnings logs are stored atomically in the `mhm_rentiva_vendor_transactions` table. When a booking is cancelled, it is reflected as a debit on the vendor's account. Statements are stored as an immutable snapshot on the approved payout record and rendered on demand.
 
 ---
 
@@ -49,5 +84,6 @@ All earnings logs are stored atomically in the `mhm_rentiva_vendor_transactions`
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 29.06.2026 | 4.61.0 | Payout statements (numbered, printable), commission breakdown, and statement branding documented. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 18.03.2026 | 4.21.2 | New document created. |
