@@ -2,11 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-29T12:00:00.000Z</updated>
+    <updated>2026-06-30T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.0 — Lite Downgrade Catalog Overflow Enforcement]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release"/>
+        <updated>2026-06-30T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.]]></summary>
+        <content type="html"><![CDATA[<p>When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lite-limit-enforcement-on-downgrade">Lite Limit Enforcement on Downgrade<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#lite-limit-enforcement-on-downgrade" class="hash-link" aria-label="Direct link to Lite Limit Enforcement on Downgrade" title="Direct link to Lite Limit Enforcement on Downgrade" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Over-limit items hidden, not deleted.</strong> Catalog items added during Pro (vehicles, add-on services, transfer routes) that exceed the Lite limit are hidden from the public site when a license expires. Data is preserved in full and restored automatically when you upgrade to Pro again.</li>
+<li class=""><strong>"Lite limit — hidden" badge in admin lists.</strong> Admin vehicle, add-on service, and transfer route lists mark each over-limit item with a clear badge so you can see at a glance which items are currently hidden from visitors.</li>
+<li class=""><strong>Vehicle limit notice shows hidden count.</strong> The vehicle limit notice in the admin dashboard now indicates how many vehicles are currently hidden due to the Lite limit, in addition to the total count.</li>
+<li class=""><strong>Hidden vehicles cannot be booked.</strong> Over-limit vehicles that are hidden from the public site can no longer be booked via the front end. Existing confirmed bookings for those vehicles are unaffected.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">The <strong>Vendor Payout Requests</strong> admin menu item no longer appears when running the Lite version of the plugin.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="lite" term="lite"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.61.0 — Vendor Payout Statements with Commission Breakdown]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release</id>
@@ -607,39 +634,5 @@
         <category label="admin" term="admin"/>
         <category label="ui" term="ui"/>
         <category label="hotfix" term="hotfix"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.43.0 — Vendor Unsuspend + Commission History]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release"/>
-        <updated>2026-05-11T12:21:00.000Z</updated>
-        <summary type="html"><![CDATA[Two additions to Vendor Management: a one-click Unsuspend action for suspended vendors, and a Rate History table in the Commission tab showing the full audit trail of platform-wide commission policies.]]></summary>
-        <content type="html"><![CDATA[<p>Two additions to Vendor Management: a one-click Unsuspend action for suspended vendors, and a Rate History table in the Commission tab showing the full audit trail of platform-wide commission policies.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-unsuspend-action">Vendor Unsuspend Action<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release#vendor-unsuspend-action" class="hash-link" aria-label="Direct link to Vendor Unsuspend Action" title="Direct link to Vendor Unsuspend Action" translate="no">​</a></h3>
-<p>Admins can now <strong>unsuspend a vendor directly</strong> from the Vendor Management admin page — no need to navigate to the user profile. When a vendor is unsuspended:</p>
-<ol>
-<li class="">The <code>rentiva_vendor</code> role is restored.</li>
-<li class="">Vehicles that were moved to <em>Pending Review</em> at suspension time are re-published.</li>
-<li class="">The action is logged in the commission audit trail.</li>
-</ol>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="commission-rate-history">Commission Rate History<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release#commission-rate-history" class="hash-link" aria-label="Direct link to Commission Rate History" title="Direct link to Commission Rate History" translate="no">​</a></h3>
-<p>The Commission tab now displays a <strong>Rate History table</strong> showing all historical platform-wide commission policies in reverse chronological order. Each entry records:</p>
-<ul>
-<li class="">Effective date</li>
-<li class="">Rate (%)</li>
-<li class="">Admin-supplied label (e.g. "Q1 2026 standard rate")</li>
-</ul>
-<p>The history is append-only — rates are never deleted or overwritten.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="menu-grouping-update">Menu Grouping Update<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.43.0-release#menu-grouping-update" class="hash-link" aria-label="Direct link to Menu Grouping Update" title="Direct link to Menu Grouping Update" translate="no">​</a></h3>
-<p>Vendor menus (Vendor Management, Vendor Reports, Payout Requests) now consistently appear at the bottom of the admin sidebar via a <code>priority-15</code> hook across all contexts.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="commission" term="commission"/>
     </entry>
 </feed>

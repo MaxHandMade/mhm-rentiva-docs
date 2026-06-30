@@ -2,11 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-29T12:00:00.000Z</updated>
+    <updated>2026-06-30T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.0 — Lite Sürümünde Downgrade Sonrası Katalog Taşma Yaptırımı]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release"/>
+        <updated>2026-06-30T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.]]></summary>
+        <content type="html"><![CDATA[<p>Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lisans-bitince-lite-limit-yaptırımı">Lisans Bitince Lite Limit Yaptırımı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#lisans-bitince-lite-limit-yapt%C4%B1r%C4%B1m%C4%B1" class="hash-link" aria-label="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" title="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Limit üstü öğeler gizlenir, silinmez.</strong> Pro döneminde eklenen ve Lite limitini aşan katalog içerikleri (araçlar, ek hizmetler, transfer rotaları) lisans süresi dolduğunda herkese açık sitede gizlenir. Veriler eksiksiz korunur ve tekrar Pro'ya geçince otomatik olarak geri gelir.</li>
+<li class=""><strong>Yönetim listelerinde "Lite limiti — gizli" rozeti.</strong> Yönetici araç, ek hizmet ve transfer rotası listeleri, limit üstü her öğeyi açık bir rozetle işaretler; böylece hangi öğelerin ziyaretçilerden gizlendiğini tek bakışta görebilirsiniz.</li>
+<li class=""><strong>Araç limit uyarısı gizlenen sayısını gösterir.</strong> Yönetici panelindeki araç limit uyarısı artık toplam sayıya ek olarak Lite limiti nedeniyle kaç aracın gizlendiğini de belirtir.</li>
+<li class=""><strong>Gizli araçlar rezervasyon alamaz.</strong> Herkese açık siteden gizlenen limit üstü araçlar artık ön yüzden rezervasyon yapılarak kullanılamaz. Bu araçlar için daha önce alınmış onaylı rezervasyonlar etkilenmez.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bayi Ödeme Talepleri</strong> yönetim menüsü artık eklentinin Lite sürümünde görünmüyor.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="lite" term="lite"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.61.0 — Komisyon Dökümlü Bayi Hakediş Makbuzları]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release</id>
@@ -607,39 +634,5 @@
         <category label="admin" term="admin"/>
         <category label="ui" term="ui"/>
         <category label="hotfix" term="hotfix"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.43.0 — Bayi Askıya Alma İptali + Komisyon Geçmişi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release"/>
-        <updated>2026-05-11T12:21:00.000Z</updated>
-        <summary type="html"><![CDATA[Bayi Yönetimi'ne iki ekleme: askıya alınmış bayiler için tek tıkla Askıyı İptal Et eylemi ve platform genelindeki komisyon politikalarının tam denetim izini gösteren Oran Geçmişi tablosu.]]></summary>
-        <content type="html"><![CDATA[<p>Bayi Yönetimi'ne iki ekleme: askıya alınmış bayiler için tek tıkla Askıyı İptal Et eylemi ve platform genelindeki komisyon politikalarının tam denetim izini gösteren Oran Geçmişi tablosu.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-askıya-alma-i̇ptali-eylemi">Bayi Askıya Alma İptali Eylemi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release#bayi-ask%C4%B1ya-alma-i%CC%87ptali-eylemi" class="hash-link" aria-label="Bayi Askıya Alma İptali Eylemi doğrudan bağlantı" title="Bayi Askıya Alma İptali Eylemi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Adminler artık kullanıcı profiline gitmeden <strong>Bayi Yönetimi admin sayfasından doğrudan bayi askısını kaldırabilir</strong>. Bir bayinin askısı kaldırıldığında:</p>
-<ol>
-<li class=""><code>rentiva_vendor</code> rolü geri yüklenir.</li>
-<li class="">Askıya alma sırasında <em>İnceleme Bekliyor</em> durumuna alınan araçlar yeniden yayınlanır.</li>
-<li class="">Eylem, komisyon denetim kaydına işlenir.</li>
-</ol>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="komisyon-oranı-geçmişi">Komisyon Oranı Geçmişi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release#komisyon-oran%C4%B1-ge%C3%A7mi%C5%9Fi" class="hash-link" aria-label="Komisyon Oranı Geçmişi doğrudan bağlantı" title="Komisyon Oranı Geçmişi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Komisyon tab'ı artık tüm geçmiş platform geneli komisyon politikalarını ters kronolojik sırada gösteren bir <strong>Oran Geçmişi tablosu</strong> içeriyor. Her giriş şunları kaydeder:</p>
-<ul>
-<li class="">Geçerlilik tarihi</li>
-<li class="">Oran (%)</li>
-<li class="">Admin tarafından girilen etiket (örn. "Q1 2026 standart oran")</li>
-</ul>
-<p>Geçmiş yalnızca ekleme yapılabilir — oranlar hiçbir zaman silinmez veya üzerine yazılmaz.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="menü-gruplandırması-güncellemesi">Menü Gruplandırması Güncellemesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.43.0-release#men%C3%BC-grupland%C4%B1rmas%C4%B1-g%C3%BCncellemesi" class="hash-link" aria-label="Menü Gruplandırması Güncellemesi doğrudan bağlantı" title="Menü Gruplandırması Güncellemesi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bayi menüleri (Bayi Yönetimi, Bayi Raporları, Bayi Ödeme Talepleri) artık tüm bağlamlarda <code>priority-15</code> hook üzerinden admin kenar çubuğunun altında tutarlı biçimde görünüyor.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="commission" term="commission"/>
     </entry>
 </feed>
