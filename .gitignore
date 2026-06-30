@@ -32,3 +32,6 @@ build_log.txt
 build_output.log
 build_log_fixed.txt
 *.m4a
+
+# Sunum / YouTube prodüksiyon materyalleri (lokal kalır, public docs reposuna girmez)
+presentations/
