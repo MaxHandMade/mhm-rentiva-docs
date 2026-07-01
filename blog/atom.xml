@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-01T12:00:00.000Z</updated>
+    <updated>2026-07-01T13:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.2 — Lite Vehicle-Limit Counter Hardening]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release"/>
+        <updated>2026-07-01T13:00:00.000Z</updated>
+        <summary type="html"><![CDATA[An internal hardening patch ensuring the Lite vehicle-limit counter reflects the true vehicle count independently of the public overflow-hiding filter.]]></summary>
+        <content type="html"><![CDATA[<p>An internal hardening patch ensuring the Lite vehicle-limit counter reflects the true vehicle count independently of the public overflow-hiding filter.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hardening">Hardening<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release#hardening" class="hash-link" aria-label="Direct link to Hardening" title="Direct link to Hardening" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Hardening: the Lite vehicle-limit counter now reflects the true vehicle count independently of the public overflow-hiding filter (internal robustness; enforced limits unchanged).</strong></li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="lite" term="lite"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Route Limit Counter Fix]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release</id>
@@ -595,35 +614,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="frontend" term="frontend"/>
         <category label="css" term="css"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.45.0 — Admin UI polish: grids, labels, buttons]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release"/>
-        <updated>2026-05-11T14:35:00.000Z</updated>
-        <summary type="html"><![CDATA[A round of admin interface refinements: KPI stat card grid layout, developer mode banner placement, human-readable location type labels, and styled action links across Locations and Routes tables.]]></summary>
-        <content type="html"><![CDATA[<p>A round of admin interface refinements: KPI stat card grid layout, developer mode banner placement, human-readable location type labels, and styled action links across Locations and Routes tables.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kpi-stat-cards--grid-fix">KPI Stat Cards — Grid Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release#kpi-stat-cards--grid-fix" class="hash-link" aria-label="Direct link to KPI Stat Cards — Grid Fix" title="Direct link to KPI Stat Cards — Grid Fix" translate="no">​</a></h3>
-<p>KPI stat cards now always render <strong>4 per row</strong> on wide screens. The minimum column width was reduced from 250 px to 200 px so four cards fit side-by-side without wrapping at standard admin viewport widths.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="developer-mode-banner-placement">Developer Mode Banner Placement<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release#developer-mode-banner-placement" class="hash-link" aria-label="Direct link to Developer Mode Banner Placement" title="Direct link to Developer Mode Banner Placement" translate="no">​</a></h3>
-<p>On the Bookings and Vehicles admin list pages, the developer mode warning banner now appears <strong>above KPI cards</strong> — previously it was below, making it easy to miss.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="human-readable-location-type-labels">Human-Readable Location Type Labels<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release#human-readable-location-type-labels" class="hash-link" aria-label="Direct link to Human-Readable Location Type Labels" title="Direct link to Human-Readable Location Type Labels" translate="no">​</a></h3>
-<p>The Locations and Transfer Routes tables now display readable labels instead of raw database enum values:</p>
-<ul>
-<li class=""><code>City_center</code> → <strong>City Center</strong></li>
-<li class=""><code>Airport</code> → <strong>Airport</strong></li>
-<li class=""><code>Hotel</code> → <strong>Hotel</strong></li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="action-links-styled-as-wp-buttons">Action Links Styled as WP Buttons<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.45.0-release#action-links-styled-as-wp-buttons" class="hash-link" aria-label="Direct link to Action Links Styled as WP Buttons" title="Direct link to Action Links Styled as WP Buttons" translate="no">​</a></h3>
-<p>Edit and Delete action links in the Locations and Routes tables are now rendered as standard WordPress admin buttons (<code>.button</code>, <code>.button-small</code>), consistent with other list table actions.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="ui" term="ui"/>
     </entry>
 </feed>

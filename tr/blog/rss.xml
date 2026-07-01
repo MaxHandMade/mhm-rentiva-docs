@@ -4,10 +4,25 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 01 Jul 2026 12:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 01 Jul 2026 13:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.62.2 — Lite Araç-Limiti Sayaç Sağlamlaştırması]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release</guid>
+            <pubDate>Wed, 01 Jul 2026 13:00:00 GMT</pubDate>
+            <description><![CDATA[Lite araç-limiti sayacının herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtmasını sağlayan bir iç sağlamlaştırma yaması.]]></description>
+            <content:encoded><![CDATA[<p>Lite araç-limiti sayacının herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtmasını sağlayan bir iç sağlamlaştırma yaması.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sağlamlaştırma">Sağlamlaştırma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release#sa%C4%9Flamla%C5%9Ft%C4%B1rma" class="hash-link" aria-label="Sağlamlaştırma doğrudan bağlantı" title="Sağlamlaştırma doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Sağlamlaştırma: Lite araç-limiti sayacı artık herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtıyor (iç sağlamlık; uygulanan limitler değişmedi).</strong></li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>lite</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Rota Limiti Sayaç Düzeltmesi]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release</link>
@@ -520,32 +535,6 @@
             <category>rentiva</category>
             <category>frontend</category>
             <category>css</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.45.0 — Admin UI cilası: kılavuzlar, etiketler, butonlar]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release</guid>
-            <pubDate>Mon, 11 May 2026 14:35:00 GMT</pubDate>
-            <description><![CDATA[Admin arayüzü iyileştirmeleri: KPI stat kart kılavuz düzeni, geliştirici modu banner konumu, okunabilir konum tipi etiketleri ve Konumlar ile Güzergahlar tablolarında stillendirilmiş eylem linkleri.]]></description>
-            <content:encoded><![CDATA[<p>Admin arayüzü iyileştirmeleri: KPI stat kart kılavuz düzeni, geliştirici modu banner konumu, okunabilir konum tipi etiketleri ve Konumlar ile Güzergahlar tablolarında stillendirilmiş eylem linkleri.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kpi-stat-kartları--kılavuz-düzeltmesi">KPI Stat Kartları — Kılavuz Düzeltmesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release#kpi-stat-kartlar%C4%B1--k%C4%B1lavuz-d%C3%BCzeltmesi" class="hash-link" aria-label="KPI Stat Kartları — Kılavuz Düzeltmesi doğrudan bağlantı" title="KPI Stat Kartları — Kılavuz Düzeltmesi doğrudan bağlantı" translate="no">​</a></h3>
-<p>KPI stat kartları artık geniş ekranlarda her zaman <strong>satır başına 4</strong> render ediliyor. Minimum sütun genişliği 250 piksel'den 200 piksel'e indirildi; standart admin viewport genişliklerinde dört kart yana yana sığıyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="geliştirici-modu-banner-konumu">Geliştirici Modu Banner Konumu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release#geli%C5%9Ftirici-modu-banner-konumu" class="hash-link" aria-label="Geliştirici Modu Banner Konumu doğrudan bağlantı" title="Geliştirici Modu Banner Konumu doğrudan bağlantı" translate="no">​</a></h3>
-<p>Rezervasyonlar ve Araçlar admin liste sayfalarında, geliştirici modu uyarı banner'ı artık <strong>KPI kartlarının üzerinde</strong> görünüyor — önceden altındaydı ve gözden kaçmak kolaylaşıyordu.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="okunabilir-konum-tipi-etiketleri">Okunabilir Konum Tipi Etiketleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release#okunabilir-konum-tipi-etiketleri" class="hash-link" aria-label="Okunabilir Konum Tipi Etiketleri doğrudan bağlantı" title="Okunabilir Konum Tipi Etiketleri doğrudan bağlantı" translate="no">​</a></h3>
-<p>Konumlar ve Transfer Güzergahları tabloları artık ham veritabanı enum değerleri yerine okunabilir etiketler gösteriyor:</p>
-<ul>
-<li class=""><code>City_center</code> → <strong>Şehir Merkezi</strong></li>
-<li class=""><code>Airport</code> → <strong>Havalimanı</strong></li>
-<li class=""><code>Hotel</code> → <strong>Otel</strong></li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wp-butonu-olarak-stillendirilmiş-eylem-linkleri">WP Butonu Olarak Stillendirilmiş Eylem Linkleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.45.0-release#wp-butonu-olarak-stillendirilmi%C5%9F-eylem-linkleri" class="hash-link" aria-label="WP Butonu Olarak Stillendirilmiş Eylem Linkleri doğrudan bağlantı" title="WP Butonu Olarak Stillendirilmiş Eylem Linkleri doğrudan bağlantı" translate="no">​</a></h3>
-<p>Konumlar ve Güzergahlar tablolarındaki Düzenle ve Sil eylem linkleri artık diğer liste tablo eylemleriyle tutarlı, standart WordPress admin butonları (<code>.button</code>, <code>.button-small</code>) olarak render ediliyor.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>admin</category>
-            <category>ui</category>
         </item>
     </channel>
 </rss>
