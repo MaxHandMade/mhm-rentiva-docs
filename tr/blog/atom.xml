@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-30T12:00:00.000Z</updated>
+    <updated>2026-07-01T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Rota Limiti Sayaç Düzeltmesi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release"/>
+        <updated>2026-07-01T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.]]></summary>
+        <content type="html"><![CDATA[<p>Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Düzeltme: Lite VIP transfer rota limiti artık rotaları doğru sayıyor.</strong> Güncel rota tablosunu kullanan kurulumlarda limit uyarısı "0 kullanıldı" gösteriyor ve sayaç yanlış (eski) veritabanı tablosunu okuduğu için Lite limitinin üstünde yeni rota eklenebiliyordu.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="lite" term="lite"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.62.0 — Lite Sürümünde Downgrade Sonrası Katalog Taşma Yaptırımı]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release</id>
@@ -606,33 +625,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="admin" term="admin"/>
         <category label="ui" term="ui"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.44.0 — Admin UI cilası + hata düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.44.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.44.0-release"/>
-        <updated>2026-05-11T13:06:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.40.0–v4.43.0 React geçiş zincirinin QA sürecinde tespit edilen üç görsel tutarsızlık ve bir veri hatasını gideren bir cila ve düzeltme sürümü.]]></summary>
-        <content type="html"><![CDATA[<p>v4.40.0–v4.43.0 React geçiş zincirinin QA sürecinde tespit edilen üç görsel tutarsızlık ve bir veri hatasını gideren bir cila ve düzeltme sürümü.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.44.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hata-düzeltmeleri">Hata Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.44.0-release#hata-d%C3%BCzeltmeleri" class="hash-link" aria-label="Hata Düzeltmeleri doğrudan bağlantı" title="Hata Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Hakkında sayfasında müşteri sayısının 0 görünmesi</strong> — Hakkında sayfası müşterileri saymak için yanlış user meta anahtarını okuyordu. Artık doğru anahtar okunuyor; müşteri sayısı doğru görüntüleniyor.</li>
-<li class=""><strong>Bayi Yönetimi'nde yinelenen tab butonları</strong> — Bir kayıt sırası sorunu, tab navigasyon butonlarını iki kez render ediyordu. Tab kayıt hook'u tekil hale getirilerek düzeltildi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arayüz-i̇yileştirmeleri">Arayüz İyileştirmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.44.0-release#aray%C3%BCz-i%CC%87yile%C5%9Ftirmeleri" class="hash-link" aria-label="Arayüz İyileştirmeleri doğrudan bağlantı" title="Arayüz İyileştirmeleri doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Bayi Raporları sayfa başlığı</strong> — diğer admin sayfalarıyla tutarlı, görünür bir <code>&lt;h1&gt;</code> sayfa başlığı eklendi.</li>
-<li class=""><strong>Kısa Kod Sayfaları KPI stat kartları</strong> — eski düz kart stilinden v4.36.0'da tanıtılan degrade Dashboard stili kartlara yükseltildi; tüm admin sayfalarında görsel dili birleştirdi.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="ui" term="ui"/>
-        <category label="hotfix" term="hotfix"/>
     </entry>
 </feed>

@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-06-30T12:00:00.000Z</updated>
+    <updated>2026-07-01T12:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Route Limit Counter Fix]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release"/>
+        <updated>2026-07-01T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.]]></summary>
+        <content type="html"><![CDATA[<p>A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Fix: the Lite VIP transfer route limit now counts routes correctly.</strong> On installs using the current routes table, the limit notice showed "0 used" and new routes could still be created past the Lite limit because the counter read the wrong (legacy) database table.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="lite" term="lite"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.62.0 — Lite Downgrade Catalog Overflow Enforcement]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release</id>
@@ -606,33 +625,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="admin" term="admin"/>
         <category label="ui" term="ui"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.44.0 — Admin UI polish + bug fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.44.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.44.0-release"/>
-        <updated>2026-05-11T13:06:00.000Z</updated>
-        <summary type="html"><![CDATA[A polish-and-fix release addressing three visual inconsistencies and one data bug found during QA of the v4.40.0–v4.43.0 React migration chain.]]></summary>
-        <content type="html"><![CDATA[<p>A polish-and-fix release addressing three visual inconsistencies and one data bug found during QA of the v4.40.0–v4.43.0 React migration chain.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.44.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bug-fixes">Bug Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.44.0-release#bug-fixes" class="hash-link" aria-label="Direct link to Bug Fixes" title="Direct link to Bug Fixes" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>About page customer count showing 0</strong> — the About page was reading the wrong user meta key to count customers. Now reads the correct key; customer count displays accurately.</li>
-<li class=""><strong>Duplicate tab buttons in Vendor Management</strong> — a registration-order issue was rendering tab navigation buttons twice. Fixed by deduplicating the tab registration hook.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ui-improvements">UI Improvements<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.44.0-release#ui-improvements" class="hash-link" aria-label="Direct link to UI Improvements" title="Direct link to UI Improvements" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Vendor Reports page heading</strong> — added a visible <code>&lt;h1&gt;</code> page heading consistent with other admin pages.</li>
-<li class=""><strong>Shortcode Pages KPI stat cards</strong> — upgraded from the old flat card style to the gradient Dashboard-style cards introduced in v4.36.0, unifying the visual language across all admin pages.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="ui" term="ui"/>
-        <category label="hotfix" term="hotfix"/>
     </entry>
 </feed>
