@@ -2,11 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-01T13:00:00.000Z</updated>
+    <updated>2026-07-02T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.63.0 — Admin Kalan-Ödeme Linki + Ödeme Türü Etiket Düzeltmesi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release"/>
+        <updated>2026-07-02T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Adminler artık bir rezervasyonun kalan tutarı için ödeme linki oluşturup e-posta ile gönderebiliyor; ayrıca tam-ödeme-zorunlu rezervasyonlar karma sepette artık yanlışlıkla "Depozito" etiketlenmiyor.]]></summary>
+        <content type="html"><![CDATA[<p>Adminler artık bir rezervasyonun kalan tutarı için ödeme linki oluşturup e-posta ile gönderebiliyor; ayrıca tam-ödeme-zorunlu rezervasyonlar karma sepette artık yanlışlıkla "Depozito" etiketlenmiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="özellik">Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release#%C3%B6zellik" class="hash-link" aria-label="Özellik doğrudan bağlantı" title="Özellik doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Adminler artık rezervasyon düzenleme ekranındaki "Mevduat Yönetimi" kutusundan doğrudan kalan tutar için ödeme linki oluşturup tek tıkla müşteriye e-posta gönderebiliyor.</strong> Link ekranda da kopyalanabilir şekilde gösteriliyor (WhatsApp, SMS, telefon için) ve site hesabı olmayan müşteriler için bile çalışıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltme">Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release#d%C3%BCzeltme" class="hash-link" aria-label="Düzeltme doğrudan bağlantı" title="Düzeltme doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Ödemesi tam-ödeme-zorunlu olan rezervasyonlar (ör. depozito desteği olmadan yapılandırılmış bir VIP transfer), karma bir sepette checkout'un sepet-geneli ödeme türü seçicisi "Depozito Ödemesi"ne ayarlandığında artık yanlışlıkla "Depozito" etiketlenmiyor.</strong> Tahsil edilen tutar zaten her zaman doğruydu; sadece iç etiket düzeltildi.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="checkout" term="checkout"/>
+        <category label="admin" term="admin"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.3 — Checkout Depozito Kalan-Tutar Geri Yükleme Düzeltmesi]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.3-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.3-release"/>
+        <updated>2026-07-02T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Checkout'ta ödeme türü seçeneğinin "Tam Ödeme"den "Depozito Ödemesi"ne geri alınması durumunda kalan bakiyenin sıfırda takılı kalmasını düzelten bir yama sürümü.]]></summary>
+        <content type="html"><![CDATA[<p>Checkout'ta ödeme türü seçeneğinin "Tam Ödeme"den "Depozito Ödemesi"ne geri alınması durumunda kalan bakiyenin sıfırda takılı kalmasını düzelten bir yama sürümü.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.3-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Düzeltme: checkout'ta ödeme türü seçeneğinin "Tam Ödeme"den "Depozito Ödemesi"ne geri alınması artık kalan bakiyeyi doğru şekilde geri yüklüyor.</strong> Daha önce, tam ödeme seçeneği kısaca bile seçilmiş olsa (sayfa yüklemesindeki otomatik senkronizasyon dahil), depozitoya geri dönüldüğünde kalan bakiye 0'da kalıyor, kalan tutarın tahsil edilmesi veya takip edilmesi imkansız hale geliyordu.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="checkout" term="checkout"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.62.2 — Lite Araç-Limiti Sayaç Sağlamlaştırması]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release</id>
@@ -557,62 +600,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="mobile" term="mobile"/>
         <category label="responsive" term="responsive"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.47.0 — Kritik düzeltme: Araçlar ve Rezervasyonlar sayfalarında fatal hata]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.47.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.47.0-release"/>
-        <updated>2026-05-11T16:22:00.000Z</updated>
-        <summary type="html"><![CDATA[v4.44.0'da ortaya çıkan, Araçlar ve Rezervasyonlar admin liste sayfalarındaki fatal hata için acil düzeltme. v4.44.0–v4.46.0 sürümündeyseniz hemen güncelleyin.]]></summary>
-        <content type="html"><![CDATA[<p>v4.44.0'da ortaya çıkan, Araçlar ve Rezervasyonlar admin liste sayfalarındaki fatal hata için acil düzeltme. v4.44.0–v4.46.0 sürümündeyseniz hemen güncelleyin.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sorun-neydi">Sorun Neydi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.47.0-release#sorun-neydi" class="hash-link" aria-label="Sorun Neydi doğrudan bağlantı" title="Sorun Neydi doğrudan bağlantı" translate="no">​</a></h2>
-<p><code>add_vehicle_stats_cards()</code> içindeki eksik <code>?&gt;</code> PHP mod kapanış etiketi, fonksiyon kapanış parantezi <code>}</code>'ı <strong>HTML çıktı modu</strong>nda bıraktı. Bu durum, <code>add_monthly_calendar()</code> dahil tüm sonraki sınıf metodlarının PHP fonksiyonları olarak kaydedilmek yerine ham metin olarak çıktılanmasına yol açtı.</p>
-<p><strong>Sonuç:</strong> Araçlar ve Rezervasyonlar admin liste sayfaları yüklemede fatal PHP hatası fırlattı, erişilemez hale geldi.</p>
-<p><strong>Tanıtıldığı sürüm:</strong> v4.44.0 (stat kart refactor'ü).</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltme">Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.47.0-release#d%C3%BCzeltme" class="hash-link" aria-label="Düzeltme doğrudan bağlantı" title="Düzeltme doğrudan bağlantı" translate="no">​</a></h2>
-<p><code>}</code> parantezinden önce <code>?&gt;</code> kapanış etiketi geri yüklendi. <code>VehicleColumns</code> ve <code>BookingColumns</code> içindeki tüm sonraki metodlar artık doğru şekilde kaydediliyor.</p>
-<p>Veritabanı değişikliği yok, migration gerekmiyor. v4.44.0–v4.46.0 için drop-in değişim.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="hotfix" term="hotfix"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.46.0 — Frontend CSS izolasyon stratejisi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release"/>
-        <updated>2026-05-11T15:12:00.000Z</updated>
-        <summary type="html"><![CDATA[Sistematik bir frontend CSS sertleştirme sürümü. 31 frontend shortcode CSS dosyasının tamamı artık aktif temanın tasarım token sistemine dahil oluyor ve blok editörünün shortcode konteynerinden gelen whitespace kalıtımına karşı korunuyor.]]></summary>
-        <content type="html"><![CDATA[<p>Sistematik bir frontend CSS sertleştirme sürümü. 31 frontend shortcode CSS dosyasının tamamı artık aktif temanın tasarım token sistemine dahil oluyor ve blok editörünün shortcode konteynerinden gelen whitespace kalıtımına karşı korunuyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wordpress-önayarlı-token-eşlemesi">WordPress Önayarlı Token Eşlemesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release#wordpress-%C3%B6nayarl%C4%B1-token-e%C5%9Flemesi" class="hash-link" aria-label="WordPress Önayarlı Token Eşlemesi doğrudan bağlantı" title="WordPress Önayarlı Token Eşlemesi doğrudan bağlantı" translate="no">​</a></h3>
-<p>31 frontend CSS dosyasının tamamı artık Rentiva'nın dahili CSS özel özelliklerini WordPress preset token'larına eşleyen bir <code>[class*="rv-"]</code> seçicisi içeriyor:</p>
-<ul>
-<li class=""><code>--mhm-primary</code> → aktif temanın birincil rengi</li>
-<li class=""><code>--mhm-font-base</code> → aktif temanın temel yazı tipi ailesi</li>
-<li class=""><code>--mhm-radius</code> → aktif temanın kenarlık yarıçapı</li>
-<li class=""><code>--mhm-text</code> → aktif temanın metin rengi</li>
-</ul>
-<p>Bu sayede Rentiva kısa kodları, manuel yapılandırma gerektirmeden aktif temanın görsel kimliğini otomatik olarak devralıyor — marketplace temaları için temel bir gereksinim.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="whitespace-sıfırlama">Whitespace Sıfırlama<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release#whitespace-s%C4%B1f%C4%B1rlama" class="hash-link" aria-label="Whitespace Sıfırlama doğrudan bağlantı" title="Whitespace Sıfırlama doğrudan bağlantı" translate="no">​</a></h3>
-<p>31 frontend CSS dosyasının tamamına <code>white-space: normal</code> eklendi. WordPress blok editörü, shortcode'ları <code>white-space: pre-like</code> davranışı uygulayan bir <code>.wp-block-shortcode</code> konteyneriyle sarmalıyor; bu durum Rentiva bileşenlerinde beklenmedik metin kaydırmaya yol açıyordu. Bu sıfırlama, hangi blok teması aktif olursa olsun sorunu ortadan kaldırıyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="eksik-bileşen-sınıfları">Eksik Bileşen Sınıfları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.46.0-release#eksik-bile%C5%9Fen-s%C4%B1n%C4%B1flar%C4%B1" class="hash-link" aria-label="Eksik Bileşen Sınıfları doğrudan bağlantı" title="Eksik Bileşen Sınıfları doğrudan bağlantı" translate="no">​</a></h3>
-<p>Üç shortcode, outermost wrapper'larında token eşleme seçicisinin uygulanması için gerekli <code>mhm-rentiva-*</code> bileşen sınıfından yoksundu:</p>
-<ul>
-<li class=""><code>VehicleRatingForm</code> → <code>mhm-rentiva-rating-form</code></li>
-<li class=""><code>VendorDirectory</code> → <code>mhm-rentiva-vendor-directory</code></li>
-<li class=""><code>MyFavorites</code> → <code>mhm-rentiva-my-favorites</code></li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="frontend" term="frontend"/>
-        <category label="css" term="css"/>
     </entry>
 </feed>

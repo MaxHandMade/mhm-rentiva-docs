@@ -2,11 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-01T13:00:00.000Z</updated>
+    <updated>2026-07-02T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.63.0 — Admin Remaining-Payment Link + Payment-Type Label Fix]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.0-release"/>
+        <updated>2026-07-02T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Admins can now generate and email a payable link for a booking's remaining amount, and full-payment-only bookings no longer get mislabeled "Deposit" in a mixed cart.]]></summary>
+        <content type="html"><![CDATA[<p>Admins can now generate and email a payable link for a booking's remaining amount, and full-payment-only bookings no longer get mislabeled "Deposit" in a mixed cart.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="feature">Feature<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.0-release#feature" class="hash-link" aria-label="Direct link to Feature" title="Direct link to Feature" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Admins can now generate a payable link for a booking's remaining amount directly from the "Deposit Management" box on the booking edit screen, and email it to the customer with one click.</strong> The link is also shown on-screen for copying (WhatsApp, SMS, phone), and works even for customers without a site account.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fix">Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.0-release#fix" class="hash-link" aria-label="Direct link to Fix" title="Direct link to Fix" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bookings whose payment is full-payment-only (e.g. a VIP transfer configured without deposit support) no longer get mislabeled "Deposit" when the checkout's cart-wide payment-type selector is set to "Deposit Payment" for a mixed cart.</strong> The amount charged was always correct; only the internal label is corrected.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="checkout" term="checkout"/>
+        <category label="admin" term="admin"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.62.3 — Checkout Deposit Remaining-Amount Restore Fix]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release"/>
+        <updated>2026-07-02T12:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A patch release fixing a checkout bug where switching the payment-type option from "Full Payment" back to "Deposit Payment" left the remaining balance stuck at zero.]]></summary>
+        <content type="html"><![CDATA[<p>A patch release fixing a checkout bug where switching the payment-type option from "Full Payment" back to "Deposit Payment" left the remaining balance stuck at zero.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Fix: switching the checkout payment-type option from "Full Payment" back to "Deposit Payment" now correctly restores the remaining balance.</strong> Previously, once the full-payment option was selected even briefly (including an automatic page-load sync), the remaining balance stayed at 0 after switching back to a deposit, leaving no way to collect or track the rest of the payment.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="checkout" term="checkout"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.62.2 — Lite Vehicle-Limit Counter Hardening]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release</id>
@@ -557,62 +600,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="mobile" term="mobile"/>
         <category label="responsive" term="responsive"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.47.0 — Critical fix: fatal error on Vehicles and Bookings pages]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.47.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.47.0-release"/>
-        <updated>2026-05-11T16:22:00.000Z</updated>
-        <summary type="html"><![CDATA[Urgent fix for a fatal error on the Vehicles and Bookings admin list pages introduced in v4.44.0. If you're on v4.44.0–v4.46.0, update immediately.]]></summary>
-        <content type="html"><![CDATA[<p>Urgent fix for a fatal error on the Vehicles and Bookings admin list pages introduced in v4.44.0. If you're on v4.44.0–v4.46.0, update immediately.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-wrong">What Was Wrong<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.47.0-release#what-was-wrong" class="hash-link" aria-label="Direct link to What Was Wrong" title="Direct link to What Was Wrong" translate="no">​</a></h2>
-<p>A missing <code>?&gt;</code> PHP mode close tag inside <code>add_vehicle_stats_cards()</code> left the function-closing <code>}</code> brace in <strong>HTML output mode</strong> instead of PHP mode. This caused all subsequent class methods — including <code>add_monthly_calendar()</code> — to be output as raw text rather than registered as PHP functions.</p>
-<p><strong>Result:</strong> The Vehicles and Bookings admin list pages threw a fatal PHP error on load, making them inaccessible.</p>
-<p><strong>Introduced in:</strong> v4.44.0 (stats card refactor).</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fix">Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.47.0-release#fix" class="hash-link" aria-label="Direct link to Fix" title="Direct link to Fix" translate="no">​</a></h2>
-<p>Restored the <code>?&gt;</code> close tag before the <code>}</code> brace. All subsequent methods in <code>VehicleColumns</code> and <code>BookingColumns</code> now register correctly.</p>
-<p>No database changes, no migration needed. Drop-in replacement for v4.44.0–v4.46.0.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="hotfix" term="hotfix"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.46.0 — Frontend CSS isolation strategy]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release"/>
-        <updated>2026-05-11T15:12:00.000Z</updated>
-        <summary type="html"><![CDATA[A systematic frontend CSS hardening release. All 31 frontend shortcode CSS files now participate in the active theme's design token system and are protected against whitespace inheritance from the block editor's shortcode container.]]></summary>
-        <content type="html"><![CDATA[<p>A systematic frontend CSS hardening release. All 31 frontend shortcode CSS files now participate in the active theme's design token system and are protected against whitespace inheritance from the block editor's shortcode container.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="wordpress-preset-token-mapping">WordPress Preset Token Mapping<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release#wordpress-preset-token-mapping" class="hash-link" aria-label="Direct link to WordPress Preset Token Mapping" title="Direct link to WordPress Preset Token Mapping" translate="no">​</a></h3>
-<p>All 31 frontend CSS files now include a <code>[class*="rv-"]</code> selector that maps Rentiva's internal CSS custom properties to WordPress preset tokens:</p>
-<ul>
-<li class=""><code>--mhm-primary</code> → active theme's primary color</li>
-<li class=""><code>--mhm-font-base</code> → active theme's base font family</li>
-<li class=""><code>--mhm-radius</code> → active theme's border radius</li>
-<li class=""><code>--mhm-text</code> → active theme's text color</li>
-</ul>
-<p>This means Rentiva shortcodes automatically inherit the active theme's visual identity without any manual configuration — a key requirement for marketplace themes.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="whitespace-reset">Whitespace Reset<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release#whitespace-reset" class="hash-link" aria-label="Direct link to Whitespace Reset" title="Direct link to Whitespace Reset" translate="no">​</a></h3>
-<p>Added <code>white-space: normal</code> to all 31 frontend CSS files. The WordPress block editor wraps shortcodes in a <code>.wp-block-shortcode</code> container that applies <code>white-space: pre-like</code> behaviour, causing unexpected text wrapping in Rentiva components. This reset eliminates the issue regardless of which block theme is active.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="missing-component-classes">Missing Component Classes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.46.0-release#missing-component-classes" class="hash-link" aria-label="Direct link to Missing Component Classes" title="Direct link to Missing Component Classes" translate="no">​</a></h3>
-<p>Three shortcodes were missing the <code>mhm-rentiva-*</code> component class on their outermost wrapper — required for the token mapping selector to apply:</p>
-<ul>
-<li class=""><code>VehicleRatingForm</code> → <code>mhm-rentiva-rating-form</code></li>
-<li class=""><code>VendorDirectory</code> → <code>mhm-rentiva-vendor-directory</code></li>
-<li class=""><code>MyFavorites</code> → <code>mhm-rentiva-my-favorites</code></li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="frontend" term="frontend"/>
-        <category label="css" term="css"/>
     </entry>
 </feed>
