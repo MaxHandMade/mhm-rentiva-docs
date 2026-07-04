@@ -21,12 +21,20 @@ Rentiva, WordPress için özelleştirilmiş bir **PHPUnit 9.6** altyapısı kull
 
 | Sürüm | Test | Assertion | Atlanmış | Tarih |
 |---|---|---|---|---|
-| **v4.23.0** (guncel) | **567** | **2036** | 4 | 26.03.2026 |
-| v4.22.2 | 562 | 2024 | 4 | 25.03.2026 |
-| v4.22.0 (T8+T9 milestone) | 563 | 2022 | — | 24.03.2026 |
-| v4.21.27+T8 | 517 | 1963 | — | 24.03.2026 |
-| v4.21.27 | 463 | 1901 | — | — |
-| v4.20.0 (ilk kilitli temel) | 268 | 1379 | — | — |
+| **v4.63.0** (güncel) | **1.366** | **4.060** | 26 | 02.07.2026 |
+| v4.60.0 | 1.350 | — | — | 23.06.2026 |
+| v4.58.2 | 1.237 | 3.736 | 15 | 22.05.2026 |
+| v4.58.1 | 1.231 | 3.726 | 15 | 21.05.2026 |
+| v4.58.0 | 1.215 | — | — | 15.05.2026 |
+| v4.39.0 | 1.115 | 3.425 | — | 10.05.2026 |
+| v4.38.2 | 1.070 | 3.332 | 7 | 09.05.2026 |
+| v4.37.0 | 982 | 3.162 | — | 05.05.2026 |
+| v4.27.0 | 728 | — | 6 | 23.04.2026 |
+| v4.26.5 | 720 | 2.601 | 6 | 15.04.2026 |
+| v4.23.0 | 567 | 2.036 | 4 | 26.03.2026 |
+| v4.20.0 (ilk kilitli temel) | 268 | 1.379 | — | — |
+
+> **Atlanan testler hakkında not:** 26 atlanan test, WooCommerce'in PHPUnit test veritabanında yüklenmediği ortamlarda atlanan WooCommerce-bağımlı entegrasyon testleridir (`WP_Ajax_UnitTestCase`) — bilinen bir ortam sınırlaması, bir kusur değil. Bu kod yollarının doğruluğu ayrıca canlı `wp eval` reprodüksiyonu ve tarayıcı smoke testleriyle doğrulanır. Daha önce dokümante edilen `saas_block` env-quota baseline başarısızlıkları artık geçerli değil — o orchestration katmanı v4.60.0'da kaldırıldı.
 
 ---
 
@@ -108,7 +116,7 @@ Test verileri `tests/fixtures` dizininde tutulur.
 
 ## Bölüm Sonu Özeti
 - Test altyapısı **PHPUnit 9.6** üzerine kuruludur.
-- **567 test, 2036 assertion** (v4.23.0 baseline).
+- **1.366 test, 4.060 assertion, 26 atlanmış** (v4.63.0 baseline; atlamalar bilinen bir WooCommerce-PHPUnit ortam sınırlaması, kusur değil).
 - CI matrisi **6 job** (PHP 8.1/8.2/8.3 x WP 6.7/latest) + PHPCS gate.
 - **Hybrid Reset** stratejisi ile veritabanı kirliligi onlenir.
 - Gelistirme sürecinde `npm run test` komutu ana doğrulama noktasidir.
@@ -116,6 +124,8 @@ Test verileri `tests/fixtures` dizininde tutulur.
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 02.07.2026 | 4.63.0 | Baseline tablosu yenilendi (güncel satır v4.63.0 — 1.366 / 4.060 / 26). Bayat `saas_block` notu kaldırıldı (o orchestration katmanı v4.60.0'da kaldırılmıştı); 26 atlamanın gerçek nedenini açıklayan doğru bir not eklendi (WooCommerce-PHPUnit ortam sınırlaması). v4.60.0 milestone satırı eklendi. |
+| 22.05.2026 | 4.58.2 | Baseline tablosu yenilendi (güncel satır v4.58.2 — 1.237 / 3.736 / 15). 7 dokümante `saas_block` env-quota baseline başarısızlığı not edildi (kapsam dışı). v4.23.0 ile v4.58.2 arası ara milestone'lar eklendi. |
 | 27.03.2026 | 4.23.0 | Test baseline v4.23.0 (567/2036/4), CI matrisi (6 job + PHPCS), test kategorileri (shortcode render, sanitizer, allowlist, key normalizer) eklendi. |
 | 19.03.2026 | 4.21.2 | PHPUnit 9.6 ve MHM_Test_Listener dokumantasyonu eklendi. |
 
