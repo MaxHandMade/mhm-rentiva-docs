@@ -4,10 +4,32 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 02 Jul 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 05 Jul 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v4.63.1 — Chart Rendering, KPI Corruption, and Settings-Tab Data-Loss Fixes]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release</guid>
+            <pubDate>Sun, 05 Jul 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[Fixes blank revenue charts, a corrupted Reports KPI value, and a bug where saving Messages settings from one tab silently reset the others.]]></description>
+            <content:encoded><![CDATA[<p>Fixes blank revenue charts, a corrupted Reports KPI value, and a bug where saving Messages settings from one tab silently reset the others.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The Dashboard's and Reports page's "Revenue" charts were rendering blank</strong> — a pre-existing 404 on a vendor script that never shipped in any release. Chart.js is now bundled directly with the admin scripts.</li>
+<li class=""><strong>The Reports page's "Monthly Revenue" KPI card showed a corrupted value</strong> (e.g. "1,87 €" instead of "1,870.00 €") due to a display value being re-parsed as a raw number.</li>
+<li class=""><strong>Saving the Messages settings page from any tab other than the one being edited</strong> (e.g. saving Email settings while on the Categories tab) silently reset the other tabs' settings, including notification checkboxes, sender email, and category/status lists, to their defaults.</li>
+<li class=""><strong>A vehicle that becomes unavailable at the moment of booking submission no longer silently drops the "similar vehicles" suggestion</strong> — the alternatives list now reaches the booking form as intended.</li>
+<li class=""><strong>Corrected a Turkish mistranslation</strong> on the Reports page ("Booking Report" tab).</li>
+<li class=""><strong>Removed two broken script/style references</strong> (booking calendar CSS, standalone customer-messages JS) that resulted in harmless but noisy 404 requests.</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>admin</category>
+            <category>reports</category>
+            <category>messages</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.63.0 — Admin Remaining-Payment Link + Payment-Type Label Fix]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.0-release</link>
@@ -493,30 +515,6 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bundle">Bundle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release#bundle" class="hash-link" aria-label="Direct link to Bundle" title="Direct link to Bundle" translate="no">​</a></h3>
 <p>This release also bundles v4.47.0 (fatal error fix) and v4.48.0 (mobile CSS fixes) for operators updating from v4.46.0 or earlier.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.48.0 — Mobile responsive CSS fixes]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release</guid>
-            <pubDate>Mon, 11 May 2026 17:18:00 GMT</pubDate>
-            <description><![CDATA[Three mobile-responsive CSS fixes for the admin interface: Messages table card layout, KPI stat card grid collapse, and Reports date filter stack. All targeting real mobile viewports where the WP admin sidebar is collapsed.]]></description>
-            <content:encoded><![CDATA[<p>Three mobile-responsive CSS fixes for the admin interface: Messages table card layout, KPI stat card grid collapse, and Reports date filter stack. All targeting real mobile viewports where the WP admin sidebar is collapsed.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="messages-table--mobile-card-layout">Messages Table — Mobile Card Layout<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release#messages-table--mobile-card-layout" class="hash-link" aria-label="Direct link to Messages Table — Mobile Card Layout" title="Direct link to Messages Table — Mobile Card Layout" translate="no">​</a></h3>
-<p>At viewport widths ≤ 375 px, the Messages table now stacks to a <strong>single-column card layout</strong>. Column headers are rendered via CSS <code>::before</code> pseudo-elements reading from <code>data-label</code> attributes on <code>&lt;td&gt;</code> elements — no JavaScript required.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kpi-stat-cards--responsive-grid">KPI Stat Cards — Responsive Grid<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release#kpi-stat-cards--responsive-grid" class="hash-link" aria-label="Direct link to KPI Stat Cards — Responsive Grid" title="Direct link to KPI Stat Cards — Responsive Grid" translate="no">​</a></h3>
-<p>The stat card grid now collapses responsively:</p>
-<ul>
-<li class="">≤ 768 px → <strong>2 columns</strong></li>
-<li class="">≤ 480 px → <strong>1 column</strong></li>
-</ul>
-<p>Applies to the Customers, Reports, and Dashboard admin pages.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="reports-date-filter--vertical-stack">Reports Date Filter — Vertical Stack<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.48.0-release#reports-date-filter--vertical-stack" class="hash-link" aria-label="Direct link to Reports Date Filter — Vertical Stack" title="Direct link to Reports Date Filter — Vertical Stack" translate="no">​</a></h3>
-<p>The date range filter (Start Date / End Date) on the Reports page now switches to a <strong>vertical stack</strong> at ≤ 768 px, preventing the inputs from overflowing the viewport on mobile devices.</p>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
             <category>mobile</category>

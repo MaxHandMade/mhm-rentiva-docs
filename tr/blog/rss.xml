@@ -4,10 +4,32 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Thu, 02 Jul 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 05 Jul 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.63.1 — Kontrol Paneli/Raporlar Grafik Render, KPI Bozulması ve Ayar-Sekmesi Veri Kaybı Düzeltmeleri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release</guid>
+            <pubDate>Sun, 05 Jul 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[Boş gelir grafiklerini, bozuk bir Raporlar KPI değerini ve Mesajlar ayarlarını bir sekmeden kaydedince diğerlerini sessizce sıfırlayan bir hatayı düzeltir.]]></description>
+            <content:encoded><![CDATA[<p>Boş gelir grafiklerini, bozuk bir Raporlar KPI değerini ve Mesajlar ayarlarını bir sekmeden kaydedince diğerlerini sessizce sıfırlayan bir hatayı düzeltir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Kontrol Paneli ve Raporlar sayfasındaki "Gelir" grafikleri boş görünüyordu</strong> — hiçbir sürümde hiç yayınlanmamış bir vendor betiğine ait, önceden var olan bir 404 hatasıydı. Chart.js artık admin betikleriyle doğrudan paketleniyor.</li>
+<li class=""><strong>Raporlar sayfasındaki "Aylık Gelir" KPI kartı bozuk bir değer gösteriyordu</strong> ("1.870,00 €" yerine "1,87 €" gibi) — zaten formatlanmış bir görüntü değerinin ham sayı olarak tekrar okunmasından kaynaklanıyordu.</li>
+<li class=""><strong>Mesajlar ayarlar sayfasını düzenlenmekte olan sekme dışında bir sekmeden kaydetmek</strong> (ör. Kategoriler sekmesindeyken E-posta ayarlarını kaydetmek), diğer sekmelerin ayarlarını (bildirim onay kutuları, gönderen e-postası, kategori/durum listeleri dahil) sessizce varsayılana sıfırlıyordu.</li>
+<li class=""><strong>Bir araç, rezervasyon gönderimi anında müsait olmaktan çıkarsa artık "benzer araçlar" önerisi sessizce kaybolmuyor</strong> — alternatif liste artık amaçlandığı gibi rezervasyon formuna ulaşıyor.</li>
+<li class=""><strong>Raporlar sayfasındaki bir Türkçe çeviri hatası düzeltildi</strong> ("Rezervasyon Raporu" sekmesi).</li>
+<li class=""><strong>Var olmayan iki betik/stil referansı kaldırıldı</strong> (rezervasyon takvimi CSS'i, bağımsız müşteri-mesajları JS'i) — bunlar zararsız ama gürültülü 404 isteklerine yol açıyordu.</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>admin</category>
+            <category>reports</category>
+            <category>messages</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.63.0 — Admin Kalan-Ödeme Linki + Ödeme Türü Etiket Düzeltmesi]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release</link>
@@ -493,30 +515,6 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="paket">Paket<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release#paket" class="hash-link" aria-label="Paket doğrudan bağlantı" title="Paket doğrudan bağlantı" translate="no">​</a></h3>
 <p>Bu sürüm ayrıca v4.46.0 veya öncesinden güncelleyen operatörler için v4.47.0 (fatal hata düzeltmesi) ve v4.48.0 (mobil CSS düzeltmeleri) içeriyor.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.48.0 — Mobil uyumlu CSS düzeltmeleri]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release</guid>
-            <pubDate>Mon, 11 May 2026 17:18:00 GMT</pubDate>
-            <description><![CDATA[Admin arayüzü için üç mobil uyumlu CSS düzeltmesi: Mesajlar tablosu kart düzeni, KPI stat kart kılavuz daraltması ve Raporlar tarih filtresi dikey istifi. Tümü, WP admin kenar çubuğunun daraltıldığı gerçek mobil viewport'leri hedefliyor.]]></description>
-            <content:encoded><![CDATA[<p>Admin arayüzü için üç mobil uyumlu CSS düzeltmesi: Mesajlar tablosu kart düzeni, KPI stat kart kılavuz daraltması ve Raporlar tarih filtresi dikey istifi. Tümü, WP admin kenar çubuğunun daraltıldığı gerçek mobil viewport'leri hedefliyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mesajlar-tablosu--mobil-kart-düzeni">Mesajlar Tablosu — Mobil Kart Düzeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release#mesajlar-tablosu--mobil-kart-d%C3%BCzeni" class="hash-link" aria-label="Mesajlar Tablosu — Mobil Kart Düzeni doğrudan bağlantı" title="Mesajlar Tablosu — Mobil Kart Düzeni doğrudan bağlantı" translate="no">​</a></h3>
-<p>≤ 375 piksel viewport genişliklerinde, Mesajlar tablosu artık <strong>tek sütunlu kart düzenine</strong> geçiyor. Sütun başlıkları, <code>&lt;td&gt;</code> elementlerindeki <code>data-label</code> özelliklerini okuyan CSS <code>::before</code> sözde elementleri aracılığıyla render ediliyor — JavaScript gerektirmiyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kpi-stat-kartları--duyarlı-kılavuz">KPI Stat Kartları — Duyarlı Kılavuz<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release#kpi-stat-kartlar%C4%B1--duyarl%C4%B1-k%C4%B1lavuz" class="hash-link" aria-label="KPI Stat Kartları — Duyarlı Kılavuz doğrudan bağlantı" title="KPI Stat Kartları — Duyarlı Kılavuz doğrudan bağlantı" translate="no">​</a></h3>
-<p>Stat kart kılavuzu artık duyarlı biçimde daralıyor:</p>
-<ul>
-<li class="">≤ 768 piksel → <strong>2 sütun</strong></li>
-<li class="">≤ 480 piksel → <strong>1 sütun</strong></li>
-</ul>
-<p>Müşteriler, Raporlar ve Kontrol Paneli admin sayfalarına uygulanıyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="raporlar-tarih-filtresi--dikey-i̇stif">Raporlar Tarih Filtresi — Dikey İstif<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.48.0-release#raporlar-tarih-filtresi--dikey-i%CC%87stif" class="hash-link" aria-label="Raporlar Tarih Filtresi — Dikey İstif doğrudan bağlantı" title="Raporlar Tarih Filtresi — Dikey İstif doğrudan bağlantı" translate="no">​</a></h3>
-<p>Raporlar sayfasındaki tarih aralığı filtresi (Başlangıç Tarihi / Bitiş Tarihi) artık ≤ 768 piksel'de <strong>dikey istife</strong> geçiyor; mobil cihazlarda input'ların viewport'u taşmasını önlüyor.</p>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
             <category>mobile</category>
