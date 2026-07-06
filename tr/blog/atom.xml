@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-05T18:00:00.000Z</updated>
+    <updated>2026-07-06T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.63.2 — Bayi Komisyonu Clearing ve İade Bakiye Düzeltmeleri]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release"/>
+        <updated>2026-07-06T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Bayi komisyonu kaydını düzeltir, kazançların gerçekten çekilebilir hale gelmesi için otomatik 7 günlük bir clearing mekanizması ekler, iade bakiye hesaplamasını düzeltir, ve her zaman sıfır gösteren bir bayi paneli KPI kartını düzeltir.]]></summary>
+        <content type="html"><![CDATA[<p>Bayi komisyonu kaydını düzeltir, kazançların gerçekten çekilebilir hale gelmesi için otomatik 7 günlük bir clearing mekanizması ekler, iade bakiye hesaplamasını düzeltir, ve her zaman sıfır gösteren bir bayi paneli KPI kartını düzeltir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bayi komisyonu, checkout akışı ile komisyon defteri arasındaki bir rezervasyon-referansı uyuşmazlığı yüzünden gerçek rezervasyonlarda hiç kaydedilmiyordu</strong> — bayi kazançları hiçbir zaman işlenmiyordu.</li>
+<li class=""><strong>Bayi komisyonu artık ödemeden 7 gün sonra yeni bir zamanlanmış görev aracılığıyla otomatik olarak kesinleşip ödemeye hazır hale geliyor.</strong> Daha önce komisyon süresiz olarak "bekleyen" durumda kalıyordu ve bayinin bunu çekmesinin hiçbir yolu yoktu.</li>
+<li class=""><strong>İadeler artık — komisyon kesinleşmeden önce veya sonra olsun, kısmi veya tam olsun — bayinin kullanılabilir bakiyesini doğru şekilde etkiliyor.</strong> Daha önce iadelerin bakiye üzerinde hiçbir etkisi yoktu.</li>
+<li class=""><strong>Bir komisyon kesinleşip ödemeye hazır hale geldiğinde bayilere artık e-posta bildirimi gönderiliyor.</strong></li>
+<li class=""><strong>Bayi panelindeki "Finansal Özet" kartları</strong> (Kullanılabilir Bakiye, Bekleyen Bakiye, Toplam Ödenen) bir veri-anahtarı uyuşmazlığı yüzünden bayinin gerçek bakiyesinden bağımsız olarak her zaman 0,00 gösteriyordu. Bakiyeyi doğrudan okuyan ödeme talebi bölümü bundan etkilenmemişti.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="commission" term="commission"/>
+        <category label="payouts" term="payouts"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.63.1 — Kontrol Paneli/Raporlar Grafik Render, KPI Bozulması ve Ayar-Sekmesi Veri Kaybı Düzeltmeleri]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release</id>
@@ -569,34 +594,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="maintenance" term="maintenance"/>
         <category label="docs" term="docs"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.49.0 — Mobil breakpoint standardizasyonu: 768px → 782px]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release"/>
-        <updated>2026-05-12T05:01:00.000Z</updated>
-        <summary type="html"><![CDATA[Tüm admin React CSS breakpoint'leri, mobil cihazlarda WordPress admin kenar çubuğu genişlik ofsetini hesaba katan doğru değer olan 782 piksel'de standartlaştırıldı.]]></summary>
-        <content type="html"><![CDATA[<p>Tüm admin React CSS breakpoint'leri, mobil cihazlarda WordPress admin kenar çubuğu genişlik ofsetini hesaba katan doğru değer olan <strong>782 piksel</strong>'de standartlaştırıldı.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="neden-782-piksel">Neden 782 Piksel?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release#neden-782-piksel" class="hash-link" aria-label="Neden 782 Piksel? doğrudan bağlantı" title="Neden 782 Piksel? doğrudan bağlantı" translate="no">​</a></h3>
-<p>WordPress, mobil cihazlarda admin kenar çubuğundan <code>window.innerWidth</code>'e ~291 piksel ekliyor. Daha önce kullanılan 768 piksel breakpoint'i çok erken tetikleniyordu — kenar çubuğu hâlâ görünürken, yaygın mobil genişliklerde (375 piksel, 390 piksel, 414 piksel) düzen çakışmaları oluşuyordu.</p>
-<p><code>782 piksel</code>, <code>wp-admin.css</code> içinde WordPress'in kendi tanımladığı admin breakpoint'iyle eşleşiyor ve tüm admin sayfalarında tutarlı daraltma davranışı sağlıyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncellenen-sayfalar">Güncellenen Sayfalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release#g%C3%BCncellenen-sayfalar" class="hash-link" aria-label="Güncellenen Sayfalar doğrudan bağlantı" title="Güncellenen Sayfalar doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class="">Kontrol Paneli widget satırları artık ≤ 782 pikselde tek sütuna geçiyor</li>
-<li class="">Mesajlar tablosu yığılmış düzeni: 768 piksel → 782 piksel</li>
-<li class="">Raporlar tarih filtresi dikey istifi: 768 piksel → 782 piksel</li>
-<li class="">Paylaşılan KPI stats kılavuzu: 768 piksel → 782 piksel (2 sütun), 480 piksel (1 sütun, değişmedi)</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="paket">Paket<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.49.0-release#paket" class="hash-link" aria-label="Paket doğrudan bağlantı" title="Paket doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu sürüm ayrıca v4.46.0 veya öncesinden güncelleyen operatörler için v4.47.0 (fatal hata düzeltmesi) ve v4.48.0 (mobil CSS düzeltmeleri) içeriyor.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
     </entry>
 </feed>

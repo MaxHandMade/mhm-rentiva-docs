@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-05T18:00:00.000Z</updated>
+    <updated>2026-07-06T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.63.2 — Vendor Commission Clearing & Refund Balance Fixes]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release"/>
+        <updated>2026-07-06T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Fixes vendor commission recording, adds an automatic 7-day clearing mechanism so earnings actually become withdrawable, corrects refund balance math, and fixes a vendor dashboard KPI card that always showed zero.]]></summary>
+        <content type="html"><![CDATA[<p>Fixes vendor commission recording, adds an automatic 7-day clearing mechanism so earnings actually become withdrawable, corrects refund balance math, and fixes a vendor dashboard KPI card that always showed zero.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Vendor commission was silently never recorded for real bookings</strong> due to a booking-reference mismatch between the checkout flow and the commission ledger — vendor earnings were never credited at all.</li>
+<li class=""><strong>Vendor commission now automatically clears and becomes available for payout 7 days after payment</strong>, via a new scheduled job. Previously, commission stayed in a "pending" state indefinitely with no way for a vendor to ever withdraw it.</li>
+<li class=""><strong>Refunds now correctly adjust the vendor's available balance</strong>, whether the refund happens before or after the commission clears, and whether it's a partial or full refund. Previously, refunds had no effect on the balance at all.</li>
+<li class=""><strong>Vendors now receive an email notification</strong> when a commission clears and becomes available for payout.</li>
+<li class=""><strong>The vendor dashboard's "Financial Summary" cards</strong> (Available Balance, Pending Balance, Total Paid Out) always showed 0,00 regardless of the vendor's actual balance, due to a data-key mismatch. The payout-request section, which reads the balance directly, was unaffected.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="commission" term="commission"/>
+        <category label="payouts" term="payouts"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.63.1 — Chart Rendering, KPI Corruption, and Settings-Tab Data-Loss Fixes]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release</id>
@@ -569,34 +594,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="maintenance" term="maintenance"/>
         <category label="docs" term="docs"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.49.0 — Mobile breakpoint standardisation: 768px → 782px]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release"/>
-        <updated>2026-05-12T05:01:00.000Z</updated>
-        <summary type="html"><![CDATA[All admin React CSS breakpoints standardised at 782 px — the correct breakpoint that accounts for WordPress's admin sidebar width offset on mobile devices.]]></summary>
-        <content type="html"><![CDATA[<p>All admin React CSS breakpoints standardised at <strong>782 px</strong> — the correct breakpoint that accounts for WordPress's admin sidebar width offset on mobile devices.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-782-px">Why 782 px?<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release#why-782-px" class="hash-link" aria-label="Direct link to Why 782 px?" title="Direct link to Why 782 px?" translate="no">​</a></h3>
-<p>WordPress adds ~291 px to <code>window.innerWidth</code> from the admin sidebar on mobile. The previously used 768 px breakpoint fired too early — the sidebar was still visible, causing layout collisions at common mobile widths (375 px, 390 px, 414 px).</p>
-<p><code>782 px</code> matches WordPress's own admin breakpoint defined in <code>wp-admin.css</code>, ensuring consistent collapse behaviour across all admin pages.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="pages-updated">Pages Updated<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release#pages-updated" class="hash-link" aria-label="Direct link to Pages Updated" title="Direct link to Pages Updated" translate="no">​</a></h3>
-<ul>
-<li class="">Dashboard widget rows now collapse to single column at ≤ 782 px</li>
-<li class="">Messages table stacked layout: 768 px → 782 px</li>
-<li class="">Reports date filter vertical stack: 768 px → 782 px</li>
-<li class="">Shared KPI stats grid: 768 px → 782 px (2-column), 480 px → 480 px (1-column, unchanged)</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bundle">Bundle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.49.0-release#bundle" class="hash-link" aria-label="Direct link to Bundle" title="Direct link to Bundle" translate="no">​</a></h3>
-<p>This release also bundles v4.47.0 (fatal error fix) and v4.48.0 (mobile CSS fixes) for operators updating from v4.46.0 or earlier.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
     </entry>
 </feed>
