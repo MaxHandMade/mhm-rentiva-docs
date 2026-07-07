@@ -2,11 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-06T18:00:00.000Z</updated>
+    <updated>2026-07-07T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.64.0 — Komisyon Oranı Geçersiz Kılmaları (Bayi ve Araç) ve Kademe Yapılandırması]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release"/>
+        <updated>2026-07-07T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Adminler artık bayi veya araç bazında komisyon oranını geçersiz kılabilir ve hacim indirimi kademe eşiklerini doğrudan admin panelinden yapılandırabilir — komisyon oranı hiyerarşisinin daha önce arayüzü olmayan son üç katmanı tamamlandı. Ayrıca üç komisyon doğruluğu düzeltmesi ve release doğrulaması sırasında bulunan bir şema migration güvencesi içerir.]]></summary>
+        <content type="html"><![CDATA[<p>Adminler artık bayi veya araç bazında komisyon oranını geçersiz kılabilir ve hacim indirimi kademe eşiklerini doğrudan admin panelinden yapılandırabilir — komisyon oranı hiyerarşisinin daha önce arayüzü olmayan son üç katmanı tamamlandı. Ayrıca üç komisyon doğruluğu düzeltmesi ve release doğrulaması sırasında bulunan bir şema migration güvencesi içerir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni">Yeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release#yeni" class="hash-link" aria-label="Yeni doğrudan bağlantı" title="Yeni doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bayi bazlı komisyon oranı geçersiz kılması.</strong> Bayi Yönetimi'ndeki bayi detay sayfasından, bireysel bir bayi için sabit bir komisyon oranı ayarlayın — bayinin listelediği her aracı tek tek değiştirmeye gerek yok.</li>
+<li class=""><strong>Araç bazlı komisyon oranı geçersiz kılması.</strong> Araç düzenleme ekranındaki yeni "Komisyon Oranı Geçersiz Kılma" kutusundan, bireysel bir araç için sabit bir komisyon oranı ayarlayın. Bu en spesifik katmandır — bayinin oranından, hacim indirimi kademesinden ve platform genelindeki orandan önceliklidir.</li>
+<li class=""><strong>Düzenlenebilir hacim indirimi kademeleri.</strong> Yüksek hacimli bir bayinin oranını (son 30 günlük onaylanmış gelire dayanarak) otomatik olarak indiren üç kademe, artık sadece doğrudan veritabanı düzenlemesiyle değil, doğrudan Komisyon sekmesinden düzenlenebilir. Tam 4 katmanlı hiyerarşinin nasıl çözümlendiğini görmek için <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/docs/vendor/commission-rates">Komisyon Oranı Yapılandırması rehberine</a> bakın.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Yukarıdaki araç bazlı geçersiz kılma artık gerçek rezervasyonlara gerçekten uygulanıyor.</strong> Bu mantık zaten mevcuttu ama canlı checkout işlemine hiç bağlanmamıştı.</li>
+<li class=""><strong>İade komisyon geri alımları artık bayinin orijinal olarak kredilendirildiği oranı kullanıyor</strong>, iade gününde geçerli olan oranı değil — ödeme ile iade arasında bir oran değişikliği artık iade hesabını sessizce bozmuyor.</li>
+<li class=""><strong>Bayi panelinin "son 7 gün" gelir rakamları</strong>, oluşturulduktan 7+ gün sonra kesinleşen bir komisyon kredisinin hiçbir zaman 7 günlük bir pencereye giremezken aynı gün gerçekleşen bir iadenin her zaman girebilmesi yüzünden yapay olarak düşük veya negatif görünebiliyordu. Yeni bir dahili zaman damgası artık bir kredinin gerçekte ne zaman kesinleştiğini takip ediyor.</li>
+<li class=""><strong>Panelin <code>revenue_7d</code> metriğinde</strong>, v4.63.2'de diğer Finansal Özet kartları için düzeltilen bakiye-anahtarı uyuşmazlığının aynısı vardı.</li>
+<li class=""><strong>Şema migration güvencesi.</strong> Release doğrulaması sırasında (bu ZIP yayınlanmadan önce) bulundu: yukarıdaki 7 günlük gelir düzeltmesini sağlayan yeni kolonla birlikte bir veritabanı şema-sürüm sabitinin bump edilmemiş olması, mevcut kurulumların bu kolonu hiçbir zaman almamasına neden olacaktı. Gerçek bir upgrade simüle edilerek düzeltildi ve release öncesi doğrulandı.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="commission" term="commission"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.63.2 — Bayi Komisyonu Clearing ve İade Bakiye Düzeltmeleri]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release</id>
@@ -565,34 +595,5 @@
         <category label="vendor" term="vendor"/>
         <category label="react" term="react"/>
         <category label="spa" term="spa"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.50.0 — Bakım ve Dokümantasyon Güncellemesi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release"/>
-        <updated>2026-05-12T05:39:00.000Z</updated>
-        <summary type="html"><![CDATA[Destek URL'leri wpalemi.com'a güncellendi, v4.40.0–v4.49.0 için changelog backfill yapıldı ve README, React SPA admin arayüzü bölümüyle güncellendi.]]></summary>
-        <content type="html"><![CDATA[<p>Destek URL'leri wpalemi.com'a güncellendi, v4.40.0–v4.49.0 için changelog backfill yapıldı ve README, React SPA admin arayüzü bölümüyle güncellendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="destek-urlleri-güncellendi">Destek URL'leri Güncellendi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release#destek-urlleri-g%C3%BCncellendi" class="hash-link" aria-label="Destek URL'leri Güncellendi doğrudan bağlantı" title="Destek URL'leri Güncellendi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Eklenti içindeki tüm destek bağlantıları ve destek e-posta adresi güncellendi:</p>
-<ul>
-<li class="">Destek URL'leri artık <strong>wpalemi.com</strong>'a yönlendiriyor</li>
-<li class="">Destek e-postası <strong><a href="mailto:support@wpalemi.com" target="_blank" rel="noopener noreferrer" class="">support@wpalemi.com</a></strong> olarak güncellendi</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changelog-backfill">Changelog Backfill<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release#changelog-backfill" class="hash-link" aria-label="Changelog Backfill doğrudan bağlantı" title="Changelog Backfill doğrudan bağlantı" translate="no">​</a></h3>
-<p><strong>v4.40.0 ile v4.49.0</strong> arasındaki sürümler için dokümantasyon changelog girişleri hem İngilizce hem Türkçe olarak tamamlandı — Vendor Management Faz A sprint'i, Messages Faz 3, Ödeme Talepleri, Frontend CSS izolasyonu ve mobil duyarlı düzeltmeler dahil.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readme-güncellemesi">README Güncellemesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release#readme-g%C3%BCncellemesi" class="hash-link" aria-label="README Güncellemesi doğrudan bağlantı" title="README Güncellemesi doğrudan bağlantı" translate="no">​</a></h3>
-<p>Eklenti README'si artık taşınan admin sayfalarını belgeleyen ayrı bir <strong>React SPA Yönetici Arayüzü</strong> bölümü içeriyor: Kontrol Paneli, Mesajlar, Müşteriler, Raporlar, Vendor Yönetimi (Faz A + Faz B sekmeleri).</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="paket">Paket<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.50.0-release#paket" class="hash-link" aria-label="Paket doğrudan bağlantı" title="Paket doğrudan bağlantı" translate="no">​</a></h3>
-<p>Bu sürüm ayrıca v4.46.0 veya öncesinden güncelleyen operatörler için v4.49.0'daki mobil breakpoint düzeltmesini (768 piksel → 782 piksel) de içeriyor.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="maintenance" term="maintenance"/>
-        <category label="docs" term="docs"/>
     </entry>
 </feed>

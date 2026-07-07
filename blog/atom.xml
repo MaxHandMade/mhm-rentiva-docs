@@ -2,11 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-06T18:00:00.000Z</updated>
+    <updated>2026-07-07T18:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.64.0 — Commission Rate Overrides (Vendor & Vehicle) and Tier Configuration]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release"/>
+        <updated>2026-07-07T18:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Admins can now override the commission rate per vendor or per vehicle, and configure the volume-discount tier thresholds directly from the admin panel — closing the last three previously UI-less layers of the commission rate hierarchy. Also includes three commission-accuracy fixes and a schema migration guard found during release verification.]]></summary>
+        <content type="html"><![CDATA[<p>Admins can now override the commission rate per vendor or per vehicle, and configure the volume-discount tier thresholds directly from the admin panel — closing the last three previously UI-less layers of the commission rate hierarchy. Also includes three commission-accuracy fixes and a schema migration guard found during release verification.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new">New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release#new" class="hash-link" aria-label="Direct link to New" title="Direct link to New" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Vendor-level commission rate override.</strong> Set a fixed commission rate for an individual vendor from that vendor's detail page in Vendor Management — no need to touch every vehicle they list.</li>
+<li class=""><strong>Vehicle-level commission rate override.</strong> Set a fixed commission rate for an individual vehicle from a new "Commission Rate Override" box on the vehicle edit screen. This is the most specific layer — it takes priority over the vendor's rate, volume-discount tier, and the platform-wide rate.</li>
+<li class=""><strong>Editable volume-discount tiers.</strong> The three tiers that automatically discount a high-volume vendor's rate (based on trailing 30-day cleared revenue) can now be edited directly from the Commission tab, instead of only via direct database edits. See the <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/vendor/commission-rates">Commission Rate Configuration guide</a> for how the full 4-layer hierarchy resolves.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The vehicle-level override above is now actually applied to real bookings.</strong> The underlying resolver logic already existed but was never connected to live checkout processing.</li>
+<li class=""><strong>Refund commission clawbacks now use the rate the vendor was originally credited at</strong>, instead of whatever rate happens to be active on the day of the refund — a rate change between payment and refund no longer silently alters the refund math.</li>
+<li class=""><strong>The vendor dashboard's "last 7 days" revenue figures</strong> could show artificially low or negative numbers, because a commission credit that clears 7+ days after it's created could never land inside a rolling 7-day window while a same-day refund always could. A new internal timestamp now tracks when a credit actually cleared.</li>
+<li class=""><strong>The dashboard's <code>revenue_7d</code> metric</strong> had the same balance-lookup key mismatch that was fixed for the other Financial Summary cards in v4.63.2.</li>
+<li class=""><strong>Schema migration guard.</strong> Found during release verification (before this ZIP was published): a database schema-version constant hadn't been bumped alongside the new column that powers the 7-day revenue fix above, which would have silently prevented existing installations from ever receiving it. Fixed and verified against a simulated real upgrade before release.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vendor" term="vendor"/>
+        <category label="commission" term="commission"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.63.2 — Vendor Commission Clearing & Refund Balance Fixes]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release</id>
@@ -565,34 +595,5 @@
         <category label="vendor" term="vendor"/>
         <category label="react" term="react"/>
         <category label="spa" term="spa"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.50.0 — Maintenance & Docs Update]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release"/>
-        <updated>2026-05-12T05:39:00.000Z</updated>
-        <summary type="html"><![CDATA[Support URLs updated to wpalemi.com, changelog backfilled for v4.40.0–v4.49.0, and README updated with the React SPA admin interface section.]]></summary>
-        <content type="html"><![CDATA[<p>Support URLs updated to wpalemi.com, changelog backfilled for v4.40.0–v4.49.0, and README updated with the React SPA admin interface section.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="support-urls-updated">Support URLs Updated<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release#support-urls-updated" class="hash-link" aria-label="Direct link to Support URLs Updated" title="Direct link to Support URLs Updated" translate="no">​</a></h3>
-<p>All in-plugin support links and the support email address have been updated:</p>
-<ul>
-<li class="">Support URLs now point to <strong>wpalemi.com</strong></li>
-<li class="">Support email updated to <strong><a href="mailto:support@wpalemi.com" target="_blank" rel="noopener noreferrer" class="">support@wpalemi.com</a></strong></li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changelog-backfill">Changelog Backfill<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release#changelog-backfill" class="hash-link" aria-label="Direct link to Changelog Backfill" title="Direct link to Changelog Backfill" translate="no">​</a></h3>
-<p>Documentation changelog entries for <strong>v4.40.0 through v4.49.0</strong> have been backfilled in both English and Turkish — covering the Vendor Management Faz A sprint, Messages Faz 3, Payout Requests, Frontend CSS isolation, and mobile responsive fixes.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readme-update">README Update<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release#readme-update" class="hash-link" aria-label="Direct link to README Update" title="Direct link to README Update" translate="no">​</a></h3>
-<p>The plugin README now includes a dedicated <strong>React SPA Admin Interface</strong> section documenting the migrated admin pages: Dashboard, Messages, Customers, Reports, Vendor Management (Faz A + Faz B tabs).</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bundle">Bundle<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.50.0-release#bundle" class="hash-link" aria-label="Direct link to Bundle" title="Direct link to Bundle" translate="no">​</a></h3>
-<p>This release also bundles the mobile breakpoint fix from v4.49.0 (768 px → 782 px) for operators updating from v4.46.0 or earlier.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="maintenance" term="maintenance"/>
-        <category label="docs" term="docs"/>
     </entry>
 </feed>
