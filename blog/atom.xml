@@ -2,11 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-12T18:00:00.000Z</updated>
+    <updated>2026-07-12T19:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.64.2 — Dark Mode Contrast + Un-translatable Placeholder Fixes]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release"/>
+        <updated>2026-07-12T19:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Fixes near-invisible text in Dark Mode and 6 example placeholders that could never be translated, no matter the site's language.]]></summary>
+        <content type="html"><![CDATA[<p>Fixes near-invisible text in Dark Mode and 6 example placeholders that could never be translated, no matter the site's language.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Dark Mode contrast.</strong> The admin page title and input/textarea placeholder text had no dark-mode color override, making both nearly unreadable against the dark background.</li>
+<li class=""><strong>6 un-translatable placeholder strings.</strong> The "Custom Location Types" example placeholder (and 5 more identical instances across Security settings, Vehicle settings, and REST API settings) were raw PHP string literals never wrapped in a translation function — they could never be translated regardless of site locale, always displaying in English even on fully localized installs. All fixed and translated.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="improved">Improved<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release#improved" class="hash-link" aria-label="Direct link to Improved" title="Direct link to Improved" translate="no">​</a></h2>
+<ul>
+<li class="">The "Custom Location Types" field description now explains that these values populate the "Type" dropdown when creating a location under Locations — previously the connection between the two screens wasn't documented anywhere in the UI.</li>
+</ul>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="settings" term="settings"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="i18n" term="i18n"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.64.1 — Dark Mode Toggle Field Clobber Fix]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release</id>
@@ -527,50 +553,5 @@
         <category label="mobile" term="mobile"/>
         <category label="responsive" term="responsive"/>
         <category label="vendor" term="vendor"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.52.0 — Export Page React SPA]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release"/>
-        <updated>2026-05-12T10:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The Export admin page is now a full React SPA. 780 lines of legacy PHP render code have been replaced with a REST-backed interface featuring live record preview, export history with per-entry delete, and a preserved admin-post.php CSV download flow.]]></summary>
-        <content type="html"><![CDATA[<p>The Export admin page is now a full React SPA. 780 lines of legacy PHP render code have been replaced with a REST-backed interface featuring live record preview, export history with per-entry delete, and a preserved admin-post.php CSV download flow.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="export-page--react-spa-migration">Export Page — React SPA Migration<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#export-page--react-spa-migration" class="hash-link" aria-label="Direct link to Export Page — React SPA Migration" title="Direct link to Export Page — React SPA Migration" translate="no">​</a></h3>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-rest-endpoints-3">New REST Endpoints (3)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#new-rest-endpoints-3" class="hash-link" aria-label="Direct link to New REST Endpoints (3)" title="Direct link to New REST Endpoints (3)" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/admin/export/history</code> — paginated export log (WP transient, max 50 entries, 1-week TTL)</li>
-<li class=""><code>DELETE /mhm-rentiva/v1/admin/export/{id}</code> — remove a specific history entry</li>
-<li class=""><code>POST /mhm-rentiva/v1/admin/export/preview</code> — returns total record count + 5-row sample for the selected post type and date filters, before committing to export</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-react-components">New React Components<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#new-react-components" class="hash-link" aria-label="Direct link to New React Components" title="Direct link to New React Components" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>ExportCards</code></strong> — visual card selector for three export types: Bookings, Vehicles, App Logs. Active card is highlighted with a blue border.</li>
-<li class=""><strong><code>AdvancedFilters</code></strong> — collapsible date filter panel. Supports preset date ranges (populated from <code>ExportFilters::get_date_ranges()</code>) and custom from/to date inputs.</li>
-<li class=""><strong><code>PreviewBar</code></strong> — displays the record count and a 5-row sample table after a preview REST call. Disables the Export CSV button if count is 0.</li>
-<li class=""><strong><code>ExportForm</code></strong> — Export CSV button triggers a hidden <code>admin-post.php</code> form submit via <code>useRef</code> — no page reload, no SPA navigation.</li>
-<li class=""><strong><code>ExportHistory</code></strong> — loads the export log on mount via REST. Each row has an inline Delete button; optimistic removal on success.</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="legacy-code-removed">Legacy Code Removed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#legacy-code-removed" class="hash-link" aria-label="Direct link to Legacy Code Removed" title="Direct link to Legacy Code Removed" translate="no">​</a></h4>
-<ul>
-<li class="">780 lines of PHP render code moved to a private <code>@deprecated</code> method, unhooked from <code>register()</code></li>
-<li class="">Three legacy AJAX handlers (<code>wp_ajax_mhm_export_*</code>) removed from the hook registry</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n">i18n<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#i18n" class="hash-link" aria-label="Direct link to i18n" title="Direct link to i18n" translate="no">​</a></h4>
-<ul>
-<li class="">33 new Turkish strings translated</li>
-<li class=""><code>mhm-rentiva-tr_TR-mhm-rentiva-react-export.json</code> generated for the React bundle</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.52.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>22 new PHPUnit integration tests covering all three REST endpoints: 401/403 auth, history CRUD, DELETE isolation, preview validation (including enum enforcement), date range filtering, and sample structure. PHPCS: 0 errors.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="export" term="export"/>
-        <category label="react" term="react"/>
-        <category label="spa" term="spa"/>
     </entry>
 </feed>

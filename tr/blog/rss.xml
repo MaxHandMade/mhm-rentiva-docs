@@ -4,10 +4,32 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sun, 12 Jul 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 12 Jul 2026 19:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.64.2 — Karanlık Mod Kontrast + Çevrilemeyen Placeholder Düzeltmeleri]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release</guid>
+            <pubDate>Sun, 12 Jul 2026 19:00:00 GMT</pubDate>
+            <description><![CDATA[Karanlık Mod'da neredeyse görünmez olan metinler ve site dili ne olursa olsun asla çevrilemeyen 6 örnek placeholder düzeltildi.]]></description>
+            <content:encoded><![CDATA[<p>Karanlık Mod'da neredeyse görünmez olan metinler ve site dili ne olursa olsun asla çevrilemeyen 6 örnek placeholder düzeltildi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Karanlık Mod kontrastı.</strong> Admin sayfa başlığı ve input/textarea placeholder metinleri için karanlık mod renk geçersiz kılması yoktu, ikisi de koyu arkaplana karşı neredeyse okunaksızdı.</li>
+<li class=""><strong>Çevrilemeyen 6 placeholder metni.</strong> "Özel Konum Türleri" örnek placeholder'ı (ve Güvenlik ayarları, Araç ayarları ile REST API ayarlarında 5 kopyası daha) hiç çeviri fonksiyonuna sarılmamış ham PHP string'leriydi — site dili ne olursa olsun asla çevrilemiyorlardı, tam Türkçeleştirilmiş kurulumlarda bile her zaman İngilizce görünüyorlardı. Hepsi düzeltilip çevrildi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇yileştirme">İyileştirme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release#i%CC%87yile%C5%9Ftirme" class="hash-link" aria-label="İyileştirme doğrudan bağlantı" title="İyileştirme doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">"Özel Konum Türleri" alan açıklaması artık bu değerlerin Konumlar bölümünde yeni bir konum oluştururken "Tip" açılır menüsünü beslediğini açıklıyor — daha önce bu iki ekran arasındaki bağlantı arayüzde hiçbir yerde belgelenmemişti.</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>settings</category>
+            <category>bugfix</category>
+            <category>i18n</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.64.1 — Karanlık Mod Anahtarının Alanları Silmesi Düzeltmesi]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release</link>
@@ -452,47 +474,6 @@
             <category>mobile</category>
             <category>responsive</category>
             <category>vendor</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.52.0 — Dışa Aktar Sayfası React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release</guid>
-            <pubDate>Tue, 12 May 2026 10:00:00 GMT</pubDate>
-            <description><![CDATA[Dışa Aktar admin sayfası artık tam bir React SPA. 780 satırlık eski PHP render kodu, canlı kayıt önizlemesi, girdi başına silme özellikli dışa aktarma geçmişi ve korunan admin-post.php CSV indirme akışını içeren REST destekli bir arayüzle değiştirildi.]]></description>
-            <content:encoded><![CDATA[<p>Dışa Aktar admin sayfası artık tam bir React SPA. 780 satırlık eski PHP render kodu, canlı kayıt önizlemesi, girdi başına silme özellikli dışa aktarma geçmişi ve korunan admin-post.php CSV indirme akışını içeren REST destekli bir arayüzle değiştirildi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dışa-aktar-sayfası--react-spa-geçişi">Dışa Aktar Sayfası — React SPA Geçişi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#d%C4%B1%C5%9Fa-aktar-sayfas%C4%B1--react-spa-ge%C3%A7i%C5%9Fi" class="hash-link" aria-label="Dışa Aktar Sayfası — React SPA Geçişi doğrudan bağlantı" title="Dışa Aktar Sayfası — React SPA Geçişi doğrudan bağlantı" translate="no">​</a></h3>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-rest-endpointleri-3">Yeni REST Endpoint'leri (3)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#yeni-rest-endpointleri-3" class="hash-link" aria-label="Yeni REST Endpoint'leri (3) doğrudan bağlantı" title="Yeni REST Endpoint'leri (3) doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><code>GET /mhm-rentiva/v1/admin/export/history</code> — sayfalandırılmış dışa aktarma logu (WP transient, maks. 50 kayıt, 1 haftalık TTL)</li>
-<li class=""><code>DELETE /mhm-rentiva/v1/admin/export/{id}</code> — belirli bir geçmiş kaydını sil</li>
-<li class=""><code>POST /mhm-rentiva/v1/admin/export/preview</code> — dışa aktarmayı onaylamadan önce seçili post türü ve tarih filtreleri için toplam kayıt sayısı + 5 satırlık örnek döndürür</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-react-bileşenleri">Yeni React Bileşenleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#yeni-react-bile%C5%9Fenleri" class="hash-link" aria-label="Yeni React Bileşenleri doğrudan bağlantı" title="Yeni React Bileşenleri doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class=""><strong><code>ExportCards</code></strong> — üç dışa aktarma türü için görsel kart seçici: Rezervasyonlar, Araçlar, Uygulama Logları. Aktif kart mavi kenarlıkla vurgulanıyor.</li>
-<li class=""><strong><code>AdvancedFilters</code></strong> — katlanabilir tarih filtresi paneli. <code>ExportFilters::get_date_ranges()</code> ile doldurulan hazır tarih aralıklarını ve özel başlangıç/bitiş tarih girdilerini destekliyor.</li>
-<li class=""><strong><code>PreviewBar</code></strong> — önizleme REST çağrısının ardından kayıt sayısını ve 5 satırlık örnek tabloyu gösteriyor. Sayı 0 ise CSV Dışa Aktar butonunu devre dışı bırakıyor.</li>
-<li class=""><strong><code>ExportForm</code></strong> — CSV Dışa Aktar butonu, <code>useRef</code> aracılığıyla gizli bir <code>admin-post.php</code> form gönderimi tetikliyor — sayfa yenilemesi yok, SPA navigasyonu yok.</li>
-<li class=""><strong><code>ExportHistory</code></strong> — mount sırasında REST üzerinden dışa aktarma logunu yüklüyor. Her satırda satır içi Sil butonu var; başarı durumunda iyimser kaldırma yapılıyor.</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="kaldırılan-eski-kod">Kaldırılan Eski Kod<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#kald%C4%B1r%C4%B1lan-eski-kod" class="hash-link" aria-label="Kaldırılan Eski Kod doğrudan bağlantı" title="Kaldırılan Eski Kod doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class="">780 satırlık PHP render kodu özel <code>@deprecated</code> metoduna taşındı, <code>register()</code>'dan kanca kaldırıldı</li>
-<li class="">Üç eski AJAX işleyicisi (<code>wp_ajax_mhm_export_*</code>) kanca kayıt defterinden çıkarıldı</li>
-</ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="i18n">i18n<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#i18n" class="hash-link" aria-label="i18n doğrudan bağlantı" title="i18n doğrudan bağlantı" translate="no">​</a></h4>
-<ul>
-<li class="">33 yeni Türkçe string çevrildi</li>
-<li class="">React paketi için <code>mhm-rentiva-tr_TR-mhm-rentiva-react-export.json</code> oluşturuldu</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.52.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>3 REST endpoint'ini kapsayan 22 yeni PHPUnit entegrasyon testi: 401/403 yetkilendirme, geçmiş CRUD, DELETE izolasyonu, önizleme doğrulaması (enum zorunluluğu dahil), tarih aralığı filtreleme ve örnek yapı. PHPCS: 0 hata.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>export</category>
-            <category>react</category>
-            <category>spa</category>
         </item>
     </channel>
 </rss>
