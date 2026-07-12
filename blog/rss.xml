@@ -4,10 +4,27 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Tue, 07 Jul 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 12 Jul 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v4.64.1 — Dark Mode Toggle Field Clobber Fix]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release</guid>
+            <pubDate>Sun, 12 Jul 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[Fixes the admin panel's quick Dark Mode switch silently blanking Support Phone/Hours/Email and resetting Brand Name, and cleans up a residual settings-pollution artifact left behind by an older migration.]]></description>
+            <content:encoded><![CDATA[<p>Fixes the admin panel's quick Dark Mode switch silently blanking Support Phone/Hours/Email and resetting Brand Name, and cleans up a residual settings-pollution artifact left behind by an older migration.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Dark Mode toggle silently blanked General/Site-Info settings.</strong> The admin panel's quick Dark Mode AJAX switch re-ran the entire General tab's sanitizer with only the dark-mode value present, silently blanking Support Phone, Support Hours, and Support Email, and resetting Brand Name back to the site title on every toggle. It now updates only the dark mode setting.</li>
+<li class=""><strong>Residual settings-pollution cleanup.</strong> A one-time cleanup added in v4.27.2 for a historical "Run All Diagnostics" data-pollution bug (which could leave Brand Name and similar text fields saved as the literal value "1") never re-ran on installs where its completion flag had already been stamped before the pollution actually occurred. A second cleanup pass now catches any installs still carrying the old pollution.</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>settings</category>
+            <category>bugfix</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.64.0 — Commission Rate Overrides (Vendor & Vehicle) and Tier Configuration]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release</link>
@@ -474,46 +491,6 @@
             <category>release</category>
             <category>rentiva</category>
             <category>export</category>
-            <category>react</category>
-            <category>spa</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.51.0 — Vendor Management Faz B: Vendors, Commission & Settings React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release</guid>
-            <pubDate>Tue, 12 May 2026 06:47:00 GMT</pubDate>
-            <description><![CDATA[Vendor Management completes its React SPA migration with Faz B: the Vendors, Commission, and Settings tabs are now fully client-side. Seven new REST endpoints, three new React components, and an N+1 query fix for vendor listing.]]></description>
-            <content:encoded><![CDATA[<p>Vendor Management completes its React SPA migration with Faz B: the Vendors, Commission, and Settings tabs are now fully client-side. Seven new REST endpoints, three new React components, and an N+1 query fix for vendor listing.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What Changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#what-changed" class="hash-link" aria-label="Direct link to What Changed" title="Direct link to What Changed" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendors-tab--vendortable-component">Vendors Tab — VendorTable Component<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#vendors-tab--vendortable-component" class="hash-link" aria-label="Direct link to Vendors Tab — VendorTable Component" title="Direct link to Vendors Tab — VendorTable Component" translate="no">​</a></h3>
-<p>The Vendors tab is now a live React table powered by <code>GET /wp-json/mhm-rentiva/v1/admin/vendors</code>. Features:</p>
-<ul>
-<li class="">Paginated vendor list with vehicle count per vendor (single <code>GROUP BY</code> query — no N+1)</li>
-<li class="">Suspend / Unsuspend actions via <code>POST /admin/vendors/{id}/suspend</code> and <code>POST /admin/vendors/{id}/unsuspend</code></li>
-<li class="">Real-time status badges and inline feedback without page reload</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="commission-tab--commissiontab-component">Commission Tab — CommissionTab Component<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#commission-tab--commissiontab-component" class="hash-link" aria-label="Direct link to Commission Tab — CommissionTab Component" title="Direct link to Commission Tab — CommissionTab Component" translate="no">​</a></h3>
-<p>The Commission tab reads and writes the global commission rate via two new REST routes:</p>
-<ul>
-<li class=""><code>GET /admin/commission</code> — fetch current rate</li>
-<li class=""><code>POST /admin/commission</code> — update rate with validation</li>
-</ul>
-<p>The PHP render function has been removed; the tab is entirely SPA-driven.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="settings-tab--settingstab-component">Settings Tab — SettingsTab Component<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#settings-tab--settingstab-component" class="hash-link" aria-label="Direct link to Settings Tab — SettingsTab Component" title="Direct link to Settings Tab — SettingsTab Component" translate="no">​</a></h3>
-<p>Vendor Management settings (enable/disable vendor marketplace, terms URL, approval mode) are now managed through:</p>
-<ul>
-<li class=""><code>GET /admin/vendor-settings</code> — fetch all settings</li>
-<li class=""><code>POST /admin/vendor-settings</code> — persist changes</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="rest-endpoints-added-7-total">REST Endpoints Added (7 total)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#rest-endpoints-added-7-total" class="hash-link" aria-label="Direct link to REST Endpoints Added (7 total)" title="Direct link to REST Endpoints Added (7 total)" translate="no">​</a></h3>
-<table><thead><tr><th>Method</th><th>Route</th><th>Purpose</th></tr></thead><tbody><tr><td>GET</td><td><code>/admin/vendors</code></td><td>Paginated vendor list</td></tr><tr><td>POST</td><td><code>/admin/vendors/{id}/suspend</code></td><td>Suspend a vendor</td></tr><tr><td>POST</td><td><code>/admin/vendors/{id}/unsuspend</code></td><td>Unsuspend a vendor</td></tr><tr><td>GET</td><td><code>/admin/commission</code></td><td>Get commission rate</td></tr><tr><td>POST</td><td><code>/admin/commission</code></td><td>Set commission rate</td></tr><tr><td>GET</td><td><code>/admin/vendor-settings</code></td><td>Get vendor settings</td></tr><tr><td>POST</td><td><code>/admin/vendor-settings</code></td><td>Update vendor settings</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="performance">Performance<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance" translate="no">​</a></h3>
-<p>Vendor list previously issued one <code>COUNT(*)</code> query per vendor to get vehicle counts. This release replaces it with a single <code>GROUP BY</code> aggregation — O(n) → O(1) queries regardless of vendor count.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="test-coverage">Test Coverage<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.51.0-release#test-coverage" class="hash-link" aria-label="Direct link to Test Coverage" title="Direct link to Test Coverage" translate="no">​</a></h3>
-<p>19 new PHPUnit tests covering all 7 REST endpoints and their permission, validation, and response contracts.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
             <category>react</category>
             <category>spa</category>
         </item>

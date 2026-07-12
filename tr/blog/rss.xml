@@ -4,10 +4,27 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Tue, 07 Jul 2026 18:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 12 Jul 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.64.1 — Karanlık Mod Anahtarının Alanları Silmesi Düzeltmesi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release</guid>
+            <pubDate>Sun, 12 Jul 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[Admin panelindeki hızlı Karanlık Mod anahtarının Destek Telefonu/Saatleri/E-postası'nı sessizce boşaltıp Marka Adı'nı sıfırlaması düzeltildi, ayrıca eski bir migration'ın geride bıraktığı ayar kirliliği temizlendi.]]></description>
+            <content:encoded><![CDATA[<p>Admin panelindeki hızlı Karanlık Mod anahtarının Destek Telefonu/Saatleri/E-postası'nı sessizce boşaltıp Marka Adı'nı sıfırlaması düzeltildi, ayrıca eski bir migration'ın geride bıraktığı ayar kirliliği temizlendi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Karanlık Mod anahtarı Genel/Site Bilgisi ayarlarını sessizce boşaltıyordu.</strong> Admin panelindeki hızlı Karanlık Mod AJAX anahtarı, sadece karanlık-mod değeri mevcutken Genel sekmenin tüm sanitizer'ını yeniden çalıştırıyordu — bu da her değiştirmede Destek Telefonu, Destek Saatleri ve Destek E-postası'nı sessizce boşaltıp Marka Adı'nı site başlığına sıfırlıyordu. Artık sadece karanlık mod ayarını güncelliyor.</li>
+<li class=""><strong>Kalan ayar kirliliği temizliği.</strong> v4.27.2'de geçmişteki bir "Tüm Testleri Çalıştır" veri-kirliliği hatası için eklenen tek-seferlik temizlik (Marka Adı ve benzeri metin alanlarının literal "1" değeriyle kaydedilmesine yol açabiliyordu), tamamlanma bayrağı kirlilik gerçekleşmeden önce zaten işaretlenmiş olan kurulumlarda bir daha hiç yeniden çalışmıyordu. İkinci bir temizlik geçişi artık hâlâ eski kirliliği taşıyan kurulumları yakalıyor.</li>
+</ul>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>settings</category>
+            <category>bugfix</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.64.0 — Komisyon Oranı Geçersiz Kılmaları (Bayi ve Araç) ve Kademe Yapılandırması]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release</link>
@@ -474,46 +491,6 @@
             <category>release</category>
             <category>rentiva</category>
             <category>export</category>
-            <category>react</category>
-            <category>spa</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.51.0 — Vendor Yönetimi Faz B: Vendors, Komisyon ve Ayarlar React SPA]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release</guid>
-            <pubDate>Tue, 12 May 2026 06:47:00 GMT</pubDate>
-            <description><![CDATA[Vendor Yönetimi, Faz B ile React SPA göçünü tamamladı: Vendors, Komisyon ve Ayarlar sekmeleri artık tamamen istemci tarafında. Yedi yeni REST endpoint, üç yeni React bileşeni ve vendor listeleme için N+1 sorgu düzeltmesi.]]></description>
-            <content:encoded><![CDATA[<p>Vendor Yönetimi, Faz B ile React SPA göçünü tamamladı: Vendors, Komisyon ve Ayarlar sekmeleri artık tamamen istemci tarafında. Yedi yeni REST endpoint, üç yeni React bileşeni ve vendor listeleme için N+1 sorgu düzeltmesi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne Değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne Değişti doğrudan bağlantı" title="Ne Değişti doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendors-sekmesi--vendortable-bileşeni">Vendors Sekmesi — VendorTable Bileşeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#vendors-sekmesi--vendortable-bile%C5%9Feni" class="hash-link" aria-label="Vendors Sekmesi — VendorTable Bileşeni doğrudan bağlantı" title="Vendors Sekmesi — VendorTable Bileşeni doğrudan bağlantı" translate="no">​</a></h3>
-<p>Vendors sekmesi artık <code>GET /wp-json/mhm-rentiva/v1/admin/vendors</code> tarafından beslenen canlı bir React tablosudur. Özellikler:</p>
-<ul>
-<li class="">Vendor başına araç sayısıyla sayfalandırılmış vendor listesi (tek <code>GROUP BY</code> sorgusu — N+1 yok)</li>
-<li class=""><code>POST /admin/vendors/{id}/suspend</code> ve <code>POST /admin/vendors/{id}/unsuspend</code> aracılığıyla askıya alma / askıdan kaldırma işlemleri</li>
-<li class="">Sayfa yenilenmeden gerçek zamanlı durum rozetleri ve satır içi geri bildirim</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="komisyon-sekmesi--commissiontab-bileşeni">Komisyon Sekmesi — CommissionTab Bileşeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#komisyon-sekmesi--commissiontab-bile%C5%9Feni" class="hash-link" aria-label="Komisyon Sekmesi — CommissionTab Bileşeni doğrudan bağlantı" title="Komisyon Sekmesi — CommissionTab Bileşeni doğrudan bağlantı" translate="no">​</a></h3>
-<p>Komisyon sekmesi, iki yeni REST rotası aracılığıyla global komisyon oranını okur ve yazar:</p>
-<ul>
-<li class=""><code>GET /admin/commission</code> — mevcut oranı getirir</li>
-<li class=""><code>POST /admin/commission</code> — oranı doğrulamayla günceller</li>
-</ul>
-<p>PHP render fonksiyonu kaldırıldı; sekme tamamen SPA tarafından yönetiliyor.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ayarlar-sekmesi--settingstab-bileşeni">Ayarlar Sekmesi — SettingsTab Bileşeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#ayarlar-sekmesi--settingstab-bile%C5%9Feni" class="hash-link" aria-label="Ayarlar Sekmesi — SettingsTab Bileşeni doğrudan bağlantı" title="Ayarlar Sekmesi — SettingsTab Bileşeni doğrudan bağlantı" translate="no">​</a></h3>
-<p>Vendor Yönetimi ayarları (vendor marketplace etkinleştirme/devre dışı bırakma, şartlar URL'si, onay modu) artık şu rotalar aracılığıyla yönetiliyor:</p>
-<ul>
-<li class=""><code>GET /admin/vendor-settings</code> — tüm ayarları getirir</li>
-<li class=""><code>POST /admin/vendor-settings</code> — değişiklikleri kaydeder</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="eklenen-rest-endpointleri-7-toplam">Eklenen REST Endpoint'leri (7 toplam)<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#eklenen-rest-endpointleri-7-toplam" class="hash-link" aria-label="Eklenen REST Endpoint'leri (7 toplam) doğrudan bağlantı" title="Eklenen REST Endpoint'leri (7 toplam) doğrudan bağlantı" translate="no">​</a></h3>
-<table><thead><tr><th>Yöntem</th><th>Rota</th><th>Amaç</th></tr></thead><tbody><tr><td>GET</td><td><code>/admin/vendors</code></td><td>Sayfalandırılmış vendor listesi</td></tr><tr><td>POST</td><td><code>/admin/vendors/{id}/suspend</code></td><td>Vendor'ı askıya al</td></tr><tr><td>POST</td><td><code>/admin/vendors/{id}/unsuspend</code></td><td>Vendor'ı askıdan kaldır</td></tr><tr><td>GET</td><td><code>/admin/commission</code></td><td>Komisyon oranını getir</td></tr><tr><td>POST</td><td><code>/admin/commission</code></td><td>Komisyon oranını ayarla</td></tr><tr><td>GET</td><td><code>/admin/vendor-settings</code></td><td>Vendor ayarlarını getir</td></tr><tr><td>POST</td><td><code>/admin/vendor-settings</code></td><td>Vendor ayarlarını güncelle</td></tr></tbody></table>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="performans">Performans<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#performans" class="hash-link" aria-label="Performans doğrudan bağlantı" title="Performans doğrudan bağlantı" translate="no">​</a></h3>
-<p>Vendor listesi daha önce araç sayısını almak için vendor başına bir <code>COUNT(*)</code> sorgusu çalıştırıyordu. Bu sürüm, bunu tek bir <code>GROUP BY</code> toplamlamasıyla değiştiriyor — vendor sayısından bağımsız olarak O(n) → O(1) sorgu.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="test-kapsamı">Test Kapsamı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.51.0-release#test-kapsam%C4%B1" class="hash-link" aria-label="Test Kapsamı doğrudan bağlantı" title="Test Kapsamı doğrudan bağlantı" translate="no">​</a></h3>
-<p>Tüm 7 REST endpoint'inin izin, doğrulama ve yanıt sözleşmelerini kapsayan 19 yeni PHPUnit testi.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
             <category>react</category>
             <category>spa</category>
         </item>
