@@ -4,10 +4,29 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sun, 12 Jul 2026 19:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 12 Jul 2026 20:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v4.64.3 — Tam Karanlık Mod Kontrast Denetimi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release</guid>
+            <pubDate>Sun, 12 Jul 2026 20:00:00 GMT</pubDate>
+            <description><![CDATA[Tüm Ayarlar sekmelerinde yapılan kapsamlı bir kontrast denetimi, önceki yamanın ötesinde yaklaşık 15 karanlık-mod okunabilirlik sorunu daha düzeltti.]]></description>
+            <content:encoded><![CDATA[<p>Tüm Ayarlar sekmelerinde yapılan kapsamlı bir kontrast denetimi, önceki yamanın ötesinde yaklaşık 15 karanlık-mod okunabilirlik sorunu daha düzeltti.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Tam karanlık mod kontrast denetimi.</strong> v4.64.2 düzeltmesi sadece 3 izole noktayı ele almıştı; bu sürüm tüm 16 Ayarlar sekmesinde yaklaşık 15 sorun daha düzeltiyor: Lite yükseltme bildirimi linki, üst menü butonları (Belgeler / Bu Sekmeyi Sıfırla / Konum Yönetimi / Rotaları Yönet), Sistem Durumu kartları, "Yeni Kimlik Bilgileri Düzenle" ve "Temizlik Paneli" kutuları, akordeon bölümleri ve etiketleri, veri tabloları (REST API referansı, veritabanı temizleme geçmişi), <code>&lt;code&gt;</code> etiketleri, ve önceki hiçbir karanlık-mod kuralının kapsamadığı bir şablon kullanan koca bir sekme (Bildirim Şablonları).</li>
+<li class=""><strong>Açık mod regresyon düzeltmesi.</strong> Veritabanı Temizleme sekmesindeki iki kart, yukarıdaki karanlık-mod çalışmasının bir yan etkisi olarak açık modda kart görünümünü kaybetmişti; geri getirildi.</li>
+</ul>
+<p>Tüm 16 Ayarlar sekmesinde otomatik bir WCAG kontrast tarayıcısı (0 kalan hata) ve iki tur bağımsız kod incelemesiyle doğrulandı.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>settings</category>
+            <category>bugfix</category>
+            <category>accessibility</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v4.64.2 — Karanlık Mod Kontrast + Çevrilemeyen Placeholder Düzeltmeleri]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release</link>
@@ -452,28 +471,6 @@
             <category>rentiva</category>
             <category>mobile</category>
             <category>responsive</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.53.0 — Bayi Yönetimi Mobil CSS Rötuşları]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.53.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.53.0-release</guid>
-            <pubDate>Tue, 12 May 2026 11:00:00 GMT</pubDate>
-            <description><![CDATA[Bayi Yönetimi mobil görünüm düzeltmeleri. Bayiler tablosu 390px'te bozuktu — sütunlar ~40px'e sıkışıp metin dikey görünüyordu — artık yatay kaydırılabilir. Ayarlar ve Komisyon girdileri dar ekranlarda container genişliğine uyuyor.]]></description>
-            <content:encoded><![CDATA[<p>Bayi Yönetimi mobil görünüm düzeltmeleri. Bayiler tablosu 390px'te bozuktu — sütunlar ~40px'e sıkışıp metin dikey görünüyordu — artık yatay kaydırılabilir. Ayarlar ve Komisyon girdileri dar ekranlarda container genişliğine uyuyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.53.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-yönetimi--mobil-yerleşim-düzeltmeleri">Bayi Yönetimi — Mobil Yerleşim Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.53.0-release#bayi-y%C3%B6netimi--mobil-yerle%C5%9Fim-d%C3%BCzeltmeleri" class="hash-link" aria-label="Bayi Yönetimi — Mobil Yerleşim Düzeltmeleri doğrudan bağlantı" title="Bayi Yönetimi — Mobil Yerleşim Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Bayiler sekmesi:</strong> 390px'te bozuk yerleşim düzeltildi — <code>table-layout:auto</code> ve ≤900px için <code>overflow-x</code> kaydırma wrapper'ı.</li>
-<li class=""><strong>Bayiler sekmesi:</strong> Ad ve E-posta sütunlarına dar ekranlarda minimum genişlik (110px / 150px) atandı, içerik okunur kalıyor.</li>
-<li class=""><strong>Ayarlar sekmesi:</strong> textarea ve sayı girdileri taşmayı önlemek için <code>max-width:100%</code> kullanıyor.</li>
-<li class=""><strong>Komisyon sekmesi:</strong> etiket girdisi ≤600px'te container genişliğine uyuyor.</li>
-<li class=""><strong>Build:</strong> <code>vendor-management.css</code> / <code>vendor-management.js</code> güncellendi.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
-            <category>vendor</category>
         </item>
     </channel>
 </rss>

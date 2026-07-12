@@ -2,11 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-12T19:00:00.000Z</updated>
+    <updated>2026-07-12T20:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v4.64.3 — Full Dark Mode Contrast Audit]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release"/>
+        <updated>2026-07-12T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A full contrast audit across every Settings tab, fixing roughly 15 more dark-mode readability issues beyond the previous patch.]]></summary>
+        <content type="html"><![CDATA[<p>A full contrast audit across every Settings tab, fixing roughly 15 more dark-mode readability issues beyond the previous patch.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Full dark-mode contrast audit.</strong> The v4.64.2 fix only addressed 3 isolated spots; this release fixes ~15 more across all 16 Settings tabs: the Lite-upgrade notice link, page-header buttons (Belgeler / Bu Sekmeyi Sıfırla / Konum Yönetimi / Rotaları Yönet), System Status cards, the "Issue New Credentials" and "Cleanup Dashboard" boxes, accordion sections and their labels, data tables (REST API reference, DB cleanup history), <code>&lt;code&gt;</code> tags, and an entire tab (Bildirim Şablonları) whose custom template wasn't covered by any prior dark-mode rule.</li>
+<li class=""><strong>Light-mode regression fix.</strong> Two Database Cleanup cards lost their card styling in light mode as a side effect of the dark-mode work above; restored.</li>
+</ul>
+<p>Verified with an automated WCAG contrast scanner across all 16 Settings tabs (0 remaining failures) plus two rounds of independent code review.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="settings" term="settings"/>
+        <category label="bugfix" term="bugfix"/>
+        <category label="accessibility" term="accessibility"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.64.2 — Dark Mode Contrast + Un-translatable Placeholder Fixes]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release</id>
@@ -527,31 +550,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="mobile" term="mobile"/>
         <category label="responsive" term="responsive"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.53.0 — Vendor Management Mobile CSS Polish]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.53.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.53.0-release"/>
-        <updated>2026-05-12T11:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Vendor Management mobile rendering fixes. The Vendors table was broken at 390px — columns crushed to ~40px causing vertical text — and now scrolls horizontally. Settings and Commission inputs respect container width at narrow widths.]]></summary>
-        <content type="html"><![CDATA[<p>Vendor Management mobile rendering fixes. The Vendors table was broken at 390px — columns crushed to ~40px causing vertical text — and now scrolls horizontally. Settings and Commission inputs respect container width at narrow widths.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.53.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-management--mobile-layout-fixes">Vendor Management — Mobile Layout Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.53.0-release#vendor-management--mobile-layout-fixes" class="hash-link" aria-label="Direct link to Vendor Management — Mobile Layout Fixes" title="Direct link to Vendor Management — Mobile Layout Fixes" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Vendors tab:</strong> fixed broken layout at 390px — <code>table-layout:auto</code> plus an <code>overflow-x</code> scroll wrapper at ≤900px.</li>
-<li class=""><strong>Vendors tab:</strong> Name and Email columns now enforce a minimum width (110px / 150px) at narrow breakpoints so content stays readable.</li>
-<li class=""><strong>Settings tab:</strong> textarea and number inputs use <code>max-width:100%</code> to prevent overflow.</li>
-<li class=""><strong>Commission tab:</strong> the label input respects container width at ≤600px.</li>
-<li class=""><strong>Build:</strong> <code>vendor-management.css</code> / <code>vendor-management.js</code> updated.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
-        <category label="vendor" term="vendor"/>
     </entry>
 </feed>
