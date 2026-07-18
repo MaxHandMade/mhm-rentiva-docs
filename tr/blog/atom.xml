@@ -2,11 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-18T14:00:00.000Z</updated>
+    <updated>2026-07-18T23:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Dışa aktarma ekranı düzeltmeleri]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes"/>
+        <updated>2026-07-18T23:30:00.000Z</updated>
+        <summary type="html"><![CDATA[Dışa aktarma ekranını düzelten, birbirine bağlı bir yama sürümü. Paylaşılan paketi Lite taşır (v5.0.1); mantığı Pro taşır (v5.0.2). Ücretsiz eklentinin kendi davranışı değişmez — dışa aktarma ekranı bir Pro özelliğidir.]]></summary>
+        <content type="html"><![CDATA[<p>Dışa aktarma ekranını düzelten, birbirine bağlı bir yama sürümü. Paylaşılan paketi Lite taşır (<strong>v5.0.1</strong>); mantığı Pro taşır (<strong>v5.0.2</strong>). Ücretsiz eklentinin kendi davranışı değişmez — dışa aktarma ekranı bir Pro özelliğidir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="neler-düzeldi">Neler düzeldi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes#neler-d%C3%BCzeldi" class="hash-link" aria-label="Neler düzeldi doğrudan bağlantı" title="Neler düzeldi doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Dışa Aktar düğmesi artık çalışıyor.</strong> Güvenlik jetonunu yanlış alan adıyla gönderiyordu; bu yüzden CSV dahil her dışa aktarma "bağlantının süresi doldu" hatasıyla başarısız oluyordu.</li>
+<li class=""><strong>Tarih aralığı inen dosyaya uygulanıyor.</strong> Ekran aralığı bir alan adıyla gönderirken işleyici başka bir alanı okuyordu; bu yüzden filtreli önizleme ("23 kayıt") gösterirken dosyaya yine tüm kayıtlar iniyordu. İkisi artık uyumlu ve bunu sabitleyen bir regresyon testi eklendi.</li>
+<li class=""><strong>Geçmiş tablosu yeniden okunabilir.</strong> Tür, Kayıt ve Kullanıcı sütunları boştu; çünkü saklanan satırlar ile tablo farklı alan adları kullanıyordu. Artık okuma anında eşleniyor ve sayısal bir kullanıcı kimliği, hesabın görünen adına çözülüyor. Yeni bir Biçim sütunu, her girdinin hangi biçimde dışa aktarıldığını gösteriyor.</li>
+<li class=""><strong>JSON biçimine ulaşılabiliyor.</strong> JSON dışa aktarma sunucuda zaten çalışıyordu ama ekranda biçim seçici yoktu; artık bir seçici sunuyor ve işleyiciyle tek bir doğruluk kaynağını paylaşarak ikisinin birbirinden ayrılmasını engelliyor.</li>
+<li class=""><strong>Türkçe çeviri</strong> yeni metinler için güncellendi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kalite-kapıları">Kalite kapıları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes#kalite-kap%C4%B1lar%C4%B1" class="hash-link" aria-label="Kalite kapıları doğrudan bağlantı" title="Kalite kapıları doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kapı</th><th>Lite v5.0.1</th><th>Pro v5.0.2</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 / 0</td><td>813 / 0</td></tr><tr><td>PHPCS</td><td>0</td><td>0</td></tr><tr><td>Plugin Check</td><td>0 hata</td><td>özel eklenti</td></tr></tbody></table>
+<p>İkisini birlikte kurun — düzeltme iki eklentiye yayılıyor (paket Lite'ta, mantık Pro'da).</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.0.0 — WordPress.org'daki İlk Genel Sürüm]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release</id>
@@ -536,27 +563,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="ui" term="ui"/>
         <category label="css" term="css"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.55.0 — Kısa Kod Sayfaları Mobil Düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.55.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.55.0-release"/>
-        <updated>2026-05-12T13:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Kısa Kod Sayfaları yönetici ekranındaki KPI kartları ve tablo eylem butonları dar ekranlarda artık erişilebilir.]]></summary>
-        <content type="html"><![CDATA[<p>Kısa Kod Sayfaları yönetici ekranındaki KPI kartları ve tablo eylem butonları dar ekranlarda artık erişilebilir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.55.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kısa-kod-sayfaları--mobil-erişilebilirlik">Kısa Kod Sayfaları — Mobil Erişilebilirlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.55.0-release#k%C4%B1sa-kod-sayfalar%C4%B1--mobil-eri%C5%9Filebilirlik" class="hash-link" aria-label="Kısa Kod Sayfaları — Mobil Erişilebilirlik doğrudan bağlantı" title="Kısa Kod Sayfaları — Mobil Erişilebilirlik doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>KPI kartları:</strong> <code>flex-wrap</code> eklendi — üç stat kartı (Toplam / Aktif / Eksik) ≤782px'te ekrandan taşmak yerine artık görünür.</li>
-<li class=""><strong>Tablo:</strong> yatay kaydırma wrapper'ı eklendi — Düzenle / Görüntüle / Kaldır eylem butonlarına dar ekranlarda scroll ile erişilebiliyor.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
     </entry>
 </feed>

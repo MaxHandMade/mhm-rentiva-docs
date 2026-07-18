@@ -2,11 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-18T14:00:00.000Z</updated>
+    <updated>2026-07-18T23:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Export screen fixes]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes"/>
+        <updated>2026-07-18T23:30:00.000Z</updated>
+        <summary type="html"><![CDATA[A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (v5.0.1); Pro ships the logic (v5.0.2). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.]]></summary>
+        <content type="html"><![CDATA[<p>A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (<strong>v5.0.1</strong>); Pro ships the logic (<strong>v5.0.2</strong>). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-fixed">What's fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#whats-fixed" class="hash-link" aria-label="Direct link to What's fixed" title="Direct link to What's fixed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The Export button now works.</strong> It was posting its security token under the wrong field name, so every export — CSV included — failed with a "the link you followed has expired" error.</li>
+<li class=""><strong>The date range is applied to the download.</strong> The screen posted the range under one set of field names while the handler read another, so a filtered preview ("23 records") still downloaded every record. The two now agree, and a regression test pins it in place.</li>
+<li class=""><strong>The history table is readable again.</strong> Its Type, Records and User columns were blank because the stored rows and the table used different field names; they are now mapped on read, and a numeric user id resolves to the account's display name. A new Format column shows how each entry was exported.</li>
+<li class=""><strong>The JSON format is reachable.</strong> JSON export has worked on the server for releases, but the screen shipped no format control; a picker now offers it, sharing one source of truth with the handler so the two can't drift apart.</li>
+<li class=""><strong>Turkish translation</strong> updated for the new strings.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
+<table><thead><tr><th>Gate</th><th>Lite v5.0.1</th><th>Pro v5.0.2</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 / 0</td><td>813 / 0</td></tr><tr><td>PHPCS</td><td>0</td><td>0</td></tr><tr><td>Plugin Check</td><td>0 errors</td><td>private add-on</td></tr></tbody></table>
+<p>Install both together — the fix spans the two (bundle in Lite, logic in Pro).</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.0.0 — First Public WordPress.org Release]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</id>
@@ -536,27 +563,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="ui" term="ui"/>
         <category label="css" term="css"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.55.0 — Shortcode Pages Mobile Fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release"/>
-        <updated>2026-05-12T13:00:00.000Z</updated>
-        <summary type="html"><![CDATA[KPI cards and table action buttons on the Shortcode Pages admin screen are now accessible at narrow widths.]]></summary>
-        <content type="html"><![CDATA[<p>KPI cards and table action buttons on the Shortcode Pages admin screen are now accessible at narrow widths.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="shortcode-pages--mobile-accessibility">Shortcode Pages — Mobile Accessibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release#shortcode-pages--mobile-accessibility" class="hash-link" aria-label="Direct link to Shortcode Pages — Mobile Accessibility" title="Direct link to Shortcode Pages — Mobile Accessibility" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>KPI cards:</strong> <code>flex-wrap</code> added — all three stat cards (Total / Active / Missing) are now visible at ≤782px instead of overflowing off-screen.</li>
-<li class=""><strong>Table:</strong> horizontal scroll wrapper added — the Edit / View / Remove action buttons are reachable via scroll at narrow widths.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
     </entry>
 </feed>

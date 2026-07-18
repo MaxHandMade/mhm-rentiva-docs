@@ -4,10 +4,33 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sat, 18 Jul 2026 14:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 18 Jul 2026 23:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Export screen fixes]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</guid>
+            <pubDate>Sat, 18 Jul 2026 23:30:00 GMT</pubDate>
+            <description><![CDATA[A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (v5.0.1); Pro ships the logic (v5.0.2). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.]]></description>
+            <content:encoded><![CDATA[<p>A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (<strong>v5.0.1</strong>); Pro ships the logic (<strong>v5.0.2</strong>). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-fixed">What's fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#whats-fixed" class="hash-link" aria-label="Direct link to What's fixed" title="Direct link to What's fixed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The Export button now works.</strong> It was posting its security token under the wrong field name, so every export — CSV included — failed with a "the link you followed has expired" error.</li>
+<li class=""><strong>The date range is applied to the download.</strong> The screen posted the range under one set of field names while the handler read another, so a filtered preview ("23 records") still downloaded every record. The two now agree, and a regression test pins it in place.</li>
+<li class=""><strong>The history table is readable again.</strong> Its Type, Records and User columns were blank because the stored rows and the table used different field names; they are now mapped on read, and a numeric user id resolves to the account's display name. A new Format column shows how each entry was exported.</li>
+<li class=""><strong>The JSON format is reachable.</strong> JSON export has worked on the server for releases, but the screen shipped no format control; a picker now offers it, sharing one source of truth with the handler so the two can't drift apart.</li>
+<li class=""><strong>Turkish translation</strong> updated for the new strings.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
+<table><thead><tr><th>Gate</th><th>Lite v5.0.1</th><th>Pro v5.0.2</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 / 0</td><td>813 / 0</td></tr><tr><td>PHPCS</td><td>0</td><td>0</td></tr><tr><td>Plugin Check</td><td>0 errors</td><td>private add-on</td></tr></tbody></table>
+<p>Install both together — the fix spans the two (bundle in Lite, logic in Pro).</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>patch</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v5.0.0 — First Public WordPress.org Release]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</link>
@@ -461,24 +484,6 @@
             <category>rentiva</category>
             <category>ui</category>
             <category>css</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.55.0 — Shortcode Pages Mobile Fixes]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release</guid>
-            <pubDate>Tue, 12 May 2026 13:00:00 GMT</pubDate>
-            <description><![CDATA[KPI cards and table action buttons on the Shortcode Pages admin screen are now accessible at narrow widths.]]></description>
-            <content:encoded><![CDATA[<p>KPI cards and table action buttons on the Shortcode Pages admin screen are now accessible at narrow widths.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="shortcode-pages--mobile-accessibility">Shortcode Pages — Mobile Accessibility<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.55.0-release#shortcode-pages--mobile-accessibility" class="hash-link" aria-label="Direct link to Shortcode Pages — Mobile Accessibility" title="Direct link to Shortcode Pages — Mobile Accessibility" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>KPI cards:</strong> <code>flex-wrap</code> added — all three stat cards (Total / Active / Missing) are now visible at ≤782px instead of overflowing off-screen.</li>
-<li class=""><strong>Table:</strong> horizontal scroll wrapper added — the Edit / View / Remove action buttons are reachable via scroll at narrow widths.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
         </item>
     </channel>
 </rss>
