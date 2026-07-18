@@ -5,7 +5,13 @@ sidebar_label: Vendor Management
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 :::info React SPA — Admin Page (since v4.40.0)
 The **Vendor Management** admin page was migrated to a **React SPA** in v4.40.0. `VendorManagementRestController` registers 7 REST routes under `/wp-json/mhm-rentiva/v1/vendor-management/*`. Components: `VendorManagementPage`, `ApplicationTable`, `VendorTable`, `VendorDetailPanel`, `ActionBar`. Data is fetched client-side — no full PHP page render.

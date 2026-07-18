@@ -6,7 +6,13 @@ sidebar_position: 4
 slug: /core-configuration/transfer-settings
 ---
 
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 The Transfer Settings tab is where you configure payment methods, deposit rates, and custom location types for VIP transfer services. Access it from the **MHM Rentiva > Settings > Transfer Settings** tab.
 

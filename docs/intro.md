@@ -17,6 +17,29 @@ Welcome to the official documentation hub for **MHM Rentiva** — the WordPress 
 Looking for a specific feature? Use the main categories below to jump straight to the information you need.
 :::
 
+## Editions — Lite vs Pro
+
+**MHM Rentiva (Lite)** is the free edition published on WordPress.org. It covers the entire rental core — fleet management, availability, bookings, customers, WooCommerce checkout, email notifications, the customer account pages and all of the shortcodes, blocks and Elementor widgets — with **no vehicle, booking or listing caps, no feature timers and no locked screens**.
+
+**MHM Rentiva Pro** is a *separate paid add-on* installed alongside Lite. It does not replace Lite; it adds the marketplace, transfer and compliance layer on top of it:
+
+| Pro-only capability | What it covers |
+| --- | --- |
+| **Multi-vendor marketplace** | Vendor onboarding & approval, vendor panel, vendor listings |
+| **Vendor payouts, commission & ledger** | Commission accrual, clearing, payout approval, ledger |
+| **Vendor reports & disputes** | Vendor-to-admin reports and the appeal flow |
+| **VIP transfers + location-based routes** | Transfer search/results, route management, popular routes |
+| **Customer messaging** | Admin ↔ customer threads |
+| **Advanced reports** | Extended reporting beyond the Lite dashboard |
+| **Dedicated export screen** | The standalone Export admin page |
+| **GDPR / data-retention tools** | Data export/erasure, consent, retention cron |
+
+:::info How to tell which is which
+Every documentation page that describes a Pro capability carries a **![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square)** badge at the top. Pages without it document Lite functionality that works in the free edition.
+
+Pro capabilities are gated on a **valid licence**, not merely hidden — with Pro installed but unlicensed those screens stay off. Pro is available at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
+:::
+
 ---
 
 <div className="row">

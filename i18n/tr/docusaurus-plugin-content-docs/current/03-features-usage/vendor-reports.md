@@ -8,6 +8,12 @@ slug: /features-usage/vendor-reports
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info Pro özelliği
+Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
+Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+:::
+
 :::info React SPA (v4.40.0'dan beri)
 Bayi Raporları yönetici sayfası v4.40.0 sürümünde (Faz 6) bir **React SPA**'ya taşındı. Veri `/wp-json/mhm-rentiva/v1/vendor-reports/*` REST uç noktaları üzerinden çekilir. Bileşenler: `VendorReportsPage`, `FilterBar`, `ReportTable`, `DetailView`, `ActionForm`, `StatusBadge`. Flash mesajları `window.mhmRentivaVendorReports.flash` desenini kullanır (PHP `enqueue_assets()`, `history.replaceState` parametreleri silmeden önce `$_GET['updated']`/`$_GET['error']` okur).
 :::

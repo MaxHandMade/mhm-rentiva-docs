@@ -17,6 +17,29 @@ WordPress tabanlı araç kiralama operasyonlarınızı profesyonel bir seviyeye 
 Hangi özelliği arıyorsunuz? Aşağıdaki ana kategoriler aracılığıyla ihtiyacınız olan bilgiye hızla ulaşabilirsiniz.
 :::
 
+## Sürümler — Lite ve Pro farkı
+
+**MHM Rentiva (Lite)**, WordPress.org'da yayınlanan ücretsiz sürümdür. Kiralama çekirdeğinin tamamını kapsar — filo yönetimi, uygunluk, rezervasyonlar, müşteriler, WooCommerce ödemesi, e-posta bildirimleri, müşteri hesap sayfaları ve tüm kısa kodlar, bloklar ve Elementor widget'ları — **araç, rezervasyon veya ilan sınırı, özellik sayacı ya da kilitli ekran olmadan**.
+
+**MHM Rentiva Pro**, Lite'ın yanına kurulan *ayrı ücretli bir eklentidir*. Lite'ın yerini almaz; üzerine pazaryeri, transfer ve uyumluluk katmanını ekler:
+
+| Yalnızca Pro'da olan yetenek | Kapsamı |
+| --- | --- |
+| **Çok bayili pazaryeri** | Bayi başvurusu ve onayı, bayi paneli, bayi ilanları |
+| **Bayi hakedişleri, komisyon ve defter** | Komisyon tahakkuku, clearing, hakediş onayı, ledger |
+| **Bayi raporları ve itirazlar** | Bayiden yöneticiye rapor ve itiraz akışı |
+| **VIP transfer + konum bazlı rotalar** | Transfer arama/sonuçları, rota yönetimi, popüler rotalar |
+| **Müşteri mesajlaşması** | Yönetici ↔ müşteri yazışmaları |
+| **Gelişmiş raporlar** | Lite kontrol panelinin ötesinde raporlama |
+| **Ayrı dışa aktarma ekranı** | Bağımsız Dışa Aktar yönetici sayfası |
+| **KVKK/GDPR ve veri saklama araçları** | Veri dışa aktarma/silme, onay, saklama cron'u |
+
+:::info Hangisinin hangisi olduğunu nasıl anlarsınız
+Pro yeteneği anlatan her dokümantasyon sayfası, üstünde **![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square)** rozeti taşır. Rozeti olmayan sayfalar, ücretsiz sürümde çalışan Lite işlevlerini anlatır.
+
+Pro yetenekleri yalnızca gizlenmez, **geçerli bir lisansa bağlanır** — Pro kurulu ama lisanssızsa o ekranlar kapalı kalır. Pro için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
+:::
+
 ---
 
 <div className="row">

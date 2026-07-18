@@ -4,7 +4,13 @@ title: Mesajlaşma Sistemi
 sidebar_position: 12
 slug: /features-usage/messages
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro özelliği
+Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
+Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+:::
 
 :::info React SPA (v4.40.0'dan beri)
 Mesajlar yönetici sayfası v4.40.0 sürümünde tam bir **React SPA**'ya taşındı (CSS rötuşları v4.41.0'da tamamlandı). 6 React bileşeninin tamamı `build/admin/messages.js` üzerinden sunulur. Sayfa, PHP tam sayfa render'ı olmadan yüklenir — veri `/wp-json/mhm-rentiva/v1/messages/*` REST uç noktaları üzerinden çekilir. Eski PHP render metotları kaldırıldı.

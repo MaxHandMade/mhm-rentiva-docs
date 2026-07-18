@@ -3,7 +3,13 @@ title: Vendor public profile
 description: Usage guide and technical reference for the Vendor Public Profile module — shortcode, Gutenberg block, and Elementor widget.
 sidebar_position: 26
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 :::info Purpose
 This page documents the Vendor Public Profile module — the public-facing trust page customers land on before booking with a vendor. Covers operational use, full attribute reference, schema/SEO behavior, and developer extension points.

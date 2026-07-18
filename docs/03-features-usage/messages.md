@@ -4,7 +4,13 @@ title: Messaging System
 sidebar_position: 12
 slug: /features-usage/messages
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 :::info React SPA (since v4.40.0)
 The Messages admin page was fully migrated to a **React SPA** in v4.40.0 (CSS polish finalized in v4.41.0). All 6 React components are served from `build/admin/messages.js`. The page loads without a PHP full-page render — data is fetched via `/wp-json/mhm-rentiva/v1/messages/*` REST endpoints. Legacy PHP render methods were removed.

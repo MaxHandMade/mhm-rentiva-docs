@@ -8,6 +8,12 @@ slug: /features-usage/vendor-reports
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
+
 :::info React SPA (since v4.40.0)
 The Vendor Reports admin page was migrated to a **React SPA** in v4.40.0 (Faz 6). Data is fetched via `/wp-json/mhm-rentiva/v1/vendor-reports/*` REST endpoints. Components: `VendorReportsPage`, `FilterBar`, `ReportTable`, `DetailView`, `ActionForm`, `StatusBadge`. Flash messages use the `window.mhmRentivaVendorReports.flash` pattern (PHP `enqueue_assets()` reads `$_GET['updated']`/`$_GET['error']` before `history.replaceState` strips params).
 :::

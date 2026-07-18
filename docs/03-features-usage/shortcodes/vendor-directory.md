@@ -3,7 +3,13 @@ title: Vendor directory
 description: Usage guide and technical reference for the Vendor Directory module — public catalogue of active vendors with city, badge, and rating filters.
 sidebar_position: 27
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 :::info Purpose
 This page documents the Vendor Directory module — the Pro-gated public catalogue at `/vendors/` (EN) / `/bayiler/` (TR) that lists every active vendor with city, badge, and minimum-rating filters. Covers operational use, attribute reference, schema/SEO, and developer extension points.

@@ -6,7 +6,13 @@ sidebar_position: 8
 slug: /features-usage/transfer-routes
 ---
 
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro özelliği
+Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
+Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+:::
 
 Transfer Güzergâhları, VIP transfer hizmetini gerçekleştirdiğiniz ana rotaları ve bu rotaların fiyatlarını belirlediğiniz alandır. **MHM Rentiva > Transfer Güzergâhları** menüsünden ulaşılır.
 

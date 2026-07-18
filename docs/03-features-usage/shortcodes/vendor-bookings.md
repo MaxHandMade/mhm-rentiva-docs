@@ -3,7 +3,13 @@ title: Vendor bookings list
 description: Usage guide and technical reference for the vendor-side booking inbox shortcode — lists every reservation made on the current vendor's vehicles.
 sidebar_position: 28
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro feature
+This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
+Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
+See [Editions — Lite vs Pro](/docs/) for the full split.
+:::
 
 :::info Purpose
 This page documents the `[rentiva_vendor_bookings]` shortcode — the vendor-side inbox that lists every reservation customers have made on the current vendor's vehicles. Used in the vendor panel (`/panel/`); not for public placement.

@@ -5,7 +5,13 @@ sidebar_label: Vendor Yönetimi
 sidebar_position: 1
 ---
 
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro özelliği
+Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
+Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+:::
 
 :::info React SPA — Yönetici Sayfası (v4.40.0'dan beri)
 **Bayi Yönetimi** yönetici sayfası v4.40.0 sürümünde bir **React SPA**'ya taşındı. `VendorManagementRestController`, `/wp-json/mhm-rentiva/v1/vendor-management/*` altında 7 REST rotası kaydeder. Bileşenler: `VendorManagementPage`, `ApplicationTable`, `VendorTable`, `VendorDetailPanel`, `ActionBar`. Veri istemci tarafında çekilir — tam PHP sayfa render'ı yok.

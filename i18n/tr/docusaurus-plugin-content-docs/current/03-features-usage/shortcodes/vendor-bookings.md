@@ -3,7 +3,13 @@ title: Bayi rezervasyon listesi
 description: Bayi-tarafı rezervasyon gelen kutusu kısa kodunun kullanım kılavuzu ve teknik referansı — mevcut bayinin araçlarına yapılan tüm rezervasyonları listeler.
 sidebar_position: 28
 ---
-![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Pro](https://img.shields.io/badge/license-Pro-purple?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
+
+:::info Pro özelliği
+Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
+Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+:::
 
 :::info Amaç
 Bu sayfa `[rentiva_vendor_bookings]` kısa kodunu belgeler — bayi panelinde (`/panel/`) müşterilerin mevcut bayinin araçlarına yaptığı tüm rezervasyonları listeleyen gelen kutusu. Halka açık yerleştirme için değil.
