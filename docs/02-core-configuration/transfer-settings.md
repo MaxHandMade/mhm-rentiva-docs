@@ -11,7 +11,7 @@ slug: /core-configuration/transfer-settings
 :::info Pro feature
 This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
 Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
-See [Editions — Lite vs Pro](/docs/) for the full split.
+See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 The Transfer Settings tab is where you configure payment methods, deposit rates, and custom location types for VIP transfer services. Access it from the **MHM Rentiva > Settings > Transfer Settings** tab.

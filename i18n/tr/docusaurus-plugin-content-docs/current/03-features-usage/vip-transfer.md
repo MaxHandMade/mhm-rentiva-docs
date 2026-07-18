@@ -11,7 +11,7 @@ slug: /features-usage/vip-transfer
 :::info Pro özelliği
 Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
 Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
-Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 VIP Transfer modülü, standart araç kiralamadan farklı olarak, şoförlü ulaşım hizmetlerini (Havalimanı transferi, şehirlerarası ulaşım vb.) yönetmek için tasarlanmıştır. Bu modül, rota bazlı fiyatlandırma ve kapasite kontrolü üzerine inşa edilmiştir.

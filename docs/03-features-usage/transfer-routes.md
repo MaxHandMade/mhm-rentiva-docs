@@ -11,7 +11,7 @@ slug: /features-usage/transfer-routes
 :::info Pro feature
 This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
 Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
-See [Editions — Lite vs Pro](/docs/) for the full split.
+See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 Transfer Routes is where you define the main routes for your VIP transfer service and the pricing for those routes. Access it via **MHM Rentiva > Transfer Routes**.

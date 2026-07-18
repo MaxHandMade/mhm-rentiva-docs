@@ -11,7 +11,7 @@ slug: /features-usage/vehicle-lifecycle
 :::info Pro özelliği
 Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
 Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
-Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 Araç Yaşam Döngüsü Yönetimi, her aracın platformdaki tüm ömrünü — aktifleşmeden sona ermeye, geri çekilmeden yeniden listelemeye kadar — kural tabanlı bir durum makinesi üzerinden yönetir. **Pro lisans gerektirir.**

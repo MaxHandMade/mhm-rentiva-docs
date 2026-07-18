@@ -11,7 +11,7 @@ slug: /core-configuration/message-settings
 :::info Pro özelliği
 Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
 Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
-Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 Mesaj Ayarları sekmesi, müşteriler ve personel arasındaki dahili sohbet sistemini, bildirim tercihlerini ve iş akışı kategorilerini yapılandırdığınız bölümdür. **MHM Rentiva > Ayarlar > Mesaj Ayarları** altından ulaşılır.

@@ -9,7 +9,7 @@ slug: /features-usage/export
 :::info Pro özelliği
 Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
 Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
-Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 Dışa Aktar aracı, kiralama verilerinizi analiz, muhasebe veya yedekleme amacıyla farklı formatlarda sistem dışına almanızı sağlar. **MHM Rentiva > Dışa Aktar** menüsü üzerinden kapsamlı veri ihracatı yapabilirsiniz.

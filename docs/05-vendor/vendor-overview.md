@@ -13,7 +13,7 @@ import Link from '@docusaurus/Link';
 :::info Pro feature
 This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
 Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
-See [Editions — Lite vs Pro](/docs/) for the full split.
+See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 # 🤝 Vendor Economy & Management

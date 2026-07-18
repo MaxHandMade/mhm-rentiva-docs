@@ -11,7 +11,7 @@ slug: /core-configuration/transfer-settings
 :::info Pro özelliği
 Bu sayfa **MHM Rentiva Pro** eklentisinin bir yeteneğini anlatır. WordPress.org'daki ücretsiz
 Lite sürümünün parçası değildir; Lite'ın yanına kurulu Pro ve geçerli bir lisans gerektirir.
-Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/).
+Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek için: [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 Transfer Ayarları sekmesi, VIP transfer hizmetleri için ödeme yöntemlerini, depozito oranlarını ve özel lokasyon tiplerini yapılandırdığınız bölümdür. **MHM Rentiva > Ayarlar > Transfer Ayarları** sekmesinden ulaşılır.

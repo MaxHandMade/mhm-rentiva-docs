@@ -9,7 +9,7 @@ slug: /features-usage/export
 :::info Pro feature
 This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
 Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
-See [Editions — Lite vs Pro](/docs/) for the full split.
+See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 The Export tool lets you extract your rental data in various formats for analysis, accounting, or backup purposes. Access comprehensive data exports via **MHM Rentiva > Export**.

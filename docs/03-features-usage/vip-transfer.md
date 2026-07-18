@@ -11,7 +11,7 @@ slug: /features-usage/vip-transfer
 :::info Pro feature
 This page documents a capability of the **MHM Rentiva Pro** add-on. It is not part of the free
 Lite edition on WordPress.org and requires Pro installed alongside Lite plus a valid licence.
-See [Editions — Lite vs Pro](/docs/) for the full split.
+See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalemi.com/rentiva](https://wpalemi.com/rentiva/).
 :::
 
 The VIP Transfer module is designed to manage chauffeured transportation services (Airport transfers, intercity travel, etc.) separately from standard vehicle rentals. This module is built on route-based pricing and capacity control.
