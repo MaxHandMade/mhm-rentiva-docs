@@ -2,11 +2,46 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-12T20:00:00.000Z</updated>
+    <updated>2026-07-18T14:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.0.0 — First Public WordPress.org Release]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release"/>
+        <updated>2026-07-18T14:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva's first release on WordPress.org: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva's first release on WordPress.org: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.</p>
+<p>Every screen works exactly as before — this release changes <strong>how the plugin is packaged and loaded</strong>, not what it does.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-in-it">What's in it<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#whats-in-it" class="hash-link" aria-label="Direct link to What's in it" title="Direct link to What's in it" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>First public release on WordPress.org.</strong> Fleet management, availability, bookings, customers, WooCommerce payments, email notifications and the customer account pages — with no vehicle, booking or listing caps, no feature timers and no locked screens.</li>
+<li class=""><strong>No third-party requests at all.</strong> The webfont is bundled and served from your own site; there are no geolocation, analytics or CDN calls.</li>
+<li class=""><strong>16 shortcodes, 16 Gutenberg blocks and 17 Elementor widgets</strong> share a single renderer (Render Parity), so all three produce identical output. Ships with a full Turkish translation.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="under-the-hood">Under the hood<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#under-the-hood" class="hash-link" aria-label="Direct link to Under the hood" title="Direct link to Under the hood" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Assets load through the WordPress asset system.</strong> Every admin and front-end script and style now goes through <code>wp_enqueue</code> / <code>wp_add_inline_*</code> instead of inline <code>&lt;script&gt;</code>/<code>&lt;style&gt;</code> blocks — with no change to how any screen looks or behaves. Self-contained documents (email templates, the downloadable test report, the meta-keys reference) keep their inline styles by design, since an external stylesheet would not be available when those are opened on their own.</li>
+<li class=""><strong>Licence gating hardened.</strong> Pro-only surfaces are now gated on a valid licence rather than only hidden, closing several paths where the separate paid add-on's features could run without one.</li>
+<li class=""><strong>WordPress 7.0 ready,</strong> including a contrast fix for dashicons inside primary buttons (WP 7.0 colours them with the admin theme colour, which made them invisible on a primary button's matching background).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
+<table><thead><tr><th>Gate</th><th>Result</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 tests / 2,823 assertions, 0 failures</td></tr><tr><td>WordPress Coding Standards</td><td>0 errors</td></tr><tr><td>Plugin Check (distributed ZIP)</td><td><strong>0 errors</strong></td></tr><tr><td>Independent audits</td><td>Two architecture/security reviews, plus browser verification across every affected admin and front-end screen</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>First WordPress.org release — if you are upgrading from a pre-release build, no action is required.</p>
+<p><strong>Requirements:</strong> WordPress 6.7+, PHP 8.1+. WooCommerce is required for frontend booking payments.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="wordpress-org" term="wordpress-org"/>
+        <category label="compliance" term="compliance"/>
+        <category label="major" term="major"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.64.3 — Full Dark Mode Contrast Audit]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release</id>
@@ -514,33 +549,6 @@
 <ul>
 <li class=""><strong>KPI cards:</strong> <code>flex-wrap</code> added — all three stat cards (Total / Active / Missing) are now visible at ≤782px instead of overflowing off-screen.</li>
 <li class=""><strong>Table:</strong> horizontal scroll wrapper added — the Edit / View / Remove action buttons are reachable via scroll at narrow widths.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.54.0 — Customers + Vendor Reports Mobile Fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.54.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.54.0-release"/>
-        <updated>2026-05-12T12:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Mobile rendering fixes for the Customers list, the Customer detail panel, and the Vendor Reports table, plus a currency-symbol HTML entity decode fix.]]></summary>
-        <content type="html"><![CDATA[<p>Mobile rendering fixes for the Customers list, the Customer detail panel, and the Vendor Reports table, plus a currency-symbol HTML entity decode fix.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.54.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobile-layout-fixes">Mobile Layout Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.54.0-release#mobile-layout-fixes" class="hash-link" aria-label="Direct link to Mobile Layout Fixes" title="Direct link to Mobile Layout Fixes" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Customers table:</strong> horizontal scroll wrapper at ≤782px — columns beyond <em>Bookings</em> are no longer inaccessible.</li>
-<li class=""><strong>Customer detail panel:</strong> full-width (100%) with the correct top offset (46px) for the mobile admin bar.</li>
-<li class=""><strong>Vendor Reports table:</strong> scroll wrapper plus <code>table-layout:auto</code> at ≤900px — the character-per-line crush is fixed.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="currency-symbol-decode">Currency Symbol Decode<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.54.0-release#currency-symbol-decode" class="hash-link" aria-label="Direct link to Currency Symbol Decode" title="Direct link to Currency Symbol Decode" translate="no">​</a></h3>
-<ul>
-<li class=""><code>html_entity_decode()</code> is now applied to the WooCommerce currency symbol in JSON responses. The Euro symbol and other HTML entities now render as proper Unicode instead of escaped markup.</li>
 </ul>]]></content>
         <author>
             <name>MaxHandMade</name>

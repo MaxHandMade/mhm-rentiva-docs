@@ -2,11 +2,46 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-12T20:00:00.000Z</updated>
+    <updated>2026-07-18T14:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.0.0 — WordPress.org'daki İlk Genel Sürüm]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release"/>
+        <updated>2026-07-18T14:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva'nın WordPress.org'daki ilk sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva'nın WordPress.org'daki ilk sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.</p>
+<p>Her ekran önceki gibi çalışır — bu sürüm eklentinin <strong>ne yaptığını değil, nasıl paketlenip yüklendiğini</strong> değiştirir.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇çeriği">İçeriği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#i%CC%87%C3%A7eri%C4%9Fi" class="hash-link" aria-label="İçeriği doğrudan bağlantı" title="İçeriği doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>WordPress.org'da ilk genel sürüm.</strong> Filo yönetimi, uygunluk, rezervasyonlar, müşteriler, WooCommerce ödemeleri, e-posta bildirimleri ve müşteri hesap sayfaları — araç, rezervasyon veya ilan sınırı, özellik sayacı ya da kilitli ekran olmadan.</li>
+<li class=""><strong>Hiçbir üçüncü taraf isteği yok.</strong> Web yazı tipi eklentiyle birlikte gelir ve kendi sitenizden sunulur; coğrafi konum, analitik veya CDN çağrısı yoktur.</li>
+<li class=""><strong>16 kısa kod, 16 Gutenberg bloğu ve 17 Elementor widget'ı</strong> tek bir işleyiciyi paylaşır (Render Parity), böylece üçü de aynı çıktıyı üretir. Tam Türkçe çeviriyle birlikte gelir.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kaputun-altında">Kaputun altında<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#kaputun-alt%C4%B1nda" class="hash-link" aria-label="Kaputun altında doğrudan bağlantı" title="Kaputun altında doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Varlıklar WordPress varlık sistemi üzerinden yükleniyor.</strong> Tüm yönetici ve ön yüz betikleri ile stilleri artık satır içi <code>&lt;script&gt;</code>/<code>&lt;style&gt;</code> blokları yerine <code>wp_enqueue</code> / <code>wp_add_inline_*</code> üzerinden geçiyor — hiçbir ekranın görünümü veya davranışı değişmeden. Kendi başına yeten belgeler (e-posta şablonları, indirilebilir test raporu, meta anahtar referansı) satır içi stillerini tasarım gereği korur; çünkü bunlar tek başına açıldığında harici bir stil dosyası erişilebilir olmaz.</li>
+<li class=""><strong>Lisans kapıları sıkılaştırıldı.</strong> Yalnızca Pro'ya özgü yüzeyler artık yalnızca gizlenmek yerine geçerli bir lisansa bağlanıyor; ayrı ücretli eklentinin özelliklerinin lisanssız çalışabildiği birkaç yol kapatıldı.</li>
+<li class=""><strong>WordPress 7.0 uyumlu</strong> — primary butonların içindeki dashicons için kontrast düzeltmesi dahil (WP 7.0 bu ikonları yönetici tema rengiyle boyuyor, bu da primary butonun aynı renkteki zemininde onları görünmez kılıyordu).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kalite-kapıları">Kalite kapıları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#kalite-kap%C4%B1lar%C4%B1" class="hash-link" aria-label="Kalite kapıları doğrudan bağlantı" title="Kalite kapıları doğrudan bağlantı" translate="no">​</a></h2>
+<table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 test / 2.823 doğrulama, 0 başarısız</td></tr><tr><td>WordPress Kodlama Standartları</td><td>0 hata</td></tr><tr><td>Plugin Check (dağıtılan ZIP)</td><td><strong>0 hata</strong></td></tr><tr><td>Bağımsız denetimler</td><td>İki mimari/güvenlik incelemesi ve etkilenen her yönetici/ön yüz ekranında tarayıcı doğrulaması</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yükseltme">Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#y%C3%BCkseltme" class="hash-link" aria-label="Yükseltme doğrudan bağlantı" title="Yükseltme doğrudan bağlantı" translate="no">​</a></h2>
+<p>İlk WordPress.org sürümü — bir ön sürüm yapısından yükseltiyorsanız herhangi bir işlem gerekmez.</p>
+<p><strong>Gereksinimler:</strong> WordPress 6.7+, PHP 8.1+. Ön yüz rezervasyon ödemeleri için WooCommerce gereklidir.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="wordpress-org" term="wordpress-org"/>
+        <category label="compliance" term="compliance"/>
+        <category label="major" term="major"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v4.64.3 — Tam Karanlık Mod Kontrast Denetimi]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release</id>
@@ -514,33 +549,6 @@
 <ul>
 <li class=""><strong>KPI kartları:</strong> <code>flex-wrap</code> eklendi — üç stat kartı (Toplam / Aktif / Eksik) ≤782px'te ekrandan taşmak yerine artık görünür.</li>
 <li class=""><strong>Tablo:</strong> yatay kaydırma wrapper'ı eklendi — Düzenle / Görüntüle / Kaldır eylem butonlarına dar ekranlarda scroll ile erişilebiliyor.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="mobile" term="mobile"/>
-        <category label="responsive" term="responsive"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.54.0 — Müşteriler + Bayi Raporları Mobil Düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.54.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.54.0-release"/>
-        <updated>2026-05-12T12:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Müşteriler listesi, Müşteri detay paneli ve Bayi Raporları tablosu için mobil görünüm düzeltmeleri ve para birimi HTML entity decode hatasının giderilmesi.]]></summary>
-        <content type="html"><![CDATA[<p>Müşteriler listesi, Müşteri detay paneli ve Bayi Raporları tablosu için mobil görünüm düzeltmeleri ve para birimi HTML entity decode hatasının giderilmesi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.54.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobil-yerleşim-düzeltmeleri">Mobil Yerleşim Düzeltmeleri<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.54.0-release#mobil-yerle%C5%9Fim-d%C3%BCzeltmeleri" class="hash-link" aria-label="Mobil Yerleşim Düzeltmeleri doğrudan bağlantı" title="Mobil Yerleşim Düzeltmeleri doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Müşteriler tablosu:</strong> ≤782px'te yatay kaydırma wrapper'ı — <em>Rezervasyonlar</em> sonrası sütunlara artık erişilebiliyor.</li>
-<li class=""><strong>Müşteri detay paneli:</strong> tam genişlik (100%) ve mobil admin barı için doğru üst boşluk (46px).</li>
-<li class=""><strong>Bayi Raporları tablosu:</strong> ≤900px'te scroll wrapper ve <code>table-layout:auto</code> — satır başına karakter sıkışması düzeltildi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-birimi-sembolü-decode">Para Birimi Sembolü Decode<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.54.0-release#para-birimi-sembol%C3%BC-decode" class="hash-link" aria-label="Para Birimi Sembolü Decode doğrudan bağlantı" title="Para Birimi Sembolü Decode doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class="">JSON yanıtlarında WooCommerce para birimi sembolüne artık <code>html_entity_decode()</code> uygulanıyor. Euro sembolü ve diğer HTML entity'leri kaçışlı işaretleme yerine doğru Unicode olarak görünüyor.</li>
 </ul>]]></content>
         <author>
             <name>MaxHandMade</name>
