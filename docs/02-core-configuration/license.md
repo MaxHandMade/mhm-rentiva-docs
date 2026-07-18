@@ -12,11 +12,13 @@ MHM Rentiva requires a valid license key for all features (VIP Transfer, Messagi
 
 ---
 
-## 💻 Developer Mode
+## 💻 Local and staging environments
 
-Rentiva automatically detects when it is running on a local (localhost) or staging environment and displays a **"Developer Mode Active"** notice in the top-right corner of the page. In this mode, all Pro features (including Vendor & Payout) are available without entering a real license key.
+**A valid license key is required in every environment**, including local and staging sites.
 
-*   **Force Validation Option:** If you want to test that the license system is actually connecting before going live or during development, check the **"Disable automatic developer mode (force real license validation)"** checkbox on the screen to return the system to its normal flow.
+Earlier versions unlocked Pro automatically on hosts ending in `.dev`, `.local`, `.test`, `.staging` or `.localhost` ("Developer Mode"). That was removed in **5.0.0**: `.dev` is a real, publicly registrable domain, so a production site could end up with paid features unlocked by accident. A feature is now granted only by a signed license token that verifies — there is no constant, option or filter that opens one without it.
+
+To work on a local or staging copy, activate your license there as you would on any other site. If you need the key on more than one site at once, deactivate it on the site you are finished with first (see below).
 
 ---
 
@@ -59,7 +61,7 @@ The transparency table at the bottom of the page lets you compare the restrictio
 
 ### Section Summary
 - Your license is activated or deactivated in one step from the **MHM Rentiva > License** menu.
-- Developer environments are detected automatically, and **Developer Mode** allows all Pro features to be tested conveniently.
+- A valid license is required everywhere, including local and staging sites — as of 5.0.0 there is no environment that unlocks Pro without one.
 - Before moving a domain, always release the old license using the **Deactivate** button.
 
 ### Changelog

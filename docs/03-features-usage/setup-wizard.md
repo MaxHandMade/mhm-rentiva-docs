@@ -31,7 +31,7 @@ Scans your WordPress environment to confirm that Rentiva can run reliably. Befor
 
 The screen where admins unlock Pro features (online payments, unlimited vehicles, advanced exports) by activating their license.
 - **Current Status:** The active Pro license status on this site is summarized with "LICENSE KEY", "PLAN", and "EXPIRY DATE" columns.
-- **Developer Mode:** If the plugin detects a local server (localhost, etc.) or staging environment, it shows a "Developer mode detected" notice so you can test the plugin without a license. However, license activation is required before going live.
+- **Local and staging sites:** A license is required in every environment, including local and staging. Versions before 5.0.0 unlocked Pro automatically on local/staging hosts; that behaviour was removed, so activate your license there too.
 - To deactivate a key, the "Open License Page" button redirects to the main license manager.
 
 ---

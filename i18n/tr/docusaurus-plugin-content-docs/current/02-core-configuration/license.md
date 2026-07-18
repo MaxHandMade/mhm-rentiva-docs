@@ -12,11 +12,13 @@ MHM Rentiva, tüm özelliklerin (VIP Transfer, Mesajlaşma, Gelişmiş Raporlar 
 
 ---
 
-## 💻 Geliştirici Modu (Developer Mode)
+## 💻 Yerel ve staging ortamları
 
-Rentiva, yerel (localhost) veya staging ortamlarında çalıştığını otomatik algılayarak sayfanın sağ üstünde **"Geliştirici Modu Etkin"** uyarısı verir. Bu moddayken gerçek bir lisans anahtarı girmeden de tüm Pro özellikler (Vendor & Payout dahil) kullanılabilir.
+**Lisans anahtarı her ortamda gereklidir** — yerel ve staging siteleri dahil.
 
-*   **Zorunlu Doğrulama Seçeneği:** Canlı yayına geçmeden önce veya geliştirme sırasındayken lisans sisteminin gerçekten bağlandığını test etmek isterseniz, ekrandaki **"Otomatik geliştirici modunu devre dışı bırak (gerçek lisans doğrulamasını zorla)"** kutucuğunu işaretleyerek sistemi normal akışına döndürebilirsiniz.
+Önceki sürümlerde `.dev`, `.local`, `.test`, `.staging` veya `.localhost` ile biten adreslerde Pro kendiliğinden açılıyordu ("Geliştirici Modu"). Bu davranış **5.0.0**'da kaldırıldı: `.dev` gerçek ve herkese açık kayıt edilebilir bir alan adı uzantısıdır, dolayısıyla bir üretim sitesi ücretli özellikleri kazara açabiliyordu. Artık bir özelliği yalnızca doğrulanan imzalı lisans token'ı açar; bunu atlayan hiçbir sabit, ayar veya filtre yoktur.
+
+Yerel ya da staging kopyada çalışmak için lisansınızı orada da normal şekilde etkinleştirin. Anahtara aynı anda birden fazla sitede ihtiyacınız varsa, işiniz biten sitede önce devre dışı bırakın (aşağıya bakın).
 
 ---
 
@@ -59,7 +61,7 @@ Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) oldu
 
 ### Bölüm Özeti
 - Lisansınız **MHM Rentiva > Lisans** menüsünden tek tuşla aktifleştirilir veya iptal edilir.
-- Geliştirici ortamları sistem tarafından tespit edilir ve kolaylık sağlamak için "Geliştirici Modu" ile Pro özelliklerin denenebilmesine olanak tanır.
+- Lisans her yerde gereklidir — yerel ve staging siteleri dahil; 5.0.0'dan itibaren Pro'yu lisanssız açan bir ortam yoktur.
 - Domain taşıma öncesi eski lisans mutlaka **Devre Dışı Bırak** butonuyla serbest bırakılmalıdır.
 
 ### Değişiklik Günlüğü

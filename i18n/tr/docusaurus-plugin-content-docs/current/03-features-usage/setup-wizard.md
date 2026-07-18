@@ -31,7 +31,7 @@ Rentiva'nın güvenilir bir şekilde çalışabilmesi için WordPress ortamını
 
 Lisansınızı etkinleştirerek yöneticilerin (Admin) Pro özelliklerinin kilidini (çevrimiçi ödemeler, sınırsız araç, gelişmiş dışa aktarma) açtığı ekrandır.
 - **Mevcut Durum:** Bu sitede aktif olan Pro lisans durumu, "LİSANS ANAHTARI", "PLAN" ve "SON KULLANMA TARİHİ" sütunlarıyla özetlenir.
-- **Geliştirici Modu (Developer Mode):** Eklenti, bir yerel sunucu (localhost vb.) veya hazırlık (staging) ortamı algılarsa, lisans olmadan eklentiyi test edebilmeniz için "Geliştirici modu algılandı" bildirimi verir. Ancak canlı yayına geçmeden lisans etkinleştirmesi zorunludur.
+- **Yerel ve staging siteler:** Lisans her ortamda gereklidir — yerel ve staging dahil. 5.0.0 öncesi sürümler yerel/staging adreslerde Pro'yu kendiliğinden açıyordu; bu davranış kaldırıldı, dolayısıyla lisansınızı orada da etkinleştirin.
 - Anahtarı devredışı bırakmak isterseniz "Lisans Sayfasını Aç" butonu ana lisans yöneticisine yönlendirir.
 
 ---

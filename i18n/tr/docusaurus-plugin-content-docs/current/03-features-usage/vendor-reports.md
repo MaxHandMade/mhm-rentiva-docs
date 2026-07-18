@@ -188,7 +188,7 @@ Tüm bayi rapor sistemi `Mode::canUseVendorMarketplace()` ile gate'li. Lite plan
 
 Etkili olarak, Lite bayiler araçları eski yöntemle çekiyorlar — direkt ceza, sebep yakalama yok, itiraz yolu yok. Pro yükseltmesi tam sistemi açar.
 
-Gerçek Pro token olmadan yerel test için `wp-config.php`'ye `define('MHM_RENTIVA_DEV_PRO', true);` ekleyin (sadece `WP_DEBUG=true` iken çalışır).
+Bunu yerelde denemek için yerel siteye gerçek bir lisans etkinleştirin — 5.0.0'dan itibaren Pro'yu doğrulanmış lisans token'ı olmadan açan bir sabit veya ayar yoktur.
 
 ---
 

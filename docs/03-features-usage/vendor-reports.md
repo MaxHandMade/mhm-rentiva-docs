@@ -188,7 +188,7 @@ The entire vendor report system is gated by `Mode::canUseVendorMarketplace()`. O
 
 In effect, Lite vendors withdraw vehicles the old way — direct penalty, no reason capture, no appeal path. Pro upgrade unlocks the full system.
 
-For local testing without a real Pro token, add `define('MHM_RENTIVA_DEV_PRO', true);` to `wp-config.php` (works only when `WP_DEBUG=true`).
+To exercise this locally, activate a real license on the local site — as of 5.0.0 there is no constant or setting that unlocks Pro without a verified license token.
 
 ---
 
