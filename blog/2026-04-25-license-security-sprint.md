@@ -155,6 +155,6 @@ Closing the source-edit + zero-config gap requires **asymmetric crypto** (RSA-si
 ---
 
 *GitHub Releases:*
-- *Rentiva: [v4.30.0](https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.0) · [v4.30.1](https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.1) · [v4.30.2](https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v4.30.2)*
+- *Rentiva: v4.30.0 · v4.30.1 · v4.30.2*
 - *License Server: [v1.9.0](https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.0) · [v1.9.1](https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.1) · [v1.9.2](https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.2) · [v1.9.3](https://github.com/MaxHandMade/mhm-license-server/releases/tag/v1.9.3)*
 - *Currency Switcher: [v0.5.0](https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.0) · [v0.5.1](https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.1) · [v0.5.2](https://github.com/MaxHandMade/mhm-currency-switcher/releases/tag/v0.5.2)*
