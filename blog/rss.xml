@@ -32,16 +32,16 @@
             <category>patch</category>
         </item>
         <item>
-            <title><![CDATA[Rentiva v5.0.0 — First Public WordPress.org Release]]></title>
+            <title><![CDATA[Rentiva v5.0.0 — First Public Release]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</link>
             <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</guid>
             <pubDate>Sat, 18 Jul 2026 14:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva's first release on WordPress.org: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva's first release on WordPress.org: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.</p>
+            <description><![CDATA[MHM Rentiva's first public release, free to download: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva's first public release, free to download: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.</p>
 <p>Every screen works exactly as before — this release changes <strong>how the plugin is packaged and loaded</strong>, not what it does.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-in-it">What's in it<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#whats-in-it" class="hash-link" aria-label="Direct link to What's in it" title="Direct link to What's in it" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>First public release on WordPress.org.</strong> Fleet management, availability, bookings, customers, WooCommerce payments, email notifications and the customer account pages — with no vehicle, booking or listing caps, no feature timers and no locked screens.</li>
+<li class=""><strong>First public release, free to download.</strong> Fleet management, availability, bookings, customers, WooCommerce payments, email notifications and the customer account pages — with no vehicle, booking or listing caps, no feature timers and no locked screens.</li>
 <li class=""><strong>No third-party requests at all.</strong> The webfont is bundled and served from your own site; there are no geolocation, analytics or CDN calls.</li>
 <li class=""><strong>16 shortcodes, 16 Gutenberg blocks and 17 Elementor widgets</strong> share a single renderer (Render Parity), so all three produce identical output. Ships with a full Turkish translation.</li>
 </ul>
@@ -54,7 +54,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
 <table><thead><tr><th>Gate</th><th>Result</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 tests / 2,823 assertions, 0 failures</td></tr><tr><td>WordPress Coding Standards</td><td>0 errors</td></tr><tr><td>Plugin Check (distributed ZIP)</td><td><strong>0 errors</strong></td></tr><tr><td>Independent audits</td><td>Two architecture/security reviews, plus browser verification across every affected admin and front-end screen</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
-<p>First WordPress.org release — if you are upgrading from a pre-release build, no action is required.</p>
+<p>First public release — if you are upgrading from a pre-release build, no action is required.</p>
 <p><strong>Requirements:</strong> WordPress 6.7+, PHP 8.1+. WooCommerce is required for frontend booking payments.</p>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
@@ -246,6 +246,10 @@
             <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
             <description><![CDATA[A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.]]></description>
             <content:encoded><![CDATA[<p>A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Historical release note — this behaviour no longer exists</div><div class="admonitionContent_BuS1"><p>The Lite transfer-route cap this patch fixed was removed in <strong>v5.0.0</strong> along with the
+rest of the Lite plan limits. Rentiva's free core places no cap on transfer routes, so
+there is no counter and no limit notice. This post is kept as a record of what v4.62.1
+shipped.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Fix: the Lite VIP transfer route limit now counts routes correctly.</strong> On installs using the current routes table, the limit notice showed "0 used" and new routes could still be created past the Lite limit because the counter read the wrong (legacy) database table.</li>
@@ -261,6 +265,10 @@
             <pubDate>Tue, 30 Jun 2026 12:00:00 GMT</pubDate>
             <description><![CDATA[When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.]]></description>
             <content:encoded><![CDATA[<p>When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Historical release note — this behaviour no longer exists</div><div class="admonitionContent_BuS1"><p>The Lite plan limits described below were removed in <strong>v5.0.0</strong>. Rentiva's free core
+ships with no vehicle, add-on service or transfer-route caps, so there is nothing to
+enforce on downgrade: no items are hidden, and there is no "Lite limit — hidden"
+badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shipped.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lite-limit-enforcement-on-downgrade">Lite Limit Enforcement on Downgrade<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#lite-limit-enforcement-on-downgrade" class="hash-link" aria-label="Direct link to Lite Limit Enforcement on Downgrade" title="Direct link to Lite Limit Enforcement on Downgrade" translate="no">​</a></h3>
 <ul>

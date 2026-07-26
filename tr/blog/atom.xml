@@ -35,16 +35,16 @@
         <category label="patch" term="patch"/>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Rentiva v5.0.0 — WordPress.org'daki İlk Genel Sürüm]]></title>
+        <title type="html"><![CDATA[Rentiva v5.0.0 — İlk Genel Sürüm]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release</id>
         <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release"/>
         <updated>2026-07-18T14:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva'nın WordPress.org'daki ilk sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva'nın WordPress.org'daki ilk sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.</p>
+        <summary type="html"><![CDATA[MHM Rentiva'nın ücretsiz indirilebilen ilk genel sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva'nın ücretsiz indirilebilen ilk genel sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.</p>
 <p>Her ekran önceki gibi çalışır — bu sürüm eklentinin <strong>ne yaptığını değil, nasıl paketlenip yüklendiğini</strong> değiştirir.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇çeriği">İçeriği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#i%CC%87%C3%A7eri%C4%9Fi" class="hash-link" aria-label="İçeriği doğrudan bağlantı" title="İçeriği doğrudan bağlantı" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>WordPress.org'da ilk genel sürüm.</strong> Filo yönetimi, uygunluk, rezervasyonlar, müşteriler, WooCommerce ödemeleri, e-posta bildirimleri ve müşteri hesap sayfaları — araç, rezervasyon veya ilan sınırı, özellik sayacı ya da kilitli ekran olmadan.</li>
+<li class=""><strong>İlk genel sürüm, ücretsiz indirilebilir.</strong> Filo yönetimi, uygunluk, rezervasyonlar, müşteriler, WooCommerce ödemeleri, e-posta bildirimleri ve müşteri hesap sayfaları — araç, rezervasyon veya ilan sınırı, özellik sayacı ya da kilitli ekran olmadan.</li>
 <li class=""><strong>Hiçbir üçüncü taraf isteği yok.</strong> Web yazı tipi eklentiyle birlikte gelir ve kendi sitenizden sunulur; coğrafi konum, analitik veya CDN çağrısı yoktur.</li>
 <li class=""><strong>16 kısa kod, 16 Gutenberg bloğu ve 17 Elementor widget'ı</strong> tek bir işleyiciyi paylaşır (Render Parity), böylece üçü de aynı çıktıyı üretir. Tam Türkçe çeviriyle birlikte gelir.</li>
 </ul>
@@ -57,7 +57,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kalite-kapıları">Kalite kapıları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#kalite-kap%C4%B1lar%C4%B1" class="hash-link" aria-label="Kalite kapıları doğrudan bağlantı" title="Kalite kapıları doğrudan bağlantı" translate="no">​</a></h2>
 <table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 test / 2.823 doğrulama, 0 başarısız</td></tr><tr><td>WordPress Kodlama Standartları</td><td>0 hata</td></tr><tr><td>Plugin Check (dağıtılan ZIP)</td><td><strong>0 hata</strong></td></tr><tr><td>Bağımsız denetimler</td><td>İki mimari/güvenlik incelemesi ve etkilenen her yönetici/ön yüz ekranında tarayıcı doğrulaması</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yükseltme">Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#y%C3%BCkseltme" class="hash-link" aria-label="Yükseltme doğrudan bağlantı" title="Yükseltme doğrudan bağlantı" translate="no">​</a></h2>
-<p>İlk WordPress.org sürümü — bir ön sürüm yapısından yükseltiyorsanız herhangi bir işlem gerekmez.</p>
+<p>İlk genel sürüm — bir ön sürüm yapısından yükseltiyorsanız herhangi bir işlem gerekmez.</p>
 <p><strong>Gereksinimler:</strong> WordPress 6.7+, PHP 8.1+. Ön yüz rezervasyon ödemeleri için WooCommerce gereklidir.</p>]]></content>
         <author>
             <name>MaxHandMade</name>
@@ -289,6 +289,10 @@
         <updated>2026-07-01T12:00:00.000Z</updated>
         <summary type="html"><![CDATA[Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.]]></summary>
         <content type="html"><![CDATA[<p>Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Tarihsel sürüm notu — bu davranış artık yok</div><div class="admonitionContent_BuS1"><p>Bu yamanın düzelttiği Lite transfer rotası sınırı, diğer Lite plan limitleriyle birlikte
+<strong>v5.0.0</strong>'da kaldırıldı. Rentiva'nın ücretsiz çekirdeği transfer rotası sayısını
+sınırlamıyor; dolayısıyla ne bir sayaç ne de limit bildirimi var. Bu yazı v4.62.1'in ne
+getirdiğinin kaydı olarak duruyor.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Düzeltme: Lite VIP transfer rota limiti artık rotaları doğru sayıyor.</strong> Güncel rota tablosunu kullanan kurulumlarda limit uyarısı "0 kullanıldı" gösteriyor ve sayaç yanlış (eski) veritabanı tablosunu okuduğu için Lite limitinin üstünde yeni rota eklenebiliyordu.</li>
@@ -308,6 +312,11 @@
         <updated>2026-06-30T12:00:00.000Z</updated>
         <summary type="html"><![CDATA[Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.]]></summary>
         <content type="html"><![CDATA[<p>Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Tarihsel sürüm notu — bu davranış artık yok</div><div class="admonitionContent_BuS1"><p>Aşağıda anlatılan Lite plan limitleri <strong>v5.0.0</strong>'da kaldırıldı. Rentiva'nın ücretsiz
+çekirdeği araç, ek hizmet veya transfer rotası sınırı içermiyor; dolayısıyla lisans
+bitiminde uygulanacak bir yaptırım da yok: hiçbir içerik gizlenmiyor, "Lite limiti —
+gizli" etiketi ve araç limiti bildirimi de bulunmuyor. Bu yazı v4.62.0'ın ne
+getirdiğinin kaydı olarak duruyor.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lisans-bitince-lite-limit-yaptırımı">Lisans Bitince Lite Limit Yaptırımı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#lisans-bitince-lite-limit-yapt%C4%B1r%C4%B1m%C4%B1" class="hash-link" aria-label="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" title="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" translate="no">​</a></h3>
 <ul>
