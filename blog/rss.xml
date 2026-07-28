@@ -43,6 +43,98 @@
             <category>i18n</category>
         </item>
         <item>
+            <title><![CDATA[Rentiva v5.2.0 / Pro v5.2.0 — Seventeen security switches that did nothing, and the ones that now do]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release</guid>
+            <pubDate>Sat, 25 Jul 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[The largest release in the 5.x line so far. Permission checks now test the specific record a request names instead of a general capability, the admin markup is filtered as it is printed, the Dashboard and Vehicle Settings screens are redesigned — and a long list of controls that claimed to do something, but were connected to nothing, has been removed.]]></description>
+            <content:encoded><![CDATA[<p>The largest release in the 5.x line so far. Permission checks now test the specific record a request names instead of a general capability, the admin markup is filtered as it is printed, the Dashboard and Vehicle Settings screens are redesigned — and a long list of controls that claimed to do something, but were connected to nothing, has been removed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-uncomfortable-part-first">The uncomfortable part first<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#the-uncomfortable-part-first" class="hash-link" aria-label="Direct link to The uncomfortable part first" title="Direct link to The uncomfortable part first" translate="no">​</a></h2>
+<p>Settings → Security had <strong>seventeen</strong> controls: "Brute Force Protection", "SQL Injection Protection", "XSS Protection", "CSRF Protection", "Enable Rate Limiting", IP allow and block lists. None of them were wired to anything. Switching one on changed no behaviour whatsoever.</p>
+<p>They are gone. So is the "Secure API Access Tokens" section, which issued keys labelled READ, WRITE and ADMIN that no part of the plugin ever checked — a key created there opened nothing. So are the Integration settings for token duration, token refresh, API caching, debug output and "Allow Global CORS". So is a "Scheduled Notifications" background job that ran every hour against a queue nothing ever added to, while the Cron Monitor cheerfully reported it as healthy. And so is the "Add Vehicle" button in the vehicle comparison: no handler, unregistered endpoints, and an Elementor switch to toggle a thing that did not exist.</p>
+<p>A control that says a protection is active while nothing enforces it is <strong>worse than no control at all</strong>, because it gets relied on. Saved values for the removed settings are cleaned up automatically when you update.</p>
+<p>Rate limiting, which does work, stays. The REST API is unchanged and still authenticates normally.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="permissions-now-check-the-record-not-just-the-role">Permissions now check the record, not just the role<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#permissions-now-check-the-record-not-just-the-role" class="hash-link" aria-label="Direct link to Permissions now check the record, not just the role" title="Direct link to Permissions now check the record, not just the role" translate="no">​</a></h2>
+<p>Booking, deposit, vehicle-gallery and blocked-date handlers used to check a general "can edit content" capability. They now check the caller against <strong>the specific record the request names</strong>. On multi-author sites this closes paths where one contributor could act on another contributor's bookings, galleries or availability.</p>
+<p>Saving a booking from the editor now always requires a valid security token; the presence of a form field is no longer accepted in its place. The database backup screen exports, restores and deletes only backup tables this plugin created — other tables can no longer be named in those requests. And markup the plugin generates is filtered through an explicit allowlist <strong>as it is printed</strong>, replacing places that trusted the output to have been escaped earlier.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes-worth-naming">Fixes worth naming<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#fixes-worth-naming" class="hash-link" aria-label="Direct link to Fixes worth naming" title="Direct link to Fixes worth naming" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Uninstall used to stop partway through.</strong> With "delete all data on uninstall" switched on, removing the plugin still left tables, scheduled jobs and taxonomy terms behind.</li>
+<li class=""><strong>The backups screen could go blank.</strong> Any <code>.sql</code> file in the backup folder without a matching database record caused a fatal error while the list was being built. Backups are now written under your uploads folder instead of directly into <code>wp-content</code>; backups taken by earlier versions stay listed, restorable and deletable — nothing is moved or lost.</li>
+<li class=""><strong>Vehicle quick edit accepted values the full editor rejects.</strong> A daily price could be saved as a negative number, which then multiplied into rental totals; the seat count could be zero or above the configured maximum.</li>
+<li class=""><strong>Log retention settings were ignored.</strong> "Auto Cleanup Logs" and "Log Retention (Days)" had no effect: the daily purge always deleted entries older than thirty days, permanently, even with cleanup switched off or retention set higher.</li>
+<li class=""><strong>Saving the Vehicle settings tab silently reset two Frontend fields</strong> — "Vehicles per page" and "Default sort order" — that the Vehicle tab does not even display.</li>
+<li class=""><strong>The dashboard's recent-bookings panel could sit up to twelve hours out of date</strong>, because its cache was cleared under a name the cache no longer used. The customers screen re-ran its full query set on every load for the mirror-image reason: it requested a cache type that had never been registered, so nothing was stored or read.</li>
+<li class=""><strong>Search could be asked to render the whole fleet.</strong> Vehicle search accepted any page size; search and testimonials now cap it at the limit their own settings advertise.</li>
+<li class="">The translation catalogue now compiles without errors — strings containing placeholders like <code>%days%</code> were being mis-flagged as printf formats.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-redesigned-dashboard-and-vehicle-settings">New: redesigned Dashboard and Vehicle Settings<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#new-redesigned-dashboard-and-vehicle-settings" class="hash-link" aria-label="Direct link to New: redesigned Dashboard and Vehicle Settings" title="Direct link to New: redesigned Dashboard and Vehicle Settings" translate="no">​</a></h2>
+<p>Both screens have been rebuilt. Vehicle Settings opens in the new layout by default; adding <code>?ui=legacy</code> to the page URL brings back the previous one for this release.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="internal">Internal<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#internal" class="hash-link" aria-label="Direct link to Internal" title="Direct link to Internal" translate="no">​</a></h2>
+<p>Temporary cache entries, the last-login record, background job names and the JavaScript objects the admin screens read now all carry the plugin's own prefix, so they cannot collide with another plugin storing something under the same name. Every script and stylesheet is registered under its full prefix too — WordPress keeps whichever was registered first under a shared short name and discards the other without warning.</p>
+<p>Around <strong>2,000 lines</strong> of code that nothing referenced were removed, including a file registering database-maintenance commands and one that would have exposed protected vehicle and booking fields over the REST API had it ever been switched on.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>No action required. Administrators are unaffected by the permission changes; on sites with editor or author roles, those users can now only act on records they are entitled to. Settings belonging to the removed controls are cleaned up for you.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>security</category>
+            <category>minor</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva v5.1.1 / Pro v5.1.1 — Compliance hygiene, no behaviour change]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.1-release</guid>
+            <pubDate>Tue, 21 Jul 2026 21:00:00 GMT</pubDate>
+            <description><![CDATA[A small follow-up to v5.1.0, continuing the pass ahead of the WordPress.org listing. Nothing about how the plugin behaves changes here — this is the kind of release that is worth publishing precisely because it is uneventful.]]></description>
+            <content:encoded><![CDATA[<p>A small follow-up to v5.1.0, continuing the pass ahead of the WordPress.org listing. Nothing about how the plugin behaves changes here — this is the kind of release that is worth publishing precisely because it is uneventful.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changed">What changed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.1-release#what-changed" class="hash-link" aria-label="Direct link to What changed" title="Direct link to What changed" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Action names carry the full prefix.</strong> The REST API-key and deposit-management AJAX actions now use the complete <code>mhm_rentiva_</code> prefix. A duplicate registration of the API-key handlers was also removed, so each action is handled exactly once instead of twice.</li>
+<li class=""><strong>Dead references removed.</strong> A leftover reference to a settings class that is not part of the free plugin, an unreachable deposit-calculation path, and developer debug logging left behind in the block-editor and search scripts.</li>
+<li class=""><strong>No non-functional buttons.</strong> The customer privacy controls render only when their handlers are actually available — those ship with the paid add-on — so the free plugin no longer shows controls that cannot do anything. Add-on-only scripts were removed from the free plugin at the same time.</li>
+<li class=""><strong>Docs:</strong> the readme describes the bundled shared UI library in neutral wording.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-v511">Pro v5.1.1<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.1-release#pro-v511" class="hash-link" aria-label="Direct link to Pro v5.1.1" title="Direct link to Pro v5.1.1" translate="no">​</a></h2>
+<p>The add-on now bundles the frontend scripts it owns, rather than expecting the free plugin to ship them on its behalf. This is the other half of the neutral-hooks separation that landed in v5.1.0.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.1-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>No action required; your settings and data are unaffected.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>patch</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva v5.1.0 / Pro v5.1.0 — Security hardening, and no third-party calls at all]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release</guid>
+            <pubDate>Mon, 20 Jul 2026 20:30:00 GMT</pubDate>
+            <description><![CDATA[A hardening pass ahead of the WordPress.org listing. The free plugin's features and behaviour are unchanged — what changed is how carefully it handles input, output and permissions, and what it no longer ships.]]></description>
+            <content:encoded><![CDATA[<p>A hardening pass ahead of the WordPress.org listing. The free plugin's features and behaviour are unchanged — what changed is how carefully it handles input, output and permissions, and what it no longer ships.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="security">Security<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Contact-form attachments</strong> are now resolved through WordPress's own upload APIs with containment checks, closing a file-path handling issue.</li>
+<li class=""><strong>Creating a customer WordPress account</strong> requires the <code>create_users</code> capability, and the REST routes that do it are gated on the matching user-management capability rather than a looser one.</li>
+<li class="">Additional <strong>output escaping</strong>, settings array-key sanitization, and proper registration of public query variables across the admin and frontend.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-plugin-now-makes-no-external-requests-whatsoever">The plugin now makes no external requests whatsoever<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#the-plugin-now-makes-no-external-requests-whatsoever" class="hash-link" aria-label="Direct link to The plugin now makes no external requests whatsoever" title="Direct link to The plugin now makes no external requests whatsoever" translate="no">​</a></h2>
+<p>Testimonial and account avatars used to come from Gravatar. They are now rendered locally from the person's initials. That was the last third-party call in the plugin: nothing it loads — including its webfont — comes from anywhere but your own site. No analytics, no geolocation, no remote fonts or scripts.</p>
+<p>This matters beyond privacy hygiene. A plugin that quietly contacts an external service is a plugin whose behaviour depends on that service being up, reachable and trustworthy. Now there is nothing to depend on.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="removed-the-demo-data-seeder">Removed: the demo-data seeder<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#removed-the-demo-data-seeder" class="hash-link" aria-label="Direct link to Removed: the demo-data seeder" title="Direct link to Removed: the demo-data seeder" translate="no">​</a></h2>
+<p>The bundled demo-data tool and its sample images are gone from the plugin. They existed to make a fresh install look populated; they also meant every site carried a set of images and a data-writing tool it would use once, if ever.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="documented-how-to-rebuild-from-source">Documented: how to rebuild from source<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#documented-how-to-rebuild-from-source" class="hash-link" aria-label="Direct link to Documented: how to rebuild from source" title="Direct link to Documented: how to rebuild from source" translate="no">​</a></h2>
+<p>The readme gained a <strong>Source code</strong> section describing the React build and pointing at the public repository. The four React admin screens ship as compiled bundles, and their un-minified sources ship alongside them — so nothing in the plugin is opaque.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-v510">Pro v5.1.0<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#pro-v510" class="hash-link" aria-label="Direct link to Pro v5.1.0" title="Direct link to Pro v5.1.0" translate="no">​</a></h2>
+<p>The paid add-on now attaches to the free plugin <strong>only through neutral WordPress hooks</strong>, and ships its own assets rather than relying on the free plugin to carry them. The free plugin contains no licensing or paid-feature scaffolding at all — not disabled, not gated: absent.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.1.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>No action required. Your settings and data are unaffected.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>security</category>
+            <category>minor</category>
+        </item>
+        <item>
             <title><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Export screen fixes]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</link>
             <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</guid>
@@ -411,102 +503,6 @@ badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shi
             <category>rentiva</category>
             <category>transfer</category>
             <category>dashboard</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.58.1 — Critical: Double-Booking Fix on Same-Day Returns]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release</guid>
-            <pubDate>Thu, 21 May 2026 16:00:00 GMT</pubDate>
-            <description><![CDATA[AutoComplete cron compared dropoffdate < NOW() at date-only granularity. MySQL cast YYYY-MM-DD to YYYY-MM-DD 0000, so any confirmed booking with a same-day dropoff was auto-completed at midnight — long before the actual return time. hasoverlap() then skipped these wrongly-completed bookings (status filter excluded 'completed'), allowing the same vehicle to be double-booked for the remaining rental hours. This release fixes the cron, adds defense-in-depth at hasoverlap(), opens a completed → inprogress Status transition, and ships a maintenance script to revert already-contaminated bookings.]]></description>
-            <content:encoded><![CDATA[<p>AutoComplete cron compared <code>dropoff_date &lt; NOW()</code> at date-only granularity. MySQL cast <code>YYYY-MM-DD</code> to <code>YYYY-MM-DD 00:00:00</code>, so any confirmed booking with a same-day dropoff was auto-completed at midnight — long before the actual return time. <code>has_overlap()</code> then skipped these wrongly-completed bookings (status filter excluded <code>'completed'</code>), allowing the same vehicle to be double-booked for the remaining rental hours. This release fixes the cron, adds defense-in-depth at <code>has_overlap()</code>, opens a <code>completed → in_progress</code> Status transition, and ships a maintenance script to revert already-contaminated bookings.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Optional after upgrade</div><div class="admonitionContent_BuS1"><p>A maintenance script lives in the GitHub repository at <code>bin/cleanup-early-completed-bookings.php</code> (intentionally not bundled in the production ZIP). If you suspect contaminated bookings (status <code>completed</code> while the real <code>end_ts</code> is still in the future), copy the file onto a deployed site and run:</p><div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># dry-run (default)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># revert to in_progress</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php apply</span><br></span></code></pre></div></div><p>The script routes through <code>Status::update_status()</code>, so audit hooks fire and the cache invalidates per fix. Idempotent — re-running after apply finds zero rows.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>AutoComplete cron now uses datetime.</strong> Primary signal: <code>_mhm_end_ts</code> (UNIX timestamp). Fallback: <code>CONCAT(_mhm_dropoff_date, ' ', _mhm_dropoff_time)</code>, with <code>23:59:59</code> if <code>dropoff_time</code> is missing — never auto-completes mid-day. Legacy <code>_mhm_end_date</code> fallback preserved.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="defense-in-depth">Defense-in-Depth<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#defense-in-depth" class="hash-link" aria-label="Direct link to Defense-in-Depth" title="Direct link to Defense-in-Depth" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>has_overlap()</code> now flags <code>'completed'</code> bookings whose <code>end_ts</code> is still in the future</strong>, blocking availability even if a future cron bug or manual mishap marks a booking complete early.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="feature">Feature<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#feature" class="hash-link" aria-label="Direct link to Feature" title="Direct link to Feature" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>Status</code> transition matrix</strong> allows <code>completed</code> → <code>in_progress</code> for early-completion correction (required by the cleanup script's audited update chain).</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tools">Tools<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#tools" class="hash-link" aria-label="Direct link to Tools" title="Direct link to Tools" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>bin/cleanup-early-completed-bookings.php</code></strong> — <code>wp eval-file</code> script. Default is dry-run; positional <code>apply</code> reverts contaminated rows via <code>Status::update_status()</code> so <code>mhm_rentiva_booking_status_changed</code> fires for audit/cache invalidation. Idempotent.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.1-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>11 new PHPUnit tests across AutoCompleteCronDatetime, HasOverlapStatusFilter, and StatusTransition suites — total <strong>1,231 tests / 3,726 assertions</strong>, 7 documented <code>saas_block</code> env-quota baseline failures, 15 skipped. No regression.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>booking</category>
-            <category>critical</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.58.0 — Financial Bug Fixes, Dashboard Polish, Expanded i18n]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release</guid>
-            <pubDate>Fri, 15 May 2026 10:00:00 GMT</pubDate>
-            <description><![CDATA[Critical fixes for remaining-payment double-tax and orphan WC orders after auto-cancel. Dashboard widgets gain status badges, plate, location, and a deposit/remaining split. The About > Support tab adds a GitHub Issues card, test stats, and a changelog accordion. The License page moves to a 2-column grid, and Messages adopt a React 18 chat bubble UI. 88 new Turkish translations.]]></description>
-            <content:encoded><![CDATA[<p>Critical fixes for remaining-payment double-tax and orphan WC orders after auto-cancel. Dashboard widgets gain status badges, plate, location, and a deposit/remaining split. The About &gt; Support tab adds a GitHub Issues card, test stats, and a changelog accordion. The License page moves to a 2-column grid, and Messages adopt a React 18 chat bubble UI. 88 new Turkish translations.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Critical financial fix</div><div class="admonitionContent_BuS1"><p>Sites using deposit + remaining payment with <code>prices_include_tax</code> enabled should run <code>sync_orphan_wc_orders()</code> via WP-CLI after upgrading, to clean up historical pending orders. No schema changes.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fixes">Critical Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#critical-fixes" class="hash-link" aria-label="Direct link to Critical Fixes" title="Direct link to Critical Fixes" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Remaining-payment double-tax:</strong> the remaining-payment WC order no longer double-taxes — it uses <code>wc_get_price_excluding_tax()</code> when <code>prices_include_tax</code> is on. Customers no longer overpay roughly 20% of the remaining amount.</li>
-<li class=""><strong>Orphan WC orders after auto-cancel:</strong> auto-cancelled bookings now correctly cancel their linked WC orders (deposit + remaining). A one-time backfill helper — <code>sync_orphan_wc_orders()</code> / <code>sync_stale_past_bookings()</code> — recovers historical orphan pending orders.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h3>
-<ul>
-<li class="">Addon list and statistics read the WooCommerce currency dynamically (previously they read the plugin setting instead).</li>
-<li class="">Recent Bookings widget shows the customer name (with WC order billing fallback) and the vehicle location.</li>
-<li class="">Pending Payments widget shows deposit and remaining as separate rows with status-aware aggregation, using WC order totals as the source of truth.</li>
-<li class="">Defensive null coalescing for optional <code>booking_data</code> keys in <code>WooCommerceBridge</code> — removes <em>Undefined array key</em> warnings from the PHP debug log.</li>
-<li class="">WP Dashboard widgets (Stats, Upcoming Operations, Pending Messages) now share consistent footer and bubble styling.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="features">Features<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#features" class="hash-link" aria-label="Direct link to Features" title="Direct link to Features" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Upcoming Operations widget</strong> (both the WP Dashboard PHP version and the plugin Dashboard React version) adds plate, a status badge (green/amber/blue), and the end date.</li>
-<li class=""><strong>Quick Actions grid</strong> adds Transfer and Vendors shortcut buttons.</li>
-<li class=""><strong>License page</strong> uses a 2-column grid (account info left, Lite/Pro comparison right), a version pill in the header, and a flex action button row.</li>
-<li class=""><strong>About &gt; Support tab</strong> adds a GitHub Issues card, a Test &amp; Verification stats card, and a version history accordion (first 5 visible, toggle for the rest).</li>
-<li class=""><strong>Messages thread view</strong> adopts a modern chat bubble layout — right-aligned blue for self, left-aligned gray for the other party, with a <em>You</em> suffix.</li>
-<li class=""><strong>Shortcode Pages</strong> admin now tracks all 26 registered shortcodes (was 20) — vendor/user/popular routes added.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="chore">Chore<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#chore" class="hash-link" aria-label="Direct link to Chore" title="Direct link to Chore" translate="no">​</a></h3>
-<ul>
-<li class="">Removed the dead Revenue Chart dashboard widget and <code>Charts.php</code> (~85 lines of orphan code left after the React migration).</li>
-<li class=""><code>ReactDOM.render</code> → React 18 <code>createRoot</code> migration in the Messages bundle.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>12 new PHPUnit tests across the RemainingPaymentTax, AutoCancelOrderKeyLookup, and ShortcodePagesController suites — 1215 tests total, 0 failures. 88 new Turkish translations were added across Pro features, block editor settings, email templates, and the chat UI.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>woocommerce</category>
-            <category>dashboard</category>
-            <category>i18n</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.57.0 — Setup Wizard + Transfer Tables Mobile Scroll]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.57.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.57.0-release</guid>
-            <pubDate>Tue, 12 May 2026 15:00:00 GMT</pubDate>
-            <description><![CDATA[Horizontal scroll wrappers added to the remaining admin tables that overflowed on narrow viewports.]]></description>
-            <content:encoded><![CDATA[<p>Horizontal scroll wrappers added to the remaining admin tables that overflowed on narrow viewports.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.57.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobile-scroll-wrappers">Mobile Scroll Wrappers<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.57.0-release#mobile-scroll-wrappers" class="hash-link" aria-label="Direct link to Mobile Scroll Wrappers" title="Direct link to Mobile Scroll Wrappers" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Setup Wizard</strong> system requirements table: horizontal scroll at the 390px viewport.</li>
-<li class=""><strong>Transfer Locations</strong> table: horizontal scroll on narrow screens.</li>
-<li class=""><strong>Transfer Routes</strong> table: horizontal scroll on narrow screens.</li>
-<li class=""><strong>Settings</strong> tab navigation: horizontal scroll was already present via CSS — no regression.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
         </item>
     </channel>
 </rss>

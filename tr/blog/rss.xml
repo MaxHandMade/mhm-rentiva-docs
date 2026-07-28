@@ -43,6 +43,98 @@
             <category>i18n</category>
         </item>
         <item>
+            <title><![CDATA[Rentiva v5.2.0 / Pro v5.2.0 — Hiçbir şey yapmayan on yedi güvenlik anahtarı ve artık yapanlar]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release</guid>
+            <pubDate>Sat, 25 Jul 2026 22:00:00 GMT</pubDate>
+            <description><![CDATA[5.x hattının şimdiye kadarki en büyük sürümü. Yetki kontrolleri artık genel bir yetki yerine isteğin adını verdiği kaydı denetliyor, yönetim HTML'i basılırken süzülüyor, Kontrol Paneli ve Araç Ayarları ekranları yeniden tasarlandı — ve bir şey yaptığını iddia eden ama hiçbir şeye bağlı olmayan uzun bir denetim listesi kaldırıldı.]]></description>
+            <content:encoded><![CDATA[<p>5.x hattının şimdiye kadarki en büyük sürümü. Yetki kontrolleri artık genel bir yetki yerine isteğin adını verdiği kaydı denetliyor, yönetim HTML'i basılırken süzülüyor, Kontrol Paneli ve Araç Ayarları ekranları yeniden tasarlandı — ve bir şey yaptığını iddia eden ama hiçbir şeye bağlı olmayan uzun bir denetim listesi kaldırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="önce-rahatsız-edici-kısım">Önce rahatsız edici kısım<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#%C3%B6nce-rahats%C4%B1z-edici-k%C4%B1s%C4%B1m" class="hash-link" aria-label="Önce rahatsız edici kısım doğrudan bağlantı" title="Önce rahatsız edici kısım doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ayarlar → Güvenlik'te <strong>on yedi</strong> denetim vardı: "Brute Force Protection", "SQL Injection Protection", "XSS Protection", "CSRF Protection", "Enable Rate Limiting", IP izin ve engel listeleri. Hiçbiri hiçbir şeye bağlı değildi. Birini açmak hiçbir davranışı değiştirmiyordu.</p>
+<p>Gittiler. "Secure API Access Tokens" bölümü de gitti — READ, WRITE ve ADMIN etiketli anahtarlar üretiyordu ama eklentinin hiçbir parçası onları kontrol etmiyordu; orada oluşturulan bir anahtar hiçbir kapıyı açmıyordu. Token süresi, token yenileme, API önbellekleme, hata ayıklama çıktısı ve "Allow Global CORS" entegrasyon ayarları da gitti. Her saat başı, hiçbir şeyin eklenmediği bir kuyruğa karşı koşan "Scheduled Notifications" arka plan işi de gitti — Cron Monitor onu neşeyle "sağlıklı" diye raporluyordu. Araç karşılaştırmasındaki "Araç Ekle" düğmesi de: işleyicisi yok, uçları kaydedilmemiş, ve var olmayan bir şeyi açıp kapatan bir Elementor anahtarı.</p>
+<p>Hiçbir şey uygulamazken "bu koruma açık" diyen bir denetim, <strong>hiç denetim olmamasından kötüdür</strong>; çünkü ona güvenilir. Kaldırılan ayarların kayıtlı değerleri güncellerken otomatik temizleniyor.</p>
+<p>Gerçekten çalışan hız sınırlama kalıyor. REST API değişmedi ve normal biçimde kimlik doğrulamaya devam ediyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yetkiler-artık-yalnız-rolü-değil-kaydı-denetliyor">Yetkiler artık yalnız rolü değil kaydı denetliyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#yetkiler-art%C4%B1k-yaln%C4%B1z-rol%C3%BC-de%C4%9Fil-kayd%C4%B1-denetliyor" class="hash-link" aria-label="Yetkiler artık yalnız rolü değil kaydı denetliyor doğrudan bağlantı" title="Yetkiler artık yalnız rolü değil kaydı denetliyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rezervasyon, kapora, araç galerisi ve bloke tarih işlemleri genel bir "içerik düzenleyebilir" yetkisini kontrol ediyordu. Artık çağıranı <strong>isteğin adını verdiği kayda</strong> karşı denetliyorlar. Çok yazarlı sitelerde bir kullanıcının başkasının rezervasyonuna, galerisine veya müsaitliğine müdahale edebildiği yollar kapandı.</p>
+<p>Düzenleyiciden rezervasyon kaydetmek artık her durumda geçerli bir güvenlik jetonu gerektiriyor; bir form alanının varlığı onun yerine kabul edilmiyor. Veritabanı yedekleme ekranı yalnızca bu eklentinin oluşturduğu yedek tablolarını dışa aktarıyor, geri yüklüyor ve siliyor — o isteklerde başka tablolar artık adlandırılamıyor. Eklentinin ürettiği HTML ise <strong>basılırken</strong> açık bir izin listesinden süzülüyor; çıktının daha önce kaçışlandığına güvenen yerlerin yerine geçti.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="adı-anılmaya-değer-düzeltmeler">Adı anılmaya değer düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#ad%C4%B1-an%C4%B1lmaya-de%C4%9Fer-d%C3%BCzeltmeler" class="hash-link" aria-label="Adı anılmaya değer düzeltmeler doğrudan bağlantı" title="Adı anılmaya değer düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Kaldırma işlemi yarıda kalıyordu.</strong> "Kaldırırken tüm verileri sil" açıkken bile eklentiyi kaldırmak geride tablolar, zamanlanmış işler ve taksonomi terimleri bırakıyordu.</li>
+<li class=""><strong>Yedekler ekranı boş kalabiliyordu.</strong> Yedek klasöründe eşleşen veritabanı kaydı olmayan herhangi bir <code>.sql</code> dosyası, liste kurulurken ölümcül hataya yol açıyordu. Yedekler artık doğrudan <code>wp-content</code> yerine yüklemeler klasörünüzün altına yazılıyor; önceki sürümlerin aldığı yedekler listede kalıyor, geri yüklenebiliyor ve silinebiliyor — hiçbir şey taşınmadı ya da kaybolmadı.</li>
+<li class=""><strong>Araç hızlı düzenleme, tam düzenleyicinin reddettiği değerleri kabul ediyordu.</strong> Günlük fiyat negatif kaydedilebiliyor ve bu kiralama toplamlarına çarpan olarak giriyordu; koltuk sayısı sıfır ya da yapılandırılmış azaminin üstünde olabiliyordu.</li>
+<li class=""><strong>Günlük saklama ayarları yok sayılıyordu.</strong> "Auto Cleanup Logs" ve "Log Retention (Days)" hiçbir etki yapmıyordu: günlük temizlik, temizlik kapalı olsa ya da saklama daha uzun ayarlansa bile otuz günden eski kayıtları her zaman kalıcı olarak siliyordu.</li>
+<li class=""><strong>Araç ayarları sekmesini kaydetmek, Ön Yüz sekmesindeki iki alanı sessizce sıfırlıyordu</strong> — "Sayfa başına araç" ve "Varsayılan sıralama" — üstelik Araç sekmesi bu alanları göstermiyor bile.</li>
+<li class=""><strong>Kontrol panelinin son rezervasyonlar bölümü on iki saate kadar bayat kalabiliyordu</strong>; çünkü önbelleği artık kullanılmayan bir adla temizleniyordu. Müşteriler ekranı ise ayna görüntüsü bir nedenle her yüklemede tüm sorgularını yeniden koşuyordu: hiç kaydedilmemiş bir önbellek türü istiyordu, dolayısıyla hiçbir şey saklanmıyor ve okunmuyordu.</li>
+<li class=""><strong>Aramadan tüm filonun basılması istenebiliyordu.</strong> Araç araması her sayfa boyutunu kabul ediyordu; arama ve değerlendirmeler artık kendi ayarlarının ilan ettiği sınırda kapıyor.</li>
+<li class="">Çeviri kataloğu artık hatasız derleniyor — <code>%days%</code> gibi yer tutucular içeren dizeler printf biçimi sanılıp yanlış işaretleniyordu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-yeniden-tasarlanan-kontrol-paneli-ve-araç-ayarları">Yeni: yeniden tasarlanan Kontrol Paneli ve Araç Ayarları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#yeni-yeniden-tasarlanan-kontrol-paneli-ve-ara%C3%A7-ayarlar%C4%B1" class="hash-link" aria-label="Yeni: yeniden tasarlanan Kontrol Paneli ve Araç Ayarları doğrudan bağlantı" title="Yeni: yeniden tasarlanan Kontrol Paneli ve Araç Ayarları doğrudan bağlantı" translate="no">​</a></h2>
+<p>İki ekran da yeniden kuruldu. Araç Ayarları varsayılan olarak yeni düzende açılıyor; sayfa adresine <code>?ui=legacy</code> eklemek bu sürüm için öncekini geri getiriyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇ç">İç<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#i%CC%87%C3%A7" class="hash-link" aria-label="İç doğrudan bağlantı" title="İç doğrudan bağlantı" translate="no">​</a></h2>
+<p>Geçici önbellek kayıtları, son giriş kaydı, arka plan iş adları ve yönetim ekranlarının okuduğu JavaScript nesneleri artık eklentinin kendi önekini taşıyor; böylece aynı adla bir şey saklayan başka bir eklentiyle çakışamıyorlar. Her betik ve stil dosyası da tam önekiyle kaydediliyor — paylaşılan kısa bir ad altında WordPress hangisi önce kaydedildiyse onu tutar ve ötekini uyarmadan atar.</p>
+<p>Hiçbir şeyin referans vermediği yaklaşık <strong>2.000 satır</strong> kod kaldırıldı; bunların arasında veritabanı bakım komutlarını kaydeden bir dosya ve açılmış olsaydı korumalı araç ve rezervasyon alanlarını REST API üzerinden ifşa edecek bir dosya da vardı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.0-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yapmanız gereken bir şey yok. Yöneticiler yetki değişikliklerinden etkilenmez; editör veya yazar rolü bulunan sitelerde bu kullanıcılar artık yalnızca hak sahibi oldukları kayıtlar üzerinde işlem yapabilir. Kaldırılan denetimlere ait ayarlar sizin için temizlenir.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>security</category>
+            <category>minor</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva v5.1.1 / Pro v5.1.1 — Uyum hijyeni, davranış değişikliği yok]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.1-release</guid>
+            <pubDate>Tue, 21 Jul 2026 21:00:00 GMT</pubDate>
+            <description><![CDATA[v5.1.0'ın küçük bir devamı; WordPress.org listelemesi öncesi turun sürdürülmesi. Eklentinin davranışına dair hiçbir şey değişmiyor — bu, tam da olaysız olduğu için yayınlanmaya değer türden bir sürüm.]]></description>
+            <content:encoded><![CDATA[<p>v5.1.0'ın küçük bir devamı; WordPress.org listelemesi öncesi turun sürdürülmesi. Eklentinin davranışına dair hiçbir şey değişmiyor — bu, tam da olaysız olduğu için yayınlanmaya değer türden bir sürüm.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişti">Ne değişti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.1-release#ne-de%C4%9Fi%C5%9Fti" class="hash-link" aria-label="Ne değişti doğrudan bağlantı" title="Ne değişti doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Eylem adları tam öneki taşıyor.</strong> REST API anahtarı ve kapora yönetimi AJAX eylemleri artık <code>mhm_rentiva_</code> önekinin tamamını kullanıyor. API anahtarı işleyicilerinin mükerrer bir kaydı da kaldırıldı; böylece her eylem iki kez değil tam olarak bir kez işleniyor.</li>
+<li class=""><strong>Ölü referanslar kaldırıldı.</strong> Ücretsiz eklentinin parçası olmayan bir ayar sınıfına kalıntı bir referans, erişilemeyen bir kapora hesaplama yolu ve blok düzenleyici ile arama betiklerinde unutulmuş geliştirici hata ayıklama kaydı.</li>
+<li class=""><strong>İşlevsiz düğme yok.</strong> Müşteri gizlilik denetimleri yalnızca işleyicileri gerçekten mevcutken görüntüleniyor — onlar ücretli eklentiyle geliyor — yani ücretsiz eklenti artık hiçbir şey yapamayan denetimler göstermiyor. Aynı anda ücretli-eklentiye-özgü betikler de ücretsiz eklentiden çıkarıldı.</li>
+<li class=""><strong>Belgeler:</strong> readme, paketlenmiş paylaşılan arayüz kütüphanesini nötr bir dille anlatıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-v511">Pro v5.1.1<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.1-release#pro-v511" class="hash-link" aria-label="Pro v5.1.1 doğrudan bağlantı" title="Pro v5.1.1 doğrudan bağlantı" translate="no">​</a></h2>
+<p>Eklenti artık sahibi olduğu ön yüz betiklerini kendisi paketliyor; ücretsiz eklentinin onları kendi adına sevk etmesini beklemiyor. Bu, v5.1.0'da gelen nötr-kanca ayrımının öteki yarısı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.1-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yapmanız gereken bir şey yok; ayarlarınız ve verileriniz etkilenmez.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>patch</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva v5.1.0 / Pro v5.1.0 — Güvenlik sertleştirmesi ve artık hiç dış çağrı yok]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release</guid>
+            <pubDate>Mon, 20 Jul 2026 20:30:00 GMT</pubDate>
+            <description><![CDATA[WordPress.org listelemesi öncesi bir sertleştirme turu. Ücretsiz eklentinin özellikleri ve davranışı değişmiyor — değişen şey girdiyi, çıktıyı ve yetkileri ne kadar dikkatli ele aldığı ve artık neyi sevk etmediği.]]></description>
+            <content:encoded><![CDATA[<p>WordPress.org listelemesi öncesi bir sertleştirme turu. Ücretsiz eklentinin özellikleri ve davranışı değişmiyor — değişen şey girdiyi, çıktıyı ve yetkileri ne kadar dikkatli ele aldığı ve artık neyi sevk etmediği.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güvenlik">Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#g%C3%BCvenlik" class="hash-link" aria-label="Güvenlik doğrudan bağlantı" title="Güvenlik doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>İletişim formu ekleri</strong> artık WordPress'in kendi yükleme API'leri üzerinden, kapsama denetimleriyle çözülüyor; bir dosya yolu ele alma sorunu kapandı.</li>
+<li class=""><strong>Müşteri için WordPress hesabı oluşturmak</strong> <code>create_users</code> yetkisi gerektiriyor ve bunu yapan REST uçları daha gevşek bir yetki yerine eşleşen kullanıcı yönetimi yetkisine bağlandı.</li>
+<li class="">Yönetim ve ön yüz genelinde ek <strong>çıktı kaçışlama</strong>, ayar dizi anahtarı temizleme ve genel sorgu değişkenlerinin usulünce kaydı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="eklenti-artık-hiçbir-dış-istek-yapmıyor">Eklenti artık hiçbir dış istek yapmıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#eklenti-art%C4%B1k-hi%C3%A7bir-d%C4%B1%C5%9F-istek-yapm%C4%B1yor" class="hash-link" aria-label="Eklenti artık hiçbir dış istek yapmıyor doğrudan bağlantı" title="Eklenti artık hiçbir dış istek yapmıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Değerlendirme ve hesap avatarları Gravatar'dan geliyordu. Artık kişinin baş harflerinden yerel olarak üretiliyor. Bu, eklentideki son üçüncü taraf çağrısıydı: yüklediği hiçbir şey — web yazı tipi dahil — kendi sitenizden başka bir yerden gelmiyor. Analitik yok, konum sorgusu yok, uzak yazı tipi ya da betik yok.</p>
+<p>Bunun önemi gizlilik hijyeninin ötesinde. Sessizce bir dış servise bağlanan eklenti, davranışı o servisin ayakta, erişilebilir ve güvenilir olmasına bağlı bir eklentidir. Artık bağlı olunacak bir şey yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kaldırıldı-demo-veri-aracı">Kaldırıldı: demo veri aracı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#kald%C4%B1r%C4%B1ld%C4%B1-demo-veri-arac%C4%B1" class="hash-link" aria-label="Kaldırıldı: demo veri aracı doğrudan bağlantı" title="Kaldırıldı: demo veri aracı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Paketlenmiş demo veri aracı ve örnek görselleri eklentiden çıkarıldı. Amaçları yeni bir kurulumun dolu görünmesini sağlamaktı; bedeli ise her sitenin bir dizi görseli ve bir kez kullanacağı (kullanırsa) bir veri yazma aracını taşımasıydı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="belgelendi-kaynaktan-yeniden-derleme">Belgelendi: kaynaktan yeniden derleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#belgelendi-kaynaktan-yeniden-derleme" class="hash-link" aria-label="Belgelendi: kaynaktan yeniden derleme doğrudan bağlantı" title="Belgelendi: kaynaktan yeniden derleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Readme'ye React derlemesini anlatan ve genel depoyu gösteren bir <strong>Source code</strong> bölümü eklendi. Dört React yönetim ekranı derlenmiş paketler olarak sevk ediliyor ve küçültülmemiş kaynakları da yanlarında geliyor — yani eklentide örtük hiçbir şey yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pro-v510">Pro v5.1.0<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#pro-v510" class="hash-link" aria-label="Pro v5.1.0 doğrudan bağlantı" title="Pro v5.1.0 doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ücretli eklenti artık ücretsiz eklentiye <strong>yalnızca nötr WordPress kancaları</strong> üzerinden bağlanıyor ve kendi varlıklarını taşıyor; ücretsiz eklentinin onları taşımasına dayanmıyor. Ücretsiz eklentide hiç lisans ya da ücretli özellik iskelesi yok — devre dışı değil, kapalı değil: <strong>yok</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.1.0-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yapmanız gereken bir şey yok. Ayarlarınız ve verileriniz etkilenmez.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>security</category>
+            <category>minor</category>
+        </item>
+        <item>
             <title><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Dışa aktarma ekranı düzeltmeleri]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes</link>
             <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes</guid>
@@ -412,102 +504,6 @@ getirdiğinin kaydı olarak duruyor.</p></div></div>
             <category>rentiva</category>
             <category>transfer</category>
             <category>dashboard</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.58.1 — Kritik: Aynı Gün İadelerinde Çift-Rezervasyon Düzeltmesi]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release</guid>
-            <pubDate>Thu, 21 May 2026 16:00:00 GMT</pubDate>
-            <description><![CDATA[AutoComplete cron'u dropoffdate < NOW() karşılaştırmasını tarih-only granülerlikte yapıyordu. MySQL YYYY-MM-DD değerini YYYY-MM-DD 0000 olarak yorumladığından, dropoff'u aynı gün olan herhangi bir confirmed rezervasyon gece 00:00'da otomatik 'completed' işaretleniyordu — gerçek iade saatinden saatler önce. hasoverlap() bu yanlış-completed kayıtları status filtresinden hariç tutuyordu ('completed' listede yoktu), aynı araç kalan kira saatleri için çift-rezervasyona açık kalıyordu. Bu sürüm cron'u düzeltir, hasoverlap() katmanında defansif koruma ekler, completed → inprogress Status geçişini açar ve mevcut kontamine kayıtları geri almak için bir bakım script'i içerir.]]></description>
-            <content:encoded><![CDATA[<p>AutoComplete cron'u <code>dropoff_date &lt; NOW()</code> karşılaştırmasını tarih-only granülerlikte yapıyordu. MySQL <code>YYYY-MM-DD</code> değerini <code>YYYY-MM-DD 00:00:00</code> olarak yorumladığından, dropoff'u aynı gün olan herhangi bir confirmed rezervasyon gece 00:00'da otomatik 'completed' işaretleniyordu — gerçek iade saatinden saatler önce. <code>has_overlap()</code> bu yanlış-completed kayıtları status filtresinden hariç tutuyordu (<code>'completed'</code> listede yoktu), aynı araç kalan kira saatleri için çift-rezervasyona açık kalıyordu. Bu sürüm cron'u düzeltir, <code>has_overlap()</code> katmanında defansif koruma ekler, <code>completed → in_progress</code> Status geçişini açar ve mevcut kontamine kayıtları geri almak için bir bakım script'i içerir.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Yükseltme sonrası önerilen (opsiyonel)</div><div class="admonitionContent_BuS1"><p>Bakım script'i GitHub deposundadır: <code>bin/cleanup-early-completed-bookings.php</code> (üretim ZIP'ine kasıtlı olarak dahil edilmedi). Kontamine rezervasyon şüpheniz varsa (statü <code>completed</code> ama gerçek <code>end_ts</code> hâlâ gelecekte), dosyayı deploy edilmiş bir siteye kopyalayın ve çalıştırın:</p><div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># dry-run (varsayılan)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># in_progress'e geri al</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">wp eval-file plugins/mhm-rentiva/bin/cleanup-early-completed-bookings.php apply</span><br></span></code></pre></div></div><p>Script <code>Status::update_status()</code> üzerinden gider, böylece audit hook'lar tetiklenir ve cache her düzeltme için invalidate olur. İdempotenttir — apply sonrası tekrar çalıştırıldığında sıfır kayıt döner.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>AutoComplete cron'u artık datetime kullanıyor.</strong> Birincil sinyal: <code>_mhm_end_ts</code> (UNIX timestamp). Yedek: <code>CONCAT(_mhm_dropoff_date, ' ', _mhm_dropoff_time)</code>, eksik <code>dropoff_time</code> için <code>23:59:59</code> — gün-içi erken completed yapmaz. Legacy <code>_mhm_end_date</code> yedeği korundu.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="defansif-katman">Defansif Katman<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#defansif-katman" class="hash-link" aria-label="Defansif Katman doğrudan bağlantı" title="Defansif Katman doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>has_overlap()</code> artık end_ts'i gelecekte olan <code>'completed'</code> rezervasyonları yakalıyor</strong>, ileride bir cron bug'ı veya manuel hata bir rezervasyonu erken complete işaretlese bile müsaitlik bloke edilir.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-özellik">Yeni Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#yeni-%C3%B6zellik" class="hash-link" aria-label="Yeni Özellik doğrudan bağlantı" title="Yeni Özellik doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>Status</code> geçiş matrisi</strong> erken-completion düzeltmesi için <code>completed</code> → <code>in_progress</code> geçişine izin veriyor (temizlik script'inin audit'li update zinciri için gerekli).</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="araç">Araç<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#ara%C3%A7" class="hash-link" aria-label="Araç doğrudan bağlantı" title="Araç doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>bin/cleanup-early-completed-bookings.php</code></strong> — <code>wp eval-file</code> script'i. Varsayılan dry-run; pozisyonel <code>apply</code> ile kontamine satırları <code>Status::update_status()</code> üzerinden geri alır, böylece <code>mhm_rentiva_booking_status_changed</code> hook'u audit/cache invalidation için tetiklenir. İdempotent.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.1-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>AutoCompleteCronDatetime, HasOverlapStatusFilter ve StatusTransition suite'lerinde 11 yeni PHPUnit testi — toplam <strong>1.231 test / 3.726 assertion</strong>, 7 dokümante <code>saas_block</code> env-quota baseline başarısızlığı, 15 atlanmış. Regresyon yok.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>booking</category>
-            <category>critical</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.58.0 — Finansal Hata Düzeltmeleri, Kontrol Paneli İyileştirmeleri, Genişletilmiş Çeviri]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release</guid>
-            <pubDate>Fri, 15 May 2026 10:00:00 GMT</pubDate>
-            <description><![CDATA[Kalan ödeme çifte vergi sorunu ve otomatik iptal sonrası orphan WC siparişleri için kritik düzeltmeler. Kontrol paneli widget'ları durum rozeti, plaka, lokasyon ve depozito/kalan ayrımı kazandı. Hakkında > Destek sekmesine GitHub Issues kartı, test istatistikleri ve sürüm geçmişi accordion'u eklendi. Lisans sayfası 2 sütun grid'e geçti, Mesajlar React 18 chat bubble arayüzünü benimsedi. 88 yeni Türkçe çeviri.]]></description>
-            <content:encoded><![CDATA[<p>Kalan ödeme çifte vergi sorunu ve otomatik iptal sonrası orphan WC siparişleri için kritik düzeltmeler. Kontrol paneli widget'ları durum rozeti, plaka, lokasyon ve depozito/kalan ayrımı kazandı. Hakkında &gt; Destek sekmesine GitHub Issues kartı, test istatistikleri ve sürüm geçmişi accordion'u eklendi. Lisans sayfası 2 sütun grid'e geçti, Mesajlar React 18 chat bubble arayüzünü benimsedi. 88 yeni Türkçe çeviri.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Kritik finansal düzeltme</div><div class="admonitionContent_BuS1"><p>Depozito + kalan ödeme akışı kullanan ve <code>prices_include_tax</code> açık olan siteler, yükseltme sonrası geçmiş bekleyen siparişleri temizlemek için <code>sync_orphan_wc_orders()</code> komutunu WP-CLI üzerinden çalıştırmalı. Şema değişikliği yok.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltmeler">Kritik Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#kritik-d%C3%BCzeltmeler" class="hash-link" aria-label="Kritik Düzeltmeler doğrudan bağlantı" title="Kritik Düzeltmeler doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Kalan ödeme çifte vergi:</strong> Kalan ödeme WC siparişi artık çifte vergi uygulamıyor — <code>prices_include_tax</code> aktifken <code>wc_get_price_excluding_tax()</code> kullanılıyor. Müşteri kalan tutarın yaklaşık %20 fazlasını artık ödemiyor.</li>
-<li class=""><strong>Otomatik iptal sonrası orphan WC siparişleri:</strong> Otomatik iptal edilen rezervasyonlar artık bağlı WC siparişlerini de iptal ediyor (depozito + kalan). Tek seferlik backfill helper'ı — <code>sync_orphan_wc_orders()</code> / <code>sync_stale_past_bookings()</code> — geçmiş orphan pending siparişleri kurtarıyor.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class="">Ek Hizmetler listesi ve istatistikleri WooCommerce para birimini dinamik olarak okuyor (önceden plugin ayarı kullanılıyordu).</li>
-<li class="">Son Rezervasyonlar widget'ı müşteri adını (WC order billing fallback ile) ve araç lokasyonunu gösteriyor.</li>
-<li class="">Bekleyen Ödemeler widget'ı depozito ve kalan ödemeyi ayrı satır olarak gösteriyor; status-aware aggregation, WC order total'ı doğru kaynak olarak.</li>
-<li class=""><code>WooCommerceBridge</code>'de opsiyonel <code>booking_data</code> anahtarları için defensive null coalescing — PHP debug log'daki <em>Undefined array key</em> uyarıları kaldırıldı.</li>
-<li class="">WP Başlangıç widget'ları (İstatistikler, Yaklaşan Operasyonlar, Bekleyen Mesajlar) tutarlı footer ve bubble stiline kavuştu.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-özellikler">Yeni Özellikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#yeni-%C3%B6zellikler" class="hash-link" aria-label="Yeni Özellikler doğrudan bağlantı" title="Yeni Özellikler doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Yaklaşan Operasyonlar widget'ı</strong> (hem WP Başlangıç PHP versiyonu hem plugin Kontrol Paneli React versiyonu) plaka, durum rozeti (yeşil/amber/mavi) ve bitiş tarihini gösteriyor.</li>
-<li class=""><strong>Hızlı İşlemler grid'ine</strong> Transfer ve Bayiler butonları eklendi.</li>
-<li class=""><strong>Lisans sayfası</strong> 2 sütun grid kullanıyor (sol hesap bilgileri, sağ Lite/Pro karşılaştırma), başlıkta versiyon pill ve flex aksiyon butonu satırı.</li>
-<li class=""><strong>Hakkında &gt; Destek sekmesi</strong> — GitHub Issues kartı, Test &amp; Doğrulama istatistik kartı ve sürüm geçmişi accordion'u (ilk 5 görünür, kalan için toggle) eklendi.</li>
-<li class=""><strong>Mesajlar thread görünümü</strong> modern chat bubble düzenine geçti — kendi mesajları sağa hizalı mavi, karşı taraf sola hizalı gri, <em>(Sen)</em> suffix ile.</li>
-<li class=""><strong>Kısa Kod Sayfaları</strong> yönetici artık tüm 26 kayıtlı kısa kodu izliyor (önceden 20) — bayi/kullanıcı/popüler güzergahlar eklendi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bakım">Bakım<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#bak%C4%B1m" class="hash-link" aria-label="Bakım doğrudan bağlantı" title="Bakım doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class="">Ölü Gelir Grafiği kontrol paneli widget'ı ve <code>Charts.php</code> kaldırıldı (React migration sonrası kalan ~85 satır orphan kod).</li>
-<li class="">Messages bundle'ında <code>ReactDOM.render</code> → React 18 <code>createRoot</code> migration'ı.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>RemainingPaymentTax, AutoCancelOrderKeyLookup ve ShortcodePagesController suite'lerinde 12 yeni PHPUnit testi — toplam 1215 test, 0 başarısızlık. Pro özellikler, blok editör ayarları, e-posta şablonları ve sohbet arayüzünde 88 yeni Türkçe çeviri eklendi.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>woocommerce</category>
-            <category>dashboard</category>
-            <category>i18n</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.57.0 — Kurulum Sihirbazı + Transfer Tabloları Mobil Kaydırma]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.57.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.57.0-release</guid>
-            <pubDate>Tue, 12 May 2026 15:00:00 GMT</pubDate>
-            <description><![CDATA[Dar ekranlarda taşan kalan yönetici tablolarına yatay kaydırma wrapper'ı eklendi.]]></description>
-            <content:encoded><![CDATA[<p>Dar ekranlarda taşan kalan yönetici tablolarına yatay kaydırma wrapper'ı eklendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.57.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobil-kaydırma-wrapperları">Mobil Kaydırma Wrapper'ları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.57.0-release#mobil-kayd%C4%B1rma-wrapperlar%C4%B1" class="hash-link" aria-label="Mobil Kaydırma Wrapper'ları doğrudan bağlantı" title="Mobil Kaydırma Wrapper'ları doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Kurulum Sihirbazı</strong> sistem gereksinimleri tablosu: 390px görünüm penceresinde yatay kaydırma.</li>
-<li class=""><strong>Transfer Konumları</strong> tablosu: dar ekranlarda yatay kaydırma.</li>
-<li class=""><strong>Transfer Güzergâhları</strong> tablosu: dar ekranlarda yatay kaydırma.</li>
-<li class=""><strong>Ayarlar</strong> sekme navigasyonu: yatay kaydırma zaten CSS ile mevcuttu — regresyon yok.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>mobile</category>
-            <category>responsive</category>
         </item>
     </channel>
 </rss>
