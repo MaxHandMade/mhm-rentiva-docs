@@ -2,11 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-28T18:00:00.000Z</updated>
+    <updated>2026-07-28T20:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.2.2 / Pro v5.2.2 — WooCommerce'e ne söylediğimiz, ve yanlış söylediğimiz bir şey]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release"/>
+        <updated>2026-07-28T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[İçinde rahatsız edici bir itiraf olan bir yama sürümü. WordPress.org başvurusuna hazırlanırken WooCommerce kontrol listemizi ilk kez tüm kod tabanına uyguladık — ve WooCommerce'in uyumluluk sorularını hiç cevaplamamış olduğumuzu gördük.]]></summary>
+        <content type="html"><![CDATA[<p>İçinde rahatsız edici bir itiraf olan bir yama sürümü. WordPress.org başvurusuna hazırlanırken WooCommerce kontrol listemizi ilk kez tüm kod tabanına uyguladık — ve WooCommerce'in uyumluluk sorularını <strong>hiç cevaplamamış</strong> olduğumuzu gördük.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="söylemediğimiz-şey">Söylemediğimiz şey<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#s%C3%B6ylemedi%C4%9Fimiz-%C5%9Fey" class="hash-link" aria-label="Söylemediğimiz şey doğrudan bağlantı" title="Söylemediğimiz şey doğrudan bağlantı" translate="no">​</a></h2>
+<p>WooCommerce, siparişlere dokunan her eklentiden hangi yeni özellikleriyle çalıştığını beyan etmesini ister. Hiçbir şey söylemeyen eklenti <em>belirsiz</em> diye kaydedilir ve site sahibi Yüksek Başarımlı Sipariş Depolama'yı açmaya çalıştığında <strong>adıyla</strong> uyarılır — ki bu depolama WooCommerce 8.2'den beri yeni mağazalarda varsayılan.</p>
+<p>Biz hiçbir şey beyan etmemişiz. "Uyumsuz" bile değil — hiçbir şey.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hpos-uyumlu-ve-söylemeden-önce-ölçüldü">HPOS: uyumlu, ve söylemeden önce ölçüldü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#hpos-uyumlu-ve-s%C3%B6ylemeden-%C3%B6nce-%C3%B6l%C3%A7%C3%BCld%C3%BC" class="hash-link" aria-label="HPOS: uyumlu, ve söylemeden önce ölçüldü doğrudan bağlantı" title="HPOS: uyumlu, ve söylemeden önce ölçüldü doğrudan bağlantı" translate="no">​</a></h2>
+<p>Uyumluluk beyanı bir sözdür ve yanlış olanı sessizlikten kötüdür: insanlar o söze güvenip HPOS'u açar ve veriyi sessizce kaybeder. Bu yüzden varsaymak yerine ölçtük. Bu eklentinin dokunduğu her sipariş <code>wc_get_order()</code> ile okunuyor; sipariş kimliğine bağlı hiçbir post-meta erişimi yok; hiçbir yer siparişler için <code>wp_posts</code> ya da <code>shop_order</code> sorgulamıyor; hiçbir sipariş <code>wp_insert_post()</code> ile oluşturulmuyor.</p>
+<p>Bu artık hem ücretsiz eklentide hem ücretli eklentide beyan ediliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="blok-sepet-ve-ödeme-sayfası-uyumlu-değiliz-ve-bunu-söylüyoruz">Blok sepet ve ödeme sayfası: uyumlu değiliz ve bunu söylüyoruz<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#blok-sepet-ve-%C3%B6deme-sayfas%C4%B1-uyumlu-de%C4%9Filiz-ve-bunu-s%C3%B6yl%C3%BCyoruz" class="hash-link" aria-label="Blok sepet ve ödeme sayfası: uyumlu değiliz ve bunu söylüyoruz doğrudan bağlantı" title="Blok sepet ve ödeme sayfası: uyumlu değiliz ve bunu söylüyoruz doğrudan bağlantı" translate="no">​</a></h2>
+<p>Mağaza işletiyorsanız okunmaya değer kısım burası.</p>
+<p>Sessiz kalabilirdik. Bunun yerine blok tabanlı ödeme sayfasında gerçekte ne olduğunu ölçtük ve <strong>uyumsuz</strong> beyan ettik, çünkü gerçek bu:</p>
+<ul>
+<li class="">Ödeme tipi seçici, özel vergi satırı ve sepete dön bağlantısı hiç görünmüyor — hepsi blok ödeme sayfasının koşturmadığı klasik kancalardan basılıyor.</li>
+<li class=""><strong>Müsaitlik kontrolü çalışmıyor.</strong> Aracın istenen tarihlerde hâlâ boş olduğunu <code>woocommerce_checkout_process</code> içinde doğruluyoruz. Blok ödeme sayfasında o kanca hiç ateşlenmiyor; bu da iki müşterinin aynı aracı aynı tarihlere rezerve edebileceği bir pencere bırakıyor.</li>
+</ul>
+<p><strong>Mağazanız blok ödeme sayfasını kullanıyorsa, bu eklentiyi kullanırken klasik ödeme sayfasına geçin.</strong> Blok ödeme sayfasını gerçekten desteklemek, o yüzeyleri Additional Checkout Fields API ve bir Store API entegrasyonu üzerine yeniden kurmak demek — bir bayrak değil, bir özellik; ve iddia etmektense düzgün yapmayı tercih ederiz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bir-değer-hposun-okuyamayacağı-yere-yazılıyordu">Bir değer, HPOS'un okuyamayacağı yere yazılıyordu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#bir-de%C4%9Fer-hposun-okuyamayaca%C4%9F%C4%B1-yere-yaz%C4%B1l%C4%B1yordu" class="hash-link" aria-label="Bir değer, HPOS'un okuyamayacağı yere yazılıyordu doğrudan bağlantı" title="Bir değer, HPOS'un okuyamayacağı yere yazılıyordu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ödeme sırasında seçilen ödeme tipi <code>update_post_meta( $order_id, … )</code> ile yazılıyordu. HPOS'ta sipariş bir post değildir; yani bu, sipariş olmayan bir şeye bağlı bir satır yazar.</p>
+<p>Artık WooCommerce'in kendi sipariş nesnesi üzerinden gidiyor. HPOS'a geçmemiş bir mağazada o nesne zaten post meta'ya yazar — yani değer tam olarak hep bulunduğu yerde kalır. Hiçbir şey taşınmaz, göç gerekmez.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇tiraf">İtiraf<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#i%CC%87tiraf" class="hash-link" aria-label="İtiraf doğrudan bağlantı" title="İtiraf doğrudan bağlantı" translate="no">​</a></h2>
+<p>Her release derlemesinden önce koşturduğumuz bağımsız denetim, tam da bu değişikliğin içinde bir aramanın çürüttüğü bir iddia yakaladı. Ücretli eklentinin açıklamasının ilk taslağında <em>"checkout kancası kaydetmez ve sepete/checkout'a hiçbir şey basmaz"</em> yazıyordu. İkisini de yapıyor — iki dosyada dört kanca.</p>
+<p>Denetim ayrıca bizim atladığımız işi yaptı: WooCommerce'in kendi kaynağını okuyup Store API'nin o kancaların ikisini <strong>koşturduğunu</strong>, yani o yüzeyin büyük kısmının blok ödeme sayfasında ayakta kaldığını, yalnız sepet kalem adının klasik sayfaya özgü ve kozmetik olduğunu ortaya koydu. Bu karışım ne "uyumlu" ne "uyumsuz"; bu yüzden ücretli eklenti hiçbirini beyan etmiyor ve nedenini yazıyor.</p>
+<p>Bunu yazıyoruz çünkü asıl faydalı kısım düzeltmenin kendisi. Yalnız neyin doğru gittiğini sıralayan bir sürüm notu kimseye bir şey öğretmez — en az da bize.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yapmanız gereken bir şey yok. Ücretli eklentiyi kullanıyorsanız ikisini birlikte güncelleyin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="woocommerce" term="woocommerce"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.2.1 / Pro v5.2.1 — Ne saydığını söyleyen bir grafik ve gerçekten sevk edilen çeviriler]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.1-release</id>
@@ -545,43 +585,5 @@ getirdiğinin kaydı olarak duruyor.</p></div></div>
         <category label="rentiva" term="rentiva"/>
         <category label="vendor" term="vendor"/>
         <category label="payouts" term="payouts"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.58.2 — Transfer Şehir Filtresi + Arayüz İyileştirmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release"/>
-        <updated>2026-05-21T22:00:00.000Z</updated>
-        <summary type="html"><![CDATA[TransferSearchEngine'de lokasyon filtresi yoktu — bir İstanbul rotası aramasında Ankara ve Antalya'daki araçlar da çıkıyordu. Bu sürüm şehir-bazlı araç eşleştirmesi ekliyor (rotanın kalkış şehri), kiralama modülünün 3-katmanlı hibrit filtresini (araç → bayi devralma → global varsayılan) yeni expandtocity moduyla yeniden kullanarak. Ayrıca bir dizi arayüz/içerik iyileştirmesi: liste-tablo sayfalarında KPI kart boşluğu, kontrol paneli kart yükseklikleri, Hakkında sayfası sağlamlaştırması ve Araçlar takviminin Rezervasyonlar sayfasıyla görsel pariteye getirilmesi.]]></summary>
-        <content type="html"><![CDATA[<p><code>TransferSearchEngine</code>'de lokasyon filtresi yoktu — bir İstanbul rotası aramasında Ankara ve Antalya'daki araçlar da çıkıyordu. Bu sürüm şehir-bazlı araç eşleştirmesi ekliyor (rotanın kalkış şehri), kiralama modülünün 3-katmanlı hibrit filtresini (araç → bayi devralma → global varsayılan) yeni <code>expand_to_city</code> moduyla yeniden kullanarak. Ayrıca bir dizi arayüz/içerik iyileştirmesi: liste-tablo sayfalarında KPI kart boşluğu, kontrol paneli kart yükseklikleri, Hakkında sayfası sağlamlaştırması ve Araçlar takviminin Rezervasyonlar sayfasıyla görsel pariteye getirilmesi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Transfer araması artık araçları rotanın kalkış şehrine göre filtreliyor.</strong> Farklı şehirdeki araçlar (örn. İstanbul rotası için Ankara aracı) hariç tutulur. Kiralama ile aynı 3-katmanlı hibrit filtre (araç meta → bayi devralma → global varsayılan), kalkış şehrini paylaşan tüm lokasyonlara genişletilir.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni-özellik">Yeni Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#yeni-%C3%B6zellik" class="hash-link" aria-label="Yeni Özellik doğrudan bağlantı" title="Yeni Özellik doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>QueryHelper::get_location_subquery()</code></strong> opsiyonel <code>$expand_to_city</code> parametresi kazandı. Geriye uyumlu: kiralamanın katı eşleşmesi değişmedi.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Hakkında sayfası geliştirici iletişim bilgileri sabit</strong> — WordPress <code>admin_email</code> sızıntısına karşı korumalı (örn. dev/temiz kurulumda <code>admin@localhost.com</code> görünmesi engellendi).</li>
-<li class=""><strong>Hakkında 'Test ve Doğrulama' kartı</strong> güncel baseline'a güncellendi (1.237 PHPUnit testi, 3.736 assertion) ve <code>Test edildi: WP 7.0</code>. Plugin header ve <code>readme.txt</code> <code>Tested up to</code> 7.0'a hizalandı.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="stil">Stil<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#stil" class="hash-link" aria-label="Stil doğrudan bağlantı" title="Stil doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>KPI istatistik grid'i üst boşluğu</strong> yönetici liste-tablo sayfalarında (Araçlar, Rezervasyonlar, Ek Hizmetler, Transfer) — kartlar artık sayfa kenarına yapışık değil.</li>
-<li class=""><strong>Kontrol paneli Bekleyen Ödemeler + Gelir kartları</strong> artık uzun boş yüksekliğe esnemiyor. <code>RevenueChart</code> 250px maks yüksekliğe sabitlendi; Row 4 kartları kendi içeriklerine göre boyutlanıyor.</li>
-<li class=""><strong>Araçlar takvimi boşlukları</strong> Rezervasyonlar takvimiyle görsel pariteye getirildi — wrapper üst margin + card-pattern iç padding.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.58.2-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>Transfer lokasyon filtresi için 6 yeni PHPUnit testi (şehir genişletme + bayi devralma) — toplam <strong>1.237 test / 3.736 assertion</strong>, 7 dokümante <code>saas_block</code> env-quota baseline başarısızlığı, 15 atlanmış. Regresyon yok.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="transfer" term="transfer"/>
-        <category label="dashboard" term="dashboard"/>
     </entry>
 </feed>

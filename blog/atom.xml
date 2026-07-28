@@ -2,11 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-28T18:00:00.000Z</updated>
+    <updated>2026-07-28T20:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.2.2 / Pro v5.2.2 — What we tell WooCommerce, and one thing we were telling it wrong]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release"/>
+        <updated>2026-07-28T20:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A patch release with one uncomfortable admission in it. Preparing for the WordPress.org submission, we ran our WooCommerce control checklist against the whole codebase for the first time — and found that we had never answered WooCommerce's compatibility questions at all.]]></summary>
+        <content type="html"><![CDATA[<p>A patch release with one uncomfortable admission in it. Preparing for the WordPress.org submission, we ran our WooCommerce control checklist against the whole codebase for the first time — and found that we had never answered WooCommerce's compatibility questions at all.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-we-were-not-saying">What we were not saying<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#what-we-were-not-saying" class="hash-link" aria-label="Direct link to What we were not saying" title="Direct link to What we were not saying" translate="no">​</a></h2>
+<p>WooCommerce asks every plugin that touches orders to declare which of its newer features it works with. A plugin that says nothing is filed as <em>uncertain</em>, and the site owner is warned <strong>by name</strong> when they try to switch on High-Performance Order Storage — which has been the default for new stores since WooCommerce 8.2.</p>
+<p>We had never declared anything. Not "incompatible" — nothing at all.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hpos-compatible-and-measured-before-saying-so">HPOS: compatible, and measured before saying so<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#hpos-compatible-and-measured-before-saying-so" class="hash-link" aria-label="Direct link to HPOS: compatible, and measured before saying so" title="Direct link to HPOS: compatible, and measured before saying so" translate="no">​</a></h2>
+<p>A compatibility declaration is a promise, and a false one is worse than silence: people enable HPOS on the strength of it and lose data quietly. So we checked rather than assumed. Every order this plugin touches is read through <code>wc_get_order()</code>; there is no post-meta access keyed to an order id; nothing queries <code>wp_posts</code> or <code>shop_order</code> for orders; no order is created or updated with <code>wp_insert_post()</code>.</p>
+<p>That is now declared, in both the free plugin and the paid add-on.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="block-cart-and-checkout-not-compatible-and-we-say-so">Block cart and checkout: not compatible, and we say so<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#block-cart-and-checkout-not-compatible-and-we-say-so" class="hash-link" aria-label="Direct link to Block cart and checkout: not compatible, and we say so" title="Direct link to Block cart and checkout: not compatible, and we say so" translate="no">​</a></h2>
+<p>This is the part worth reading if you run a store.</p>
+<p>We could have stayed quiet. Instead we checked what actually happens on a block-based checkout, and declared <strong>incompatible</strong>, because that is the truth:</p>
+<ul>
+<li class="">The payment-type selector, the custom tax row and the return-to-cart link never render — they are printed from classic-checkout hooks the block checkout does not run.</li>
+<li class=""><strong>The availability check does not run.</strong> <code>woocommerce_checkout_process</code> is where we verify that the vehicle is still free for the requested dates. On a block checkout that hook never fires, which leaves a window where two customers can book the same vehicle for the same dates.</li>
+</ul>
+<p><strong>If your store uses the block checkout, switch to the classic checkout while using this plugin.</strong> Making the block checkout genuinely supported means rebuilding those surfaces on the Additional Checkout Fields API and a Store API integration — a feature, not a flag, and one we would rather do properly than claim.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-value-was-being-stored-where-hpos-cannot-read-it">One value was being stored where HPOS cannot read it<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#one-value-was-being-stored-where-hpos-cannot-read-it" class="hash-link" aria-label="Direct link to One value was being stored where HPOS cannot read it" title="Direct link to One value was being stored where HPOS cannot read it" translate="no">​</a></h2>
+<p>The payment type chosen at checkout was written with <code>update_post_meta( $order_id, … )</code>. Under HPOS an order is not a post, so that writes a row keyed to something that is not the order.</p>
+<p>It now goes through WooCommerce's own order object. On a store that has not switched to HPOS, that object writes to post meta anyway — so the value stays exactly where it has always been. Nothing is moved and nothing needs migrating.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-admission">The admission<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#the-admission" class="hash-link" aria-label="Direct link to The admission" title="Direct link to The admission" translate="no">​</a></h2>
+<p>The independent audit we run before every release build caught a claim inside this very change that a search disproves. Our first draft of the add-on's explanation said it "registers no checkout hooks and prints nothing into cart or checkout". It does both — four hooks, in two files.</p>
+<p>The audit also did the work we had skipped: it read WooCommerce's own source and established that the Store API <em>does</em> run two of those hooks, so most of that surface survives a block checkout, and only the cart line-item name is classic-only and cosmetic. That mixture is neither "compatible" nor "incompatible", so the add-on declares neither and explains why.</p>
+<p>We are writing this down because the correction is the useful part. A release note that only lists what went right teaches nobody anything, least of all us.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>Nothing to do. Update both plugins together if you use the paid add-on.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="woocommerce" term="woocommerce"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.2.1 / Pro v5.2.1 — A chart that says what it counts, and translations that ship]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.1-release</id>
@@ -544,43 +584,5 @@ badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shi
         <category label="rentiva" term="rentiva"/>
         <category label="vendor" term="vendor"/>
         <category label="payouts" term="payouts"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.58.2 — Transfer City Filter + UI Polish]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release"/>
-        <updated>2026-05-21T22:00:00.000Z</updated>
-        <summary type="html"><![CDATA[TransferSearchEngine had no location filter — a search for an İstanbul route returned vehicles parked in Ankara and Antalya. This release adds city-based vehicle matching (route origin's city), reusing the rental module's 3-layer hybrid filter (vehicle → vendor inheritance → global default) via a new expandtocity mode. Plus a batch of UI/content polish: KPI spacing on list-table pages, dashboard card heights, About page hardening, and Vehicles calendar parity with the Bookings page.]]></summary>
-        <content type="html"><![CDATA[<p><code>TransferSearchEngine</code> had no location filter — a search for an İstanbul route returned vehicles parked in Ankara and Antalya. This release adds city-based vehicle matching (route origin's city), reusing the rental module's 3-layer hybrid filter (vehicle → vendor inheritance → global default) via a new <code>expand_to_city</code> mode. Plus a batch of UI/content polish: KPI spacing on list-table pages, dashboard card heights, About page hardening, and Vehicles calendar parity with the Bookings page.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Transfer search filters by route origin city.</strong> A vehicle parked in Ankara no longer appears for an İstanbul route. Same 3-layer hybrid filter as rental (vehicle direct meta → vendor inheritance → global default), expanded to all locations sharing the origin's city.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="feature">Feature<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#feature" class="hash-link" aria-label="Direct link to Feature" title="Direct link to Feature" translate="no">​</a></h3>
-<ul>
-<li class=""><strong><code>QueryHelper::get_location_subquery()</code></strong> gains an optional <code>$expand_to_city</code> parameter. Backward-compatible: rental's strict matching is unchanged.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>About page developer contact info hardcoded</strong> — defensive against a DB option leaking the WordPress <code>admin_email</code> (e.g. <code>admin@localhost.com</code> on dev/clean installs).</li>
-<li class=""><strong>About <code>Tests &amp; Verification</code> card</strong> updated to the current baseline (1,237 PHPUnit tests, 3,736 assertions) and <code>Tested with: WP 7.0</code>. Plugin header and <code>readme.txt</code> <code>Tested up to</code> aligned to 7.0.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="style">Style<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#style" class="hash-link" aria-label="Direct link to Style" title="Direct link to Style" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>KPI stats grid top spacing</strong> on admin list-table pages (Vehicles, Bookings, Add-ons, Transfer) — cards no longer sit flush against the page edge.</li>
-<li class=""><strong>Dashboard Pending Payments + Revenue cards</strong> no longer stretch to a tall empty height. <code>RevenueChart</code> is bound to a 250px max height; Row 4 cards size to their own content.</li>
-<li class=""><strong>Vehicles calendar spacing parity</strong> with the Bookings calendar — wrapper top margin + card-pattern inner padding.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.58.2-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>6 new PHPUnit tests cover the transfer location filter (city expansion + vendor inheritance) — total <strong>1,237 tests / 3,736 assertions</strong>, 7 documented <code>saas_block</code> env-quota baseline failures, 15 skipped. No regression.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="transfer" term="transfer"/>
-        <category label="dashboard" term="dashboard"/>
     </entry>
 </feed>
