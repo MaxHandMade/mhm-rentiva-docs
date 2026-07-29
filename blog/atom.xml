@@ -2,11 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-28T20:00:00.000Z</updated>
+    <updated>2026-07-29T04:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.2.3 / Pro v5.2.3 — A table WordPress was never really looking at, and a privacy notice that named the wrong things]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release"/>
+        <updated>2026-07-29T04:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Another patch on the way to the WordPress.org submission, and another release where the interesting part is not the bug we fixed but what we found while checking whether we had described it honestly.]]></summary>
+        <content type="html"><![CDATA[<p>Another patch on the way to the WordPress.org submission, and another release where the interesting part is not the bug we fixed but what we found while checking whether we had described it honestly.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-table-update-that-could-never-have-landed">The table update that could never have landed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release#the-table-update-that-could-never-have-landed" class="hash-link" aria-label="Direct link to The table update that could never have landed" title="Direct link to The table update that could never have landed" translate="no">​</a></h2>
+<p>WordPress has a function, <code>dbDelta()</code>, that takes a <code>CREATE TABLE</code> statement and works out the difference between it and the table you already have — adding columns you have introduced since the last release, without touching the data already in them. It is how a plugin evolves its own schema safely.</p>
+<p>It does not execute the statement. It <em>parses</em> it. And the way it finds the table's name is to take the first thing after the words <code>CREATE TABLE</code>.</p>
+<p>Our background-job table was created with <code>CREATE TABLE IF NOT EXISTS</code>. So <code>dbDelta()</code> had been tracking, for as long as that table has existed, a table called <strong><code>IF</code></strong>.</p>
+<p>The table itself was fine — the database executed the raw statement correctly and always had. Nothing was lost, and nothing is wrong on your site today. But <code>dbDelta()</code> runs <code>DESCRIBE</code> against the name it parsed, <code>DESCRIBE IF</code> fails, and a table it cannot describe is skipped entirely. Any column we added to that table in a future release would have been silently ignored: no error, no warning, <code>dbDelta()</code> reporting success while doing nothing.</p>
+<p>We measured it rather than reasoning about it. Adding a column to the schema and re-running the migration before the fix: the column was not created. After the fix: it was.</p>
+<p>The same defect was in two more <code>CREATE TABLE</code> statements in the paid add-on. One of them — the reports background-job table — is created on activation and genuinely had the problem. The other belongs to a monitoring subsystem that nothing currently starts; we fixed it anyway so both read the same way, and we would rather say that plainly than let a changelog imply we repaired something that was never running.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-privacy-notice-rewritten-because-it-was-wrong">The privacy notice, rewritten because it was wrong<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release#the-privacy-notice-rewritten-because-it-was-wrong" class="hash-link" aria-label="Direct link to The privacy notice, rewritten because it was wrong" title="Direct link to The privacy notice, rewritten because it was wrong" translate="no">​</a></h2>
+<p>The readme's Privacy section is the part of a plugin page that a site owner copies into their own privacy policy. Ours said that every booking record stores the visitor's IP address and browser user-agent.</p>
+<p>That turned out to be almost exactly backwards.</p>
+<p>The code that writes an IP onto a booking sits behind an endpoint that <strong>nothing in the plugin posts to</strong>. The real booking flow — the form, the cart, WooCommerce checkout — records no IP at all. So the one store we disclosed was the one that, in practice, barely exists.</p>
+<p>Meanwhile three that do exist were not mentioned:</p>
+<ul>
+<li class=""><strong>The contact form.</strong> Every submission is kept with the sender's name, e-mail, telephone, company, the message, a link to any file they attached, and the IP and user-agent it came from. There is no retention setting on these records and nothing ever deletes them. The attached file goes to your ordinary uploads folder, reachable by anyone with the URL, and stays there even if you delete the message.</li>
+<li class=""><strong>The rating form.</strong> Reviews are stored as ordinary WordPress comments, so WordPress itself records the reviewer's IP and user-agent — as it does for any comment. Guest reviews are reachable through <strong>Tools → Erase Personal Data</strong>, which matches comments by e-mail address. A review left by a logged-in customer is saved against their user ID with no e-mail on the comment, so those tools will not find it; you have to delete it from the Comments screen.</li>
+<li class=""><strong>The e-mail log.</strong> Alongside the recipient and subject, it keeps the booking details each message was built from — customer name, contact details, rental dates. Not the assembled message body. It has its own retention setting, 30 days by default.</li>
+</ul>
+<p>The activity log, which we had described correctly, keeps IP, user-agent and user ID per entry on a configurable retention, also 30 days by default.</p>
+<p><strong>Nothing about what the plugin stores has changed in this release.</strong> What changed is that the description of it is now true. If you have a privacy policy that was written from our old text, it is worth re-reading it against the new section.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-we-found-it-which-is-the-part-worth-writing-down">How we found it, which is the part worth writing down<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release#how-we-found-it-which-is-the-part-worth-writing-down" class="hash-link" aria-label="Direct link to How we found it, which is the part worth writing down" title="Direct link to How we found it, which is the part worth writing down" translate="no">​</a></h2>
+<p>None of this came out of the fix. It came out of putting the fix in front of an independent model and asking it to disprove our own description, five times over. Each round found something in the text we had <em>just written</em> to correct the previous round: a list read as a delete-list when it was a keep-list; a test's normalised key names mistaken for the real ones; a count of ten where the code has a hundred and sixty-one.</p>
+<p>The pattern in every one of them was the same — assuming what something meant instead of reading it. That is worth naming publicly, because it is the failure mode that produces confident, well-written documentation that happens to be false, and a privacy notice is exactly the kind of document where that does real harm.</p>
+<p>The same rounds turned up a scratch file that had been shipping inside our release ZIPs since 5.2.1. The build now holds an allow-list of what may sit in the archive root and refuses to build otherwise, because the exclusion list we had could only ever catch the files somebody had thought of.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>Nothing to do. There is no pending column for the corrected table, so nothing changes on your site on update; the fix is what makes the next schema change actually apply. Pro 5.2.3 ships alongside and requires Lite 5.2.3.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="privacy" term="privacy"/>
+        <category label="database" term="database"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.2.2 / Pro v5.2.2 — What we tell WooCommerce, and one thing we were telling it wrong]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.2-release</id>
@@ -549,33 +592,6 @@ badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shi
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
 <p>The full suite is green at <strong>1,331 tests / 4,021 assertions</strong>, 0 failures, with 0 Plugin Check errors. No regression.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="payouts" term="payouts"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.60.0 — Matured Payout Fix + Dead SaaS Scaffolding Removal]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release"/>
-        <updated>2026-06-23T12:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Matured vendor payouts were silently skipped on single-site installs: a dead SaaS "control plane" gate in the matured-payout worker required a multi-tenant registry row that a normal install never provisions, so no scheduled payout ever finalized automatically. This release removes that gate — the worker now runs unconditionally — and clears out the unused multi-tenant orchestration scaffolding that caused it.]]></summary>
-        <content type="html"><![CDATA[<p>Matured vendor payouts were silently skipped on single-site installs: a dead SaaS "control plane" gate in the matured-payout worker required a multi-tenant registry row that a normal install never provisions, so no scheduled payout ever finalized automatically. This release removes that gate — the worker now runs unconditionally — and clears out the unused multi-tenant orchestration scaffolding that caused it.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="critical-fix">Critical Fix<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#critical-fix" class="hash-link" aria-label="Direct link to Critical Fix" title="Direct link to Critical Fix" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Matured vendor payouts now process on single-site installs.</strong> The matured-payout worker (<code>MaturedPayoutJob::run()</code>) was gated behind a SaaS control-plane <code>is_operational()</code> check that required a tenant-registry row which a normal (non-SaaS-hosted) install never creates — so every scheduled run exited early without finalizing a single payout. The gate has been removed; the worker now runs unconditionally. A regression test reproduces the production state (no tenant row present) and asserts the matured payout is finalized.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="change">Change<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#change" class="hash-link" aria-label="Direct link to Change" title="Direct link to Change" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Removed unused multi-tenant SaaS orchestration scaffolding.</strong> Six dead classes — the control-plane guard, usage metering, cycle manager, tenant provisioner, quota exception, and their migration — were deleted, the usage-metering call sites were stripped from the financial layer, and a one-time <code>v3.9.0</code> upgrade migration drops the two now-empty database tables. The tenant-context layer used for financial data scoping is intentionally retained.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.60.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>The full suite stays green at <strong>1,263 tests / 3,839 assertions</strong>, 0 failures. The four obsolete orchestration test files were removed and a <code>MaturedPayoutJob</code> regression test was added. No regression.</p>]]></content>
         <author>
             <name>MaxHandMade</name>
             <uri>https://github.com/MaxHandMade</uri>

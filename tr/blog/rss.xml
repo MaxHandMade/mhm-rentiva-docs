@@ -4,10 +4,49 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Tue, 28 Jul 2026 20:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 29 Jul 2026 04:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva v5.2.3 / Pro v5.2.3 — WordPress'in aslında hiç bakmadığı bir tablo ve yanlış şeyleri sayan bir gizlilik metni]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release</guid>
+            <pubDate>Wed, 29 Jul 2026 04:00:00 GMT</pubDate>
+            <description><![CDATA[WordPress.org başvurusuna giden yolda bir yama sürümü daha. İlginç olan kısmı düzelttiğimiz hata değil, o hatayı dürüst anlatıp anlatmadığımızı kontrol ederken bulduklarımız.]]></description>
+            <content:encoded><![CDATA[<p>WordPress.org başvurusuna giden yolda bir yama sürümü daha. İlginç olan kısmı düzelttiğimiz hata değil, o hatayı dürüst anlatıp anlatmadığımızı kontrol ederken bulduklarımız.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hiçbir-zaman-uygulanamayacak-olan-tablo-güncellemesi">Hiçbir zaman uygulanamayacak olan tablo güncellemesi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release#hi%C3%A7bir-zaman-uygulanamayacak-olan-tablo-g%C3%BCncellemesi" class="hash-link" aria-label="Hiçbir zaman uygulanamayacak olan tablo güncellemesi doğrudan bağlantı" title="Hiçbir zaman uygulanamayacak olan tablo güncellemesi doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress'in <code>dbDelta()</code> diye bir fonksiyonu var: ona bir <code>CREATE TABLE</code> ifadesi verirsiniz, o da elinizdeki tabloyla arasındaki farkı bulur ve son sürümden beri eklediğiniz sütunları, içindeki veriye dokunmadan ekler. Bir eklentinin kendi şemasını güvenle geliştirmesinin yolu budur.</p>
+<p>Bu fonksiyon ifadeyi <strong>çalıştırmaz</strong>, <strong>ayrıştırır</strong>. Tablonun adını bulma yöntemi de şudur: <code>CREATE TABLE</code> kelimelerinden sonraki ilk şeyi alır.</p>
+<p>Bizim arka plan iş tablomuz <code>CREATE TABLE IF NOT EXISTS</code> ile oluşturuluyordu. Yani <code>dbDelta()</code>, o tablo var olduğundan beri, adı <strong><code>IF</code></strong> olan bir tabloyu izliyordu.</p>
+<p>Tablonun kendisi sorunsuzdu — ham ifadeyi veritabanı hep doğru çalıştırdı. Kaybolan veri yok, bugün sitenizde yanlış olan bir şey de yok. Ama <code>dbDelta()</code> ayrıştırdığı ada karşı <code>DESCRIBE</code> koşar, <code>DESCRIBE IF</code> başarısız olur ve tarif edemediği bir tabloyu tümüyle atlar. İleride o tabloya ekleyeceğimiz her sütun sessizce yok sayılacaktı: hata yok, uyarı yok, <code>dbDelta()</code> başarı bildirirken hiçbir şey yapmıyor.</p>
+<p>Bunu akıl yürüterek değil ölçerek doğruladık. Şemaya bir sütun ekleyip göçü yeniden koşturduk — düzeltmeden önce sütun oluşmadı, düzeltmeden sonra oluştu.</p>
+<p>Aynı kusur ücretli eklentideki iki <code>CREATE TABLE</code> ifadesinde daha vardı. Biri — rapor arka plan iş tablosu — etkinleştirmede oluşturuluyor ve sorunu gerçekten yaşıyordu. Diğeri şu an hiçbir yerden başlatılmayan bir izleme alt sistemine ait; iki kod yolu aynı okunsun diye onu da düzelttik, ama bunu açıkça söylemeyi, changelog'un hiç çalışmamış bir şeyi onardığımızı ima etmesine tercih ederiz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yanlış-olduğu-için-baştan-yazılan-gizlilik-metni">Yanlış olduğu için baştan yazılan gizlilik metni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release#yanl%C4%B1%C5%9F-oldu%C4%9Fu-i%C3%A7in-ba%C5%9Ftan-yaz%C4%B1lan-gizlilik-metni" class="hash-link" aria-label="Yanlış olduğu için baştan yazılan gizlilik metni doğrudan bağlantı" title="Yanlış olduğu için baştan yazılan gizlilik metni doğrudan bağlantı" translate="no">​</a></h2>
+<p>readme'nin Gizlilik bölümü, site sahibinin kendi gizlilik politikasına kopyaladığı kısımdır. Bizimki, her rezervasyon kaydının ziyaretçinin IP adresini ve tarayıcı bilgisini sakladığını söylüyordu.</p>
+<p>Neredeyse tam tersi çıktı.</p>
+<p>Rezervasyona IP yazan kod, eklentide <strong>hiçbir şeyin gönderim yapmadığı</strong> bir ucun arkasında duruyor. Gerçek rezervasyon akışı — form, sepet, WooCommerce ödeme sayfası — hiç IP kaydetmiyor. Yani beyan ettiğimiz tek depo, pratikte neredeyse hiç var olmayanıydı.</p>
+<p>Buna karşılık var olan üçü hiç anılmamıştı:</p>
+<ul>
+<li class=""><strong>İletişim formu.</strong> Her gönderim; gönderenin adı, e-postası, telefonu, firması, mesajın kendisi, eklediği dosyanın bağlantısı ve geldiği IP ile tarayıcı bilgisiyle saklanıyor. Bu kayıtların saklama süresi ayarı yok ve hiçbir şey onları silmiyor. Eklenen dosya sıradan yükleme klasörüne gidiyor, bağlantıyı bilen herkesçe erişilebilir, ve mesajı silseniz bile orada kalıyor.</li>
+<li class=""><strong>Değerlendirme formu.</strong> Yorumlar sıradan WordPress yorumu olarak saklanıyor, dolayısıyla IP ve tarayıcı bilgisini WordPress'in kendisi kaydediyor — her yorumda yaptığı gibi. Misafir yorumlarına <strong>Araçlar → Kişisel Veriyi Sil</strong> üzerinden ulaşılabiliyor, çünkü orası yorumları e-posta adresiyle eşliyor. Giriş yapmış bir müşterinin bıraktığı yorum ise kullanıcı kimliğine bağlı, üstünde e-posta olmadan saklanıyor; o araçlar onu bulamaz, Yorumlar ekranından silmeniz gerekir.</li>
+<li class=""><strong>E-posta günlüğü.</strong> Alıcı ve konunun yanında, her mesajın hangi rezervasyon bilgilerinden üretildiğini de tutuyor: müşteri adı, iletişim bilgileri, kiralama tarihleri. Derlenmiş mesaj gövdesini tutmuyor. Kendi saklama ayarı var, varsayılan 30 gün.</li>
+</ul>
+<p>Doğru anlattığımız etkinlik günlüğü ise girdi başına IP, tarayıcı bilgisi ve kullanıcı kimliğini, yine varsayılan 30 günlük ayarlanabilir bir süreyle tutuyor.</p>
+<p><strong>Bu sürümde eklentinin ne sakladığı değişmedi.</strong> Değişen şey, onun tarifinin artık doğru olması. Eski metnimizden yazılmış bir gizlilik politikanız varsa, yeni bölüme karşı bir kez okumaya değer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bunu-nasıl-bulduk--asıl-yazılmaya-değer-kısım">Bunu nasıl bulduk — asıl yazılmaya değer kısım<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release#bunu-nas%C4%B1l-bulduk--as%C4%B1l-yaz%C4%B1lmaya-de%C4%9Fer-k%C4%B1s%C4%B1m" class="hash-link" aria-label="Bunu nasıl bulduk — asıl yazılmaya değer kısım doğrudan bağlantı" title="Bunu nasıl bulduk — asıl yazılmaya değer kısım doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bunların hiçbiri düzeltmeden çıkmadı. Düzeltmeyi bağımsız bir modelin önüne koyup kendi tarifimizi çürütmesini istememizden çıktı — beş tur boyunca. Her tur, bir önceki turu düzeltmek için <strong>az önce yazdığımız</strong> metinde bir şey buldu: koruma listesini silme listesi sanmak; bir testin normalize edilmiş anahtar adlarını gerçek adlar sanmak; kodda yüz altmış bir tane varken on demek.</p>
+<p>Hepsinin ortak deseni aynıydı: bir şeyin ne anlama geldiğini okumak yerine varsaymak. Bunu açıkça yazmaya değer, çünkü kendinden emin, iyi yazılmış ama yanlış olan belge tam da böyle üretilir — ve gizlilik metni, bunun gerçek zarar verdiği belge türüdür.</p>
+<p>Aynı turlar, 5.2.1'den beri release ZIP'lerimizin içinde yolculuk eden bir çalışma dosyasını da ortaya çıkardı. Artık derleme, arşivin kökünde ne bulunabileceğinin beyaz listesini tutuyor ve başka bir şey varsa üretmeyi reddediyor; çünkü elimizdeki hariç tutma listesi ancak birinin aklına gelmiş dosyaları yakalayabilirdi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.3-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yapmanız gereken bir şey yok. Düzeltilen tablo için bekleyen bir sütun olmadığından güncellemede sitenizde bir şey değişmez; düzeltme, bir sonraki şema değişikliğinin gerçekten uygulanmasını sağlar. Pro 5.2.3 birlikte yayınlanıyor ve Lite 5.2.3 gerektiriyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>privacy</category>
+            <category>database</category>
+            <category>patch</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v5.2.2 / Pro v5.2.2 — WooCommerce'e ne söylediğimiz, ve yanlış söylediğimiz bir şey]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.2-release</link>
@@ -479,29 +518,6 @@ getirdiğinin kaydı olarak duruyor.</p></div></div>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.61.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
 <p>Tam suite <strong>1.331 test / 4.021 doğrulama</strong> ile yeşil, 0 başarısızlık, 0 Plugin Check hatası. Regresyon yok.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
-            <category>payouts</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.60.0 — Olgunlaşmış Ödeme Düzeltmesi + Ölü SaaS İskelet Kaldırma]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release</guid>
-            <pubDate>Tue, 23 Jun 2026 12:00:00 GMT</pubDate>
-            <description><![CDATA[Olgunlaşmış bayi ödemeleri tek-siteli kurulumlarda sessizce atlanıyordu: olgunlaşmış-ödeme işçisindeki ölü bir SaaS "kontrol düzlemi" gate'i, normal bir kurulumun hiç oluşturmadığı çok-kiracılı bir kayıt satırı gerektiriyordu; bu yüzden hiçbir zamanlanmış ödeme otomatik olarak sonuçlanmıyordu. Bu sürüm o gate'i kaldırıyor — işçi artık koşulsuz çalışıyor — ve buna neden olan kullanılmayan çok-kiracılı orkestrasyon iskeletini temizliyor.]]></description>
-            <content:encoded><![CDATA[<p>Olgunlaşmış bayi ödemeleri tek-siteli kurulumlarda sessizce atlanıyordu: olgunlaşmış-ödeme işçisindeki ölü bir SaaS "kontrol düzlemi" gate'i, normal bir kurulumun hiç oluşturmadığı çok-kiracılı bir kayıt satırı gerektiriyordu; bu yüzden hiçbir zamanlanmış ödeme otomatik olarak sonuçlanmıyordu. Bu sürüm o gate'i kaldırıyor — işçi artık koşulsuz çalışıyor — ve buna neden olan kullanılmayan çok-kiracılı orkestrasyon iskeletini temizliyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="kritik-düzeltme">Kritik Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#kritik-d%C3%BCzeltme" class="hash-link" aria-label="Kritik Düzeltme doğrudan bağlantı" title="Kritik Düzeltme doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Olgunlaşmış bayi ödemeleri artık tek-siteli kurulumlarda işleniyor.</strong> Olgunlaşmış-ödeme işçisi (<code>MaturedPayoutJob::run()</code>), normal (SaaS-barındırmalı olmayan) bir kurulumun hiç oluşturmadığı bir kiracı-kayıt satırı gerektiren bir SaaS kontrol-düzlemi <code>is_operational()</code> kontrolünün arkasındaydı — bu yüzden her zamanlanmış çalışma tek bir ödemeyi bile sonuçlandırmadan erken çıkıyordu. Gate kaldırıldı; işçi artık koşulsuz çalışıyor. Bir regresyon testi üretim durumunu (kiracı satırı yok) yeniden üretiyor ve olgunlaşmış ödemenin sonuçlandığını doğruluyor.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="değişiklik">Değişiklik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#de%C4%9Fi%C5%9Fiklik" class="hash-link" aria-label="Değişiklik doğrudan bağlantı" title="Değişiklik doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Kullanılmayan çok-kiracılı SaaS orkestrasyon iskeleti kaldırıldı.</strong> Altı ölü sınıf — kontrol-düzlemi guard, kullanım sayacı, döngü yöneticisi, kiracı sağlayıcı, kota istisnası ve migration'ları — silindi, kullanım-sayacı çağrıları finansal katmandan temizlendi ve tek seferlik bir <code>v3.9.0</code> yükseltme migration'ı artık boş olan iki veritabanı tablosunu düşürüyor. Finansal veri kapsamlaması için kullanılan kiracı-bağlam katmanı kasıtlı olarak korundu.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testler">Testler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.60.0-release#testler" class="hash-link" aria-label="Testler doğrudan bağlantı" title="Testler doğrudan bağlantı" translate="no">​</a></h2>
-<p>Tam suite <strong>1.263 test / 3.839 doğrulama</strong> ile yeşil kalıyor, 0 başarısızlık. Dört eski orkestrasyon test dosyası kaldırıldı ve bir <code>MaturedPayoutJob</code> regresyon testi eklendi. Regresyon yok.</p>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
             <category>vendor</category>
