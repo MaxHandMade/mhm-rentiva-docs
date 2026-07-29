@@ -2,11 +2,42 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-29T04:00:00.000Z</updated>
+    <updated>2026-07-29T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva v5.2.4 — The menu moves down, and every link out of your site is now written down]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release"/>
+        <updated>2026-07-29T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A small release with a simple theme: fitting into WordPress rather than competing with it.]]></summary>
+        <content type="html"><![CDATA[<p>A small release with a simple theme: fitting into WordPress rather than competing with it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-menu-is-lower-now">The menu is lower now<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release#the-menu-is-lower-now" class="hash-link" aria-label="Direct link to The menu is lower now" title="Direct link to The menu is lower now" translate="no">​</a></h2>
+<p>MHM Rentiva registered its top-level admin menu at position 58, which put it directly above <strong>Appearance</strong> — ahead of most of WordPress's own items. That is a prominent spot, and on a site running several plugins it is exactly how the admin sidebar turns into a scramble.</p>
+<p>It now sits at 76: still top-level, but below Appearance, Plugins, Users and Tools, immediately above Settings. Nothing else changed — the same screens are underneath it in the same order.</p>
+<p>If you navigate by muscle memory, this is the one thing you will notice.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="every-outbound-link-written-down">Every outbound link, written down<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release#every-outbound-link-written-down" class="hash-link" aria-label="Direct link to Every outbound link, written down" title="Direct link to Every outbound link, written down" translate="no">​</a></h2>
+<p>The readme said the plugin uses no external services. That is true in the sense that matters — it makes no HTTP request to anyone, sends nothing about your site or your customers anywhere, and loads every asset including its webfont from your own server.</p>
+<p>But the admin screens do contain ordinary hyperlinks, and a reader checking the claim would find them and reasonably wonder. So the "External services" section now lists them: the documentation site, the issue tracker, wpalemi.com with its terms and privacy pages, this plugin's WordPress.org support forum, the two SMTP plugin pages the setup wizard suggests, and a YouTube channel. They open only if you click them, and they send nothing when you do.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-sentence-we-had-to-take-back">A sentence we had to take back<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release#a-sentence-we-had-to-take-back" class="hash-link" aria-label="Direct link to A sentence we had to take back" title="Direct link to A sentence we had to take back" translate="no">​</a></h2>
+<p>The same section previously said that a check in our build "fails if a request to any third-party host is introduced."</p>
+<p>That was not true, and the file it referred to says so itself, in a comment we wrote: <em>"this gate cannot catch a NEW third-party host nobody has thought of. It is a regression fence, not a discovery tool."</em> It is a list of sixteen specific hosts — the geolocation, CDN, analytics and Gravatar services earlier versions used — and it scans PHP only. We confirmed the gap by testing it: a request to one of those sixteen fails the build, a request to a host nobody listed passes.</p>
+<p>So the readme now describes the check as what it is. The underlying claim — that the plugin makes no third-party request — still holds and was verified by sweeping the shipped code, not by trusting the gate.</p>
+<p>We are writing this down publicly because it is the third time in two releases that a sentence of ours turned out to be an assumption rather than a measurement, and the pattern was identical each time: reading a thing's name instead of reading what it does.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
+<p>Nothing to do.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="privacy" term="privacy"/>
+        <category label="admin" term="admin"/>
+        <category label="patch" term="patch"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.2.3 / Pro v5.2.3 — A table WordPress was never really looking at, and a privacy notice that named the wrong things]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.3-release</id>
@@ -560,45 +591,5 @@ badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shi
         <category label="release" term="release"/>
         <category label="rentiva" term="rentiva"/>
         <category label="lite" term="lite"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.61.0 — Vendor Payout Statements with Commission Breakdown]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release"/>
-        <updated>2026-06-29T12:00:00.000Z</updated>
-        <summary type="html"><![CDATA[When you approve a vendor payout, Rentiva now generates a printable, sequentially-numbered payment statement for the period — earnings, the platform commission deducted from each, penalties, and the net paid — frozen as an immutable record and emailed to the vendor. This release also adds a vendor agreement acceptance gate on the application form, an "Added by" column that distinguishes operator and vendor vehicles, and one-click day blocking in the Monthly Reservation Calendar.]]></summary>
-        <content type="html"><![CDATA[<p>When you approve a vendor payout, Rentiva now generates a printable, sequentially-numbered payment statement for the period — earnings, the platform commission deducted from each, penalties, and the net paid — frozen as an immutable record and emailed to the vendor. This release also adds a vendor agreement acceptance gate on the application form, an "Added by" column that distinguishes operator and vendor vehicles, and one-click day blocking in the Monthly Reservation Calendar.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-payout-statements">Vendor Payout Statements<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#vendor-payout-statements" class="hash-link" aria-label="Direct link to Vendor Payout Statements" title="Direct link to Vendor Payout Statements" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Numbered, printable statements on approval.</strong> Approving a vendor payout generates a payment statement for the period covered — earnings, penalties, and net — with a sequential number, frozen as an immutable snapshot at the moment of approval. The vendor receives an email with a link to view and print it from their panel. Admins see the statement number and a view link on the Payout Requests list; vendors find it in their payout history.</li>
-<li class=""><strong>Commission breakdown.</strong> Each earning line on the statement shows <strong>Gross</strong>, the <strong>Commission</strong> (its rate and amount), and the <strong>Net</strong> the vendor received, plus a period <strong>"Total commission deducted"</strong> total. Statements issued before this version show net only — existing records are never rewritten.</li>
-<li class=""><strong>Statement branding.</strong> Your company identity — name, address, tax office and number, phone, email, and logo — and a custom footer note appear on the statement. These are configured under the new statement branding settings and applied when the statement is viewed.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-marketplace">Vendor Marketplace<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#vendor-marketplace" class="hash-link" aria-label="Direct link to Vendor Marketplace" title="Direct link to Vendor Marketplace" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Vendor agreement gate.</strong> You can require applicants to read and accept a vendor agreement on the application form. The acceptance, with a timestamp, is stored and shown on the application detail. The toggle and the agreement text live in the vendor settings.</li>
-<li class=""><strong>"Added by" column for vehicles.</strong> The admin vehicle list now shows and filters who added each vehicle — vendor or operator — so the two are easy to tell apart.</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="calendar">Calendar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#calendar" class="hash-link" aria-label="Direct link to Calendar" title="Direct link to Calendar" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Quick day block.</strong> Click an empty day in the Monthly Reservation Calendar to close it for reservations, and click a blocked day to re-open it — no vehicle-edit detour needed. Booked days are unchanged and keep their reservation popup.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class="">When a vendor edits critical fields of a live listing, the listing is now unpublished for admin re-review instead of staying live with unreviewed changes.</li>
-<li class="">An admin can now edit a vendor's city, and the vendor's city is read from the canonical field across the panel.</li>
-<li class="">Booking reminder emails are no longer sent for inactive bookings.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tests">Tests<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.61.0-release#tests" class="hash-link" aria-label="Direct link to Tests" title="Direct link to Tests" translate="no">​</a></h2>
-<p>The full suite is green at <strong>1,331 tests / 4,021 assertions</strong>, 0 failures, with 0 Plugin Check errors. No regression.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="payouts" term="payouts"/>
     </entry>
 </feed>
