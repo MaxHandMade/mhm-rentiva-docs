@@ -36,20 +36,28 @@ For stable operation, your server and WordPress installation must meet the follo
 
 ## 2. Step-by-Step Installation
 
-There are two main methods for installing MHM Rentiva:
+MHM Rentiva is published on the [WordPress.org plugin directory](https://wordpress.org/plugins/mhm-rentiva/), so the ordinary route is the one WordPress offers itself. The other two methods are for installing a **specific build** rather than the current release.
 
-### Method A: Through the WordPress Admin (Recommended)
+### Method A: From the WordPress.org directory (Recommended)
 1. From your WordPress dashboard, go to **Plugins > Add New**.
-2. Click the **Upload Plugin** button and select the `mhm-rentiva.zip` file you received.
+2. Search for **MHM Rentiva**.
+3. Click **Install Now** and, once the process completes, click **Activate**.
+
+From here on WordPress keeps the plugin up to date the same way it updates any other directory plugin — you do not need to download anything by hand again.
 
 ---
 
-### 🖼️ IMAGE: PLUGIN UPLOAD SCREEN
-*(Screenshot showing the Plugins > Add New > Choose File step)*
+### 🖼️ IMAGE: PLUGIN SEARCH SCREEN
+*(Screenshot showing the Plugins > Add New search results with MHM Rentiva listed)*
 
 ---
 
-3. Click **Install Now** and, once the process completes, click **Activate Plugin**.
+### Method B: Uploading a ZIP file
+Use this when you need a particular build — for example a version from the [GitHub releases page](https://github.com/MaxHandMade/mhm-rentiva/releases) — rather than the one currently in the directory.
+
+1. Go to **Plugins > Add New** and click the **Upload Plugin** button.
+2. Choose the ZIP file and click **Install Now**.
+3. Once the process completes, click **Activate Plugin**.
 
 ---
 
@@ -58,8 +66,8 @@ There are two main methods for installing MHM Rentiva:
 
 ---
 
-### Method B: Via FTP/SFTP
-1. Extract the `mhm-rentiva.zip` file into a folder on your computer.
+### Method C: Via FTP/SFTP
+1. Extract the plugin ZIP file into a folder on your computer.
 2. Connect to your server with an FTP client (such as FileZilla).
 3. Upload the extracted folder to the `/wp-content/plugins/` directory.
 4. Activate the plugin from your WordPress dashboard.
@@ -71,8 +79,8 @@ There are two main methods for installing MHM Rentiva:
 When the plugin is activated, the following actions run automatically in the background:
 
 1. **Database Tables:** Functional tables such as `payment_log`, `sessions`, and `transfer_routes` are created.
-2. **CPT Registration:** The `vehicle` custom post type and its related taxonomies are registered.
-3. **Customer Role:** A custom user role named `rentiva_customer` is added.
+2. **CPT Registration:** The `mhmrentiva_vehicle`, `mhmrentiva_booking` and `mhmrentiva_addon` custom post types and their related taxonomies are registered.
+3. **Customer Role:** A custom user role named `mhmrentiva_customer` is added.
 4. **Rewrite Rules:** Permalinks are automatically refreshed for vehicle pages.
 
 ---
@@ -92,7 +100,7 @@ If the wizard does not open automatically, you can start it manually via **MHM R
 
 ## Technical Details (For Developers)
 
-During activation, the plugin uses `register_activation_hook` to fire the `mhm_rentiva_single_site_activation()` function. That function keeps the database schema up to date through the `DatabaseMigrator` class.
+During activation, the plugin uses `register_activation_hook` to fire the `mhmrentiva_single_site_activation()` function. That function keeps the database schema up to date through the `DatabaseMigrator` class.
 
 When `WP_DEBUG` is enabled during development, installation errors will surface in the PHP logs or in the error notice boxes at the top of the screen.
 
@@ -106,6 +114,7 @@ When `WP_DEBUG` is enabled during development, installation errors will surface 
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 23.08.2026 | 6.0.7 | Installation now starts at the WordPress.org directory; post-activation identifiers updated for the 6.0.0 renames. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 18.03.2026 | 4.21.2 | Design revision and expanded content. |
 | 26.02.2026 | 4.21.0 | Initial version created. |
