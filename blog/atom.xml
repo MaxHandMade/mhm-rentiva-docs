@@ -2,11 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-07-29T06:00:00.000Z</updated>
+    <updated>2026-08-23T14:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.0.7 — MHM Rentiva is now on the WordPress.org plugin directory]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release"/>
+        <updated>2026-08-23T14:00:00.000Z</updated>
+        <summary type="html"><![CDATA[MHM Rentiva is now published on the WordPress.org plugin directory. You install it the way you install anything else — search for it, click install — and WordPress keeps it updated from there on.]]></summary>
+        <content type="html"><![CDATA[<p>MHM Rentiva is now published on the WordPress.org plugin directory. You install it the way you install anything else — search for it, click install — and WordPress keeps it updated from there on.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="installing-has-changed-and-it-is-simpler">Installing has changed, and it is simpler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release#installing-has-changed-and-it-is-simpler" class="hash-link" aria-label="Direct link to Installing has changed, and it is simpler" title="Direct link to Installing has changed, and it is simpler" translate="no">​</a></h2>
+<p>Until today the plugin reached you as a ZIP file you had to receive, upload and re-upload on every update. That is no longer the route:</p>
+<ol>
+<li class="">In your WordPress admin, go to <strong>Plugins &gt; Add New</strong>.</li>
+<li class="">Search for <strong>MHM Rentiva</strong>.</li>
+<li class="">Click <strong>Install Now</strong>, then <strong>Activate</strong>.</li>
+</ol>
+<p>The listing lives at <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">wordpress.org/plugins/mhm-rentiva</a>. From here on, updates arrive the same way every other directory plugin's updates arrive — WordPress checks on its own schedule and offers the new version on your Plugins screen. Nothing to download by hand.</p>
+<p>Uploading a ZIP still works, and remains the way to install a <strong>specific</strong> build rather than the current release — for example a version from the <a href="https://github.com/MaxHandMade/mhm-rentiva/releases" target="_blank" rel="noopener noreferrer" class="">GitHub releases page</a>. The <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/getting-started/installation">installation guide</a> now describes all three routes.</p>
+<p>WooCommerce is still required, and is checked when the plugin activates.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-is-in-607">What is in 6.0.7<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release#what-is-in-607" class="hash-link" aria-label="Direct link to What is in 6.0.7" title="Direct link to What is in 6.0.7" translate="no">​</a></h2>
+<p>WordPress.org's review of the plugin found one issue, and 6.0.7 is its fix.</p>
+<p>A batch customer-update method in the customer performance helper wrote WordPress user accounts behind the blanket <code>edit_users</code> capability — without asking whether the caller may edit <em>that particular</em> account, or whether the account was one this plugin manages. It had no caller anywhere, in this release or any earlier one, and there was no screen or address through which it could be reached.</p>
+<p>It was removed rather than repaired, because unreachable code that writes user accounts should not ship at all. The two places that do edit an existing customer — the customer edit screen and the delete route — already asked that per-account question beside the write, and still do. Adding a customer is a different case: it creates the account, so there is no existing account for such a question to be about, and it is gated on the permission WordPress itself requires to create a user.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="coming-from-5x-read-this-before-you-update">Coming from 5.x? Read this before you update<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release#coming-from-5x-read-this-before-you-update" class="hash-link" aria-label="Direct link to Coming from 5.x? Read this before you update" title="Direct link to Coming from 5.x? Read this before you update" translate="no">​</a></h2>
+<p>The last release written about here was 5.2.4. Between it and today sits <strong>6.0.0</strong>, which was a major release with breaking changes — and they are the silent kind. If you have custom code that hooks into this plugin, it will simply stop running after the update: no error message, nothing in the log, the customisation just quietly stops happening.</p>
+<p><strong>113 hooks were renamed.</strong> To convert your own code, apply these two steps in the order given, because the order matters:</p>
+<ol>
+<li class="">In the older slash-style names, replace every <code>/</code> with <code>_</code>: <code>mhm_rentiva/testimonials/limit</code> becomes <code>mhm_rentiva_testimonials_limit</code>.</li>
+<li class="">Then replace the prefix <code>mhm_rentiva_</code> with <code>mhmrentiva_</code>: that name finishes as <code>mhmrentiva_testimonials_limit</code>.</li>
+</ol>
+<p>Doing step 2 first produces names that do not exist. Two hooks used a bare <code>mhm_</code> prefix and follow the same idea: <code>mhm_message_created</code> and <code>mhm_message_status_changed</code> become <code>mhmrentiva_message_created</code> and <code>mhmrentiva_message_status_changed</code>.</p>
+<p><strong>The post types and taxonomies were renamed too</strong>, which changes the WordPress core hooks built from them — this is the part most easily missed, because these are not our hook names. <code>save_post_vehicle</code> is now <code>save_post_mhmrentiva_vehicle</code>, and the same applies to <code>add_meta_boxes_*</code> and to the <code>manage_*_posts_columns</code> / <code>manage_*_posts_custom_column</code> pairs. The renames are:</p>
+<table><thead><tr><th style="text-align:left">Old</th><th style="text-align:left">New</th></tr></thead><tbody><tr><td style="text-align:left"><code>vehicle</code></td><td style="text-align:left"><code>mhmrentiva_vehicle</code></td></tr><tr><td style="text-align:left"><code>vehicle_booking</code></td><td style="text-align:left"><code>mhmrentiva_booking</code></td></tr><tr><td style="text-align:left"><code>vehicle_addon</code></td><td style="text-align:left"><code>mhmrentiva_addon</code></td></tr><tr><td style="text-align:left"><code>mhm_app_log</code></td><td style="text-align:left"><code>mhmrentiva_app_log</code></td></tr><tr><td style="text-align:left"><code>mhm_email_log</code></td><td style="text-align:left"><code>mhmrentiva_email_log</code></td></tr><tr><td style="text-align:left"><code>mhm_contact_message</code></td><td style="text-align:left"><code>mhmrentiva_contact</code></td></tr><tr><td style="text-align:left"><code>vehicle_category</code></td><td style="text-align:left"><code>mhmrentiva_vehicle_category</code></td></tr><tr><td style="text-align:left"><code>addon_category</code></td><td style="text-align:left"><code>mhmrentiva_addon_category</code></td></tr></tbody></table>
+<p>The same rename affects any query you wrote by hand. A <code>WP_Query</code> with <code>'post_type' =&gt; 'vehicle'</code>, a <code>pre_get_posts</code> handler that checks for it, a <code>get_posts</code> call, a shortcode of your own — all of these now match nothing, silently, because they ask for a post type that no longer exists under that name.</p>
+<p><strong>What to search your custom code for before updating:</strong> <code>mhm_rentiva</code>, <code>mhm_message_</code>, <code>save_post_vehicle</code>, and the quoted literals <code>'vehicle'</code>, <code>'vehicle_booking'</code>, <code>'vehicle_addon'</code> and <code>'vehicle_category'</code>.</p>
+<p>Your stored data is moved to the new names by a migration that runs once, automatically, the first time you load the admin after updating. Nothing is deleted and nothing needs to be re-entered. If you also run the paid add-on, update both at the same time: this version refuses to migrate underneath an older add-on rather than leave your data half-moved.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="security" term="security"/>
+        <category label="wordpress-org" term="wordpress-org"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva v5.2.4 — The menu moves down, and every link out of your site is now written down]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.4-release</id>
@@ -552,37 +595,6 @@ shipped.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Fix: the Lite VIP transfer route limit now counts routes correctly.</strong> On installs using the current routes table, the limit notice showed "0 used" and new routes could still be created past the Lite limit because the counter read the wrong (legacy) database table.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="lite" term="lite"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.62.0 — Lite Downgrade Catalog Overflow Enforcement]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release"/>
-        <updated>2026-06-30T12:00:00.000Z</updated>
-        <summary type="html"><![CDATA[When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.]]></summary>
-        <content type="html"><![CDATA[<p>When a Pro license expires, catalog items added during the Pro period that exceed the Lite plan limits — vehicles, add-on services, and transfer routes — are now automatically hidden from the public site instead of staying live. Data is never deleted; everything is restored the moment you upgrade to Pro again.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Historical release note — this behaviour no longer exists</div><div class="admonitionContent_BuS1"><p>The Lite plan limits described below were removed in <strong>v5.0.0</strong>. Rentiva's free core
-ships with no vehicle, add-on service or transfer-route caps, so there is nothing to
-enforce on downgrade: no items are hidden, and there is no "Lite limit — hidden"
-badge or vehicle limit notice. This post is kept as a record of what v4.62.0 shipped.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-new">What's New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#whats-new" class="hash-link" aria-label="Direct link to What's New" title="Direct link to What's New" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lite-limit-enforcement-on-downgrade">Lite Limit Enforcement on Downgrade<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#lite-limit-enforcement-on-downgrade" class="hash-link" aria-label="Direct link to Lite Limit Enforcement on Downgrade" title="Direct link to Lite Limit Enforcement on Downgrade" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Over-limit items hidden, not deleted.</strong> Catalog items added during Pro (vehicles, add-on services, transfer routes) that exceed the Lite limit are hidden from the public site when a license expires. Data is preserved in full and restored automatically when you upgrade to Pro again.</li>
-<li class=""><strong>"Lite limit — hidden" badge in admin lists.</strong> Admin vehicle, add-on service, and transfer route lists mark each over-limit item with a clear badge so you can see at a glance which items are currently hidden from visitors.</li>
-<li class=""><strong>Vehicle limit notice shows hidden count.</strong> The vehicle limit notice in the admin dashboard now indicates how many vehicles are currently hidden due to the Lite limit, in addition to the total count.</li>
-<li class=""><strong>Hidden vehicles cannot be booked.</strong> Over-limit vehicles that are hidden from the public site can no longer be booked via the front end. Existing confirmed bookings for those vehicles are unaffected.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class="">The <strong>Vendor Payout Requests</strong> admin menu item no longer appears when running the Lite version of the plugin.</li>
 </ul>]]></content>
         <author>
             <name>MaxHandMade</name>

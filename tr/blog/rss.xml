@@ -4,10 +4,55 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 29 Jul 2026 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 23 Aug 2026 14:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva 6.0.7 — MHM Rentiva artık WordPress.org eklenti dizininde]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release</guid>
+            <pubDate>Sun, 23 Aug 2026 14:00:00 GMT</pubDate>
+            <description><![CDATA[MHM Rentiva artık WordPress.org eklenti dizininde yayınlandı. Eklentiyi diğer her eklenti gibi kuruyorsunuz — aratıp kur diyorsunuz — ve WordPress bundan sonrasını kendisi güncelliyor.]]></description>
+            <content:encoded><![CDATA[<p>MHM Rentiva artık WordPress.org eklenti dizininde yayınlandı. Eklentiyi diğer her eklenti gibi kuruyorsunuz — aratıp kur diyorsunuz — ve WordPress bundan sonrasını kendisi güncelliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kurulum-değişti-üstelik-basitleşti">Kurulum değişti, üstelik basitleşti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release#kurulum-de%C4%9Fi%C5%9Fti-%C3%BCstelik-basitle%C5%9Fti" class="hash-link" aria-label="Kurulum değişti, üstelik basitleşti doğrudan bağlantı" title="Kurulum değişti, üstelik basitleşti doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bugüne kadar eklenti size bir ZIP dosyası olarak ulaşıyordu; her güncellemede onu alıp yeniden yüklemeniz gerekiyordu. Artık yol bu değil:</p>
+<ol>
+<li class="">WordPress yönetim panelinizde <strong>Eklentiler &gt; Yeni Ekle</strong> sayfasına gidin.</li>
+<li class=""><strong>MHM Rentiva</strong> araması yapın.</li>
+<li class=""><strong>Şimdi Kur</strong>, ardından <strong>Etkinleştir</strong> deyin.</li>
+</ol>
+<p>Dizin sayfası: <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">wordpress.org/plugins/mhm-rentiva</a>. Bundan sonra güncellemeler de diğer bütün dizin eklentilerinde olduğu gibi gelir — WordPress kendi takvimiyle denetler ve yeni sürümü Eklentiler ekranınızda önerir. Elle indirilecek bir şey kalmaz.</p>
+<p>ZIP yükleme yöntemi çalışmaya devam ediyor ve güncel sürüm yerine <strong>belirli bir yapıyı</strong> kurmanın yolu olarak duruyor — örneğin <a href="https://github.com/MaxHandMade/mhm-rentiva/releases" target="_blank" rel="noopener noreferrer" class="">GitHub releases sayfasındaki</a> bir sürüm. <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/docs/getting-started/installation">Kurulum rehberi</a> artık üç yolu da anlatıyor.</p>
+<p>WooCommerce hâlâ zorunlu ve eklenti etkinleşirken denetleniyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="607de-ne-var">6.0.7'de ne var<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release#607de-ne-var" class="hash-link" aria-label="6.0.7'de ne var doğrudan bağlantı" title="6.0.7'de ne var doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress.org'un eklenteye yaptığı inceleme tek bir bulgu çıkardı; 6.0.7 onun düzeltmesi.</p>
+<p>Müşteri performans yardımcısındaki toplu müşteri güncelleme yöntemi, WordPress kullanıcı hesaplarına genel <code>edit_users</code> yetkisinin arkasından yazıyordu — çağıranın <strong>o belirli</strong> hesabı düzenleyip düzenleyemeyeceğini de, hesabın bu eklentinin yönettiği bir hesap olup olmadığını da sormadan. Yöntemin ne bu sürümde ne daha eskisinde hiçbir çağıranı vardı ve ona ulaşılabilecek bir ekran ya da adres de yoktu.</p>
+<p>Onarılmak yerine kaldırıldı: kullanıcı hesaplarına yazan, ulaşılamayan kod hiç sevk edilmemeli. Mevcut bir müşteriyi gerçekten düzenleyen iki yer — müşteri düzenleme ekranı ve silme rotası — bu hesap-bazlı soruyu yazmanın yanında zaten soruyordu, sormaya da devam ediyor. Müşteri eklemek farklı bir durum: hesabı o oluşturuyor, yani sorunun konusu olacak mevcut bir hesap yok; ve orası WordPress'in kullanıcı oluşturmak için istediği yetkiyle korunuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5xten-mi-geliyorsunuz-güncellemeden-önce-bunu-okuyun">5.x'ten mi geliyorsunuz? Güncellemeden önce bunu okuyun<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release#5xten-mi-geliyorsunuz-g%C3%BCncellemeden-%C3%B6nce-bunu-okuyun" class="hash-link" aria-label="5.x'ten mi geliyorsunuz? Güncellemeden önce bunu okuyun doğrudan bağlantı" title="5.x'ten mi geliyorsunuz? Güncellemeden önce bunu okuyun doğrudan bağlantı" translate="no">​</a></h2>
+<p>Burada yazılan son sürüm 5.2.4'tü. Onunla bugün arasında <strong>6.0.0</strong> duruyor: kırıcı değişiklikler taşıyan bir ana sürüm — ve kırılmalar sessiz cinsten. Bu eklentiye bağlanan özel kodunuz varsa, güncellemeden sonra çalışmayı bırakır: hata mesajı yok, günlükte iz yok, özelleştirme sadece sessizce olmamaya başlar.</p>
+<p><strong>113 hook yeniden adlandırıldı.</strong> Kendi kodunuzu çevirmek için şu iki adımı <strong>verilen sırayla</strong> uygulayın, çünkü sıra önemli:</p>
+<ol>
+<li class="">
+<p>Eski eğik çizgili adlarda her <code>/</code> yerine <code>_</code> koyun: <code>mhm_rentiva/testimonials/limit</code> → <code>mhm_rentiva_testimonials_limit</code>.</p>
+</li>
+<li class="">
+<p>Sonra <code>mhm_rentiva_</code> önekini <code>mhmrentiva_</code> ile değiştirin: ad <code>mhmrentiva_testimonials_limit</code> hâline gelir.</p>
+</li>
+<li class="">
+<p>adımı önce yaparsanız var olmayan adlar üretirsiniz. İki hook düz <code>mhm_</code> öneki kullanıyordu ve aynı mantıkla değişti: <code>mhm_message_created</code> ve <code>mhm_message_status_changed</code> → <code>mhmrentiva_message_created</code> ve <code>mhmrentiva_message_status_changed</code>.</p>
+</li>
+</ol>
+<p><strong>Yazı tipleri ve taksonomiler de yeniden adlandırıldı</strong>, bu da onlardan türeyen WordPress çekirdek hook'larını değiştiriyor — en kolay gözden kaçan kısım burası, çünkü bunlar bizim hook adlarımız değil. <code>save_post_vehicle</code> artık <code>save_post_mhmrentiva_vehicle</code>; aynısı <code>add_meta_boxes_*</code> ile <code>manage_*_posts_columns</code> / <code>manage_*_posts_custom_column</code> çiftleri için de geçerli. Değişenler:</p>
+<table><thead><tr><th style="text-align:left">Eski</th><th style="text-align:left">Yeni</th></tr></thead><tbody><tr><td style="text-align:left"><code>vehicle</code></td><td style="text-align:left"><code>mhmrentiva_vehicle</code></td></tr><tr><td style="text-align:left"><code>vehicle_booking</code></td><td style="text-align:left"><code>mhmrentiva_booking</code></td></tr><tr><td style="text-align:left"><code>vehicle_addon</code></td><td style="text-align:left"><code>mhmrentiva_addon</code></td></tr><tr><td style="text-align:left"><code>mhm_app_log</code></td><td style="text-align:left"><code>mhmrentiva_app_log</code></td></tr><tr><td style="text-align:left"><code>mhm_email_log</code></td><td style="text-align:left"><code>mhmrentiva_email_log</code></td></tr><tr><td style="text-align:left"><code>mhm_contact_message</code></td><td style="text-align:left"><code>mhmrentiva_contact</code></td></tr><tr><td style="text-align:left"><code>vehicle_category</code></td><td style="text-align:left"><code>mhmrentiva_vehicle_category</code></td></tr><tr><td style="text-align:left"><code>addon_category</code></td><td style="text-align:left"><code>mhmrentiva_addon_category</code></td></tr></tbody></table>
+<p>Aynı yeniden adlandırma elle yazdığınız sorguları da etkiliyor. <code>'post_type' =&gt; 'vehicle'</code> içeren bir <code>WP_Query</code>, bunu denetleyen bir <code>pre_get_posts</code> işleyicisi, bir <code>get_posts</code> çağrısı, kendi yazdığınız bir kısa kod — hepsi artık <strong>sessizce</strong> hiçbir şeyle eşleşmez, çünkü o adla var olmayan bir yazı tipi istiyorlar.</p>
+<p><strong>Güncellemeden önce özel kodunuzda arayacaklarınız:</strong> <code>mhm_rentiva</code>, <code>mhm_message_</code>, <code>save_post_vehicle</code>, ve tırnak içindeki <code>'vehicle'</code>, <code>'vehicle_booking'</code>, <code>'vehicle_addon'</code>, <code>'vehicle_category'</code> değerleri.</p>
+<p>Kayıtlı verileriniz, güncellemeden sonra yönetim panelini ilk açtığınızda bir kez otomatik çalışan bir taşıma ile yeni adlara aktarılır. Hiçbir şey silinmez, hiçbir şeyi yeniden girmeniz gerekmez. Ücretli eklentiyi de kullanıyorsanız ikisini aynı anda güncelleyin: bu sürüm, verinizi yarım taşınmış hâlde bırakmaktansa eski bir eklentinin altında taşıma yapmayı reddeder.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>security</category>
+            <category>wordpress-org</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva v5.2.4 — Menü aşağı indi ve sitenizden dışarı giden her bağlantı artık yazılı]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.2.4-release</link>
@@ -481,34 +526,6 @@ getirdiğinin kaydı olarak duruyor.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Düzeltme: Lite VIP transfer rota limiti artık rotaları doğru sayıyor.</strong> Güncel rota tablosunu kullanan kurulumlarda limit uyarısı "0 kullanıldı" gösteriyor ve sayaç yanlış (eski) veritabanı tablosunu okuduğu için Lite limitinin üstünde yeni rota eklenebiliyordu.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>lite</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.62.0 — Lite Sürümünde Downgrade Sonrası Katalog Taşma Yaptırımı]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release</guid>
-            <pubDate>Tue, 30 Jun 2026 12:00:00 GMT</pubDate>
-            <description><![CDATA[Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.]]></description>
-            <content:encoded><![CDATA[<p>Pro lisansı sona erdiğinde, Pro döneminde eklenen ve Lite plan limitlerini aşan katalog içerikleri — araçlar, ek hizmetler ve transfer rotaları — canlı kalmak yerine otomatik olarak herkese açık siteden gizlenir. Veri asla silinmez; Pro'ya tekrar geçtiğinizde her şey otomatik olarak geri gelir.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Tarihsel sürüm notu — bu davranış artık yok</div><div class="admonitionContent_BuS1"><p>Aşağıda anlatılan Lite plan limitleri <strong>v5.0.0</strong>'da kaldırıldı. Rentiva'nın ücretsiz
-çekirdeği araç, ek hizmet veya transfer rotası sınırı içermiyor; dolayısıyla lisans
-bitiminde uygulanacak bir yaptırım da yok: hiçbir içerik gizlenmiyor, "Lite limiti —
-gizli" etiketi ve araç limiti bildirimi de bulunmuyor. Bu yazı v4.62.0'ın ne
-getirdiğinin kaydı olarak duruyor.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yenilikler">Yenilikler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#yenilikler" class="hash-link" aria-label="Yenilikler doğrudan bağlantı" title="Yenilikler doğrudan bağlantı" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lisans-bitince-lite-limit-yaptırımı">Lisans Bitince Lite Limit Yaptırımı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#lisans-bitince-lite-limit-yapt%C4%B1r%C4%B1m%C4%B1" class="hash-link" aria-label="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" title="Lisans Bitince Lite Limit Yaptırımı doğrudan bağlantı" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Limit üstü öğeler gizlenir, silinmez.</strong> Pro döneminde eklenen ve Lite limitini aşan katalog içerikleri (araçlar, ek hizmetler, transfer rotaları) lisans süresi dolduğunda herkese açık sitede gizlenir. Veriler eksiksiz korunur ve tekrar Pro'ya geçince otomatik olarak geri gelir.</li>
-<li class=""><strong>Yönetim listelerinde "Lite limiti — gizli" rozeti.</strong> Yönetici araç, ek hizmet ve transfer rotası listeleri, limit üstü her öğeyi açık bir rozetle işaretler; böylece hangi öğelerin ziyaretçilerden gizlendiğini tek bakışta görebilirsiniz.</li>
-<li class=""><strong>Araç limit uyarısı gizlenen sayısını gösterir.</strong> Yönetici panelindeki araç limit uyarısı artık toplam sayıya ek olarak Lite limiti nedeniyle kaç aracın gizlendiğini de belirtir.</li>
-<li class=""><strong>Gizli araçlar rezervasyon alamaz.</strong> Herkese açık siteden gizlenen limit üstü araçlar artık ön yüzden rezervasyon yapılarak kullanılamaz. Bu araçlar için daha önce alınmış onaylı rezervasyonlar etkilenmez.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Bayi Ödeme Talepleri</strong> yönetim menüsü artık eklentinin Lite sürümünde görünmüyor.</li>
 </ul>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
