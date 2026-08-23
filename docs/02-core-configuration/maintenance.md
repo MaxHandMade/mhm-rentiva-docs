@@ -54,17 +54,32 @@ You can monitor the row count and disk size of plugin-specific tables such as `p
 
 ## Uninstall & Table Cleanup
 
-When the plugin is completely removed (deleted), all custom tables it created are also cleaned up. As of v4.22.1, the tables cleaned by the uninstaller are:
+When the plugin is completely removed (deleted), the uninstaller deletes its content and drops its own tables.
 
-- Core tables: `mhm_vehicles`, `mhm_bookings`, `mhm_customers`, `mhm_addons`, etc.
-- Notification queue: `mhmrentiva_notification_queue`
+**Content it deletes.** Vehicles, bookings, contact messages and the two log types are WordPress posts, not tables, and they are deleted as posts: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. Records still carrying the pre-6.0.0 post types `vehicle` and `vehicle_booking` are deleted with them.
+
+**Tables it drops.**
+
+- Queue and reports: `mhmrentiva_queue`, `mhmrentiva_report_queue`, `mhmrentiva_notification_queue`
+- Ratings: `mhmrentiva_ratings`
 - Payment records: `mhmrentiva_payment_log`
 - Sessions: `mhmrentiva_sessions`
+- Message logs: `mhmrentiva_message_logs`
+- Multi-site bookkeeping: `mhmrentiva_tenants`, `mhmrentiva_usage_metrics`
+- Recovery copies: `mhmrentiva_backup_records`
 - Transfer locations: `rentiva_transfer_locations` (+ legacy `mhm_rentiva_transfer_locations`)
 - Transfer routes: `rentiva_transfer_routes` (+ legacy `mhm_rentiva_transfer_routes`)
 
+Pre-6.0.0 spellings of these names are dropped too, and anything else left behind under the plugin's own `mhmrentiva_` table prefix is swept up after them.
+
+:::info The add-on's six tables are NOT dropped
+The commission ledger, commission policy, vendor reports, background jobs, payout audit trail and key registry belong to the paid add-on, and removing Lite leaves them untouched. They hold append-only financial history, and a site removing Lite may be about to reinstall it. Each plugin removes its own data; uninstall the add-on to remove those.
+:::
+
 :::caution
-The uninstall operation cannot be undone. All vehicle, booking, customer, and transfer data is permanently deleted.
+The uninstall operation cannot be undone. Vehicle, booking and transfer data is permanently deleted.
+
+**Customer accounts survive.** Customers are WordPress users, and the uninstaller does not delete users or their profile data — only the bookings that referenced them.
 :::
 
 ---

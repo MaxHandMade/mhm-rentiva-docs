@@ -54,17 +54,32 @@ Temizleme işlemleri geri alınamaz. İşlem yapmadan önce mutlaka **"Anlık G�
 
 ## Kaldırma (Uninstall) ve Tablo Temizliği
 
-Eklenti tamamen kaldırıldıginda (silindiğinde), oluşturulan tum ozel tablolar da temizlenir. v4.22.1 itibariyla uninstaller tarafından temizlenen tablolar sunlardir:
+Eklenti tamamen kaldırıldığında (silindiğinde), kaldırıcı önce kendi içeriğini siler, sonra kendi tablolarını düşürür.
 
-- Cekirdek tablolar: `mhm_vehicles`, `mhm_bookings`, `mhm_customers`, `mhm_addons` vb.
-- Bildirim kuyruğu: `mhmrentiva_notification_queue`
-- Odeme kayıtlari: `mhmrentiva_payment_log`
+**Sildiği içerik.** Araçlar, rezervasyonlar, iletişim mesajları ve iki günlük tipi tablo değil **WordPress içeriğidir** ve içerik olarak silinir: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. 6.0.0 öncesi `vehicle` ve `vehicle_booking` içerik tiplerini hâlâ taşıyan kayıtlar da bunlarla birlikte silinir.
+
+**Düşürdüğü tablolar.**
+
+- Kuyruk ve raporlar: `mhmrentiva_queue`, `mhmrentiva_report_queue`, `mhmrentiva_notification_queue`
+- Değerlendirmeler: `mhmrentiva_ratings`
+- Ödeme kayıtları: `mhmrentiva_payment_log`
 - Oturumlar: `mhmrentiva_sessions`
-- Transfer lokasyonlari: `rentiva_transfer_locations` (+ legacy `mhm_rentiva_transfer_locations`)
-- Transfer rotalari: `rentiva_transfer_routes` (+ legacy `mhm_rentiva_transfer_routes`)
+- Mesaj günlükleri: `mhmrentiva_message_logs`
+- Çok siteli kurulum defteri: `mhmrentiva_tenants`, `mhmrentiva_usage_metrics`
+- Kurtarma kopyaları: `mhmrentiva_backup_records`
+- Transfer lokasyonları: `rentiva_transfer_locations` (+ eski `mhm_rentiva_transfer_locations`)
+- Transfer rotaları: `rentiva_transfer_routes` (+ eski `mhm_rentiva_transfer_routes`)
+
+Bu adların 6.0.0 öncesi yazımları da düşürülür; eklentinin kendi `mhmrentiva_` tablo öneki altında geriye kalan başka bir şey varsa o da ardından süpürülür.
+
+:::info Add-on'un altı tablosu düşürülmez
+Komisyon defteri, komisyon politikası, bayi raporları, arka plan işleri, ödeme denetim izi ve anahtar kaydı ücretli eklentiye aittir; Lite kaldırılınca bunlara dokunulmaz. İçlerinde yalnız-ekleme yapılan finansal geçmiş var ve Lite'ı kaldıran bir site onu yeniden kurmak üzere olabilir. Her eklenti kendi verisini kaldırır; bunları silmek için add-on'u kaldırın.
+:::
 
 :::caution
-Kaldırma işlemi geri alinamaz. Tum arac, rezervasyon, müşteri ve transfer verileri kalici olarak silinir.
+Kaldırma işlemi geri alınamaz. Araç, rezervasyon ve transfer verileri kalıcı olarak silinir.
+
+**Müşteri hesapları kalır.** Müşteriler WordPress kullanıcısıdır; kaldırıcı kullanıcıları ve profil verilerini silmez — yalnızca onlara atıf yapan rezervasyonları siler.
 :::
 
 ---

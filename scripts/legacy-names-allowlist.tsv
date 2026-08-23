@@ -23,3 +23,7 @@ docs/03-features-usage/additional-services-usage.md	vehicle_addon	upgrading to v
 i18n/tr/docusaurus-plugin-content-docs/current/03-features-usage/additional-services-usage.md	vehicle_addon	v4.36.0'a yükseltme	Same sentence, Turkish mirror.
 docs/04-developer/ui-components/dashboard-widgets.md	mhm_dashboard_stats	previous incorrect prefix	Historical: the incorrect cache prefix v4.23.0 fixed. The current prefix on the same line now reads mhmrentiva_dashboard_stats.
 i18n/tr/docusaurus-plugin-content-docs/current/04-developer/ui-components/dashboard-widgets.md	mhm_dashboard_stats	önceki hatali prefix	Same sentence, Turkish mirror.
+docs/02-core-configuration/maintenance.md	vehicle_booking	pre-6.0.0 post types	The uninstaller looks for both spellings, so the sentence naming the old ones is what makes the cleanup claim true.
+docs/02-core-configuration/maintenance.md	vehicle	pre-6.0.0 post types	Same sentence.
+i18n/tr/docusaurus-plugin-content-docs/current/02-core-configuration/maintenance.md	vehicle_booking	6.0.0 öncesi	Same sentence, Turkish mirror.
+i18n/tr/docusaurus-plugin-content-docs/current/02-core-configuration/maintenance.md	vehicle	6.0.0 öncesi	Same sentence, Turkish mirror.
