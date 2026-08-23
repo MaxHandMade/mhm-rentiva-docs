@@ -57,9 +57,9 @@ Temizleme işlemleri geri alınamaz. İşlem yapmadan önce mutlaka **"Anlık G�
 Eklenti tamamen kaldırıldıginda (silindiğinde), oluşturulan tum ozel tablolar da temizlenir. v4.22.1 itibariyla uninstaller tarafından temizlenen tablolar sunlardir:
 
 - Cekirdek tablolar: `mhm_vehicles`, `mhm_bookings`, `mhm_customers`, `mhm_addons` vb.
-- Bildirim kuyruğu: `mhm_notification_queue`
-- Odeme kayıtlari: `mhm_payment_log`
-- Oturumlar: `mhm_sessions`
+- Bildirim kuyruğu: `mhmrentiva_notification_queue`
+- Odeme kayıtlari: `mhmrentiva_payment_log`
+- Oturumlar: `mhmrentiva_sessions`
 - Transfer lokasyonlari: `rentiva_transfer_locations` (+ legacy `mhm_rentiva_transfer_locations`)
 - Transfer rotalari: `rentiva_transfer_routes` (+ legacy `mhm_rentiva_transfer_routes`)
 

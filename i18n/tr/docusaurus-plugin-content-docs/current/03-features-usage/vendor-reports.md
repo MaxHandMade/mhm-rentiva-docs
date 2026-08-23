@@ -31,12 +31,12 @@ Bayi raporu, bir bayiden platform yöneticisine giden yapılandırılmış bir m
 | Bağlam | Kullanım | Tetikleme yeri |
 | :--- | :--- | :--- |
 | `booking` | Müşteri sorunları (no-show, hasar, anlaşmazlık) | Her bayi rezervasyon kartında "Sorun Bildir" butonu |
-| `vehicle` | Durdurulmuş/çekilmiş araca itiraz | Listings sayfasında "İtiraz Et" butonu (sadece paused/withdrawn durumlarda) |
+| `mhmrentiva_vehicle` | Durdurulmuş/çekilmiş araca itiraz | Listings sayfasında "İtiraz Et" butonu (sadece paused/withdrawn durumlarda) |
 | `vehicle_action` | Çekme/durdurma sırasında sebep yakalama — ceza askıya alınır | Bayi Çek veya Durdur tıkladığında modal otomatik açılır |
 | `penalty` | Halihazırda uygulanmış ceza ledger satırına itiraz | Puan geçmişi tablosunun her satırında "İtiraz" butonu |
 | `general` | "Yöneticiye Yaz" — direkt admin hattı | Her bayi panel sayfasının altbilgisinde link |
 
-Beşi de aynı veri yapısını paylaşır (`wp_mhm_rentiva_vendor_reports`'ta tek satır) ve aynı admin UI'ı kullanır. Çözümleme yan etkileri bağlama göre değişir.
+Beşi de aynı veri yapısını paylaşır (`wp_mhmrentiva_vendor_reports`'ta tek satır) ve aynı admin UI'ı kullanır. Çözümleme yan etkileri bağlama göre değişir.
 
 ---
 
@@ -63,7 +63,7 @@ v4.35.0 ile bayi çekerken sebebini yakalayabilir:
 5. Gönder → sırayla iki şey olur:
    - `vehicle_action` raporu `status=open` ile oluşturulur
    - Çekme AJAX'ı çağrılır
-6. `VehicleLifecycleManager::withdraw()` içinde yeni `mhm_rentiva_before_apply_penalty` filtresi çalışır. `PenaltySuspensionHook` callback'i açık raporu görür ve `false` döndürür. **Puan düşüşü ve ledger debiti atlanır.**
+6. `VehicleLifecycleManager::withdraw()` içinde yeni `mhmrentiva_before_apply_penalty` filtresi çalışır. `PenaltySuspensionHook` callback'i açık raporu görür ve `false` döndürür. **Puan düşüşü ve ledger debiti atlanır.**
 7. Araç hâlâ `withdrawn`'a geçer (post status, lifecycle meta, cooldown tarihi hepsi set), ama finansal ceza admin incelemesine kadar askıda kalır.
 
 Aynı akış pause aksiyonları için de geçerli.
@@ -115,7 +115,7 @@ Bir rapora tıklamak detay görünümünü açar:
 | Bağlam | "Çözüldü Olarak İşaretle" | "Reddet" |
 | :--- | :--- | :--- |
 | `booking` | Durum güncelleme + bayiye e-posta | Aynı |
-| `vehicle` | Aynı | Aynı |
+| `mhmrentiva_vehicle` | Aynı | Aynı |
 | `vehicle_action` | **No-op** — ceza zaten çekme zamanında askıya alınmıştı, bayi puanını korur | **`apply_deferred_penalty()` çalışır** — `ReliabilityScoreCalculator::update()` yeniden hesaplar (geri çekilme state'te olduğu için puan düşer) ve `PenaltyRecorder::record_penalty()` ertelenmiş ledger debitini yazar |
 | `penalty` | (v4.36.0+ — ledger compensating entry helper) | No-op (ceza zaten uygulanmış; reddetme sadece itirazı kapatır) |
 | `general` | Durum güncelleme + e-posta | Aynı |
@@ -128,7 +128,7 @@ Bir rapora tıklamak detay görünümünü açar:
 
 ---
 
-## Ceza filtresi — `mhm_rentiva_before_apply_penalty`
+## Ceza filtresi — `mhmrentiva_before_apply_penalty`
 
 İki filter hook noktası puan düşüşünü ve ledger girişini sarmalıyor. Eklentiler veya temalar bu filtreyi hook'layarak bayi raporlarının ötesinde ek askıya alma sebepleri tanıtabilir:
 
@@ -140,7 +140,7 @@ Bir rapora tıklamak detay görünümünü açar:
  * @param string $reason     Ceza sebebi ('withdrawal').
  * @param float  $penalty    Hesaplanmış ceza miktarı.
  */
-add_filter('mhm_rentiva_before_apply_penalty', function ($apply, $vehicle_id, $vendor_id, $reason, $penalty) {
+add_filter('mhmrentiva_before_apply_penalty', function ($apply, $vehicle_id, $vendor_id, $reason, $penalty) {
     if ($reason === 'withdrawal' && my_holiday_freeze_active()) {
         return false; // platform-wide freeze sırasında cezaları askıya al
     }
@@ -154,13 +154,13 @@ Eklentinin kendi `PenaltySuspensionHook`'u priority 10'da kayıtlı. `false` dö
 
 ## Veritabanı
 
-Yeni custom table `{prefix}mhm_rentiva_vendor_reports`:
+Yeni custom table `{prefix}mhmrentiva_vendor_reports`:
 
 | Sütun | Tip | Notlar |
 | :--- | :--- | :--- |
 | `id` | BIGINT UNSIGNED AUTO_INCREMENT | Primary key |
 | `vendor_id` | BIGINT UNSIGNED | İndeksli |
-| `context_type` | VARCHAR(20) | `booking` / `vehicle` / `vehicle_action` / `penalty` / `general` |
+| `context_type` | VARCHAR(20) | `booking` / `mhmrentiva_vehicle` / `vehicle_action` / `penalty` / `general` |
 | `context_id` | VARCHAR(64) | Integer ID, ledger UUID, veya NULL |
 | `title` | VARCHAR(255) | |
 | `description` | LONGTEXT | Servis katmanında min 20 karakter zorlanır |
@@ -196,9 +196,9 @@ Bunu yerelde denemek için yerel siteye gerçek bir lisans etkinleştirin — 5.
 
 | Hook / Sınıf | Amaç |
 | :--- | :--- |
-| `mhm_rentiva_before_apply_penalty` | Filter — puan düşüşünü ve ledger girişini gate'ler. 5 argümanlı imza. |
-| `mhm_rentiva_vendor_report_created` | Action — bir rapor kaydedildikten sonra ateşlenir. E-posta alt sistemi dinler. 3 arg. |
-| `mhm_rentiva_vendor_report_resolved` | Action — durum terminal'e değiştikten sonra ateşlenir. 3 arg (report_id, vendor_id, new_status). |
+| `mhmrentiva_before_apply_penalty` | Filter — puan düşüşünü ve ledger girişini gate'ler. 5 argümanlı imza. |
+| `mhmrentiva_vendor_report_created` | Action — bir rapor kaydedildikten sonra ateşlenir. E-posta alt sistemi dinler. 3 arg. |
+| `mhmrentiva_vendor_report_resolved` | Action — durum terminal'e değiştikten sonra ateşlenir. 3 arg (report_id, vendor_id, new_status). |
 | `VendorReportRepository` | Public API: `create()`, `find()`, `update_status()`, `find_by_vendor()`, `has_open_report_for()`, `reset_has_open_cache()` |
 | `VendorReportService` | Public API: `create_report()`, `resolve_report()`, `reject_report()` |
 

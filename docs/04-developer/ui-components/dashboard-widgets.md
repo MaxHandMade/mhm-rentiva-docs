@@ -35,7 +35,7 @@ Widgets in the admin panel are managed by the `DashboardPage.php`, `Reports.php`
 
 ### Statistics Widget (Stats)
 - **Design:** 2×2 grid layout with icons and colors via inline CSS.
-- **Cache:** Cache key prefix `mhm_rentiva_dashboard_stats` (fixed in v4.23.0; previous incorrect prefix: `mhm_dashboard_stats`).
+- **Cache:** Cache key prefix `mhmrentiva_dashboard_stats` (fixed in v4.23.0; previous incorrect prefix: `mhm_dashboard_stats`).
 - **File:** `Reports.php`
 
 ### Revenue Chart
@@ -46,11 +46,11 @@ Widgets in the admin panel are managed by the `DashboardPage.php`, `Reports.php`
 
 ### Upcoming Operations
 - **Time display:** `start_date + start_time` are combined and shown (previous 00:00 bug fixed).
-- **Display ID:** WC order ID displayed via `mhm_rentiva_get_display_id()` with a clickable link.
+- **Display ID:** WC order ID displayed via `mhmrentiva_get_display_id()` with a clickable link.
 - **File:** `Reports.php`
 
 ### Recent Bookings
-- **ID display:** WC order ID compatibility via `mhm_rentiva_get_display_id()`.
+- **ID display:** WC order ID compatibility via `mhmrentiva_get_display_id()`.
 - **Files:** `recent-bookings.php` + `transfer-widget.php`
 
 ### Messages Widget
@@ -58,7 +58,7 @@ Widgets in the admin panel are managed by the `DashboardPage.php`, `Reports.php`
 - **File:** `Messages.php`
 
 ### Calendar Popup
-- **Time display:** `_mhm_start_time`/`_mhm_end_time` fields via `get_post_meta()` (instead of SQL JOIN).
+- **Time display:** `_mhmrentiva_start_time`/`_mhmrentiva_end_time` fields via `get_post_meta()` (instead of SQL JOIN).
 - **File:** `BookingColumns.php`
 
 ### Payout List Table (`PayoutListTable.php`)
@@ -133,15 +133,15 @@ graph TD
 ## 8. Security Rules
 
 - **Data Isolation:** A vendor can only see their own data (`post_author` match).
-- **Capability Check:** The bulk approval button on `PayoutListTable` is visible only to users with the `mhm_rentiva_approve_payout` capability.
-- **Nonce Security:** All AJAX requests made through Elementor widgets are verified with the `mhm_rentiva_elementor` nonce key.
+- **Capability Check:** The bulk approval button on `PayoutListTable` is visible only to users with the `mhmrentiva_approve_payout` capability.
+- **Nonce Security:** All AJAX requests made through Elementor widgets are verified with the `mhmrentiva_elementor` nonce key.
 
 ## Section Summary
 - Frontend widgets are **Elementor**-based and use `TrendService`.
 - Admin widgets are managed by the `DashboardPage`, `Reports`, `Messages`, and `RevenueReport` classes.
 - Revenue Chart and Upcoming Operations are available **Pro only** (`Mode::canUseAdvancedReports()`).
 - All widgets use the WordPress timezone (`current_time`, `wp_date`).
-- Cache key prefix: `mhm_rentiva_dashboard_stats`.
+- Cache key prefix: `mhmrentiva_dashboard_stats`.
 
 ## Changelog
 | Date | Version | Note |

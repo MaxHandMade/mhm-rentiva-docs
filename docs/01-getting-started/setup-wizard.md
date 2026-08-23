@@ -66,11 +66,11 @@ Running the wizard again does **not** delete your existing data (vehicles, booki
 
 ## Technical Note: Automatic Redirect (For Developers)
 
-When the plugin is first installed, it sets the `mhm_rentiva_setup_redirect` option to `1`. The `admin_init` hook checks this option, redirects the user to the wizard, and deletes the option once the process is complete.
+When the plugin is first installed, it sets the `mhmrentiva_setup_redirect` option to `1`. The `admin_init` hook checks this option, redirects the user to the wizard, and deletes the option once the process is complete.
 
 To check the wizard status programmatically:
 ```php
-$is_completed = get_option('mhm_rentiva_setup_completed'); // '1' means completed
+$is_completed = get_option('mhmrentiva_setup_completed'); // '1' means completed
 ```
 
 ---

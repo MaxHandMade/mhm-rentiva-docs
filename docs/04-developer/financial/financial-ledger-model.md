@@ -19,7 +19,7 @@ This page details the Immutable Ledger data schema, storage rules, and financial
 
 # 🧾 Ledger Data Model
 
-The `wp_mhm_rentiva_ledger` table is the final record store for all financial events. This table is **Append-Only**; existing rows are never updated or deleted.
+The `wp_mhmrentiva_ledger` table is the final record store for all financial events. This table is **Append-Only**; existing rows are never updated or deleted.
 
 ---
 
@@ -28,7 +28,7 @@ The `wp_mhm_rentiva_ledger` table is the final record store for all financial ev
 The main table structure used by the system is shown below. `DECIMAL(12,2)` is used for precise financial calculations.
 
 ```sql
-CREATE TABLE wp_mhm_rentiva_ledger (
+CREATE TABLE wp_mhmrentiva_ledger (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     tenant_id BIGINT UNSIGNED NOT NULL DEFAULT 1,
     transaction_uuid CHAR(36) NOT NULL, -- Idempotency Key
@@ -81,7 +81,7 @@ All transactions are stamped in UTC via the `created_at` column. The `policy_id`
 A vendor's current balance is always derived by summing all "cleared" rows:
 
 ```sql
-SELECT SUM(amount) FROM wp_mhm_rentiva_ledger 
+SELECT SUM(amount) FROM wp_mhmrentiva_ledger 
 WHERE vendor_id = %d AND status = 'cleared';
 ```
 

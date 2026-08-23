@@ -39,18 +39,18 @@ The following parameters are available inside the shortcode:
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
 | `vehicle_id` | `(empty)` | Controls the module's **feature** filter behavior. |
-| `show_pricing` | `apply_filters(mhm_rentiva/availability_calendar/show_pricing` | Controls the module's **general** display behavior. |
-| `show_seasonal_prices` | `apply_filters(mhm_rentiva/availability_calendar/show_seasonal_prices` | Controls the module's **general** display behavior. |
-| `show_discounts` | `apply_filters(mhm_rentiva/availability_calendar/show_discounts` | Controls the module's **general** display behavior. |
+| `show_pricing` | `apply_filters(mhmrentiva_availability_calendar_show_pricing` | Controls the module's **general** display behavior. |
+| `show_seasonal_prices` | `apply_filters(mhmrentiva_availability_calendar_show_seasonal_prices` | Controls the module's **general** display behavior. |
+| `show_discounts` | `apply_filters(mhmrentiva_availability_calendar_show_discounts` | Controls the module's **general** display behavior. |
 | `show_booking_button` | `apply_filters(` | Controls the module's **general** display behavior. |
-| `theme` | `apply_filters(mhm_rentiva/availability_calendar/theme` | Controls the module's **general** display behavior. |
+| `theme` | `apply_filters(mhmrentiva_availability_calendar_theme` | Controls the module's **general** display behavior. |
 | `start_date` | `(empty)` | Controls the module's **general** display behavior. |
-| `months_ahead` | `apply_filters(mhm_rentiva/availability_calendar/months_ahead` | Controls the module's **general** display behavior. |
-| `months_to_show` | `apply_filters(mhm_rentiva/availability_calendar/months_to_show` | Controls the module's **general** display behavior. |
+| `months_ahead` | `apply_filters(mhmrentiva_availability_calendar_months_ahead` | Controls the module's **general** display behavior. |
+| `months_to_show` | `apply_filters(mhmrentiva_availability_calendar_months_to_show` | Controls the module's **general** display behavior. |
 | `start_month` | `(empty)` | Controls the module's **general** display behavior. |
-| `show_weekends` | `apply_filters(mhm_rentiva/availability_calendar/show_weekends` | Controls the module's **general** display behavior. |
-| `show_past_dates` | `apply_filters(mhm_rentiva/availability_calendar/show_past_dates` | Controls the module's **general** display behavior. |
-| `integrate_pricing` | `apply_filters(mhm_rentiva/availability_calendar/integrate_pricing` | Controls the module's **general** display behavior. |
+| `show_weekends` | `apply_filters(mhmrentiva_availability_calendar_show_weekends` | Controls the module's **general** display behavior. |
+| `show_past_dates` | `apply_filters(mhmrentiva_availability_calendar_show_past_dates` | Controls the module's **general** display behavior. |
+| `integrate_pricing` | `apply_filters(mhmrentiva_availability_calendar_integrate_pricing` | Controls the module's **general** display behavior. |
 | `class` | `(empty)` | Controls the module's **general** layout behavior. |
 
 

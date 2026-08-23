@@ -39,18 +39,18 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | Parametre | Varsayılan | Açıklama |
 | :--- | :--- | :--- |
 | `vehicle_id` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
-| `show_pricing` | `apply_filters(mhm_rentiva/availability_calendar/show_pricing` | Modülün **general** davranışını kontrol eder. |
-| `show_seasonal_prices` | `apply_filters(mhm_rentiva/availability_calendar/show_seasonal_prices` | Modülün **general** davranışını kontrol eder. |
-| `show_discounts` | `apply_filters(mhm_rentiva/availability_calendar/show_discounts` | Modülün **general** davranışını kontrol eder. |
+| `show_pricing` | `apply_filters(mhmrentiva_availability_calendar_show_pricing` | Modülün **general** davranışını kontrol eder. |
+| `show_seasonal_prices` | `apply_filters(mhmrentiva_availability_calendar_show_seasonal_prices` | Modülün **general** davranışını kontrol eder. |
+| `show_discounts` | `apply_filters(mhmrentiva_availability_calendar_show_discounts` | Modülün **general** davranışını kontrol eder. |
 | `show_booking_button` | `apply_filters(` | Modülün **general** davranışını kontrol eder. |
-| `theme` | `apply_filters(mhm_rentiva/availability_calendar/theme` | Modülün **general** davranışını kontrol eder. |
+| `theme` | `apply_filters(mhmrentiva_availability_calendar_theme` | Modülün **general** davranışını kontrol eder. |
 | `start_date` | `(boş)` | Modülün **general** davranışını kontrol eder. |
-| `months_ahead` | `apply_filters(mhm_rentiva/availability_calendar/months_ahead` | Modülün **general** davranışını kontrol eder. |
-| `months_to_show` | `apply_filters(mhm_rentiva/availability_calendar/months_to_show` | Modülün **general** davranışını kontrol eder. |
+| `months_ahead` | `apply_filters(mhmrentiva_availability_calendar_months_ahead` | Modülün **general** davranışını kontrol eder. |
+| `months_to_show` | `apply_filters(mhmrentiva_availability_calendar_months_to_show` | Modülün **general** davranışını kontrol eder. |
 | `start_month` | `(boş)` | Modülün **general** davranışını kontrol eder. |
-| `show_weekends` | `apply_filters(mhm_rentiva/availability_calendar/show_weekends` | Modülün **general** davranışını kontrol eder. |
-| `show_past_dates` | `apply_filters(mhm_rentiva/availability_calendar/show_past_dates` | Modülün **general** davranışını kontrol eder. |
-| `integrate_pricing` | `apply_filters(mhm_rentiva/availability_calendar/integrate_pricing` | Modülün **general** davranışını kontrol eder. |
+| `show_weekends` | `apply_filters(mhmrentiva_availability_calendar_show_weekends` | Modülün **general** davranışını kontrol eder. |
+| `show_past_dates` | `apply_filters(mhmrentiva_availability_calendar_show_past_dates` | Modülün **general** davranışını kontrol eder. |
+| `integrate_pricing` | `apply_filters(mhmrentiva_availability_calendar_integrate_pricing` | Modülün **general** davranışını kontrol eder. |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 
 

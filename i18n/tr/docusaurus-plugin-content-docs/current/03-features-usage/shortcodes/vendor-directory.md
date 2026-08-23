@@ -44,7 +44,7 @@ Bayi Dizini, pazaryeri keşif döngüsünü kapatır. Profil sayfaları mevcuttu
 | :--- | :--- |
 | Kısa kod | `[rentiva_vendor_directory]` |
 | Gutenberg bloğu | `mhm-rentiva/vendor-directory` ("MHM Vendor Directory") |
-| Elementor widget'ı | `mhm_rentiva_vendor_directory` ("MHM Vendor Directory") |
+| Elementor widget'ı | `mhmrentiva_vendor_directory` ("MHM Vendor Directory") |
 
 Blok ve widget kısa koda `do_shortcode()` ile delege eder. Kısa kod ne render ediyorsa, blok ve widget aynı şeyi render eder — çift kod yolu yok.
 
@@ -58,7 +58,7 @@ Base segment çevrilebilirdir:
 | :--- | :--- |
 | EN (varsayılan) | `/vendors/` |
 | TR | `/bayiler/` (`_x('vendors', 'URL slug', ...)` `.po` çevirisi) |
-| Özel | `mhm_rentiva_vendor_directory_url_base` filtresi ile override |
+| Özel | `mhmrentiva_vendor_directory_url_base` filtresi ile override |
 
 Base, Bayi Profil base'inin kardeşidir ama ayrıdır — Profil tek-bayi + slug capture group (`/vendor/{slug}/`), Dizin yalnızca base (`/vendors/`).
 
@@ -167,16 +167,16 @@ Sayfa başlığı (varsayılan: `Vendors — {site adı}`) ve meta açıklaması
 Filtre + sıralama + sayfa kombinasyonunun her benzersiz hali 30 dakikalık TTL'li bir transient'ta cache'lenir:
 
 ```
-mhm_rentiva_vendor_dir_{md5(query_args)}
+mhmrentiva_vendor_dir_{md5(query_args)}
 ```
 
 Invalidation **Bayi Profil invalidator'ının bir alt kümesidir** — yalnızca dizin listelemesini etkileyen alanlar flush tetikler:
 
-- `_rentiva_vendor_status` user_meta değişimi (active ↔ suspended)
-- `_rentiva_vendor_city` user_meta değişimi (filtre dropdown'u + şehir-bazlı sonuç seti)
-- `_rentiva_vendor_reliability_score` user_meta değişimi (rozet filtre kovaları)
-- `save_post_vehicle` (araç ekleme/kaldırma vehicle_count + şehir havuzunu değiştirir)
-- `mhm_rentiva_vehicle_lifecycle_changed` (active/withdrawn/paused dahil olmayı etkiler)
+- `_mhmrentiva_vendor_status` user_meta değişimi (active ↔ suspended)
+- `_mhmrentiva_vendor_city` user_meta değişimi (filtre dropdown'u + şehir-bazlı sonuç seti)
+- `_mhmrentiva_vendor_reliability_score` user_meta değişimi (rozet filtre kovaları)
+- `save_post_mhmrentiva_vehicle` (araç ekleme/kaldırma vehicle_count + şehir havuzunu değiştirir)
+- `mhmrentiva_vehicle_lifecycle_changed` (active/withdrawn/paused dahil olmayı etkiler)
 - `transition_comment_status` (yorum onayı puan agregatını değiştirir)
 - `profile_update` (display name değişimi kart etiketi + alpha sort'u etkiler)
 
@@ -186,29 +186,29 @@ Lifecycle status gerçekten değişmediğinde invalidator no-op yapar ([v4.38.1]
 
 ## Geliştirici uzantı noktaları
 
-### `mhm_rentiva_vendor_directory_url_base`
+### `mhmrentiva_vendor_directory_url_base`
 
 URL base segment'ini override et. Özel pazaryeri slug'ları için kullanışlı.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_url_base', function ($base) {
+add_filter('mhmrentiva_vendor_directory_url_base', function ($base) {
     return 'firmalar';
 });
 ```
 
 Locale değişim takipçisi yeni değeri otomatik algılar ve rewrite kurallarını flush eder.
 
-### `mhm_rentiva_vendor_directory_per_page`
+### `mhmrentiva_vendor_directory_per_page`
 
 Per-page cap'ini kısa kod dışından override et. Her blok/widget örneğini düzenlemeden site-genel politika belirlemeyi sağlar.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_per_page', function () {
+add_filter('mhmrentiva_vendor_directory_per_page', function () {
     return 24;
 });
 ```
 
-### `mhm_rentiva_vendor_directory_empty_message`
+### `mhmrentiva_vendor_directory_empty_message`
 
 "Bayi bulunamadı" metnini filtrele. İki bağlam:
 
@@ -218,7 +218,7 @@ add_filter('mhm_rentiva_vendor_directory_per_page', function () {
 Bağlama göre override:
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_empty_message', function ($message, $context) {
+add_filter('mhmrentiva_vendor_directory_empty_message', function ($message, $context) {
     if ($context === 'site_wide_zero') {
         return 'Henüz kayıtlı bayimiz yok. Yakında!';
     }
@@ -226,16 +226,16 @@ add_filter('mhm_rentiva_vendor_directory_empty_message', function ($message, $co
 }, 10, 2);
 ```
 
-### `mhm_rentiva_vendor_directory_page_title`
+### `mhmrentiva_vendor_directory_page_title`
 
 Sayfa başlığını override et (varsayılan: `Vendors — {site adı}`). `VendorDirectorySeo::build_title()` tarafından döndürülür. Aktif SEO eklentisi varken inert.
 
-### `mhm_rentiva_vendor_directory_meta_description`
+### `mhmrentiva_vendor_directory_meta_description`
 
 Meta açıklamasını override et. Filter üç argüman alır — varsayılan metin, bayi sayısı, araç sayısı — bağlam-aware metin kurabilirsin.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_meta_description',
+add_filter('mhmrentiva_vendor_directory_meta_description',
     function (string $default, int $vendor_count, int $vehicle_count): string {
         return sprintf(
             'Antalya rent-a-car pazaryeri — %d aktif bayi, %d araç.',
@@ -248,12 +248,12 @@ add_filter('mhm_rentiva_vendor_directory_meta_description',
 );
 ```
 
-### `mhm_rentiva_vendor_directory_seo_disable`
+### `mhmrentiva_vendor_directory_seo_disable`
 
 Hem schema JSON-LD hem title/description emisyonu için global kill switch. Varsayılan `false`; tamamen opt-out etmek için `true` döndür (genellikle tema dizin metadata'sını kendi yöntemiyle yönetiyorsa).
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_seo_disable', '__return_true');
+add_filter('mhmrentiva_vendor_directory_seo_disable', '__return_true');
 ```
 
 ## İki katmanlı Pro kilidi
@@ -263,7 +263,7 @@ Bayi Dizini **Pro-yalnız bir özelliktir** — `vendor_marketplace` flag'i gere
 1. **Dispatch-time kilidi** — `template_redirect` handler'ı `Mode::canUseVendorMarketplace()` false döndüğünde `/{base}/` istekleri için WordPress 404 döner. Kullanıcı temanın 404 sayfasını görür.
 2. **Render-time kilidi** — Lite kullanıcısının manuel kısa kod kullanımı (sayfada blok / widget / kısa kod) boş string döndürür. Yükseltme modal'ı yok, error log yok, yarı render edilmiş HTML yok.
 
-Yükseltme istemleri `/pricing` ve mevcut `[mhm_rentiva_pricing_table]` kısa kodunda yer alır.
+Yükseltme istemleri `/pricing` ve mevcut `[mhmrentiva_pricing_table]` kısa kodunda yer alır.
 
 ## Boş durumlar
 

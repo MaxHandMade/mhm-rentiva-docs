@@ -41,7 +41,7 @@ Popüler Rotalar modülü, ana sayfada en güçlü VIP transfer rotalarınızı 
 | :--- | :--- |
 | Kısa kod | `[rentiva_popular_routes]` |
 | Gutenberg bloğu | `mhm-rentiva/popular-routes` ("MHM Popüler Transfer Rotaları" başlığı) |
-| Elementor widget | `mhm_rentiva_popular_routes` ("MHM Popüler Rotalar" başlığı) |
+| Elementor widget | `mhmrentiva_popular_routes` ("MHM Popüler Rotalar" başlığı) |
 
 Blok ve widget, kısa koda `do_shortcode()` üzerinden delege eder. Kısa kod ne render ediyorsa, blok ve widget aynısını render eder — çift kod yolu yok.
 
@@ -119,7 +119,7 @@ Blok `ServerSideRender` kullanır, bu yüzden editör önizlemesi canlı fronten
 | `heading` | "Popüler Rotalar" | string | Bölüm başlığı (çevrilebilir). |
 | `subheading` | "En çok tercih edilen VIP transfer güzergahları" | string | Alt başlık (çevrilebilir). |
 | `show_view_all` | `true` | bool | Bölüm header'ında "Transfer arayın" linkini göster. |
-| `view_all_url` | boş | url | Link hedefini override et. Boşken `mhm_rentiva_popular_routes_view_all_url` filtresi kullanılır; o da boşsa link gizlenir. |
+| `view_all_url` | boş | url | Link hedefini override et. Boşken `mhmrentiva_popular_routes_view_all_url` filtresi kullanılır; o da boşsa link gizlenir. |
 | `show_duration` | `true` | bool | Her kartta "Yaklaşık X dk" satırını render et. |
 | `show_distance` | `true` | bool | Her kartta "X km" satırını render et. |
 | `show_traffic_note` | `true` | bool | "Trafiğe göre değişebilir" uyarısını render et. |
@@ -150,7 +150,7 @@ Kart sağ üst köşesi, kalkış lokasyonunun tipine göre bir ikon gösterir:
 | `city_center` | 🏙️ |
 | (diğer) | ↗ |
 
-Eşleştirmeyi `mhm_rentiva_popular_routes_type_icon` filtresi ile override edin (aşağıdaki Geliştirici uzantı noktalarına bakın).
+Eşleştirmeyi `mhmrentiva_popular_routes_type_icon` filtresi ile override edin (aşağıdaki Geliştirici uzantı noktalarına bakın).
 
 ## Kart tıklama davranışı — deep-link ön-doldurma
 
@@ -173,36 +173,36 @@ Transfer arama kısa kodu bu query parametrelerini okur ve `<select>` elementler
 
 ## Geliştirici uzantı noktaları
 
-### `mhm_rentiva_popular_routes_view_all_url`
+### `mhmrentiva_popular_routes_view_all_url`
 
 **Bölüm header link** hedefi için filtre ("Transfer arayın" linki). `resolve_view_all_url()` tarafından döndürülür.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_view_all_url', function ($url) {
+add_filter('mhmrentiva_popular_routes_view_all_url', function ($url) {
     return home_url('/transfer/');
 });
 ```
 
 Bu filtre boş döndüğünde bölüm header linki gizlenir — henüz transfer arama sayfası olmayan kurulumlar için faydalı.
 
-### `mhm_rentiva_popular_routes_search_url`
+### `mhmrentiva_popular_routes_search_url`
 
 **Kart tıklama hedefi** taban URL'i için filtre (v4.34.1'de tanıtıldı). Bölüm header linkinden bağımsız, böylece tema'lar bunları farklı sayfalara yönlendirebilir.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_search_url', function ($url) {
+add_filter('mhmrentiva_popular_routes_search_url', function ($url) {
     return home_url('/transfer-search/');
 });
 ```
 
-Boş olduğunda `mhm_rentiva_popular_routes_view_all_url` filtresine fallback yapar; o da `home_url('/transfer/')`'e fallback yapar.
+Boş olduğunda `mhmrentiva_popular_routes_view_all_url` filtresine fallback yapar; o da `home_url('/transfer/')`'e fallback yapar.
 
-### `mhm_rentiva_popular_routes_type_icon`
+### `mhmrentiva_popular_routes_type_icon`
 
 Kalkış-tipi ikonunu filtreler. Varsayılan ikon ve tip slug'ını alır.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_type_icon', function ($icon, $type) {
+add_filter('mhmrentiva_popular_routes_type_icon', function ($icon, $type) {
     if ($type === 'airport') {
         return '🛫';
     }

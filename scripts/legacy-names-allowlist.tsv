@@ -1,0 +1,25 @@
+# Deliberate pre-6.0.0 spellings on the current documentation surface.
+#
+# NOT "findings we tolerate". Each line names an old identifier a page mentions
+# ON PURPOSE, because the sentence is about the old name. Sweeping it would make
+# the sentence false -- worse than the stale name it fixes.
+#
+# 🔴 AN ENTRY IS A CLAIM ABOUT ONE SENTENCE, NOT ABOUT A FILE. That is why the
+#    third column exists: the token is spared only on lines containing that
+#    anchor text. Measured reason -- transfer-admin-panels.md talks about the
+#    legacy `mhm_` table prefix on line 103 and carries a genuinely stale
+#    `admin_post_mhm_save_route` on line 95. A (file, token) allowlist would have
+#    hidden the second while sparing the first.
+#
+# 🔴 FAILS TOWARD FLAGGING. Rewrite the sentence and the anchor stops matching,
+#    so the name is swept and flagged again -- the safe direction. An entry that
+#    no longer matches anything is dead and should be deleted; the probe prints
+#    the skip count on every run so this file cannot quietly become a blindfold.
+#
+# Format:  <path><TAB><token><TAB><anchor text on the line><TAB><why>
+docs/04-developer/ui-components/transfer-admin-panels.md	mhm_	detect legacy	Legacy table prefix, named as legacy: the paid add-on still probes for the mhm_-prefixed spelling as a legacy fallback when reading transfer tables.
+i18n/tr/docusaurus-plugin-content-docs/current/04-developer/ui-components/transfer-admin-panels.md	mhm_	eski sistemlerden gelen	Same sentence, Turkish mirror.
+docs/03-features-usage/additional-services-usage.md	vehicle_addon	upgrading to v4.36.0	Historical: the one-time migration on upgrading to v4.36.0, when that WAS the post type's name.
+i18n/tr/docusaurus-plugin-content-docs/current/03-features-usage/additional-services-usage.md	vehicle_addon	v4.36.0'a yükseltme	Same sentence, Turkish mirror.
+docs/04-developer/ui-components/dashboard-widgets.md	mhm_dashboard_stats	previous incorrect prefix	Historical: the incorrect cache prefix v4.23.0 fixed. The current prefix on the same line now reads mhmrentiva_dashboard_stats.
+i18n/tr/docusaurus-plugin-content-docs/current/04-developer/ui-components/dashboard-widgets.md	mhm_dashboard_stats	önceki hatali prefix	Same sentence, Turkish mirror.

@@ -76,7 +76,7 @@ Developers can manipulate transfer pricing or add additional rules:
 
 ```php
 // To filter the transfer price:
-add_filter('mhm_rentiva_transfer_price', function($price, $route_id) {
+add_filter('mhmrentiva_transfer_price', function($price, $route_id) {
     // Custom campaign logic
     return $price * 0.9; 
 }, 10, 2);

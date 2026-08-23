@@ -25,8 +25,8 @@ This page describes the risk analysis, approval hierarchy, and audit mechanisms 
 
 ### 1. Freeze Controls
 Before any transaction is initiated, the system performs a two-stage freeze check:
-- **Global Freeze:** If the `mhm_rentiva_global_payout_freeze` setting is active, all Payouts stop immediately.
-- **Vendor Freeze:** Requests from vendors with the `_mhm_vendor_payout_freeze` meta are rejected.
+- **Global Freeze:** If the `mhmrentiva_global_payout_freeze` setting is active, all Payouts stop immediately.
+- **Vendor Freeze:** Requests from vendors with the `_mhmrentiva_vendor_payout_freeze` meta are rejected.
 
 ### 2. Risk Engine (Deterministic Risk Analysis)
 The system generates a risk score for each Payout request based on the following criteria:
@@ -38,7 +38,7 @@ The system generates a risk score for each Payout request based on the following
 To prevent internal fraud, no administrator can unilaterally approve a Payout they initiated or created:
 - **Maker:** The person who created the request or performed the initial review.
 - **Checker:** A different authorized person who gives the final approval.
-- *Exception:* Only senior administrators with the `mhm_rentiva_override_maker_checker` capability can bypass this rule (and the action is recorded in the forensic log).
+- *Exception:* Only senior administrators with the `mhmrentiva_override_maker_checker` capability can bypass this rule (and the action is recorded in the forensic log).
 
 ---
 
@@ -68,7 +68,7 @@ graph TD
 
 ## 🏛️ Audit Trail
 
-All governance decisions are stored **immutably** in the `wp_mhm_rentiva_payout_audit` table:
+All governance decisions are stored **immutably** in the `wp_mhmrentiva_payout_audit` table:
 - **IP Hash:** The IP trace of the actor is stored as SHA-256 to preserve privacy.
 - **Action Constants:** Actions such as `submit_payout`, `review_payout`, `finalize_payout`, `bypass_time_lock` are recorded.
 - **Metadata JSON:** The current risk score, workflow state, and contextual details are stamped on each event.

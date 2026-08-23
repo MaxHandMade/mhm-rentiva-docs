@@ -65,7 +65,7 @@ Tablo, işlem durumlarını dinamik renklerle görselleştirir:
 
 ## 🛡️ Güvenlik ve Yetkilendirme
 
-- **Capability:** Toplu işlemleri gerçekleştirmek için `mhm_rentiva_approve_payout` yetkisi zorunludur.
+- **Capability:** Toplu işlemleri gerçekleştirmek için `mhmrentiva_approve_payout` yetkisi zorunludur.
 - **Nonce:** Tüm bulk action'lar standart WP güvenliğinden geçirilir.
 - **Idempotency Guard:** `PayoutListTable` içinde her işlem öncesi `post_status` kontrolü yapılarak mükerrer işlem yapılması kod seviyesinde engellenir.
 

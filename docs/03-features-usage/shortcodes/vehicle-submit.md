@@ -59,13 +59,13 @@ As of v4.23.0, the vehicle submission form includes fields specific to the trans
 #### City-Filtered Location Selection
 Transfer locations are automatically filtered based on the vendor's `_vendor_city` meta value. Queried via `LocationProvider::get_by_city()`. Vendors can only see and select locations belonging to their own city.
 
-- **Meta key:** `_mhm_rentiva_transfer_locations` (array)
-- **Meta key:** `_mhm_rentiva_transfer_routes` (array)
+- **Meta key:** `_mhmrentiva_transfer_locations` (array)
+- **Meta key:** `_mhmrentiva_transfer_routes` (array)
 
 #### Per-Route Price Entry
 For each selected route, the vendor can enter their own price within the `min_price` / `max_price` range set by the admin. Prices outside the range are rejected.
 
-- **Meta key:** `_mhm_rentiva_transfer_route_prices` (JSON)
+- **Meta key:** `_mhmrentiva_transfer_route_prices` (JSON)
 - **Fallback:** If no vendor price is set, the route's `base_price` value is used.
 
 #### Passenger and Luggage Capacity

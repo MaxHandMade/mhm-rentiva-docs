@@ -27,7 +27,7 @@ Bu sayfa `[rentiva_vendor_bookings]` kısa kodunu belgeler — bayi panelinde (`
 
 ## Bu kısa kod nedir
 
-`[rentiva_vendor_bookings]` **bayi-yalnız bir panel widget'ıdır**. Mevcut giriş yapmış kullanıcı `rentiva_vendor` rolüne sahip olmalı; aksi halde kısa kod boş string döner. Çıktı, alttaki aracın `post_author`'ı mevcut kullanıcıyla eşleşen tüm `vehicle_booking` postlarının listesidir — bir başka deyişle, müşterinin bu bayiye ait bir araca yaptığı her rezervasyon.
+`[rentiva_vendor_bookings]` **bayi-yalnız bir panel widget'ıdır**. Mevcut giriş yapmış kullanıcı `rentiva_vendor` rolüne sahip olmalı; aksi halde kısa kod boş string döner. Çıktı, alttaki aracın `post_author`'ı mevcut kullanıcıyla eşleşen tüm `mhmrentiva_booking` postlarının listesidir — bir başka deyişle, müşterinin bu bayiye ait bir araca yaptığı her rezervasyon.
 
 Bu, müşteri-tarafı "rezervasyonlarım" listesi **değildir** (`[rentiva_my_bookings]` o iş için). Müşteri "rezervasyonlarım" **mevcut kullanıcının yaptığı** rezervasyonları okur; bayi rezervasyonları **mevcut kullanıcının envanterine sahip olduğu** rezervasyonları okur. İkisi bilinçli olarak ayrı kısa kodlar çünkü bayi-tarafı sorgular müşterinin kimliğini de yüzeye çıkarmak zorunda, müşteri-tarafı sorgular ise aracı ve bayiyi yüzeye çıkarır.
 
@@ -37,7 +37,7 @@ Bu, müşteri-tarafı "rezervasyonlarım" listesi **değildir** (`[rentiva_my_bo
 
 Çıktıyı iki katman korur:
 
-1. **Auth zorunlu.** Registry'de `requires_auth = true` — giriş yapmamış ziyaretçiler `mhm_rentiva_shortcode_auth_error` filtresi üzerinden bir "Auth error" bildirimi görür (varsayılan: "Bu içeriği görüntülemek için lütfen giriş yapın.").
+1. **Auth zorunlu.** Registry'de `requires_auth = true` — giriş yapmamış ziyaretçiler `mhmrentiva_shortcode_auth_error` filtresi üzerinden bir "Auth error" bildirimi görür (varsayılan: "Bu içeriği görüntülemek için lütfen giriş yapın.").
 2. **Rol zorunlu.** Mevcut kullanıcı `rentiva_vendor` rolünden yoksunsa handler `error => 'not_vendor'` ile çıkar. Şablon o dalda hiçbir şey render etmez.
 
 Pro kilidi **sayfadan miras alınır** — tipik yerleştirme `/panel/`'dir, ki o zaten `vendor_marketplace` Pro özelliğini gerektirir. Lite bayilerin panel sayfasına erişimi en başta yoktur.
@@ -56,8 +56,8 @@ Kısa kod yalnızca tek attribute okur, `limit`:
 
 Sorgu yolu:
 
-1. Mevcut bayinin sahip olduğu tüm `vehicle` ID'lerini al (`post_author = $user_id`, `post_status` `[publish, pending]` içinde).
-2. `vehicle_booking` sorgusunu o vehicle ID'lerine `_mhm_vehicle_id` meta üzerinden join ederek çalıştır.
+1. Mevcut bayinin sahip olduğu tüm `mhmrentiva_vehicle` ID'lerini al (`post_author = $user_id`, `post_status` `[publish, pending]` içinde).
+2. `mhmrentiva_booking` sorgusunu o vehicle ID'lerine `_mhmrentiva_vehicle_id` meta üzerinden join ederek çalıştır.
 3. Sonuç listesini müşteri kimliği, araç, tarihler ve durumla render et.
 
 Pagination sunucu-tarafıdır ve istekten `?paged=N` okur.
@@ -75,7 +75,7 @@ Pagination sunucu-tarafıdır ve istekten `?paged=N` okur.
 | Sahip olunan araç sayısı sıfır olan bayi | "Henüz envanter yok" ipucuyla boş liste |
 | Araçları olan ama sıfır rezervasyonu olan bayi | "Henüz rezervasyon yok" ipucuyla boş liste |
 | Bayi olmayan kullanıcı | Boş string (sessiz) |
-| Giriş yapmamış kullanıcı | Auth error bildirimi (`mhm_rentiva_shortcode_auth_error` ile filtrelenir) |
+| Giriş yapmamış kullanıcı | Auth error bildirimi (`mhmrentiva_shortcode_auth_error` ile filtrelenir) |
 
 ## Bayi panelinde nereye oturuyor
 
@@ -87,7 +87,7 @@ Pagination sunucu-tarafıdır ve istekten `?paged=N` okur.
 | Rezervasyon Talepleri | `[rentiva_vendor_bookings]` ← **bu sayfa** |
 | Defter & Ödemeler | `[rentiva_vendor_ledger]` ([referans](./vendor-ledger)) |
 
-Müşteri-tarafı eşdeğeri `[rentiva_my_bookings]` ([referans](./my-bookings)) — o `_mhm_customer_user_id` meta'sı üzerinde çalışır, bu ise aracın author'ı üzerinde çalışır.
+Müşteri-tarafı eşdeğeri `[rentiva_my_bookings]` ([referans](./my-bookings)) — o `_mhmrentiva_customer_user_id` meta'sı üzerinde çalışır, bu ise aracın author'ı üzerinde çalışır.
 
 ## Ayrıca bakınız
 

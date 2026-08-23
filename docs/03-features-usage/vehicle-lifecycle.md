@@ -98,7 +98,7 @@ Deductions are automatically recorded in the ledger and subtracted from the next
 Since [v4.35.0](/blog/rentiva-v4.35.0-release), vendors can capture a reason while withdrawing a vehicle. The previous browser `confirm()` dialog has been replaced by the shared **vendor report modal** that prompts for a reason (minimum 20 characters). When a reason is provided:
 
 1. A `vehicle_action` report is filed with `status=open` before the withdrawal AJAX runs.
-2. Inside `VehicleLifecycleManager::withdraw()`, the new `mhm_rentiva_before_apply_penalty` filter checks for the open report. The `PenaltySuspensionHook` callback returns `false`, **suspending both the score deduction and the ledger debit**.
+2. Inside `VehicleLifecycleManager::withdraw()`, the new `mhmrentiva_before_apply_penalty` filter checks for the open report. The `PenaltySuspensionHook` callback returns `false`, **suspending both the score deduction and the ledger debit**.
 3. The vehicle still transitions to `withdrawn` (post status, lifecycle meta, cooldown date all set), but the financial penalty is paused pending admin review.
 
 The admin reviews the appeal in **MHM Rentiva → Bayi Raporları**:
@@ -116,7 +116,7 @@ To prevent price manipulation:
 
 - A vendor cannot cancel a vehicle that has an active booking and re-list it for the same dates at a higher price.
 - Dates of bookings cancelled by the vendor remain closed to new bookings for **30 days**.
-- `AntiGamingBlocker` stores these blocks using the `_mhm_anti_gaming_blocks` meta key.
+- `AntiGamingBlocker` stores these blocks using the `_mhmrentiva_anti_gaming_blocks` meta key.
 
 ---
 

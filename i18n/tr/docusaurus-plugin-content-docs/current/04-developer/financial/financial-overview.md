@@ -28,7 +28,7 @@ Finansal operasyonlar şu motorlar üzerinden yönetilir:
 | Bileşen | Görev |
 | :--- | :--- |
 | `CommissionResolver` | Rezervasyon için en uygun komisyon politikasını belirleyen karar motoru. |
-| `Ledger` | Tüm parasal hareketleri `wp_mhm_rentiva_ledger` tablosuna atomik olarak yazan servis. |
+| `Ledger` | Tüm parasal hareketleri `wp_mhmrentiva_ledger` tablosuna atomik olarak yazan servis. |
 | `PayoutService` | Vendor hak edişlerini hesaplayan ve ödeme taleplerini yöneten katman. |
 | `GovernanceService` | Finansal limitleri, risk kontrollerini ve yetkilendirmeleri denetler. |
 | `PolicyRepository` | Versiyonlanmış komisyon politikalarını ve kurumsal anlaşmaları saklar. |

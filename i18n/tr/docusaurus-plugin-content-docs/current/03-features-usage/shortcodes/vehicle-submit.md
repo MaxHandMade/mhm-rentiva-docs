@@ -59,13 +59,13 @@ v4.23.0 ile araç ekleme formuna transfer modulune ozel alanlar eklenmiştir:
 #### Şehir-Filtrelenms Lokasyon Seçimi
 Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari otomatik filtrelenir. `LocationProvider::get_by_city()` ile sorgulama yapilir. Vendor yalnızca kendi sehrine ait lokasyonlari gorebilir ve secebilir.
 
-- **Meta key:** `_mhm_rentiva_transfer_locations` (array)
-- **Meta key:** `_mhm_rentiva_transfer_routes` (array)
+- **Meta key:** `_mhmrentiva_transfer_locations` (array)
+- **Meta key:** `_mhmrentiva_transfer_routes` (array)
 
 #### Rota Basi Fiyat Girişi
 Her secilen rota için vendor, admin tarafından belirlenen `min_price` / `max_price` araligi dahilinde kendi fiyatini girebilir. Aralik disinda fiyat kabul edilmez.
 
-- **Meta key:** `_mhm_rentiva_transfer_route_prices` (JSON)
+- **Meta key:** `_mhmrentiva_transfer_route_prices` (JSON)
 - **Fallback:** Vendor fiyati yoksa rotanin `base_price` değeri kullanılır.
 
 #### Yolcu ve Bagaj Kapasitesi

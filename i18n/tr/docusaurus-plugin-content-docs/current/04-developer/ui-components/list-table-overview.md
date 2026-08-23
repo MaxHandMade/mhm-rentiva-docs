@@ -65,7 +65,7 @@ Alt sınıflar, karmaşık HTML yapıları yerine hazır metodları kullanabilir
 
 ## 🛡️ Güvenlik Protokolü
 
-- **Nonce Enforcement:** Tüm bulk action'lar `mhm_listtable_nonce` üzerinden doğrulanır.
+- **Nonce Enforcement:** Tüm bulk action'lar `mhmrentiva_listtable_nonce` üzerinden doğrulanır.
 - **Redirects:** Toplu işlem sonrası "Form Resubmission" hatasını önlemek için `wp_safe_redirect` kullanılır.
 - **Sanitization:** Tabloya gelen tüm filtre parametreleri `sanitize_text_field_safe` üzerinden geçirilir.
 

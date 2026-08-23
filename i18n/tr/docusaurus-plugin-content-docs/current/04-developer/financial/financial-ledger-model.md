@@ -19,7 +19,7 @@ Bu sayfa, Rentiva finansal sisteminin temeli olan Değişmez Defter (Immutable L
 
 # 🧾 Ledger Veri Modeli
 
-`wp_mhm_rentiva_ledger` tablosu, tüm finansal olayların nihai kayıt yeridir. Bu tablo **Append-Only** (Sadece Ekleme) yapısındadır; mevcut satırlar asla güncellenmez veya silinmez.
+`wp_mhmrentiva_ledger` tablosu, tüm finansal olayların nihai kayıt yeridir. Bu tablo **Append-Only** (Sadece Ekleme) yapısındadır; mevcut satırlar asla güncellenmez veya silinmez.
 
 ---
 
@@ -28,7 +28,7 @@ Bu sayfa, Rentiva finansal sisteminin temeli olan Değişmez Defter (Immutable L
 Sistemde kullanılan ana tablo yapısı aşağıdadır. Hassas finansal hesaplamalar için `DECIMAL(12,2)` kullanılmaktadır.
 
 ```sql
-CREATE TABLE wp_mhm_rentiva_ledger (
+CREATE TABLE wp_mhmrentiva_ledger (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     tenant_id BIGINT UNSIGNED NOT NULL DEFAULT 1,
     transaction_uuid CHAR(36) NOT NULL, -- Idempotency Key
@@ -81,7 +81,7 @@ Tüm işlemler `created_at` kolonu üzerinden UTC olarak damgalanır. `policy_id
 Satıcının güncel bakiyesi her zaman tüm "cleared" satırların toplanmasıyla bulunur:
 
 ```sql
-SELECT SUM(amount) FROM wp_mhm_rentiva_ledger 
+SELECT SUM(amount) FROM wp_mhmrentiva_ledger 
 WHERE vendor_id = %d AND status = 'cleared';
 ```
 

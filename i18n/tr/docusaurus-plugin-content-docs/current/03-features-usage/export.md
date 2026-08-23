@@ -15,7 +15,7 @@ Tam ayrım için: [Sürümler — Lite ve Pro farkı](/docs/). Pro'yu edinmek i�
 Dışa Aktar aracı, kiralama verilerinizi analiz, muhasebe veya yedekleme amacıyla farklı formatlarda sistem dışına almanızı sağlar. **MHM Rentiva > Dışa Aktar** menüsü üzerinden kapsamlı veri ihracatı yapabilirsiniz.
 
 :::info React SPA (v4.52.0'dan beri)
-Dışa Aktar sayfası v4.52.0 sürümünde tamamen **REST API destekli bir React SPA**'ya taşındı. Yaklaşık 780 satırlık eski PHP render kodu değiştirildi ve üç eski AJAX işleyicisi (`wp_ajax_mhm_export_*`) kaldırıldı. Sayfa artık canlı kayıt önizlemesi, girdi başına silme özellikli REST destekli dışa aktarma geçmişi ve korunan `admin-post.php` CSV indirme akışı sunuyor — tamamı sayfa yenilemesi olmadan.
+Dışa Aktar sayfası v4.52.0 sürümünde tamamen **REST API destekli bir React SPA**'ya taşındı. Yaklaşık 780 satırlık eski PHP render kodu değiştirildi ve üç eski AJAX işleyicisi (`wp_ajax_mhmrentiva_export_*`) kaldırıldı. Sayfa artık canlı kayıt önizlemesi, girdi başına silme özellikli REST destekli dışa aktarma geçmişi ve korunan `admin-post.php` CSV indirme akışı sunuyor — tamamı sayfa yenilemesi olmadan.
 :::
 
 ---
@@ -60,7 +60,7 @@ Sistem, yapılan her ihracat etkinliğini kayıt altında tutar:
 
 Bu sürümde dışa aktarım modülünde 4 kritik hata düzeltilmiştir:
 
-1. **Ödeme Günlükleri post_type hatası:** Dışa aktarım formu `mhm_payment_log` gönderiyordu ancak gerçek CPT `mhm_app_log` idi. "Geçersiz dışa aktarım türü" hatası giderildi.
+1. **Ödeme Günlükleri post_type hatası:** Dışa aktarım formu `mhmrentiva_payment_log` gönderiyordu ancak gerçek CPT `mhmrentiva_app_log` idi. "Geçersiz dışa aktarım türü" hatası giderildi.
 2. **Kayıt sayısı 0 hatası:** `no_found_rows => true` query parametresi `found_posts` değerinin daima 0 dönmesine neden oluyordu. Sayım sorgusu ayrı bir override ile düzeltildi.
 3. **Geçmiş silme:** Dışa aktarım geçmişi silme işlemi placeholder kodda kalmıştı ve çalışmıyordu. Transient tabanlı doğrudan silme mekanizması eklendi.
 4. **Araç CSV/JSON PHP 8 hatası:** `get_status_label()` fonksiyonuna yanlış parametre tipi (int yerine string) gönderiliyordu. PHP 8 strict types ile fatal error oluşuyordu.

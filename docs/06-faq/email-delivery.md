@@ -59,7 +59,7 @@ System emails (`Mailer::send`) use the default WordPress `wp_mail()` function. D
 ## 🛠️ 4. Test Mode & Debugging
 
 ### Email Test Mode
-- **Check:** If the `mhm_rentiva_email_test_mode` setting is enabled, emails are only logged to `AdvancedLogger` instead of being sent to real recipients.
+- **Check:** If the `mhmrentiva_email_test_mode` setting is enabled, emails are only logged to `AdvancedLogger` instead of being sent to real recipients.
 - **Fix:** Make sure test mode is off before going live.
 
 ### Template Errors

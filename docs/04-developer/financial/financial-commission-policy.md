@@ -27,8 +27,8 @@ MHM Rentiva uses a multi-layered, deterministic **Commission Resolution Hierarch
 
 | Priority | Level | Meta / Source | Description |
 | :--- | :--- | :--- | :--- |
-| **1** | **Vehicle Override** | `_mhm_vendor_commission_rate` | If a specific rate is assigned to the vehicle itself, it takes highest priority. |
-| **2** | **Vendor Override** | `_mhm_vendor_commission_rate` | If a specific rate is assigned to the vendor user (and no Vehicle override exists), it applies. |
+| **1** | **Vehicle Override** | `_mhmrentiva_vendor_commission_rate` | If a specific rate is assigned to the vehicle itself, it takes highest priority. |
+| **2** | **Vendor Override** | `_mhmrentiva_vendor_commission_rate` | If a specific rate is assigned to the vendor user (and no Vehicle override exists), it applies. |
 | **3** | **Tier Incentive** | `TierService` | An additional discount is applied on top of the Global rate based on the vendor's performance over the last 30 days. |
 | **4** | **Global Policy** | `CommissionPolicy` | If no other rule matches, the system's default policy rate is applied. |
 

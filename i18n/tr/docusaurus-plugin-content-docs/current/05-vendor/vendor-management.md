@@ -37,14 +37,14 @@ Onaylı her tedarikçiye atanan bu rol, şu yetkileri (capabilities) beraberinde
 
 ### 🛡️ Mülkiyet Zorunluluğu (`VendorOwnershipEnforcer`)
 Tedarikçilerin birbirlerinin araçlarına veya rezervasyonlarına erişmesini engellemek için `user_has_cap` filtresi kullanılır:
-- Bir vendor sadece `post_author` değeri kendi `user_id`'si ile eşleşen `vehicle` kayıtlarını düzenleyebilir.
+- Bir vendor sadece `post_author` değeri kendi `user_id`'si ile eşleşen `mhmrentiva_vehicle` kayıtlarını düzenleyebilir.
 - Admin portalında "All Vehicles" listesi vendor için sadece kendi kayıtlarına filtrelenir.
 
 ---
 
-## 📋 2. Başvuru Yönetimi (`mhm_vendor_app`)
+## 📋 2. Başvuru Yönetimi (`mhmrentiva_vendor_app`)
 
-Tedarikçi adaylarının verileri `mhm_vendor_app` Custom Post Type (CPT) içinde saklanır:
+Tedarikçi adaylarının verileri `mhmrentiva_vendor_app` Custom Post Type (CPT) içinde saklanır:
 - **Onboarding Akışı:** `Pending` (İnceleme) → `Approved` (Onaylandı) / `Rejected` (Reddedildi).
 - **Veri Güvenliği:** Başvuru sırasında alınan IBAN bilgileri `VendorApplicationManager::encrypt_iban()` ile **AES-256-CBC** metoduna göre şifrelenir.
 - **Evrak Takibi:** Kimlik, ehliyet ve ikametgah belgeleri `_vendor_doc_*` meta anahtarları altında WordPress Media Library ile ilişkilendirilir.
@@ -55,9 +55,9 @@ Tedarikçi adaylarının verileri `mhm_vendor_app` Custom Post Type (CPT) içind
 
 ### Onay ve Meta Senkronizasyonu (`VendorOnboardingController`)
 Admin bir başvuruyu onayladığında:
-1. `mhm_vendor_app` kaydındaki telefon, şehir ve IBAN bilgileri kullanıcının (WP_User) meta tablolarına kopyalanır.
+1. `mhmrentiva_vendor_app` kaydındaki telefon, şehir ve IBAN bilgileri kullanıcının (WP_User) meta tablolarına kopyalanır.
 2. Kullanıcının rolü `customer`'dan `rentiva_vendor`'a yükseltilir.
-3. `mhm_rentiva_vendor_approved` kancası (hook) tetiklenerek hoş geldin e-postası gönderilir.
+3. `mhmrentiva_vendor_approved` kancası (hook) tetiklenerek hoş geldin e-postası gönderilir.
 
 ### Profil Yonetimi (`VendorProfileExtension`)
 WordPress profil sayfasi (`wp-admin/profile.php`), vendorlara ozel alanlarla genisletilmistir:
@@ -105,9 +105,9 @@ Vendor araç ekleme formunda (`[rentiva_vehicle_submit]`), yalnızca vendor'un b
 - Kapasite bilgileri (yolcu, bagaj) araç düzeyinde tanımlanır.
 
 ### Meta Yapısı
-- `_mhm_rentiva_transfer_locations`: Vendor'un hizmet verdiği lokasyonlar (array)
-- `_mhm_rentiva_transfer_routes`: Vendor'un hizmet verdiği rotalar (array)
-- `_mhm_rentiva_transfer_route_prices`: Rota bazlı vendor fiyatları (JSON)
+- `_mhmrentiva_transfer_locations`: Vendor'un hizmet verdiği lokasyonlar (array)
+- `_mhmrentiva_transfer_routes`: Vendor'un hizmet verdiği rotalar (array)
+- `_mhmrentiva_transfer_route_prices`: Rota bazlı vendor fiyatları (JSON)
 
 ### Admin Görünümü
 Admin araç düzenleme ekranında (`VehicleTransferMetaBox`), vendor'un şehir bilgisi ve seçtiği lokasyon/rotalar görüntülenir.
@@ -182,7 +182,7 @@ graph TD
 - **SKU:** `mhm-rentiva-listing-fee`
 - **Görünürlük:** Mağazada gizli (shop/arama sonuçlarında gösterilmez)
 - **Fiyat:** Admin ayarlarından dinamik olarak okunur
-- **Sepet meta:** `_mhm_listing_vehicle_id`, `_mhm_listing_action` (new/renew/relist)
+- **Sepet meta:** `_mhmrentiva_listing_vehicle_id`, `_mhmrentiva_listing_action` (new/renew/relist)
 - **Otomatik oluşturma:** Özellik ilk etkinleştirildiğinde otomatik oluşturulur
 
 ### Büyükbaba Kuralı (Grandfather Rule)
@@ -276,7 +276,7 @@ Denetim günlüğü yalnızca eklenebilir (append-only) — girdiler asla silinm
 
 | Sorun | Detay | Durum |
 |-------|-------|-------|
-| Arac durumu filtresi | `_mhm_vehicle_status` arama sorgularinda kontrol edilmiyor — bakimdaki araclar gorunur. | Kesfedildi |
+| Arac durumu filtresi | `_mhmrentiva_vehicle_status` arama sorgularinda kontrol edilmiyor — bakimdaki araclar gorunur. | Kesfedildi |
 | Vendor askiya alma | `VendorOnboardingController::suspend()` vendor araclarini yayindan kaldirmiyor. | Kesfedildi |
 
 ---

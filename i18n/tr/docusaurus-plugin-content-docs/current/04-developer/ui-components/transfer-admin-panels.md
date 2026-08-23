@@ -92,8 +92,8 @@ Tüm form işlemleri `admin_post` kancaları üzerinden asenkron ve güvenli (No
 
 ```php
 // Örnek: Rota kaydı sırasında tetiklenen kancalar
-add_action('admin_post_mhm_save_route', array(self::class, 'handle_save_route'));
-add_action('admin_post_mhm_delete_route', array(self::class, 'handle_delete_route'));
+add_action('admin_post_mhmrentiva_save_route', array(self::class, 'handle_save_route'));
+add_action('admin_post_mhmrentiva_delete_route', array(self::class, 'handle_delete_route'));
 ```
 
 ---

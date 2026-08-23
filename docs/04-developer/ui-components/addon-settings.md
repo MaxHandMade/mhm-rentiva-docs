@@ -41,8 +41,8 @@ public static function register(): void {
     );
 
     // Field registration via SettingsHelper
-    SettingsHelper::checkbox_field($page_slug, 'mhm_rentiva_addon_require_confirmation', ...);
-    SettingsHelper::select_field($page_slug, 'mhm_rentiva_addon_display_order', ...);
+    SettingsHelper::checkbox_field($page_slug, 'mhmrentiva_addon_require_confirmation', ...);
+    SettingsHelper::select_field($page_slug, 'mhmrentiva_addon_display_order', ...);
 }
 ```
 

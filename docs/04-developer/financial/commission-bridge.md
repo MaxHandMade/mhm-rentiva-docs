@@ -74,7 +74,7 @@ As soon as a financial entry is written to the Ledger, `MetricCacheManager` is t
 | `order_id` | `parent_id` / `source_id` | Indicates the source is a WC order. |
 | `order_total` | `gross_amount` | Total amount including tax. |
 | `currency` | `currency` | Currency of the order. |
-| `_mhm_booking_id` | `reference_id` | Rentiva booking reference. |
+| `_mhmrentiva_booking_id` | `reference_id` | Rentiva booking reference. |
 
 ## Section Summary
 - `CommissionBridge` converts WooCommerce events into financial Transaction structures.

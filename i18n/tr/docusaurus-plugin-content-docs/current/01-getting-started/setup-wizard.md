@@ -66,11 +66,11 @@ Sihirbazı tekrar çalıştırmak mevcut verilerinizi (araçlar, rezervasyonlar)
 
 ## Teknik Not: Otomatik Yönlendirme (Geliştiriciler İçin)
 
-Eklenti ilk yüklendiğinde `mhm_rentiva_setup_redirect` opsiyonunu `1` olarak set eder. `admin_init` hook'u bu opsiyonu kontrol ederek kullanıcıyı sihirbaza yönlendirir ve işlem bitince bu opsiyonu siler.
+Eklenti ilk yüklendiğinde `mhmrentiva_setup_redirect` opsiyonunu `1` olarak set eder. `admin_init` hook'u bu opsiyonu kontrol ederek kullanıcıyı sihirbaza yönlendirir ve işlem bitince bu opsiyonu siler.
 
 Programatik olarak sihirbaz durumunu kontrol etmek için:
 ```php
-$is_completed = get_option('mhm_rentiva_setup_completed'); // '1' ise tamamlanmıştır
+$is_completed = get_option('mhmrentiva_setup_completed'); // '1' ise tamamlanmıştır
 ```
 
 ---

@@ -92,8 +92,8 @@ All form operations are handled asynchronously and securely (nonce-protected) vi
 
 ```php
 // Example: hooks triggered during route saving
-add_action('admin_post_mhm_save_route', array(self::class, 'handle_save_route'));
-add_action('admin_post_mhm_delete_route', array(self::class, 'handle_delete_route'));
+add_action('admin_post_mhmrentiva_save_route', array(self::class, 'handle_save_route'));
+add_action('admin_post_mhmrentiva_delete_route', array(self::class, 'handle_delete_route'));
 ```
 
 ---

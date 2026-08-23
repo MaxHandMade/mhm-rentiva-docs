@@ -44,7 +44,7 @@ Three rendering surfaces share a single canonical renderer (Render Parity contra
 | :--- | :--- |
 | Shortcode | `[rentiva_vendor_directory]` |
 | Gutenberg block | `mhm-rentiva/vendor-directory` (titled "MHM Vendor Directory") |
-| Elementor widget | `mhm_rentiva_vendor_directory` (titled "MHM Vendor Directory") |
+| Elementor widget | `mhmrentiva_vendor_directory` (titled "MHM Vendor Directory") |
 
 The block and widget delegate to the shortcode via `do_shortcode()`. Whatever the shortcode renders, the block and widget render identically — no double codepath.
 
@@ -58,7 +58,7 @@ The base segment is translatable:
 | :--- | :--- |
 | EN (default) | `/vendors/` |
 | TR | `/bayiler/` (`.po` translation of `_x('vendors', 'URL slug', ...)`) |
-| Custom | Override with the `mhm_rentiva_vendor_directory_url_base` filter |
+| Custom | Override with the `mhmrentiva_vendor_directory_url_base` filter |
 
 The base is sibling to (but separate from) the Vendor Profile base — Profile is single-vendor with a slug capture group (`/vendor/{slug}/`), Directory is base-only (`/vendors/`).
 
@@ -167,16 +167,16 @@ The page title (default: `Vendors — {site name}`) and meta description (defaul
 Each unique combination of filter + sort + page is cached in a transient with a 30-minute TTL:
 
 ```
-mhm_rentiva_vendor_dir_{md5(query_args)}
+mhmrentiva_vendor_dir_{md5(query_args)}
 ```
 
 Invalidation is a **subset of the Vendor Profile invalidator** — only fields that affect directory listing trigger a flush:
 
-- `_rentiva_vendor_status` user_meta change (active ↔ suspended)
-- `_rentiva_vendor_city` user_meta change (filter dropdown + per-city result set)
-- `_rentiva_vendor_reliability_score` user_meta change (badge filter buckets)
-- `save_post_vehicle` (vehicle add/remove changes vehicle_count + city pool)
-- `mhm_rentiva_vehicle_lifecycle_changed` (active/withdrawn/paused affects inclusion)
+- `_mhmrentiva_vendor_status` user_meta change (active ↔ suspended)
+- `_mhmrentiva_vendor_city` user_meta change (filter dropdown + per-city result set)
+- `_mhmrentiva_vendor_reliability_score` user_meta change (badge filter buckets)
+- `save_post_mhmrentiva_vehicle` (vehicle add/remove changes vehicle_count + city pool)
+- `mhmrentiva_vehicle_lifecycle_changed` (active/withdrawn/paused affects inclusion)
 - `transition_comment_status` (review approval changes rating aggregate)
 - `profile_update` (display name change affects card label + alpha sort)
 
@@ -186,29 +186,29 @@ When the lifecycle status doesn't actually change, the invalidator no-ops (parit
 
 ## Developer extension points
 
-### `mhm_rentiva_vendor_directory_url_base`
+### `mhmrentiva_vendor_directory_url_base`
 
 Override the URL base segment. Useful for custom marketplace slugs.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_url_base', function ($base) {
+add_filter('mhmrentiva_vendor_directory_url_base', function ($base) {
     return 'firmalar';
 });
 ```
 
 The locale-change watcher detects the new value and flushes rewrite rules automatically.
 
-### `mhm_rentiva_vendor_directory_per_page`
+### `mhmrentiva_vendor_directory_per_page`
 
 Override the per-page cap from outside the shortcode. Lets you set a site-wide policy without editing every block/widget instance.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_per_page', function () {
+add_filter('mhmrentiva_vendor_directory_per_page', function () {
     return 24;
 });
 ```
 
-### `mhm_rentiva_vendor_directory_empty_message`
+### `mhmrentiva_vendor_directory_empty_message`
 
 Filter the "no vendors found" copy. Two contexts:
 
@@ -218,7 +218,7 @@ Filter the "no vendors found" copy. Two contexts:
 Override based on context:
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_empty_message', function ($message, $context) {
+add_filter('mhmrentiva_vendor_directory_empty_message', function ($message, $context) {
     if ($context === 'site_wide_zero') {
         return 'Henüz kayıtlı bayimiz yok. Yakında!';
     }
@@ -226,16 +226,16 @@ add_filter('mhm_rentiva_vendor_directory_empty_message', function ($message, $co
 }, 10, 2);
 ```
 
-### `mhm_rentiva_vendor_directory_page_title`
+### `mhmrentiva_vendor_directory_page_title`
 
 Override the page title (default: `Vendors — {site name}`). Returned by `VendorDirectorySeo::build_title()`. Inert when an SEO plugin is active.
 
-### `mhm_rentiva_vendor_directory_meta_description`
+### `mhmrentiva_vendor_directory_meta_description`
 
 Override the meta description. The filter receives three arguments — default copy, vendor count, vehicle count — so you can build context-aware copy.
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_meta_description',
+add_filter('mhmrentiva_vendor_directory_meta_description',
     function (string $default, int $vendor_count, int $vehicle_count): string {
         return sprintf(
             'Antalya rent-a-car marketplace — %d aktif bayi, %d araç.',
@@ -248,12 +248,12 @@ add_filter('mhm_rentiva_vendor_directory_meta_description',
 );
 ```
 
-### `mhm_rentiva_vendor_directory_seo_disable`
+### `mhmrentiva_vendor_directory_seo_disable`
 
 Global kill switch for both schema JSON-LD and title/description emission. Returns `false` by default; set to `true` to opt out entirely (typically because your theme handles directory metadata its own way).
 
 ```php
-add_filter('mhm_rentiva_vendor_directory_seo_disable', '__return_true');
+add_filter('mhmrentiva_vendor_directory_seo_disable', '__return_true');
 ```
 
 ## Two-layer Pro gate
@@ -263,7 +263,7 @@ Vendor Directory is a **Pro-only feature** — it requires the `vendor_marketpla
 1. **Dispatch-time gate** — `template_redirect` handler returns a WordPress 404 for `/{base}/` requests when `Mode::canUseVendorMarketplace()` is false. The user sees the theme's 404 page.
 2. **Render-time gate** — manual shortcode usage by Lite users (block / widget / shortcode in a page) returns an empty string. No upsell modal, no error log, no half-rendered HTML.
 
-Upgrade prompts live on `/pricing` and the existing `[mhm_rentiva_pricing_table]` shortcode.
+Upgrade prompts live on `/pricing` and the existing `[mhmrentiva_pricing_table]` shortcode.
 
 ## Empty states
 

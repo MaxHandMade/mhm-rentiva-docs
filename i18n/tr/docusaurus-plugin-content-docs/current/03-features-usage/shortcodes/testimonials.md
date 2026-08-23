@@ -27,7 +27,7 @@ Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden b
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 
 ```shortcode
-[rentiva_testimonials limit="apply_filters(mhm_rentiva/testimonials/limit"]
+[rentiva_testimonials limit="apply_filters(mhmrentiva_testimonials_limit"]
 ```
 
 Gutenberg blok editöründe **"MHM Rentiva -> Testimonials"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
@@ -38,19 +38,19 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 | Parametre | Varsayılan | Açıklama |
 | :--- | :--- | :--- |
-| `limit` | `apply_filters(mhm_rentiva/testimonials/limit` | Görüntülenecek maksimum öğe sayısı. |
-| `rating` | `apply_filters(mhm_rentiva/testimonials/rating` | Modülün **feature** davranışını kontrol eder. |
-| `vehicle_id` | `apply_filters(mhm_rentiva/testimonials/vehicle_id` | Modülün **feature** davranışını kontrol eder. |
-| `orderby` | `apply_filters(mhm_rentiva/testimonials/orderby` | Modülün **general** davranışını kontrol eder. |
-| `order` | `apply_filters(mhm_rentiva/testimonials/order` | Modülün **general** davranışını kontrol eder. |
-| `show_rating` | `apply_filters(mhm_rentiva/testimonials/show_rating` | Modülün **general** davranışını kontrol eder. |
-| `show_date` | `apply_filters(mhm_rentiva/testimonials/show_date` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_vehicle` | `apply_filters(mhm_rentiva/testimonials/show_vehicle` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_customer` | `apply_filters(mhm_rentiva/testimonials/show_customer` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `layout` | `apply_filters(mhm_rentiva/testimonials/layout` | Modülün **general** davranışını kontrol eder. |
-| `columns` | `apply_filters(mhm_rentiva/testimonials/columns` | Modülün **general** davranışını kontrol eder. |
-| `auto_rotate` | `apply_filters(mhm_rentiva/testimonials/auto_rotate` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `class` | `apply_filters(mhm_rentiva/testimonials/class` | Modülün **general** davranışını kontrol eder. |
+| `limit` | `apply_filters(mhmrentiva_testimonials_limit` | Görüntülenecek maksimum öğe sayısı. |
+| `rating` | `apply_filters(mhmrentiva_testimonials_rating` | Modülün **feature** davranışını kontrol eder. |
+| `vehicle_id` | `apply_filters(mhmrentiva_testimonials_vehicle_id` | Modülün **feature** davranışını kontrol eder. |
+| `orderby` | `apply_filters(mhmrentiva_testimonials_orderby` | Modülün **general** davranışını kontrol eder. |
+| `order` | `apply_filters(mhmrentiva_testimonials_order` | Modülün **general** davranışını kontrol eder. |
+| `show_rating` | `apply_filters(mhmrentiva_testimonials_show_rating` | Modülün **general** davranışını kontrol eder. |
+| `show_date` | `apply_filters(mhmrentiva_testimonials_show_date` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
+| `show_vehicle` | `apply_filters(mhmrentiva_testimonials_show_vehicle` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
+| `show_customer` | `apply_filters(mhmrentiva_testimonials_show_customer` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
+| `layout` | `apply_filters(mhmrentiva_testimonials_layout` | Modülün **general** davranışını kontrol eder. |
+| `columns` | `apply_filters(mhmrentiva_testimonials_columns` | Modülün **general** davranışını kontrol eder. |
+| `auto_rotate` | `apply_filters(mhmrentiva_testimonials_auto_rotate` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
+| `class` | `apply_filters(mhmrentiva_testimonials_class` | Modülün **general** davranışını kontrol eder. |
 
 
 ## Özellikler

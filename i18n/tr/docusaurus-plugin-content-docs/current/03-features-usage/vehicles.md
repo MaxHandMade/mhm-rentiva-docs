@@ -81,7 +81,7 @@ Vendor, arac ruhsat belgesini form uzerinden yukler. Admin tarafindan dogrulama 
 ### Arac Sigortasi (Vehicle Insurance Document)
 v4.23.1 ile eklenmistir. Arac ruhsatindan hemen sonra gelen bu bolum, aracin sigorta belgesinin yuklenmesini saglar.
 
-- **Meta key:** `_mhm_rentiva_vehicle_insurance_doc`
+- **Meta key:** `_mhmrentiva_vehicle_insurance_doc`
 - **Islem:** VehicleSubmit.php AJAX handler tarafindan islenir ve WordPress Media Library'de saklanir.
 - **Gecmis:** Bu alan onceden vendor basvuru formunda bulunuyordu. v4.23.1 ile her araca ozel sigorta belgesi yuklenebilmesi icin arac ekleme formuna tasindi.
 
@@ -108,7 +108,7 @@ Halihazırda rezervasyonu olan günler değişmez — popup'larını korur ve bu
 
 ## ⚡ AssetManager Admin Kapsami
 
-v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admin sayfalarında çalışır (`is_rentiva_admin_page()` guard). v4.22.1 ile `vehicle`, `vehicle_booking` ve `vehicle_addon` post type'lari da guard'a eklenmiştir. Bu sayede CSS degiskenleri (`css-variables.css`) dogru sekilde yüklenir ve KPI kartlari bozulmaz.
+v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admin sayfalarında çalışır (`is_rentiva_admin_page()` guard). v4.22.1 ile `mhmrentiva_vehicle`, `mhmrentiva_booking` ve `mhmrentiva_addon` post type'lari da guard'a eklenmiştir. Bu sayede CSS degiskenleri (`css-variables.css`) dogru sekilde yüklenir ve KPI kartlari bozulmaz.
 
 ---
 

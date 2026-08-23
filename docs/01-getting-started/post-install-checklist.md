@@ -45,7 +45,7 @@ If you encounter a technical issue, check the following:
 
 1. **Permalinks:** Visit `Settings > Permalinks` and click "Save Changes" to flush the rewrite rules (`flush_rewrite_rules`).
 2. **WooCommerce Sync:** Use `WooCommerceBridge` logs to verify that Rentiva is sending data to the WooCommerce cart.
-3. **Database Check:** You can verify active session data in the `wp_mhm_rentiva_sessions` table via phpMyAdmin.
+3. **Database Check:** You can verify active session data in the `wp_mhmrentiva_sessions` table via phpMyAdmin.
 
 ---
 

@@ -21,10 +21,10 @@ Eklenti, finansal kayıtlar ve SaaS operasyonları için WordPress'in standart t
 
 | Tablo Adı | Amaç | Kritik Alanlar |
 | :--- | :--- | :--- |
-| `wp_mhm_rentiva_ledger` | Değiştirilemez finansal defter (Immutable Ledger). | `transaction_uuid`, `amount`, `tenant_id` |
-| `wp_mhm_rentiva_commission_policy` | Komisyon politikalarının versiyonlanmış kayıtları. | `version_hash`, `global_rate`, `effective_from` |
-| `wp_mhm_rentiva_tenants` | Çoklu kiracı (Multi-tenant) kayıt ve kotaları. | `tenant_id`, `status`, `subscription_plan` |
-| `wp_mhm_rentiva_usage_metrics` | SaaS kullanım limitleri ve metrik takibi. | `metric_type`, `metric_value`, `cycle_start` |
+| `wp_mhmrentiva_ledger` | Değiştirilemez finansal defter (Immutable Ledger). | `transaction_uuid`, `amount`, `tenant_id` |
+| `wp_mhmrentiva_commission_policy` | Komisyon politikalarının versiyonlanmış kayıtları. | `version_hash`, `global_rate`, `effective_from` |
+| `wp_mhmrentiva_tenants` | Çoklu kiracı (Multi-tenant) kayıt ve kotaları. | `tenant_id`, `status`, `subscription_plan` |
+| `wp_mhmrentiva_usage_metrics` | SaaS kullanım limitleri ve metrik takibi. | `metric_type`, `metric_value`, `cycle_start` |
 
 ### 🏗️ Veri Bütünlüğü Prensipleri
 - **Immutability (Değiştirilemezlik):** `ledger` tablosundaki kayıtlar asla güncellenmez veya silinmez. Düzeltmeler yeni bir ters kayıt (offsetting entry) ile yapılır.
@@ -36,13 +36,13 @@ Eklenti, finansal kayıtlar ve SaaS operasyonları için WordPress'in standart t
 ## 🔑 Meta Key Standartları
 
 Operasyonel veriler (araç özellikleri, müşteri tercihleri vb.) WordPress meta tablolarında şu prefix kuralı ile saklanır:
-`_mhm_rentiva_[kategori]_[alan_adı]`
+`_mhmrentiva_[kategori]_[alan_adı]`
 
 | Kategori | Örnek Key |
 | :--- | :--- |
-| **Araç (Vehicle)** | `_mhm_rentiva_vehicle_license_plate` |
-| **Rezervasyon** | `_mhm_rentiva_booking_payout_status` |
-| **Müşteri** | `_mhm_rentiva_customer_banned` |
+| **Araç (Vehicle)** | `_mhmrentiva_vehicle_license_plate` |
+| **Rezervasyon** | `_mhmrentiva_booking_payout_status` |
+| **Müşteri** | `_mhmrentiva_customer_banned` |
 
 ---
 
@@ -103,13 +103,13 @@ Eklenti kaldırıldıginda asagidaki tablolar temizlenir:
 
 | Tablo | Kategori |
 |---|---|
-| `wp_mhm_rentiva_ledger` | Finans |
-| `wp_mhm_rentiva_commission_policy` | Finans |
-| `wp_mhm_rentiva_tenants` | SaaS |
-| `wp_mhm_rentiva_usage_metrics` | SaaS |
-| `wp_mhm_notification_queue` | Sistem |
-| `wp_mhm_payment_log` | Sistem |
-| `wp_mhm_sessions` | Sistem |
+| `wp_mhmrentiva_ledger` | Finans |
+| `wp_mhmrentiva_commission_policy` | Finans |
+| `wp_mhmrentiva_tenants` | SaaS |
+| `wp_mhmrentiva_usage_metrics` | SaaS |
+| `wp_mhmrentiva_notification_queue` | Sistem |
+| `wp_mhmrentiva_payment_log` | Sistem |
+| `wp_mhmrentiva_sessions` | Sistem |
 | `wp_rentiva_transfer_locations` | Transfer |
 | `wp_rentiva_transfer_routes` | Transfer |
 

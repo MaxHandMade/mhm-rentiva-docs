@@ -76,7 +76,7 @@ v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileşt
 
 ### Düzeltilen Hatalar
 - **Timezone tutarlılığı:** Geri sayım ve yaklaşan operasyon widget'larında `time()` yerine `current_time('timestamp')` kullanılarak WordPress timezone ayarına uyum sağlandı.
-- **Cache invalidation:** İstatistik widget'ı cache key prefix uyumsuzluğu düzeltildi (`mhm_dashboard_stats` → `mhm_rentiva_dashboard_stats`).
+- **Cache invalidation:** İstatistik widget'ı cache key prefix uyumsuzluğu düzeltildi (`mhmrentiva_dashboard_stats` → `mhmrentiva_dashboard_stats`).
 - **Status senkronizasyonu:** `updated_post_meta` + `added_post_meta` hook'ları eklenerek meta güncellemelerinde durum tutarlılığı sağlandı.
 - **WooCommerce email görselleri:** Rezervasyon onay e-postalarında araç görseli artık doğru şekilde gösteriliyor.
 - **Takvim popup saat bilgisi:** Rezervasyon detay popup'ında teslim alma/iade saatleri eklendi.

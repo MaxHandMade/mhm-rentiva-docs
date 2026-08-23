@@ -29,8 +29,8 @@ Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen b
 
 ### Teknik Uygulama
 - **Sınıf:** `MHMRentiva\Admin\Frontend\Shortcodes\Vendor\VendorApply`
-- **AJAX İşleyici:** `mhm_vendor_apply` eylemi üzerinden `handle_ajax()` metoduyla çalışır.
-- **Güvenlik:** Her başvuru için `wp_create_nonce('mhm_vendor_apply_nonce')` ile CSRF koruması sağlanır.
+- **AJAX İşleyici:** `mhmrentiva_vendor_apply` eylemi üzerinden `handle_ajax()` metoduyla çalışır.
+- **Güvenlik:** Her başvuru için `wp_create_nonce('mhmrentiva_vendor_apply_nonce')` ile CSRF koruması sağlanır.
 
 ### Zorunlu Alanlar
 | Alan | Meta Anahtari | Tip | Sifreleme |
@@ -78,7 +78,7 @@ Bir kullanıcı başvuru yapmadan önce `VendorApplicationManager::can_apply()` 
 
 ## 🔒 3. Veri Saklama ve Güvenlik
 
-Başvurular `mhm_vendor_app` CPT'si olarak saklanır.
+Başvurular `mhmrentiva_vendor_app` CPT'si olarak saklanır.
 
 ### IBAN Şifreleme Protokolü
 IBAN bilgileri veritabanına asla düz metin olarak yazılmaz:
@@ -98,15 +98,15 @@ return base64_encode($iv . $cipher);
 ### Onay Akisi (`Approve`)
 Admin panelinden "Approve" tiklandiginda `VendorOnboardingController::approve()` su islemleri sirasiyla yapar:
 1. **Rol Yukseltme:** Kullaniciya `rentiva_vendor` rolu atanir.
-2. **Meta Sync:** Basvuru postundaki veriler (`_vendor_*`) kullanici meta tablolarina (`_rentiva_vendor_*`) kopyalanir. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanlari da senkronize edilir.
+2. **Meta Sync:** Basvuru postundaki veriler (`_vendor_*`) kullanici meta tablolarina (`_mhmrentiva_vendor_*`) kopyalanir. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanlari da senkronize edilir.
 3. **Loglama:** Onay tarihi ve onaylayan admin ID'si kaydedilir.
-4. **Bildirim:** `mhm_rentiva_vendor_approved` kancasi tetiklenir.
+4. **Bildirim:** `mhmrentiva_vendor_approved` kancasi tetiklenir.
 
 ### Red Akışı (`Reject`)
 Admin reddettiğinde:
 1. Başvuru statüsü `trash` (çöp) durumuna alınır.
 2. `_vendor_rejection_note` içine red gerekçesi yazılır.
-3. `mhm_rentiva_vendor_rejected` kancası tetiklenir.
+3. `mhmrentiva_vendor_rejected` kancası tetiklenir.
 
 ---
 
@@ -127,7 +127,7 @@ Vendor onaylandiktan sonra `[rentiva_vehicle_submit]` formu ile araç ekleyebili
 Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari ve rotalari filtrelenir. `LocationProvider::get_by_city()` ile sehre gore sorgulama yapilir.
 
 ### Rota Basi Fiyatlandırma
-Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlanan `min_price` / `max_price` araligi zorunludur. Meta key: `_mhm_rentiva_transfer_route_prices` (JSON).
+Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlanan `min_price` / `max_price` araligi zorunludur. Meta key: `_mhmrentiva_transfer_route_prices` (JSON).
 
 ### Kapasite Alanları
 - **Yolcu kapasitesi:** Maksimum yolcu sayısı.
@@ -137,7 +137,7 @@ Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlan
 Vendor, arac ruhsat belgesini form uzerinden yukleyebilir. Bu belge admin tarafindan dogrulama icin incelenir.
 
 ### Arac Sigorta Belgesi Yukleme (v4.23.1)
-Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhm_rentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
+Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhmrentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
 
 ### Ücretli İlan Kapısı (v4.24.1)
 

@@ -21,10 +21,10 @@ For financial records and SaaS operations, the plugin bypasses WordPress's stand
 
 | Table Name | Purpose | Critical Columns |
 | :--- | :--- | :--- |
-| `wp_mhm_rentiva_ledger` | Immutable financial ledger. | `transaction_uuid`, `amount`, `tenant_id` |
-| `wp_mhm_rentiva_commission_policy` | Versioned records of commission policies. | `version_hash`, `global_rate`, `effective_from` |
-| `wp_mhm_rentiva_tenants` | Multi-tenant records and quotas. | `tenant_id`, `status`, `subscription_plan` |
-| `wp_mhm_rentiva_usage_metrics` | SaaS usage limits and metric tracking. | `metric_type`, `metric_value`, `cycle_start` |
+| `wp_mhmrentiva_ledger` | Immutable financial ledger. | `transaction_uuid`, `amount`, `tenant_id` |
+| `wp_mhmrentiva_commission_policy` | Versioned records of commission policies. | `version_hash`, `global_rate`, `effective_from` |
+| `wp_mhmrentiva_tenants` | Multi-tenant records and quotas. | `tenant_id`, `status`, `subscription_plan` |
+| `wp_mhmrentiva_usage_metrics` | SaaS usage limits and metric tracking. | `metric_type`, `metric_value`, `cycle_start` |
 
 ### 🏗️ Data Integrity Principles
 - **Immutability:** Records in the `ledger` table are never updated or deleted. Corrections are made by creating a new offsetting entry.
@@ -36,13 +36,13 @@ For financial records and SaaS operations, the plugin bypasses WordPress's stand
 ## 🔑 Meta Key Standards
 
 Operational data (vehicle attributes, customer preferences, etc.) is stored in WordPress meta tables using the following prefix convention:
-`_mhm_rentiva_[category]_[field_name]`
+`_mhmrentiva_[category]_[field_name]`
 
 | Category | Example Key |
 | :--- | :--- |
-| **Vehicle** | `_mhm_rentiva_vehicle_license_plate` |
-| **Booking** | `_mhm_rentiva_booking_payout_status` |
-| **Customer** | `_mhm_rentiva_customer_banned` |
+| **Vehicle** | `_mhmrentiva_vehicle_license_plate` |
+| **Booking** | `_mhmrentiva_booking_payout_status` |
+| **Customer** | `_mhmrentiva_customer_banned` |
 
 ---
 
@@ -103,13 +103,13 @@ The following tables are removed when the plugin is uninstalled:
 
 | Table | Category |
 |---|---|
-| `wp_mhm_rentiva_ledger` | Financial |
-| `wp_mhm_rentiva_commission_policy` | Financial |
-| `wp_mhm_rentiva_tenants` | SaaS |
-| `wp_mhm_rentiva_usage_metrics` | SaaS |
-| `wp_mhm_notification_queue` | System |
-| `wp_mhm_payment_log` | System |
-| `wp_mhm_sessions` | System |
+| `wp_mhmrentiva_ledger` | Financial |
+| `wp_mhmrentiva_commission_policy` | Financial |
+| `wp_mhmrentiva_tenants` | SaaS |
+| `wp_mhmrentiva_usage_metrics` | SaaS |
+| `wp_mhmrentiva_notification_queue` | System |
+| `wp_mhmrentiva_payment_log` | System |
+| `wp_mhmrentiva_sessions` | System |
 | `wp_rentiva_transfer_locations` | Transfer |
 | `wp_rentiva_transfer_routes` | Transfer |
 

@@ -45,7 +45,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 `PaymentSettings` is registered as a section on Rentiva's central settings page (`SettingsCore::PAGE`).
 
--   **Section ID:** `mhm_rentiva_general_payment_section`
+-   **Section ID:** `mhmrentiva_general_payment_section`
 -   **Hook:** `admin_init` (via the central `SettingsManager`).
 
 ---

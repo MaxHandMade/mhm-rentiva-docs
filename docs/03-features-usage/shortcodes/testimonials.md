@@ -27,7 +27,7 @@ A screenshot showing the frontend (visitor-facing) appearance of this module wil
 To add this module to any page or post, use the shortcode below:
 
 ```shortcode
-[rentiva_testimonials limit="apply_filters(mhm_rentiva/testimonials/limit"]
+[rentiva_testimonials limit="apply_filters(mhmrentiva_testimonials_limit"]
 ```
 
 You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Testimonials"**.
@@ -38,19 +38,19 @@ The following parameters are available inside the shortcode:
 
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `limit` | `apply_filters(mhm_rentiva/testimonials/limit` | Maximum number of items to display. |
-| `rating` | `apply_filters(mhm_rentiva/testimonials/rating` | Controls the module's **feature** filter behavior. |
-| `vehicle_id` | `apply_filters(mhm_rentiva/testimonials/vehicle_id` | Controls the module's **feature** filter behavior. |
-| `orderby` | `apply_filters(mhm_rentiva/testimonials/orderby` | Controls the module's **general** sorting behavior. |
-| `order` | `apply_filters(mhm_rentiva/testimonials/order` | Controls the module's **general** sorting direction. |
-| `show_rating` | `apply_filters(mhm_rentiva/testimonials/show_rating` | Controls the module's **general** display behavior. |
-| `show_date` | `apply_filters(mhm_rentiva/testimonials/show_date` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_vehicle` | `apply_filters(mhm_rentiva/testimonials/show_vehicle` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_customer` | `apply_filters(mhm_rentiva/testimonials/show_customer` | Visibility toggle. `1` (on) or `0` (off). |
-| `layout` | `apply_filters(mhm_rentiva/testimonials/layout` | Controls the module's **general** layout behavior. |
-| `columns` | `apply_filters(mhm_rentiva/testimonials/columns` | Controls the module's **general** layout behavior. |
-| `auto_rotate` | `apply_filters(mhm_rentiva/testimonials/auto_rotate` | Visibility toggle. `1` (on) or `0` (off). |
-| `class` | `apply_filters(mhm_rentiva/testimonials/class` | Controls the module's **general** layout behavior. |
+| `limit` | `apply_filters(mhmrentiva_testimonials_limit` | Maximum number of items to display. |
+| `rating` | `apply_filters(mhmrentiva_testimonials_rating` | Controls the module's **feature** filter behavior. |
+| `vehicle_id` | `apply_filters(mhmrentiva_testimonials_vehicle_id` | Controls the module's **feature** filter behavior. |
+| `orderby` | `apply_filters(mhmrentiva_testimonials_orderby` | Controls the module's **general** sorting behavior. |
+| `order` | `apply_filters(mhmrentiva_testimonials_order` | Controls the module's **general** sorting direction. |
+| `show_rating` | `apply_filters(mhmrentiva_testimonials_show_rating` | Controls the module's **general** display behavior. |
+| `show_date` | `apply_filters(mhmrentiva_testimonials_show_date` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_vehicle` | `apply_filters(mhmrentiva_testimonials_show_vehicle` | Visibility toggle. `1` (on) or `0` (off). |
+| `show_customer` | `apply_filters(mhmrentiva_testimonials_show_customer` | Visibility toggle. `1` (on) or `0` (off). |
+| `layout` | `apply_filters(mhmrentiva_testimonials_layout` | Controls the module's **general** layout behavior. |
+| `columns` | `apply_filters(mhmrentiva_testimonials_columns` | Controls the module's **general** layout behavior. |
+| `auto_rotate` | `apply_filters(mhmrentiva_testimonials_auto_rotate` | Visibility toggle. `1` (on) or `0` (off). |
+| `class` | `apply_filters(mhmrentiva_testimonials_class` | Controls the module's **general** layout behavior. |
 
 
 ## Features

@@ -6,20 +6,20 @@
   <text x="40" y="50" class="t">Finansal Tablolar - ER Görünümü</text>
 
   <rect x="70" y="130" width="460" height="220" class="b"/>
-  <text x="95" y="165" class="s">mhm_rentiva_ledger</text>
+  <text x="95" y="165" class="s">mhmrentiva_ledger</text>
   <text x="95" y="195" class="s">PK id, UNIQUE transaction_uuid</text>
   <text x="95" y="225" class="s">vendor_id, booking_id, order_id</text>
   <text x="95" y="255" class="s">type, amount, status, created_at</text>
   <text x="95" y="285" class="s">policy_id, policy_version_hash</text>
 
   <rect x="650" y="130" width="470" height="220" class="b"/>
-  <text x="675" y="165" class="s">mhm_rentiva_commission_policy</text>
+  <text x="675" y="165" class="s">mhmrentiva_commission_policy</text>
   <text x="675" y="195" class="s">PK id, UNIQUE version_hash</text>
   <text x="675" y="225" class="s">global_rate, vendor_id</text>
   <text x="675" y="255" class="s">effective_from, effective_to</text>
 
   <rect x="360" y="430" width="480" height="210" class="b"/>
-  <text x="390" y="465" class="s">mhm_rentiva_payout_audit</text>
+  <text x="390" y="465" class="s">mhmrentiva_payout_audit</text>
   <text x="390" y="495" class="s">PK id, payout_id, actor_user_id, action</text>
   <text x="390" y="525" class="s">tx_uuid, ip_hash, metadata_json, created_at</text>
   <text x="390" y="555" class="s">UNIQUE (payout_id, action, tx_uuid)</text>

@@ -22,7 +22,7 @@ The system provides optimization across three main layers: Object Cache, Transie
 ### WordPress Transients (Database Level)
 - **Usage:** Price calculations, complex vehicle listing queries, and vendor analytics.
 - **TTL (Lifetime):** Typically 15 minutes (`900 seconds`) for critical data.
-- **Important:** If Transients accumulate in the database without being cleared, they can cause site-wide slowdowns. Use `mhm_rentiva_flush_cache` for manual cleanup.
+- **Important:** If Transients accumulate in the database without being cleared, they can cause site-wide slowdowns. Use `mhmrentiva_flush_cache` for manual cleanup.
 
 ### Object Cache (Memory Level)
 - **Usage:** If Redis or Memcached is active, the system retrieves all object data from memory.

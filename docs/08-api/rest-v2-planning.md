@@ -26,8 +26,8 @@ All new endpoints will be grouped under the `wp-json/mhm-rentiva/v2` namespace, 
 ## 📦 2. Modular Migration Plan
 
 ### A. Financial and Ledger Module (`/v2/ledger`)
-- **GET `/v2/ledger/summary`:** Will replace the AJAX `mhm_fetch_vendor_stats` action.
-- **POST `/v2/ledger/payouts`:** Will replace the AJAX `mhm_request_payout` action.
+- **GET `/v2/ledger/summary`:** Will replace the AJAX `mhmrentiva_fetch_vendor_stats` action.
+- **POST `/v2/ledger/payouts`:** Will replace the AJAX `mhmrentiva_request_payout` action.
 - **Analysis:** This migration will result in the Vendor dashboard loading 40% faster.
 
 ### B. Booking Engine (`/v2/booking`)
@@ -35,7 +35,7 @@ All new endpoints will be grouped under the `wp-json/mhm-rentiva/v2` namespace, 
 - **POST `/v2/booking/create`:** A new endpoint that manages the WooCommerce cart process entirely via the API.
 
 ### C. Vehicles and Filtering (`/v2/vehicles`)
-- **GET `/v2/vehicles/search`:** Will replace the AJAX `mhm_rentiva_filter_results` action.
+- **GET `/v2/vehicles/search`:** Will replace the AJAX `mhmrentiva_filter_results` action.
 - **Interactivity API Integration:** This endpoint will be used directly for reactive search results.
 
 ---

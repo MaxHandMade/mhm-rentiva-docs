@@ -31,12 +31,12 @@ A vendor report is a structured message from a vendor to the platform administra
 | Context | Used for | Where the trigger lives |
 | :--- | :--- | :--- |
 | `booking` | Customer issues (no-show, damage, dispute) | "Sorun Bildir" button on each vendor booking card |
-| `vehicle` | Appeals against a paused/withdrawn vehicle | "İtiraz Et" button on listings page (paused/withdrawn states only) |
+| `mhmrentiva_vehicle` | Appeals against a paused/withdrawn vehicle | "İtiraz Et" button on listings page (paused/withdrawn states only) |
 | `vehicle_action` | Reason capture during withdraw/pause — suspends the penalty | Modal opens automatically when the vendor clicks Withdraw or Pause |
 | `penalty` | Appeal an already-applied penalty ledger entry | "Appeal" button on each row of the score history table |
 | `general` | "Yöneticiye Yaz" — direct line to admin | Footer link on every vendor panel page |
 
-All five share the same data structure (one row in `wp_mhm_rentiva_vendor_reports`) and the same admin UI. Side-effects on resolution differ per context.
+All five share the same data structure (one row in `wp_mhmrentiva_vendor_reports`) and the same admin UI. Side-effects on resolution differ per context.
 
 ---
 
@@ -63,7 +63,7 @@ With v4.35.0 the vendor can capture a reason while withdrawing:
 5. Submit → two things happen in sequence:
    - A `vehicle_action` report is created with `status=open`
    - The withdrawal AJAX is called
-6. Inside `VehicleLifecycleManager::withdraw()`, the new `mhm_rentiva_before_apply_penalty` filter runs. The `PenaltySuspensionHook` callback sees the open report and returns `false`. **Score deduction and ledger debit are skipped.**
+6. Inside `VehicleLifecycleManager::withdraw()`, the new `mhmrentiva_before_apply_penalty` filter runs. The `PenaltySuspensionHook` callback sees the open report and returns `false`. **Score deduction and ledger debit are skipped.**
 7. The vehicle still transitions to `withdrawn` (post status, lifecycle meta, cooldown date all set), but the financial penalty is suspended pending admin review.
 
 Same flow applies to pause actions.
@@ -115,7 +115,7 @@ Clicking a report opens the detail view with:
 | Context | "Mark as Resolved" | "Reject" |
 | :--- | :--- | :--- |
 | `booking` | Status update + email to vendor | Same |
-| `vehicle` | Same | Same |
+| `mhmrentiva_vehicle` | Same | Same |
 | `vehicle_action` | **No-op** — penalty was already suspended at withdrawal time, vendor keeps their score | **`apply_deferred_penalty()` runs** — `ReliabilityScoreCalculator::update()` recomputes (the withdrawal is in state, so score drops) and `PenaltyRecorder::record_penalty()` writes the deferred ledger debit |
 | `penalty` | (v4.36.0+ — ledger compensating entry helper) | No-op (penalty already applied; rejection just closes the appeal) |
 | `general` | Status update + email | Same |
@@ -128,7 +128,7 @@ Sets `status=in_review`. Penalty suspension stays active (in_review counts as "o
 
 ---
 
-## The penalty filter — `mhm_rentiva_before_apply_penalty`
+## The penalty filter — `mhmrentiva_before_apply_penalty`
 
 Two filter hook points wrap the score deduction and the ledger entry. Plugins or themes can hook this filter to introduce additional suspension reasons beyond vendor reports:
 
@@ -140,7 +140,7 @@ Two filter hook points wrap the score deduction and the ledger entry. Plugins or
  * @param string $reason     Penalty reason ('withdrawal').
  * @param float  $penalty    Pre-calculated penalty amount.
  */
-add_filter('mhm_rentiva_before_apply_penalty', function ($apply, $vehicle_id, $vendor_id, $reason, $penalty) {
+add_filter('mhmrentiva_before_apply_penalty', function ($apply, $vehicle_id, $vendor_id, $reason, $penalty) {
     if ($reason === 'withdrawal' && my_holiday_freeze_active()) {
         return false; // suspend penalties during a platform-wide freeze
     }
@@ -154,13 +154,13 @@ The plugin's own `PenaltySuspensionHook` registers at priority 10. Any filter ca
 
 ## Database
 
-New custom table `{prefix}mhm_rentiva_vendor_reports`:
+New custom table `{prefix}mhmrentiva_vendor_reports`:
 
 | Column | Type | Notes |
 | :--- | :--- | :--- |
 | `id` | BIGINT UNSIGNED AUTO_INCREMENT | Primary key |
 | `vendor_id` | BIGINT UNSIGNED | Indexed |
-| `context_type` | VARCHAR(20) | `booking` / `vehicle` / `vehicle_action` / `penalty` / `general` |
+| `context_type` | VARCHAR(20) | `booking` / `mhmrentiva_vehicle` / `vehicle_action` / `penalty` / `general` |
 | `context_id` | VARCHAR(64) | Integer ID, ledger UUID, or NULL |
 | `title` | VARCHAR(255) | |
 | `description` | LONGTEXT | Min 20 chars enforced at service layer |
@@ -196,9 +196,9 @@ To exercise this locally, activate a real license on the local site — as of 5.
 
 | Hook / Class | Purpose |
 | :--- | :--- |
-| `mhm_rentiva_before_apply_penalty` | Filter — gate the score deduction and ledger entry. 5-arg signature. |
-| `mhm_rentiva_vendor_report_created` | Action — fires after a report is persisted. Email subsystem listens. 3 args. |
-| `mhm_rentiva_vendor_report_resolved` | Action — fires after status changes to terminal. 3 args (report_id, vendor_id, new_status). |
+| `mhmrentiva_before_apply_penalty` | Filter — gate the score deduction and ledger entry. 5-arg signature. |
+| `mhmrentiva_vendor_report_created` | Action — fires after a report is persisted. Email subsystem listens. 3 args. |
+| `mhmrentiva_vendor_report_resolved` | Action — fires after status changes to terminal. 3 args (report_id, vendor_id, new_status). |
 | `VendorReportRepository` | Public API: `create()`, `find()`, `update_status()`, `find_by_vendor()`, `has_open_report_for()`, `reset_has_open_cache()` |
 | `VendorReportService` | Public API: `create_report()`, `resolve_report()`, `reject_report()` |
 

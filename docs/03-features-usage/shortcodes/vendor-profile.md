@@ -42,7 +42,7 @@ Three rendering surfaces share a single canonical renderer (Render Parity contra
 | :--- | :--- |
 | Shortcode | `[rentiva_vendor_profile]` |
 | Gutenberg block | `mhm-rentiva/vendor-profile` (titled "MHM Vendor Profile") |
-| Elementor widget | `mhm_rentiva_vendor_profile` (titled "MHM Vendor Profile") |
+| Elementor widget | `mhmrentiva_vendor_profile` (titled "MHM Vendor Profile") |
 
 The block and widget delegate to the shortcode via `do_shortcode()`. Whatever the shortcode renders, the block and widget render identically — no double codepath.
 
@@ -56,7 +56,7 @@ The base segment is translatable:
 | :--- | :--- |
 | EN (default) | `/vendor/{slug}/` |
 | TR | `/bayi/{slug}/` (`.po` translation of `_x('vendor', 'URL slug', ...)`) |
-| Custom | Override with the `mhm_rentiva_vendor_profile_url_base` filter |
+| Custom | Override with the `mhmrentiva_vendor_profile_url_base` filter |
 
 The slug is always ASCII (Latin) — `sanitize_title(remove_accents($display_name))`. Türkçe diacritics in the display name (e.g., "Akif Ötömötiv Şirketi") are folded to ASCII (`akif-otomotiv-sirketi`) so the URL is safe in every browser, e-mail client, and legacy share target.
 
@@ -84,13 +84,13 @@ The "✓ Verified Vendor" badge is fully threshold-driven. A vendor is verified 
 | Reliability score (0-100) | 80 | `vendor_badge_min_score` |
 | Completed bookings (lifetime) | 10 | `vendor_badge_min_completed_bookings` |
 
-Tune them under **MHM Rentiva → Settings → Vendor Marketplace** (or override per-vendor with the `mhm_rentiva_vendor_badge_eligibility` filter, see Developer extension points).
+Tune them under **MHM Rentiva → Settings → Vendor Marketplace** (or override per-vendor with the `mhmrentiva_vendor_badge_eligibility` filter, see Developer extension points).
 
 Vendors who haven't reached all three thresholds get a "Yeni Bayi" tag instead — positive framing for new accounts, no negative signal in either direction.
 
 ### 3. Bio, city — copied from onboarding
 
-The "About" section reads from `_rentiva_vendor_bio` (collected during onboarding). The hero "📍 City · Member YYYY" line reads from `_rentiva_vendor_city` and `_rentiva_vendor_approved_at`. Vendors can update both via their dashboard at any time — changes invalidate the 1-hour transient cache automatically.
+The "About" section reads from `_mhmrentiva_vendor_bio` (collected during onboarding). The hero "📍 City · Member YYYY" line reads from `_mhmrentiva_vendor_city` and `_mhmrentiva_vendor_approved_at`. Vendors can update both via their dashboard at any time — changes invalidate the 1-hour transient cache automatically.
 
 ## Frontend usage
 
@@ -117,7 +117,7 @@ Configured example:
     show_location="no"]
 ```
 
-When `slug` is empty AND the page is rewrite-routed, the slug is read from the `mhm_rentiva_vendor_slug` query var automatically.
+When `slug` is empty AND the page is rewrite-routed, the slug is read from the `mhmrentiva_vendor_slug` query var automatically.
 
 ### Gutenberg block
 
@@ -136,7 +136,7 @@ All 12 attributes accept the canonical snake_case form (used by the shortcode) a
 | `slug` | empty | string | Vendor slug. Empty + rewrite-routed page reads from query var. |
 | `show_badge` | `yes` | bool | Show the "✓ Verified Vendor" / "Yeni Bayi" tag in the hero. |
 | `show_rating` | `yes` | bool | Show the aggregate rating bar (★★★★½ 4.6) and review count in the hero. |
-| `show_about` | `yes` | bool | Render the About section (hidden if `_rentiva_vendor_bio` is empty). |
+| `show_about` | `yes` | bool | Render the About section (hidden if `_mhmrentiva_vendor_bio` is empty). |
 | `show_vehicles` | `yes` | bool | Render the active-vehicles grid section. |
 | `max_vehicles` | `6` | int (1-50) | Maximum vehicle cards rendered. Clamped to range. |
 | `vehicle_sort` | `rating-newest` | enum | Sort order for the vehicle grid. Currently a single mode (rating DESC, then `post_date` DESC). |
@@ -151,12 +151,12 @@ All 12 attributes accept the canonical snake_case form (used by the shortcode) a
 
 The following user_meta keys are **never** rendered on the public profile, even with extreme attribute combinations:
 
-- `_rentiva_vendor_phone` — collected for vendor onboarding, kept admin-only (anti-spam scraping).
-- `_rentiva_vendor_iban` — financial.
-- `_rentiva_vendor_account_holder` — financial.
-- `_rentiva_vendor_tax_number` — financial.
+- `_mhmrentiva_vendor_phone` — collected for vendor onboarding, kept admin-only (anti-spam scraping).
+- `_mhmrentiva_vendor_iban` — financial.
+- `_mhmrentiva_vendor_account_holder` — financial.
+- `_mhmrentiva_vendor_tax_number` — financial.
 
-The `VendorProfileProvider` class allowlists exactly the fields that feed the render array; sensitive fields are not read. The `mhm_rentiva_vendor_profile_data` filter docblock warns that injecting sensitive values via this filter would leak them to the 1-hour transient — keep filter callbacks read-only.
+The `VendorProfileProvider` class allowlists exactly the fields that feed the render array; sensitive fields are not read. The `mhmrentiva_vendor_profile_data` filter docblock warns that injecting sensitive values via this filter would leak them to the 1-hour transient — keep filter callbacks read-only.
 
 ## Schema.org `LocalBusiness` JSON-LD + SEO plugin probe
 
@@ -176,24 +176,24 @@ The Schema.org JSON-LD output also yields to the SEO plugin's canonical-tag filt
 
 ## Developer extension points
 
-### `mhm_rentiva_vendor_profile_url_base`
+### `mhmrentiva_vendor_profile_url_base`
 
 Override the URL base segment. Useful when you want a custom slug like `/dealers/` or `/firmalar/` regardless of locale.
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_url_base', function ($base) {
+add_filter('mhmrentiva_vendor_profile_url_base', function ($base) {
     return 'firmalar';
 });
 ```
 
 The locale-change watcher will detect the new value and flush rewrite rules automatically.
 
-### `mhm_rentiva_vendor_profile_data`
+### `mhmrentiva_vendor_profile_data`
 
 Filter the full render data array (identity, badge state, vehicles list, reviews aggregate, schema data) before the template runs. Use it to inject extra fields a custom template partial reads, or to redact fields per page.
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_data', function (array $data) {
+add_filter('mhmrentiva_vendor_profile_data', function (array $data) {
     $data['custom_extra_text'] = 'Member of Antalya Tourism Association';
     return $data;
 });
@@ -201,12 +201,12 @@ add_filter('mhm_rentiva_vendor_profile_data', function (array $data) {
 
 **Read-only by convention.** Injecting sensitive values here would leak them to the 1-hour transient cache.
 
-### `mhm_rentiva_vendor_badge_eligibility`
+### `mhmrentiva_vendor_badge_eligibility`
 
 Override the per-vendor badge result. Typical use: bypass thresholds for "featured" vendors, or temporarily revoke the badge for a vendor under review.
 
 ```php
-add_filter('mhm_rentiva_vendor_badge_eligibility', function (bool $eligible, int $vendor_id, array $context) {
+add_filter('mhmrentiva_vendor_badge_eligibility', function (bool $eligible, int $vendor_id, array $context) {
     if (in_array($vendor_id, get_option('featured_vendor_ids', []), true)) {
         return true;
     }
@@ -216,20 +216,20 @@ add_filter('mhm_rentiva_vendor_badge_eligibility', function (bool $eligible, int
 
 `$context` carries `age_days`, `score`, `completed_bookings`.
 
-### `mhm_rentiva_vendor_completed_bookings_count`
+### `mhmrentiva_vendor_completed_bookings_count`
 
 Override the lifetime completed-bookings count used by `VendorBadgeEligibility`. Default callback delegates to `ReliabilityScoreCalculator::count_completed_bookings()`. Replace it for a custom counting strategy (e.g., count only certain product categories).
 
-### `mhm_rentiva_vendor_profile_view_all_url`
+### `mhmrentiva_vendor_profile_view_all_url`
 
 Filter the "View all vehicles →" link target on the vehicles section. When empty, the link is hidden — useful for installations that don't have a search-results page yet.
 
-### `mhm_rentiva_vendor_profile_seo_disable`
+### `mhmrentiva_vendor_profile_seo_disable`
 
 Global kill switch for the title + meta description emission. Returns `false` by default; set to `true` to opt out entirely (typically because your theme handles vendor metadata its own way).
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_seo_disable', '__return_true');
+add_filter('mhmrentiva_vendor_profile_seo_disable', '__return_true');
 ```
 
 ## Lite vs Pro behavior
@@ -240,7 +240,7 @@ Vendor Public Profile is a **Pro-only feature** — it requires the `vendor_mark
 - Manual shortcode usage on a page returns an empty string.
 - Block and Elementor widget render nothing (delegating to the shortcode).
 
-Upgrade prompts live on `/pricing` and the existing `[mhm_rentiva_pricing_table]` shortcode.
+Upgrade prompts live on `/pricing` and the existing `[mhmrentiva_pricing_table]` shortcode.
 
 ## Empty states
 

@@ -61,11 +61,11 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik gösterir:
 
-- **Kiralama (Rental) sekmesi:** Alan zorunluluğu `mhm_rentiva_fields_required` genel ayarina bağlı olarak koşullu çalışır. Varsayılan değer `0` (zorunlu değil).
+- **Kiralama (Rental) sekmesi:** Alan zorunluluğu `mhmrentiva_fields_required` genel ayarina bağlı olarak koşullu çalışır. Varsayılan değer `0` (zorunlu değil).
 - **Transfer sekmesi:** Transfer alanları (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) her zaman zorunludur (hardcoded `required`). Transfer rota-bazli bir servis olduğu için bu alanlar bos birakilamaz.
 
 :::tip Ayar Yönetimi
-`mhm_rentiva_fields_required` değeri **MHM Rentiva > Ayarlar** üzerinden degistirilebilir. Bu ayar yalnızca kiralama sekmesini etkiler; transfer sekmesi daima zorunlu kalir.
+`mhmrentiva_fields_required` değeri **MHM Rentiva > Ayarlar** üzerinden degistirilebilir. Bu ayar yalnızca kiralama sekmesini etkiler; transfer sekmesi daima zorunlu kalir.
 :::
 
 ## Özellikler

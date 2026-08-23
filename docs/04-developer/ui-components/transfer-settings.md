@@ -25,7 +25,7 @@ This page describes the `TransferSettings` class, which defines the global behav
 
 ## 🏗️ Setting Groups and Fields
 
-The class manages the following settings in the admin panel under the `mhm_rentiva_transfer_section` ID:
+The class manages the following settings in the admin panel under the `mhmrentiva_transfer_section` ID:
 
 ### 1. Payment Behavior (Payment Type)
 Determines the payment model the customer uses when making a transfer booking:
@@ -52,7 +52,7 @@ Settings fields are registered with type safety via `SettingsHelper`:
 ```php
 SettingsHelper::select_field(
     $page_slug,
-    'mhm_transfer_deposit_type',
+    'mhmrentiva_transfer_deposit_type',
     __( 'Payment Type', 'mhm-rentiva' ),
     $options,
     $description,

@@ -27,9 +27,9 @@ This page describes the technical operation and data security rules of the `Payo
 
 ### 1. Access and Security
 The export operation runs through a standard WordPress `admin_post` hook:
-- **Endpoint:** `/wp-admin/admin-post.php?action=mhm_export_payouts`
+- **Endpoint:** `/wp-admin/admin-post.php?action=mhmrentiva_export_payouts`
 - **Capability Check:** Only users with `manage_options` (Administrator) capability can access this.
-- **Nonce Verification:** The validity of the request is verified via a **WP Nonce** keyed with `mhm_export_payouts`.
+- **Nonce Verification:** The validity of the request is verified via a **WP Nonce** keyed with `mhmrentiva_export_payouts`.
 
 ### 2. Data Format (Excel Compatibility)
 The system uses **UTF-8 with BOM (Byte Order Mark)** to ensure CSV files open correctly in Excel:
@@ -46,10 +46,10 @@ The columns in the exported file and their sources are as follows:
 | :--- | :--- | :--- |
 | `Payout ID` | `Post ID` | System-assigned unique identifier. |
 | `Vendor Name` | `WP_User` Display Name | Full name of the vendor being paid. |
-| `Amount` | `_mhm_payout_amount` | Payout amount (Decimal format). |
+| `Amount` | `_mhmrentiva_payout_amount` | Payout amount (Decimal format). |
 | `Currency` | WC Currency | WooCommerce base currency. |
 | `CPT Status` | `post_status` | WordPress-side status (Pending, Approved, etc.). |
-| `Processor Status`| `_mhm_payout_status` | Status code returned from the payment processor (n/a if pending). |
+| `Processor Status`| `_mhmrentiva_payout_status` | Status code returned from the payment processor (n/a if pending). |
 | `Requested At` | `post_date_gmt` | UTC timestamp of the request. |
 
 ---
@@ -60,7 +60,7 @@ The columns in the exported file and their sources are as follows:
 Since CSV outputs are designed for financial auditing, sensitive vendor information (IBAN, Tax ID) is not included in this export by default. This data is only accessible through the encrypted meta layer within the Payout record.
 
 ### Logging
-Every export operation is recorded in the `mhm_rentiva_payout_audit` table with an "export_triggered" action. Who downloaded data, and when, is traceable in the forensics system.
+Every export operation is recorded in the `mhmrentiva_payout_audit` table with an "export_triggered" action. Who downloaded data, and when, is traceable in the forensics system.
 
 ---
 

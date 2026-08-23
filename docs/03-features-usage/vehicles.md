@@ -81,7 +81,7 @@ The vendor uploads the vehicle registration document via the form. It is reviewe
 ### Vehicle Insurance Document
 Added in v4.23.1. This section, which appears immediately after the registration document, allows uploading the vehicle's insurance document.
 
-- **Meta key:** `_mhm_rentiva_vehicle_insurance_doc`
+- **Meta key:** `_mhmrentiva_vehicle_insurance_doc`
 - **Processing:** Handled by the `VehicleSubmit.php` AJAX handler and stored in the WordPress Media Library.
 - **History:** This field was previously in the vendor application form. In v4.23.1, it was moved to the vehicle submission form so that an insurance document can be uploaded per vehicle.
 
@@ -108,7 +108,7 @@ Days that already have a booking are unchanged — they keep their reservation p
 
 ## AssetManager Admin Scope
 
-As of v4.22.0, `AssetManager::enqueue_admin_assets()` runs only on Rentiva admin pages (guarded by `is_rentiva_admin_page()`). In v4.22.1, the `vehicle`, `vehicle_booking`, and `vehicle_addon` post types were also added to the guard. This ensures that CSS variables (`css-variables.css`) load correctly and KPI cards are not broken.
+As of v4.22.0, `AssetManager::enqueue_admin_assets()` runs only on Rentiva admin pages (guarded by `is_rentiva_admin_page()`). In v4.22.1, the `mhmrentiva_vehicle`, `mhmrentiva_booking`, and `mhmrentiva_addon` post types were also added to the guard. This ensures that CSS variables (`css-variables.css`) load correctly and KPI cards are not broken.
 
 ---
 

@@ -42,7 +42,7 @@ Pazaryeri için bir **dönüşüm yüzeyi**, admin paneli değil. Bayi başvuru 
 | :--- | :--- |
 | Kısa kod | `[rentiva_vendor_profile]` |
 | Gutenberg bloğu | `mhm-rentiva/vendor-profile` ("MHM Vendor Profile") |
-| Elementor widget'ı | `mhm_rentiva_vendor_profile` ("MHM Vendor Profile") |
+| Elementor widget'ı | `mhmrentiva_vendor_profile` ("MHM Vendor Profile") |
 
 Blok ve widget kısa koda `do_shortcode()` ile delege eder. Kısa kod ne render ediyorsa, blok ve widget aynı şeyi render eder — çift kod yolu yok.
 
@@ -56,7 +56,7 @@ Base segment çevrilebilirdir:
 | :--- | :--- |
 | EN (varsayılan) | `/vendor/{slug}/` |
 | TR | `/bayi/{slug}/` (`_x('vendor', 'URL slug', ...)` `.po` çevirisi) |
-| Özel | `mhm_rentiva_vendor_profile_url_base` filtresi ile override |
+| Özel | `mhmrentiva_vendor_profile_url_base` filtresi ile override |
 
 Slug daima ASCII (Latin) — `sanitize_title(remove_accents($display_name))`. Display name'deki Türkçe diakritikler (örn. "Akif Ötömötiv Şirketi") ASCII'ye katlanır (`akif-otomotiv-sirketi`); URL her tarayıcı, e-posta istemcisi ve eski paylaşım hedefi için güvenli kalır.
 
@@ -84,13 +84,13 @@ Save yolu [v4.38.1](/blog/rentiva-v4.38.1-release)'den itibaren `VendorSlugManag
 | Güvenilirlik puanı (0-100) | 80 | `vendor_badge_min_score` |
 | Tamamlanan rezervasyon (toplam) | 10 | `vendor_badge_min_completed_bookings` |
 
-Eşikleri **MHM Rentiva → Ayarlar → Bayi Pazaryeri** altından ayarla (veya `mhm_rentiva_vendor_badge_eligibility` filtresi ile bayi-bazlı override et — Geliştirici uzantı noktalarına bak).
+Eşikleri **MHM Rentiva → Ayarlar → Bayi Pazaryeri** altından ayarla (veya `mhmrentiva_vendor_badge_eligibility` filtresi ile bayi-bazlı override et — Geliştirici uzantı noktalarına bak).
 
 Üç eşiği henüz tutturmamış bayiler "Yeni Bayi" etiketini görür — yeni hesaplara olumlu çerçeveleme; iki yönde de olumsuz sinyal yok.
 
 ### 3. Bio, şehir — onboarding'den taşınır
 
-"Hakkında" bölümü `_rentiva_vendor_bio`'dan (onboarding sırasında toplanır) okur. Hero "📍 Şehir · Üye YYYY" satırı `_rentiva_vendor_city` ve `_rentiva_vendor_approved_at`'tan okur. Bayiler ikisini de panelden istedikleri zaman güncelleyebilir — değişiklikler 1 saatlik transient cache'ini otomatik invalidate eder.
+"Hakkında" bölümü `_mhmrentiva_vendor_bio`'dan (onboarding sırasında toplanır) okur. Hero "📍 Şehir · Üye YYYY" satırı `_mhmrentiva_vendor_city` ve `_mhmrentiva_vendor_approved_at`'tan okur. Bayiler ikisini de panelden istedikleri zaman güncelleyebilir — değişiklikler 1 saatlik transient cache'ini otomatik invalidate eder.
 
 ## Frontend kullanım
 
@@ -117,7 +117,7 @@ Yapılandırılmış örnek:
     show_location="no"]
 ```
 
-`slug` boş ve sayfa rewrite-routed ise slug otomatik olarak `mhm_rentiva_vendor_slug` query var'ından okunur.
+`slug` boş ve sayfa rewrite-routed ise slug otomatik olarak `mhmrentiva_vendor_slug` query var'ından okunur.
 
 ### Gutenberg bloğu
 
@@ -136,7 +136,7 @@ Yapılandırılmış örnek:
 | `slug` | boş | string | Bayi slug'ı. Boş + rewrite-routed sayfa query var'dan okur. |
 | `show_badge` | `yes` | bool | Hero'da "✓ Doğrulanmış Bayi" / "Yeni Bayi" etiketini göster. |
 | `show_rating` | `yes` | bool | Hero'da agregat puan barı (★★★★½ 4.6) ve yorum sayısını göster. |
-| `show_about` | `yes` | bool | Hakkında bölümünü render et (`_rentiva_vendor_bio` boşsa gizli). |
+| `show_about` | `yes` | bool | Hakkında bölümünü render et (`_mhmrentiva_vendor_bio` boşsa gizli). |
 | `show_vehicles` | `yes` | bool | Aktif araç grid bölümünü render et. |
 | `max_vehicles` | `6` | int (1-50) | Maksimum araç kartı. Aralığa clamp'lenir. |
 | `vehicle_sort` | `rating-newest` | enum | Araç grid sıralaması. Şu anda tek mod (rating DESC, sonra `post_date` DESC). |
@@ -151,12 +151,12 @@ Yapılandırılmış örnek:
 
 Aşağıdaki user_meta anahtarları, en uç attribute kombinasyonlarında bile public profilde **asla** render edilmez:
 
-- `_rentiva_vendor_phone` — bayi onboarding'de toplanır, admin-only kalır (anti-spam scraping).
-- `_rentiva_vendor_iban` — finansal.
-- `_rentiva_vendor_account_holder` — finansal.
-- `_rentiva_vendor_tax_number` — finansal.
+- `_mhmrentiva_vendor_phone` — bayi onboarding'de toplanır, admin-only kalır (anti-spam scraping).
+- `_mhmrentiva_vendor_iban` — finansal.
+- `_mhmrentiva_vendor_account_holder` — finansal.
+- `_mhmrentiva_vendor_tax_number` — finansal.
 
-`VendorProfileProvider` sınıfı render array'ini besleyen alanları tam olarak allowlist'ler; hassas alanlar hiç okunmaz. `mhm_rentiva_vendor_profile_data` filtre DocBlock'u, hassas değerleri bu filtre üzerinden enjekte etmenin 1 saatlik transient'a sızdıracağı uyarısını taşır — filter callback'lerini salt-okunur tut.
+`VendorProfileProvider` sınıfı render array'ini besleyen alanları tam olarak allowlist'ler; hassas alanlar hiç okunmaz. `mhmrentiva_vendor_profile_data` filtre DocBlock'u, hassas değerleri bu filtre üzerinden enjekte etmenin 1 saatlik transient'a sızdıracağı uyarısını taşır — filter callback'lerini salt-okunur tut.
 
 ## Schema.org `LocalBusiness` JSON-LD + SEO eklenti probe'u
 
@@ -176,24 +176,24 @@ Schema.org JSON-LD çıktısı SEO eklentisinin canonical-tag filtresine de yol 
 
 ## Geliştirici uzantı noktaları
 
-### `mhm_rentiva_vendor_profile_url_base`
+### `mhmrentiva_vendor_profile_url_base`
 
 URL base segment'ini override et. Locale fark etmeksizin `/dealers/` veya `/firmalar/` gibi özel slug istediğinde işe yarar.
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_url_base', function ($base) {
+add_filter('mhmrentiva_vendor_profile_url_base', function ($base) {
     return 'firmalar';
 });
 ```
 
 Locale değişim takipçisi yeni değeri otomatik algılar ve rewrite kurallarını flush eder.
 
-### `mhm_rentiva_vendor_profile_data`
+### `mhmrentiva_vendor_profile_data`
 
 Tam render data array'ini (kimlik, rozet durumu, araç listesi, yorum agregatı, schema verisi) şablon çalışmadan önce filtrele. Özel template partial'ının okuyacağı ek alanlar enjekte etmek veya sayfa-bazında alan redact etmek için kullan.
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_data', function (array $data) {
+add_filter('mhmrentiva_vendor_profile_data', function (array $data) {
     $data['custom_extra_text'] = 'Antalya Turizm Derneği üyesi';
     return $data;
 });
@@ -201,12 +201,12 @@ add_filter('mhm_rentiva_vendor_profile_data', function (array $data) {
 
 **Konvansiyonel olarak salt-okunur.** Burada hassas değer enjekte etmek 1 saatlik transient cache'e sızdırır.
 
-### `mhm_rentiva_vendor_badge_eligibility`
+### `mhmrentiva_vendor_badge_eligibility`
 
 Bayi-bazlı rozet sonucunu override et. Tipik kullanım: "öne çıkan" bayiler için eşikleri bypass et veya inceleme altındaki bir bayiden rozeti geçici olarak çek.
 
 ```php
-add_filter('mhm_rentiva_vendor_badge_eligibility', function (bool $eligible, int $vendor_id, array $context) {
+add_filter('mhmrentiva_vendor_badge_eligibility', function (bool $eligible, int $vendor_id, array $context) {
     if (in_array($vendor_id, get_option('featured_vendor_ids', []), true)) {
         return true;
     }
@@ -216,20 +216,20 @@ add_filter('mhm_rentiva_vendor_badge_eligibility', function (bool $eligible, int
 
 `$context` `age_days`, `score`, `completed_bookings` taşır.
 
-### `mhm_rentiva_vendor_completed_bookings_count`
+### `mhmrentiva_vendor_completed_bookings_count`
 
 `VendorBadgeEligibility`'nin kullandığı toplam tamamlanan rezervasyon sayısını override et. Varsayılan callback `ReliabilityScoreCalculator::count_completed_bookings()`'a delege eder. Özel sayım stratejisi (örn. yalnızca belirli ürün kategorilerini sayma) için değiştir.
 
-### `mhm_rentiva_vendor_profile_view_all_url`
+### `mhmrentiva_vendor_profile_view_all_url`
 
 Araçlar bölümündeki "Tüm araçları görüntüle →" link hedefini filtrele. Boş döndürülürse link gizlenir — search-results sayfası olmayan kurulumlar için kullanışlı.
 
-### `mhm_rentiva_vendor_profile_seo_disable`
+### `mhmrentiva_vendor_profile_seo_disable`
 
 Title + meta description emisyonu için global kill switch. Varsayılan `false`; tamamen opt-out etmek için `true` döndür (genellikle tema bayi metadata'sını kendi yöntemiyle yönetiyorsa).
 
 ```php
-add_filter('mhm_rentiva_vendor_profile_seo_disable', '__return_true');
+add_filter('mhmrentiva_vendor_profile_seo_disable', '__return_true');
 ```
 
 ## Lite vs Pro davranışı
@@ -240,7 +240,7 @@ Bayi Profil Sayfası **Pro-yalnız bir özelliktir** — `vendor_marketplace` fl
 - Bir sayfada manuel kısa kod kullanımı boş string döndürür.
 - Blok ve Elementor widget'ı boş render eder (kısa koda delege ettiklerinden).
 
-Yükseltme istemleri `/pricing` ve mevcut `[mhm_rentiva_pricing_table]` kısa kodunda yer alır.
+Yükseltme istemleri `/pricing` ve mevcut `[mhmrentiva_pricing_table]` kısa kodunda yer alır.
 
 ## Boş durumlar
 

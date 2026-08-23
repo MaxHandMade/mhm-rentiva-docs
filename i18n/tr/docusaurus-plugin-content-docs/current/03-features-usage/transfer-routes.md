@@ -47,7 +47,7 @@ Rotanın kiralama bedeli müşteri taleplerine göre dinamik değişir:
 - **Admin** rota oluştururken `base_price` ve `max_price` değerlerini tanımlar.
 - **Vendor** araç ekleme formunda, hizmet verdiği rotalar için bu aralıkta fiyat girer.
 - **Arama motoru** rota bazlı filtreleme yaparken vendor fiyatını kullanır; vendor fiyatı yoksa rotanın `base_price` değerine düşer (fallback).
-- Vendor fiyatları `_mhm_rentiva_transfer_route_prices` meta key'inde JSON olarak saklanır.
+- Vendor fiyatları `_mhmrentiva_transfer_route_prices` meta key'inde JSON olarak saklanır.
 
 ---
 

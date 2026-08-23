@@ -47,7 +47,7 @@ sidebar_position: 30
 ### "Double-Spending" (Mükerrer Ödeme) Denemeleri
 - **Durum:** Bir ödeme talebi (Payout) onaylanmış görünüyor ama bakiye düşmemiş.
 - **Neden:** `AtomicPayoutService` transaction kilidine takılmış olabilir.
-- **Çözüm:** `mhm_rentiva_ledger` tablosunda ilgili `UUID` ile bir kayıt olup olmadığını SQL üzerinden doğrulayın.
+- **Çözüm:** `mhmrentiva_ledger` tablosunda ilgili `UUID` ile bir kayıt olup olmadığını SQL üzerinden doğrulayın.
 
 ### Commission Credit Oluşmuyor?
 - **Neden:** Komisyon motoru (`CommissionEngine`), rezervasyonu sadece `completed` (Seyahat Bitti) statüsünde işler.

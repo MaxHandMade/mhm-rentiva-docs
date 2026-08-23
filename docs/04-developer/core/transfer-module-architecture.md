@@ -63,25 +63,25 @@ sequenceDiagram
 Transfer prices are calculated based on the rules in the `wp_rentiva_transfer_routes` table:
 - **Fixed:** The defined `base_price` is applied directly.
 - **Distance:** The formula `base_price * distance_km` is used. Optionally, a `min_price` floor can be added.
-- **Multiplier:** A per-vehicle multiplier (`_mhm_transfer_price_multiplier`) allows automatic price increases for VIP vehicles.
+- **Multiplier:** A per-vehicle multiplier (`_mhmrentiva_transfer_price_multiplier`) allows automatic price increases for VIP vehicles.
 
 ### 1a. Vendor Pricing (v4.23.0)
 Pricing works as follows in the vendor marketplace integration:
 - The admin sets a `min_price` and `max_price` range for each route.
-- The vendor assigns a route-based price to their own vehicle (`_mhm_rentiva_transfer_route_prices` JSON meta).
+- The vendor assigns a route-based price to their own vehicle (`_mhmrentiva_transfer_route_prices` JSON meta).
 - `TransferSearchEngine` checks the vendor price first; if absent, it falls back to the route `base_price`.
 - If the vendor price is outside the admin's range, it is considered invalid.
 
 ### 2. Luggage Score Calculation
 The system calculates a vehicle's luggage capacity using the following mathematical model:
 `Luggage Score = (Small Bags * 1) + (Large Bags * 2.5)`
-During search, if the requested luggage load exceeds the vehicle's `_mhm_transfer_max_luggage_score` value, the vehicle is excluded.
+During search, if the requested luggage load exceeds the vehicle's `_mhmrentiva_transfer_max_luggage_score` value, the vehicle is excluded.
 
 ---
 
 ## 🛡️ Critical Hooks and Actions
 
-- **AJAX Search:** `mhm_rentiva_transfer_search_results` — Returns search results.
+- **AJAX Search:** `mhmrentiva_transfer_search_results` — Returns search results.
 - **Add to Cart:** `rentiva_transfer_add_to_cart` — Sends transfer data with meta fields to the cart.
 - **Order Creation:** `woocommerce_checkout_create_order_line_item` — Converts route details into a permanent order record.
 
@@ -100,9 +100,9 @@ The Transfer module uses the following meta keys:
 
 | Meta Key | Type | Description |
 |---|---|---|
-| `_mhm_rentiva_transfer_locations` | array | Location IDs the vehicle serves |
-| `_mhm_rentiva_transfer_routes` | array | Route IDs the vehicle serves |
-| `_mhm_rentiva_transfer_route_prices` | JSON | Route-based vendor prices (`{route_id: price}`) |
+| `_mhmrentiva_transfer_locations` | array | Location IDs the vehicle serves |
+| `_mhmrentiva_transfer_routes` | array | Route IDs the vehicle serves |
+| `_mhmrentiva_transfer_route_prices` | JSON | Route-based vendor prices (`{route_id: price}`) |
 
 ---
 

@@ -59,7 +59,7 @@ Sistem e-postaları (`Mailer::send`), varsayılan WordPress `wp_mail()` fonksiyo
 ## 🛠️ 4. Test Modu ve Debugging
 
 ### E-posta Test Modu
-- **Kontrol:** `mhm_rentiva_email_test_mode` ayarı açıksa, e-postalar gerçek alıcılara gitmek yerine sadece `AdvancedLogger`'a kaydedilir.
+- **Kontrol:** `mhmrentiva_email_test_mode` ayarı açıksa, e-postalar gerçek alıcılara gitmek yerine sadece `AdvancedLogger`'a kaydedilir.
 - **Çözüm:** Canlıya alırken test modunun kapalı olduğundan emin olun.
 
 ### Şablon Hataları

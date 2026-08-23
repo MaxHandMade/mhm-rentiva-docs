@@ -10,6 +10,10 @@ Rentiva (ve Currency Switcher) Pro lisans katmanını kaynak-düzenleme bypass s
 
 <!--truncate-->
 
+:::info 6.0.0 öncesinde yazıldı
+Bu yazı, **6.0.0'dan önce** çıkmış bir sürümün kaydıdır; 6.0.0 eklentinin içerik tiplerini, taksonomilerini, ayarlarını, meta anahtarlarını ve hook'larını yeniden adlandırdı. Aşağıdaki tanımlayıcılar o sürümlerin gerçekten kullandığı adlardır ve bilerek öyle bırakılmıştır. Güncel adlar ve dönüşüm tablosu için [6.0.7 sürüm yazısına](./2026-08-23-rentiva-v6.0.7-release.md) bakın.
+:::
+
 ## Bu sprint neden gerçekleşti
 
 Rentiva eklentisi kaynak kodu **public GitHub repository'sinde** yayınlanıyor. Motive bir saldırgan kodu klonlayıp `Mode::canUseVendorMarketplace()`'i `return true;` olarak yamalayabilir ve lisans sunucusunu hiç çağırmadan Pro özellikleri açabilir. v1.8.0 *çapraz ürün* anahtar yeniden kullanımını (Currency Switcher anahtarı Rentiva'da) kapattı, ancak kaynak-düzenleme bypass'a karşı hiçbir şey yapmadı. **v4.30.x maliyeti yükseltir: bir crack artık HMAC imzası taklit etmek, sahte bir doğrulayıcı barındırmak VE sürekli yeni feature token'lar yaymak zorunda — ve yine de token'lar 24 saat içinde sona erer.**

@@ -45,7 +45,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 `PaymentSettings`, Rentiva'nın merkezi ayar sayfasında (`SettingsCore::PAGE`) bir bölüm (Section) olarak kaydedilir.
 
--   **Section ID:** `mhm_rentiva_general_payment_section`
+-   **Section ID:** `mhmrentiva_general_payment_section`
 -   **Hook:** `admin_init` (Merkezi `SettingsManager` üzerinden).
 
 ---

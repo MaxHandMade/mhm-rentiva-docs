@@ -37,14 +37,14 @@ Every approved vendor is assigned this role, which comes with the following capa
 
 ### 🛡️ Ownership Enforcement (`VendorOwnershipEnforcer`)
 The `user_has_cap` filter is used to prevent vendors from accessing each other's vehicles or bookings:
-- A vendor can only edit `vehicle` records where the `post_author` value matches their own `user_id`.
+- A vendor can only edit `mhmrentiva_vehicle` records where the `post_author` value matches their own `user_id`.
 - The "All Vehicles" list in the admin portal is filtered to show only the vendor's own records.
 
 ---
 
-## 📋 2. Application Management (`mhm_vendor_app`)
+## 📋 2. Application Management (`mhmrentiva_vendor_app`)
 
-Vendor applicant data is stored within the `mhm_vendor_app` Custom Post Type (CPT):
+Vendor applicant data is stored within the `mhmrentiva_vendor_app` Custom Post Type (CPT):
 - **Onboarding Flow:** `Pending` → `Approved` / `Rejected`.
 - **Data Security:** IBAN data collected during application is encrypted using `VendorApplicationManager::encrypt_iban()` with the **AES-256-CBC** method.
 - **Document Tracking:** Identity, driver's license, and proof of address documents are associated with the WordPress Media Library under `_vendor_doc_*` meta keys.
@@ -55,9 +55,9 @@ Vendor applicant data is stored within the `mhm_vendor_app` Custom Post Type (CP
 
 ### Approval & Meta Synchronization (`VendorOnboardingController`)
 When an admin approves an application:
-1. Phone, city, and IBAN data from the `mhm_vendor_app` record are copied to the user's (WP_User) meta tables.
+1. Phone, city, and IBAN data from the `mhmrentiva_vendor_app` record are copied to the user's (WP_User) meta tables.
 2. The user's role is upgraded from `customer` to `rentiva_vendor`.
-3. The `mhm_rentiva_vendor_approved` hook is triggered and a welcome email is sent.
+3. The `mhmrentiva_vendor_approved` hook is triggered and a welcome email is sent.
 
 ### Profile Management (`VendorProfileExtension`)
 The WordPress profile page (`wp-admin/profile.php`) is extended with vendor-specific fields:
@@ -105,9 +105,9 @@ On the vendor vehicle submission form (`[rentiva_vehicle_submit]`), only **locat
 - Capacity details (passengers, luggage) are defined at the vehicle level.
 
 ### Meta Structure
-- `_mhm_rentiva_transfer_locations`: Locations the vendor serves (array)
-- `_mhm_rentiva_transfer_routes`: Routes the vendor serves (array)
-- `_mhm_rentiva_transfer_route_prices`: Per-route vendor prices (JSON)
+- `_mhmrentiva_transfer_locations`: Locations the vendor serves (array)
+- `_mhmrentiva_transfer_routes`: Routes the vendor serves (array)
+- `_mhmrentiva_transfer_route_prices`: Per-route vendor prices (JSON)
 
 ### Admin View
 On the vehicle edit screen (`VehicleTransferMetaBox`), the vendor's city and their selected locations/routes are displayed.
@@ -182,7 +182,7 @@ graph TD
 - **SKU:** `mhm-rentiva-listing-fee`
 - **Visibility:** Hidden in the store (not shown in shop/search results)
 - **Price:** Dynamically read from admin settings
-- **Cart meta:** `_mhm_listing_vehicle_id`, `_mhm_listing_action` (new/renew/relist)
+- **Cart meta:** `_mhmrentiva_listing_vehicle_id`, `_mhmrentiva_listing_action` (new/renew/relist)
 - **Auto-creation:** Automatically created when the feature is first enabled
 
 ### Grandfather Rule
@@ -276,7 +276,7 @@ The audit log is append-only — entries are never deleted or modified. Use it t
 
 | Issue | Detail | Status |
 |-------|-------|-------|
-| Vehicle status filter | `_mhm_vehicle_status` is not checked in search queries — vehicles in maintenance are visible. | Discovered |
+| Vehicle status filter | `_mhmrentiva_vehicle_status` is not checked in search queries — vehicles in maintenance are visible. | Discovered |
 | Vendor suspension | `VendorOnboardingController::suspend()` does not unpublish vendor vehicles. | Discovered |
 
 ---

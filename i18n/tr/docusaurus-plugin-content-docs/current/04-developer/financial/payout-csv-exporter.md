@@ -27,9 +27,9 @@ Bu sayfa, finansal ödeme kayıtlarının toplu olarak dışa aktarılmasını s
 
 ### 1. Erişim ve Güvenlik
 Dışa aktarma işlemi standart bir WordPress `admin_post` kancası üzerinden yürütülür:
-- **Endpoint:** `/wp-admin/admin-post.php?action=mhm_export_payouts`
+- **Endpoint:** `/wp-admin/admin-post.php?action=mhmrentiva_export_payouts`
 - **Yetki Kontrolü:** Sadece `manage_options` (Yönetici) yetkisine sahip kullanıcılar erişebilir.
-- **Nonce Doğrulama:** İşlemin geçerliliği `mhm_export_payouts` anahtarlı bir **WP Nonce** üzerinden doğrulanır.
+- **Nonce Doğrulama:** İşlemin geçerliliği `mhmrentiva_export_payouts` anahtarlı bir **WP Nonce** üzerinden doğrulanır.
 
 ### 2. Veri Formatı (Excel Uyumluluğu)
 Sistem, CSV dosyalarının özellikle Excel'de düzgün açılabilmesi için **UTF-8 with BOM (Byte Order Mark)** kullanır:
@@ -46,10 +46,10 @@ Dışa aktarılan dosyadaki kolonlar ve kaynakları aşağıdaki gibidir:
 | :--- | :--- | :--- |
 | `Payout ID` | `Post ID` | Sistemsel benzersiz kimlik. |
 | `Vendor Name` | `WP_User` Display Name | Ödemenin yapıldığı satıcının tam adı. |
-| `Amount` | `_mhm_payout_amount` | Ödeme tutarı (Decimal format). |
+| `Amount` | `_mhmrentiva_payout_amount` | Ödeme tutarı (Decimal format). |
 | `Currency` | WC Currency | WooCommerce baz para birimi. |
 | `CPT Status` | `post_status` | WordPress tarafındaki durum (Pending, Approved vb.). |
-| `Processor Status`| `_mhm_payout_status` | Ödeme sağlayıcısından dönen statü kodu (n/a ise bekliyor). |
+| `Processor Status`| `_mhmrentiva_payout_status` | Ödeme sağlayıcısından dönen statü kodu (n/a ise bekliyor). |
 | `Requested At` | `post_date_gmt` | Talebin UTC zaman damgası. |
 
 ---
@@ -60,7 +60,7 @@ Dışa aktarılan dosyadaki kolonlar ve kaynakları aşağıdaki gibidir:
 CSV çıktıları finansal denetim için tasarlandığından, satıcıların hassas bilgileri (IBAN, Vergi No) varsayılan olarak bu exportta yer almaz. Bu verilere sadece `Payout` dökümü içindeki şifreli meta katmanından erişilebilir.
 
 ### Loglama
-Her dışa aktarma (Export) işlemi, `mhm_rentiva_payout_audit` tablosuna "export_triggered" aksiyonu ile kaydedilir. Kimin, ne zaman veri indirdiği forensics sisteminde izlenebilir.
+Her dışa aktarma (Export) işlemi, `mhmrentiva_payout_audit` tablosuna "export_triggered" aksiyonu ile kaydedilir. Kimin, ne zaman veri indirdiği forensics sisteminde izlenebilir.
 
 ---
 

@@ -61,11 +61,11 @@ The following parameters are available inside the shortcode:
 
 Field requirement behavior in the search form differs by tab:
 
-- **Rental tab:** Field requirements are conditional, based on the `mhm_rentiva_fields_required` global setting. Default value is `0` (not required).
+- **Rental tab:** Field requirements are conditional, based on the `mhmrentiva_fields_required` global setting. Default value is `0` (not required).
 - **Transfer tab:** Transfer fields (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) are always required (hardcoded `required`). Because transfer is a route-based service, these fields cannot be left empty.
 
 :::tip Settings Management
-The `mhm_rentiva_fields_required` value can be changed via **MHM Rentiva > Settings**. This setting only affects the rental tab; the transfer tab is always required.
+The `mhmrentiva_fields_required` value can be changed via **MHM Rentiva > Settings**. This setting only affects the rental tab; the transfer tab is always required.
 :::
 
 ## Features

@@ -74,7 +74,7 @@ Bir finansal kayıt deftere işlendiği anda, `MetricCacheManager` tetiklenerek 
 | `order_id` | `parent_id` / `source_id` | Kaynağın WC siparişi olduğunu belirtir. |
 | `order_total` | `gross_amount` | Vergi dahil toplam tutar. |
 | `currency` | `currency` | Siparişin para birimi. |
-| `_mhm_booking_id` | `reference_id` | Rentiva rezervasyon referansı. |
+| `_mhmrentiva_booking_id` | `reference_id` | Rentiva rezervasyon referansı. |
 
 ## Bölüm Sonu Özeti
 - `CommissionBridge`, WooCommerce olaylarını finansal "Transaction" yapılarına dönüştürür.

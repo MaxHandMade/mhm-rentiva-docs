@@ -25,7 +25,7 @@ Bu sayfa, transfer modülünün global davranışını (Ödeme kuralları, depoz
 
 ## 🏗️ Ayar Grupları ve Sahalar
 
-Sınıf, admin panelinde `mhm_rentiva_transfer_section` ID'si ile aşağıdaki ayarları yönetir:
+Sınıf, admin panelinde `mhmrentiva_transfer_section` ID'si ile aşağıdaki ayarları yönetir:
 
 ### 1. Ödeme Davranışı (Payment Type)
 Müşterinin transfer rezervasyonu sırasında yapacağı ödeme modelini belirler:
@@ -52,7 +52,7 @@ Ayar sahaları `SettingsHelper` üzerinden tip güvenliği ile kaydedilir:
 ```php
 SettingsHelper::select_field(
     $page_slug,
-    'mhm_transfer_deposit_type',
+    'mhmrentiva_transfer_deposit_type',
     __( 'Payment Type', 'mhm-rentiva' ),
     $options,
     $description,

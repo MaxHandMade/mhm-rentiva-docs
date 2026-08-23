@@ -22,7 +22,7 @@ Sistem; Object Cache, Transients ve Page Cache olmak üzere üç ana katmanda op
 ### WordPress Transients (Veritabanı Seviyesi)
 - **Kullanım:** Fiyat hesaplamaları, karmaşık araç listeleme sorguları ve tedarikçi analizleri.
 - ** TTL (Ömür):** Kritik veriler için genellikle 15 dakika (`900 saniye`).
-- **Önemli:** Eğer Transients veritabanında aşırı birikir ve temizlenmezse, site genelinde yavaşlamaya neden olabilir. `mhm_rentiva_flush_cache` fonksiyonuyla manuel temizlenebilir.
+- **Önemli:** Eğer Transients veritabanında aşırı birikir ve temizlenmezse, site genelinde yavaşlamaya neden olabilir. `mhmrentiva_flush_cache` fonksiyonuyla manuel temizlenebilir.
 
 ### Object Cache (Bellek Seviyesi)
 - **Kullanım:** Redis veya Memcached aktifse, sistem tüm nesne (Object) verilerini bellek üzerinden çeker.

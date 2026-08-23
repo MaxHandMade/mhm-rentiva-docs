@@ -23,10 +23,10 @@ The primary channel used for Vendor dashboard and front-end form interactions.
 
 | Hook (Action) | Responsible Controller | Function |
 | :--- | :--- | :--- |
-| `mhm_fetch_vendor_stats` | `AnalyticsController` | Fetches dashboard KPI and Sparkline data. |
-| `mhm_request_payout` | `PayoutAjaxController` | Initiates payout requests atomically. |
-| `mhm_rentiva_filter_results` | `SearchResults` | Filters the vehicle list without a page reload. |
-| `mhm_approve_iban` | `VendorOnboardingController` | Approves IBAN changes from the admin panel. |
+| `mhmrentiva_fetch_vendor_stats` | `AnalyticsController` | Fetches dashboard KPI and Sparkline data. |
+| `mhmrentiva_request_payout` | `PayoutAjaxController` | Initiates payout requests atomically. |
+| `mhmrentiva_filter_results` | `SearchResults` | Filters the vehicle list without a page reload. |
+| `mhmrentiva_approve_iban` | `VendorOnboardingController` | Approves IBAN changes from the admin panel. |
 
 ---
 

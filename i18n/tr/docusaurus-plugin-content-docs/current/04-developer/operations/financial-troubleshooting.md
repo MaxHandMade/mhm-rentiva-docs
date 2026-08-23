@@ -33,7 +33,7 @@ Finansal hatalar genellikle ağ kesintileri, yetki eksiklikleri veya veri tutars
 
 ### 1. Beklenen Bakiye Yanlış (Balance Mismatch)
 Eğer satıcının paneli ile Ledger tabloları uyuşmuyorsa:
-- **Teşhis:** `mhm_rentiva_ledger` tablosunda `source_type` filtresiyle arama yapın.
+- **Teşhis:** `mhmrentiva_ledger` tablosunda `source_type` filtresiyle arama yapın.
 - **Çözüm:** `Ledger::calculate_net_balance()` metodunu asenkron olarak tetikleyerek veritabanı toplamını zorlayın.
 
 ### 2. Payout "Approved" Kalıyor (No Callback)

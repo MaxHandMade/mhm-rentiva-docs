@@ -57,9 +57,9 @@ You can monitor the row count and disk size of plugin-specific tables such as `p
 When the plugin is completely removed (deleted), all custom tables it created are also cleaned up. As of v4.22.1, the tables cleaned by the uninstaller are:
 
 - Core tables: `mhm_vehicles`, `mhm_bookings`, `mhm_customers`, `mhm_addons`, etc.
-- Notification queue: `mhm_notification_queue`
-- Payment records: `mhm_payment_log`
-- Sessions: `mhm_sessions`
+- Notification queue: `mhmrentiva_notification_queue`
+- Payment records: `mhmrentiva_payment_log`
+- Sessions: `mhmrentiva_sessions`
 - Transfer locations: `rentiva_transfer_locations` (+ legacy `mhm_rentiva_transfer_locations`)
 - Transfer routes: `rentiva_transfer_routes` (+ legacy `mhm_rentiva_transfer_routes`)
 

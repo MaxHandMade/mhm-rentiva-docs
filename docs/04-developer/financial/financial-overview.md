@@ -28,7 +28,7 @@ Financial operations are managed through the following engines:
 | Component | Responsibility |
 | :--- | :--- |
 | `CommissionResolver` | Decision engine that determines the most appropriate commission policy for a booking. |
-| `Ledger` | Service that atomically writes all monetary movements to the `wp_mhm_rentiva_ledger` table. |
+| `Ledger` | Service that atomically writes all monetary movements to the `wp_mhmrentiva_ledger` table. |
 | `PayoutService` | Layer that calculates vendor earnings and manages Payout requests. |
 | `GovernanceService` | Audits financial limits, risk controls, and authorizations. |
 | `PolicyRepository` | Stores versioned commission policies and enterprise agreements. |

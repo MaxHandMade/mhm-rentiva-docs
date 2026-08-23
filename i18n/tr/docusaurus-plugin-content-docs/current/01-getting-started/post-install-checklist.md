@@ -45,7 +45,7 @@ Eğer teknik bir sorun yaşıyorsanız, aşağıdaki noktaları kontrol edin:
 
 1. **Permalinks:** `Settings > Permalinks` sayfasını ziyaret edip "Save Changes" butonuna basarak rotaları yenileyin (`flush_rewrite_rules`).
 2. **WooCommerce Sync:** Rentiva'nın WooCommerce sepetine veri gönderip göndermediğini `WooCommerceBridge` loglarından takip edin.
-3. **Database Check:** `wp_mhm_rentiva_sessions` tablosunda aktif oturum verisi olup olmadığını PHPMyAdmin üzerinden doğrulayabilirsiniz.
+3. **Database Check:** `wp_mhmrentiva_sessions` tablosunda aktif oturum verisi olup olmadığını PHPMyAdmin üzerinden doğrulayabilirsiniz.
 
 ---
 

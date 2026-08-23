@@ -26,7 +26,7 @@ Eklenti, `LicenseManager` servisi aracılığıyla tüm lisans operasyonlarını
 | **İmza Yöntemi** | HMAC-SHA256 (Hash-based Message Authentication Code) |
 | **Şifreleme** | Veri akışı `TLS 1.2/1.3` (HTTPS) üzerinden şifrelenir. |
 | **Doğrulama** | Paylaşılan Gizli Anahtar (Shared HMAC Secret) ile çift taraflı imza kontrolü. |
-| **API Anahtarı** | Sunucu tanımlaması için `MHM_RENTIVA_LICENSE_API_KEY` kullanılır. |
+| **API Anahtarı** | Sunucu tanımlaması için `MHMRENTIVA_LICENSE_API_KEY` kullanılır. |
 
 ---
 

@@ -65,7 +65,7 @@ Sub-classes can use built-in methods instead of complex HTML structures:
 
 ## 🛡️ Security Protocol
 
-- **Nonce Enforcement:** All bulk actions are verified via `mhm_listtable_nonce`.
+- **Nonce Enforcement:** All bulk actions are verified via `mhmrentiva_listtable_nonce`.
 - **Redirects:** `wp_safe_redirect` is used after bulk actions to prevent "Form Resubmission" errors.
 - **Sanitization:** All filter parameters coming into the table are passed through `sanitize_text_field_safe`.
 

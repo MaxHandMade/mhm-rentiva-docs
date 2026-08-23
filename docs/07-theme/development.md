@@ -35,7 +35,7 @@ The `@layer layout` previously used in `3-layout.css` **was removed in v0.3.0**.
 
 #### Loading Logic
 
-All assets are loaded via `mhm_rentiva_theme_enqueue_header_assets()` inside `functions.php`:
+All assets are loaded via `mhmrentiva_theme_enqueue_header_assets()` inside `functions.php`:
 
 ```php
 wp_enqueue_style( 'mhm-theme-plugin-pages', $css_uri . 'plugin-pages.css', array(), $ver );
@@ -106,14 +106,14 @@ The theme follows these strict rules (as defined in `phpcs.xml.dist`):
 - `declare(strict_types=1);` mandatory for all PHP files.
 - No direct usage of `extract()`.
 - Use of `@since` and `@return` tags in docblocks.
-- Prefixing all functions with `mhm_rentiva_theme_`.
+- Prefixing all functions with `mhmrentiva_theme_`.
 
 ---
 
 ## DemoSeeder & WP-CLI
 
 ### DemoSeeder Bug Fixes (v0.3.0)
-7 bugs were fixed in DemoSeeder in v0.3.0. The most important: the `add_booking_review()` method now works fully compatible with the testimonials shortcode. The testimonials shortcode reads from `vehicle_booking` post meta (`_mhm_rentiva_customer_review`), **not** from WP comments.
+7 bugs were fixed in DemoSeeder in v0.3.0. The most important: the `add_booking_review()` method now works fully compatible with the testimonials shortcode. The testimonials shortcode reads from `mhmrentiva_booking` post meta (`_mhmrentiva_customer_review`), **not** from WP comments.
 
 ### WP-CLI Page Creation
 To avoid bash `!` escaping issues when creating WordPress pages via WP-CLI, the `wp eval-file -` heredoc method is used:

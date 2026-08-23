@@ -55,7 +55,7 @@ Core classes (e.g., `Plugin.php`) use the Singleton pattern. This prevents servi
 Modules are not tightly coupled to each other. Whether a module runs or not is determined dynamically via `is_class_available()` checks and the license gate.
 
 ### 3. Event-Driven Architecture (Hooks)
-The system is extensible through WordPress's `add_action` and `add_filter` ecosystem. For example, when a booking is completed (`mhm_rentiva_booking_completed`), the financial records (Ledger) are triggered automatically.
+The system is extensible through WordPress's `add_action` and `add_filter` ecosystem. For example, when a booking is completed (`mhmrentiva_booking_completed`), the financial records (Ledger) are triggered automatically.
 
 ---
 

@@ -20,7 +20,7 @@ Control the visual hierarchy on vehicle listing pages:
 - **Default Sort Order:** The criterion by which the listing page is ordered on first load (ascending by price, descending by year, etc.).
 
 :::note Removed Settings (v4.22.1)
-The **Show Vehicle Images** (`mhm_rentiva_vehicle_show_images`), **Show Features** (`mhm_rentiva_vehicle_show_features`), and **Show Availability** (`mhm_rentiva_vehicle_show_availability`) settings present in earlier versions were removed in v4.22.1 because they were unused in the codebase. These display controls are now managed directly through shortcode parameters (`show_features`, `show_badges`, etc.).
+The **Show Vehicle Images** (`mhmrentiva_vehicle_show_images`), **Show Features** (`mhmrentiva_vehicle_show_features`), and **Show Availability** (`mhmrentiva_vehicle_show_availability`) settings present in earlier versions were removed in v4.22.1 because they were unused in the codebase. These display controls are now managed directly through shortcode parameters (`show_features`, `show_badges`, etc.).
 :::
 
 ---

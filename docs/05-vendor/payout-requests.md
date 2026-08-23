@@ -78,7 +78,7 @@ Branding is applied **when the statement is viewed**, so updating these settings
 
 ## 🛠️ Technical Infrastructure
 
-All earnings logs are stored atomically in the `mhm_rentiva_vendor_transactions` table. When a booking is cancelled, it is reflected as a debit on the vendor's account. Statements are stored as an immutable snapshot on the approved payout record and rendered on demand.
+All earnings logs are stored atomically in the `mhmrentiva_vendor_transactions` table. When a booking is cancelled, it is reflected as a debit on the vendor's account. Statements are stored as an immutable snapshot on the approved payout record and rendered on demand.
 
 ---
 

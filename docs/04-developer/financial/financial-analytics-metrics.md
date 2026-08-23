@@ -19,7 +19,7 @@ This page describes the logic and data sources behind the financial and operatio
 
 # 📊 Analytics and Financial Metrics
 
-MHM Rentiva uses the `mhm_rentiva_ledger` table exclusively as the **Single Source of Truth** for financial metrics. Operational metrics (occupancy rate, etc.) are blended with booking metadata.
+MHM Rentiva uses the `mhmrentiva_ledger` table exclusively as the **Single Source of Truth** for financial metrics. Operational metrics (occupancy rate, etc.) are blended with booking metadata.
 
 ## 🛠️ Core Principles
 

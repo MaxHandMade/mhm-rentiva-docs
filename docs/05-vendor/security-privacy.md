@@ -49,7 +49,7 @@ Changes to critical fields such as IBAN by the vendor do not take effect immedia
 
 ### IBAN Change Workflow
 1. **Request:** The vendor enters a new IBAN.
-2. **Temporary Storage:** The new IBAN is encrypted and stored in the `_mhm_rentiva_pending_iban` meta field.
+2. **Temporary Storage:** The new IBAN is encrypted and stored in the `_mhmrentiva_pending_iban` meta field.
 3. **Admin Notification:** A counter badge appears in the admin panel.
 4. **Approve/Reject:** If the admin approves, the temporary IBAN is moved to the main IBAN field. If rejected, the temporary data is deleted and the vendor receives an email.
 
@@ -74,7 +74,7 @@ All critical security events are logged via `AdvancedLogger`.
 | Login Attempt | Failed vendor dashboard login attempts. | `WARNING` |
 | Payout Approval | "Admin #Y approved a payout for Vendor #X." | `CRITICAL` |
 
-Logs can be monitored from the **System Logs** section of the admin panel and are automatically purged based on the `mhm_rentiva_log_retention_days` setting.
+Logs can be monitored from the **System Logs** section of the admin panel and are automatically purged based on the `mhmrentiva_log_retention_days` setting.
 
 ---
 

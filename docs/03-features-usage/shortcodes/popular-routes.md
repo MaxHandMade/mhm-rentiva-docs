@@ -41,7 +41,7 @@ Three rendering surfaces share a single canonical renderer (Render Parity contra
 | :--- | :--- |
 | Shortcode | `[rentiva_popular_routes]` |
 | Gutenberg block | `mhm-rentiva/popular-routes` (titled "MHM Popular Transfer Routes") |
-| Elementor widget | `mhm_rentiva_popular_routes` (titled "MHM Popular Routes") |
+| Elementor widget | `mhmrentiva_popular_routes` (titled "MHM Popular Routes") |
 
 The block and widget delegate to the shortcode via `do_shortcode()`. Whatever the shortcode renders, the block and widget render identically — no double codepath.
 
@@ -119,7 +119,7 @@ All 16 attributes accept the canonical snake_case form (used by the shortcode) a
 | `heading` | "Popular Routes" | string | Section title (translatable). |
 | `subheading` | "Most preferred VIP transfer routes" | string | Section subtitle (translatable). |
 | `show_view_all` | `true` | bool | Show the "Search transfers" link in the section header. |
-| `view_all_url` | empty | url | Override the link target. When empty, the `mhm_rentiva_popular_routes_view_all_url` filter is used; when that's also empty, the link is hidden. |
+| `view_all_url` | empty | url | Override the link target. When empty, the `mhmrentiva_popular_routes_view_all_url` filter is used; when that's also empty, the link is hidden. |
 | `show_duration` | `true` | bool | Render the "Approx. X min" line on each card. |
 | `show_distance` | `true` | bool | Render the "X km" line on each card. |
 | `show_traffic_note` | `true` | bool | Render the "May vary with traffic" disclaimer. |
@@ -150,7 +150,7 @@ The card top-right corner shows an icon based on the origin location's type:
 | `city_center` | 🏙️ |
 | (other) | ↗ |
 
-Override the mapping with the `mhm_rentiva_popular_routes_type_icon` filter (see Developer extension points below).
+Override the mapping with the `mhmrentiva_popular_routes_type_icon` filter (see Developer extension points below).
 
 ## Card click behavior — deep-link pre-fill
 
@@ -173,36 +173,36 @@ The pre-fill is **backwards compatible**: a transfer-search page loaded without 
 
 ## Developer extension points
 
-### `mhm_rentiva_popular_routes_view_all_url`
+### `mhmrentiva_popular_routes_view_all_url`
 
 Filter for the **section header link** target ("Search transfers" link). Returned by `resolve_view_all_url()`.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_view_all_url', function ($url) {
+add_filter('mhmrentiva_popular_routes_view_all_url', function ($url) {
     return home_url('/transfer/');
 });
 ```
 
 When this filter returns empty, the section header link is hidden — useful for installations that don't have a transfer-search page yet.
 
-### `mhm_rentiva_popular_routes_search_url`
+### `mhmrentiva_popular_routes_search_url`
 
 Filter for the **card click target** base URL (introduced in v4.34.1). Independent from the section header link, so themes can route them to different pages.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_search_url', function ($url) {
+add_filter('mhmrentiva_popular_routes_search_url', function ($url) {
     return home_url('/transfer-search/');
 });
 ```
 
-When empty, falls back to the `mhm_rentiva_popular_routes_view_all_url` filter, which itself falls back to `home_url('/transfer/')`.
+When empty, falls back to the `mhmrentiva_popular_routes_view_all_url` filter, which itself falls back to `home_url('/transfer/')`.
 
-### `mhm_rentiva_popular_routes_type_icon`
+### `mhmrentiva_popular_routes_type_icon`
 
 Filter the origin-type icon. Receives the default icon and the type slug.
 
 ```php
-add_filter('mhm_rentiva_popular_routes_type_icon', function ($icon, $type) {
+add_filter('mhmrentiva_popular_routes_type_icon', function ($icon, $type) {
     if ($type === 'airport') {
         return '🛫';
     }

@@ -10,6 +10,10 @@ A two-day cross-plugin sprint that hardened the Rentiva (and Currency Switcher) 
 
 <!--truncate-->
 
+:::info Written before 6.0.0
+This post is the record of a release that shipped **before 6.0.0**, which renamed the plugin's post types, taxonomies, options, meta keys and hooks. The identifiers below are the names those versions actually used, and they are kept that way on purpose. For the current names — and a conversion table — see [the 6.0.7 release post](./2026-08-23-rentiva-v6.0.7-release.md).
+:::
+
 ## Why this sprint happened
 
 The Rentiva plugin source ships on a **public GitHub repository**. A motivated attacker can clone, patch `Mode::canUseVendorMarketplace()` to `return true;`, and unlock Pro features without ever calling the license server. v1.8.0 closed *cross-product* key reuse (Currency Switcher key on Rentiva) but did nothing about source-edit bypass. **v4.30.x raises the cost: a crack now has to forge an HMAC signature, host a fake validator, AND keep emitting fresh feature tokens — and even then, tokens expire within 24 hours.**

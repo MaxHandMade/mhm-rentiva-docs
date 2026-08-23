@@ -33,7 +33,7 @@ Financial errors typically originate from network interruptions, missing permiss
 
 ### 1. Expected Balance is Wrong (Balance Mismatch)
 If the vendor's dashboard does not match the Ledger tables:
-- **Diagnosis:** Search the `mhm_rentiva_ledger` table with a `source_type` filter.
+- **Diagnosis:** Search the `mhmrentiva_ledger` table with a `source_type` filter.
 - **Resolution:** Trigger `Ledger::calculate_net_balance()` asynchronously to force a database recount.
 
 ### 2. Payout Stays "Approved" (No Callback)

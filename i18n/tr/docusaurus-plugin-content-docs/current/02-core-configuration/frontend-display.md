@@ -20,7 +20,7 @@ Araç listeleme sayfalarındaki görsel hiyerarşiyi buradan kontrol edebilirsin
 - **Varsayılan Sıralama:** Listeleme sayfasının ilk açılışta hangi kritere göre dizileceği (Fiyata göre artan, Yıla göre azalan vb.).
 
 :::note Kaldirilan Ayarlar (v4.22.1)
-Daha önceki sürümlerde bulunan **Araç Resimlerini Göster** (`mhm_rentiva_vehicle_show_images`), **Özellikleri Göster** (`mhm_rentiva_vehicle_show_features`) ve **Müsaitlik Durumunu Göster** (`mhm_rentiva_vehicle_show_availability`) ayarlari kodda hicbir yerde kullanilmadigi için v4.22.1 ile kaldirilmistir. Bu görüntüleme kontrolleri artik dogrudan kisa kod (shortcode) parametreleri üzerinden yönetilmektedir (`show_features`, `show_badges` vb.).
+Daha önceki sürümlerde bulunan **Araç Resimlerini Göster** (`mhmrentiva_vehicle_show_images`), **Özellikleri Göster** (`mhmrentiva_vehicle_show_features`) ve **Müsaitlik Durumunu Göster** (`mhmrentiva_vehicle_show_availability`) ayarlari kodda hicbir yerde kullanilmadigi için v4.22.1 ile kaldirilmistir. Bu görüntüleme kontrolleri artik dogrudan kisa kod (shortcode) parametreleri üzerinden yönetilmektedir (`show_features`, `show_badges` vb.).
 :::
 
 ---

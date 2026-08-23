@@ -45,7 +45,7 @@ Riskli aktivite tespit edildiğinde:
 ## 📝 Audit Log Doğrulama
 
 Herhangi bir finansal itiraz durumunda:
-1. `mhm_rentiva_ledger` tablosundan işlem ID'sini bulun.
+1. `mhmrentiva_ledger` tablosundan işlem ID'sini bulun.
 2. `GovernanceService::log_decision()` tarafından oluşturulan audit kaydıyla eşleştiğini doğrulayın.
 3. Timestamp ve IP adresi tutarlılığını kontrol ederek adli (Forensic) bütünlüğü onaylayın.
 

@@ -54,7 +54,7 @@ Müşteri araç detay sayfasında veya sepet (Checkout) aşamasında bu hizmetle
 
 v4.36.0 ile her ek hizmette düzenleme ekranında iki yeni alan görünür:
 
-### Bağlam (`addon_context` taxonomy)
+### Bağlam (`mhmrentiva_addon_context` taxonomy)
 
 Yan paneldeki radio metabox üç seçenek sunar:
 
@@ -69,13 +69,13 @@ Yan paneldeki radio metabox üç seçenek sunar:
     - Kiralama: rezervasyon formundaki mevcut checkbox'lar (değişmedi)
     - Transfer: arama sonucu kartında "Sepete ekle" butonunun üstünde "+ N ek hizmet mevcut" küçük etiketi; butona tıklanınca modal seçici açılır
 
-### Fiyatlandırma Tipi (`_mhm_addon_pricing_type` post meta)
+### Fiyatlandırma Tipi (`_mhmrentiva_addon_pricing_type` post meta)
 
 Ana metabox'ta üç seçenekli select alanı:
 
 | Tip | Hesaplama | Geçerli olduğu bağlam |
 | :--- | :--- | :--- |
-| **Rezervasyon başına (sabit)** | `addon_price` (sabit) | Her iki bağlam |
+| **Rezervasyon başına (sabit)** | `mhmrentiva_addon_price` (sabit) | Her iki bağlam |
 | **Günlük** | `addon_price × kiralama_günü` | Kiralama |
 | **Yolcu başına** | `addon_price × (yetişkin + çocuk)` | Transfer |
 
@@ -110,7 +110,7 @@ Müşteri transfer arama sonucunda "Sepete ekle"'ye tıkladığında ve en az bi
 
 v4.36.0'a yükseltme sonrası ilk `init`'te her mevcut `vehicle_addon` kaydı otomatik olarak şu şekilde atanır:
 - `addon_context = rental`
-- `_mhm_addon_pricing_type = per_booking`
+- `_mhmrentiva_addon_pricing_type = per_booking`
 
 Bu **idempotent**'tir — operatör manuel override (bağlamı `transfer`'a veya fiyatlandırmayı `per_day`'e değiştirme) sonraki boot'larda asla üzerine yazılmaz. Migration bir option flag ile kapatılır.
 
@@ -129,5 +129,5 @@ Lite hâlâ toplam **4 published ek hizmetle** sınırlıdır (kiralama + transf
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 29.04.2026 | 4.36.0 | `addon_context` taxonomy (kiralama / transfer / her ikisi) ve `_mhm_addon_pricing_type` (rezervasyon başına / günlük / yolcu başına) eklendi. Canlı toplamlı transfer modal seçici. Idempotent veri-şeritli migration. |
+| 29.04.2026 | 4.36.0 | `mhmrentiva_addon_context` taxonomy (kiralama / transfer / her ikisi) ve `_mhmrentiva_addon_pricing_type` (rezervasyon başına / günlük / yolcu başına) eklendi. Canlı toplamlı transfer modal seçici. Idempotent veri-şeritli migration. |
 | 19.03.2026 | 4.21.2 | Ek Hizmetler (Addons) kullanım rehberi oluşturuldu. |

@@ -20,7 +20,7 @@ Bu protokol, Rentiva sürüm geçişlerinde sistem sürekliliğini ve veri güve
 ## 🏗️ 1. Altyapı ve Lisans Kontrolleri
 
 - [ ] **Pro Mode Activation:** `Mode::featureEnabled()` kontrolleri için lisans anahtarı canlı sunucuda doğrulandı mı?
-- [ ] **SQL Migrations:** `{$wpdb->prefix}mhm_rentiva_*` tabloları için gerekli `up()` scriptleri hatasız çalıştı mı?
+- [ ] **SQL Migrations:** `{$wpdb->prefix}mhmrentiva_*` tabloları için gerekli `up()` scriptleri hatasız çalıştı mı?
 - [ ] **SSL Enforcement:** Payout ve Webhook trafiğinin sadece HTTPS üzerinden aktığı teyit edildi mi?
 - [ ] **SMTP / Mailer:** `Mailer::send()` üzerinden deneme e-postası başarıyla ulaştı mı?
 

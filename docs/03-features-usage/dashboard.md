@@ -76,7 +76,7 @@ In v4.23.0, a comprehensive audit and improvement of Dashboard widgets was carri
 
 ### Bug Fixes
 - **Timezone consistency:** `current_time('timestamp')` is now used instead of `time()` in countdown and upcoming operations widgets to align with WordPress timezone settings.
-- **Cache invalidation:** A cache key prefix mismatch in the statistics widget was fixed (`mhm_dashboard_stats` → `mhm_rentiva_dashboard_stats`).
+- **Cache invalidation:** A cache key prefix mismatch in the statistics widget was fixed (`mhmrentiva_dashboard_stats` → `mhmrentiva_dashboard_stats`).
 - **Status synchronization:** `updated_post_meta` + `added_post_meta` hooks were added to ensure status consistency on meta updates.
 - **WooCommerce email images:** Vehicle images now display correctly in booking confirmation emails.
 - **Calendar popup time info:** Pickup and return times were added to the booking detail popup.

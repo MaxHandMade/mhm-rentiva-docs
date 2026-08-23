@@ -26,7 +26,7 @@ The plugin manages all license operations through the `LicenseManager` service.
 | **Signing Method** | HMAC-SHA256 (Hash-based Message Authentication Code) |
 | **Encryption** | Data stream is encrypted over `TLS 1.2/1.3` (HTTPS). |
 | **Verification** | Two-way signature check using a Shared HMAC Secret. |
-| **API Key** | `MHM_RENTIVA_LICENSE_API_KEY` is used for server identification. |
+| **API Key** | `MHMRENTIVA_LICENSE_API_KEY` is used for server identification. |
 
 ---
 

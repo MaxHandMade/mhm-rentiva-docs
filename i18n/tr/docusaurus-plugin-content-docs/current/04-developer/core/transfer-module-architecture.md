@@ -63,25 +63,25 @@ sequenceDiagram
 Transfer fiyatlari `wp_rentiva_transfer_routes` tablosundaki kurallara gore hesaplanir:
 - **Sabit (Fixed):** Belirlenen `base_price` dogrudan uygulanır.
 - **Mesafe (Distance):** `base_price * distance_km` formulu kullanılır. Opsiyonel olarak `min_price` alt siniri eklenebilir.
-- **Carpan (Multiplier):** Araç bazli carpan (`_mhm_transfer_price_multiplier`) ile VIP araclar için fiyat otomatik arttirilabilir.
+- **Carpan (Multiplier):** Araç bazli carpan (`_mhmrentiva_transfer_price_multiplier`) ile VIP araclar için fiyat otomatik arttirilabilir.
 
 ### 1a. Vendor Fiyatlandırmasi (v4.23.0)
 Vendor marketplace entegrasyonunda fiyatlandırma su sekilde çalışır:
 - Admin her rota için `min_price` ve `max_price` araligi belirler.
-- Vendor, kendi aracına rota bazında fiyat atar (`_mhm_rentiva_transfer_route_prices` JSON meta).
+- Vendor, kendi aracına rota bazında fiyat atar (`_mhmrentiva_transfer_route_prices` JSON meta).
 - `TransferSearchEngine` once vendor fiyatini kontrol eder; yoksa rota `base_price` değerine fallback yapar.
 - Vendor fiyati admin araliginin disindaysa gecersiz sayilir.
 
 ### 2. Bagaj Skoru Hesaplama
 Sistem, araçların bagaj kapasitesini şu matematiksel modelle hesaplar:
 `Luggage Score = (Küçük Bagaj * 1) + (Büyük Bagaj * 2.5)`
-Arama sırasında istenen bagaj yükü, aracın `_mhm_transfer_max_luggage_score` değerinden büyükse araç elenir.
+Arama sırasında istenen bagaj yükü, aracın `_mhmrentiva_transfer_max_luggage_score` değerinden büyükse araç elenir.
 
 ---
 
 ## 🛡️ Kritik Hook ve Aksiyonlar
 
-- **AJAX Arama:** `mhm_rentiva_transfer_search_results` - Arama sonuçlarını döndürür.
+- **AJAX Arama:** `mhmrentiva_transfer_search_results` - Arama sonuçlarını döndürür.
 - **Sepete Ekleme:** `rentiva_transfer_add_to_cart` - Transfer verilerini meta alanlarıyla sepete yollar.
 - **Sipariş Oluşturma:** `woocommerce_checkout_create_order_line_item` - Rota detaylarını kalıcı sipariş kaydına dönüştürür.
 
@@ -100,9 +100,9 @@ Transfer modulu asagidaki meta key'leri kullanir:
 
 | Meta Key | Tip | Açıklama |
 |---|---|---|
-| `_mhm_rentiva_transfer_locations` | array | Aracın hizmet verdiği lokasyon ID'leri |
-| `_mhm_rentiva_transfer_routes` | array | Aracın hizmet verdiği rota ID'leri |
-| `_mhm_rentiva_transfer_route_prices` | JSON | Rota bazında vendor fiyatlari (`{route_id: price}`) |
+| `_mhmrentiva_transfer_locations` | array | Aracın hizmet verdiği lokasyon ID'leri |
+| `_mhmrentiva_transfer_routes` | array | Aracın hizmet verdiği rota ID'leri |
+| `_mhmrentiva_transfer_route_prices` | JSON | Rota bazında vendor fiyatlari (`{route_id: price}`) |
 
 ---
 

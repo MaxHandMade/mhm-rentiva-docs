@@ -49,7 +49,7 @@ IBAN gibi kritik alanların tedarikçi tarafından değiştirilmesi doğrudan ge
 
 ### IBAN Değişiklik İş Akışı
 1. **Talep:** Tedarikçi yeni IBAN'ı girer.
-2. **Geçici Saklama:** Yeni IBAN şifrelenerek `_mhm_rentiva_pending_iban` meta alanında saklanır.
+2. **Geçici Saklama:** Yeni IBAN şifrelenerek `_mhmrentiva_pending_iban` meta alanında saklanır.
 3. **Admin Bildirimi:** Admin panelinde bir sayaç rozeti (badge) belirir.
 4. **Onay/Red:** Admin onaylarsa, geçici IBAN ana IBAN alanına taşınır. Reddedilirse geçici veri silinir ve tedarikçiye e-posta gönderilir.
 
@@ -74,7 +74,7 @@ Tüm kritik güvenlik olayları `AdvancedLogger` üzerinden kayıt altına alın
 | Giriş Denemesi | Başarısız tedarikçi paneli girişleri. | `WARNING` |
 | Ödeme Onayı | "Admin #Y, Tedarikçi #X için ödemeyi onayladı." | `CRITICAL` |
 
-Kayıtlar, admin panelindeki **Sistem Günlükleri** bölümünden takip edilebilir ve `mhm_rentiva_log_retention_days` ayarına göre otomatik temizlenir.
+Kayıtlar, admin panelindeki **Sistem Günlükleri** bölümünden takip edilebilir ve `mhmrentiva_log_retention_days` ayarına göre otomatik temizlenir.
 
 ---
 

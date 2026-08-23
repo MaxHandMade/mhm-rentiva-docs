@@ -25,8 +25,8 @@ Bu sayfa, finansal ödeme (Payout) sürecindeki risk analizini, onay hiyerarşis
 
 ### 1. Freeze (Blokaj) Kontrolleri
 Sistem, herhangi bir işlem başlatılmadan önce iki aşamalı blokaj kontrolü yapar:
-- **Global Freeze:** `mhm_rentiva_global_payout_freeze` ayarı aktifse tüm ödemeler anında durur.
-- **Vendor Freeze:** `_mhm_vendor_payout_freeze` metasını içeren satıcıların talepleri reddedilir.
+- **Global Freeze:** `mhmrentiva_global_payout_freeze` ayarı aktifse tüm ödemeler anında durur.
+- **Vendor Freeze:** `_mhmrentiva_vendor_payout_freeze` metasını içeren satıcıların talepleri reddedilir.
 
 ### 2. Risk Engine (Deterministik Risk Analizi)
 Sistem, her ödeme talebi için şu kriterlere göre bir risk puanı üretir:
@@ -38,7 +38,7 @@ Sistem, her ödeme talebi için şu kriterlere göre bir risk puanı üretir:
 Dolandırıcılığı önlemek için hiçbir yönetici kendi başlattığı veya oluşturduğu bir ödemeyi tek başına onaylayamaz:
 - **Maker:** Talebi oluşturan veya ilk incelemeyi yapan kişi.
 - **Checker:** Nihai onayı veren farklı bir yetkili.
-- *İstisna:** Sadece `mhm_rentiva_override_maker_checker` yetkisine sahip üst düzey yöneticiler bu kuralı bypass edebilir (ve bu işlem forensic loguna düşer).
+- *İstisna:** Sadece `mhmrentiva_override_maker_checker` yetkisine sahip üst düzey yöneticiler bu kuralı bypass edebilir (ve bu işlem forensic loguna düşer).
 
 ---
 
@@ -68,7 +68,7 @@ graph TD
 
 ## 🏛️ Audit Trail (Denetim İzi)
 
-Tüm yönetişim kararları `wp_mhm_rentiva_payout_audit` tablosunda **Immutable (Değiştirilemez)** olarak saklanır:
+Tüm yönetişim kararları `wp_mhmrentiva_payout_audit` tablosunda **Immutable (Değiştirilemez)** olarak saklanır:
 - **IP Hash:** Gizlilik korunarak işlem yapanın IP izi SHA-256 ile saklanır.
 - **Action Constants:** `submit_payout`, `review_payout`, `finalize_payout`, `bypass_time_lock` gibi aksiyonlar kaydedilir.
 - **Metadata JSON:** O anki risk puanı, iş akışı durumu ve bağlamsal detaylar her olayda damgalanır.

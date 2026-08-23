@@ -45,7 +45,7 @@ When suspicious activity is detected:
 ## 📝 Audit Log Verification
 
 In the event of any financial dispute:
-1. Locate the transaction ID in the `mhm_rentiva_ledger` table.
+1. Locate the transaction ID in the `mhmrentiva_ledger` table.
 2. Verify that it matches the audit record created by `GovernanceService::log_decision()`.
 3. Confirm forensic integrity by checking timestamp and IP address consistency.
 

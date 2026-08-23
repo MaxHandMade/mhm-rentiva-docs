@@ -34,7 +34,7 @@ At the top of the page, four main performance indicators updated according to th
 - **Occupancy Rate (%):** The capacity utilization percentage of your fleet.
 
 :::info Technical Note
-The statistics widget is cached with the `mhm_rentiva_dashboard_stats` cache key prefix. All date calculations use the WordPress timezone (`wp_date`).
+The statistics widget is cached with the `mhmrentiva_dashboard_stats` cache key prefix. All date calculations use the WordPress timezone (`wp_date`).
 :::
 
 ---

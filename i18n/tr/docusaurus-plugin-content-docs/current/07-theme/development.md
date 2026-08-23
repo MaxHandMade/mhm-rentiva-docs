@@ -35,7 +35,7 @@ Statik dosyalar `/assets` dizininde saklanir. v0.3.0 itibariyla CSS yigini 6 dos
 
 #### Yükleme Mantigi
 
-Tum asset'ler `functions.php` icerisinde `mhm_rentiva_theme_enqueue_header_assets()` üzerinden yüklenir:
+Tum asset'ler `functions.php` icerisinde `mhmrentiva_theme_enqueue_header_assets()` üzerinden yüklenir:
 
 ```php
 wp_enqueue_style( 'mhm-theme-plugin-pages', $css_uri . 'plugin-pages.css', array(), $ver );
@@ -106,7 +106,7 @@ The theme follows these strict rules (as defined in `phpcs.xml.dist`):
 - `declare(strict_types=1);` mandatory for all PHP files.
 - No direct usage of `extract()`.
 - Use of `@since` and `@return` tags in docblocks.
-- Prefixing all functions with `mhm_rentiva_theme_`.
+- Prefixing all functions with `mhmrentiva_theme_`.
 
 ---
 
@@ -115,7 +115,7 @@ The theme follows these strict rules (as defined in `phpcs.xml.dist`):
 ## DemoSeeder ve WP-CLI
 
 ### DemoSeeder Hata Düzeltmeleri (v0.3.0)
-v0.3.0 sürümünde DemoSeeder'da 7 hata düzeltildi. Bunlardan en önemlisi: `add_booking_review()` metodu artik testimonials shortcode'u ile tam uyumlu çalışmaktadir. Testimonials shortcode'u `vehicle_booking` post meta'dan (`_mhm_rentiva_customer_review`) okur, WP comment'lerden **değil**.
+v0.3.0 sürümünde DemoSeeder'da 7 hata düzeltildi. Bunlardan en önemlisi: `add_booking_review()` metodu artik testimonials shortcode'u ile tam uyumlu çalışmaktadir. Testimonials shortcode'u `mhmrentiva_booking` post meta'dan (`_mhmrentiva_customer_review`) okur, WP comment'lerden **değil**.
 
 ### WP-CLI Sayfa Oluşturma
 WordPress sayfalarınin WP-CLI ile olusturulmasi sırasında bash `!` escaping sorunundan kacinmak için `wp eval-file -` heredoc yontemi kullanılır:

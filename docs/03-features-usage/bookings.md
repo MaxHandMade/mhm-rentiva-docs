@@ -33,7 +33,7 @@ The central calendar visualizes the occupancy rate of your vehicles.
 - <span style={{color: '#22c55e'}}>●</span> **Completed:** Bookings where the rental process has successfully concluded and the vehicle has been returned.
 - <span style={{color: '#ef4444'}}>●</span> **Cancelled:** Invalid records cancelled by the customer or the system.
 
-*Tip: Clicking a record on the calendar opens a quick summary panel with customer and vehicle details. As of v4.23.0, the popup also displays time information via the `_mhm_start_time` and `_mhm_end_time` meta values.*
+*Tip: Clicking a record on the calendar opens a quick summary panel with customer and vehicle details. As of v4.23.0, the popup also displays time information via the `_mhmrentiva_start_time` and `_mhmrentiva_end_time` meta values.*
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
   <strong>📸 IMAGE: BOOKING CALENDAR AND SUMMARY POPUP</strong><br/>
@@ -73,8 +73,8 @@ For bookings made with a deposit, customers can pay the remaining balance direct
 4. Payment is completed using any payment method active on the site.
 
 **Technical Details:**
-- Remaining payment orders are identified by the `_mhm_is_remaining_payment` flag.
-- The `_mhm_remaining_order_id` meta provides duplicate order protection — if a pending order already exists, a new one is not created.
+- Remaining payment orders are identified by the `_mhmrentiva_is_remaining_payment` flag.
+- The `_mhmrentiva_remaining_order_id` meta provides duplicate order protection — if a pending order already exists, a new one is not created.
 - Does not require any additional integrations or payment plugins.
 
 ### Payment History (Timeline)
@@ -91,7 +91,7 @@ Every step — from booking creation, to payments received, to status changes �
 
 ## 🆔 Display ID
 
-As of v4.23.0, the `mhm_rentiva_get_display_id()` function is used in booking lists and widgets. If the WooCommerce integration is active, this function returns the WC order ID; otherwise the standard post ID is shown. This ensures the ID shown to the customer is consistent with the ID in the admin panel.
+As of v4.23.0, the `mhmrentiva_get_display_id()` function is used in booking lists and widgets. If the WooCommerce integration is active, this function returns the WC order ID; otherwise the standard post ID is shown. This ensures the ID shown to the customer is consistent with the ID in the admin panel.
 
 ---
 

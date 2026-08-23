@@ -20,7 +20,7 @@ This protocol is designed to guarantee system continuity and data security durin
 ## 🏗️ 1. Infrastructure and License Checks
 
 - [ ] **Pro Mode Activation:** Has the license key been validated on the live server for `Mode::featureEnabled()` checks?
-- [ ] **SQL Migrations:** Have the required `up()` scripts for `{$wpdb->prefix}mhm_rentiva_*` tables run without errors?
+- [ ] **SQL Migrations:** Have the required `up()` scripts for `{$wpdb->prefix}mhmrentiva_*` tables run without errors?
 - [ ] **SSL Enforcement:** Has it been confirmed that payout and webhook traffic flows only over HTTPS?
 - [ ] **SMTP / Mailer:** Has a test email been successfully delivered via `Mailer::send()`?
 

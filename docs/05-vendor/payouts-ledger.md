@@ -79,9 +79,9 @@ $balance = Ledger::get_balance($vendor_id);
 ### Creating a Payout Request
 ```php
 // PayoutService::request_payout()
-// 1. Minimum limit (mhm_min_payout_amount) is checked.
+// 1. Minimum limit (mhmrentiva_min_payout_amount) is checked.
 // 2. Presence of a pending request is verified.
-// 3. mhm_payout post is created.
+// 3. mhmrentiva_payout post is created.
 ```
 
 ---
@@ -90,8 +90,8 @@ $balance = Ledger::get_balance($vendor_id);
 
 | Hook | Trigger | Recipient |
 |---|---|---|
-| `mhm_rentiva_payout_approved` | When payout is atomically approved. | Vendor |
-| `mhm_rentiva_payout_rejected` | When payout is rejected by the admin. | Vendor |
+| `mhmrentiva_payout_approved` | When payout is atomically approved. | Vendor |
+| `mhmrentiva_payout_rejected` | When payout is rejected by the admin. | Vendor |
 
 ## Section Summary
 - The Ledger table uses an `APPEND-ONLY` architecture.

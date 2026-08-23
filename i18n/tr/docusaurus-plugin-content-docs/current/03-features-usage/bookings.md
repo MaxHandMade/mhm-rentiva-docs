@@ -33,7 +33,7 @@ Merkezi takvim, araçlarınızın doluluk oranını görselleştirir.
 - <span style={{color: '#22c55e'}}>●</span> **Tamamlandı:** Kiralama süreci başarıyla bitmiş ve araç teslim alınmış rezervasyonlar.
 - <span style={{color: '#ef4444'}}>●</span> **İptal Edildi:** Müşteri veya sistem tarafından iptal edilmiş geçersiz kayıtlar.
 
-*Ipucu: Takvim uzerindeki bir kayda tikladiginizda müşteri ve araç detaylarini iceren hizli bir ozet paneli acilir. v4.23.0 itibariyla popup'ta `_mhm_start_time` ve `_mhm_end_time` meta değerleri ile **saat bilgisi** de gosterilmektedir.*
+*Ipucu: Takvim uzerindeki bir kayda tikladiginizda müşteri ve araç detaylarini iceren hizli bir ozet paneli acilir. v4.23.0 itibariyla popup'ta `_mhmrentiva_start_time` ve `_mhmrentiva_end_time` meta değerleri ile **saat bilgisi** de gosterilmektedir.*
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
   <strong>📸 GÖRSEL: REZERVASYON TAKVİMİ VE ÖZET POPUP</strong><br/>
@@ -73,8 +73,8 @@ Depozito ile yapılmış rezervasyonlarda müşteriler kalan bakiyeyi doğrudan 
 4. Sitede aktif olan herhangi bir ödeme yöntemiyle ödeme tamamlanır.
 
 **Teknik Detaylar:**
-- `_mhm_is_remaining_payment` flag'i ile kalan ödeme siparişleri tanımlanır.
-- `_mhm_remaining_order_id` meta'sı ile duplicate sipariş koruması sağlanır — bekleyen sipariş varsa yeni sipariş oluşturulmaz.
+- `_mhmrentiva_is_remaining_payment` flag'i ile kalan ödeme siparişleri tanımlanır.
+- `_mhmrentiva_remaining_order_id` meta'sı ile duplicate sipariş koruması sağlanır — bekleyen sipariş varsa yeni sipariş oluşturulmaz.
 - Herhangi bir ek entegrasyon veya ödeme eklentisi gerektirmez.
 
 ### Para Yatırma Geçmişi (Timeline)
@@ -91,7 +91,7 @@ Rezervasyonun oluşturulmasından, ödemelerin alınmasına ve durum değişikli
 
 ## 🆔 Gorunum ID'si (Display ID)
 
-v4.23.0 itibariyla rezervasyon listelerinde ve widget'larda `mhm_rentiva_get_display_id()` fonksiyonu kullanılmaktadır. WooCommerce entegrasyonu aktifse, bu fonksiyon WC siparis ID'sini dondurur; değilse standart post ID gosterilir. Bu sayede müşteriye iletilen ID ile admin panelindeki ID tutarli olur.
+v4.23.0 itibariyla rezervasyon listelerinde ve widget'larda `mhmrentiva_get_display_id()` fonksiyonu kullanılmaktadır. WooCommerce entegrasyonu aktifse, bu fonksiyon WC siparis ID'sini dondurur; değilse standart post ID gosterilir. Bu sayede müşteriye iletilen ID ile admin panelindeki ID tutarli olur.
 
 ---
 

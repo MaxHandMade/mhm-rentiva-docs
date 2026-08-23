@@ -79,9 +79,9 @@ $balance = Ledger::get_balance($vendor_id);
 ### Ödeme Talebi Oluşturma
 ```php
 // PayoutService::request_payout()
-// 1. Minimum limit (mhm_min_payout_amount) kontrol edilir.
+// 1. Minimum limit (mhmrentiva_min_payout_amount) kontrol edilir.
 // 2. Bekleyen talep olup olmadığı denetlenir.
-// 3. mhm_payout postu oluşturulur.
+// 3. mhmrentiva_payout postu oluşturulur.
 ```
 
 ---
@@ -90,8 +90,8 @@ $balance = Ledger::get_balance($vendor_id);
 
 | Hook | Tetiklenme Anı | Alıcı |
 |---|---|---|
-| `mhm_rentiva_payout_approved` | Ödeme atomik olarak onaylandığında. | Vendor |
-| `mhm_rentiva_payout_rejected` | Ödeme admin tarafından reddedildiğinde. | Vendor |
+| `mhmrentiva_payout_approved` | Ödeme atomik olarak onaylandığında. | Vendor |
+| `mhmrentiva_payout_rejected` | Ödeme admin tarafından reddedildiğinde. | Vendor |
 
 ## Bölüm Sonu Özeti
 - Ledger tablosu `APPEND-ONLY` mimaridedir.

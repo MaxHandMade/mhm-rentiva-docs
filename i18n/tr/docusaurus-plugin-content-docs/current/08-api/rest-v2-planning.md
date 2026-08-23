@@ -26,8 +26,8 @@ Tüm yeni uç noktalar `wp-json/mhm-rentiva/v2` ad alanı altında toplanacak ve
 ## 📦 2. Modüler Geçiş Planı
 
 ### A. Finans ve Ledger Modülü (`/v2/ledger`)
-- **GET `/v2/ledger/summary`:** AJAX `mhm_fetch_vendor_stats` yerine geçecek.
-- **POST `/v2/ledger/payouts`:** AJAX `mhm_request_payout` yerine geçecek.
+- **GET `/v2/ledger/summary`:** AJAX `mhmrentiva_fetch_vendor_stats` yerine geçecek.
+- **POST `/v2/ledger/payouts`:** AJAX `mhmrentiva_request_payout` yerine geçecek.
 - **Analiz:** Bu geçiş, tedarikçi panelinin (Dashboard) %40 daha hızlı yüklenmesini sağlayacaktır.
 
 ### B. Rezervasyon Motoru (`/v2/booking`)
@@ -35,7 +35,7 @@ Tüm yeni uç noktalar `wp-json/mhm-rentiva/v2` ad alanı altında toplanacak ve
 - **POST `/v2/booking/create`:** WooCommerce sepet sürecini tamamen API üzerinden yöneten yeni uç nokta.
 
 ### C. Araç ve Filtreleme (`/v2/vehicles`)
-- **GET `/v2/vehicles/search`:** AJAX `mhm_rentiva_filter_results` yerine geçecek.
+- **GET `/v2/vehicles/search`:** AJAX `mhmrentiva_filter_results` yerine geçecek.
 - **Interactivity API Entegrasyonu:** Reaktif arama sonuçları için doğrudan bu uç nokta kullanılacak.
 
 ---

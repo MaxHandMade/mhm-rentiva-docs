@@ -15,7 +15,7 @@ See [Editions — Lite vs Pro](/docs/) for the full split, or get Pro at [wpalem
 The Export tool lets you extract your rental data in various formats for analysis, accounting, or backup purposes. Access comprehensive data exports via **MHM Rentiva > Export**.
 
 :::info React SPA (since v4.52.0)
-The Export page was fully migrated to a **React SPA** backed by the REST API in v4.52.0. About 780 lines of legacy PHP render code were replaced, and three legacy AJAX handlers (`wp_ajax_mhm_export_*`) were removed. The page now offers a live record preview, REST-backed export history with per-entry delete, and a preserved `admin-post.php` CSV download flow — all without page reloads.
+The Export page was fully migrated to a **React SPA** backed by the REST API in v4.52.0. About 780 lines of legacy PHP render code were replaced, and three legacy AJAX handlers (`wp_ajax_mhmrentiva_export_*`) were removed. The page now offers a live record preview, REST-backed export history with per-entry delete, and a preserved `admin-post.php` CSV download flow — all without page reloads.
 :::
 
 ---
@@ -60,7 +60,7 @@ The system keeps a log of every export event:
 
 Four critical bugs were fixed in the export module in this release:
 
-1. **Payment Log post_type mismatch:** The export form was sending `mhm_payment_log`, but the actual CPT was `mhm_app_log`. The "Invalid export type" error has been resolved.
+1. **Payment Log post_type mismatch:** The export form was sending `mhmrentiva_payment_log`, but the actual CPT was `mhmrentiva_app_log`. The "Invalid export type" error has been resolved.
 2. **Record count returning 0:** The `no_found_rows => true` query parameter caused `found_posts` to always return 0. The count query was fixed with a separate override.
 3. **History deletion:** The export history deletion function was placeholder code and did not work. A direct transient-based deletion mechanism was added.
 4. **Vehicle CSV/JSON PHP 8 error:** The wrong parameter type (string instead of int) was being sent to `get_status_label()`. This caused a fatal error with PHP 8 strict types.

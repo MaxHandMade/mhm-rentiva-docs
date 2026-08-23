@@ -47,7 +47,7 @@ Payment errors typically originate from API connections, status mappings, or dat
 ### Double-Spending Attempts
 - **Situation:** A payout request appears approved but the balance was not reduced.
 - **Reason:** `AtomicPayoutService` may have stalled on a transaction lock.
-- **Fix:** Verify via SQL whether a record exists in the `mhm_rentiva_ledger` table with the relevant `UUID`.
+- **Fix:** Verify via SQL whether a record exists in the `mhmrentiva_ledger` table with the relevant `UUID`.
 
 ### Commission Credit Not Created?
 - **Reason:** The commission engine (`CommissionEngine`) only processes bookings in `completed` (Trip Ended) status.

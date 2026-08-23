@@ -78,7 +78,7 @@ Markalama, makbuz **görüntülendiğinde** uygulanır; dolayısıyla bu ayarlar
 
 ## 🛠️ Teknik Altyapı
 
-Tüm kazanç logları `mhm_rentiva_vendor_transactions` tablosunda atomik olarak saklanır. Bir rezervasyon iptal edildiğinde vendor hanesine borç (Debit) olarak yansıtılır. Makbuzlar, onaylanan ödeme kaydında değiştirilemez bir anlık görüntü olarak saklanır ve talep üzerine oluşturulur.
+Tüm kazanç logları `mhmrentiva_vendor_transactions` tablosunda atomik olarak saklanır. Bir rezervasyon iptal edildiğinde vendor hanesine borç (Debit) olarak yansıtılır. Makbuzlar, onaylanan ödeme kaydında değiştirilemez bir anlık görüntü olarak saklanır ve talep üzerine oluşturulur.
 
 ---
 

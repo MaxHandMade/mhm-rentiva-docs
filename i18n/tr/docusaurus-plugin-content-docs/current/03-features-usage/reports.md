@@ -34,7 +34,7 @@ Sayfanin en üstünde, secilen tarih araligina gore güncellenen 4 ana performan
 - **Doluluk Orani (%):** Filonuzun kapasite kullanim yuzdesi.
 
 :::info Teknik Not
-İstatistik widget'i `mhm_rentiva_dashboard_stats` cache key prefix'i ile önbelleklenir. Tum tarih hesaplamalari WordPress timezone'unu kullanir (`wp_date`).
+İstatistik widget'i `mhmrentiva_dashboard_stats` cache key prefix'i ile önbelleklenir. Tum tarih hesaplamalari WordPress timezone'unu kullanir (`wp_date`).
 :::
 
 ---

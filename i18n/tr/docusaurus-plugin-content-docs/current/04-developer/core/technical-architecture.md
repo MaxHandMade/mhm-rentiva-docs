@@ -55,7 +55,7 @@ graph TD
 Modüller birbirlerine doğrudan sıkı bağlı değildir. Bir modün çalışıp çalışmayacağı `is_class_available()` kontrolü ve lisans kapısı üzerinden dinamik olarak belirlenir.
 
 ### 3. Event-Driven Mimari (Hooks)
-Sistem, WordPress'in `add_action` ve `add_filter` ekosistemini kullanarak genişletilebilir. Örneğin; bir rezervasyon tamamlandığında (`mhm_rentiva_booking_completed`), finansal kayıtlar (Ledger) otomatik tetiklenir.
+Sistem, WordPress'in `add_action` ve `add_filter` ekosistemini kullanarak genişletilebilir. Örneğin; bir rezervasyon tamamlandığında (`mhmrentiva_booking_completed`), finansal kayıtlar (Ledger) otomatik tetiklenir.
 
 ---
 

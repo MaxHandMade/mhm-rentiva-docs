@@ -26,10 +26,10 @@ System-wide financial configurations stored in the `wp_options` table:
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `mhm_min_payout_amount` | `float` | Minimum balance a vendor must have to request a Payout. |
-| `mhm_rentiva_global_payout_freeze` | `bool` | Emergency switch that halts all Payouts system-wide. |
-| `mhm_rentiva_payout_webhook_secret`| `string` | HMAC-signed secret key used for Payout notifications. |
-| `mhm_rentiva_commission_tiers` | `json` | Threshold values that determine discount rates based on sales volume. |
+| `mhmrentiva_min_payout_amount` | `float` | Minimum balance a vendor must have to request a Payout. |
+| `mhmrentiva_global_payout_freeze` | `bool` | Emergency switch that halts all Payouts system-wide. |
+| `mhmrentiva_payout_webhook_secret`| `string` | HMAC-signed secret key used for Payout notifications. |
+| `mhmrentiva_commission_tiers` | `json` | Threshold values that determine discount rates based on sales volume. |
 
 ---
 
@@ -38,30 +38,30 @@ Data stored per vendor in the `wp_usermeta` table:
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `_mhm_vendor_commission_rate` | `float` | Fixed commission rate defined specifically for this vendor (Override). |
-| `_mhm_vendor_payout_freeze` | `bool` | Block status that prevents only this vendor from receiving Payouts. |
-| `_mhm_vendor_tier_id` | `string` | The performance tier the vendor currently belongs to. |
+| `_mhmrentiva_vendor_commission_rate` | `float` | Fixed commission rate defined specifically for this vendor (Override). |
+| `_mhmrentiva_vendor_payout_freeze` | `bool` | Block status that prevents only this vendor from receiving Payouts. |
+| `_mhmrentiva_vendor_tier_id` | `string` | The performance tier the vendor currently belongs to. |
 
 ---
 
 ## 💰 Payout Data (Post Meta)
-Metadata stored under the `mhm_rentiva_payout` post type:
+Metadata stored under the `mhmrentiva_payout` post type:
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `_mhm_payout_amount` | `float` | Net amount requested or paid. |
-| `_mhm_payout_status` | `string` | Status: `pending`, `processing`, `completed`, `rejected`. |
-| `_mhm_payout_external_ref` | `string` | Reference number from the bank or payment gateway (Stripe, etc.). |
-| `_mhm_payout_rejection_reason` | `string` | Explanation text entered for rejected requests. |
+| `_mhmrentiva_payout_amount` | `float` | Net amount requested or paid. |
+| `_mhmrentiva_payout_status` | `string` | Status: `pending`, `processing`, `completed`, `rejected`. |
+| `_mhmrentiva_payout_external_ref` | `string` | Reference number from the bank or payment gateway (Stripe, etc.). |
+| `_mhmrentiva_payout_rejection_reason` | `string` | Explanation text entered for rejected requests. |
 
 ---
 
 ## 🔑 Capabilities
 WordPress capabilities required to manage financial operations:
 
-- **`mhm_rentiva_approve_payout`**: Permission to approve Payout requests.
-- **`mhm_rentiva_freeze_payout`**: Permission to freeze/block Payouts.
-- **`mhm_rentiva_view_financial_audit`**: Permission to view audit logs and Ledger details.
+- **`mhmrentiva_approve_payout`**: Permission to approve Payout requests.
+- **`mhmrentiva_freeze_payout`**: Permission to freeze/block Payouts.
+- **`mhmrentiva_view_financial_audit`**: Permission to view audit logs and Ledger details.
 
 ---
 
@@ -77,7 +77,7 @@ graph LR
 ```
 
 ## Section Summary
-- All financial keys are stored with the `_mhm_` prefix (private meta).
+- All financial keys are stored with the `_mhmrentiva_` prefix (private meta).
 - Critical operations (e.g., `payout_status`) can only be changed by authorized (Capabilities) users.
 - For fields in the Ledger table, see the [Ledger Model](./financial-ledger-model) page.
 

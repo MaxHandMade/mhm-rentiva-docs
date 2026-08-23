@@ -54,7 +54,7 @@ The customer sees these services as a list on the vehicle detail page or at the 
 
 Starting with v4.36.0, every add-on has two new fields on the edit screen:
 
-### Context (`addon_context` taxonomy)
+### Context (`mhmrentiva_addon_context` taxonomy)
 
 A radio metabox in the side panel with three options:
 
@@ -69,13 +69,13 @@ A radio metabox in the side panel with three options:
     - Rental: existing checkboxes on the booking form (unchanged)
     - Transfer: a "+ N add-ons available" hint above the "Add to cart" button on each search-result card; clicking the button opens a modal picker
 
-### Pricing Type (`_mhm_addon_pricing_type` post meta)
+### Pricing Type (`_mhmrentiva_addon_pricing_type` post meta)
 
 A select field in the main metabox with three options:
 
 | Type | Calculation | Valid in |
 | :--- | :--- | :--- |
-| **Per booking (fixed)** | `addon_price` (flat) | Both contexts |
+| **Per booking (fixed)** | `mhmrentiva_addon_price` (flat) | Both contexts |
 | **Per day** | `addon_price × rental_days` | Rental |
 | **Per passenger** | `addon_price × (adults + children)` | Transfer |
 
@@ -110,7 +110,7 @@ When a customer clicks "Add to cart" on a transfer search result and at least on
 
 On the first `init` after upgrading to v4.36.0, every legacy `vehicle_addon` record is auto-assigned:
 - `addon_context = rental`
-- `_mhm_addon_pricing_type = per_booking`
+- `_mhmrentiva_addon_pricing_type = per_booking`
 
 This is **idempotent** — a manual operator override (changing context to `transfer` or pricing type to `per_day`) is never overwritten on subsequent boots. The migration is gated by an internal option flag.
 
@@ -129,5 +129,5 @@ Lite still caps at **4 published add-ons total** (combined rental + transfer). T
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
-| 29.04.2026 | 4.36.0 | Added `addon_context` taxonomy (rental / transfer / both) and `_mhm_addon_pricing_type` (per_booking / per_day / per_passenger). Transfer modal picker with live total. Idempotent data-lane migration. |
+| 29.04.2026 | 4.36.0 | Added `mhmrentiva_addon_context` taxonomy (rental / transfer / both) and `_mhmrentiva_addon_pricing_type` (per_booking / per_day / per_passenger). Transfer modal picker with live total. Idempotent data-lane migration. |
 | 19.03.2026 | 4.21.2 | Add-ons usage guide created. |

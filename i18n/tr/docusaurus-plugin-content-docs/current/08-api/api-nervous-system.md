@@ -23,10 +23,10 @@ Tedarikçi paneli ve ön yüzdeki form etkileşimleri için kullanılan ana kana
 
 | Kanca (Action) | Sorumlu Controller | İşlev |
 | :--- | :--- | :--- |
-| `mhm_fetch_vendor_stats` | `AnalyticsController` | Dashboard KPI ve Sparkline verilerini çeker. |
-| `mhm_request_payout` | `PayoutAjaxController` | Para çekme taleplerini atomik olarak başlatır. |
-| `mhm_rentiva_filter_results` | `SearchResults` | Araç listesini sayfayı yenilemeden filtreler. |
-| `mhm_approve_iban` | `VendorOnboardingController` | Admin panelinden IBAN değişikliklerini onaylar. |
+| `mhmrentiva_fetch_vendor_stats` | `AnalyticsController` | Dashboard KPI ve Sparkline verilerini çeker. |
+| `mhmrentiva_request_payout` | `PayoutAjaxController` | Para çekme taleplerini atomik olarak başlatır. |
+| `mhmrentiva_filter_results` | `SearchResults` | Araç listesini sayfayı yenilemeden filtreler. |
+| `mhmrentiva_approve_iban` | `VendorOnboardingController` | Admin panelinden IBAN değişikliklerini onaylar. |
 
 ---
 

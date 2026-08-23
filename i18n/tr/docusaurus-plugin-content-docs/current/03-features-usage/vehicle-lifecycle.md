@@ -101,7 +101,7 @@ Fiyat manipülasyonunu önlemek için:
 
 - Vendor, aktif rezervasyonu olan bir aracı iptal edip aynı tarihlere daha yüksek fiyatla yeniden listeleyemez.
 - Vendor tarafından iptal edilen rezervasyonların tarihleri **30 gün boyunca** yeniden rezervasyona kapalı kalır.
-- `AntiGamingBlocker` bu blokları `_mhm_anti_gaming_blocks` meta key ile saklar.
+- `AntiGamingBlocker` bu blokları `_mhmrentiva_anti_gaming_blocks` meta key ile saklar.
 
 ---
 

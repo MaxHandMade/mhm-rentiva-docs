@@ -47,7 +47,7 @@ In a multi-vendor structure, each vendor can set their own route-specific price 
 - **Admin** defines `base_price` and `max_price` when creating a route.
 - **Vendor** enters their price within this range for the routes they serve in the vehicle submission form.
 - **Search engine** uses the vendor price when filtering by route; if no vendor price is set, it falls back to the route's `base_price`.
-- Vendor prices are stored as JSON in the `_mhm_rentiva_transfer_route_prices` meta key.
+- Vendor prices are stored as JSON in the `_mhmrentiva_transfer_route_prices` meta key.
 
 ---
 

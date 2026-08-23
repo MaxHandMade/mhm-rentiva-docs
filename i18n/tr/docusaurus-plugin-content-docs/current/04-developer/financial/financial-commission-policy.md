@@ -27,8 +27,8 @@ MHM Rentiva, komisyon oranlarını hesaplamak için çok katmanlı ve determinis
 
 | Öncelik | Seviye | Meta / Kaynak | Açıklama |
 | :--- | :--- | :--- | :--- |
-| **1** | **Vehicle Override** | `_mhm_vendor_commission_rate` | Aracın kendisine özel bir oran atanmışsa en yüksek önceliğe sahiptir. |
-| **2** | **Vendor Override** | `_mhm_vendor_commission_rate` | Satıcı kullanıcısına özel bir oran atanmışsa (Vehicle yoksa) geçerlidir. |
+| **1** | **Vehicle Override** | `_mhmrentiva_vendor_commission_rate` | Aracın kendisine özel bir oran atanmışsa en yüksek önceliğe sahiptir. |
+| **2** | **Vendor Override** | `_mhmrentiva_vendor_commission_rate` | Satıcı kullanıcısına özel bir oran atanmışsa (Vehicle yoksa) geçerlidir. |
 | **3** | **Tier Incentive** | `TierService` | Satıcının son 30 günlük başarısına göre Global orana ek indirim uygulanır. |
 | **4** | **Global Policy** | `CommissionPolicy` | Hiçbir kural eşleşmezse sistemin varsayılan politika oranı uygulanır. |
 

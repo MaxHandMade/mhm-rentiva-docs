@@ -65,7 +65,7 @@ The table visualizes transaction statuses with dynamic colors:
 
 ## 🛡️ Security and Authorization
 
-- **Capability:** The `mhm_rentiva_approve_payout` capability is required to perform bulk actions.
+- **Capability:** The `mhmrentiva_approve_payout` capability is required to perform bulk actions.
 - **Nonce:** All bulk actions pass through standard WP security.
 - **Idempotency Guard:** Inside `PayoutListTable`, a `post_status` check is performed before each operation to prevent duplicate processing at the code level.
 

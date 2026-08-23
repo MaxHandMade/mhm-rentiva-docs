@@ -19,7 +19,7 @@ Bu sayfa, `AnalyticsService` tarafından hesaplanan finansal ve operasyonel metr
 
 # 📊 Analytics ve Finansal Metrikler
 
-MHM Rentiva, "Tek Doğruluk Kaynağı" (**Single Source of Truth**) olarak finansal metriklerde sadece `mhm_rentiva_ledger` tablosunu kullanır. Operasyonel metrikler (doluluk oranı vb.) ise rezervasyon meta verileriyle harmanlanır.
+MHM Rentiva, "Tek Doğruluk Kaynağı" (**Single Source of Truth**) olarak finansal metriklerde sadece `mhmrentiva_ledger` tablosunu kullanır. Operasyonel metrikler (doluluk oranı vb.) ise rezervasyon meta verileriyle harmanlanır.
 
 ## 🛠️ Temel Prensipler
 

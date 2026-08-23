@@ -35,7 +35,7 @@ Yönetim panelindeki widget'lar `DashboardPage.php`, `Reports.php`, `Messages.ph
 
 ### İstatistik Widget'i (Stats)
 - **Tasarim:** 2x2 grid düzeninde, ikonlar ve renklerle zenginlestirilmis inline CSS.
-- **Cache:** Cache key prefix `mhm_rentiva_dashboard_stats` (v4.23.0'da düzeltildi; önceki hatali prefix: `mhm_dashboard_stats`).
+- **Cache:** Cache key prefix `mhmrentiva_dashboard_stats` (v4.23.0'da düzeltildi; önceki hatali prefix: `mhm_dashboard_stats`).
 - **Dosya:** `Reports.php`
 
 ### Gelir Grafigi (Revenue Chart)
@@ -46,11 +46,11 @@ Yönetim panelindeki widget'lar `DashboardPage.php`, `Reports.php`, `Messages.ph
 
 ### Yaklasan Operasyonlar (Upcoming Ops)
 - **Saat bilgisi:** `start_date + start_time` birlestirilerek gosterilir (önceki 00:00 hatasi düzeltildi).
-- **Display ID:** `mhm_rentiva_get_display_id()` ile WC order ID gösterimi + tıklanabilir link.
+- **Display ID:** `mhmrentiva_get_display_id()` ile WC order ID gösterimi + tıklanabilir link.
 - **Dosya:** `Reports.php`
 
 ### Son Rezervasyonlar (Recent Bookings)
-- **ID gösterimi:** `mhm_rentiva_get_display_id()` ile WC order ID uyumu.
+- **ID gösterimi:** `mhmrentiva_get_display_id()` ile WC order ID uyumu.
 - **Dosyalar:** `recent-bookings.php` + `transfer-widget.php`
 
 ### Mesajlar Widget'i (Messages)
@@ -58,7 +58,7 @@ Yönetim panelindeki widget'lar `DashboardPage.php`, `Reports.php`, `Messages.ph
 - **Dosya:** `Messages.php`
 
 ### Takvim Popup
-- **Saat bilgisi:** `get_post_meta()` ile `_mhm_start_time`/`_mhm_end_time` alanları (SQL JOIN yerine).
+- **Saat bilgisi:** `get_post_meta()` ile `_mhmrentiva_start_time`/`_mhmrentiva_end_time` alanları (SQL JOIN yerine).
 - **Dosya:** `BookingColumns.php`
 
 ### Payout List Table (`PayoutListTable.php`)
@@ -133,15 +133,15 @@ graph TD
 ## 8. Güvenlik Kuralları
 
 - **Data Isolation:** Bir satici sadece kendi verisini (`post_author` eslesmesi) gorebilir.
-- **Capability Check:** `PayoutListTable` uzerindeki toplu onay butonu sadece `mhm_rentiva_approve_payout` yetkisine sahip kullanıcılara gorunur.
-- **Nonce Security:** Elementor widget'lari üzerinden yapilan tum AJAX istekleri `mhm_rentiva_elementor` nonce anahtarıyla dogrulanir.
+- **Capability Check:** `PayoutListTable` uzerindeki toplu onay butonu sadece `mhmrentiva_approve_payout` yetkisine sahip kullanıcılara gorunur.
+- **Nonce Security:** Elementor widget'lari üzerinden yapilan tum AJAX istekleri `mhmrentiva_elementor` nonce anahtarıyla dogrulanir.
 
 ## Bölüm Sonu Özeti
 - Frontend widget'lari **Elementor** tabalidir ve `TrendService` kullanir.
 - Admin widget'lari `DashboardPage`, `Reports`, `Messages` ve `RevenueReport` siniflari tarafından yonetilir.
 - Gelir Grafigi ve Yaklasan Operasyonlar **yalnızca Pro** sürümde kullanilabilir (`Mode::canUseAdvancedReports()`).
 - Tum widget'lar WordPress timezone'unu kullanir (`current_time`, `wp_date`).
-- Cache key prefix: `mhm_rentiva_dashboard_stats`.
+- Cache key prefix: `mhmrentiva_dashboard_stats`.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |

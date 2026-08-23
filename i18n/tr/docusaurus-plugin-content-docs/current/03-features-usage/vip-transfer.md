@@ -76,7 +76,7 @@ Geliştiriciler için transfer fiyatlandırmasını manipüle etmek veya ek kura
 
 ```php
 // Transfer fiyatını filtrelemek için:
-add_filter('mhm_rentiva_transfer_price', function($price, $route_id) {
+add_filter('mhmrentiva_transfer_price', function($price, $route_id) {
     // Özel kampanya mantığı
     return $price * 0.9; 
 }, 10, 2);
