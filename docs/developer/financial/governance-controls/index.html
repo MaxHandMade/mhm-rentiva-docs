@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Governance and Security Controls | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls"><meta data-rh="true" property="og:locale" content="en_US"><meta data-rh="true" property="og:locale:alternate" content="tr_TR"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Governance and Security Controls | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Pro Updated"><meta data-rh="true" property="og:description" content="Version Pro Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/financial/governance-controls" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Developer Guide","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/reading-order"},{"@type":"ListItem","position":2,"name":"Financial","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/category/financial"},{"@type":"ListItem","position":3,"name":"Governance Controls","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/assets/js/runtime~main.58d92ef3.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/assets/js/runtime~main.f5650e73.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/assets/js/main.91ad2442.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,8 +23,8 @@ See <a class="" href="/mhm-rentiva-docs/docs/">Editions — Lite vs Pro</a> for 
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-freeze-controls">1. Freeze Controls<a href="#1-freeze-controls" class="hash-link" aria-label="Direct link to 1. Freeze Controls" title="Direct link to 1. Freeze Controls" translate="no">​</a></h3>
 <p>Before any transaction is initiated, the system performs a two-stage freeze check:</p>
 <ul>
-<li class=""><strong>Global Freeze:</strong> If the <code>mhm_rentiva_global_payout_freeze</code> setting is active, all Payouts stop immediately.</li>
-<li class=""><strong>Vendor Freeze:</strong> Requests from vendors with the <code>_mhm_vendor_payout_freeze</code> meta are rejected.</li>
+<li class=""><strong>Global Freeze:</strong> If the <code>mhmrentiva_global_payout_freeze</code> setting is active, all Payouts stop immediately.</li>
+<li class=""><strong>Vendor Freeze:</strong> Requests from vendors with the <code>_mhmrentiva_vendor_payout_freeze</code> meta are rejected.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-risk-engine-deterministic-risk-analysis">2. Risk Engine (Deterministic Risk Analysis)<a href="#2-risk-engine-deterministic-risk-analysis" class="hash-link" aria-label="Direct link to 2. Risk Engine (Deterministic Risk Analysis)" title="Direct link to 2. Risk Engine (Deterministic Risk Analysis)" translate="no">​</a></h3>
 <p>The system generates a risk score for each Payout request based on the following criteria:</p>
@@ -38,14 +38,14 @@ See <a class="" href="/mhm-rentiva-docs/docs/">Editions — Lite vs Pro</a> for 
 <ul>
 <li class=""><strong>Maker:</strong> The person who created the request or performed the initial review.</li>
 <li class=""><strong>Checker:</strong> A different authorized person who gives the final approval.</li>
-<li class=""><em>Exception:</em> Only senior administrators with the <code>mhm_rentiva_override_maker_checker</code> capability can bypass this rule (and the action is recorded in the forensic log).</li>
+<li class=""><em>Exception:</em> Only senior administrators with the <code>mhmrentiva_override_maker_checker</code> capability can bypass this rule (and the action is recorded in the forensic log).</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-governance-workflow">🔄 Governance Workflow<a href="#-governance-workflow" class="hash-link" aria-label="Direct link to 🔄 Governance Workflow" title="Direct link to 🔄 Governance Workflow" translate="no">​</a></h2>
 <!-- -->
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-audit-trail">🏛️ Audit Trail<a href="#️-audit-trail" class="hash-link" aria-label="Direct link to 🏛️ Audit Trail" title="Direct link to 🏛️ Audit Trail" translate="no">​</a></h2>
-<p>All governance decisions are stored <strong>immutably</strong> in the <code>wp_mhm_rentiva_payout_audit</code> table:</p>
+<p>All governance decisions are stored <strong>immutably</strong> in the <code>wp_mhmrentiva_payout_audit</code> table:</p>
 <ul>
 <li class=""><strong>IP Hash:</strong> The IP trace of the actor is stored as SHA-256 to preserve privacy.</li>
 <li class=""><strong>Action Constants:</strong> Actions such as <code>submit_payout</code>, <code>review_payout</code>, <code>finalize_payout</code>, <code>bypass_time_lock</code> are recorded.</li>

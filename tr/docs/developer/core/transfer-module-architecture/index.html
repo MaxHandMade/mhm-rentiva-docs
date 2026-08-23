@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">MHMRentiva Transfer Mimarisi | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/core/transfer-module-architecture"><meta data-rh="true" property="og:locale" content="tr_TR"><meta data-rh="true" property="og:locale:alternate" content="en_US"><meta data-rh="true" name="docusaurus_locale" content="tr"><meta data-rh="true" name="docsearch:language" content="tr"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="MHMRentiva Transfer Mimarisi | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Pro Updated"><meta data-rh="true" property="og:description" content="Version Pro Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/tr/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/core/transfer-module-architecture"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/core/transfer-module-architecture" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Geliştirici Rehberi","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/reading-order"},{"@type":"ListItem","position":2,"name":"Çekirdek","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/category/core"},{"@type":"ListItem","position":3,"name":"Transfer Mimarisi","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/core/transfer-module-architecture"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/tr/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/tr/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/tr/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/tr/assets/js/runtime~main.e4f54634.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/tr/assets/js/runtime~main.36d5a2b4.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/tr/assets/js/main.c4e50409.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -33,24 +33,24 @@ Tam ayrım için: <a class="" href="/mhm-rentiva-docs/tr/docs/">Sürümler — L
 <ul>
 <li class=""><strong>Sabit (Fixed):</strong> Belirlenen <code>base_price</code> dogrudan uygulanır.</li>
 <li class=""><strong>Mesafe (Distance):</strong> <code>base_price * distance_km</code> formulu kullanılır. Opsiyonel olarak <code>min_price</code> alt siniri eklenebilir.</li>
-<li class=""><strong>Carpan (Multiplier):</strong> Araç bazli carpan (<code>_mhm_transfer_price_multiplier</code>) ile VIP araclar için fiyat otomatik arttirilabilir.</li>
+<li class=""><strong>Carpan (Multiplier):</strong> Araç bazli carpan (<code>_mhmrentiva_transfer_price_multiplier</code>) ile VIP araclar için fiyat otomatik arttirilabilir.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1a-vendor-fiyatlandırmasi-v4230">1a. Vendor Fiyatlandırmasi (v4.23.0)<a href="#1a-vendor-fiyatlandırmasi-v4230" class="hash-link" aria-label="1a. Vendor Fiyatlandırmasi (v4.23.0) doğrudan bağlantı" title="1a. Vendor Fiyatlandırmasi (v4.23.0) doğrudan bağlantı" translate="no">​</a></h3>
 <p>Vendor marketplace entegrasyonunda fiyatlandırma su sekilde çalışır:</p>
 <ul>
 <li class="">Admin her rota için <code>min_price</code> ve <code>max_price</code> araligi belirler.</li>
-<li class="">Vendor, kendi aracına rota bazında fiyat atar (<code>_mhm_rentiva_transfer_route_prices</code> JSON meta).</li>
+<li class="">Vendor, kendi aracına rota bazında fiyat atar (<code>_mhmrentiva_transfer_route_prices</code> JSON meta).</li>
 <li class=""><code>TransferSearchEngine</code> once vendor fiyatini kontrol eder; yoksa rota <code>base_price</code> değerine fallback yapar.</li>
 <li class="">Vendor fiyati admin araliginin disindaysa gecersiz sayilir.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-bagaj-skoru-hesaplama">2. Bagaj Skoru Hesaplama<a href="#2-bagaj-skoru-hesaplama" class="hash-link" aria-label="2. Bagaj Skoru Hesaplama doğrudan bağlantı" title="2. Bagaj Skoru Hesaplama doğrudan bağlantı" translate="no">​</a></h3>
 <p>Sistem, araçların bagaj kapasitesini şu matematiksel modelle hesaplar:
 <code>Luggage Score = (Küçük Bagaj * 1) + (Büyük Bagaj * 2.5)</code>
-Arama sırasında istenen bagaj yükü, aracın <code>_mhm_transfer_max_luggage_score</code> değerinden büyükse araç elenir.</p>
+Arama sırasında istenen bagaj yükü, aracın <code>_mhmrentiva_transfer_max_luggage_score</code> değerinden büyükse araç elenir.</p>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-kritik-hook-ve-aksiyonlar">🛡️ Kritik Hook ve Aksiyonlar<a href="#️-kritik-hook-ve-aksiyonlar" class="hash-link" aria-label="🛡️ Kritik Hook ve Aksiyonlar doğrudan bağlantı" title="🛡️ Kritik Hook ve Aksiyonlar doğrudan bağlantı" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>AJAX Arama:</strong> <code>mhm_rentiva_transfer_search_results</code> - Arama sonuçlarını döndürür.</li>
+<li class=""><strong>AJAX Arama:</strong> <code>mhmrentiva_transfer_search_results</code> - Arama sonuçlarını döndürür.</li>
 <li class=""><strong>Sepete Ekleme:</strong> <code>rentiva_transfer_add_to_cart</code> - Transfer verilerini meta alanlarıyla sepete yollar.</li>
 <li class=""><strong>Sipariş Oluşturma:</strong> <code>woocommerce_checkout_create_order_line_item</code> - Rota detaylarını kalıcı sipariş kaydına dönüştürür.</li>
 </ul>
@@ -63,7 +63,7 @@ Arama sırasında istenen bagaj yükü, aracın <code>_mhm_transfer_max_luggage_
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="araç-meta-yapısı">Araç Meta Yapısı<a href="#araç-meta-yapısı" class="hash-link" aria-label="Araç Meta Yapısı doğrudan bağlantı" title="Araç Meta Yapısı doğrudan bağlantı" translate="no">​</a></h2>
 <p>Transfer modulu asagidaki meta key&#x27;leri kullanir:</p>
-<table><thead><tr><th>Meta Key</th><th>Tip</th><th>Açıklama</th></tr></thead><tbody><tr><td><code>_mhm_rentiva_transfer_locations</code></td><td>array</td><td>Aracın hizmet verdiği lokasyon ID&#x27;leri</td></tr><tr><td><code>_mhm_rentiva_transfer_routes</code></td><td>array</td><td>Aracın hizmet verdiği rota ID&#x27;leri</td></tr><tr><td><code>_mhm_rentiva_transfer_route_prices</code></td><td>JSON</td><td>Rota bazında vendor fiyatlari (<code>{route_id: price}</code>)</td></tr></tbody></table>
+<table><thead><tr><th>Meta Key</th><th>Tip</th><th>Açıklama</th></tr></thead><tbody><tr><td><code>_mhmrentiva_transfer_locations</code></td><td>array</td><td>Aracın hizmet verdiği lokasyon ID&#x27;leri</td></tr><tr><td><code>_mhmrentiva_transfer_routes</code></td><td>array</td><td>Aracın hizmet verdiği rota ID&#x27;leri</td></tr><tr><td><code>_mhmrentiva_transfer_route_prices</code></td><td>JSON</td><td>Rota bazında vendor fiyatlari (<code>{route_id: price}</code>)</td></tr></tbody></table>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bölüm-sonu-özeti">Bölüm Sonu Özeti<a href="#bölüm-sonu-özeti" class="hash-link" aria-label="Bölüm Sonu Özeti doğrudan bağlantı" title="Bölüm Sonu Özeti doğrudan bağlantı" translate="no">​</a></h2>
 <ul>

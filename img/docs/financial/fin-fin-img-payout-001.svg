@@ -6,7 +6,7 @@
   <text x="40" y="50" class="t">Payout Yaşam Döngüsü (Talep -> Onay -> Callback)</text>
 
   <rect x="40" y="110" width="220" height="80" class="b"/><text x="70" y="155" class="s">Vendor: request_payout</text>
-  <rect x="320" y="110" width="240" height="80" class="b"/><text x="350" y="155" class="s">mhm_payout (pending)</text>
+  <rect x="320" y="110" width="240" height="80" class="b"/><text x="350" y="155" class="s">mhmrentiva_payout (pending)</text>
   <rect x="620" y="110" width="250" height="80" class="b"/><text x="650" y="155" class="s">Governance check</text>
   <rect x="930" y="110" width="220" height="80" class="b"/><text x="955" y="155" class="s">Atomic approve</text>
 

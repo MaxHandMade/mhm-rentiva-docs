@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Governance ve Güvenlik Kontrolleri | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/financial/governance-controls"><meta data-rh="true" property="og:locale" content="tr_TR"><meta data-rh="true" property="og:locale:alternate" content="en_US"><meta data-rh="true" name="docusaurus_locale" content="tr"><meta data-rh="true" name="docsearch:language" content="tr"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Governance ve Güvenlik Kontrolleri | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Pro Updated"><meta data-rh="true" property="og:description" content="Version Pro Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/tr/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/financial/governance-controls"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/financial/governance-controls" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/financial/governance-controls" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Geliştirici Rehberi","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/reading-order"},{"@type":"ListItem","position":2,"name":"Finansal","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/category/financial"},{"@type":"ListItem","position":3,"name":"Governance Kontrolleri","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/financial/governance-controls"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/tr/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/tr/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/tr/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/tr/assets/js/runtime~main.e4f54634.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/tr/assets/js/runtime~main.36d5a2b4.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/tr/assets/js/main.c4e50409.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,8 +23,8 @@ Tam ayrım için: <a class="" href="/mhm-rentiva-docs/tr/docs/">Sürümler — L
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-freeze-blokaj-kontrolleri">1. Freeze (Blokaj) Kontrolleri<a href="#1-freeze-blokaj-kontrolleri" class="hash-link" aria-label="1. Freeze (Blokaj) Kontrolleri doğrudan bağlantı" title="1. Freeze (Blokaj) Kontrolleri doğrudan bağlantı" translate="no">​</a></h3>
 <p>Sistem, herhangi bir işlem başlatılmadan önce iki aşamalı blokaj kontrolü yapar:</p>
 <ul>
-<li class=""><strong>Global Freeze:</strong> <code>mhm_rentiva_global_payout_freeze</code> ayarı aktifse tüm ödemeler anında durur.</li>
-<li class=""><strong>Vendor Freeze:</strong> <code>_mhm_vendor_payout_freeze</code> metasını içeren satıcıların talepleri reddedilir.</li>
+<li class=""><strong>Global Freeze:</strong> <code>mhmrentiva_global_payout_freeze</code> ayarı aktifse tüm ödemeler anında durur.</li>
+<li class=""><strong>Vendor Freeze:</strong> <code>_mhmrentiva_vendor_payout_freeze</code> metasını içeren satıcıların talepleri reddedilir.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-risk-engine-deterministik-risk-analizi">2. Risk Engine (Deterministik Risk Analizi)<a href="#2-risk-engine-deterministik-risk-analizi" class="hash-link" aria-label="2. Risk Engine (Deterministik Risk Analizi) doğrudan bağlantı" title="2. Risk Engine (Deterministik Risk Analizi) doğrudan bağlantı" translate="no">​</a></h3>
 <p>Sistem, her ödeme talebi için şu kriterlere göre bir risk puanı üretir:</p>
@@ -38,14 +38,14 @@ Tam ayrım için: <a class="" href="/mhm-rentiva-docs/tr/docs/">Sürümler — L
 <ul>
 <li class=""><strong>Maker:</strong> Talebi oluşturan veya ilk incelemeyi yapan kişi.</li>
 <li class=""><strong>Checker:</strong> Nihai onayı veren farklı bir yetkili.</li>
-<li class=""><em>İstisna:</em>* Sadece <code>mhm_rentiva_override_maker_checker</code> yetkisine sahip üst düzey yöneticiler bu kuralı bypass edebilir (ve bu işlem forensic loguna düşer).</li>
+<li class=""><em>İstisna:</em>* Sadece <code>mhmrentiva_override_maker_checker</code> yetkisine sahip üst düzey yöneticiler bu kuralı bypass edebilir (ve bu işlem forensic loguna düşer).</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-yönetişim-i̇ş-akışı">🔄 Yönetişim İş Akışı<a href="#-yönetişim-i̇ş-akışı" class="hash-link" aria-label="🔄 Yönetişim İş Akışı doğrudan bağlantı" title="🔄 Yönetişim İş Akışı doğrudan bağlantı" translate="no">​</a></h2>
 <!-- -->
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-audit-trail-denetim-i̇zi">🏛️ Audit Trail (Denetim İzi)<a href="#️-audit-trail-denetim-i̇zi" class="hash-link" aria-label="🏛️ Audit Trail (Denetim İzi) doğrudan bağlantı" title="🏛️ Audit Trail (Denetim İzi) doğrudan bağlantı" translate="no">​</a></h2>
-<p>Tüm yönetişim kararları <code>wp_mhm_rentiva_payout_audit</code> tablosunda <strong>Immutable (Değiştirilemez)</strong> olarak saklanır:</p>
+<p>Tüm yönetişim kararları <code>wp_mhmrentiva_payout_audit</code> tablosunda <strong>Immutable (Değiştirilemez)</strong> olarak saklanır:</p>
 <ul>
 <li class=""><strong>IP Hash:</strong> Gizlilik korunarak işlem yapanın IP izi SHA-256 ile saklanır.</li>
 <li class=""><strong>Action Constants:</strong> <code>submit_payout</code>, <code>review_payout</code>, <code>finalize_payout</code>, <code>bypass_time_lock</code> gibi aksiyonlar kaydedilir.</li>

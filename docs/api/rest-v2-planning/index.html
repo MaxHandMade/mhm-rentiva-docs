@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">REST v2 Planning and Roadmap | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/rest-v2-planning"><meta data-rh="true" property="og:locale" content="en_US"><meta data-rh="true" property="og:locale:alternate" content="tr_TR"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="REST v2 Planning and Roadmap | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Docs Updated"><meta data-rh="true" property="og:description" content="Version Docs Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/rest-v2-planning"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/rest-v2-planning" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/api/rest-v2-planning" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/rest-v2-planning" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"REST API & Nervous System","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/overview"},{"@type":"ListItem","position":2,"name":"REST v2 Plan","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/api/rest-v2-planning"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/assets/js/runtime~main.58d92ef3.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/assets/js/runtime~main.f5650e73.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/assets/js/main.91ad2442.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,8 +23,8 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-2-modular-migration-plan">📦 2. Modular Migration Plan<a href="#-2-modular-migration-plan" class="hash-link" aria-label="Direct link to 📦 2. Modular Migration Plan" title="Direct link to 📦 2. Modular Migration Plan" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-financial-and-ledger-module-v2ledger">A. Financial and Ledger Module (<code>/v2/ledger</code>)<a href="#a-financial-and-ledger-module-v2ledger" class="hash-link" aria-label="Direct link to a-financial-and-ledger-module-v2ledger" title="Direct link to a-financial-and-ledger-module-v2ledger" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>GET <code>/v2/ledger/summary</code>:</strong> Will replace the AJAX <code>mhm_fetch_vendor_stats</code> action.</li>
-<li class=""><strong>POST <code>/v2/ledger/payouts</code>:</strong> Will replace the AJAX <code>mhm_request_payout</code> action.</li>
+<li class=""><strong>GET <code>/v2/ledger/summary</code>:</strong> Will replace the AJAX <code>mhmrentiva_fetch_vendor_stats</code> action.</li>
+<li class=""><strong>POST <code>/v2/ledger/payouts</code>:</strong> Will replace the AJAX <code>mhmrentiva_request_payout</code> action.</li>
 <li class=""><strong>Analysis:</strong> This migration will result in the Vendor dashboard loading 40% faster.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="b-booking-engine-v2booking">B. Booking Engine (<code>/v2/booking</code>)<a href="#b-booking-engine-v2booking" class="hash-link" aria-label="Direct link to b-booking-engine-v2booking" title="Direct link to b-booking-engine-v2booking" translate="no">​</a></h3>
@@ -34,7 +34,7 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="c-vehicles-and-filtering-v2vehicles">C. Vehicles and Filtering (<code>/v2/vehicles</code>)<a href="#c-vehicles-and-filtering-v2vehicles" class="hash-link" aria-label="Direct link to c-vehicles-and-filtering-v2vehicles" title="Direct link to c-vehicles-and-filtering-v2vehicles" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>GET <code>/v2/vehicles/search</code>:</strong> Will replace the AJAX <code>mhm_rentiva_filter_results</code> action.</li>
+<li class=""><strong>GET <code>/v2/vehicles/search</code>:</strong> Will replace the AJAX <code>mhmrentiva_filter_results</code> action.</li>
 <li class=""><strong>Interactivity API Integration:</strong> This endpoint will be used directly for reactive search results.</li>
 </ul>
 <hr>

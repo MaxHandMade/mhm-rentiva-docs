@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Booking Management | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/bookings"><meta data-rh="true" property="og:locale" content="en_US"><meta data-rh="true" property="og:locale:alternate" content="tr_TR"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Booking Management | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Docs Updated"><meta data-rh="true" property="og:description" content="Version Docs Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/bookings"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/bookings" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/features-usage/bookings" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/bookings" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Features & Usage","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/reading-order"},{"@type":"ListItem","position":2,"name":"Bookings","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/features-usage/bookings"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/assets/js/runtime~main.58d92ef3.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/assets/js/runtime~main.f5650e73.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/assets/js/main.91ad2442.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -34,7 +34,7 @@
 <li class=""><span style="color:#22c55e">●</span> <strong>Completed:</strong> Bookings where the rental process has successfully concluded and the vehicle has been returned.</li>
 <li class=""><span style="color:#ef4444">●</span> <strong>Cancelled:</strong> Invalid records cancelled by the customer or the system.</li>
 </ul>
-<p><em>Tip: Clicking a record on the calendar opens a quick summary panel with customer and vehicle details. As of v4.23.0, the popup also displays time information via the <code>_mhm_start_time</code> and <code>_mhm_end_time</code> meta values.</em></p>
+<p><em>Tip: Clicking a record on the calendar opens a quick summary panel with customer and vehicle details. As of v4.23.0, the popup also displays time information via the <code>_mhmrentiva_start_time</code> and <code>_mhmrentiva_end_time</code> meta values.</em></p>
 <div style="border:1px solid #e5e7eb;padding:20px;border-radius:8px;background:#f9fafb;margin-bottom:20px"><strong>📸 IMAGE: BOOKING CALENDAR AND SUMMARY POPUP</strong><br><em>mhm-rentiva-booking-calendar-popup</em></div>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-manual-booking-creation">➕ Manual Booking Creation<a href="#-manual-booking-creation" class="hash-link" aria-label="Direct link to ➕ Manual Booking Creation" title="Direct link to ➕ Manual Booking Creation" translate="no">​</a></h2>
@@ -65,8 +65,8 @@
 </ol>
 <p><strong>Technical Details:</strong></p>
 <ul>
-<li class="">Remaining payment orders are identified by the <code>_mhm_is_remaining_payment</code> flag.</li>
-<li class="">The <code>_mhm_remaining_order_id</code> meta provides duplicate order protection — if a pending order already exists, a new one is not created.</li>
+<li class="">Remaining payment orders are identified by the <code>_mhmrentiva_is_remaining_payment</code> flag.</li>
+<li class="">The <code>_mhmrentiva_remaining_order_id</code> meta provides duplicate order protection — if a pending order already exists, a new one is not created.</li>
 <li class="">Does not require any additional integrations or payment plugins.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="payment-history-timeline">Payment History (Timeline)<a href="#payment-history-timeline" class="hash-link" aria-label="Direct link to Payment History (Timeline)" title="Direct link to Payment History (Timeline)" translate="no">​</a></h3>
@@ -80,7 +80,7 @@
 <hr>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-display-id">🆔 Display ID<a href="#-display-id" class="hash-link" aria-label="Direct link to 🆔 Display ID" title="Direct link to 🆔 Display ID" translate="no">​</a></h2>
-<p>As of v4.23.0, the <code>mhm_rentiva_get_display_id()</code> function is used in booking lists and widgets. If the WooCommerce integration is active, this function returns the WC order ID; otherwise the standard post ID is shown. This ensures the ID shown to the customer is consistent with the ID in the admin panel.</p>
+<p>As of v4.23.0, the <code>mhmrentiva_get_display_id()</code> function is used in booking lists and widgets. If the WooCommerce integration is active, this function returns the WC order ID; otherwise the standard post ID is shown. This ensures the ID shown to the customer is consistent with the ID in the admin panel.</p>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-status-change-hooks">🔄 Status Change Hooks<a href="#-status-change-hooks" class="hash-link" aria-label="Direct link to 🔄 Status Change Hooks" title="Direct link to 🔄 Status Change Hooks" translate="no">​</a></h2>
 <p>When a booking status changes, calls to <code>update_post_meta</code> do not trigger the standard <code>save_post</code> hook. As of v4.23.0, the <code>updated_post_meta</code> and <code>added_post_meta</code> hooks are listened to, ensuring real-time updates to dashboard widgets and statistics.</p>

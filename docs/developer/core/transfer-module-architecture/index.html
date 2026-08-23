@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">MHM Rentiva Transfer Architecture | MHM Rentiva Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://MaxHandMade.github.io/mhm-rentiva-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture"><meta data-rh="true" property="og:locale" content="en_US"><meta data-rh="true" property="og:locale:alternate" content="tr_TR"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="MHM Rentiva Transfer Architecture | MHM Rentiva Documentation"><meta data-rh="true" name="description" content="Version Pro Updated"><meta data-rh="true" property="og:description" content="Version Pro Updated"><link data-rh="true" rel="icon" href="/mhm-rentiva-docs/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/docs/developer/core/transfer-module-architecture" hreflang="tr-TR"><link data-rh="true" rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Developer Guide","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/reading-order"},{"@type":"ListItem","position":2,"name":"Core","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/category/core"},{"@type":"ListItem","position":3,"name":"Transfer Architecture","item":"https://MaxHandMade.github.io/mhm-rentiva-docs/docs/developer/core/transfer-module-architecture"}]}</script><link rel="alternate" type="application/rss+xml" href="/mhm-rentiva-docs/blog/rss.xml" title="MHM Rentiva Documentation RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/mhm-rentiva-docs/blog/atom.xml" title="MHM Rentiva Documentation Atom Feed"><link rel="stylesheet" href="/mhm-rentiva-docs/assets/css/styles.64bfea40.css">
-<script src="/mhm-rentiva-docs/assets/js/runtime~main.58d92ef3.js" defer="defer"></script>
+<script src="/mhm-rentiva-docs/assets/js/runtime~main.f5650e73.js" defer="defer"></script>
 <script src="/mhm-rentiva-docs/assets/js/main.91ad2442.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -33,24 +33,24 @@ See <a class="" href="/mhm-rentiva-docs/docs/">Editions — Lite vs Pro</a> for 
 <ul>
 <li class=""><strong>Fixed:</strong> The defined <code>base_price</code> is applied directly.</li>
 <li class=""><strong>Distance:</strong> The formula <code>base_price * distance_km</code> is used. Optionally, a <code>min_price</code> floor can be added.</li>
-<li class=""><strong>Multiplier:</strong> A per-vehicle multiplier (<code>_mhm_transfer_price_multiplier</code>) allows automatic price increases for VIP vehicles.</li>
+<li class=""><strong>Multiplier:</strong> A per-vehicle multiplier (<code>_mhmrentiva_transfer_price_multiplier</code>) allows automatic price increases for VIP vehicles.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1a-vendor-pricing-v4230">1a. Vendor Pricing (v4.23.0)<a href="#1a-vendor-pricing-v4230" class="hash-link" aria-label="Direct link to 1a. Vendor Pricing (v4.23.0)" title="Direct link to 1a. Vendor Pricing (v4.23.0)" translate="no">​</a></h3>
 <p>Pricing works as follows in the vendor marketplace integration:</p>
 <ul>
 <li class="">The admin sets a <code>min_price</code> and <code>max_price</code> range for each route.</li>
-<li class="">The vendor assigns a route-based price to their own vehicle (<code>_mhm_rentiva_transfer_route_prices</code> JSON meta).</li>
+<li class="">The vendor assigns a route-based price to their own vehicle (<code>_mhmrentiva_transfer_route_prices</code> JSON meta).</li>
 <li class=""><code>TransferSearchEngine</code> checks the vendor price first; if absent, it falls back to the route <code>base_price</code>.</li>
 <li class="">If the vendor price is outside the admin&#x27;s range, it is considered invalid.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-luggage-score-calculation">2. Luggage Score Calculation<a href="#2-luggage-score-calculation" class="hash-link" aria-label="Direct link to 2. Luggage Score Calculation" title="Direct link to 2. Luggage Score Calculation" translate="no">​</a></h3>
 <p>The system calculates a vehicle&#x27;s luggage capacity using the following mathematical model:
 <code>Luggage Score = (Small Bags * 1) + (Large Bags * 2.5)</code>
-During search, if the requested luggage load exceeds the vehicle&#x27;s <code>_mhm_transfer_max_luggage_score</code> value, the vehicle is excluded.</p>
+During search, if the requested luggage load exceeds the vehicle&#x27;s <code>_mhmrentiva_transfer_max_luggage_score</code> value, the vehicle is excluded.</p>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-critical-hooks-and-actions">🛡️ Critical Hooks and Actions<a href="#️-critical-hooks-and-actions" class="hash-link" aria-label="Direct link to 🛡️ Critical Hooks and Actions" title="Direct link to 🛡️ Critical Hooks and Actions" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>AJAX Search:</strong> <code>mhm_rentiva_transfer_search_results</code> — Returns search results.</li>
+<li class=""><strong>AJAX Search:</strong> <code>mhmrentiva_transfer_search_results</code> — Returns search results.</li>
 <li class=""><strong>Add to Cart:</strong> <code>rentiva_transfer_add_to_cart</code> — Sends transfer data with meta fields to the cart.</li>
 <li class=""><strong>Order Creation:</strong> <code>woocommerce_checkout_create_order_line_item</code> — Converts route details into a permanent order record.</li>
 </ul>
@@ -63,7 +63,7 @@ During search, if the requested luggage load exceeds the vehicle&#x27;s <code>_m
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="vehicle-meta-structure">Vehicle Meta Structure<a href="#vehicle-meta-structure" class="hash-link" aria-label="Direct link to Vehicle Meta Structure" title="Direct link to Vehicle Meta Structure" translate="no">​</a></h2>
 <p>The Transfer module uses the following meta keys:</p>
-<table><thead><tr><th>Meta Key</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>_mhm_rentiva_transfer_locations</code></td><td>array</td><td>Location IDs the vehicle serves</td></tr><tr><td><code>_mhm_rentiva_transfer_routes</code></td><td>array</td><td>Route IDs the vehicle serves</td></tr><tr><td><code>_mhm_rentiva_transfer_route_prices</code></td><td>JSON</td><td>Route-based vendor prices (<code>{route_id: price}</code>)</td></tr></tbody></table>
+<table><thead><tr><th>Meta Key</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>_mhmrentiva_transfer_locations</code></td><td>array</td><td>Location IDs the vehicle serves</td></tr><tr><td><code>_mhmrentiva_transfer_routes</code></td><td>array</td><td>Route IDs the vehicle serves</td></tr><tr><td><code>_mhmrentiva_transfer_route_prices</code></td><td>JSON</td><td>Route-based vendor prices (<code>{route_id: price}</code>)</td></tr></tbody></table>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="section-summary">Section Summary<a href="#section-summary" class="hash-link" aria-label="Direct link to Section Summary" title="Direct link to Section Summary" translate="no">​</a></h2>
 <ul>
