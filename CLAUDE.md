@@ -97,7 +97,11 @@ Yeni release blog post'u:
 
 ## Memory Bağlantısı
 
-- Hafıza dizini: `C:/Users/manag/.claude/projects/c--projects-rentiva-dev/memory/`
+- Hafıza dizini: `C:/Users/manag/.claude/projects/c--projects-mhm-rentiva-docs/memory/`
+  🔴 **Bu projenin KENDİ defteri budur** (D6 Faz 3, 2026-07-27'de kuruldu). Eskiden burada
+  `c--projects-rentiva-dev/memory/` yazıyordu — bayattı; docs işinin kaydı komşunun defterine
+  yazılmaz. Rentiva penceresinden bu depoya çalışılabilir (aile kuralı,
+  `wp-knowledge/laws/feedback_calisma_penceresi_kapsami.md`), ama kayıt **buraya** düşer.
 - Hot.md tepesinde "BROKEN-LINK FIX = nav simüle et" uyarısı var
 - Detay: `feedback_link_navigation_testing.md`
 - Bu CLAUDE.md o feedback'in repo-içi kalıcı versiyonudur — feedback değişirse buraya da yansıt
