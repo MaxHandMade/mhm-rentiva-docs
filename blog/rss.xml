@@ -4,10 +4,53 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sun, 23 Aug 2026 14:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 24 Aug 2026 20:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva 6.1.0 — Cancelling a paid booking now returns the money]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release</guid>
+            <pubDate>Mon, 24 Aug 2026 20:30:00 GMT</pubDate>
+            <description><![CDATA[If a customer paid and then cancelled, Rentiva marked the booking as awaiting a refund and stopped there. No money moved. Somebody had to notice and refund it by hand. From 6.1.0 the cancellation carries the refund through to your payment gateway itself.]]></description>
+            <content:encoded><![CDATA[<p>If a customer paid and then cancelled, Rentiva marked the booking as awaiting a refund and stopped there. No money moved. Somebody had to notice and refund it by hand. From 6.1.0 the cancellation carries the refund through to your payment gateway itself.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-refund-actually-happens-now">The refund actually happens now<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#the-refund-actually-happens-now" class="hash-link" aria-label="Direct link to The refund actually happens now" title="Direct link to The refund actually happens now" translate="no">​</a></h2>
+<p>This applies to both ways a booking gets cancelled: the customer cancelling their own booking, and you cancelling it from the deposit screen. Both now run the refund to the end.</p>
+<p>Where the gateway can return the money, it does, automatically. Where it cannot — an offline payment, a gateway that does not support refunds — the booking is recorded as <strong>awaiting a manual transfer</strong>, and the customer is told that a person will transfer it rather than being promised an automatic return that is not coming. Which of the two happened is written on the booking and stated in the e-mail the customer receives.</p>
+<p>A customer who cancels before the cancellation deadline now gets the whole refundable balance back automatically, with no step from you in between. Rentiva defines no cancellation fee, so a full refund is the only policy it can apply.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="several-things-that-made-refunds-unreliable">Several things that made refunds unreliable<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#several-things-that-made-refunds-unreliable" class="hash-link" aria-label="Direct link to Several things that made refunds unreliable" title="Direct link to Several things that made refunds unreliable" translate="no">​</a></h2>
+<p>While fixing the path above, a number of related faults came out. All of these are fixed in 6.1.0:</p>
+<ul>
+<li class=""><strong>Refunding a paid order failed.</strong> The refund screen refused any order that had actually been paid. It was asking whether WooCommerce still considered the order editable — which is only true while an order is pending, on-hold or a draft — instead of asking whether the gateway could send the money back.</li>
+<li class=""><strong>A deposit booking's second order was invisible to refunds.</strong> When a booking was paid in two parts, the remaining-payment order was not found at all, so only the deposit came back.</li>
+<li class=""><strong>One refund was counted twice.</strong> A single refund ran through two separate record-and-notify steps, so the booking's refunded total was doubled and the customer received two e-mails for it.</li>
+<li class=""><strong>The refund notice did not always reach the customer.</strong> It read an e-mail field that the contact form fills in and bookings do not. When that field was empty it skipped the notice silently. It now looks where the rest of the plugin looks: the booking's own customer e-mail, then the WooCommerce billing address, then the linked account.</li>
+<li class=""><strong>A refund nobody's gateway performed was recorded as completed.</strong> It is now recorded as awaiting a manual transfer, because the money has not moved until someone moves it.</li>
+<li class=""><strong>A part-card, part-cash refund told you to transfer the whole amount by hand.</strong> The two amounts are now named separately: what the gateway already returned, and what still has to be transferred.</li>
+<li class=""><strong>Cancelling one order on a two-part booking disturbed the other.</strong> Cancelling the unpaid remaining-payment order used to cancel or demote the whole booking even though the deposit order had been paid — with no refund anywhere. The paid order is now left alone, the dead order's link is cleared so you can issue a fresh payment link for what is still owed, and you are notified.</li>
+<li class=""><strong>Manually created bookings had no payment method at all</strong>, which left them unlabelled in the booking list and its filter, refused by the refund path, and grouped into a blank bucket in payment-method reports. They are now recorded as offline payments.</li>
+<li class=""><strong>The refund box on the booking screen shows its form for offline bookings with a balance</strong> — for the first time. The box was always there; in place of the form it printed "No refundable payment found for this booking," because the form needed a figure that nothing ever wrote.</li>
+</ul>
+<p>Two refunds started at the same moment on the same booking — a cancellation and one you started from the admin screen — can no longer run at once.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="money-conversion-now-follows-your-stores-decimals">Money conversion now follows your store's decimals<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#money-conversion-now-follows-your-stores-decimals" class="hash-link" aria-label="Direct link to Money conversion now follows your store's decimals" title="Direct link to Money conversion now follows your store's decimals" translate="no">​</a></h2>
+<p>Rentiva converts between your currency and its smallest unit. It used to assume that unit was always one hundredth. It now reads your store's own setting: <strong>WooCommerce → Settings → General → Currency Options → Number of Decimals</strong>.</p>
+<p><strong>If your store uses the default of two decimals, nothing changes for you.</strong></p>
+<p>If your store is set to a different number of decimals, read this before updating: refund and payment amounts that Rentiva recorded <em>before</em> this release are re-read at the new scale rather than converted. There is no migration step for existing records, and none is planned. Currencies without minor units — the Japanese yen, for example, at zero decimals — are the case this affects.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="deposits-taken-outside-woocommerce">Deposits taken outside WooCommerce<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#deposits-taken-outside-woocommerce" class="hash-link" aria-label="Direct link to Deposits taken outside WooCommerce" title="Direct link to Deposits taken outside WooCommerce" translate="no">​</a></h2>
+<p>If a booking's deposit was taken outside WooCommerce, Rentiva no longer offers a WooCommerce payment link for the remaining balance.</p>
+<p>For a manually created booking that never had a WooCommerce order, that link always failed anyway. For a booking that started at WooCommerce checkout and whose deposit was later marked as received offline, the link did work — and that was the fault: completing it built a WooCommerce order that quietly erased the earlier offline deposit from the booking's recorded paid amount.</p>
+<p>The deposit screen now explains the situation instead of offering a button that would lose money. <strong>Process Remaining Amount</strong>, which records the balance as settled without going through WooCommerce, is unaffected and still works.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="screens">Screens<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#screens" class="hash-link" aria-label="Direct link to Screens" title="Direct link to Screens" translate="no">​</a></h2>
+<p>The vehicles list is rebuilt, with list, card and calendar views. There is a new monthly fleet occupancy calendar showing every vehicle's month at a glance. The Additional Services screen is new.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="updating">Updating<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release#updating" class="hash-link" aria-label="Direct link to Updating" title="Direct link to Updating" translate="no">​</a></h2>
+<p>Rentiva is on the WordPress.org plugin directory, so the update appears on your Plugins screen on WordPress's own schedule — usually within half a day. You can also check for it immediately from <strong>Dashboard → Updates</strong>.</p>
+<p>Tested up to WordPress 7.1. Requires WordPress 6.7 and PHP 8.1.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>refunds</category>
+            <category>woocommerce</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva 6.0.7 — MHM Rentiva is now on the WordPress.org plugin directory]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.0.7-release</link>
@@ -503,25 +546,6 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hardening">Hardening<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release#hardening" class="hash-link" aria-label="Direct link to Hardening" title="Direct link to Hardening" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Hardening: the Lite vehicle-limit counter now reflects the true vehicle count independently of the public overflow-hiding filter (internal robustness; enforced limits unchanged).</strong></li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>lite</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Route Limit Counter Fix]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release</guid>
-            <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
-            <description><![CDATA[A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.]]></description>
-            <content:encoded><![CDATA[<p>A patch release fixing the Lite VIP transfer route limit counter, which silently failed to enforce the route cap on installs using the current routes table.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Historical release note — this behaviour no longer exists</div><div class="admonitionContent_BuS1"><p>The Lite transfer-route cap this patch fixed was removed in <strong>v5.0.0</strong> along with the
-rest of the Lite plan limits. Rentiva's free core places no cap on transfer routes, so
-there is no counter and no limit notice. This post is kept as a record of what v4.62.1
-shipped.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Fix: the Lite VIP transfer route limit now counts routes correctly.</strong> On installs using the current routes table, the limit notice showed "0 used" and new routes could still be created past the Lite limit because the counter read the wrong (legacy) database table.</li>
 </ul>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>

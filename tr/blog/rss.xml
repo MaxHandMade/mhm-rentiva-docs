@@ -4,10 +4,53 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sun, 23 Aug 2026 14:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 24 Aug 2026 20:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva 6.1.0 — Ödemesi alınmış bir rezervasyonun iptali artık parayı geri veriyor]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release</guid>
+            <pubDate>Mon, 24 Aug 2026 20:30:00 GMT</pubDate>
+            <description><![CDATA[Bir müşteri ödeme yapıp sonra iptal ettiğinde, Rentiva rezervasyonu "iade bekliyor" diye işaretliyor ve orada duruyordu. Para hareket etmiyordu. Birinin bunu fark edip elle iade etmesi gerekiyordu. 6.1.0'dan itibaren iptal, iadeyi ödeme ağ geçidinize kadar kendisi yürütüyor.]]></description>
+            <content:encoded><![CDATA[<p>Bir müşteri ödeme yapıp sonra iptal ettiğinde, Rentiva rezervasyonu "iade bekliyor" diye işaretliyor ve orada duruyordu. Para hareket etmiyordu. Birinin bunu fark edip elle iade etmesi gerekiyordu. 6.1.0'dan itibaren iptal, iadeyi ödeme ağ geçidinize kadar kendisi yürütüyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇ade-artık-gerçekten-gerçekleşiyor">İade artık gerçekten gerçekleşiyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#i%CC%87ade-art%C4%B1k-ger%C3%A7ekten-ger%C3%A7ekle%C5%9Fiyor" class="hash-link" aria-label="İade artık gerçekten gerçekleşiyor doğrudan bağlantı" title="İade artık gerçekten gerçekleşiyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bu, bir rezervasyonun iptal edilebildiği her iki yol için de geçerli: müşterinin kendi rezervasyonunu iptal etmesi ve sizin depozito ekranından iptal etmeniz. İkisi de artık iadeyi sonuna kadar yürütüyor.</p>
+<p>Ağ geçidi parayı geri verebiliyorsa, otomatik olarak veriyor. Veremiyorsa — çevrimdışı bir ödeme, iadeyi desteklemeyen bir ağ geçidi — rezervasyon <strong>elden aktarım bekliyor</strong> olarak kaydediliyor ve müşteriye, gelmeyecek bir otomatik iade vaat edilmek yerine parayı bir kişinin aktaracağı söyleniyor. Hangisinin olduğu rezervasyona yazılıyor ve müşteriye giden e-postada belirtiliyor.</p>
+<p>İptal süresi dolmadan iptal eden bir müşteri, artık iade edilebilir bakiyenin tamamını, aradan sizin bir adımınız geçmeden otomatik olarak geri alıyor. Rentiva bir iptal ücreti tanımlamıyor; dolayısıyla uygulayabileceği tek politika tam iade.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇adeleri-güvenilmez-kılan-bir-dizi-şey">İadeleri güvenilmez kılan bir dizi şey<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#i%CC%87adeleri-g%C3%BCvenilmez-k%C4%B1lan-bir-dizi-%C5%9Fey" class="hash-link" aria-label="İadeleri güvenilmez kılan bir dizi şey doğrudan bağlantı" title="İadeleri güvenilmez kılan bir dizi şey doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yukarıdaki yol düzeltilirken bağlantılı birçok kusur ortaya çıktı. 6.1.0'da hepsi kapandı:</p>
+<ul>
+<li class=""><strong>Ödemesi yapılmış bir siparişin iadesi başarısız oluyordu.</strong> İade ekranı, gerçekten ödenmiş her siparişi reddediyordu. WooCommerce'in siparişi hâlâ düzenlenebilir sayıp saymadığını soruyordu — ki bu yalnız sipariş beklemede, askıda veya taslakken doğrudur — oysa sorması gereken, ağ geçidinin parayı geri gönderip gönderemeyeceğiydi.</li>
+<li class=""><strong>Depozitolu bir rezervasyonun ikinci siparişi iadelere görünmüyordu.</strong> Bir rezervasyon iki parça hâlinde ödendiğinde kalan-ödeme siparişi hiç bulunamıyordu, yani yalnız depozito geri dönüyordu.</li>
+<li class=""><strong>Bir iade iki kez sayılıyordu.</strong> Tek bir iade, birbirinden ayrı iki kaydet-ve-bildir adımından geçiyordu; rezervasyonun iade toplamı ikiye katlanıyor ve müşteriye iki e-posta gidiyordu.</li>
+<li class=""><strong>İade bildirimi müşteriye her zaman ulaşmıyordu.</strong> İletişim formunun doldurduğu, rezervasyonların doldurmadığı bir e-posta alanını okuyordu. O alan boş olduğunda bildirimi sessizce atlıyordu. Artık eklentinin geri kalanının baktığı yere bakıyor: rezervasyonun kendi müşteri e-postası, sonra WooCommerce fatura adresi, sonra bağlı hesap.</li>
+<li class=""><strong>Hiçbir ağ geçidinin gerçekleştirmediği bir iade "tamamlandı" diye kaydediliyordu.</strong> Artık elden aktarım bekliyor olarak kaydediliyor, çünkü biri parayı hareket ettirene kadar para hareket etmemiştir.</li>
+<li class=""><strong>Bir kısmı kartla, bir kısmı nakit alınmış ödemenin iadesi, tutarın tamamını elden aktarmanızı söylüyordu.</strong> İki tutar artık ayrı ayrı adlandırılıyor: ağ geçidinin zaten iade ettiği ve hâlâ aktarılması gereken.</li>
+<li class=""><strong>İki parçalı bir rezervasyonda bir siparişi iptal etmek diğerini bozuyordu.</strong> Ödenmemiş kalan-ödeme siparişini iptal etmek, depozito siparişi ödenmiş olmasına rağmen rezervasyonun tamamını iptal ediyor veya geriye düşürüyordu — üstelik hiçbir yerde iade olmadan. Ödenmiş sipariş artık rahat bırakılıyor, ölü siparişin bağlantısı temizleniyor ki kalan borç için yeni bir ödeme linki kesebilesiniz, ve size bildirim gidiyor.</li>
+<li class=""><strong>Elle oluşturulan rezervasyonların hiç ödeme yöntemi yoktu</strong>; bu da onları rezervasyon listesinde ve filtresinde etiketsiz bırakıyor, iade yolunda reddettiriyor ve ödeme yöntemi raporlarında boş bir kovaya topluyordu. Artık çevrimdışı ödeme olarak kaydediliyorlar.</li>
+<li class=""><strong>Rezervasyon ekranındaki iade kutusu, bakiyesi olan çevrimdışı rezervasyonlar için iade formunu gösteriyor</strong> — ilk kez. Kutu hep oradaydı; formun yerine <em>"Bu rezervasyon için iade edilebilir ödeme bulunamadı"</em> yazıyordu, çünkü form hiçbir şeyin yazmadığı bir tutarı bekliyordu.</li>
+</ul>
+<p>Aynı rezervasyon üzerinde aynı anda başlatılan iki iade — bir iptal ve sizin yönetim ekranından başlattığınız bir iade — artık aynı anda koşamıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-çevrimi-artık-mağazanızın-ondalığını-izliyor">Para çevrimi artık mağazanızın ondalığını izliyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#para-%C3%A7evrimi-art%C4%B1k-ma%C4%9Fazan%C4%B1z%C4%B1n-ondal%C4%B1%C4%9F%C4%B1n%C4%B1-izliyor" class="hash-link" aria-label="Para çevrimi artık mağazanızın ondalığını izliyor doğrudan bağlantı" title="Para çevrimi artık mağazanızın ondalığını izliyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rentiva, para biriminizle onun en küçük birimi arasında çevrim yapıyor. Eskiden bu birimin her zaman yüzde bir olduğunu varsayıyordu. Artık mağazanızın kendi ayarını okuyor: <strong>WooCommerce → Ayarlar → Genel → Para Birimi Seçenekleri → Ondalık Basamak Sayısı</strong>.</p>
+<p><strong>Mağazanız varsayılan iki ondalık kullanıyorsa sizin için hiçbir şey değişmiyor.</strong></p>
+<p>Mağazanız farklı bir ondalık sayısına ayarlıysa, güncellemeden önce şunu okuyun: Rentiva'nın bu sürümden <em>önce</em> kaydettiği iade ve ödeme tutarları dönüştürülmüyor, doğrudan yeni ölçekle yeniden okunuyor. Mevcut kayıtlar için bir göç adımı yok ve planlanmıyor. Bu, alt birimi olmayan para birimlerini ilgilendiriyor — örneğin sıfır ondalıklı Japon yeni.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="woocommerce-dışında-alınan-depozitolar">WooCommerce dışında alınan depozitolar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#woocommerce-d%C4%B1%C5%9F%C4%B1nda-al%C4%B1nan-depozitolar" class="hash-link" aria-label="WooCommerce dışında alınan depozitolar doğrudan bağlantı" title="WooCommerce dışında alınan depozitolar doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir rezervasyonun depozitosu WooCommerce dışında alınmışsa, Rentiva artık kalan bakiye için WooCommerce ödeme linki teklif etmiyor.</p>
+<p>Hiç WooCommerce siparişi olmamış, elle oluşturulmuş bir rezervasyon için o link zaten her zaman hata veriyordu. WooCommerce ödeme sayfasından başlayıp depozitosu sonradan çevrimdışı alındı diye işaretlenmiş bir rezervasyon içinse link <strong>çalışıyordu</strong> — ve asıl kusur buydu: tamamlanması bir WooCommerce siparişi oluşturuyor, bu da daha önce alınmış çevrimdışı depozitoyu rezervasyonun kayıtlı ödenen tutarından sessizce siliyordu.</p>
+<p>Depozito ekranı artık para kaybettirecek bir düğme sunmak yerine durumu açıklıyor. WooCommerce'e hiç uğramadan bakiyeyi tahsil edilmiş olarak kaydeden <strong>İşlem Kalan Miktar</strong> bundan etkilenmiyor ve çalışmaya devam ediyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ekranlar">Ekranlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#ekranlar" class="hash-link" aria-label="Ekranlar doğrudan bağlantı" title="Ekranlar doğrudan bağlantı" translate="no">​</a></h2>
+<p>Araçlar listesi yeniden inşa edildi; liste, kart ve takvim görünümleri var. Her aracın ayını tek bakışta gösteren yeni bir aylık filo doluluk takvimi eklendi. Ek Hizmetler ekranı da yeni.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncelleme">Güncelleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release#g%C3%BCncelleme" class="hash-link" aria-label="Güncelleme doğrudan bağlantı" title="Güncelleme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rentiva WordPress.org eklenti dizininde, dolayısıyla güncelleme WordPress'in kendi programına göre Eklentiler ekranınızda beliriyor — genellikle yarım gün içinde. Hemen kontrol etmek için <strong>Panel → Güncellemeler</strong>'i de kullanabilirsiniz.</p>
+<p>WordPress 7.1'e kadar test edildi. WordPress 6.7 ve PHP 8.1 gerektirir.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>refunds</category>
+            <category>woocommerce</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva 6.0.7 — MHM Rentiva artık WordPress.org eklenti dizininde]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.0.7-release</link>
@@ -509,25 +552,6 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sağlamlaştırma">Sağlamlaştırma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release#sa%C4%9Flamla%C5%9Ft%C4%B1rma" class="hash-link" aria-label="Sağlamlaştırma doğrudan bağlantı" title="Sağlamlaştırma doğrudan bağlantı" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Sağlamlaştırma: Lite araç-limiti sayacı artık herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtıyor (iç sağlamlık; uygulanan limitler değişmedi).</strong></li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>lite</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.62.1 — Lite VIP Transfer Rota Limiti Sayaç Düzeltmesi]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release</guid>
-            <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
-            <description><![CDATA[Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.]]></description>
-            <content:encoded><![CDATA[<p>Güncel rota tablosunu kullanan kurulumlarda rota limitini sessizce uygulamayan Lite VIP transfer rota limiti sayacını düzelten bir yama sürümü.</p>
-<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Tarihsel sürüm notu — bu davranış artık yok</div><div class="admonitionContent_BuS1"><p>Bu yamanın düzelttiği Lite transfer rotası sınırı, diğer Lite plan limitleriyle birlikte
-<strong>v5.0.0</strong>'da kaldırıldı. Rentiva'nın ücretsiz çekirdeği transfer rotası sayısını
-sınırlamıyor; dolayısıyla ne bir sayaç ne de limit bildirimi var. Bu yazı v4.62.1'in ne
-getirdiğinin kaydı olarak duruyor.</p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Düzeltme: Lite VIP transfer rota limiti artık rotaları doğru sayıyor.</strong> Güncel rota tablosunu kullanan kurulumlarda limit uyarısı "0 kullanıldı" gösteriyor ve sayaç yanlış (eski) veritabanı tablosunu okuduğu için Lite limitinin üstünde yeni rota eklenebiliyordu.</li>
 </ul>]]></content:encoded>
             <category>release</category>
             <category>rentiva</category>
