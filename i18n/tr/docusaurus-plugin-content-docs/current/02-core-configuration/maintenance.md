@@ -56,7 +56,7 @@ Temizleme işlemleri geri alınamaz. İşlem yapmadan önce mutlaka **"Anlık G�
 
 Eklenti tamamen kaldırıldığında (silindiğinde), kaldırıcı önce kendi içeriğini siler, sonra kendi tablolarını düşürür.
 
-**Sildiği içerik.** Araçlar, rezervasyonlar, iletişim mesajları ve iki günlük tipi tablo değil **WordPress içeriğidir** ve içerik olarak silinir: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. 6.0.0 öncesi `vehicle` ve `vehicle_booking` içerik tiplerini hâlâ taşıyan kayıtlar da bunlarla birlikte silinir.
+**Sildiği içerik.** Araçlar, rezervasyonlar, ek hizmetler, iletişim mesajları ve iki günlük tipi tablo değil **WordPress içeriğidir** ve içerik olarak silinir: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_addon`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. 6.0.0 öncesi `vehicle` ve `vehicle_booking` içerik tiplerini hâlâ taşıyan kayıtlar da bunlarla birlikte silinir.
 
 **Düşürdüğü tablolar.**
 

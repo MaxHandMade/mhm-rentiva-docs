@@ -56,7 +56,7 @@ You can monitor the row count and disk size of plugin-specific tables such as `p
 
 When the plugin is completely removed (deleted), the uninstaller deletes its content and drops its own tables.
 
-**Content it deletes.** Vehicles, bookings, contact messages and the two log types are WordPress posts, not tables, and they are deleted as posts: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. Records still carrying the pre-6.0.0 post types `vehicle` and `vehicle_booking` are deleted with them.
+**Content it deletes.** Vehicles, bookings, additional services, contact messages and the two log types are WordPress posts, not tables, and they are deleted as posts: `mhmrentiva_vehicle`, `mhmrentiva_booking`, `mhmrentiva_addon`, `mhmrentiva_contact`, `mhmrentiva_app_log`, `mhmrentiva_email_log`. Records still carrying the pre-6.0.0 post types `vehicle` and `vehicle_booking` are deleted with them.
 
 **Tables it drops.**
 
