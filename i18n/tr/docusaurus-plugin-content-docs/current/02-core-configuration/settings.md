@@ -16,7 +16,7 @@ Genel Ayarlar sayfası, eklentinin temel çalışma prensiplerini, para birimini
 
 Bu bölümde sistemin temel görüntüleme ve para birimi tercihleri belirlenir.
 
-- **Para Birimi:** MHM Rentiva, WooCommerce ile tam uyumlu çalışır. Eğer sitenizde WooCommerce yüklüyse, para birimi ayarı otomatik olarak WooCommerce'den çekilir (Varsayılan: TRY).
+- **Para Birimi:** MHM Rentiva, WooCommerce ile tam uyumlu çalışır. Sitenizde WooCommerce etkinse para birimi WooCommerce'den alınır ve buradaki ayar onu izler. WooCommerce yoksa eklenti kendi para birimi ayarını kullanır; **varsayılanı USD**'dir.
 - **Para Birimi Pozisyonu:** Sembolün sağda/solda olması gibi yerleşim ayarları yine WooCommerce üzerinden merkezi olarak yönetilir.
 - **Karanlık Kip (Dark Mode):** Yönetim panelinin renk şemasını belirler. 
     - **Otomatik (Sistem):** İşletim sisteminizin moduna göre (Gece/Gündüz) otomatik değişir.

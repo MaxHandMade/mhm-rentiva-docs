@@ -16,7 +16,7 @@ The General Settings page is the starting point where you configure the plugin's
 
 This section defines the system's core display and currency preferences.
 
-- **Currency:** MHM Rentiva works fully integrated with WooCommerce. If WooCommerce is installed on your site, the currency setting is automatically pulled from WooCommerce (Default: TRY).
+- **Currency:** MHM Rentiva works fully integrated with WooCommerce. If WooCommerce is active on your site, the currency is taken from WooCommerce and the setting below simply follows it. Without WooCommerce, the plugin uses its own currency setting, which defaults to **USD**.
 - **Currency Position:** Placement settings such as symbol left/right are also managed centrally through WooCommerce.
 - **Dark Mode:** Defines the color scheme of the admin panel.
     - **Auto (System):** Automatically switches based on your operating system's mode (Night/Day).
