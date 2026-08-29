@@ -2,11 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-08-24T20:30:00.000Z</updated>
+    <updated>2026-08-29T00:40:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.1.3 — Vehicle galleries stop disappearing]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release"/>
+        <updated>2026-08-29T00:40:00.000Z</updated>
+        <summary type="html"><![CDATA[If your vehicle detail fields were configured before 6.1.2, adding gallery images and pressing Update could wipe the gallery you had just added. 6.1.3 stops that, and it asks nothing of you: no database change, no re-saving of settings. Installing it is enough.]]></summary>
+        <content type="html"><![CDATA[<p>If your vehicle detail fields were configured before 6.1.2, adding gallery images and pressing Update could wipe the gallery you had just added. 6.1.3 stops that, and it asks nothing of you: no database change, no re-saving of settings. Installing it is enough.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-gallery-no-longer-disappears">The gallery no longer disappears<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release#the-gallery-no-longer-disappears" class="hash-link" aria-label="Direct link to The gallery no longer disappears" title="Direct link to The gallery no longer disappears" translate="no">​</a></h2>
+<p>Two boxes that were never real fields — an empty <strong>Image</strong> and an empty <strong>Gallery Images</strong> — sat in the Vehicle Details grid on every vehicle screen. They looked cosmetic. They were not: the second one carried the same form field name as the gallery itself, and when two fields on a page share a name, the browser sends both and the last one wins. The empty box came last, so pressing Update wrote nothing over the gallery you had just uploaded.</p>
+<p>6.1.2 stopped new sites from ever reaching that state, but it did nothing for sites already in it — and that is most sites that had saved their vehicle settings at least once. The reason it survived is worth one sentence: the code that decides which fields exist would invent a label for any name it did not recognise, and an invented label made an unrecognised name look like a real field to every check that came after it. It now discards what it does not recognise.</p>
+<p>So if your site is affected, updating is the whole fix. The leftover entry stays in your settings and is simply ignored from now on.</p>
+<p><strong>One thing to know.</strong> If you clear a custom detail's name under <em>Edit Names</em>, that detail now disappears from the grid instead of showing under a name generated from its internal key. Nothing is deleted — typing a name again brings it straight back — and the public side of your site was already hiding such a field, so the two now agree.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="saving-an-ordinary-page-no-longer-writes-booking-data-onto-it">Saving an ordinary page no longer writes booking data onto it<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release#saving-an-ordinary-page-no-longer-writes-booking-data-onto-it" class="hash-link" aria-label="Direct link to Saving an ordinary page no longer writes booking data onto it" title="Direct link to Saving an ordinary page no longer writes booking data onto it" translate="no">​</a></h2>
+<p>A handler that stores booking information was listening to every save on the site rather than to bookings only. Saving an unrelated page or post could therefore write a booking status onto it. Nobody could reach data they were not allowed to reach — the check that was in place still asked whether you may edit that page — but the plugin was writing its own fields onto objects that were none of its business.</p>
+<p>Fifteen handlers across vehicles and bookings now confirm what kind of post they are writing to before they write. One of them was a live path that could attach vehicle ordering data to any post it was pointed at.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-admin-screen-that-fails-now-says-so">An admin screen that fails now says so<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release#an-admin-screen-that-fails-now-says-so" class="hash-link" aria-label="Direct link to An admin screen that fails now says so" title="Direct link to An admin screen that fails now says so" translate="no">​</a></h2>
+<p>When a screen's data failed to load, some screens showed a short "something went wrong, please refresh" message and others simply went blank — a white area under the WordPress menu with nothing explaining it. Every screen now shows the message, and a check keeps new screens from shipping without it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="under-the-hood">Under the hood<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release#under-the-hood" class="hash-link" aria-label="Direct link to Under the hood" title="Direct link to Under the hood" translate="no">​</a></h2>
+<p>Shared admin building blocks are now loaded from a common package rather than kept as copies inside Rentiva, and duplicated style declarations were consolidated. This was verified against a before-and-after comparison in both light and dark mode: nothing on your site renders differently.</p>
+<hr>
+<p>6.1.1 and 6.1.2 were never published to the WordPress.org directory; everything they fixed is included here. The full history in both languages ships with the plugin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="vehicles" term="vehicles"/>
+        <category label="security" term="security"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva 6.1.0 — Cancelling a paid booking now returns the money]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.0-release</id>
@@ -610,24 +640,5 @@
         <category label="release" term="release"/>
         <category label="rentiva" term="rentiva"/>
         <category label="checkout" term="checkout"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.62.2 — Lite Vehicle-Limit Counter Hardening]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release"/>
-        <updated>2026-07-01T13:00:00.000Z</updated>
-        <summary type="html"><![CDATA[An internal hardening patch ensuring the Lite vehicle-limit counter reflects the true vehicle count independently of the public overflow-hiding filter.]]></summary>
-        <content type="html"><![CDATA[<p>An internal hardening patch ensuring the Lite vehicle-limit counter reflects the true vehicle count independently of the public overflow-hiding filter.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hardening">Hardening<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.2-release#hardening" class="hash-link" aria-label="Direct link to Hardening" title="Direct link to Hardening" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Hardening: the Lite vehicle-limit counter now reflects the true vehicle count independently of the public overflow-hiding filter (internal robustness; enforced limits unchanged).</strong></li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="lite" term="lite"/>
     </entry>
 </feed>

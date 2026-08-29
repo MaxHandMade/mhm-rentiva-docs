@@ -4,10 +4,36 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 24 Aug 2026 20:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 29 Aug 2026 00:40:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva 6.1.3 — Araç galerileri artık kaybolmuyor]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release</guid>
+            <pubDate>Sat, 29 Aug 2026 00:40:00 GMT</pubDate>
+            <description><![CDATA[Araç detay alanlarınız 6.1.2'den önce yapılandırıldıysa, galeri görseli ekleyip Güncelle'ye basmak az önce eklediğiniz galeriyi silebiliyordu. 6.1.3 bunu durduruyor ve sizden hiçbir şey istemiyor: veritabanı değişikliği yok, ayarları yeniden kaydetmek yok. Güncellemek yeterli.]]></description>
+            <content:encoded><![CDATA[<p>Araç detay alanlarınız 6.1.2'den önce yapılandırıldıysa, galeri görseli ekleyip Güncelle'ye basmak az önce eklediğiniz galeriyi silebiliyordu. 6.1.3 bunu durduruyor ve sizden hiçbir şey istemiyor: veritabanı değişikliği yok, ayarları yeniden kaydetmek yok. Güncellemek yeterli.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="galeri-artık-kaybolmuyor">Galeri artık kaybolmuyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release#galeri-art%C4%B1k-kaybolmuyor" class="hash-link" aria-label="Galeri artık kaybolmuyor doğrudan bağlantı" title="Galeri artık kaybolmuyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Hiçbir zaman gerçek alan olmayan iki kutu — boş bir <strong>Image</strong> ve boş bir <strong>Gallery Images</strong> — her araç ekranındaki Araç Detayları ızgarasında duruyordu. Görüntüde zararsızdılar; değillerdi: ikincisi galerinin kendisiyle <strong>aynı form alanı adını</strong> taşıyordu ve bir sayfada iki alan aynı adı taşıdığında tarayıcı ikisini de gönderir, sonuncusu kazanır. Boş kutu sonda geliyordu, yani Güncelle'ye basmak az önce yüklediğiniz galerinin üzerine boşluk yazıyordu.</p>
+<p>6.1.2 yeni sitelerin bu duruma hiç düşmemesini sağladı, ama zaten o durumda olan siteler için bir şey yapmadı — ve araç ayarlarını en az bir kez kaydetmiş siteler çoğunlukla o durumdaydı. Neden kurtulduğu tek cümleyle şu: hangi alanların var olduğuna karar veren kod, <strong>tanımadığı bir ada etiket uyduruyordu</strong>, ve uydurulmuş bir etiket o adı, sonraki her kontrolün gözünde gerçek bir alan hâline getiriyordu. Artık tanımadığını atıyor.</p>
+<p>Yani siteniz etkilendiyse, güncellemek düzeltmenin tamamıdır. Ayarlarınızda kalan artık kayıt yerinde durur ve bundan sonra basitçe yok sayılır.</p>
+<p><strong>Bilmeniz gereken bir şey.</strong> <em>Adları Düzenle</em> altında bir özel detayın adını silerseniz, o detay artık iç anahtarından türetilmiş bir adla görünmek yerine ızgaradan kaybolur. Hiçbir şey silinmez — yeniden ad yazmak onu anında geri getirir — ve sitenizin ön yüzü böyle bir alanı zaten gizliyordu, yani ikisi artık aynı şeyi söylüyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sıradan-bir-sayfayı-kaydetmek-artık-üzerine-rezervasyon-verisi-yazmıyor">Sıradan bir sayfayı kaydetmek artık üzerine rezervasyon verisi yazmıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release#s%C4%B1radan-bir-sayfay%C4%B1-kaydetmek-art%C4%B1k-%C3%BCzerine-rezervasyon-verisi-yazm%C4%B1yor" class="hash-link" aria-label="Sıradan bir sayfayı kaydetmek artık üzerine rezervasyon verisi yazmıyor doğrudan bağlantı" title="Sıradan bir sayfayı kaydetmek artık üzerine rezervasyon verisi yazmıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rezervasyon bilgisi kaydeden bir işleyici, yalnız rezervasyonları değil <strong>sitedeki her kaydetmeyi</strong> dinliyordu. Bu yüzden ilgisiz bir sayfayı veya yazıyı kaydetmek onun üzerine bir rezervasyon durumu yazabiliyordu. Kimse erişemeyeceği bir veriye erişemiyordu — mevcut kontrol hâlâ "bu sayfayı düzenleyebilir misiniz" diye soruyordu — ama eklenti kendi alanlarını kendisini ilgilendirmeyen nesnelere yazıyordu.</p>
+<p>Araç ve rezervasyon tarafındaki on beş işleyici artık yazmadan önce hangi tür kayda yazdığını doğruluyor. Bunlardan biri, yönlendirildiği her kayda araç sıralama verisi ekleyebilen canlı bir yoldu.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yüklenemeyen-bir-yönetim-ekranı-artık-durumu-söylüyor">Yüklenemeyen bir yönetim ekranı artık durumu söylüyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release#y%C3%BCklenemeyen-bir-y%C3%B6netim-ekran%C4%B1-art%C4%B1k-durumu-s%C3%B6yl%C3%BCyor" class="hash-link" aria-label="Yüklenemeyen bir yönetim ekranı artık durumu söylüyor doğrudan bağlantı" title="Yüklenemeyen bir yönetim ekranı artık durumu söylüyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir ekranın verisi yüklenemediğinde bazı ekranlar kısa bir "bir şeyler ters gitti, lütfen yenileyin" mesajı gösteriyor, bazıları ise bomboş kalıyordu — WordPress menüsünün altında hiçbir açıklama taşımayan beyaz bir alan. Artık her ekran mesajı gösteriyor ve bir kontrol, yeni ekranların bu mesaj olmadan sevk edilmesini engelliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kapağın-altında">Kapağın altında<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.3-release#kapa%C4%9F%C4%B1n-alt%C4%B1nda" class="hash-link" aria-label="Kapağın altında doğrudan bağlantı" title="Kapağın altında doğrudan bağlantı" translate="no">​</a></h2>
+<p>Paylaşılan yönetim yapı taşları artık Rentiva'nın içinde kopya olarak tutulmak yerine ortak bir paketten yükleniyor ve yinelenen stil tanımları birleştirildi. Bu, açık ve koyu temada değişiklik öncesi/sonrası karşılaştırmayla doğrulandı: sitenizde hiçbir şey farklı görüntülenmiyor.</p>
+<hr>
+<p>6.1.1 ve 6.1.2 WordPress.org dizinine hiç yayınlanmadı; düzelttikleri her şey buraya dahil. Tam geçmiş, iki dilde, eklentiyle birlikte geliyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>vehicles</category>
+            <category>security</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva 6.1.0 — Ödemesi alınmış bir rezervasyonun iptali artık parayı geri veriyor]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.0-release</link>
@@ -541,21 +567,6 @@
             <category>release</category>
             <category>rentiva</category>
             <category>checkout</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.62.2 — Lite Araç-Limiti Sayaç Sağlamlaştırması]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release</guid>
-            <pubDate>Wed, 01 Jul 2026 13:00:00 GMT</pubDate>
-            <description><![CDATA[Lite araç-limiti sayacının herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtmasını sağlayan bir iç sağlamlaştırma yaması.]]></description>
-            <content:encoded><![CDATA[<p>Lite araç-limiti sayacının herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtmasını sağlayan bir iç sağlamlaştırma yaması.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sağlamlaştırma">Sağlamlaştırma<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.62.2-release#sa%C4%9Flamla%C5%9Ft%C4%B1rma" class="hash-link" aria-label="Sağlamlaştırma doğrudan bağlantı" title="Sağlamlaştırma doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Sağlamlaştırma: Lite araç-limiti sayacı artık herkese açık overflow-gizleme filtresinden bağımsız olarak gerçek araç sayısını yansıtıyor (iç sağlamlık; uygulanan limitler değişmedi).</strong></li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>lite</category>
         </item>
     </channel>
 </rss>
