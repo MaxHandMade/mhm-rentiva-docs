@@ -6,7 +6,7 @@ tags: [release, rentiva, pro, vendors, security, breaking]
 date: 2026-08-29T05:00
 ---
 
-Bu bir ana sürüm ve temmuz sonundaki 5.2.3'ten bu yana yayınlanan ilk Pro paketi. Çoğu site sahibi için iki cümle yeter: **önce MHM Rentiva'yı 6.1.3'e, sonra Pro'yu güncelleyin**; verileriniz yönetim panelini bir sonraki açışınızda kendiliğinden taşınır. Geri kalan herkes — yani Pro'nun hook'larına bağlı özel kodu olanlar — önce kısa bir listeyi okumalı, çünkü 62 hook adı değişti ve bunlardan biri ateşlemeyi bıraktığında sizi hiçbir şey uyarmıyor.
+Bu bir ana sürüm ve temmuz sonundaki 5.2.3'ten bu yana yayınlanan ilk Pro paketi. Çoğu site sahibi için iki cümle yeter: **önce MHM Rentiva'yı 6.1.3'e, sonra Pro'yu güncelleyin**; verileriniz yönetim panelini bir sonraki açışınızda kendiliğinden taşınır. Geri kalan herkes — yani Pro'nun hook'larına bağlı özel kodu olanlar — önce kısa bir listeyi okumalı, çünkü 70 hook adı değişti ve bunlardan biri ateşlemeyi bıraktığında sizi hiçbir şey uyarmıyor.
 
 <!--truncate-->
 
@@ -15,6 +15,8 @@ Bu bir ana sürüm ve temmuz sonundaki 5.2.3'ten bu yana yayınlanan ilk Pro pak
 Pro'nun tanımlayıcıları, tıpkı ücretsiz eklentinin kendi 6.0.0'ında yaptığı gibi, tek ve tutarlı bir öneke taşındı. Bir kez yapılması iyi, kazara keşfedilmesi kötü bir iş — o yüzden tamamı burada.
 
 **Hook kuralı tek adım.** `mhm_rentiva_` yerine `mhmrentiva_` yazın. Yani `mhm_rentiva_payout_approved` artık `mhmrentiva_payout_approved`. Üç mesaj hook'u düz `mhm_` öneki kullanıyordu, aynı kural onlar için de geçerli: `mhm_message_created`, `mhm_message_read` ve `mhm_message_status_changed`.
+
+**Kuralın anlatmadığı tek hook.** `mhm_rentiva/currency_symbol`, diğer her ad alt çizgi kullanırken eğik çizgi kullanıyordu. Artık `mhmrentiva_currency_symbol`.
 
 **Bir filtre yeniden adlandırılmadı, kaldırıldı.** `mhm_rentiva_vendor_apply_endpoint_slug` de diğerleri gibi yeni öneke süpürülmüştü; şimdi tümden kaldırıldı — çünkü hiç çalışmıyordu. Yalnızca gönderim sonrası yönlendirmenin kurulduğu yerde uygulanıyordu; bayi başvuru ucunu *kaydeden* kod ise onu ne bu sürümde ne de 5.2.3'te okuyordu. Onu ayarlayan herkes, WordPress'in haberi olmayan bir adrese yönlendiriliyor ve 404 alıyordu. Uca bağlamak yerine kaldırdık, çünkü buradaki uç adresi başka bir kodun yeniden yazacağı bir etiket değil, sitenizin diline sabitlenmiş bir tanımlayıcıdır.
 

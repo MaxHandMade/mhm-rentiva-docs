@@ -6,7 +6,7 @@ tags: [release, rentiva, pro, vendors, security, breaking]
 date: 2026-08-29T05:00
 ---
 
-This is a major release, and the first Pro build published since 5.2.3 at the end of July. Two sentences cover most site owners: **update MHM Rentiva to 6.1.3 first, then Pro**, and your data moves itself the next time you open the admin. Everyone else — anyone with custom code hooked into Pro — has a short list to read first, because 62 hook names changed and nothing warns you when one stops firing.
+This is a major release, and the first Pro build published since 5.2.3 at the end of July. Two sentences cover most site owners: **update MHM Rentiva to 6.1.3 first, then Pro**, and your data moves itself the next time you open the admin. Everyone else — anyone with custom code hooked into Pro — has a short list to read first, because 70 hook names changed and nothing warns you when one stops firing.
 
 <!--truncate-->
 
@@ -15,6 +15,8 @@ This is a major release, and the first Pro build published since 5.2.3 at the en
 Pro's identifiers moved onto one consistent prefix, the same way the free plugin's did in its own 6.0.0. That is a good thing to have done once and a bad thing to discover by accident, so here is the whole of it.
 
 **The hook rule is one step.** Replace `mhm_rentiva_` with `mhmrentiva_`. So `mhm_rentiva_payout_approved` becomes `mhmrentiva_payout_approved`. Three message hooks used a plain `mhm_` prefix and follow the same rule: `mhm_message_created`, `mhm_message_read` and `mhm_message_status_changed`.
+
+**One hook the rule does not describe.** `mhm_rentiva/currency_symbol` used a slash where every other name used an underscore. It is now `mhmrentiva_currency_symbol`.
 
 **One filter is gone rather than renamed.** `mhm_rentiva_vendor_apply_endpoint_slug` was swept to the new prefix like everything else, and has now been removed outright — because it never worked. It was applied only where the post-submission redirect is built, while the code that *registers* the vendor-application endpoint never read it, in this version or in 5.2.3. Anyone who set it was redirected to an address WordPress had not been told about, and landed on a 404. We removed it rather than wiring it up, because the address of an endpoint here is an identifier fixed to your site's language, not a label for other code to rewrite.
 
