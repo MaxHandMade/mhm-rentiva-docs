@@ -4,10 +4,56 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sat, 29 Aug 2026 00:40:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 29 Aug 2026 05:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva Pro 6.0.0 — Everything is named consistently, and suspension finally means suspension]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release</guid>
+            <pubDate>Sat, 29 Aug 2026 05:00:00 GMT</pubDate>
+            <description><![CDATA[This is a major release, and the first Pro build published since 5.2.3 at the end of July. Two sentences cover most site owners: update MHM Rentiva to 6.1.3 first, then Pro, and your data moves itself the next time you open the admin. Everyone else — anyone with custom code hooked into Pro — has a short list to read first, because 70 hook names changed and nothing warns you when one stops firing.]]></description>
+            <content:encoded><![CDATA[<p>This is a major release, and the first Pro build published since 5.2.3 at the end of July. Two sentences cover most site owners: <strong>update MHM Rentiva to 6.1.3 first, then Pro</strong>, and your data moves itself the next time you open the admin. Everyone else — anyone with custom code hooked into Pro — has a short list to read first, because 70 hook names changed and nothing warns you when one stops firing.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="read-this-first-if-you-have-custom-code">Read this first if you have custom code<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#read-this-first-if-you-have-custom-code" class="hash-link" aria-label="Direct link to Read this first if you have custom code" title="Direct link to Read this first if you have custom code" translate="no">​</a></h2>
+<p>Pro's identifiers moved onto one consistent prefix, the same way the free plugin's did in its own 6.0.0. That is a good thing to have done once and a bad thing to discover by accident, so here is the whole of it.</p>
+<p><strong>The hook rule is one step.</strong> Replace <code>mhm_rentiva_</code> with <code>mhmrentiva_</code>. So <code>mhm_rentiva_payout_approved</code> becomes <code>mhmrentiva_payout_approved</code>. Three message hooks used a plain <code>mhm_</code> prefix and follow the same rule: <code>mhm_message_created</code>, <code>mhm_message_read</code> and <code>mhm_message_status_changed</code>.</p>
+<p><strong>One hook the rule does not describe.</strong> <code>mhm_rentiva/currency_symbol</code> used a slash where every other name used an underscore. It is now <code>mhmrentiva_currency_symbol</code>.</p>
+<p><strong>One filter is gone rather than renamed.</strong> <code>mhm_rentiva_vendor_apply_endpoint_slug</code> was swept to the new prefix like everything else, and has now been removed outright — because it never worked. It was applied only where the post-submission redirect is built, while the code that <em>registers</em> the vendor-application endpoint never read it, in this version or in 5.2.3. Anyone who set it was redirected to an address WordPress had not been told about, and landed on a 404. We removed it rather than wiring it up, because the address of an endpoint here is an identifier fixed to your site's language, not a label for other code to rewrite.</p>
+<p><strong>The part that catches people is not our hook names.</strong> Pro's three content types were renamed, and that changes the WordPress hooks derived from them:</p>
+<table><thead><tr><th>Was</th><th>Is now</th></tr></thead><tbody><tr><td><code>mhm_message</code></td><td><code>mhmrentiva_message</code></td></tr><tr><td><code>mhm_payout</code></td><td><code>mhmrentiva_payout</code></td></tr><tr><td><code>mhm_vendor_app</code></td><td><code>mhmrentiva_vendor</code></td></tr></tbody></table>
+<p>So <code>save_post_mhm_payout</code> is now <code>save_post_mhmrentiva_payout</code>, and the same applies to the <code>add_meta_boxes_*</code> and <code>manage_*_posts_columns</code> families. Any <code>WP_Query</code>, <code>get_posts</code> or <code>pre_get_posts</code> check naming an old type now matches nothing at all, quietly.</p>
+<p>Note the third row. <code>mhm_vendor_app</code> did <strong>not</strong> become <code>mhmrentiva_vendor_app</code> — that name is 21 characters and WordPress stores a content type in a 20-character column, so registering it fails outright and the content type would simply cease to exist. It is <code>mhmrentiva_vendor</code>.</p>
+<p><strong>Before updating, search your custom code for</strong> <code>mhm_rentiva</code>, <code>mhm_message_</code>, <code>save_post_mhm_payout</code>, and the quoted values <code>'mhm_message'</code>, <code>'mhm_payout'</code> and <code>'mhm_vendor_app'</code>.</p>
+<p><strong>Your shortcodes were deliberately left alone.</strong> <code>rentiva_vendor_profile</code>, <code>rentiva_vendor_directory</code>, <code>rentiva_vendor_ledger</code>, <code>rentiva_transfer_search</code>, <code>rentiva_transfer_results</code>, <code>rentiva_popular_routes</code> and <code>rentiva_messages</code> keep the names they have always had, because those names are saved inside the content of your pages. Renaming them would have blanked live pages. Pages built with them need no attention.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="your-data-moves-itself">Your data moves itself<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#your-data-moves-itself" class="hash-link" aria-label="Direct link to Your data moves itself" title="Direct link to Your data moves itself" translate="no">​</a></h2>
+<p>Twenty settings, four database tables — the commission ledger, commission policy, vendor reports and the background-job queue — ten scheduled jobs and the custom fields on Pro's content types are all moved to the new names by a migration that runs once, the first time an administrator, WP-CLI or a scheduled job reaches the site after the update. Nothing is deleted and nothing has to be re-entered.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="update-the-free-plugin-first">Update the free plugin first<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#update-the-free-plugin-first" class="hash-link" aria-label="Direct link to Update the free plugin first" title="Direct link to Update the free plugin first" translate="no">​</a></h2>
+<p>Pro has always declared which version of MHM Rentiva it needs. Until now it never checked: the only test asked whether the free plugin was installed, never whether it was recent enough.</p>
+<p>It checks now, and it needs <strong>6.1.1 or newer</strong>. Below that, Pro registers nothing, touches no data and shows a notice naming both versions — which is also why updating in the wrong order is safe rather than destructive. It simply waits. In 5.2.3 the same mismatch produced a fatal error on the vendor panel instead of a message.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="suspension-now-means-suspension">Suspension now means suspension<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#suspension-now-means-suspension" class="hash-link" aria-label="Direct link to Suspension now means suspension" title="Direct link to Suspension now means suspension" translate="no">​</a></h2>
+<p>Three things were wrong at once here, and together they made a suspended vendor less suspended than the screen claimed.</p>
+<p>A suspended vendor <strong>kept the ability to edit and delete their own vehicle listings</strong>. Suspension removes the vendor role and drafts those listings, but a permission filter was handing edit and delete rights back on any vehicle the caller had authored. Booking history included. The half of that filter that grants rights now asks whether the vendor is active; the half that restricts stays exactly as wide as it was.</p>
+<p>Suspending was also <strong>a one-way door</strong>. It worked, and every attempt to lift it afterwards failed with "vendor not found" — permanently — while the screen went on listing the vendor as suspended and went on offering the button. Five endpoints were asking for a role that suspension removes. An operator could not correct a suspended vendor's city or commission rate either.</p>
+<p>And a suspended vendor's <strong>pending bank-account change request vanished</strong> from the operator's tab and its counter, because those were also listing by role. A request that arrived just before a suspension can now still be resolved.</p>
+<p>Separately, two older form handlers took a user id straight from the request and wrote vendor status onto it — pointed at any account, one could mark a stranger as a suspended vendor and draft everything they had authored. Nothing in the plugin generates the tokens those handlers require, so they were unreachable in practice, but they were the same operation behind a weaker gate than the routes actually in use. Both now verify the target and refuse visibly.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="five-admin-screens-that-were-not-working">Five admin screens that were not working<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#five-admin-screens-that-were-not-working" class="hash-link" aria-label="Direct link to Five admin screens that were not working" title="Direct link to Five admin screens that were not working" translate="no">​</a></h2>
+<p>Five Pro admin screens were reading the free plugin's list of REST endpoints, which does not describe Pro's own — so each screen loaded and then failed. Pro now ships its own map, and a check compares that map against the routes actually registered. Two further screens that went blank instead of showing an error when data was missing are now contained, so the rest of the page survives.</p>
+<p>The vendor dashboard is fixed too: a vendor holding a valid licence was being resolved as a customer, which cost them their navigation and their panel, and the financial figures at the top read zero instead of reading the commission ledger.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="you-will-now-be-told-when-a-new-pro-exists">You will now be told when a new Pro exists<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#you-will-now-be-told-when-a-new-pro-exists" class="hash-link" aria-label="Direct link to You will now be told when a new Pro exists" title="Direct link to You will now be told when a new Pro exists" translate="no">​</a></h2>
+<p>Pro is distributed from wpalemi.com rather than the WordPress.org directory, so WordPress's own update check has never had anything to say about it — and until now, neither did we. The Plugins screen now shows a line of our own when a newer version is available. It does not join WordPress's update pipeline; it just tells you.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also-fixed">Also fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.0.0-release#also-fixed" class="hash-link" aria-label="Direct link to Also fixed" title="Direct link to Also fixed" translate="no">​</a></h2>
+<p>A group of paid capabilities had stopped working when the free plugin removed code Pro had been borrowing: the add-on context cluster, the vehicle reliability and penalty cluster, message-notification email bodies, the relocated email templates together with any overrides you had saved, the paid shortcodes' attribute definitions, the premium transfer-results stylesheet, and the vendor role itself.</p>
+<p>Pro was also not loading its own translation catalogue, so its Turkish never appeared. Transfer-only add-ons were being offered on the rental side. The reports screen was writing a translated label into a booking's status field. And the database migrations now run on MySQL 8 as well as MariaDB.</p>
+<hr>
+<p>The full changelog ships with the plugin in both languages. If you are updating from 5.2.3, everything above happened in between.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>vendors</category>
+            <category>security</category>
+            <category>breaking</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva 6.1.3 — Vehicle galleries stop disappearing]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.3-release</link>
@@ -546,21 +592,6 @@
             <category>rentiva</category>
             <category>checkout</category>
             <category>admin</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.62.3 — Checkout Deposit Remaining-Amount Restore Fix]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release</guid>
-            <pubDate>Thu, 02 Jul 2026 12:00:00 GMT</pubDate>
-            <description><![CDATA[A patch release fixing a checkout bug where switching the payment-type option from "Full Payment" back to "Deposit Payment" left the remaining balance stuck at zero.]]></description>
-            <content:encoded><![CDATA[<p>A patch release fixing a checkout bug where switching the payment-type option from "Full Payment" back to "Deposit Payment" left the remaining balance stuck at zero.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.62.3-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Fix: switching the checkout payment-type option from "Full Payment" back to "Deposit Payment" now correctly restores the remaining balance.</strong> Previously, once the full-payment option was selected even briefly (including an automatic page-load sync), the remaining balance stayed at 0 after switching back to a deposit, leaving no way to collect or track the rest of the payment.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>checkout</category>
         </item>
     </channel>
 </rss>
