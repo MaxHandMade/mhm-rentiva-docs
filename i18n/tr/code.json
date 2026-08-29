@@ -384,5 +384,11 @@
   "theme.tags.tagsPageTitle": {
     "message": "Etiketler",
     "description": "The title of the tag list page"
+  },
+  "home.title": {
+    "message": "MHM Rentiva Dokümantasyonu"
+  },
+  "home.description": {
+    "message": "WordPress araç kiralama ve transfer rezervasyon eklentisi — dokümantasyon"
   }
 }

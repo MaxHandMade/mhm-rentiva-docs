@@ -4,28 +4,33 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* Palette sampled from the plugin's own banner (static/img/banner-1544x500.png):
+   dark navy #04111e + turquoise #30b0b0 (the "Rentiva" wordmark colour). The
+   turquoise itself is too light to pass 4.5:1 body-text contrast on a white
+   page (measured 2.64:1), so light mode uses a darkened tone of the same hue;
+   dark mode uses the turquoise itself, which reads at 6.52:1 on the default
+   dark background. --ifm-color-primary-lightest lands back on #30b0b0 exactly. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #1f7070;
+  --ifm-color-primary-dark: #195c5c;
+  --ifm-color-primary-darker: #154e4e;
+  --ifm-color-primary-darkest: #0d3030;
+  --ifm-color-primary-light: #248484;
+  --ifm-color-primary-lighter: #289292;
+  --ifm-color-primary-lightest: #30b0b0;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #30b0b0;
+  --ifm-color-primary-dark: #279090;
+  --ifm-color-primary-darker: #217a7a;
+  --ifm-color-primary-darkest: #144949;
+  --ifm-color-primary-light: #3ecaca;
+  --ifm-color-primary-lighter: #55d1d1;
+  --ifm-color-primary-lightest: #85dede;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 

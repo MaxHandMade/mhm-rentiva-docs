@@ -7,7 +7,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-import Translate from '@docusaurus/Translate';
+import Translate, { translate } from '@docusaurus/Translate';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -36,11 +36,13 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={translate({ id: 'home.title', message: 'MHM Rentiva Documentation' })}
+      description={translate({
+        id: 'home.description',
+        message: 'WordPress vehicle rental and transfer booking plugin — documentation',
+      })}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

@@ -4,6 +4,8 @@
  */
 
 .heroBanner {
+  background: linear-gradient(135deg, #04111e 0%, #0a2740 55%, #30b0b0 100%);
+  color: #fff;
   padding: 4rem 0;
   text-align: center;
   position: relative;
