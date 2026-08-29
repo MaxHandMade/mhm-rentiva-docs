@@ -14,8 +14,9 @@ const FeatureList = [
     }),
     description: (
       <Translate>
-        Manage your vehicles from a single hub with detailed feature sets,
-        maintenance schedules, and pricing rules.
+        Every vehicle carries its daily price, feature chips and weekly
+        availability on one screen, filterable by category — fleet
+        management without switching tabs.
       </Translate>
     ),
   },
@@ -28,8 +29,9 @@ const FeatureList = [
     }),
     description: (
       <Translate>
-        Streamline your business with flexible booking forms, Stripe/PayPal/PayTR
-        integrations, and an automated notification system.
+        The dashboard tracks bookings, revenue and payments together — a
+        seven-day chart, status breakdown and held deposits — powered by
+        flexible booking forms and Stripe/PayPal/PayTR integrations.
       </Translate>
     ),
   },
@@ -42,8 +44,9 @@ const FeatureList = [
     }),
     description: (
       <Translate>
-        Customize for your project with an extensible architecture, REST API
-        support, and a rich hook/filter system.
+        Fifteen tabs deep, Settings covers everything from integrations and
+        system performance to cron job monitoring — and for developers who
+        need more, a REST API and hook/filter system underneath.
       </Translate>
     ),
   },

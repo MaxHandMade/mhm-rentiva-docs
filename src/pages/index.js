@@ -27,8 +27,12 @@ function HomepageHeader() {
             <Translate>Get started</Translate>
           </Link>
         </div>
-        <div className="margin-bottom--lg">
-          <img src="img/banner-1544x500.png" alt="MHM Rentiva — Car Rental and Transfer Booking for WordPress" style={{ maxWidth: '1000px', width: '100%', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }} />
+        <div className={styles.heroBannerFrame}>
+          <img
+            className={styles.heroBannerImage}
+            src="img/banner-1544x500.png"
+            alt="MHM Rentiva — Car Rental and Transfer Booking for WordPress"
+          />
         </div>
       </div>
     </header>

@@ -8,8 +8,8 @@
   "Fleet Management": {
     "message": "Filo Yönetimi"
   },
-  "Manage your vehicles from a single hub with detailed feature sets, maintenance schedules, and pricing rules.": {
-    "message": "Tüm araçlarınızı tek bir merkezden ayrıntılı özellikler, bakım takvimi ve fiyat kuralları ile yönetin."
+  "Every vehicle carries its daily price, feature chips and weekly availability on one screen, filterable by category — fleet management without switching tabs.": {
+    "message": "Her araç; günlük fiyatını, özellik etiketlerini ve haftalık müsaitliğini tek ekranda taşır, kategoriye göre filtrelenebilir — sekme değiştirmeden filo yönetimi."
   },
   "The Vehicles screen listing six vehicles with their daily price, features and weekly availability": {
     "message": "Araçlar ekranı: altı aracı günlük fiyatı, özellikleri ve haftalık müsaitlik durumuyla listeler"
@@ -17,8 +17,8 @@
   "Powerful Booking Infrastructure": {
     "message": "Güçlü Rezervasyon Altyapısı"
   },
-  "Streamline your business with flexible booking forms, Stripe/PayPal/PayTR integrations, and an automated notification system.": {
-    "message": "Esnek rezervasyon formları, Stripe/PayPal/PayTR entegrasyonları ve otomatik bildirim sistemi ile işinizi kolaylaştırın."
+  "The dashboard tracks bookings, revenue and payments together — a seven-day chart, status breakdown and held deposits — powered by flexible booking forms and Stripe/PayPal/PayTR integrations.": {
+    "message": "Kontrol paneli rezervasyonları, geliri ve ödemeleri tek ekranda toplar — yedi günlük grafik, durum dağılımı ve bloke depozitolar — altyapısında esnek rezervasyon formları ve Stripe/PayPal/PayTR entegrasyonları var."
   },
   "The Rentiva dashboard showing total bookings, revenue, a seven-day chart and booking statuses": {
     "message": "Rentiva kontrol paneli: toplam rezervasyon sayısını, geliri, yedi günlük grafiği ve rezervasyon durumlarını gösterir"
@@ -26,8 +26,8 @@
   "Developer Friendly": {
     "message": "Geliştirici Dostu"
   },
-  "Customize for your project with an extensible architecture, REST API support, and a rich hook/filter system.": {
-    "message": "Genişletilebilir mimari, REST API desteği ve zengin hook/filter sistemi ile projenize göre özelleştirin."
+  "Fifteen tabs deep, Settings covers everything from integrations and system performance to cron job monitoring — and for developers who need more, a REST API and hook/filter system underneath.": {
+    "message": "Ayarlar tek başına on beş sekme derinliğinde: entegrasyonlardan sistem performansına, cron iş izlemesine kadar — daha fazlasını isteyen geliştiriciler için altyapıda REST API ve hook/filter sistemi de hazır."
   },
   "The Settings screen with its fifteen tabs, including integration, system and cron monitoring": {
     "message": "On beş sekmeli Ayarlar ekranı; entegrasyon, sistem ve cron izleme sekmeleri de dahil"
