@@ -20,15 +20,15 @@ function HomepageHeader() {
         <p className="hero__subtitle">
           <Translate>WordPress Vehicle Rental Plugin</Translate>
         </p>
-        <div className="margin-bottom--lg">
-          <img src="img/banner-1544x500.png" alt="MHM Rentiva — Car Rental and Transfer Booking for WordPress" style={{ maxWidth: '1000px', width: '100%', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }} />
-        </div>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/getting-started/installation">
-            <Translate>Quick Start (5 min) ⏱️</Translate>
+            <Translate>Get started</Translate>
           </Link>
+        </div>
+        <div className="margin-bottom--lg">
+          <img src="img/banner-1544x500.png" alt="MHM Rentiva — Car Rental and Transfer Booking for WordPress" style={{ maxWidth: '1000px', width: '100%', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }} />
         </div>
       </div>
     </header>
