@@ -11,17 +11,26 @@
   "Manage your vehicles from a single hub with detailed feature sets, maintenance schedules, and pricing rules.": {
     "message": "Tüm araçlarınızı tek bir merkezden ayrıntılı özellikler, bakım takvimi ve fiyat kuralları ile yönetin."
   },
+  "The Vehicles screen listing six vehicles with their daily price, features and weekly availability": {
+    "message": "Araçlar ekranı: altı aracı günlük fiyatı, özellikleri ve haftalık müsaitlik durumuyla listeler"
+  },
   "Powerful Booking Infrastructure": {
     "message": "Güçlü Rezervasyon Altyapısı"
   },
   "Streamline your business with flexible booking forms, Stripe/PayPal/PayTR integrations, and an automated notification system.": {
     "message": "Esnek rezervasyon formları, Stripe/PayPal/PayTR entegrasyonları ve otomatik bildirim sistemi ile işinizi kolaylaştırın."
   },
+  "The Rentiva dashboard showing total bookings, revenue, a seven-day chart and booking statuses": {
+    "message": "Rentiva kontrol paneli: toplam rezervasyon sayısını, geliri, yedi günlük grafiği ve rezervasyon durumlarını gösterir"
+  },
   "Developer Friendly": {
     "message": "Geliştirici Dostu"
   },
   "Customize for your project with an extensible architecture, REST API support, and a rich hook/filter system.": {
     "message": "Genişletilebilir mimari, REST API desteği ve zengin hook/filter sistemi ile projenize göre özelleştirin."
+  },
+  "The Settings screen with its fifteen tabs, including integration, system and cron monitoring": {
+    "message": "On beş sekmeli Ayarlar ekranı; entegrasyon, sistem ve cron izleme sekmeleri de dahil"
   },
   "theme.ErrorPageContent.title": {
     "message": "Bu sayfa çöktü.",

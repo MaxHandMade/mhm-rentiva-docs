@@ -2,12 +2,16 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-import Translate from '@docusaurus/Translate';
+import Translate, { translate } from '@docusaurus/Translate';
 
 const FeatureList = [
   {
     title: <Translate>Fleet Management</Translate>,
-    image: 'img/filo-yonetimi-docs-01.webp',
+    image: 'img/rentiva-filo-yonetimi.webp',
+    alt: translate({
+      message:
+        'The Vehicles screen listing six vehicles with their daily price, features and weekly availability',
+    }),
     description: (
       <Translate>
         Manage your vehicles from a single hub with detailed feature sets,
@@ -17,7 +21,11 @@ const FeatureList = [
   },
   {
     title: <Translate>Powerful Booking Infrastructure</Translate>,
-    image: 'img/guclu-rezervasyon-altyapisi-02.webp',
+    image: 'img/rentiva-rezervasyon-altyapisi.webp',
+    alt: translate({
+      message:
+        'The Rentiva dashboard showing total bookings, revenue, a seven-day chart and booking statuses',
+    }),
     description: (
       <Translate>
         Streamline your business with flexible booking forms, Stripe/PayPal/PayTR
@@ -27,7 +35,11 @@ const FeatureList = [
   },
   {
     title: <Translate>Developer Friendly</Translate>,
-    image: 'img/gelistirici-dostu-03.webp',
+    image: 'img/rentiva-gelistirici-dostu.webp',
+    alt: translate({
+      message:
+        'The Settings screen with its fifteen tabs, including integration, system and cron monitoring',
+    }),
     description: (
       <Translate>
         Customize for your project with an extensible architecture, REST API
@@ -37,12 +49,12 @@ const FeatureList = [
   },
 ];
 
-function Feature({ Svg, image, title, description }) {
+function Feature({ Svg, image, alt, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
         {image ? (
-          <img src={image} className={styles.featureSvg} alt={title} style={{ objectFit: 'contain' }} />
+          <img src={image} className={styles.featureSvg} alt={alt} style={{ objectFit: 'contain' }} />
         ) : (
           <Svg className={styles.featureSvg} role="img" />
         )}
