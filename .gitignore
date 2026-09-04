@@ -36,3 +36,4 @@ build_log_fixed.txt
 # Sunum / YouTube prodüksiyon materyalleri (lokal kalır, public docs reposuna girmez)
 presentations/
 .claude/memory/
+.claude/settings.json
