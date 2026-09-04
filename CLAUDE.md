@@ -1,3 +1,14 @@
+<!-- mhm:pencere-karti v1 — memory-migrate.py üretir; elle yalnız "Aile" ve "Kapılar" düzenlenir -->
+# mhm-rentiva-docs — pencere kartı
+- Tip: Docusaurus → orkestratör: yok
+- Depo sınıfı: B' · hafıza: ~/.claude/projects/c--projects-mhm-rentiva-docs/memory
+- Aile: — · altyapı olanlar: rentiva-lisans, mhm-ui-core, wpalemi
+- Kapılar: —
+- KAPI 0 (kardeşten dokunurken): aşağıdaki iki içe aktarım Read ile otomatik gelir; fingerprint elle
+@~/.claude/projects/c--projects-mhm-rentiva-docs/memory/hot.md
+@~/.claude/projects/c--projects-mhm-rentiva-docs/memory/MEMORY.md
+<!-- /mhm:pencere-karti -->
+
 # mhm-rentiva-docs — Docusaurus Disiplin Sözleşmesi
 
 Bu repo, **mhm-rentiva** WordPress eklentisi için Docusaurus tabanlı dokümantasyon sitesidir. WordPress projesi DEĞİLDİR: `wp-conductor` ve diğer `wp-*` skill'leri **invoke edilmez**. Bu dosya bu projeye özel disiplin sözleşmesidir; her görevin başında oku, sonunda gate'leri çalıştır.
@@ -97,7 +108,7 @@ Yeni release blog post'u:
 
 ## Memory Bağlantısı
 
-- Hafıza dizini: `C:/Users/manag/.claude/projects/c--projects-mhm-rentiva-docs/memory/`
+- Hafıza dizini: `~/.claude/projects/c--projects-mhm-rentiva-docs/memory/`
   🔴 **Bu projenin KENDİ defteri budur** (D6 Faz 3, 2026-07-27'de kuruldu). Eskiden burada
   `c--projects-rentiva-dev/memory/` yazıyordu — bayattı; docs işinin kaydı komşunun defterine
   yazılmaz. Rentiva penceresinden bu depoya çalışılabilir (aile kuralı,
