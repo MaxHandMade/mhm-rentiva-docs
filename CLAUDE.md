@@ -108,7 +108,7 @@ Yeni release blog post'u:
 
 ## Memory Bağlantısı
 
-- Hafıza dizini: `~/.claude/projects/c--projects-mhm-rentiva-docs/memory/`
+- Hafıza: pencere kartındaki `.claude/memory` (junction; gerçek yer kartın `hafıza:` satırında değil, `memory-migrate.py` kurar).
   🔴 **Bu projenin KENDİ defteri budur** (D6 Faz 3, 2026-07-27'de kuruldu). Eskiden burada
   `c--projects-rentiva-dev/memory/` yazıyordu — bayattı; docs işinin kaydı komşunun defterine
   yazılmaz. Rentiva penceresinden bu depoya çalışılabilir (aile kuralı,
