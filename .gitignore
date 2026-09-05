@@ -37,3 +37,4 @@ build_log_fixed.txt
 presentations/
 .claude/memory/
 .claude/settings.json
+.claude/settings.local.json
