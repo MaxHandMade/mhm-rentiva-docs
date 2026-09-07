@@ -4,10 +4,46 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sat, 29 Aug 2026 05:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 07 Sep 2026 23:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva 6.1.4 — Kimlikle bağlanmış bir rezervasyon artık Müşteriler ekranından kaybolmuyor]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release</guid>
+            <pubDate>Mon, 07 Sep 2026 23:30:00 GMT</pubDate>
+            <description><![CDATA[Bir misafir önce sizden rezervasyon yaptıysa ve hesabını sonradan oluşturduysa, Müşteriler ekranı o rezervasyonu göremiyordu. Müşterinin satırında 0 rezervasyon yazıyor, parası yukarıdaki özet kartlarına hiç ulaşmıyor ve "Rezervasyonları Görüntüle" boş bir liste açıyordu. 6.1.4 bunu düzeltiyor ve sizden hiçbir şey istemiyor: veritabanı değişikliği yok, ayarları yeniden kaydetmek yok.]]></description>
+            <content:encoded><![CDATA[<p>Bir misafir önce sizden rezervasyon yaptıysa ve hesabını sonradan oluşturduysa, Müşteriler ekranı o rezervasyonu göremiyordu. Müşterinin satırında 0 rezervasyon yazıyor, parası yukarıdaki özet kartlarına hiç ulaşmıyor ve "Rezervasyonları Görüntüle" boş bir liste açıyordu. 6.1.4 bunu düzeltiyor ve sizden hiçbir şey istemiyor: veritabanı değişikliği yok, ayarları yeniden kaydetmek yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="müşteriler-ekranı-artık-her-rezervasyonu-buluyor">Müşteriler ekranı artık her rezervasyonu buluyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#m%C3%BC%C5%9Fteriler-ekran%C4%B1-art%C4%B1k-her-rezervasyonu-buluyor" class="hash-link" aria-label="Müşteriler ekranı artık her rezervasyonu buluyor doğrudan bağlantı" title="Müşteriler ekranı artık her rezervasyonu buluyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ekran, müşterinin rezervasyonlarına <strong>yalnızca e-posta adresi üzerinden</strong> ulaşıyordu. Hesapla rezervasyonun aynı adresi taşıdığı sıradan durumda bu işe yarar. Taşımadığı her durumda başarısız olur:</p>
+<ul>
+<li class="">önce rezervasyon yapıp sonra kayıt olan bir misafir — rezervasyon hesaba e-posta eşleşmesiyle değil, iç kimliğiyle bağlıdır</li>
+<li class="">rezervasyondan sonra e-posta adresini değiştiren bir müşteri</li>
+<li class="">elle eklenmiş, henüz rezervasyonu olmayan bir hesap ya da yalnızca eklentinin kendi kayıtlarından bilinen bir müşteri</li>
+</ul>
+<p>Bunların her birinde rezervasyon ekranın gözünde görünmezdi. Satırda 0 yazıyor, detay paneli boş kalıyor, yukarıdaki özet kartları o parayı dışarıda bırakıyor ve hesap müşteri sayımından tamamen düşebiliyordu.</p>
+<p>Ekranın altında, "kim müşteri sayılır" sorusunun <strong>dört ayrı kopyası</strong> birbirinden ayrışmıştı; müşteri <em>listesinin</em> ve rezervasyon <em>sayısının</em> aynı kişi hakkında farklı şey söyleyebilmesinin sebebi buydu. Artık tek bir tanım var ve bu soruyu soran her yer onu okuyor — eklenti genelinde yedi dosya, yirmi dokuz çağrı yeri; üyelik, sayım, silme ve dışa aktarma dahil. Bunlar artık birbiriyle çelişemez.</p>
+<p>Nasıl kurulduğuna dair tek bir not, çünkü bir düzeltmenin gerçek olup olmadığına karar veren ayrıntı tam da budur: sorgu, genişletilmiş bir birleştirme değil, <code>EXISTS</code> yüklemi kullanıyor. E-posta <em>veya</em> kimlikle eşleşen bir birleştirme, ikisi de eşleştiğinde rezervasyonu iki kez sayar. Bu bir risk olarak varsayılmadı — naif hâli bilerek yazılıp sayıların ikiye katlandığı görülerek gösterildi.</p>
+<p><strong>Kontrol panelinin kendi rakamları ayrı hesaplanıyor ve bu değişikliğin kapsamında değildi.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yönetim-menüsü-wordpressin-kendi-öğelerinin-üstüne-döndü">Yönetim menüsü WordPress'in kendi öğelerinin üstüne döndü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#y%C3%B6netim-men%C3%BCs%C3%BC-wordpressin-kendi-%C3%B6%C4%9Felerinin-%C3%BCst%C3%BCne-d%C3%B6nd%C3%BC" class="hash-link" aria-label="Yönetim menüsü WordPress'in kendi öğelerinin üstüne döndü doğrudan bağlantı" title="Yönetim menüsü WordPress'in kendi öğelerinin üstüne döndü doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rentiva, arkasında çok sayıda sayfa olan tek bir üst düzey menü kaydediyor ve bir kiralama işi yürütüyorsanız gününüz o sayfaların içinde geçiyor. Menü, Görünüm, Eklentiler, Kullanıcılar ve Araçlar'ın altında, kenar çubuğunun dibine yakın duruyordu; yani herhangi birine ulaşmak önce WordPress'in tamamını kaydırmak demekti.</p>
+<p>Artık <strong>doğrudan WooCommerce'in altında</strong>, Görünüm'ün üstünde duruyor. Daha yukarı da çıkmıyor: bu konum, bir eklentinin WordPress'in kendi üst düzey öğeleriyle yarışmamasını isteyen WordPress.org yönergesinin alt sınırı ve Rentiva çekirdeğin üstüne çıkmak yerine sınırın içinde kalıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="çok-siteli-kurulumda-etkinleştirme-her-siteye-ulaşıyor">Çok siteli kurulumda etkinleştirme her siteye ulaşıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#%C3%A7ok-siteli-kurulumda-etkinle%C5%9Ftirme-her-siteye-ula%C5%9F%C4%B1yor" class="hash-link" aria-label="Çok siteli kurulumda etkinleştirme her siteye ulaşıyor doğrudan bağlantı" title="Çok siteli kurulumda etkinleştirme her siteye ulaşıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rentiva'yı ağ genelinde etkinleştirmek yüzüncü sitede duruyor ve özel siteleri tamamen atlıyordu; büyük bir ağda o noktadan sonraki siteler tablolarını hiç almıyordu. Artık ikisi de alıyor. Bir alt site, URL kısa adlarını oluştururken ağın dilini devralmak yerine <strong>kendi</strong> dilini okuyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yerleşim-geri-alma-artık-yanlış-sayfaya-dokunamıyor">Yerleşim geri alma artık yanlış sayfaya dokunamıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#yerle%C5%9Fim-geri-alma-art%C4%B1k-yanl%C4%B1%C5%9F-sayfaya-dokunam%C4%B1yor" class="hash-link" aria-label="Yerleşim geri alma artık yanlış sayfaya dokunamıyor doğrudan bağlantı" title="Yerleşim geri alma artık yanlış sayfaya dokunamıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yerleşim aracında bir sayfayı geri almak, bayat bir iç kimlik başka bir kaydı işaret ettiğinde tamamen ilgisiz bir yazının üzerine yerleşim işaretlemesi yazabiliyordu. Artık kendisine ait olmayan bir kayda dokunamıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="redis-ve-memcached-kullanan-barındırmalar">Redis ve Memcached kullanan barındırmalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#redis-ve-memcached-kullanan-bar%C4%B1nd%C4%B1rmalar" class="hash-link" aria-label="Redis ve Memcached kullanan barındırmalar doğrudan bağlantı" title="Redis ve Memcached kullanan barındırmalar doğrudan bağlantı" translate="no">​</a></h2>
+<p>Harici nesne önbelleği olan barındırmalarda, bir müşteriyi, rezervasyonu veya aracı kaydetmek, önbellek kaydı kendiliğinden düşene kadar listeyi eski veriyle bırakıyordu. Liste artık kaydettiğinizde güncelleniyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="daha-küçük-indirme">Daha küçük indirme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release#daha-k%C3%BC%C3%A7%C3%BCk-indirme" class="hash-link" aria-label="Daha küçük indirme doğrudan bağlantı" title="Daha küçük indirme doğrudan bağlantı" translate="no">​</a></h2>
+<p>Paket, WordPress'in hiç çalıştırmadığı React kaynak dosyalarını artık taşımıyor.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> 6.1.4, GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.1.4" target="_blank" rel="noopener noreferrer" class=""><code>v6.1.4</code></a> olarak yayınlandı. WordPress.org eklenti dizini hâlâ 6.1.3 sunuyor — 6.1.4'ü oraya göndermek ayrı bir karar ve henüz verilmedi, yani WordPress içinden güncelleme bugün size bu sürümü önermeyecek. Tam değişiklik günlüğü iki dilde eklentiyle birlikte geliyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>customers</category>
+            <category>multisite</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva Pro 6.0.0 — Her şey tutarlı adlandırıldı ve askıya alma artık gerçekten askıya alıyor]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.0.0-release</link>
@@ -578,26 +614,6 @@
             <category>admin</category>
             <category>reports</category>
             <category>messages</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.63.0 — Admin Kalan-Ödeme Linki + Ödeme Türü Etiket Düzeltmesi]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release</guid>
-            <pubDate>Thu, 02 Jul 2026 18:00:00 GMT</pubDate>
-            <description><![CDATA[Adminler artık bir rezervasyonun kalan tutarı için ödeme linki oluşturup e-posta ile gönderebiliyor; ayrıca tam-ödeme-zorunlu rezervasyonlar karma sepette artık yanlışlıkla "Depozito" etiketlenmiyor.]]></description>
-            <content:encoded><![CDATA[<p>Adminler artık bir rezervasyonun kalan tutarı için ödeme linki oluşturup e-posta ile gönderebiliyor; ayrıca tam-ödeme-zorunlu rezervasyonlar karma sepette artık yanlışlıkla "Depozito" etiketlenmiyor.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="özellik">Özellik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release#%C3%B6zellik" class="hash-link" aria-label="Özellik doğrudan bağlantı" title="Özellik doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Adminler artık rezervasyon düzenleme ekranındaki "Mevduat Yönetimi" kutusundan doğrudan kalan tutar için ödeme linki oluşturup tek tıkla müşteriye e-posta gönderebiliyor.</strong> Link ekranda da kopyalanabilir şekilde gösteriliyor (WhatsApp, SMS, telefon için) ve site hesabı olmayan müşteriler için bile çalışıyor.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltme">Düzeltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.0-release#d%C3%BCzeltme" class="hash-link" aria-label="Düzeltme doğrudan bağlantı" title="Düzeltme doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Ödemesi tam-ödeme-zorunlu olan rezervasyonlar (ör. depozito desteği olmadan yapılandırılmış bir VIP transfer), karma bir sepette checkout'un sepet-geneli ödeme türü seçicisi "Depozito Ödemesi"ne ayarlandığında artık yanlışlıkla "Depozito" etiketlenmiyor.</strong> Tahsil edilen tutar zaten her zaman doğruydu; sadece iç etiket düzeltildi.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>checkout</category>
-            <category>admin</category>
         </item>
     </channel>
 </rss>
