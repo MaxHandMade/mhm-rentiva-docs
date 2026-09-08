@@ -2,11 +2,70 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-09-07T23:30:00.000Z</updated>
+    <updated>2026-09-08T02:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.1.0 — A deletion button only a customer can press]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release"/>
+        <updated>2026-09-08T02:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This release is mostly about one question: what happens when an account is deleted. The answer, in 6.0.0, was worse than it should have been in three separate places — and one of them destroyed a customer's messages on sites that had never bought the compliance feature at all. Update MHM Rentiva to 6.1.4 first, then Pro. There is no data migration and no hook renames this time.]]></summary>
+        <content type="html"><![CDATA[<p>This release is mostly about one question: what happens when an account is deleted. The answer, in 6.0.0, was worse than it should have been in three separate places — and one of them destroyed a customer's messages on sites that had never bought the compliance feature at all. <strong>Update MHM Rentiva to 6.1.4 first, then Pro.</strong> There is no data migration and no hook renames this time.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-self-service-deletion-button-was-live-for-everyone">The self-service deletion button was live for everyone<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#the-self-service-deletion-button-was-live-for-everyone" class="hash-link" aria-label="Direct link to The self-service deletion button was live for everyone" title="Direct link to The self-service deletion button was live for everyone" translate="no">​</a></h2>
+<p>Pro's GDPR tools put a "delete my data" button on the customer account area. It was gated on being logged in, and on nothing else.</p>
+<p>Any logged-in user reached it — an editor, a shop manager, <strong>an administrator</strong>. Typing DELETE and confirming ran WordPress's account deletion against the current session's own account. Everything that account had authored went with it, and attachments are not sent to the trash unless a site explicitly turns that on, so the uploaded files were destroyed outright rather than recoverable. Any other content type the account authored — Elementor templates among them — was deleted the same way.</p>
+<p>The handler now refuses any account that does not wear the customer role and nothing else. An administrator who presses it is told the account cannot be erased through self-service.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-data-loss-guard-that-was-sitting-behind-the-wrong-licence">A data-loss guard that was sitting behind the wrong licence<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#a-data-loss-guard-that-was-sitting-behind-the-wrong-licence" class="hash-link" aria-label="Direct link to A data-loss guard that was sitting behind the wrong licence" title="Direct link to A data-loss guard that was sitting behind the wrong licence" translate="no">​</a></h2>
+<p>Pro keeps vendors, payouts and messages out of an account deletion. That protection was bound inside the GDPR-tools feature — but the content type it protects most, <strong>messages</strong>, is registered by a different licence feature.</p>
+<p>So a site licensed for messaging and <em>not</em> for GDPR tools registered the message content type and bound no guard at all. A message has an author and is neither a post nor a page, which means WordPress deletes it outright instead of trashing it. Deleting that customer from the free plugin's Customers screen destroyed the customer's half of every conversation they had taken part in, with nothing in the trash to restore, and left the other party's replies sitting in a thread that no longer reads as one.</p>
+<p>The guard is now bound whenever Pro loads, whatever the licence says. It is a data-loss shield, not a feature — it has to cover deletions Pro does not itself start.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-retention-cleanup-was-not-asking-who-the-account-belonged-to">The retention cleanup was not asking who the account belonged to<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#the-retention-cleanup-was-not-asking-who-the-account-belonged-to" class="hash-link" aria-label="Direct link to The retention cleanup was not asking who the account belonged to" title="Direct link to The retention cleanup was not asking who the account belonged to" translate="no">​</a></h2>
+<p>Pro can delete inactive customer data after a retention period. In 6.0.0 the query that chose the accounts asked three things: has this account been inactive long enough, was it registered long enough ago, and does it have no bookings. It did not ask <strong>whose account it was</strong>, and there was no role check anywhere in the loop either.</p>
+<p>An inactive account without a booking was therefore a candidate whatever it was: a vendor, a shop manager, an administrator.</p>
+<p>The query narrows the same way now, and a second pass keeps only accounts whose roles are the customer role and nothing else. It errs towards not deleting, which is the right direction for code whose job is to destroy data.</p>
+<p>Three more things in the same subsystem:</p>
+<ul>
+<li class=""><strong>The retention period cannot be shorter than a year.</strong> Any smaller value, configured or passed in, is raised to 365 days and the substitution is written to the log.</li>
+<li class=""><strong>Scheduled erasure actually erases now.</strong> WordPress's account-deletion function lives in an admin-only file that a scheduled run never loads, so on the cron path the deletion step had been doing nothing at all, silently. Measured in a real cron context: the function was absent before the fix and present after it.</li>
+<li class=""><strong>The erased customer's e-mail address is no longer part of what the cleanup logs.</strong> Only the account id is recorded. And two safety warnings — including the one that fires when an account could not be deleted and was anonymised instead — were being written at a level the default configuration discards. They are errors now, so they are actually recorded.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="on-a-multisite-network-deletion-now-fails-honestly">On a multisite network, deletion now fails honestly<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#on-a-multisite-network-deletion-now-fails-honestly" class="hash-link" aria-label="Direct link to On a multisite network, deletion now fails honestly" title="Direct link to On a multisite network, deletion now fails honestly" translate="no">​</a></h2>
+<p>WordPress cannot remove an account from a network from inside a single site — its deletion call only removes the user from that one site, and the account and its address survive network-wide.</p>
+<p>The request was being answered as though it had been carried out. It now refuses, with an error saying account deletion is not available on this installation.</p>
+<p>This is a behaviour change: someone who used to see "Data deletion completed" will now see an error. The error is the truthful answer. Nothing was being deleted before either.</p>
+<p><strong>One thing that has not changed, and is worth knowing:</strong> when a customer erases themselves, their own bookings go with the account. They are the subject of the request, so they are deleted rather than retained — permanently, not to the trash. The guard above covers vendors, payouts and messages, not the requester's own bookings. There is no per-site switch for this in 6.1.0. A version that anonymises the booking instead of removing it is the next slice of this work.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-authority-for-the-currency">One authority for the currency<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#one-authority-for-the-currency" class="hash-link" aria-label="Direct link to One authority for the currency" title="Direct link to One authority for the currency" translate="no">​</a></h2>
+<p>Ten places in Pro decided the currency for themselves when WooCommerce was not available — and disagreed with each other. Six said TRY and one said USD; the symbol was written as the lira sign twice and the dollar sign once.</p>
+<p>These are fallbacks, so they run exactly when the condition they guard is true: a scheduled run, a deactivated store, a payment callback that arrives before WooCommerce has booted. In that window a single payout could be stamped USD while the CSV export, the penalty ledger entry, the webhook callback and the printed statement covering the same money all said TRY.</p>
+<p>All ten now ask the same helper, which consults WooCommerce when it is active and the plugin's own currency setting when it is not. The pre-release audit then found five more surfaces of the same class — the vendor analytics panel, the printed statement's own missing-currency fallback, the penalty-reversal ledger entry, the statement-ready e-mail, and the price hint on the vendor vehicle form — and those went onto the helper too.</p>
+<p>Two money bugs were fixed along the way, and both reached a vendor:</p>
+<ul>
+<li class=""><strong>A penalty e-mailed to a vendor read like a credit.</strong> Where WooCommerce was unavailable the notification formatted the amount itself and took its absolute value. Penalties are carried as negative amounts, so the vendor was sent the size of the deduction with no sign on it — the same string a payment produces.</li>
+<li class=""><strong>The printed payout statement could be wrong by a factor of a thousand.</strong> Its figures come from stored data, and a value already formatted as <code>1.234.567,89</code> was being cast straight to a number, which yields <code>1.234</code> — silently, on the document a vendor keeps.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="four-shortcuts-are-back-on-the-dashboard">Four shortcuts are back on the dashboard<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#four-shortcuts-are-back-on-the-dashboard" class="hash-link" aria-label="Direct link to Four shortcuts are back on the dashboard" title="Direct link to Four shortcuts are back on the dashboard" translate="no">​</a></h2>
+<p>Reports, Vendors, Messages and Export left the dashboard with the free plugin's WordPress.org separation on 8 August, and nothing could put them back until the free plugin opened a seam for it. The pages stayed in the admin menu the whole time; they had simply lost their shortcuts.</p>
+<p>Each is contributed per licence feature, so a licence that cannot open a screen is not handed a link to it, and an unlicensed install contributes none at all. Transfer is deliberately not among them — it leads to locations and routes, which are configured once and left alone.</p>
+<p>This is also why <strong>Pro now requires MHM Rentiva 6.1.4 or newer</strong>, raised from 6.1.3 during the pre-release audit: the shortcuts bind a filter the free plugin does not open until 6.1.4. On a 6.1.3 site the pairing would have been accepted and the shortcuts would simply never have appeared, with nothing to say why. If Pro finds an older free plugin it switches itself off with a notice and touches no data.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also-in-this-release">Also in this release<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release#also-in-this-release" class="hash-link" aria-label="Direct link to Also in this release" title="Direct link to Also in this release" translate="no">​</a></h2>
+<p>The monitoring subsystem was removed — a message logger, a monitoring manager and a performance monitor, about 1,400 lines that no code path could reach. The shared MHM interface library moved from 0.4 to 0.9.4, in step with the free plugin.</p>
+<hr>
+<p>The full changelog ships with the plugin in both languages.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="privacy" term="privacy"/>
+        <category label="gdpr" term="gdpr"/>
+        <category label="security" term="security"/>
+        <category label="money" term="money"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva 6.1.4 — A booking linked by ID no longer vanishes from the Customers screen]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.4-release</id>
@@ -661,31 +720,5 @@
         <category label="vendor" term="vendor"/>
         <category label="commission" term="commission"/>
         <category label="payouts" term="payouts"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.63.1 — Chart Rendering, KPI Corruption, and Settings-Tab Data-Loss Fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release"/>
-        <updated>2026-07-05T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Fixes blank revenue charts, a corrupted Reports KPI value, and a bug where saving Messages settings from one tab silently reset the others.]]></summary>
-        <content type="html"><![CDATA[<p>Fixes blank revenue charts, a corrupted Reports KPI value, and a bug where saving Messages settings from one tab silently reset the others.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.1-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>The Dashboard's and Reports page's "Revenue" charts were rendering blank</strong> — a pre-existing 404 on a vendor script that never shipped in any release. Chart.js is now bundled directly with the admin scripts.</li>
-<li class=""><strong>The Reports page's "Monthly Revenue" KPI card showed a corrupted value</strong> (e.g. "1,87 €" instead of "1,870.00 €") due to a display value being re-parsed as a raw number.</li>
-<li class=""><strong>Saving the Messages settings page from any tab other than the one being edited</strong> (e.g. saving Email settings while on the Categories tab) silently reset the other tabs' settings, including notification checkboxes, sender email, and category/status lists, to their defaults.</li>
-<li class=""><strong>A vehicle that becomes unavailable at the moment of booking submission no longer silently drops the "similar vehicles" suggestion</strong> — the alternatives list now reaches the booking form as intended.</li>
-<li class=""><strong>Corrected a Turkish mistranslation</strong> on the Reports page ("Booking Report" tab).</li>
-<li class=""><strong>Removed two broken script/style references</strong> (booking calendar CSS, standalone customer-messages JS) that resulted in harmless but noisy 404 requests.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="admin" term="admin"/>
-        <category label="reports" term="reports"/>
-        <category label="messages" term="messages"/>
     </entry>
 </feed>

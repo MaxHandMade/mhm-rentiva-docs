@@ -4,10 +4,65 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Mon, 07 Sep 2026 23:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 08 Sep 2026 02:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva Pro 6.1.0 — Yalnızca müşterinin basabildiği bir silme düğmesi]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release</guid>
+            <pubDate>Tue, 08 Sep 2026 02:00:00 GMT</pubDate>
+            <description><![CDATA[Bu sürüm büyük ölçüde tek bir soruyu ele alıyor: bir hesap silindiğinde ne oluyor. 6.0.0'daki yanıt, birbirinden ayrı üç yerde olması gerekenden kötüydü — ve bunlardan biri, uyumluluk özelliğini hiç satın almamış sitelerde müşterinin mesajlarını yok ediyordu. Önce MHM Rentiva'yı 6.1.4'e, sonra Pro'yu güncelleyin. Bu sürümde veri taşıma ve hook yeniden adlandırması yok.]]></description>
+            <content:encoded><![CDATA[<p>Bu sürüm büyük ölçüde tek bir soruyu ele alıyor: bir hesap silindiğinde ne oluyor. 6.0.0'daki yanıt, birbirinden ayrı üç yerde olması gerekenden kötüydü — ve bunlardan biri, uyumluluk özelliğini hiç satın almamış sitelerde müşterinin mesajlarını yok ediyordu. <strong>Önce MHM Rentiva'yı 6.1.4'e, sonra Pro'yu güncelleyin.</strong> Bu sürümde veri taşıma ve hook yeniden adlandırması yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kendi-verisini-silme-düğmesi-herkese-açıktı">Kendi verisini silme düğmesi herkese açıktı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#kendi-verisini-silme-d%C3%BC%C4%9Fmesi-herkese-a%C3%A7%C4%B1kt%C4%B1" class="hash-link" aria-label="Kendi verisini silme düğmesi herkese açıktı doğrudan bağlantı" title="Kendi verisini silme düğmesi herkese açıktı doğrudan bağlantı" translate="no">​</a></h2>
+<p>Pro'nun GDPR araçları, müşteri hesap alanına bir "verilerimi sil" düğmesi koyuyor. Bu düğme yalnızca oturum açmış olmaya bakıyordu; başka hiçbir şeye değil.</p>
+<p>Oturum açmış her kullanıcı ona erişiyordu — bir editör, bir mağaza yöneticisi, <strong>bir yönetici</strong>. DELETE yazıp onaylamak, WordPress'in hesap silme işlemini o oturumun kendi hesabında çalıştırıyordu. O hesabın yazarı olduğu her şey onunla birlikte gidiyordu; ekler ise site açıkça izin vermedikçe çöp kutusuna gitmez, yani yüklenen dosyalar geri alınabilir değil, doğrudan yok ediliyordu. Hesabın yazarı olduğu diğer içerik türleri de — Elementor şablonları dahil — aynı yoldan siliniyordu.</p>
+<p>İşlem artık yalnızca müşteri rolü taşıyan, başka rolü olmayan hesapları kabul ediyor. Düğmeye basan bir yöneticiye, hesabının self-servis yolla silinemeyeceği söyleniyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yanlış-lisansın-ardında-duran-bir-veri-kaybı-siperi">Yanlış lisansın ardında duran bir veri kaybı siperi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#yanl%C4%B1%C5%9F-lisans%C4%B1n-ard%C4%B1nda-duran-bir-veri-kayb%C4%B1-siperi" class="hash-link" aria-label="Yanlış lisansın ardında duran bir veri kaybı siperi doğrudan bağlantı" title="Yanlış lisansın ardında duran bir veri kaybı siperi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Pro, bayileri, ödemeleri ve mesajları hesap silmenin dışında tutar. Bu koruma GDPR araçları özelliğinin içinde bağlanıyordu — oysa en çok koruduğu içerik türü olan <strong>mesajlar</strong>, başka bir lisans özelliğiyle kaydediliyor.</p>
+<p>Yani mesajlaşma lisanslı ama GDPR araçları lisanssız bir site, mesaj içerik türünü kaydediyor ve korumayı hiç bağlamıyordu. Bir mesajın yazarı vardır ve ne yazı ne sayfadır; bu da WordPress'in onu çöpe atmak yerine doğrudan silmesi demektir. O müşteriyi ücretsiz eklentinin Müşteriler ekranından silmek, katıldığı her yazışmanın müşteriye ait yarısını yok ediyor, geri alınacak hiçbir şey bırakmıyor ve karşı tarafın yanıtlarını artık yazışma olarak okunmayan bir dizinin içinde bırakıyordu.</p>
+<p>Koruma artık Pro her yüklendiğinde, lisans ne derse desin bağlı. Bu bir özellik değil, veri kaybı siperi — Pro'nun kendi başlatmadığı silmeleri de kapsamak zorunda.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="saklama-temizliği-hesabın-kime-ait-olduğunu-sormuyordu">Saklama temizliği, hesabın kime ait olduğunu sormuyordu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#saklama-temizli%C4%9Fi-hesab%C4%B1n-kime-ait-oldu%C4%9Funu-sormuyordu" class="hash-link" aria-label="Saklama temizliği, hesabın kime ait olduğunu sormuyordu doğrudan bağlantı" title="Saklama temizliği, hesabın kime ait olduğunu sormuyordu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Pro, hareketsiz müşteri verisini saklama süresi dolduğunda silebilir. 6.0.0'da hesapları seçen sorgu üç şey soruyordu: bu hesap yeterince uzun süredir hareketsiz mi, yeterince eskiden mi kayıtlı ve rezervasyonu yok mu. <strong>Hesabın kime ait olduğunu sormuyordu</strong> ve döngüde de hiçbir rol kontrolü yoktu.</p>
+<p>Dolayısıyla rezervasyonu olmayan hareketsiz bir hesap, ne olursa olsun adaydı: bir bayi, bir mağaza yöneticisi, bir yönetici.</p>
+<p>Sorgu artık aynı şekilde daraltıyor, ikinci bir geçiş ise yalnızca müşteri rolü taşıyan, başka rolü olmayan hesapları bırakıyor. Hatayı silmeme yönüne yapıyor ki işi veri yok etmek olan bir kod için doğru eğilim budur.</p>
+<p>Aynı altsistemde üç şey daha:</p>
+<ul>
+<li class=""><strong>Saklama süresi bir yıldan kısa olamaz.</strong> Ayarlanmış ya da dışarıdan geçirilmiş daha küçük her değer 365 güne yükseltiliyor ve bu değiştirme günlüğe yazılıyor.</li>
+<li class=""><strong>Zamanlanmış silme artık gerçekten siliyor.</strong> WordPress'in hesap silme fonksiyonu yalnızca yönetici tarafında yüklenen bir dosyada yaşıyor ve zamanlanmış bir koşum o dosyayı hiç yüklemiyor; yani cron yolunda silme adımı sessizce hiçbir şey yapmıyordu. Gerçek bir cron bağlamında ölçüldü: düzeltmeden önce fonksiyon yoktu, sonra vardı.</li>
+<li class=""><strong>Silinen müşterinin e-posta adresi artık günlüğe yazılanların içinde değil.</strong> Yalnızca hesap kimliği kaydediliyor. Ayrıca iki güvenlik uyarısı — biri hesabın silinemeyip anonimleştirildiğinde ateşlenen uyarı — varsayılan yapılandırmanın attığı bir seviyede yazılıyordu. İkisi de artık hata seviyesinde, yani gerçekten kaydediliyorlar.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="çok-siteli-ağlarda-silme-artık-dürüstçe-başarısız-oluyor">Çok siteli ağlarda silme artık dürüstçe başarısız oluyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#%C3%A7ok-siteli-a%C4%9Flarda-silme-art%C4%B1k-d%C3%BCr%C3%BCst%C3%A7e-ba%C5%9Far%C4%B1s%C4%B1z-oluyor" class="hash-link" aria-label="Çok siteli ağlarda silme artık dürüstçe başarısız oluyor doğrudan bağlantı" title="Çok siteli ağlarda silme artık dürüstçe başarısız oluyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>WordPress bir ağ hesabını tek bir sitenin içinden kaldıramaz — silme çağrısı kullanıcıyı yalnızca o siteden çıkarır; hesap ve adresi ağ genelinde yaşamaya devam eder.</p>
+<p>Talep, yerine getirilmiş gibi yanıtlanıyordu. Artık "bu kurulumda hesap silme kullanılamıyor" diyen bir hatayla reddediyor.</p>
+<p>Bu bir davranış değişikliği: önceden "Veri silme tamamlandı" gören biri şimdi hata görecek. Dürüst yanıt o hatadır; önceden de zaten hiçbir şey silinmiyordu.</p>
+<p><strong>Değişmeyen ve bilinmesinde yarar olan bir şey:</strong> bir müşteri kendini sildiğinde kendi rezervasyonları da hesapla birlikte gider. Onlar talebin konusudur, bu yüzden korunmaz silinirler — çöpe değil, kalıcı olarak. Yukarıdaki koruma bayileri, ödemeleri ve mesajları kapsar, talebi yapanın kendi rezervasyonlarını değil. 6.1.0'da bunun site başına bir anahtarı yok. Rezervasyonu silmek yerine anonimleştiren sürüm bu işin bir sonraki dilimi.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-birimi-için-tek-otorite">Para birimi için tek otorite<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#para-birimi-i%C3%A7in-tek-otorite" class="hash-link" aria-label="Para birimi için tek otorite doğrudan bağlantı" title="Para birimi için tek otorite doğrudan bağlantı" translate="no">​</a></h2>
+<p>Pro'da on yer, WooCommerce kullanılamadığında para birimini kendi başına belirliyordu — ve birbirleriyle çelişiyorlardı. Altısı TRY, biri USD diyordu; simge iki kez lira, bir kez dolar yazılmıştı.</p>
+<p>Bunlar yedek yollardır, yani tam da korudukları koşul doğruyken çalışırlar: zamanlanmış bir koşum, devre dışı bırakılmış bir mağaza, WooCommerce açılmadan gelen bir ödeme geri çağrısı. O aralıkta tek bir ödeme USD damgası alırken, aynı parayı anlatan CSV dışa aktarımı, ceza defteri kaydı, webhook geri çağrısı ve basılı hesap özetinin üçü de TRY diyebiliyordu.</p>
+<p>Onunun onu da artık aynı yardımcıya soruyor: o da WooCommerce etkinken ona, değilken eklentinin kendi para birimi ayarına bakıyor. Sürüm öncesi denetim aynı sınıftan beş yer daha buldu — bayi analiz paneli, basılı hesap özetinin kendi eksik-para-birimi yedeği, ceza iptalinin defter kaydı, hesap özeti hazır e-postası ve bayi araç formundaki fiyat ipucu — onlar da yardımcıya bağlandı.</p>
+<p>Bu arada iki para hatası düzeltildi ve ikisi de bayiye ulaşıyordu:</p>
+<ul>
+<li class=""><strong>Bayiye e-postayla giden bir ceza, alacak gibi okunuyordu.</strong> WooCommerce kullanılamadığında bildirim tutarı kendisi biçimlendiriyor ve mutlak değerini alıyordu. Cezalar negatif taşındığı için bayiye kesintinin büyüklüğü işaretsiz gidiyordu — bir ödemenin ürettiği dizgenin aynısı.</li>
+<li class=""><strong>Basılı ödeme hesap özeti bin kat yanlış olabiliyordu.</strong> Rakamları saklanan veriden geliyor ve <code>1.234.567,89</code> biçimine sokulmuş bir değer doğrudan sayıya çevriliyordu; bu da <code>1.234</code> verir — sessizce, hem de bayinin sakladığı belgenin üzerinde.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dört-kısayol-panele-geri-döndü">Dört kısayol panele geri döndü<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#d%C3%B6rt-k%C4%B1sayol-panele-geri-d%C3%B6nd%C3%BC" class="hash-link" aria-label="Dört kısayol panele geri döndü doğrudan bağlantı" title="Dört kısayol panele geri döndü doğrudan bağlantı" translate="no">​</a></h2>
+<p>Raporlar, Bayiler, Mesajlar ve Dışa Aktarım, ücretsiz eklentinin WordPress.org ayrışmasıyla 8 Ağustos'ta panelden gitmişti ve ücretsiz eklenti bunun için bir dikiş açana kadar geri konulamıyordu. Sayfalar bu süre boyunca yönetim menüsünde duruyordu; yalnızca kısayolları yoktu.</p>
+<p>Her biri lisans özelliğine göre ekleniyor, yani bir ekranı açamayan lisansa o ekranın bağı verilmiyor; lisanssız kurulum hiçbirini almıyor. Transfer bilerek aralarında değil — o, bir kez ayarlanıp bırakılan konumlara ve rotalara götürüyor.</p>
+<p><strong>Pro'nun artık MHM Rentiva 6.1.4 veya sonrasını istemesinin</strong> sebebi de bu; sürüm öncesi denetimde 6.1.3'ten yükseltildi: kısayollar, ücretsiz eklentinin 6.1.4'e kadar açmadığı bir filtreye bağlanıyor. 6.1.3'lük bir sitede eşleşme kabul edilir ve kısayollar hiç görünmezdi, üstelik sebebini söyleyen hiçbir şey olmadan. Pro daha eski bir ücretsiz eklenti bulursa hiçbir veriye dokunmadan bir uyarıyla kendini kapatır.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bu-sürümde-ayrıca">Bu sürümde ayrıca<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release#bu-s%C3%BCr%C3%BCmde-ayr%C4%B1ca" class="hash-link" aria-label="Bu sürümde ayrıca doğrudan bağlantı" title="Bu sürümde ayrıca doğrudan bağlantı" translate="no">​</a></h2>
+<p>İzleme altsistemi kaldırıldı — bir mesaj günlükçüsü, bir izleme yöneticisi ve bir performans izleyicisi; hiçbir kod yolunun ulaşamadığı yaklaşık 1.400 satır. Paylaşılan MHM arayüz kütüphanesi, ücretsiz eklentiyle birlikte 0.4'ten 0.9.4'e geçti.</p>
+<hr>
+<p>Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>privacy</category>
+            <category>gdpr</category>
+            <category>security</category>
+            <category>money</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva 6.1.4 — Kimlikle bağlanmış bir rezervasyon artık Müşteriler ekranından kaybolmuyor]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.4-release</link>
@@ -592,28 +647,6 @@
             <category>vendor</category>
             <category>commission</category>
             <category>payouts</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.63.1 — Kontrol Paneli/Raporlar Grafik Render, KPI Bozulması ve Ayar-Sekmesi Veri Kaybı Düzeltmeleri]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release</guid>
-            <pubDate>Sun, 05 Jul 2026 18:00:00 GMT</pubDate>
-            <description><![CDATA[Boş gelir grafiklerini, bozuk bir Raporlar KPI değerini ve Mesajlar ayarlarını bir sekmeden kaydedince diğerlerini sessizce sıfırlayan bir hatayı düzeltir.]]></description>
-            <content:encoded><![CDATA[<p>Boş gelir grafiklerini, bozuk bir Raporlar KPI değerini ve Mesajlar ayarlarını bir sekmeden kaydedince diğerlerini sessizce sıfırlayan bir hatayı düzeltir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Kontrol Paneli ve Raporlar sayfasındaki "Gelir" grafikleri boş görünüyordu</strong> — hiçbir sürümde hiç yayınlanmamış bir vendor betiğine ait, önceden var olan bir 404 hatasıydı. Chart.js artık admin betikleriyle doğrudan paketleniyor.</li>
-<li class=""><strong>Raporlar sayfasındaki "Aylık Gelir" KPI kartı bozuk bir değer gösteriyordu</strong> ("1.870,00 €" yerine "1,87 €" gibi) — zaten formatlanmış bir görüntü değerinin ham sayı olarak tekrar okunmasından kaynaklanıyordu.</li>
-<li class=""><strong>Mesajlar ayarlar sayfasını düzenlenmekte olan sekme dışında bir sekmeden kaydetmek</strong> (ör. Kategoriler sekmesindeyken E-posta ayarlarını kaydetmek), diğer sekmelerin ayarlarını (bildirim onay kutuları, gönderen e-postası, kategori/durum listeleri dahil) sessizce varsayılana sıfırlıyordu.</li>
-<li class=""><strong>Bir araç, rezervasyon gönderimi anında müsait olmaktan çıkarsa artık "benzer araçlar" önerisi sessizce kaybolmuyor</strong> — alternatif liste artık amaçlandığı gibi rezervasyon formuna ulaşıyor.</li>
-<li class=""><strong>Raporlar sayfasındaki bir Türkçe çeviri hatası düzeltildi</strong> ("Rezervasyon Raporu" sekmesi).</li>
-<li class=""><strong>Var olmayan iki betik/stil referansı kaldırıldı</strong> (rezervasyon takvimi CSS'i, bağımsız müşteri-mesajları JS'i) — bunlar zararsız ama gürültülü 404 isteklerine yol açıyordu.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>admin</category>
-            <category>reports</category>
-            <category>messages</category>
         </item>
     </channel>
 </rss>
