@@ -14,14 +14,20 @@ Sistemin uzun vadeli performansı için gereksiz verilerin periyodik olarak temi
 
 ## 🧹 Veritabanı Temizleme Araçları
 
-Panel üzerinde tek tıkla çalıştırabileceğiniz 6 ana bakım aracı bulunmaktadır:
+Panelde tek tıkla çalıştırabileceğiniz altı düğme bulunur:
 
-1.  **Bütünlüğü Analiz Et:** Veritabanındaki tutarsızlıkları ve eksik tabloları tarar.
-2.  **Temiz Yetim Meta:** Silinmiş araçlara veya rezervasyonlara ait sahipsiz (orphan) meta verilerini temizler.
-3.  **Sistem Önbelleğini Temizle:** Geçici süreli (transient) sistem verilerini sıfırlar.
+1.  **Veritabanını Analiz Et:** Veritabanını tarar ve aşağıdaki **Veritabanı Temizleme Raporu**'nu doldurur (düğme ardından *Bütünlüğü Analiz Et* olarak görünür).
+2.  **Temiz Yetim Meta:** Silinmiş araçlardan veya rezervasyonlardan geriye kalan meta verilerini temizler.
+3.  **Süresi Dolmuş Geçici Dosyaları Temizle:** Süresi dolmuş geçici (transient) sistem verilerini siler.
 4.  **Otomatik Yüklemeyi Optimize Et:** WordPress'in her açılışta yüklediği `autoload` seçeneklerini düzenleyerek hızı artırır.
 5.  **Tabloları Optimize Et:** MySQL tablolarındaki boş alanları (overhead) geri kazanır ve dizinleri (index) yeniler.
-6.  **Eski Günlükleri Temizle:** 30 günden eski işlem kayıtlarını ve logları kalıcı olarak siler.
+6.  **Eski Günlükleri Temizle:** 30 günden eski günlükleri ve kuyruk kayıtlarını kalıcı olarak siler.
+
+**Geçersiz meta anahtarları** raporun içinden temizlenir: bir analizden sonra, kaldırılacak bir şey varsa *Geçersiz Meta Anahtarları* satırında **Temiz** düğmesi görünür. 6.1.5'ten beri bu temizlik `_mhmcs_` altındaki anahtarlara dokunmaz — bunlar Rentiva'nın değil, MHM Currency Switcher'ın verisidir (her ürünün sabit fiyatları ve siparişleri yazı olarak saklayan mağazalarda her siparişe kaydedilen para birimi ile döviz kuru).
+
+:::info Yedek yoksa silme yok (6.1.5)
+Geçersiz meta, sahipsiz meta ve eski günlük temizlikleri, silecekleri kayıtları önce bir yedek tabloya kopyalar. Bu yedek tablo oluşturulamaz ya da doldurulamazsa temizlik **hiçbir şey silmez**, nedenini söyler ve dolduramadığı yedek tabloyu kaldırır. Her çalıştırmanın aldığı yedekler **Artımlı Temizleme Yedeklemeleri** altında listelenir.
+:::
 
 ---
 
@@ -98,5 +104,6 @@ Sistem onbelleği **Bakim** sekmesi altındaki **Önbellek** akordiyonundan yone
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 17.09.2026 | 6.1.5 | Araç etiketleri ekranla eşleştirildi; geçersiz meta temizliği, Currency Switcher anahtarları ve yedek-yoksa-silme-yok kuralı belgelendi. |
 | 27.03.2026 | 4.22.1 | Uninstaller'a 5 eksik tablo eklendi. Önbellek bölümü tek render noktasi olarak belgelendi. |
 | 19.03.2026 | 4.21.2 | Veritabanı temizleme ve yedekleme detayları eklendi. |

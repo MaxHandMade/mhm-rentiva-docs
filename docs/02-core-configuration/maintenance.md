@@ -14,14 +14,20 @@ Periodically removing unnecessary data and optimizing database tables is critica
 
 ## 🧹 Database Cleanup Tools
 
-The panel provides 6 core maintenance tools you can run with a single click:
+The panel has six buttons you can run with a single click:
 
-1.  **Analyze Integrity:** Scans the database for inconsistencies and missing tables.
-2.  **Clean Orphan Meta:** Removes orphaned meta data belonging to deleted vehicles or bookings.
-3.  **Clear System Cache:** Resets transient system data.
+1.  **Analyze Database:** Scans the database and fills in the **Database Cleanup Report** below (the button then reads *Analyze Integrity*).
+2.  **Clean Orphaned Meta:** Removes meta data left behind by deleted vehicles or bookings.
+3.  **Clean Expired Transients:** Deletes expired temporary (transient) system data.
 4.  **Optimize Autoload:** Optimizes the `autoload` options WordPress loads on every request, improving speed.
 5.  **Optimize Tables:** Reclaims overhead in MySQL tables and refreshes indexes.
-6.  **Clean Old Logs:** Permanently deletes operation records and logs older than 30 days.
+6.  **Purge Old Logs:** Permanently deletes logs and queue entries older than 30 days.
+
+**Invalid meta keys** are cleaned from the report itself: after an analysis, the *Invalid Meta Keys* row shows a **Clean** button when there is something to remove. Since 6.1.5 this cleanup leaves keys under `_mhmcs_` alone — they belong to MHM Currency Switcher (each product's fixed prices and, where orders are stored as posts, the currency and exchange rate recorded on each order), not to Rentiva.
+
+:::info No backup, no deletion (6.1.5)
+The invalid-meta, orphaned-meta and old-log cleanups copy what they are about to remove into a backup table first. If that backup table cannot be created or filled, the cleanup **deletes nothing**, tells you why, and removes the backup table it could not fill. The backups each run makes are listed under **Incremental Cleanup Backups**.
+:::
 
 ---
 
@@ -38,7 +44,7 @@ Before performing any critical operation, you can take a full backup of all your
 - **Restore (Rollback):** If an error occurs, you can revert to a previous state with a single click from the "Incremental Cleanup Backups" list.
 
 :::caution Critical Warning
-Cleanup operations cannot be undone. Always create a copy of your system using the **"Start Snapshot"** button before proceeding.
+Cleanup operations cannot be undone. Always create a copy of your system using the **"Initialize Snapshot"** button before proceeding.
 :::
 
 ---
@@ -98,6 +104,7 @@ The system cache is managed from the **Cache** accordion under the **Maintenance
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 17.09.2026 | 6.1.5 | Tool labels match the screen; invalid-meta cleanup, Currency Switcher keys and the no-backup-no-deletion rule documented. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.22.1 | 5 missing tables added to uninstaller. Cache section documented as the single render point. |
 | 19.03.2026 | 4.21.2 | Database cleanup and backup details added. |
