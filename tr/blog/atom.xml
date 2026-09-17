@@ -2,11 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-09-08T02:00:00.000Z</updated>
+    <updated>2026-09-17T06:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.2.0 — Bayilere ait bir panel, tek para birimli defter ve komisyonu birebir geri alan iadeler]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release"/>
+        <updated>2026-09-17T06:30:00.000Z</updated>
+        <summary type="html"><![CDATA[Bayiler kendilerine ait bir panele kavuşuyor ve arkasındaki para tek bir zemine oturuyor: defterde tek para birimi ve alacak yazılan komisyonu birebir geri alan iadeler. Önce MHM Rentiva'yı 6.1.5'e, sonra Pro'yu güncelleyin. Pro daha eski bir Rentiva bulursa bir bildirimle kendini kapatır ve hiçbir şey oluşturmaz.]]></summary>
+        <content type="html"><![CDATA[<p>Bayiler kendilerine ait bir panele kavuşuyor ve arkasındaki para tek bir zemine oturuyor: defterde tek para birimi ve alacak yazılan komisyonu birebir geri alan iadeler. <strong>Önce MHM Rentiva'yı 6.1.5'e, sonra Pro'yu güncelleyin.</strong> Pro daha eski bir Rentiva bulursa bir bildirimle kendini kapatır ve hiçbir şey oluşturmaz.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayilerin-çalışabileceği-bir-panel">Bayilerin çalışabileceği bir panel<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#bayilerin-%C3%A7al%C4%B1%C5%9Fabilece%C4%9Fi-bir-panel" class="hash-link" aria-label="Bayilerin çalışabileceği bir panel doğrudan bağlantı" title="Bayilerin çalışabileceği bir panel doğrudan bağlantı" translate="no">​</a></h2>
+<p>Pro, <code>satici-panel</code> adresinde bir <strong>Bayi Paneli</strong> sayfasını kendiliğinden oluşturuyor. Sayfada beş bölüm var: Panel, İlanlarım, Rezervasyonlar, Kazanç ve ödemeler, Değerlendirmeler. Hesabım altındaki eski bayi alanı artık kalıcı olarak buraya yönlendiriyor.</p>
+<ul>
+<li class=""><strong>İlanlarım</strong>'dan bayi bir ilanı duraklatıyor, sürdürüyor, geri çekiyor, yeniliyor ve yeniden yayınlıyor. Yalnızca ilanın o anki durumunun izin verdiği eylemler gösteriliyor; hiç onaylanmamış bir ilan hiçbirini göstermiyor, ilan ücretini bekleyen ilan <em>Ödemeyi tamamla</em> gösteriyor. Reddedilen ilan ret notunu gösteriyor, geri çekilen ilan rezervasyon geçmişini koruyor.</li>
+<li class=""><strong>Kazanç ve ödemeler</strong>'den bayi ödeme talep ediyor. Bir talep beklerken panel formun yerine o talebi gösteriyor.</li>
+<li class="">Yönetici, bayilerin ne gördüğünü görmek için paneli açabiliyor. Askıya alınmış bir bayi erişiminin neden durduğunu görüyor; başvurusu hâlâ bekleyen bir aday da başvuru formuna geri gönderilmek yerine başvurusunun durumunu görüyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="defterde-tek-para-birimi">Defterde tek para birimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#defterde-tek-para-birimi" class="hash-link" aria-label="Defterde tek para birimi doğrudan bağlantı" title="Defterde tek para birimi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bayi defteri artık her tutarı <strong>mağazanın ana para biriminde</strong>, mağazanın kendi ondalık hassasiyetiyle kaydediyor — ziyaretçi Currency Switcher üzerinden başka bir para biriminde ödemiş olsa bile. Böyle bir siparişin komisyonu <strong>o siparişe kaydedilen döviz kuruyla</strong> çevriliyor. Bu sürümün Rentiva 6.1.5 gerektirmesinin sebebi de bu: 6.1.5, Rentiva'nın veritabanı temizliğinin tam da o kayıtlı kuru silmesini durduruyor.</p>
+<p>Bakiyeler ve toplamlar yalnızca ana para birimindeki tutarları sayıyor. Bir bayinin başka bir para biriminde tuttuğu bakiye, sessizce eklenmek yerine Kullanılabilir bakiye kartında ayrıca adıyla gösteriliyor. Defterin para sütunları tek seferlik bir veritabanı güncellemesiyle dört ondalığa genişletiliyor; mevcut her defter satırının denetim özeti (hash) değişmiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇adeler-alacak-yazılanı-birebir-geri-alıyor">İadeler, alacak yazılanı birebir geri alıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#i%CC%87adeler-alacak-yaz%C4%B1lan%C4%B1-birebir-geri-al%C4%B1yor" class="hash-link" aria-label="İadeler, alacak yazılanı birebir geri alıyor doğrudan bağlantı" title="İadeler, alacak yazılanı birebir geri alıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir iade artık komisyonu, ait olduğu komisyon satırına bağlı olarak <strong>kümülatif</strong> biçimde geri alıyor. Herhangi bir kısmi iade dizisi — komisyonun kendisinden önce kaydedilmiş bir iade dahil — alacak yazılanı birebir, o komisyonun para biriminde geri alıyor. Aynı siparişin iadeleri sırayla işleniyor; birlikte gelen iki iade artık komisyonun tamamını iki kez geri alamıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="gerçek-bir-ödemeden-sonra-toplam-ödenen-0-görünüyordu">Gerçek bir ödemeden sonra "Toplam ödenen" 0 görünüyordu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#ger%C3%A7ek-bir-%C3%B6demeden-sonra-toplam-%C3%B6denen-0-g%C3%B6r%C3%BCn%C3%BCyordu" class="hash-link" aria-label="Gerçek bir ödemeden sonra &quot;Toplam ödenen&quot; 0 görünüyordu doğrudan bağlantı" title="Gerçek bir ödemeden sonra &quot;Toplam ödenen&quot; 0 görünüyordu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Ödemeler ekranından onaylanan ödemeler, toplamların tanımadığı bir türle ve ödendi yerine <em>ayrılmış</em> olarak kaydediliyordu — hiçbir şeyin onları çıkarmadığı bir durum. Bayinin "Toplam ödenen" değeri 0 okunuyor, kazanç ödemeyi eksi olarak sayıyordu. Ödemeler artık ödendi olarak kaydediliyor; bu sürümden önce o yoldan onaylananlar da bir sonraki yönetim sayfası yüklemesinde düzeltiliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncellemeden-önce-okuyun">Güncellemeden önce okuyun<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#g%C3%BCncellemeden-%C3%B6nce-okuyun" class="hash-link" aria-label="Güncellemeden önce okuyun doğrudan bağlantı" title="Güncellemeden önce okuyun doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Güvenlik.</strong> İlan ücreti açıkken, yenileme ya da yeniden yayınlama isteği ilanı <strong>ilanın talep eden bayiye ait olup olmadığını kontrol etmeden önce</strong> onun sepetine koyuyordu — etkin bir bayi başka bir bayinin ilanını yenileyebiliyor ya da yeniden yayınlayabiliyordu. Artık önce sahiplik kontrol ediliyor.</li>
+<li class="">İlan ücreti açıkken, ücretli bir yenileme ya da yeniden yayınlama ücreti, ilanın yenilenip yenilenemeyeceğini sormadan <strong>önce</strong> alıyordu: süre aşımını geçmiş bir yenilemenin ücreti ödeniyor ve ilan süresi dolmuş olarak kalıyordu, yeniden yayınlama da bekleme süresini atlıyordu. Kurallar artık ödeme adımından önce ve ödeme tamamlanınca yeniden kontrol ediliyor.</li>
+<li class="">Rentiva'nın Pro'dan önce etkinleştirildiği bir sitede — Pro'nun izin verdiği tek sıra budur — Pro'nun kendi tabloları (bayi defteri, ödeme denetimi, anahtar kaydı, komisyon politikası, bayi raporları ve transfer tabloları) hiç oluşturulmuyordu; yani <strong>komisyon kaydedilmiyor ve hiçbir şey nedenini söylemiyordu</strong>. Pro artık eksik her tabloyu bir sonraki yönetim sayfası yüklemesinde oluşturuyor ve hepsi var olana kadar denemeye devam ediyor.</li>
+<li class="">Defter bütünlük kontrolü kararını kendi salt okunur veritabanı işleminin içine yazıyordu; tespit edilen bir uyuşmazlık bu yüzden hiç saklanmıyordu. Artık saklanıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bu-sürümde-ayrıca">Bu sürümde ayrıca<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release#bu-s%C3%BCr%C3%BCmde-ayr%C4%B1ca" class="hash-link" aria-label="Bu sürümde ayrıca doğrudan bağlantı" title="Bu sürümde ayrıca doğrudan bağlantı" translate="no">​</a></h2>
+<p>Defter tarihleri UTC yerine sitenizin saat diliminde gösteriliyor. WooCommerce eklenti ekranının dışında kapatıldığında bayi paneli artık hata vermiyor, ilk yüklemede birlikte gelen iki ziyaret de artık iki ayrı Bayi Paneli sayfası oluşturamıyor. Bayi Yönetimi ve Bayi Raporları ekranlarında yönetici bildirimleri ekran ilk göründüğünde yerinde. Bayi paneli ve ilan ücreti mesajları Türkçeye çevrildi.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> Pro 6.2.0, GitHub'da <code>v6.2.0</code> olarak yayınlandı ve wpalemi.com üzerindeki Rentiva Pro indirmesiyle sunuluyor. Önce <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release">Rentiva'yı 6.1.5'e</a> güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="vendor" term="vendor"/>
+        <category label="payouts" term="payouts"/>
+        <category label="money" term="money"/>
+        <category label="security" term="security"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.1.5 — Veritabanı temizliği artık kendisine ait olmayanı silmiyor]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release"/>
+        <updated>2026-09-17T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Rentiva'nın yanında MHM Currency Switcher kullanıyorsanız, Rentiva'nın veritabanı temizliğinde tek bir tıklama ürünlerinizin sabit fiyatlarını silebiliyordu. 6.1.5 bunu kapatıyor, temizliğin önce yedekleyemediği hiçbir şeyi silmemesini sağlıyor ve Rezervasyonlar listesinde hiç yüklenmeyen bir filtreyi düzeltiyor. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar, sonrasında yeniden kaydetmeniz gereken bir şey yok.]]></summary>
+        <content type="html"><![CDATA[<p>Rentiva'nın yanında MHM Currency Switcher kullanıyorsanız, Rentiva'nın veritabanı temizliğinde tek bir tıklama ürünlerinizin sabit fiyatlarını silebiliyordu. 6.1.5 bunu kapatıyor, temizliğin önce yedekleyemediği hiçbir şeyi silmemesini sağlıyor ve Rezervasyonlar listesinde hiç yüklenmeyen bir filtreyi düzeltiyor. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar, sonrasında yeniden kaydetmeniz gereken bir şey yok.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="temizlik-yalnızca-rentivaya-ait-olanı-siliyor">Temizlik yalnızca Rentiva'ya ait olanı siliyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release#temizlik-yaln%C4%B1zca-rentivaya-ait-olan%C4%B1-siliyor" class="hash-link" aria-label="Temizlik yalnızca Rentiva'ya ait olanı siliyor doğrudan bağlantı" title="Temizlik yalnızca Rentiva'ya ait olanı siliyor doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>MHM Rentiva &gt; Ayarlar &gt; Veri tabanı temizleme</strong> altındaki geçersiz meta temizliği, <code>_mhm</code> ile başlayan her veri anahtarını Rentiva'nın kendi anahtarı sayıyordu. MHM Currency Switcher'ın anahtarları da aynı şekilde başladığı için temizlik <strong>her ürünün sabit fiyatlarını</strong> ve siparişleri yazı olarak saklayan mağazalarda <strong>her siparişe kaydedilen para birimini, döviz kurunu ve ana para birimini</strong> siliyordu.</p>
+<p><code>_mhmcs_</code> altındaki anahtarlara — Currency Switcher'ınkilere — artık dokunulmuyor. Öneke yalnızca benzeyen bir anahtar yine temizleniyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yedek-yoksa-silme-yok">Yedek yoksa silme yok<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release#yedek-yoksa-silme-yok" class="hash-link" aria-label="Yedek yoksa silme yok doğrudan bağlantı" title="Yedek yoksa silme yok doğrudan bağlantı" translate="no">​</a></h2>
+<p>Üç temizlik, sileceği kayıtları önce bir yedek tabloya kopyalar: geçersiz meta, sahipsiz meta ve eski günlükler. Hiçbiri kopyanın gerçekten alınıp alınmadığını kontrol etmiyordu. Yedek tablo oluşturulamaz ya da doldurulamazsa kayıtlar yine de siliniyordu — ve sonuç ekranı onları içermeyen bir yedeği adıyla anmaya devam ediyordu.</p>
+<p>Üçü de artık yedeğinin iki adımı da başarılı olmadıkça <strong>hiçbir şey silmiyor</strong>. Neden durduğunu söylüyor ve oluşturup dolduramadığı yedek tabloyu kaldırıyor. Eski günlük temizliği tablo tablo karar veriyor; yani diğer tablolar yine temizleniyor.</p>
+<p>Aynı yerdeki iki küçük kusur da kapandı: aynı saniyede başlatılan iki temizlik artık aynı yedek tabloyu paylaşmıyor ve uzun bir özel tablo öneki yedek tablonun adını bozmuyor. İptal edilen bir temizlik "[object Object]" yerine kendi nedenini gösteriyor.</p>
+<p>Bu belgelerdeki <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/docs/core-configuration/maintenance">Veri tabanı temizleme sayfası</a> artık araçları ekranda gördüğünüz etiketlerle anlatıyor; geçersiz meta temizliğinin nerede olduğu da dahil.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="beklemede-filtresi-yeniden-açılıyor">Beklemede filtresi yeniden açılıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release#beklemede-filtresi-yeniden-a%C3%A7%C4%B1l%C4%B1yor" class="hash-link" aria-label="Beklemede filtresi yeniden açılıyor doğrudan bağlantı" title="Beklemede filtresi yeniden açılıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rezervasyonlar listesinde <strong>Beklemede</strong> çipine tıklamak sayfayı sonsuza kadar yükleniyor bırakabiliyordu. Filtre, rezervasyona kaydedilen her ayrıntıyla büyüyen bir veritabanı sorgusu olarak kuruluyordu; gerçek rezervasyon verisi olan bir test sitesinde veritabanı 77 saniye sonra hâlâ sorguyla uğraşıyordu. Her durum çipi artık rezervasyonlarını tek adımda, çipin üstündeki sayının kullandığı kuralla buluyor — liste ile sayı yine aynı. Plakaya göre filtrelemek de artık bir çipin listesini değiştirmek yerine daraltıyor. Bu kusur 6.1.0'dan beri vardı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yönetim-panelinde-fark-edeceğiniz-küçük-şeyler">Yönetim panelinde fark edeceğiniz küçük şeyler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release#y%C3%B6netim-panelinde-fark-edece%C4%9Finiz-k%C3%BC%C3%A7%C3%BCk-%C5%9Feyler" class="hash-link" aria-label="Yönetim panelinde fark edeceğiniz küçük şeyler doğrudan bağlantı" title="Yönetim panelinde fark edeceğiniz küçük şeyler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bildirimler yerinde duruyor.</strong> Lisans uyarısı gibi bir bildirim, çoğu yönetim ekranı açıldıktan bir an sonra sayfa başlığının altına kayıyor ve sayfayı aşağı itiyordu. Artık ekran ilk göründüğünde yerinde. Ayarlar &gt; Bildirim Şablonları'nda iki kez görünmüyor, Ayarlar'da da dört saniye sonra kaybolan bir açılır mesaja dönüşmüyor.</li>
+<li class=""><strong>Menü doğrudan WooCommerce'in üstünde duruyor</strong>; WooCommerce'in Ürünler, Ödemeler ve Analiz menülerinin altında değil. Böylece Rentiva'nın uzun ekran listesi görünür alanda kalıyor. WordPress'in kendi Yazılar, Ortamlar, Sayfalar ve Yorumlar menülerinin altında kalmaya devam ediyor.</li>
+<li class=""><strong>Araç Ayarları &gt; Görünüm ve Önizleme</strong>, gri bir yer tutucu ve örnek bir araç yerine öne çıkan görseli olan ilk aracınızı — fotoğrafını, adını ve günlük fiyatını — gösteriyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bu-sürümde-ayrıca">Bu sürümde ayrıca<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.1.5-release#bu-s%C3%BCr%C3%BCmde-ayr%C4%B1ca" class="hash-link" aria-label="Bu sürümde ayrıca doğrudan bağlantı" title="Bu sürümde ayrıca doğrudan bağlantı" translate="no">​</a></h2>
+<p>Arama filtresinin "araç bulunamadı" mesajı artık AJAX yolunda da kaçışlanıyor, araç ayrıntıları ayarı boş olduğunda araç düzenleme ekranı PHP uyarısı vermiyor ve var olmayan dört yönetici eylemini çağıran kullanılmayan e-posta ekranı JavaScript'i kaldırıldı.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> 6.1.5 <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.1.5" target="_blank" rel="noopener noreferrer" class=""><code>v6.1.5</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. <strong>Rentiva Pro kullanıyor musunuz?</strong> Pro 6.2.0 bu sürümü gerektiriyor — önce Rentiva'yı güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="maintenance" term="maintenance"/>
+        <category label="bookings" term="bookings"/>
+        <category label="admin" term="admin"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva Pro 6.1.0 — Yalnızca müşterinin basabildiği bir silme düğmesi]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.1.0-release</id>
@@ -671,60 +752,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="settings" term="settings"/>
         <category label="bugfix" term="bugfix"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.0 — Komisyon Oranı Geçersiz Kılmaları (Bayi ve Araç) ve Kademe Yapılandırması]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release"/>
-        <updated>2026-07-07T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Adminler artık bayi veya araç bazında komisyon oranını geçersiz kılabilir ve hacim indirimi kademe eşiklerini doğrudan admin panelinden yapılandırabilir — komisyon oranı hiyerarşisinin daha önce arayüzü olmayan son üç katmanı tamamlandı. Ayrıca üç komisyon doğruluğu düzeltmesi ve release doğrulaması sırasında bulunan bir şema migration güvencesi içerir.]]></summary>
-        <content type="html"><![CDATA[<p>Adminler artık bayi veya araç bazında komisyon oranını geçersiz kılabilir ve hacim indirimi kademe eşiklerini doğrudan admin panelinden yapılandırabilir — komisyon oranı hiyerarşisinin daha önce arayüzü olmayan son üç katmanı tamamlandı. Ayrıca üç komisyon doğruluğu düzeltmesi ve release doğrulaması sırasında bulunan bir şema migration güvencesi içerir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yeni">Yeni<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release#yeni" class="hash-link" aria-label="Yeni doğrudan bağlantı" title="Yeni doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Bayi bazlı komisyon oranı geçersiz kılması.</strong> Bayi Yönetimi'ndeki bayi detay sayfasından, bireysel bir bayi için sabit bir komisyon oranı ayarlayın — bayinin listelediği her aracı tek tek değiştirmeye gerek yok.</li>
-<li class=""><strong>Araç bazlı komisyon oranı geçersiz kılması.</strong> Araç düzenleme ekranındaki yeni "Komisyon Oranı Geçersiz Kılma" kutusundan, bireysel bir araç için sabit bir komisyon oranı ayarlayın. Bu en spesifik katmandır — bayinin oranından, hacim indirimi kademesinden ve platform genelindeki orandan önceliklidir.</li>
-<li class=""><strong>Düzenlenebilir hacim indirimi kademeleri.</strong> Yüksek hacimli bir bayinin oranını (son 30 günlük onaylanmış gelire dayanarak) otomatik olarak indiren üç kademe, artık sadece doğrudan veritabanı düzenlemesiyle değil, doğrudan Komisyon sekmesinden düzenlenebilir. Tam 4 katmanlı hiyerarşinin nasıl çözümlendiğini görmek için <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/docs/vendor/commission-rates">Komisyon Oranı Yapılandırması rehberine</a> bakın.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Yukarıdaki araç bazlı geçersiz kılma artık gerçek rezervasyonlara gerçekten uygulanıyor.</strong> Bu mantık zaten mevcuttu ama canlı checkout işlemine hiç bağlanmamıştı.</li>
-<li class=""><strong>İade komisyon geri alımları artık bayinin orijinal olarak kredilendirildiği oranı kullanıyor</strong>, iade gününde geçerli olan oranı değil — ödeme ile iade arasında bir oran değişikliği artık iade hesabını sessizce bozmuyor.</li>
-<li class=""><strong>Bayi panelinin "son 7 gün" gelir rakamları</strong>, oluşturulduktan 7+ gün sonra kesinleşen bir komisyon kredisinin hiçbir zaman 7 günlük bir pencereye giremezken aynı gün gerçekleşen bir iadenin her zaman girebilmesi yüzünden yapay olarak düşük veya negatif görünebiliyordu. Yeni bir dahili zaman damgası artık bir kredinin gerçekte ne zaman kesinleştiğini takip ediyor.</li>
-<li class=""><strong>Panelin <code>revenue_7d</code> metriğinde</strong>, v4.63.2'de diğer Finansal Özet kartları için düzeltilen bakiye-anahtarı uyuşmazlığının aynısı vardı.</li>
-<li class=""><strong>Şema migration güvencesi.</strong> Release doğrulaması sırasında (bu ZIP yayınlanmadan önce) bulundu: yukarıdaki 7 günlük gelir düzeltmesini sağlayan yeni kolonla birlikte bir veritabanı şema-sürüm sabitinin bump edilmemiş olması, mevcut kurulumların bu kolonu hiçbir zaman almamasına neden olacaktı. Gerçek bir upgrade simüle edilerek düzeltildi ve release öncesi doğrulandı.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="commission" term="commission"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.63.2 — Bayi Komisyonu Clearing ve İade Bakiye Düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release"/>
-        <updated>2026-07-06T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Bayi komisyonu kaydını düzeltir, kazançların gerçekten çekilebilir hale gelmesi için otomatik 7 günlük bir clearing mekanizması ekler, iade bakiye hesaplamasını düzeltir, ve her zaman sıfır gösteren bir bayi paneli KPI kartını düzeltir.]]></summary>
-        <content type="html"><![CDATA[<p>Bayi komisyonu kaydını düzeltir, kazançların gerçekten çekilebilir hale gelmesi için otomatik 7 günlük bir clearing mekanizması ekler, iade bakiye hesaplamasını düzeltir, ve her zaman sıfır gösteren bir bayi paneli KPI kartını düzeltir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.63.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Bayi komisyonu, checkout akışı ile komisyon defteri arasındaki bir rezervasyon-referansı uyuşmazlığı yüzünden gerçek rezervasyonlarda hiç kaydedilmiyordu</strong> — bayi kazançları hiçbir zaman işlenmiyordu.</li>
-<li class=""><strong>Bayi komisyonu artık ödemeden 7 gün sonra yeni bir zamanlanmış görev aracılığıyla otomatik olarak kesinleşip ödemeye hazır hale geliyor.</strong> Daha önce komisyon süresiz olarak "bekleyen" durumda kalıyordu ve bayinin bunu çekmesinin hiçbir yolu yoktu.</li>
-<li class=""><strong>İadeler artık — komisyon kesinleşmeden önce veya sonra olsun, kısmi veya tam olsun — bayinin kullanılabilir bakiyesini doğru şekilde etkiliyor.</strong> Daha önce iadelerin bakiye üzerinde hiçbir etkisi yoktu.</li>
-<li class=""><strong>Bir komisyon kesinleşip ödemeye hazır hale geldiğinde bayilere artık e-posta bildirimi gönderiliyor.</strong></li>
-<li class=""><strong>Bayi panelindeki "Finansal Özet" kartları</strong> (Kullanılabilir Bakiye, Bekleyen Bakiye, Toplam Ödenen) bir veri-anahtarı uyuşmazlığı yüzünden bayinin gerçek bakiyesinden bağımsız olarak her zaman 0,00 gösteriyordu. Bakiyeyi doğrudan okuyan ödeme talebi bölümü bundan etkilenmemişti.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="vendor" term="vendor"/>
-        <category label="commission" term="commission"/>
-        <category label="payouts" term="payouts"/>
     </entry>
 </feed>

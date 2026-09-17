@@ -4,10 +4,83 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Tue, 08 Sep 2026 02:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 17 Sep 2026 06:30:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva Pro 6.2.0 — A vendor panel of its own, one ledger currency, and refunds that reverse commission exactly]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release</guid>
+            <pubDate>Thu, 17 Sep 2026 06:30:00 GMT</pubDate>
+            <description><![CDATA[Vendors get a panel of their own, and the money behind it is put on one footing: one currency in the ledger, and refunds that take back exactly the commission that was credited. Update MHM Rentiva to 6.1.5 first, then Pro. If Pro finds an older Rentiva it switches itself off with a notice and creates nothing.]]></description>
+            <content:encoded><![CDATA[<p>Vendors get a panel of their own, and the money behind it is put on one footing: one currency in the ledger, and refunds that take back exactly the commission that was credited. <strong>Update MHM Rentiva to 6.1.5 first, then Pro.</strong> If Pro finds an older Rentiva it switches itself off with a notice and creates nothing.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-panel-vendors-can-work-from">A panel vendors can work from<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#a-panel-vendors-can-work-from" class="hash-link" aria-label="Direct link to A panel vendors can work from" title="Direct link to A panel vendors can work from" translate="no">​</a></h2>
+<p>Pro creates a <strong>Vendor Panel</strong> page automatically, at the address <code>satici-panel</code>, with five sections: Panel, My listings, Bookings, Earnings &amp; payouts and Reviews. The old vendor area under My Account now redirects there permanently.</p>
+<ul>
+<li class="">From <strong>My listings</strong> a vendor pauses, resumes, withdraws, renews and relists a listing. Only the actions the listing's current state allows are shown; a listing that was never approved shows none, and one waiting for its listing fee shows <em>Complete payment</em>. A rejected listing shows the rejection note, and a withdrawn listing keeps its booking history.</li>
+<li class="">From <strong>Earnings &amp; payouts</strong> a vendor requests a payout. While a request is pending, the panel shows that request instead of the form.</li>
+<li class="">An administrator can open the panel to see what vendors see. A suspended vendor sees why their access stopped, and an applicant whose application is still pending sees its status instead of being sent back to the application form.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-currency-in-the-ledger">One currency in the ledger<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#one-currency-in-the-ledger" class="hash-link" aria-label="Direct link to One currency in the ledger" title="Direct link to One currency in the ledger" translate="no">​</a></h2>
+<p>The vendor ledger now records every amount in <strong>the store's base currency</strong>, at the store's own decimal precision — even when a visitor paid in another currency through Currency Switcher. Commission from such an order is converted with <strong>the exchange rate recorded on that order</strong>, which is why this version needs Rentiva 6.1.5: 6.1.5 stops Rentiva's database cleanup from deleting exactly that recorded rate.</p>
+<p>Balances and totals count base-currency amounts only. A balance a vendor still holds in another currency is named separately on the Available balance card rather than silently added in. The ledger's money columns are widened to four decimals by a one-time database update; the audit hash of every existing ledger row is unchanged.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="refunds-take-back-exactly-what-was-credited">Refunds take back exactly what was credited<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#refunds-take-back-exactly-what-was-credited" class="hash-link" aria-label="Direct link to Refunds take back exactly what was credited" title="Direct link to Refunds take back exactly what was credited" translate="no">​</a></h2>
+<p>A refund now reverses commission <strong>cumulatively</strong>, tied to the commission it belongs to. Any series of partial refunds — including one recorded before the commission itself — takes back exactly what was credited, in that commission's currency. Refunds for the same order are handled one at a time, so two arriving together can no longer both reverse the full commission.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="total-paid-out-showed-0-after-a-real-payout">"Total paid out" showed 0 after a real payout<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#total-paid-out-showed-0-after-a-real-payout" class="hash-link" aria-label="Direct link to &quot;Total paid out&quot; showed 0 after a real payout" title="Direct link to &quot;Total paid out&quot; showed 0 after a real payout" translate="no">​</a></h2>
+<p>Payouts approved from the Payouts screen were recorded under a type the totals did not recognise, and as <em>reserved</em> rather than paid — a state nothing ever moved them out of. The vendor's "Total paid out" read 0 and earnings counted the payout as negative. Payouts are now recorded as paid, and ones approved that way before this version are corrected on the next admin page load.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="read-this-before-updating">Read this before updating<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#read-this-before-updating" class="hash-link" aria-label="Direct link to Read this before updating" title="Direct link to Read this before updating" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Security.</strong> With listing fees enabled, a renew or relist request put the listing in the requesting vendor's cart <strong>before checking the listing was theirs</strong> — an active vendor could renew or relist another vendor's listing. Ownership is now checked first.</li>
+<li class="">With listing fees enabled, a paid renew or relist also took the fee <strong>before</strong> asking whether the listing could be renewed or relisted: a renewal past its grace period was paid for and stayed expired, and a relist skipped its cooldown. The rules are now checked before checkout and again when the payment completes.</li>
+<li class="">On a site where Rentiva was activated before Pro — the only order Pro allows — Pro's own tables (vendor ledger, payout audit, key registry, commission policy, vendor reports and the transfer tables) were never created, so <strong>commission was not recorded and nothing said why</strong>. Pro now creates any missing table on its next admin page load and keeps retrying until all of them exist.</li>
+<li class="">The ledger integrity check wrote its verdict inside its own read-only transaction, so a detected mismatch was never stored. It is stored now.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also-in-this-release">Also in this release<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release#also-in-this-release" class="hash-link" aria-label="Direct link to Also in this release" title="Direct link to Also in this release" translate="no">​</a></h2>
+<p>Ledger dates show in your site's timezone instead of UTC. The vendor panel no longer fails when WooCommerce is switched off outside the plugin screen, and two visits arriving together on first load can no longer create two Vendor Panel pages. On Vendor Management and Vendor Reports, admin notices are in place when the screen first appears. The vendor panel and the listing-fee messages are translated into Turkish.</p>
+<hr>
+<p><strong>Where to get it.</strong> Pro 6.2.0 is published on GitHub as <code>v6.2.0</code> and served through the Rentiva Pro download on wpalemi.com. Update <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release">Rentiva to 6.1.5</a> first. The full changelog ships with the plugin in both languages.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>pro</category>
+            <category>vendor</category>
+            <category>payouts</category>
+            <category>money</category>
+            <category>security</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva 6.1.5 — The database cleanup no longer deletes what is not its own]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release</guid>
+            <pubDate>Thu, 17 Sep 2026 06:00:00 GMT</pubDate>
+            <description><![CDATA[If you run MHM Currency Switcher next to Rentiva, one click in Rentiva's database cleanup could wipe your products' fixed prices. 6.1.5 closes that, makes the cleanup refuse to delete anything it could not back up first, and fixes a Bookings filter that never finished loading. It is published on WordPress.org, so WordPress offers it to you as an ordinary update — nothing to re-save afterwards.]]></description>
+            <content:encoded><![CDATA[<p>If you run MHM Currency Switcher next to Rentiva, one click in Rentiva's database cleanup could wipe your products' fixed prices. 6.1.5 closes that, makes the cleanup refuse to delete anything it could not back up first, and fixes a Bookings filter that never finished loading. It is published on WordPress.org, so WordPress offers it to you as an ordinary update — nothing to re-save afterwards.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-cleanup-only-removes-what-belongs-to-rentiva">The cleanup only removes what belongs to Rentiva<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release#the-cleanup-only-removes-what-belongs-to-rentiva" class="hash-link" aria-label="Direct link to The cleanup only removes what belongs to Rentiva" title="Direct link to The cleanup only removes what belongs to Rentiva" translate="no">​</a></h2>
+<p>Under <strong>MHM Rentiva &gt; Settings &gt; Database Cleanup</strong>, the invalid-meta cleanup treated every data key starting with <code>_mhm</code> as Rentiva's own. MHM Currency Switcher's keys start the same way, so the cleanup removed <strong>each product's fixed prices</strong> and, on stores whose orders are stored as posts, <strong>the currency, exchange rate and base currency recorded on each order</strong>.</p>
+<p>Keys under <code>_mhmcs_</code> — Currency Switcher's — are now left alone. A key that only resembles the prefix is still cleaned.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="no-backup-no-deletion">No backup, no deletion<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release#no-backup-no-deletion" class="hash-link" aria-label="Direct link to No backup, no deletion" title="Direct link to No backup, no deletion" translate="no">​</a></h2>
+<p>Three cleanups copy what they are about to remove into a backup table first: invalid meta, orphaned meta and old logs. None of them ever checked that the copy had actually been made. If the backup table could not be created, or could not be filled, the rows were deleted anyway — and the result screen still named a backup that did not hold them.</p>
+<p>Each of the three now <strong>deletes nothing</strong> unless both steps of its backup succeeded. It tells you why it stopped, and removes a backup table it created but could not fill. The old-log cleanup decides table by table, so the other tables are still cleaned.</p>
+<p>Two smaller faults in the same place are gone too: two cleanups started in the same second no longer share a backup table, and a long custom table prefix no longer breaks the backup table's name. A cancelled cleanup shows its own reason instead of "[object Object]".</p>
+<p>The <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/core-configuration/maintenance">Database Cleanup page</a> in these docs now describes the tools with the labels you see on screen, including where the invalid-meta cleanup lives.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-pending-filter-opens-again">The Pending filter opens again<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release#the-pending-filter-opens-again" class="hash-link" aria-label="Direct link to The Pending filter opens again" title="Direct link to The Pending filter opens again" translate="no">​</a></h2>
+<p>On the Bookings list, clicking the <strong>Pending</strong> chip could leave the page loading forever. The filter was built as a database query that grew with every detail stored on a booking; on a test site with real booking data the database was still working on it after 77 seconds. Every status chip now finds its bookings in one step, using the same rule the number on the chip uses — so the list and the number still agree. Filtering by licence plate now narrows a chip's list instead of replacing it. This had been there since 6.1.0.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="smaller-things-you-will-notice-in-the-admin">Smaller things you will notice in the admin<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release#smaller-things-you-will-notice-in-the-admin" class="hash-link" aria-label="Direct link to Smaller things you will notice in the admin" title="Direct link to Smaller things you will notice in the admin" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Notices stay put.</strong> A notice such as the licence warning used to slide in under the page title a moment after most admin screens appeared, pushing the page down. It is now in place when the screen first shows. On Settings &gt; Notification Templates it no longer appears twice, and on Settings it no longer turns into a pop-up that disappears after four seconds.</li>
+<li class=""><strong>The menu sits directly above WooCommerce</strong>, instead of below WooCommerce's Products, Payments and Analytics menus, so Rentiva's long list of screens stays in view. It is still below WordPress's own Posts, Media, Pages and Comments.</li>
+<li class=""><strong>Vehicle Settings &gt; Display &amp; Preview</strong> shows your first vehicle that has a featured image — its photo, name and daily price — instead of a grey placeholder and a sample car.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="also-in-this-release">Also in this release<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.1.5-release#also-in-this-release" class="hash-link" aria-label="Direct link to Also in this release" title="Direct link to Also in this release" translate="no">​</a></h2>
+<p>The search filter's "No vehicles found" message is now escaped on its AJAX path too, the vehicle edit screen no longer raises a PHP warning when the vehicle-details setting is empty, and unused e-mail screen JavaScript that called four admin actions that do not exist was removed.</p>
+<hr>
+<p><strong>Where to get it.</strong> 6.1.5 is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.1.5" target="_blank" rel="noopener noreferrer" class=""><code>v6.1.5</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. <strong>Using Rentiva Pro?</strong> Pro 6.2.0 requires this version — update Rentiva first. The full changelog in both languages ships with the plugin.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>maintenance</category>
+            <category>bookings</category>
+            <category>admin</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva Pro 6.1.0 — A deletion button only a customer can press]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.1.0-release</link>
@@ -594,53 +667,6 @@
             <category>rentiva</category>
             <category>settings</category>
             <category>bugfix</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.64.0 — Commission Rate Overrides (Vendor & Vehicle) and Tier Configuration]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release</guid>
-            <pubDate>Tue, 07 Jul 2026 18:00:00 GMT</pubDate>
-            <description><![CDATA[Admins can now override the commission rate per vendor or per vehicle, and configure the volume-discount tier thresholds directly from the admin panel — closing the last three previously UI-less layers of the commission rate hierarchy. Also includes three commission-accuracy fixes and a schema migration guard found during release verification.]]></description>
-            <content:encoded><![CDATA[<p>Admins can now override the commission rate per vendor or per vehicle, and configure the volume-discount tier thresholds directly from the admin panel — closing the last three previously UI-less layers of the commission rate hierarchy. Also includes three commission-accuracy fixes and a schema migration guard found during release verification.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new">New<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release#new" class="hash-link" aria-label="Direct link to New" title="Direct link to New" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Vendor-level commission rate override.</strong> Set a fixed commission rate for an individual vendor from that vendor's detail page in Vendor Management — no need to touch every vehicle they list.</li>
-<li class=""><strong>Vehicle-level commission rate override.</strong> Set a fixed commission rate for an individual vehicle from a new "Commission Rate Override" box on the vehicle edit screen. This is the most specific layer — it takes priority over the vendor's rate, volume-discount tier, and the platform-wide rate.</li>
-<li class=""><strong>Editable volume-discount tiers.</strong> The three tiers that automatically discount a high-volume vendor's rate (based on trailing 30-day cleared revenue) can now be edited directly from the Commission tab, instead of only via direct database edits. See the <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/vendor/commission-rates">Commission Rate Configuration guide</a> for how the full 4-layer hierarchy resolves.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>The vehicle-level override above is now actually applied to real bookings.</strong> The underlying resolver logic already existed but was never connected to live checkout processing.</li>
-<li class=""><strong>Refund commission clawbacks now use the rate the vendor was originally credited at</strong>, instead of whatever rate happens to be active on the day of the refund — a rate change between payment and refund no longer silently alters the refund math.</li>
-<li class=""><strong>The vendor dashboard's "last 7 days" revenue figures</strong> could show artificially low or negative numbers, because a commission credit that clears 7+ days after it's created could never land inside a rolling 7-day window while a same-day refund always could. A new internal timestamp now tracks when a credit actually cleared.</li>
-<li class=""><strong>The dashboard's <code>revenue_7d</code> metric</strong> had the same balance-lookup key mismatch that was fixed for the other Financial Summary cards in v4.63.2.</li>
-<li class=""><strong>Schema migration guard.</strong> Found during release verification (before this ZIP was published): a database schema-version constant hadn't been bumped alongside the new column that powers the 7-day revenue fix above, which would have silently prevented existing installations from ever receiving it. Fixed and verified against a simulated real upgrade before release.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
-            <category>commission</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.63.2 — Vendor Commission Clearing & Refund Balance Fixes]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release</guid>
-            <pubDate>Mon, 06 Jul 2026 18:00:00 GMT</pubDate>
-            <description><![CDATA[Fixes vendor commission recording, adds an automatic 7-day clearing mechanism so earnings actually become withdrawable, corrects refund balance math, and fixes a vendor dashboard KPI card that always showed zero.]]></description>
-            <content:encoded><![CDATA[<p>Fixes vendor commission recording, adds an automatic 7-day clearing mechanism so earnings actually become withdrawable, corrects refund balance math, and fixes a vendor dashboard KPI card that always showed zero.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.63.2-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Vendor commission was silently never recorded for real bookings</strong> due to a booking-reference mismatch between the checkout flow and the commission ledger — vendor earnings were never credited at all.</li>
-<li class=""><strong>Vendor commission now automatically clears and becomes available for payout 7 days after payment</strong>, via a new scheduled job. Previously, commission stayed in a "pending" state indefinitely with no way for a vendor to ever withdraw it.</li>
-<li class=""><strong>Refunds now correctly adjust the vendor's available balance</strong>, whether the refund happens before or after the commission clears, and whether it's a partial or full refund. Previously, refunds had no effect on the balance at all.</li>
-<li class=""><strong>Vendors now receive an email notification</strong> when a commission clears and becomes available for payout.</li>
-<li class=""><strong>The vendor dashboard's "Financial Summary" cards</strong> (Available Balance, Pending Balance, Total Paid Out) always showed 0,00 regardless of the vendor's actual balance, due to a data-key mismatch. The payout-request section, which reads the balance directly, was unaffected.</li>
-</ul>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>vendor</category>
-            <category>commission</category>
-            <category>payouts</category>
         </item>
     </channel>
 </rss>
