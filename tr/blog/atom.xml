@@ -2,11 +2,115 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-09-17T06:30:00.000Z</updated>
+    <updated>2026-10-11T06:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.3.0 — Bayi IBAN'ları ve belgeleri şifreli saklanıyor, mesajlar konuşma olarak yeniden kuruldu, bayi ayarları tek yerde]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release"/>
+        <updated>2026-10-11T06:30:00.000Z</updated>
+        <summary type="html"><![CDATA[6.3.0 bayilerin teslim ettiklerini koruyor: IBAN'lar, kimlik belgeleri ve araç belgeleri şifreleniyor ve medya kütüphanesinin dışında tutuluyor. Mesajlar konuşma olarak yeniden kuruldu; Bayi Yönetimi bir bayi ayrıntı sayfası ve bütün bayi ayarları için tek bir yer kazandı. Önce MHM Rentiva'yı (Lite) 6.2.0'a, sonra Pro'yu güncelleyin. Rentiva Pro 6.1.0 ve öncesi Rentiva 6.2.0 ile birlikte bayi panelinde hatayla duruyor; iki güncellemeyi art arda yapın.]]></summary>
+        <content type="html"><![CDATA[<p>6.3.0 bayilerin teslim ettiklerini koruyor: IBAN'lar, kimlik belgeleri ve araç belgeleri şifreleniyor ve medya kütüphanesinin dışında tutuluyor. Mesajlar konuşma olarak yeniden kuruldu; Bayi Yönetimi bir bayi ayrıntı sayfası ve bütün bayi ayarları için tek bir yer kazandı. <strong>Önce MHM Rentiva'yı (Lite) 6.2.0'a, sonra Pro'yu güncelleyin.</strong> Rentiva Pro 6.1.0 ve öncesi Rentiva 6.2.0 ile birlikte bayi panelinde hatayla duruyor; iki güncellemeyi art arda yapın.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-ibanları-ve-belgeleri-şifreli-saklanıyor">Bayi IBAN'ları ve belgeleri şifreli saklanıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release#bayi-ibanlar%C4%B1-ve-belgeleri-%C5%9Fifreli-saklan%C4%B1yor" class="hash-link" aria-label="Bayi IBAN'ları ve belgeleri şifreli saklanıyor doğrudan bağlantı" title="Bayi IBAN'ları ve belgeleri şifreli saklanıyor doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>IBAN'lar ve kimlik belgeleri</strong> (kimlik, ehliyet, adres belgesi) şifreleniyor ve medya kütüphanesinin dışında saklanıyor. Belgeler yalnızca JPG, PNG ya da PDF olarak kabul ediliyor, türü ve boyutu denetleniyor. Yöneticiler IBAN'ı Göster / Kopyala / Gizle ile açıyor, belgeleri kimin baktığını kaydeden yollardan görüyor; ödeme dökümleri IBAN'ı maskeli gösteriyor.</li>
+<li class=""><strong>Araç ruhsatı ve sigorta belgeleri</strong> de herkese açık medya kütüphanesinden çıkıyor. Araç düzenleme ekranında, kimin baktığını kaydeden bir Araç Belgeleri kutusu var; bir bayi belgesini yenileyince yönetici e-posta alıyor.</li>
+<li class=""><strong>Güncellemede mevcut IBAN'lar ve belgeler dönüştürülüyor; eski belge ekleri şifreli depoya kopyalandıktan sonra medya kütüphanesinden siliniyor.</strong> Böyle bir dosyayı gösteren galeri ya da kapak girdileri kaldırılıyor.</li>
+</ul>
+<p><strong>Önerilen:</strong> ek bir ayar yapılmazsa şifreleme anahtarları <code>wp-config.php</code>'deki WordPress anahtarlarından türetiliyor; bu anahtarlar değişirse saklanan IBAN'lar ve belgeler okunamıyor. Verinin kendine ait bir anahtarı olsun diye <code>wp-config.php</code>'ye <code>MHM_RENTIVA_SENSITIVE_KEY</code> tanımlayın — yönetici uyarısı bunu öneriyor, nereye yazılacağını anlatıyor ve yeni bir anahtarla hazır bir <code>define()</code> satırı basıyor.</p>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Bilinen sınır</div><div class="admonitionContent_BuS1"><p>Güncellemeden sonra IBAN'ı okunamayan bir bayi — örneğin bayi onaylandıktan sonra <code>wp-config.php</code>'deki WordPress anahtarları değiştirildiyse — <strong>IBAN yeniden girilene kadar ödeme talep edemiyor ve 6.3.0'da IBAN'ı yeniden girmek için bir form yok.</strong> Yönetici uyarısı bu bayilerin her birini adıyla ve bağlantısıyla gösteriyor.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mesajlar-konuşma-olarak-yeniden-kuruldu">Mesajlar konuşma olarak yeniden kuruldu<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release#mesajlar-konu%C5%9Fma-olarak-yeniden-kuruldu" class="hash-link" aria-label="Mesajlar konuşma olarak yeniden kuruldu doğrudan bağlantı" title="Mesajlar konuşma olarak yeniden kuruldu doğrudan bağlantı" translate="no">​</a></h2>
+<p>Bir konuşma, bir ilk mesaj ve onun yanıtlarından oluşuyor. Yeni bir yönetici gelen kutusu ve konuşma görünümü var — öncelik, son etkinlik, müşteri, durum ve ilgili rezervasyon — katlanıp durumunu hatırlayan yan kartlarla. Müşteriler yalnızca kendi konuşmalarını, düz metin olarak görüyor. E-posta kuralları açık: durum e-postası yalnızca yöneticinin tek bir değişikliği için, her yönetici yanıtı için tam bir e-posta, toplu işlemlerde ve güncellemede hiç e-posta yok, otomatik yanıt yalnızca yeni bir konuşma için. Mesajların kendi yetkileri var. Mevcut mesajlar güncellemede, e-posta gönderilmeden bir kez dönüştürülüyor. Mesajlar e-posta bildirimleri artık gerçekten kapatılabiliyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bayi-yönetimi">Bayi yönetimi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release#bayi-y%C3%B6netimi" class="hash-link" aria-label="Bayi yönetimi doğrudan bağlantı" title="Bayi yönetimi doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Bir bayi ayrıntı sayfası:</strong> rakamlar, iletişim (şehir düzenlenebilir), denetlenen IBAN gösterimiyle ödeme ve vergi bilgileri, onaylanmış başvuru ve belgeleri, güvenilirlik ve rozet, geçerli komisyon ve kaynağı, bayinin araçlarındaki rezervasyonlar ve yorumlar, askıya alma / yeniden etkinleştirme.</li>
+<li class=""><strong>Bayi Yönetimi Aktif Bayiler ile açılıyor</strong>; her bayi için e-posta, şehir, araç sayısı, geçerli komisyon ve puan, bir sayaç şeridi ve bir "Şehre göre gelir" kartı var. Onaylama, reddetme, IBAN ve askıya alma işlemleri tarayıcı açılır penceresi yerine sayfa içinde onay istiyor. Üç belgesi eklenmemiş bir başvuru reddediliyor.</li>
+<li class=""><strong>Bütün bayi ayarları Eklenti Ayarları &gt; Bayi Pazaryeri altına taşındı</strong>; Bayi Yönetimi'nin Ayarlar sekmesi kalktı. Yeni "Yeni bayi başvurularını kabul et" anahtarı varsayılan olarak açık. İlan ücreti ayarları artık gerçekten kaydediliyor. Sekiz ayrı bayi seçeneği güncellemede oraya taşınıyor.</li>
+<li class="">Rentiva'nın <strong>Müşteriler</strong> ekranında bayiler "Bayi" ya da "Askıdaki bayi" rozeti taşıyor; <strong>Rezervasyonlar</strong> ekranına Bayi süzgeci ve sütunu eklendi.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Komisyon oranı kaydedilmemiş yeni bir kurulum artık WooCommerce ödemelerini, tamamlamalarını ve iadelerini bozmuyor.</strong> Komisyon bir sipariş notuyla bekletiliyor ve sonradan kaydedilen oranla yazılıyor; bir yönetici uyarısı kaç komisyonun beklediğini gösteriyor.</li>
+<li class="">Tek bir bekleyen bayi başvurusu artık giriş yapmış diğer bütün müşterilerin panelini boşaltmıyor.</li>
+<li class="">Bayi e-postaları (13 şablon ve ödeme dökümü), bayileri Hesabım'a geri göndermek yerine Bayi Paneli'nin ilgili bölümüne bağlanıyor.</li>
+<li class="">Müşteri, araç ve gelir raporları yalnızca tamamlanmış ve onaylanmış rezervasyonları sayıyor; aynı anda yapılan genel oran değişiklikleri artık birbirini ezmiyor.</li>
+<li class="">Altı Pro Elementor bileşeninin hepsi içinde kaydedilen ayarları uyguluyor; kaydedilip yok sayılan ayarlar artık uygulanıyor — örneğin Transfer Arama'nın "Dikey" yerleşimi ve artık kayıtlı konum türlerinizi listeleyen Popüler Rotalar kalkış türü süzgeci. Hiçbir işe yaramayan ayarlar Mesajlar bloğundan, Transfer Sonuçları'ndan, Transfer Arama'dan ve Popüler Rotalar'dan kaldırıldı.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="geliştiriciler-için">Geliştiriciler için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release#geli%C5%9Ftiriciler-i%C3%A7in" class="hash-link" aria-label="Geliştiriciler için doğrudan bağlantı" title="Geliştiriciler için doğrudan bağlantı" translate="no">​</a></h2>
+<p>Kaldırılanlar: <code>mhmrentiva_message_read</code> eylemi, <code>mhmrentiva_account_vendor_panel</code> filtresi, eski mesaj formu işleyicileri ve <code>Message::mark_as_read()</code>, <code>VendorApplicationManager::encrypt_iban()</code> / <code>decrypt_iban()</code> gibi yöntemler, <code>GET/POST /vendors/settings</code> REST yolları. <code>mhmrentiva_message_status_changed</code> artık konuşmanın ilk mesajının kimliğini ve <code>array( 'actor' =&gt; … )</code> geçiriyor. <strong>Saklanan IBAN'ların biçimi değişti:</strong> IBAN meta'sını doğrudan okuyan kod çalışmıyor. Güncellemede beş veritabanı adımı bir kez çalışıyor.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> Pro 6.3.0, GitHub'da <code>v6.3.0</code> olarak yayınlandı ve wpalemi.com üzerindeki Rentiva Pro indirmesiyle sunuluyor. Önce <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release">Rentiva'yı 6.2.0'a</a> güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="vendor" term="vendor"/>
+        <category label="security" term="security"/>
+        <category label="messages" term="messages"/>
+        <category label="admin" term="admin"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.2.0 — İletişim mesajları kendi ekranında, müşteri paneli emekliye ayrıldı, yok sayılan blok ve Elementor ayarları artık uygulanıyor]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release"/>
+        <updated>2026-10-11T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[6.2.0 dört haftalık çalışmayı bir araya getiriyor. İletişim mesajları kendi ekranına, ekleri özel bir klasöre taşınıyor; ayrı müşteri paneli Hesabım lehine emekliye ayrılıyor ve kaydedildiği hâlde sayfaya hiç ulaşmayan blok ve Elementor ayarları artık etkili. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. Rentiva Pro kullanıyor musunuz? Pro 6.1.0 ve öncesi bu sürümle birlikte bayi panelinde hatayla duruyor — hemen ardından Pro'yu 6.3.0'a güncelleyin.]]></summary>
+        <content type="html"><![CDATA[<p>6.2.0 dört haftalık çalışmayı bir araya getiriyor. İletişim mesajları kendi ekranına, ekleri özel bir klasöre taşınıyor; ayrı müşteri paneli Hesabım lehine emekliye ayrılıyor ve kaydedildiği hâlde sayfaya hiç ulaşmayan blok ve Elementor ayarları artık etkili. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. <strong>Rentiva Pro kullanıyor musunuz?</strong> Pro 6.1.0 ve öncesi bu sürümle birlikte bayi panelinde hatayla duruyor — hemen ardından Pro'yu 6.3.0'a güncelleyin.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇letişim-mesajları-kendi-ekranında">İletişim mesajları kendi ekranında<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#i%CC%87leti%C5%9Fim-mesajlar%C4%B1-kendi-ekran%C4%B1nda" class="hash-link" aria-label="İletişim mesajları kendi ekranında doğrudan bağlantı" title="İletişim mesajları kendi ekranında doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>MHM Rentiva &gt; İletişim Mesajları</strong> yeni bir ekran: istatistikler, Yeni / Okundu / Yanıtlandı sekmeleri, ay süzgeci, arama, toplu işlemler ve gönderenin kartını ve diğer mesajlarını gösteren bir ayrıntı görünümü. E-postayla yanıt verebiliyor, bir mesajı yanıtlandı olarak işaretleyebiliyorsunuz; menü de kaç mesajın okunmadığını gösteriyor. Eski liste ve düzenleme ekranlarının bağlantıları yeni ekranı açıyor; mevcut mesajlar güncellemede bir kez okundu olarak işaretleniyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ekler-özel-bir-klasöre-taşınıyor">Ekler özel bir klasöre taşınıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#ekler-%C3%B6zel-bir-klas%C3%B6re-ta%C5%9F%C4%B1n%C4%B1yor" class="hash-link" aria-label="Ekler özel bir klasöre taşınıyor doğrudan bağlantı" title="Ekler özel bir klasöre taşınıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>İletişim formu ekleri artık <code>uploads/mhm-rentiva-private/contact/</code> adlı özel bir klasörde, rastgele adlarla saklanıyor. Yalnızca yöneticinin <strong>İndir</strong> düğmesiyle indirilebiliyor; mesaj silinince dosyası da siliniyor. Güncellemede mevcut ekler oraya taşınıyor ve <strong>eski herkese açık adresleri artık çalışmıyor</strong>; taşınamayan dosyalar bir kez yönetici uyarısında listeleniyor. Ekler 5 MB ile sınırlı.</p>
+<ul>
+<li class=""><strong>nginx kullanıyorsanız</strong> eklentinin readme dosyasındaki gizlilik bölümünde yer alan engelleme kuralını ekleyin: <code>location ^~ /wp-content/uploads/mhm-rentiva-private/ { deny all; }</code>. Apache'de klasör, doğrudan erişimi engelleyen bir <code>.htaccess</code> ile geliyor.</li>
+<li class=""><strong>Bir medya aktarma (offload) eklentisi mi kullanıyorsunuz?</strong> Bu klasörü onun dışında bırakın.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="müşteri-paneli-emekliye-ayrıldı">Müşteri paneli emekliye ayrıldı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#m%C3%BC%C5%9Fteri-paneli-emekliye-ayr%C4%B1ld%C4%B1" class="hash-link" aria-label="Müşteri paneli emekliye ayrıldı doğrudan bağlantı" title="Müşteri paneli emekliye ayrıldı doğrudan bağlantı" translate="no">​</a></h2>
+<p><code>[rentiva_user_dashboard]</code>, bloğu ve Elementor bileşeni artık bir panel çizmiyor. Giriş yapmış müşteri tek bir satır ve <strong>Hesabım</strong> bağlantısı görüyor; ziyaretçi hiçbir şey görmüyor; yöneticiler ayrıca bunu sayfadan kaldırmalarını isteyen bir uyarı görüyor. Blok ve bileşen düzenleyicilerde gizlendi; Kısa Kod Sayfaları artık bu sayfayı oluşturmayı önermiyor. Müşteriler rezervasyonlarını, favorilerini ve ödemelerini Hesabım'da buluyor. Ayrıntı: <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/docs/features-usage/shortcodes/user-dashboard">Master account dashboard (emekli)</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yok-sayılan-blok-ve-elementor-ayarları-artık-uygulanıyor">Yok sayılan blok ve Elementor ayarları artık uygulanıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#yok-say%C4%B1lan-blok-ve-elementor-ayarlar%C4%B1-art%C4%B1k-uygulan%C4%B1yor" class="hash-link" aria-label="Yok sayılan blok ve Elementor ayarları artık uygulanıyor doğrudan bağlantı" title="Yok sayılan blok ve Elementor ayarları artık uygulanıyor doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Kaydedilen ayarlar sayfaya ulaşıyor.</strong> Bunlardan bazıları: iletişim formunun türü, telefon, şirket, araç, öncelik ve ek dosya alanları, teması ve otomatik yanıtı (her form "genel" olarak çıkıyordu); araç listesinin Sütunlar ayarı; artık "İncelemeleri Göster" ayarına bağlı olan araç detayındaki "Derecelendirmeler ve Yorumlar" bölümü; müsaitlik takviminin yüksekliği. Varsayılanlar eski görünümü koruyor; sayfa yalnızca bu ayarlardan biri değiştirilmişse değişiyor.</li>
+<li class=""><strong>Elementor stil denetimleri</strong> araç kartlarını, listeleri, ızgaraları, öne çıkan araçları ve rezervasyon düğmesini artık gerçekten biçimlendiriyor — çoğu önceden hiçbir şeyi hedeflemiyordu. Önceden kaydedip hiç görmediğiniz renk ve boşluk değerleri artık görünebilir.</li>
+<li class=""><strong>Blok ayarları kalıcı.</strong> Blok düzenleyicide değiştirilip kaydedilen bir ayar artık her çizimde ezilmiyor.</li>
+<li class=""><strong>Hiçbir işe yaramayan ayarlar kaldırıldı</strong>: bloklardan, bileşenlerden ve kısa kodlardan. Kayıtlı bir değer yalnızca yok sayılıyor, sayfa eskisi gibi görünüyor. Bu belgelerdeki kısa kod sayfaları artık bunları listelemiyor.</li>
+<li class=""><strong>Kısa kod metninde iki öznitelik değişti:</strong> Öne Çıkan Araçlar artık <code>show_book_button</code> okumuyor — <code>show_booking_button="0"</code> kullanın — ve Birleşik Arama artık <code>layout</code> okumuyor — <code>search_layout="vertical"</code> kullanın. Arama Sonuçları'nda Sıralama Ölçütü ve Sıralama Düzeni yerine tek bir <strong>Varsayılan Sıralama Düzeni</strong> (<code>default_sort</code>) var.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fark-edeceğiniz-küçük-şeyler">Fark edeceğiniz küçük şeyler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#fark-edece%C4%9Finiz-k%C3%BC%C3%A7%C3%BCk-%C5%9Feyler" class="hash-link" aria-label="Fark edeceğiniz küçük şeyler doğrudan bağlantı" title="Fark edeceğiniz küçük şeyler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araç kartları</strong> 3:2 oranlı görsel ve aracın gerçek puanını gösteriyor; puanı olmayan araçta puan görünmüyor, "★ 4.8 (120 yorum)" yer tutucusu kalktı. Rezervasyon düğmesi araç hizmet dışıysa "Kullanım dışı" yazıyor, değilse bileşenin metnini, o yoksa genel "Şimdi Rezervasyon Yap Düğmesi" metninizi kullanıyor. Rezervasyon formu da aynı görünümü aldı ve araç detay sayfasının düzenine uyuyor.</li>
+<li class=""><strong>Müşteriler ekranı:</strong> Toplam Harcama, Aktif, VIP ve Ort. Harcama yalnızca tamamlanmış ya da onaylanmış rezervasyonları sayıyor; WooCommerce üzerinden ödeme yapmış müşterilerin telefonu ve adresi görünüyor; iki telefon kaydı olan bir müşteri artık iki kez görünmüyor.</li>
+<li class=""><strong>Hesabım listeleri:</strong> Ödeme Geçmişi'nin 2. sayfasına yeniden ulaşılabiliyor; Rezervasyonlarım ve Ödeme Geçmişi sayfalamadan önce süzüyor, böylece süzülen sayfa dolu geliyor.</li>
+<li class=""><strong>Müşteri yorumlarının "Daha Fazla Yükle"</strong> düğmesi sıralamayı, süzgeçleri ve görünüm seçeneklerini koruyor.</li>
+<li class=""><strong>Ön yüz artık ziyaretçinin işletim sistemi karanlık modda diye koyulaşmıyor</strong>; buna temanız ve eklentinin kendi Karanlık Mod ayarı karar veriyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güvenlik-ve-gizlilik">Güvenlik ve gizlilik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#g%C3%BCvenlik-ve-gizlilik" class="hash-link" aria-label="Güvenlik ve gizlilik doğrudan bağlantı" title="Güvenlik ve gizlilik doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">Bir aracın galerisi ve öne çıkan görseli yalnızca düzenleyen kullanıcının yüklediği ya da kullanabileceği görselleri kabul ediyor, hassas bir belgeyi asla kabul etmiyor. Daha önce kaydedilmiş galeri girdileri yalnızca kaynağı güvenilirse gösteriliyor. Bir görseli araca eklemek o aracı düzenleme yetkisi gerektiriyor.</li>
+<li class="">İletişim formunun özel alıcısı (<code>email_to</code>) yalnızca bu adres formu barındıran sayfada hâlâ ayarlıyken kullanılıyor; aksi hâlde mesaj genel alıcıya gidiyor.</li>
+<li class="">Ziyaretçinin IP adresi artık yönetici e-postasında yer almıyor; iletişim formunun türü ve önceliği izin verilen değerlere göre denetleniyor.</li>
+<li class="">Veritabanı temizliği artık Rentiva Pro'nun mesaj konuşması, bekletilen komisyon ve bayi IBAN kayıtlarını silmiyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="geliştiriciler-için">Geliştiriciler için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.0-release#geli%C5%9Ftiriciler-i%C3%A7in" class="hash-link" aria-label="Geliştiriciler için doğrudan bağlantı" title="Geliştiriciler için doğrudan bağlantı" translate="no">​</a></h2>
+<p>On hook ve müşteri paneli sınıfları kaldırıldı; aralarında <code>mhmrentiva_dashboard_*</code> filtreleri ve üç <code>mhmrentiva_availability_calendar_*</code> filtresi var. <code>render_shortcode()</code> ve <code>output_shortcode()</code> kullanımdan kalkmış ara yöntem olarak duruyor — <code>render_canonical()</code> kullanın. Yeni hook'lar arasında <code>mhmrentiva_contact_recipient_fallback</code>, <code>mhmrentiva_gallery_attachment_allowed</code> ve <code>mhmrentiva_retired_dashboard_notice</code> var; ayrıca <code>mhm-rentiva/v1/contact-messages</code> altında REST yolları (yalnızca yöneticiler). Güncellemede üç veritabanı adımı bir kez çalışıyor: iletişim durumları, iletişim ekleri ve Elementor stil kimlikleri.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> 6.2.0 <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.2.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.2.0</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. <strong>Rentiva Pro kullanıyor musunuz?</strong> Önce Rentiva'yı, ardından <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release">Pro'yu 6.3.0'a</a> güncelleyin — Pro 6.1.0 ve öncesi bu sürümle birlikte bayi panelinde hatayla duruyor. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="contact" term="contact"/>
+        <category label="elementor" term="elementor"/>
+        <category label="blocks" term="blocks"/>
+        <category label="security" term="security"/>
+        <category label="admin" term="admin"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva Pro 6.2.0 — Bayilere ait bir panel, tek para birimli defter ve komisyonu birebir geri alan iadeler]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.2.0-release</id>
@@ -705,52 +809,5 @@
         <category label="settings" term="settings"/>
         <category label="bugfix" term="bugfix"/>
         <category label="accessibility" term="accessibility"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.2 — Karanlık Mod Kontrast + Çevrilemeyen Placeholder Düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release"/>
-        <updated>2026-07-12T19:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Karanlık Mod'da neredeyse görünmez olan metinler ve site dili ne olursa olsun asla çevrilemeyen 6 örnek placeholder düzeltildi.]]></summary>
-        <content type="html"><![CDATA[<p>Karanlık Mod'da neredeyse görünmez olan metinler ve site dili ne olursa olsun asla çevrilemeyen 6 örnek placeholder düzeltildi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Karanlık Mod kontrastı.</strong> Admin sayfa başlığı ve input/textarea placeholder metinleri için karanlık mod renk geçersiz kılması yoktu, ikisi de koyu arkaplana karşı neredeyse okunaksızdı.</li>
-<li class=""><strong>Çevrilemeyen 6 placeholder metni.</strong> "Özel Konum Türleri" örnek placeholder'ı (ve Güvenlik ayarları, Araç ayarları ile REST API ayarlarında 5 kopyası daha) hiç çeviri fonksiyonuna sarılmamış ham PHP string'leriydi — site dili ne olursa olsun asla çevrilemiyorlardı, tam Türkçeleştirilmiş kurulumlarda bile her zaman İngilizce görünüyorlardı. Hepsi düzeltilip çevrildi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇yileştirme">İyileştirme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.2-release#i%CC%87yile%C5%9Ftirme" class="hash-link" aria-label="İyileştirme doğrudan bağlantı" title="İyileştirme doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class="">"Özel Konum Türleri" alan açıklaması artık bu değerlerin Konumlar bölümünde yeni bir konum oluştururken "Tip" açılır menüsünü beslediğini açıklıyor — daha önce bu iki ekran arasındaki bağlantı arayüzde hiçbir yerde belgelenmemişti.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="settings" term="settings"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="i18n" term="i18n"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.1 — Karanlık Mod Anahtarının Alanları Silmesi Düzeltmesi]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release"/>
-        <updated>2026-07-12T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Admin panelindeki hızlı Karanlık Mod anahtarının Destek Telefonu/Saatleri/E-postası'nı sessizce boşaltıp Marka Adı'nı sıfırlaması düzeltildi, ayrıca eski bir migration'ın geride bıraktığı ayar kirliliği temizlendi.]]></summary>
-        <content type="html"><![CDATA[<p>Admin panelindeki hızlı Karanlık Mod anahtarının Destek Telefonu/Saatleri/E-postası'nı sessizce boşaltıp Marka Adı'nı sıfırlaması düzeltildi, ayrıca eski bir migration'ın geride bıraktığı ayar kirliliği temizlendi.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.1-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Karanlık Mod anahtarı Genel/Site Bilgisi ayarlarını sessizce boşaltıyordu.</strong> Admin panelindeki hızlı Karanlık Mod AJAX anahtarı, sadece karanlık-mod değeri mevcutken Genel sekmenin tüm sanitizer'ını yeniden çalıştırıyordu — bu da her değiştirmede Destek Telefonu, Destek Saatleri ve Destek E-postası'nı sessizce boşaltıp Marka Adı'nı site başlığına sıfırlıyordu. Artık sadece karanlık mod ayarını güncelliyor.</li>
-<li class=""><strong>Kalan ayar kirliliği temizliği.</strong> v4.27.2'de geçmişteki bir "Tüm Testleri Çalıştır" veri-kirliliği hatası için eklenen tek-seferlik temizlik (Marka Adı ve benzeri metin alanlarının literal "1" değeriyle kaydedilmesine yol açabiliyordu), tamamlanma bayrağı kirlilik gerçekleşmeden önce zaten işaretlenmiş olan kurulumlarda bir daha hiç yeniden çalışmıyordu. İkinci bir temizlik geçişi artık hâlâ eski kirliliği taşıyan kurulumları yakalıyor.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="settings" term="settings"/>
-        <category label="bugfix" term="bugfix"/>
     </entry>
 </feed>

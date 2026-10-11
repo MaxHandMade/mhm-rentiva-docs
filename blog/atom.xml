@@ -2,11 +2,115 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-09-17T06:30:00.000Z</updated>
+    <updated>2026-10-11T06:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.3.0 — Vendor IBANs and documents encrypted at rest, messages rebuilt as conversations, and every vendor setting in one place]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release"/>
+        <updated>2026-10-11T06:30:00.000Z</updated>
+        <summary type="html"><![CDATA[6.3.0 protects what vendors hand over: IBANs, identity documents and vehicle documents are encrypted and kept out of the media library. Messages are rebuilt as conversations, and Vendor Management gets a vendor detail page and one home for every vendor setting. Update MHM Rentiva (Lite) to 6.2.0 first, then Pro. Rentiva Pro 6.1.0 or older stops with an error on the vendor panel beside Rentiva 6.2.0, so do the two updates back to back.]]></summary>
+        <content type="html"><![CDATA[<p>6.3.0 protects what vendors hand over: IBANs, identity documents and vehicle documents are encrypted and kept out of the media library. Messages are rebuilt as conversations, and Vendor Management gets a vendor detail page and one home for every vendor setting. <strong>Update MHM Rentiva (Lite) to 6.2.0 first, then Pro.</strong> Rentiva Pro 6.1.0 or older stops with an error on the vendor panel beside Rentiva 6.2.0, so do the two updates back to back.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-ibans-and-documents-are-encrypted-at-rest">Vendor IBANs and documents are encrypted at rest<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release#vendor-ibans-and-documents-are-encrypted-at-rest" class="hash-link" aria-label="Direct link to Vendor IBANs and documents are encrypted at rest" title="Direct link to Vendor IBANs and documents are encrypted at rest" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>IBANs and identity documents</strong> (ID, driving licence, proof of address) are encrypted and stored outside the media library. Documents are accepted as JPG, PNG or PDF only and are checked for type and size. Administrators reveal an IBAN with Show / Copy / Hide and open documents through routes that record who looked; payout statements show a masked IBAN.</li>
+<li class=""><strong>Vehicle registration and insurance documents</strong> leave the public media library too. The vehicle edit screen has a Vehicle Documents box with a recorded viewer, and the administrator gets an e-mail when a vendor renews a document.</li>
+<li class=""><strong>On update, existing IBANs and documents are converted, and the old document attachments are deleted from the media library once they have been copied</strong> to the encrypted store. Gallery or cover entries that pointed at such a file are removed.</li>
+</ul>
+<p><strong>Recommended:</strong> without further setup the encryption keys come from the WordPress keys in <code>wp-config.php</code>, so changing those keys makes stored IBANs and documents unreadable. Define <code>MHM_RENTIVA_SENSITIVE_KEY</code> in <code>wp-config.php</code> to give the data a key of its own — an admin notice recommends it, explains where it goes and prints a ready <code>define()</code> line with a fresh key.</p>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Known limitation</div><div class="admonitionContent_BuS1"><p>A vendor whose IBAN could not be read after the update — for example because the WordPress keys in <code>wp-config.php</code> were changed after the vendor was approved — <strong>cannot request a payout until the IBAN is entered again, and 6.3.0 has no form for entering it.</strong> The admin notice names and links each such vendor.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="messages-rebuilt-as-conversations">Messages, rebuilt as conversations<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release#messages-rebuilt-as-conversations" class="hash-link" aria-label="Direct link to Messages, rebuilt as conversations" title="Direct link to Messages, rebuilt as conversations" translate="no">​</a></h2>
+<p>A conversation is one first message plus its replies. There is a new admin inbox and thread view — priority, last activity, customer, status and related booking — with side cards that fold and remember their state. Customers see only their own conversations, as plain text. The e-mail rules are clear: a status e-mail only for an administrator's single change, exactly one e-mail per administrator reply, none for bulk actions or the update, and an auto-reply only for a new conversation. Messages have their own permissions. Existing messages are converted once, on update, without sending e-mail. Messages e-mail notifications can now really be switched off.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-management">Vendor management<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release#vendor-management" class="hash-link" aria-label="Direct link to Vendor management" title="Direct link to Vendor management" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>A vendor detail page:</strong> figures, contact (city editable), payment and tax with the audited IBAN reveal, the approved application and its documents, reliability and badge, the effective commission and where it comes from, bookings and reviews on the vendor's vehicles, and suspend / reactivate.</li>
+<li class=""><strong>Vendor Management opens on Active Vendors</strong>, with e-mail, city, vehicle count, effective commission and rating per vendor, a counters strip, and a "Revenue by city" card. Approve, reject, IBAN and suspend actions confirm inside the page instead of a browser pop-up. An application is refused unless its three documents are attached.</li>
+<li class=""><strong>Every vendor setting moves to Plugin Settings &gt; Vendor Marketplace</strong>, and Vendor Management loses its Settings tab. A new "Accept new vendor applications" switch is on by default. The listing-fee settings are now actually saved. The eight loose vendor options move there on update.</li>
+<li class="">On Rentiva's <strong>Customers</strong> screen, vendors carry a "Vendor" or "Suspended vendor" badge, and the <strong>Bookings</strong> screen gains a Vendor filter and column.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>A fresh install with no commission rate saved no longer breaks WooCommerce payments, completions and refunds.</strong> The commission is held with an order note and written at the rate saved later; an admin notice shows how many are held.</li>
+<li class="">One pending vendor application no longer empties the dashboard of every other logged-in customer.</li>
+<li class="">Vendor e-mails (13 templates and the payout statement) link to the matching section of the Vendor Panel instead of sending vendors back to My Account.</li>
+<li class="">Customer, vehicle and revenue reports count only completed and confirmed bookings, and simultaneous global-rate changes no longer overwrite each other.</li>
+<li class="">All six Pro Elementor widgets apply the settings saved in them, and settings that were saved but ignored now apply — for example Transfer Search's "Vertical" layout and Popular Routes' origin type filter, which now lists your stored location types. Settings that never did anything were removed from the Messages block, Transfer Results, Transfer Search and Popular Routes.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="for-developers">For developers<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release#for-developers" class="hash-link" aria-label="Direct link to For developers" title="Direct link to For developers" translate="no">​</a></h2>
+<p>Removed: the <code>mhmrentiva_message_read</code> action, the <code>mhmrentiva_account_vendor_panel</code> filter, the old message form handlers and methods such as <code>Message::mark_as_read()</code>, <code>VendorApplicationManager::encrypt_iban()</code> / <code>decrypt_iban()</code>, and the REST routes <code>GET/POST /vendors/settings</code>. <code>mhmrentiva_message_status_changed</code> now passes the conversation's first message id and <code>array( 'actor' =&gt; … )</code>. <strong>Stored IBANs change format:</strong> code reading the IBAN meta directly stops working. Five database steps run once on update.</p>
+<hr>
+<p><strong>Where to get it.</strong> Pro 6.3.0 is published on GitHub as <code>v6.3.0</code> and served through the Rentiva Pro download on wpalemi.com. Update <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release">Rentiva to 6.2.0</a> first. The full changelog ships with the plugin in both languages.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="vendor" term="vendor"/>
+        <category label="security" term="security"/>
+        <category label="messages" term="messages"/>
+        <category label="admin" term="admin"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.2.0 — Contact messages get their own screen, the customer dashboard retires, and ignored block and Elementor settings now apply]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release"/>
+        <updated>2026-10-11T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[6.2.0 gathers four weeks of work. Contact messages move to a screen of their own and their attachments to a private folder, the separate customer dashboard is retired in favour of My Account, and block and Elementor settings that were saved but never reached the page now take effect. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. Using Rentiva Pro? Pro 6.1.0 or older stops with an error on the vendor panel beside this release — update Pro to 6.3.0 right after.]]></summary>
+        <content type="html"><![CDATA[<p>6.2.0 gathers four weeks of work. Contact messages move to a screen of their own and their attachments to a private folder, the separate customer dashboard is retired in favour of My Account, and block and Elementor settings that were saved but never reached the page now take effect. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. <strong>Using Rentiva Pro?</strong> Pro 6.1.0 or older stops with an error on the vendor panel beside this release — update Pro to 6.3.0 right after.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="contact-messages-get-their-own-screen">Contact messages get their own screen<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#contact-messages-get-their-own-screen" class="hash-link" aria-label="Direct link to Contact messages get their own screen" title="Direct link to Contact messages get their own screen" translate="no">​</a></h2>
+<p><strong>MHM Rentiva &gt; Contact Messages</strong> is a new screen: statistics, New / Read / Replied tabs, a month filter, search, bulk actions, and a detail view with the sender's card and their other messages. You can reply by e-mail, mark a message as replied, and the menu shows how many are unread. Links to the old list and edit screens open the new one, and existing messages are marked as read once, on update.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="attachments-move-to-a-private-folder">Attachments move to a private folder<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#attachments-move-to-a-private-folder" class="hash-link" aria-label="Direct link to Attachments move to a private folder" title="Direct link to Attachments move to a private folder" translate="no">​</a></h2>
+<p>Contact-form attachments are now stored in a private folder, <code>uploads/mhm-rentiva-private/contact/</code>, under random names. They can only be downloaded through the administrator's <strong>Download</strong> button, and deleting a message deletes its file. On update, existing attachments are moved there and <strong>their old public addresses stop working</strong>; any file that cannot be moved is listed once in an admin notice. Attachments are capped at 5 MB.</p>
+<ul>
+<li class=""><strong>On nginx</strong>, add the deny rule from the privacy section of the plugin's readme: <code>location ^~ /wp-content/uploads/mhm-rentiva-private/ { deny all; }</code>. On Apache the folder ships with an <code>.htaccess</code> that denies direct access.</li>
+<li class=""><strong>Using a media offload plugin?</strong> Exclude the folder from it.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-customer-dashboard-is-retired">The customer dashboard is retired<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#the-customer-dashboard-is-retired" class="hash-link" aria-label="Direct link to The customer dashboard is retired" title="Direct link to The customer dashboard is retired" translate="no">​</a></h2>
+<p><code>[rentiva_user_dashboard]</code>, its block and its Elementor widget no longer render a dashboard. A logged-in customer sees one line and a link to <strong>My Account</strong>; visitors see nothing; administrators also see a notice asking them to remove it from the page. The block and the widget are hidden from the editors, and Shortcode Pages no longer offers to create the page. Customers find their bookings, favorites and payments on My Account. See <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/docs/features-usage/shortcodes/user-dashboard">Master account dashboard (retired)</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="block-and-elementor-settings-that-were-ignored-now-apply">Block and Elementor settings that were ignored now apply<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#block-and-elementor-settings-that-were-ignored-now-apply" class="hash-link" aria-label="Direct link to Block and Elementor settings that were ignored now apply" title="Direct link to Block and Elementor settings that were ignored now apply" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Saved settings reach the page.</strong> Among them: the contact form's type, phone, company, vehicle, priority and attachment fields, theme and auto-reply (every form used to render as "general"); the vehicles list's Columns; the vehicle details "Ratings &amp; Reviews" section, which now follows "Show Reviews"; the availability calendar's height. The defaults keep the old look, so a page only changes where one of these settings had been changed.</li>
+<li class=""><strong>Elementor style controls</strong> for vehicle cards, lists, grids, featured vehicles and the booking button now style the page — most of them matched nothing before. Colours or spacing you saved earlier but never saw may now appear.</li>
+<li class=""><strong>Block settings stick.</strong> A setting changed in the block editor and saved is no longer overwritten on every render.</li>
+<li class=""><strong>Settings that never did anything were removed</strong> from blocks, widgets and shortcodes. A saved value is simply ignored and the page renders as before. The shortcode pages in these docs no longer list them.</li>
+<li class=""><strong>Two shortcode attributes were renamed in practice:</strong> Featured Vehicles no longer reads <code>show_book_button</code> — use <code>show_booking_button="0"</code> — and Unified Search no longer reads <code>layout</code> — use <code>search_layout="vertical"</code>. Search Results has a single <strong>Default Sort Order</strong> (<code>default_sort</code>) instead of Sort By and Sort Order.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="smaller-things-you-will-notice">Smaller things you will notice<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#smaller-things-you-will-notice" class="hash-link" aria-label="Direct link to Smaller things you will notice" title="Direct link to Smaller things you will notice" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Vehicle cards</strong> show a 3:2 image and the vehicle's real rating; a vehicle without ratings shows none, and the placeholder "★ 4.8 (120 reviews)" is gone. The booking button reads "Unavailable" when the vehicle is out of service, and otherwise follows the widget's text, then your global "Book Now Button" text. The booking form takes the same look and matches the vehicle details layout.</li>
+<li class=""><strong>Customers screen:</strong> Total Spent, Active, VIP and Avg. Spend count only completed or confirmed bookings, customers who checked out through WooCommerce show their phone and address, and a customer with two phone records no longer appears twice.</li>
+<li class=""><strong>My Account lists:</strong> Payment History page 2 can be reached again, and My Bookings and Payment History filter before paging, so a filtered page is full.</li>
+<li class=""><strong>Testimonials' "Load More"</strong> keeps the order, filters and display options.</li>
+<li class=""><strong>The front end no longer turns dark</strong> because the visitor's operating system is in dark mode; your theme and the plugin's own Dark Mode setting decide.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="security-and-privacy">Security and privacy<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#security-and-privacy" class="hash-link" aria-label="Direct link to Security and privacy" title="Direct link to Security and privacy" translate="no">​</a></h2>
+<ul>
+<li class="">A vehicle's gallery and featured image accept only images the editing user uploaded or may use, and never a sensitive document. Gallery entries stored earlier are shown only when their origin is trusted. Attaching an image to a vehicle requires permission to edit that vehicle.</li>
+<li class="">A contact form's custom recipient (<code>email_to</code>) is used only while that address is still set on the page that holds the form; otherwise the message goes to the global recipient.</li>
+<li class="">The visitor's IP address is no longer included in the admin e-mail, and the contact form's type and priority are checked against the allowed values.</li>
+<li class="">The database cleanup no longer deletes Rentiva Pro's message-thread, commission-hold and vendor IBAN records.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="for-developers">For developers<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.0-release#for-developers" class="hash-link" aria-label="Direct link to For developers" title="Direct link to For developers" translate="no">​</a></h2>
+<p>Ten hooks and the customer dashboard classes were removed, including the <code>mhmrentiva_dashboard_*</code> filters and three <code>mhmrentiva_availability_calendar_*</code> filters; <code>render_shortcode()</code> and <code>output_shortcode()</code> remain as deprecated shims — use <code>render_canonical()</code>. New hooks include <code>mhmrentiva_contact_recipient_fallback</code>, <code>mhmrentiva_gallery_attachment_allowed</code> and <code>mhmrentiva_retired_dashboard_notice</code>, plus REST routes under <code>mhm-rentiva/v1/contact-messages</code> (administrators only). Three database steps run once on update: contact statuses, contact attachments and Elementor style ids.</p>
+<hr>
+<p><strong>Where to get it.</strong> 6.2.0 is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.2.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.2.0</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. <strong>Using Rentiva Pro?</strong> Update Rentiva first, then <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release">Pro to 6.3.0</a> — Pro 6.1.0 or older stops with an error on the vendor panel beside this release. The full changelog in both languages ships with the plugin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="contact" term="contact"/>
+        <category label="elementor" term="elementor"/>
+        <category label="blocks" term="blocks"/>
+        <category label="security" term="security"/>
+        <category label="admin" term="admin"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva Pro 6.2.0 — A vendor panel of its own, one ledger currency, and refunds that reverse commission exactly]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.2.0-release</id>
@@ -699,52 +803,5 @@
         <category label="settings" term="settings"/>
         <category label="bugfix" term="bugfix"/>
         <category label="accessibility" term="accessibility"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.2 — Dark Mode Contrast + Un-translatable Placeholder Fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release"/>
-        <updated>2026-07-12T19:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Fixes near-invisible text in Dark Mode and 6 example placeholders that could never be translated, no matter the site's language.]]></summary>
-        <content type="html"><![CDATA[<p>Fixes near-invisible text in Dark Mode and 6 example placeholders that could never be translated, no matter the site's language.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Dark Mode contrast.</strong> The admin page title and input/textarea placeholder text had no dark-mode color override, making both nearly unreadable against the dark background.</li>
-<li class=""><strong>6 un-translatable placeholder strings.</strong> The "Custom Location Types" example placeholder (and 5 more identical instances across Security settings, Vehicle settings, and REST API settings) were raw PHP string literals never wrapped in a translation function — they could never be translated regardless of site locale, always displaying in English even on fully localized installs. All fixed and translated.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="improved">Improved<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.2-release#improved" class="hash-link" aria-label="Direct link to Improved" title="Direct link to Improved" translate="no">​</a></h2>
-<ul>
-<li class="">The "Custom Location Types" field description now explains that these values populate the "Type" dropdown when creating a location under Locations — previously the connection between the two screens wasn't documented anywhere in the UI.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="settings" term="settings"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="i18n" term="i18n"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.1 — Dark Mode Toggle Field Clobber Fix]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release"/>
-        <updated>2026-07-12T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Fixes the admin panel's quick Dark Mode switch silently blanking Support Phone/Hours/Email and resetting Brand Name, and cleans up a residual settings-pollution artifact left behind by an older migration.]]></summary>
-        <content type="html"><![CDATA[<p>Fixes the admin panel's quick Dark Mode switch silently blanking Support Phone/Hours/Email and resetting Brand Name, and cleans up a residual settings-pollution artifact left behind by an older migration.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.1-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Dark Mode toggle silently blanked General/Site-Info settings.</strong> The admin panel's quick Dark Mode AJAX switch re-ran the entire General tab's sanitizer with only the dark-mode value present, silently blanking Support Phone, Support Hours, and Support Email, and resetting Brand Name back to the site title on every toggle. It now updates only the dark mode setting.</li>
-<li class=""><strong>Residual settings-pollution cleanup.</strong> A one-time cleanup added in v4.27.2 for a historical "Run All Diagnostics" data-pollution bug (which could leave Brand Name and similar text fields saved as the literal value "1") never re-ran on installs where its completion flag had already been stamped before the pollution actually occurred. A second cleanup pass now catches any installs still carrying the old pollution.</li>
-</ul>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="settings" term="settings"/>
-        <category label="bugfix" term="bugfix"/>
     </entry>
 </feed>
