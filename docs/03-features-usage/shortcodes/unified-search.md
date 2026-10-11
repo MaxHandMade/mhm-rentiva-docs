@@ -49,10 +49,8 @@ The following parameters are available inside the shortcode:
 | `show_pax` | `default` | Visibility toggle. `1` (on) or `0` (off). |
 | `show_luggage` | `default` | Visibility toggle. `1` (on) or `0` (off). |
 | `service_type` | `both` | Controls the module's **feature** filter behavior. |
-| `filter_categories` | `(empty)` | Controls the module's **feature** filter behavior. |
 | `redirect_page` | `default` | Controls the module's **workflow** behavior. |
-| `layout` | `horizontal` | Controls the module's **general** layout behavior. |
-| `search_layout` | `(empty)` | Controls the module's **layout** behavior. |
+| `search_layout` | `horizontal` | `horizontal` or `vertical` (stacks the fields). Replaces `layout`, which 6.2.0 no longer reads. |
 | `style` | `glass` | Controls the module's **layout** behavior. |
 | `location_required` | `0` | Controls whether location selection is required. `1` (required) or `0` (optional). |
 | `class` | `(empty)` | Controls the module's **general** layout behavior. |
@@ -90,6 +88,7 @@ The `mhmrentiva_fields_required` value can be changed via **MHM Rentiva > Settin
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `filter_categories` and `layout` removed: 6.2.0 no longer reads them. Use `search_layout="vertical"` instead of `layout`. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.22.1 | `location_required` parameter added. Field requirement (fields_required) behavior documented: rental is conditional, transfer is always required. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

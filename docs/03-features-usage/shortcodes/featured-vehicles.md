@@ -27,7 +27,7 @@ A screenshot showing the frontend (visitor-facing) appearance of this module wil
 To add this module to any page or post, use the shortcode below:
 
 ```shortcode
-[rentiva_featured_vehicles title="__(Featured Vehicles"]
+[rentiva_featured_vehicles limit="6"]
 ```
 
 You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Featured Vehicles"**.
@@ -38,7 +38,6 @@ The following parameters are available inside the shortcode:
 
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `title` | `__(Featured Vehicles` | Controls the module's **general** display behavior. |
 | `ids` | `(empty)` | Comma-separated ID list (e.g. `12,15,44`). |
 | `category` | `(empty)` | Controls the module's **feature** filter behavior. |
 | `limit` | `6` | Maximum number of items to display. |
@@ -51,16 +50,13 @@ The following parameters are available inside the shortcode:
 | `show_price` | `1` | Controls the module's **general** display behavior. |
 | `show_rating` | `1` | Controls the module's **general** display behavior. |
 | `show_category` | `1` | Controls the module's **general** display behavior. |
-| `show_book_button` | `1` | Controls the module's **general** display behavior. |
+| `show_booking_button` | `1` | Shows the booking button on each card. `1` (on) or `0` (off). Replaces `show_book_button`, which 6.2.0 no longer reads. |
 | `show_features` | `1` | Controls the module's **general** display behavior. |
 | `max_features` | `5` | Controls the module's **feature** filter behavior. |
 | `show_brand` | `0` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_availability` | `0` | Controls the module's **general** display behavior. |
 | `show_compare_button` | `1` | Controls the module's **general** display behavior. |
-| `show_badges` | `1` | Controls the module's **general** display behavior. |
 | `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
 | `image_size` | `medium_large` | Controls the module's **layout** behavior. |
-| `price_format` | `daily` | Controls the module's **layout** behavior. |
 | `filter_brands` | `(empty)` | Controls the module's **data** query behavior. |
 | `filter_categories` | `(empty)` | Controls the module's **feature** filter behavior. |
 
@@ -87,5 +83,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `title`, `show_book_button`, `show_availability`, `show_badges` and `price_format` removed: 6.2.0 no longer reads them. `show_booking_button` documented (replaces `show_book_button`). |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

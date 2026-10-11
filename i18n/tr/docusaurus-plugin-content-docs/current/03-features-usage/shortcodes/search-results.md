@@ -52,7 +52,7 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `show_features` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_rating` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
-| `default_sort` | `price_asc` | Modülün **general** davranışını kontrol eder. |
+| `default_sort` | `price_asc` | İlk sıralama düzeni: `relevance`, `price_asc`, `price_desc`, `name_asc`, `name_desc` ya da `year_desc`. 6.2.0'ın artık okumadığı `order` ve `orderby` yerine kullanılır. |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 
 
@@ -89,5 +89,6 @@ v4.22.1 itibariyla lokasyon filtresi **radio buton** yerine **checkbox** kullani
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `default_sort` değerleri belgelendi; 6.2.0'ın artık okumadığı `order` / `orderby` yerine kullanılır. |
 | 27.03.2026 | 4.22.1 | Lokasyon filtresi radio -> checkbox (çoklu seçim). Musaitlik sorgusu bos tarih koruması. Geliştirici notlarına QueryHelper bilgileri eklendi. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

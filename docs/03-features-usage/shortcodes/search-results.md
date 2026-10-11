@@ -52,7 +52,7 @@ The following parameters are available inside the shortcode:
 | `show_features` | `1` | Controls the module's **general** display behavior. |
 | `show_rating` | `1` | Controls the module's **general** display behavior. |
 | `show_badges` | `1` | Controls the module's **general** display behavior. |
-| `default_sort` | `price_asc` | Controls the module's **general** sorting behavior. |
+| `default_sort` | `price_asc` | The first sort order: `relevance`, `price_asc`, `price_desc`, `name_asc`, `name_desc` or `year_desc`. Replaces `order` and `orderby`, which 6.2.0 no longer reads. |
 | `class` | `(empty)` | Controls the module's **general** layout behavior. |
 
 
@@ -89,6 +89,7 @@ As of v4.22.1, the location filter uses **checkboxes** instead of radio buttons.
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `default_sort` values documented; it replaces `order` / `orderby`, which 6.2.0 no longer reads. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.22.1 | Location filter changed from radio to checkbox (multi-select). Availability query protected against empty dates. QueryHelper information added to Developer Notes. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

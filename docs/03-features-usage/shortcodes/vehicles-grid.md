@@ -53,9 +53,6 @@ The following parameters are available inside the shortcode:
 | `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
 | `show_category` | `1` | Controls the module's **general** display behavior. |
 | `show_brand` | `0` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_badges` | `1` | Controls the module's **general** display behavior. |
-| `show_description` | `0` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_availability` | `0` | Controls the module's **general** display behavior. |
 | `show_compare_button` | `1` | Controls the module's **general** display behavior. |
 | `enable_lazy_load` | `1` | Visibility toggle. `1` (on) or `0` (off). |
 | `enable_ajax_filtering` | `0` | Visibility toggle. `1` (on) or `0` (off). |
@@ -90,5 +87,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_badges`, `show_description` and `show_availability` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2-docs | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

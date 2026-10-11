@@ -53,9 +53,7 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `show_favorite_button` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_category` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_brand` | `0` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_description` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_availability` | `0` | Modülün **general** davranışını kontrol eder. |
 | `show_compare_button` | `1` | Modülün **general** davranışını kontrol eder. |
 | `enable_lazy_load` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `enable_ajax_filtering` | `0` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
@@ -63,7 +61,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `image_size` | `medium` | Modülün **layout** davranışını kontrol eder. |
 | `ids` | `(boş)` | Virgülle ayrılmış ID listesi (Örn: `12,15,44`). |
 | `max_features` | `5` | Modülün **feature** davranışını kontrol eder. |
-| `price_format` | `daily` | Modülün **layout** davranışını kontrol eder. |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 | `custom_css_class` | `(boş)` | Modülün **layout** davranışını kontrol eder. |
 | `min_rating` | `(boş)` | Modülün **query** davranışını kontrol eder. |
@@ -92,4 +89,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_badges`, `show_availability` ve `price_format` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

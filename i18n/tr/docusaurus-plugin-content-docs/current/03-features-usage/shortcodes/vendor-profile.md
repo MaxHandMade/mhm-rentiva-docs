@@ -34,7 +34,7 @@ Bayi Profil Sayfası modülü, onaylanmış her bayiye temiz ve paylaşılabilir
 
 ## Bu modül nedir
 
-Pazaryeri için bir **dönüşüm yüzeyi**, admin paneli değil. Bayi başvuru formu (`[rentiva_vendor_apply]`) onboarding'i, bayi paneli (`[rentiva_user_dashboard]`) operasyonları üstlenir. Bayi Profil Sayfası ise müşterinin bir araç kartında "Bayiyi gör" tıkladığında veya arama/paylaşım yoluyla geldiğinde gördüğü herkese açık salt-okunur görünümdür.
+Pazaryeri için bir **dönüşüm yüzeyi**, admin paneli değil. Bayi başvuru formu (`[rentiva_vendor_apply]`) onboarding'i, Bayi Paneli sayfası (Rentiva Pro 6.2.0+) operasyonları üstlenir. Bayi Profil Sayfası ise müşterinin bir araç kartında "Bayiyi gör" tıkladığında veya arama/paylaşım yoluyla geldiğinde gördüğü herkese açık salt-okunur görünümdür.
 
 Üç render yüzeyi tek bir kanonik renderer'ı paylaşır (Render Parity sözleşmesi):
 

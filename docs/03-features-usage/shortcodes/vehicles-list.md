@@ -53,9 +53,7 @@ The following parameters are available inside the shortcode:
 | `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
 | `show_category` | `1` | Controls the module's **general** display behavior. |
 | `show_brand` | `0` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_badges` | `1` | Controls the module's **general** display behavior. |
 | `show_description` | `1` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_availability` | `0` | Controls the module's **general** display behavior. |
 | `show_compare_button` | `1` | Controls the module's **general** display behavior. |
 | `enable_lazy_load` | `1` | Visibility toggle. `1` (on) or `0` (off). |
 | `enable_ajax_filtering` | `0` | Visibility toggle. `1` (on) or `0` (off). |
@@ -63,7 +61,6 @@ The following parameters are available inside the shortcode:
 | `image_size` | `medium` | Controls the module's **layout** behavior. |
 | `ids` | `(empty)` | Comma-separated ID list (e.g. `12,15,44`). |
 | `max_features` | `5` | Controls the module's **feature** filter behavior. |
-| `price_format` | `daily` | Controls the module's **layout** behavior. |
 | `class` | `(empty)` | Controls the module's **general** layout behavior. |
 | `custom_css_class` | `(empty)` | Controls the module's **layout** behavior. |
 | `min_rating` | `(empty)` | Controls the module's **query** behavior. |
@@ -92,5 +89,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_badges`, `show_availability` and `price_format` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

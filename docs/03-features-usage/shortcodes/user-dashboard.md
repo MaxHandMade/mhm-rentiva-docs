@@ -1,67 +1,59 @@
 ---
-title: Master account dashboard
-description: Usage guide and technical reference for the Master Account Dashboard module.
+title: Master account dashboard (retired)
+description: The customer dashboard shortcode, block and Elementor widget were retired in Rentiva 6.2.0; customers use the My Account page.
 sidebar_position: 13
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
-:::info Purpose
-This page describes the Master Account Dashboard module as a standard reference, covering both technical and operational aspects.
+:::warning Retired in 6.2.0
+The separate customer dashboard is retired. A customer's home is the **My Account** page (WooCommerce's account page), where bookings, favorites and payments are listed. Remove `[rentiva_user_dashboard]`, its block or its Elementor widget from your pages.
 :::
 
-# 🚗 Master Account Dashboard
+# 🚗 Master Account Dashboard (retired)
 
 ## Contents
-- Usage
-- Features
+- What the shortcode shows now
+- Where customers go instead
 - Developer Notes
 
-The Master Account Dashboard module is designed to manage and present **account** overview processes to visitors on the Rentiva platform.
+## What the shortcode shows now
 
-## Usage
-
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
-
-To add this module to any page or post, use the shortcode below:
+The shortcode is still registered, so a page that contains it does not break:
 
 ```shortcode
 [rentiva_user_dashboard]
 ```
 
-You can also insert it visually from the Gutenberg block editor by selecting **"MHM Rentiva → Master Account Dashboard"**.
+Since Rentiva 6.2.0 the shortcode, the **Master Account Dashboard** block and the Elementor widget no longer render a dashboard:
 
-### Parameters
+| Who views the page | What they see |
+| :--- | :--- |
+| Logged-in customer | One line saying the account has moved, and a **Go to my account** link to the My Account page. |
+| Visitor (not logged in) | Nothing. |
+| Administrator | The same line and link, plus a notice that this dashboard is deprecated and should be removed from the page. Only administrators see the notice. |
 
-The following parameters are available inside the shortcode:
+- The block and the Elementor widget are hidden from the editors, so they can no longer be added to new pages.
+- **MHM Rentiva > Shortcode Pages** no longer offers to create this page.
+- On a page with the slug `panel`, visitors and logged-in non-administrators are redirected to My Account; administrators can still open it.
+- The shortcode takes no parameters.
 
-| Parameter | Default | Description |
-| :--- | :--- | :--- |
-| - | - | This shortcode accepts no parameters. |
+## Where customers go instead
 
+Use the **My Account** page. Its sections are documented here:
 
-## Features
-
-### 📱 Responsive Design
-- **Mobile:** Single-column layout.
-- **Tablet (under 782px):** Optimized view.
-- **Desktop:** Full view at the configured column count or width.
-
-### 🚀 Performance-Focused
-- **Smart Caching:** Database queries are optimized and cached by the system.
-- **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
+- [My Bookings](./my-bookings)
+- [My Favorites](./my-favorites)
+- [Payment History](./payment-history)
 
 ## Developer Notes
 
-- **HTML Structure:** All containers start with the `.mhm-rentiva-user-dashboard-wrapper` class.
-- **Customization:** CSS variables (`--mhm-color-primary`, etc.) are inherited from the global `css-variables.css` file.
-
-## Section Summary
-- The Master Account Dashboard page has been aligned to the standard documentation structure with consistent reference headings.
+- **HTML Structure:** The notice is wrapped in `.mhm-rentiva-retired-dashboard`; the administrator notice is `.mhm-rentiva-retired-dashboard__admin`.
+- **Filter:** `mhmrentiva_retired_dashboard_notice` filters the printed markup (`$html`, `$role` = `customer` or `admin`).
+- **Removed in 6.2.0:** the customer dashboard classes (`CustomerDashboard`, `DashboardConfig`, `DashboardContext`, `DashboardDataProvider`, `DashboardNavigation`) and the `mhmrentiva_dashboard_*` hooks. See the [6.2.0 release post](/blog/rentiva-v6.2.0-release).
 
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | Page rewritten: the customer dashboard is retired; customers use My Account. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

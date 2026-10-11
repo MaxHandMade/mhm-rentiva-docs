@@ -43,14 +43,10 @@ The following parameters are available inside the shortcode:
 | `end_date` | `(empty)` | Controls the module's **workflow** behavior. |
 | `show_vehicle_selector` | `1` | Controls the module's **general** display behavior. |
 | `default_days` | `(from settings)` | Controls the module's **workflow** behavior. |
-| `min_days` | `(from settings)` | Controls the module's **workflow** behavior. |
-| `max_days` | `(from settings)` | Controls the module's **workflow** behavior. |
-| `show_payment_options` | `1` | Visibility toggle. `1` (on) or `0` (off). |
 | `show_addons` | `1` | Visibility toggle. `1` (on) or `0` (off). |
 | `class` | `(empty)` | Controls the module's **general** layout behavior. |
 | `redirect_url` | `(empty)` | Controls the module's **workflow** behavior. |
 | `enable_deposit` | `1` | Visibility toggle. `1` (on) or `0` (off). |
-| `default_payment` | `deposit` | Controls the module's **workflow** behavior. |
 | `form_title` | `(empty)` | Controls the module's **content** behavior. |
 | `show_vehicle_info` | `1` | Visibility toggle. `1` (on) or `0` (off). |
 | `show_time_select` | `1` | Visibility toggle. `1` (on) or `0` (off). |
@@ -78,5 +74,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `min_days`, `max_days`, `show_payment_options` and `default_payment` removed: 6.2.0 no longer reads them; the global settings still apply. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

@@ -40,17 +40,13 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | :--- | :--- | :--- |
 | `vehicle_id` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
 | `show_pricing` | `apply_filters(mhmrentiva_availability_calendar_show_pricing` | Modülün **general** davranışını kontrol eder. |
-| `show_seasonal_prices` | `apply_filters(mhmrentiva_availability_calendar_show_seasonal_prices` | Modülün **general** davranışını kontrol eder. |
-| `show_discounts` | `apply_filters(mhmrentiva_availability_calendar_show_discounts` | Modülün **general** davranışını kontrol eder. |
 | `show_booking_button` | `apply_filters(` | Modülün **general** davranışını kontrol eder. |
 | `theme` | `apply_filters(mhmrentiva_availability_calendar_theme` | Modülün **general** davranışını kontrol eder. |
-| `start_date` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 | `months_ahead` | `apply_filters(mhmrentiva_availability_calendar_months_ahead` | Modülün **general** davranışını kontrol eder. |
 | `months_to_show` | `apply_filters(mhmrentiva_availability_calendar_months_to_show` | Modülün **general** davranışını kontrol eder. |
 | `start_month` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 | `show_weekends` | `apply_filters(mhmrentiva_availability_calendar_show_weekends` | Modülün **general** davranışını kontrol eder. |
 | `show_past_dates` | `apply_filters(mhmrentiva_availability_calendar_show_past_dates` | Modülün **general** davranışını kontrol eder. |
-| `integrate_pricing` | `apply_filters(mhmrentiva_availability_calendar_integrate_pricing` | Modülün **general** davranışını kontrol eder. |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 
 
@@ -76,4 +72,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_seasonal_prices`, `show_discounts`, `start_date` ve `integrate_pricing` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

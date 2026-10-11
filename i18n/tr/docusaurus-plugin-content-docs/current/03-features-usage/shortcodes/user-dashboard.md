@@ -1,66 +1,58 @@
 ---
-title: Master account dashboard
-description: Master account dashboard modülünün kullanım kılavuzu ve teknik detayları.
+title: Master account dashboard (emekli)
+description: Müşteri paneli kısa kodu, bloğu ve Elementor bileşeni Rentiva 6.2.0'da emekliye ayrıldı; müşteriler Hesabım sayfasını kullanır.
 sidebar_position: 13
 ---
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
-:::info Amaç
-Bu sayfa, Master account dashboard modülü konusunu teknik ve operasyonel açıdan standart bir referans formatında açıklar.
+:::warning 6.2.0'da emekliye ayrıldı
+Ayrı müşteri paneli emekliye ayrıldı. Müşterinin ana sayfası artık rezervasyonların, favorilerin ve ödemelerin listelendiği **Hesabım** sayfasıdır (WooCommerce hesap sayfası). `[rentiva_user_dashboard]` kısa kodunu, bloğunu ya da Elementor bileşenini sayfalarınızdan kaldırın.
 :::
 
-# 🚗 Master account dashboard
+# 🚗 Master account dashboard (emekli)
 
 ## İçindekiler
-- Kullanım
-- Özellikler
+- Kısa kod artık ne gösteriyor
+- Müşteriler bunun yerine nereye gidiyor
 - Geliştirici Notları
 
-Master account dashboard modülü, Rentiva platformundaki **account** süreçlerini yönetmek ve kullanıcılara sunmak için tasarlanmıştır.
+## Kısa kod artık ne gösteriyor
 
-## Kullanım
-
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
-
-Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
+Kısa kod hâlâ kayıtlı; içinde bu kısa kod bulunan bir sayfa bozulmaz:
 
 ```shortcode
 [rentiva_user_dashboard]
 ```
 
-Gutenberg blok editöründe **"MHM Rentiva -> Master account dashboard"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
+Rentiva 6.2.0'dan beri kısa kod, **Master account dashboard** bloğu ve Elementor bileşeni artık bir panel çizmiyor:
 
-### Parametreler
+| Sayfayı kim görüntülüyor | Ne görüyor |
+| :--- | :--- |
+| Giriş yapmış müşteri | Hesabın taşındığını söyleyen tek bir satır ve Hesabım sayfasına giden bir **Hesabıma git** bağlantısı. |
+| Ziyaretçi (giriş yapmamış) | Hiçbir şey. |
+| Yönetici | Aynı satır ve bağlantı, ayrıca bu panelin kullanımdan kalktığını ve sayfadan kaldırılması gerektiğini söyleyen bir uyarı. Uyarıyı yalnız yöneticiler görür. |
 
-Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
+- Blok ve Elementor bileşeni düzenleyicilerde gizlendi; yeni sayfalara artık eklenemez.
+- **MHM Rentiva > Kısa Kod Sayfaları** artık bu sayfayı oluşturmayı önermiyor.
+- Kısa adı `panel` olan bir sayfada ziyaretçiler ve giriş yapmış, yönetici olmayan kullanıcılar Hesabım'a yönlendirilir; yöneticiler sayfayı açmaya devam edebilir.
+- Kısa kod parametre almaz.
 
-| Parametre | Varsayılan | Açıklama |
-| :--- | :--- | :--- |
-| - | - | Bu kısa kod parametre almaz. |
+## Müşteriler bunun yerine nereye gidiyor
 
+**Hesabım** sayfasını kullanın. Bölümleri şu sayfalarda anlatılıyor:
 
-## Özellikler
-
-### 📱 Responsive Tasarım
-- **Mobil:** Tek sütun düzeni.
-- **Tablet (782px altı):** Optimize edilmiş görünüm.
-- **Masaüstü:** Ayarlanan sütun veya genişlikte tam görünüm.
-
-### 🚀 Performans Odaklı
-- **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
-- **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
+- [Rezervasyonlarım](./my-bookings)
+- [Favorilerim](./my-favorites)
+- [Ödeme Geçmişi](./payment-history)
 
 ## Geliştirici Notları
 
-- **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-user-dashboard-wrapper` sınıfı ile başlar.
-- **Özelleştirme:** CSS değişkenleri (`--mhm-color-primary` vb.) global `css-variables.css` dosyasından miras alınır.
-
-## Bölüm Sonu Özeti
-- Master account dashboard sayfası, tekil referans başlıklarıyla standart dokümantasyon yapısına alınmıştır.
+- **HTML Yapısı:** Bildirim `.mhm-rentiva-retired-dashboard` içinde yer alır; yönetici uyarısı `.mhm-rentiva-retired-dashboard__admin` sınıfını taşır.
+- **Filtre:** `mhmrentiva_retired_dashboard_notice` basılan işaretlemeyi filtreler (`$html`, `$role` = `customer` ya da `admin`).
+- **6.2.0'da kaldırılanlar:** müşteri paneli sınıfları (`CustomerDashboard`, `DashboardConfig`, `DashboardContext`, `DashboardDataProvider`, `DashboardNavigation`) ve `mhmrentiva_dashboard_*` hook'ları. Ayrıntı için [6.2.0 sürüm yazısına](/blog/rentiva-v6.2.0-release) bakın.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | Sayfa yeniden yazıldı: müşteri paneli emekliye ayrıldı; müşteriler Hesabım sayfasını kullanıyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

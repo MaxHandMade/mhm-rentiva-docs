@@ -39,7 +39,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | Parametre | Varsayılan | Açıklama |
 | :--- | :--- | :--- |
 | `vehicle_ids` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
-| `show_features` | `all` | Modülün **general** davranışını kontrol eder. |
 | `max_vehicles` | `4` | Modülün **general** davranışını kontrol eder. |
 | `show_add_vehicle` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_remove_buttons` | `1` | Modülün **general** davranışını kontrol eder. |
@@ -74,4 +73,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_features` kaldırıldı: 6.2.0 bunu artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

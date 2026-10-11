@@ -40,7 +40,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | :--- | :--- | :--- |
 | `limit` | `10` | Görüntülenecek maksimum öğe sayısı. |
 | `status` | `(boş)` | Modülün **workflow** davranışını kontrol eder. |
-| `orderby` | `date` | Modülün **general** davranışını kontrol eder. |
 | `order` | `DESC` | Modülün **general** davranışını kontrol eder. |
 | `hide_nav` | `false` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 
@@ -67,4 +66,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `orderby` kaldırıldı: 6.2.0 bunu artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

@@ -39,7 +39,6 @@ The following parameters are available inside the shortcode:
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
 | `vehicle_ids` | `(empty)` | Controls the module's **feature** filter behavior. |
-| `show_features` | `all` | Controls the module's **general** display behavior. |
 | `max_vehicles` | `4` | Controls the module's **general** display behavior. |
 | `show_add_vehicle` | `1` | Controls the module's **general** display behavior. |
 | `show_remove_buttons` | `1` | Controls the module's **general** display behavior. |
@@ -74,5 +73,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_features` removed: 6.2.0 no longer reads it. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

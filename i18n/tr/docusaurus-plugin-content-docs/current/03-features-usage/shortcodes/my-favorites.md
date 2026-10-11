@@ -49,10 +49,7 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `show_rating` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_booking_button` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_favorite_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
 | `layout` | `grid` | Modülün **general** davranışını kontrol eder. |
-| `show_remove_button` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_added_date` | `0` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `no_results_text` | `__(You have no favorite vehicles yet.` | Modülün **content** davranışını kontrol eder. |
 
 
@@ -78,4 +75,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_badges`, `show_remove_button` ve `show_added_date` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

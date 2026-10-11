@@ -49,10 +49,8 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `show_pax` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `show_luggage` | `default` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `service_type` | `both` | Modülün **feature** davranışını kontrol eder. |
-| `filter_categories` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
 | `redirect_page` | `default` | Modülün **workflow** davranışını kontrol eder. |
-| `layout` | `horizontal` | Modülün **general** davranışını kontrol eder. |
-| `search_layout` | `(boş)` | Modülün **layout** davranışını kontrol eder. |
+| `search_layout` | `horizontal` | `horizontal` ya da `vertical` (alanları alt alta dizer). 6.2.0'ın artık okumadığı `layout` yerine kullanılır. |
 | `style` | `glass` | Modülün **layout** davranışını kontrol eder. |
 | `location_required` | `0` | Lokasyon seçiminin zorunlu olup olmadigini kontrol eder. `1` (Zorunlu) veya `0` (Opsiyonel). |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
@@ -90,5 +88,6 @@ Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik göst
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `filter_categories` ve `layout` kaldırıldı: 6.2.0 bunları artık okumuyor. `layout` yerine `search_layout="vertical"` kullanın. |
 | 27.03.2026 | 4.22.1 | `location_required` parametresi eklendi. Alan zorunluluğu (fields_required) davranışı belgelendi: rental koşullu, transfer daima zorunlu. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

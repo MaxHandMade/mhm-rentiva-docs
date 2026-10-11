@@ -31,8 +31,8 @@ Essential shortcodes for starting and completing the rental flow:
 
 **1. Booking Form:** Form for selecting rental dates, insurance, and add-ons.
 *   **Shortcode:** `[rentiva_booking_form]`
-*   **Key Parameters:** `vehicle_id`, `show_payment_options`, `show_addons`
-*   **Example:** `[rentiva_booking_form vehicle_id="101" show_payment_options="1" show_addons="1"]`
+*   **Key Parameters:** `vehicle_id`, `show_addons`
+*   **Example:** `[rentiva_booking_form vehicle_id="101" show_addons="1"]`
 
 **2. Availability Calendar:** Renders the monthly or daily availability calendar for a vehicle.
 *   **Shortcode:** `[rentiva_availability_calendar]`
@@ -74,16 +74,16 @@ Visualizes vehicle filtering and vehicle detail processes for customers:
 
 **9. Vehicle Comparison:** Side-by-side feature comparison.
 *   **Shortcode:** `[rentiva_vehicle_comparison]`
-*   **Key Parameters:** `max_vehicles`, `show_technical_specs`
-*   **Example:** `[rentiva_vehicle_comparison max_vehicles="4" show_technical_specs="1"]`
+*   **Key Parameters:** `max_vehicles`, `show_prices`
+*   **Example:** `[rentiva_vehicle_comparison max_vehicles="4" show_prices="1"]`
 
 ### 3. User Account Module
 (**Auth=Yes** — only active for logged-in users):
 
-**10. Customer Dashboard:** Customer summary screen.
+**10. Customer Dashboard (retired in 6.2.0):** Shows a logged-in customer one line and a link to My Account; visitors see nothing. Use the My Account page instead.
 *   **Shortcode:** `[rentiva_user_dashboard]`
-*   **Key Parameters:** (Standard dashboard with no additional required parameters)
-*   **Example:** `[rentiva_user_dashboard]`
+*   **Key Parameters:** -
+*   **Reference:** [Master account dashboard (retired)](./user-dashboard)
 
 **11. My Bookings:** Active or historical booking list.
 *   **Shortcode:** `[rentiva_my_bookings]`
@@ -97,8 +97,8 @@ Visualizes vehicle filtering and vehicle detail processes for customers:
 
 **13. Payment History:** Transaction receipts and records.
 *   **Shortcode:** `[rentiva_payment_history]`
-*   **Key Parameters:** `limit`, `show_invoice_download`
-*   **Example:** `[rentiva_payment_history limit="20" show_invoice_download="1"]`
+*   **Key Parameters:** `limit`, `show_payment_method`
+*   **Example:** `[rentiva_payment_history limit="20"]`
 
 **14. Commission Resolver:** Affiliate / Vendor-specific system.
 *   **Shortcode:** `[rentiva_commission_resolver]`
@@ -127,13 +127,13 @@ Visualizes vehicle filtering and vehicle detail processes for customers:
 
 **18. Messages (Ticket System):**
 *   **Shortcode:** `[rentiva_messages]`
-*   **Key Parameters:** `limit_items`, `show_thread_preview`
-*   **Example:** `[rentiva_messages limit_items="20"]`
+*   **Key Parameters:** `show_thread_preview`
+*   **Example:** `[rentiva_messages show_thread_preview="1"]`
 
 **19. Contact Feedback Form:**
 *   **Shortcode:** `[rentiva_contact]`
-*   **Key Parameters:** `recipient_email`, `show_map`, `show_booking_id_field`
-*   **Example:** `[rentiva_contact recipient_email="info@rentiva.com" show_map="1"]`
+*   **Key Parameters:** `email_to`, `type`, `show_booking_id_field`
+*   **Example:** `[rentiva_contact email_to="info@rentiva.com" show_booking_id_field="1"]`
 
 **20. Testimonials / Reviews:**
 *   **Shortcode:** `[rentiva_testimonials]`
@@ -142,8 +142,8 @@ Visualizes vehicle filtering and vehicle detail processes for customers:
 
 **21. Vehicle Rating & Review Form:**
 *   **Shortcode:** `[rentiva_vehicle_rating_form]`
-*   **Key Parameters:** `vehicle_id`, `require_booking`, `show_photo_upload`
-*   **Example:** `[rentiva_vehicle_rating_form vehicle_id="45" require_booking="1"]`
+*   **Key Parameters:** `vehicle_id`, `show_form`, `show_ratings_list`
+*   **Example:** `[rentiva_vehicle_rating_form vehicle_id="45"]`
 
 **22. Home Page Proof of Concept (POC):**
 *   **Shortcode:** `[rentiva_home_poc]`

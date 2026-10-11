@@ -126,7 +126,7 @@ All 16 attributes accept the canonical snake_case form (used by the shortcode) a
 | `show_price` | `true` | bool | Render the starting-price line on each card. |
 | `currency_symbol` | `₺` | string | Prefix for the price (single character or short code). |
 | `filter_origin_city` | empty | string | Show only routes whose origin location is in this city (case-insensitive). |
-| `filter_origin_type` | empty | enum | Show only routes whose origin is of this type: `airport` / `train` / `hotel` / `marina` / `city_center`. |
+| `filter_origin_type` | empty | enum | Show only routes whose origin is of this type — a stored location type: `airport` / `hotel` / `port` / `station` / `city_center` / `hospital`, or a custom type you added. Since Pro 6.3.0 the editors list these types; the old fixed `train` and `marina` options matched no location and were removed. |
 | `featured_only` | `false` | bool | Render only routes that have the "🌟 Showcase" checkbox ticked. |
 | `theme` | `light` | enum | `light` / `dark` (light is the production-tested default). |
 
@@ -144,9 +144,9 @@ The card top-right corner shows an icon based on the origin location's type:
 | Type | Default icon |
 | :--- | :--- |
 | `airport` | ✈️ |
-| `train` | 🚆 |
+| `station` | 🚆 |
 | `hotel` | 🏨 |
-| `marina` | ⛵ |
+| `port` | ⛵ |
 | `city_center` | 🏙️ |
 | (other) | ↗ |
 

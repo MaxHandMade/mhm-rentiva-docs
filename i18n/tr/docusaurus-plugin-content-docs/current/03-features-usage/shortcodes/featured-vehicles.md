@@ -27,7 +27,7 @@ Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden b
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 
 ```shortcode
-[rentiva_featured_vehicles title="__(Featured Vehicles"]
+[rentiva_featured_vehicles limit="6"]
 ```
 
 Gutenberg blok editöründe **"MHM Rentiva -> Featured vehicles"** bloğunu seçerek görsel olarak da ekleyebilirsiniz.
@@ -38,7 +38,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 | Parametre | Varsayılan | Açıklama |
 | :--- | :--- | :--- |
-| `title` | `__(Featured Vehicles` | Modülün **general** davranışını kontrol eder. |
 | `ids` | `(boş)` | Virgülle ayrılmış ID listesi (Örn: `12,15,44`). |
 | `category` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
 | `limit` | `6` | Görüntülenecek maksimum öğe sayısı. |
@@ -51,16 +50,13 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `show_price` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_rating` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_category` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_book_button` | `1` | Modülün **general** davranışını kontrol eder. |
+| `show_booking_button` | `1` | Her kartta rezervasyon düğmesini gösterir. `1` (Açık) veya `0` (Kapalı). 6.2.0'ın artık okumadığı `show_book_button` yerine kullanılır. |
 | `show_features` | `1` | Modülün **general** davranışını kontrol eder. |
 | `max_features` | `5` | Modülün **feature** davranışını kontrol eder. |
 | `show_brand` | `0` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `show_availability` | `0` | Modülün **general** davranışını kontrol eder. |
 | `show_compare_button` | `1` | Modülün **general** davranışını kontrol eder. |
-| `show_badges` | `1` | Modülün **general** davranışını kontrol eder. |
 | `show_favorite_button` | `1` | Modülün **general** davranışını kontrol eder. |
 | `image_size` | `medium_large` | Modülün **layout** davranışını kontrol eder. |
-| `price_format` | `daily` | Modülün **layout** davranışını kontrol eder. |
 | `filter_brands` | `(boş)` | Modülün **data** davranışını kontrol eder. |
 | `filter_categories` | `(boş)` | Modülün **feature** davranışını kontrol eder. |
 
@@ -87,4 +83,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `title`, `show_book_button`, `show_availability`, `show_badges` ve `price_format` kaldırıldı: 6.2.0 bunları artık okumuyor. `show_booking_button` belgelendi (`show_book_button` yerine). |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

@@ -43,14 +43,10 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 | `end_date` | `(boş)` | Modülün **workflow** davranışını kontrol eder. |
 | `show_vehicle_selector` | `1` | Modülün **general** davranışını kontrol eder. |
 | `default_days` | `(ayarlardan gelir)` | Modülün **workflow** davranışını kontrol eder. |
-| `min_days` | `(ayarlardan gelir)` | Modülün **workflow** davranışını kontrol eder. |
-| `max_days` | `(ayarlardan gelir)` | Modülün **workflow** davranışını kontrol eder. |
-| `show_payment_options` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `show_addons` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `class` | `(boş)` | Modülün **general** davranışını kontrol eder. |
 | `redirect_url` | `(boş)` | Modülün **workflow** davranışını kontrol eder. |
 | `enable_deposit` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
-| `default_payment` | `deposit` | Modülün **workflow** davranışını kontrol eder. |
 | `form_title` | `(boş)` | Modülün **content** davranışını kontrol eder. |
 | `show_vehicle_info` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
 | `show_time_select` | `1` | Görünürlük kontrolü. `1` (Açık) veya `0` (Kapalı). |
@@ -78,4 +74,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `min_days`, `max_days`, `show_payment_options` ve `default_payment` kaldırıldı: 6.2.0 bunları artık okumuyor; genel ayarlar uygulanmaya devam ediyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

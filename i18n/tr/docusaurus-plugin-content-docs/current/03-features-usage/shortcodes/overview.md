@@ -31,8 +31,8 @@ Kiralama akışını başlatmak ve bitirmek için kullanılan hayati kodlar:
 
 **1. Rezervasyon Formu:** Kiralama tarihlerini, sigorta ve ek hizmetleri seçme formu.
 *   **Kısa Kod:** `[rentiva_booking_form]`
-*   **Temel Parametreler:** `vehicle_id`, `show_payment_options`, `show_addons`
-*   **Örnek Kullanım:** `[rentiva_booking_form vehicle_id="101" show_payment_options="1" show_addons="1"]`
+*   **Temel Parametreler:** `vehicle_id`, `show_addons`
+*   **Örnek Kullanım:** `[rentiva_booking_form vehicle_id="101" show_addons="1"]`
 
 **2. Uygunluk Takvimi:** Aracın aylık veya günlük takvimini çizer.
 *   **Kısa Kod:** `[rentiva_availability_calendar]`
@@ -74,16 +74,16 @@ Müşterilerin araç filtreleme ve araç detay süreçlerini görselleştirir:
 
 **9. Araç Karşılaştırma:** Özelliklerin kıyaslanması.
 *   **Kısa Kod:** `[rentiva_vehicle_comparison]`
-*   **Temel Parametreler:** `max_vehicles`, `show_technical_specs`
-*   **Örnek Kullanım:** `[rentiva_vehicle_comparison max_vehicles="4" show_technical_specs="1"]`
+*   **Temel Parametreler:** `max_vehicles`, `show_prices`
+*   **Örnek Kullanım:** `[rentiva_vehicle_comparison max_vehicles="4" show_prices="1"]`
 
 ### 3. Kullanıcı (Account) Paneli Modülü
 (Sadece giriş yapmış kullanıcılarda çalışan **Auth=Yes** yetki kodlarıdır):
 
-**10. Müşteri Ana Paneli:** Müşteri özet ekranı.
+**10. Müşteri Ana Paneli (6.2.0'da emekliye ayrıldı):** Giriş yapmış müşteriye tek satır ve Hesabım bağlantısı gösterir; ziyaretçi hiçbir şey görmez. Bunun yerine Hesabım sayfasını kullanın.
 *   **Kısa Kod:** `[rentiva_user_dashboard]`
-*   **Temel Parametreler:** (Desteklenen parametre harici standart paneldir)
-*   **Örnek Kullanım:** `[rentiva_user_dashboard]`
+*   **Temel Parametreler:** -
+*   **Referans:** [Master account dashboard (emekli)](./user-dashboard)
 
 **11. Rezervasyonlarım:** Aktif ya da tarihli işlem listesi.
 *   **Kısa Kod:** `[rentiva_my_bookings]`
@@ -97,8 +97,8 @@ Müşterilerin araç filtreleme ve araç detay süreçlerini görselleştirir:
 
 **13. Ödeme Geçmişi:** İşlem makbuzu/Transaction tutanakları.
 *   **Kısa Kod:** `[rentiva_payment_history]`
-*   **Temel Parametreler:** `limit`, `show_invoice_download`
-*   **Örnek Kullanım:** `[rentiva_payment_history limit="20" show_invoice_download="1"]`
+*   **Temel Parametreler:** `limit`, `show_payment_method`
+*   **Örnek Kullanım:** `[rentiva_payment_history limit="20"]`
 
 **14. Komisyon Çözümleyici:** Affiliate / Satıcılara özel sistem.
 *   **Kısa Kod:** `[rentiva_commission_resolver]`
@@ -127,13 +127,13 @@ Müşterilerin araç filtreleme ve araç detay süreçlerini görselleştirir:
 
 **18. Mesajlar (Ticket Sistemi):**
 *   **Kısa Kod:** `[rentiva_messages]`
-*   **Temel Parametreler:** `limit_items`, `show_thread_preview`
-*   **Örnek Kullanım:** `[rentiva_messages limit_items="20"]`
+*   **Temel Parametreler:** `show_thread_preview`
+*   **Örnek Kullanım:** `[rentiva_messages show_thread_preview="1"]`
 
 **19. İletişim Geri Bildirim Formu:**
 *   **Kısa Kod:** `[rentiva_contact]`
-*   **Temel Parametreler:** `recipient_email`, `show_map`, `show_booking_id_field`
-*   **Örnek Kullanım:** `[rentiva_contact recipient_email="info@rentiva.com" show_map="1"]`
+*   **Temel Parametreler:** `email_to`, `type`, `show_booking_id_field`
+*   **Örnek Kullanım:** `[rentiva_contact email_to="info@rentiva.com" show_booking_id_field="1"]`
 
 **20. Referanslar / Değerlendirmeler:**
 *   **Kısa Kod:** `[rentiva_testimonials]`
@@ -142,8 +142,8 @@ Müşterilerin araç filtreleme ve araç detay süreçlerini görselleştirir:
 
 **21. Araç Değerlendirme & Yorum Formu:**
 *   **Kısa Kod:** `[rentiva_vehicle_rating_form]`
-*   **Temel Parametreler:** `vehicle_id`, `require_booking`, `show_photo_upload`
-*   **Örnek Kullanım:** `[rentiva_vehicle_rating_form vehicle_id="45" require_booking="1"]`
+*   **Temel Parametreler:** `vehicle_id`, `show_form`, `show_ratings_list`
+*   **Örnek Kullanım:** `[rentiva_vehicle_rating_form vehicle_id="45"]`
 
 **22. Ana Sayfa Kavram Kanıtı (POC):**
 *   **Kısa Kod:** `[rentiva_home_poc]`

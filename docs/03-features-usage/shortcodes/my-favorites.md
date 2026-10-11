@@ -49,10 +49,7 @@ The following parameters are available inside the shortcode:
 | `show_rating` | `1` | Controls the module's **general** display behavior. |
 | `show_booking_button` | `1` | Controls the module's **general** display behavior. |
 | `show_favorite_button` | `1` | Controls the module's **general** display behavior. |
-| `show_badges` | `1` | Controls the module's **general** display behavior. |
 | `layout` | `grid` | Controls the module's **general** layout behavior. |
-| `show_remove_button` | `1` | Visibility toggle. `1` (on) or `0` (off). |
-| `show_added_date` | `0` | Visibility toggle. `1` (on) or `0` (off). |
 | `no_results_text` | `__(You have no favorite vehicles yet.` | Controls the module's **content** behavior. |
 
 
@@ -78,5 +75,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `show_badges`, `show_remove_button` and `show_added_date` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

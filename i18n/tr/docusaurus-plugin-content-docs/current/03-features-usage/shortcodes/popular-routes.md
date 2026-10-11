@@ -126,7 +126,7 @@ Blok `ServerSideRender` kullanır, bu yüzden editör önizlemesi canlı fronten
 | `show_price` | `true` | bool | Her kartta başlangıç-fiyatı satırını render et. |
 | `currency_symbol` | `₺` | string | Fiyat ön eki (tek karakter veya kısa kod). |
 | `filter_origin_city` | boş | string | Yalnızca kalkış lokasyonu bu şehirde olan rotaları göster (büyük/küçük harf duyarsız). |
-| `filter_origin_type` | boş | enum | Yalnızca kalkış tipi bu olan rotaları göster: `airport` / `train` / `hotel` / `marina` / `city_center`. |
+| `filter_origin_type` | boş | enum | Yalnızca kalkış tipi bu olan rotaları göster — kayıtlı bir konum türü: `airport` / `hotel` / `port` / `station` / `city_center` / `hospital` ya da eklediğiniz özel bir tür. Pro 6.3.0'dan beri düzenleyiciler bu türleri listeliyor; hiçbir konuma uymayan eski sabit `train` ve `marina` seçenekleri kaldırıldı. |
 | `featured_only` | `false` | bool | Yalnızca "🌟 Vitrin" checkbox'ı işaretli rotaları render et. |
 | `theme` | `light` | enum | `light` / `dark` (açık tema üretim-test edilmiş varsayılandır). |
 
@@ -144,9 +144,9 @@ Kart sağ üst köşesi, kalkış lokasyonunun tipine göre bir ikon gösterir:
 | Tip | Varsayılan ikon |
 | :--- | :--- |
 | `airport` | ✈️ |
-| `train` | 🚆 |
+| `station` | 🚆 |
 | `hotel` | 🏨 |
-| `marina` | ⛵ |
+| `port` | ⛵ |
 | `city_center` | 🏙️ |
 | (diğer) | ↗ |
 

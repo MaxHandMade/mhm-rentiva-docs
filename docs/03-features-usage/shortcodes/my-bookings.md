@@ -40,7 +40,6 @@ The following parameters are available inside the shortcode:
 | :--- | :--- | :--- |
 | `limit` | `10` | Maximum number of items to display. |
 | `status` | `(empty)` | Controls the module's **workflow** behavior. |
-| `orderby` | `date` | Controls the module's **general** sorting behavior. |
 | `order` | `DESC` | Controls the module's **general** sorting direction. |
 | `hide_nav` | `false` | Visibility toggle. `1` (on) or `0` (off). |
 
@@ -67,5 +66,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 11.10.2026 | 6.2.0 | `orderby` removed: 6.2.0 no longer reads it. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

@@ -34,7 +34,7 @@ The Vendor Public Profile module gives every approved vendor a dedicated trust p
 
 ## What this module is
 
-A **conversion surface for the marketplace**, not an admin panel. The vendor application form (`[rentiva_vendor_apply]`) handles onboarding; the vendor dashboard (`[rentiva_user_dashboard]`) handles operations. Vendor Public Profile is the public read-only view a customer sees when they click "view vendor" on a vehicle card or land via search/share.
+A **conversion surface for the marketplace**, not an admin panel. The vendor application form (`[rentiva_vendor_apply]`) handles onboarding; the Vendor Panel page (Rentiva Pro 6.2.0+) handles operations. Vendor Public Profile is the public read-only view a customer sees when they click "view vendor" on a vehicle card or land via search/share.
 
 Three rendering surfaces share a single canonical renderer (Render Parity contract):
 
