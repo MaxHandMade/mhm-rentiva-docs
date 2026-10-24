@@ -2,11 +2,70 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-10-24T06:00:00.000Z</updated>
+    <updated>2026-10-24T06:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.4.0 — Transferler belirlediğiniz kaporayı alıyor, transfer sepeti sunucuda fiyatlanıyor, editörde güvenli önizleme]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release"/>
+        <updated>2026-10-24T06:30:00.000Z</updated>
+        <summary type="html"><![CDATA[6.4.0 transferlerin ayarların söylediği tutarı almasını sağlıyor. Transfer sepeti her transferi artık sunucuda fiyatlıyor ve Ayarlar > Transfer'de belirlenen kaporayı alıyor; önceden tarayıcının gönderdiği fiyatı alıyor ve her zaman tutarın tamamını tahsil ediyordu. Pro bileşenleri editörlerde güvenli önizleme gösteriyor, Pro e-postaları çevrilmiş adlar ve site dilini kazanıyor. Güncellemede veritabanı adımı çalışmıyor. Önce MHM Rentiva'yı (Lite) 6.3.0'a, sonra Pro'yu güncelleyin. Rentiva Pro 6.4.0, Rentiva 6.2.1 ve öncesiyle birlikte Rentiva güncellenene kadar özelliklerini kapatıyor; iki güncellemeyi art arda yapın.]]></summary>
+        <content type="html"><![CDATA[<p>6.4.0 transferlerin ayarların söylediği tutarı almasını sağlıyor. Transfer sepeti her transferi artık sunucuda fiyatlıyor ve Ayarlar &gt; Transfer'de belirlenen kaporayı alıyor; önceden tarayıcının gönderdiği fiyatı alıyor ve her zaman tutarın tamamını tahsil ediyordu. Pro bileşenleri editörlerde güvenli önizleme gösteriyor, Pro e-postaları çevrilmiş adlar ve site dilini kazanıyor. Güncellemede veritabanı adımı çalışmıyor. <strong>Önce MHM Rentiva'yı (Lite) 6.3.0'a, sonra Pro'yu güncelleyin.</strong> Rentiva Pro 6.4.0, Rentiva 6.2.1 ve öncesiyle birlikte Rentiva güncellenene kadar özelliklerini kapatıyor; iki güncellemeyi art arda yapın.</p>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Transfer kaporalarınızı kontrol edin</div><div class="admonitionContent_BuS1"><p>Transferler artık tutarın tamamı yerine <strong>Ayarlar &gt; Transfer</strong>'de belirlediğiniz kaporayı alıyor. <strong>Aracın kendi kapora oranı önce gelir:</strong> kendi oranını saklayan araç (eski varsayılan 10 yazıyordu), transfer ayarı "Tam ödeme gerekli" olsa bile transferde de bu kaporayı alıyor. Aracın transfer ayarını izlemesi için kapora alanını boşaltın. <strong>Bayi komisyonu çevrim içi tahsil edilen tutar üzerinden hesaplanır</strong>; bu yüzden böyle bir transferde komisyon kapora üzerinden hesaplanıyor, çevrim dışı tahsil edilen kalan tutar komisyon kaydı oluşturmuyor.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="transferler-ayarlarınızın-söylediğini-alıyor">Transferler ayarlarınızın söylediğini alıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#transferler-ayarlar%C4%B1n%C4%B1z%C4%B1n-s%C3%B6yledi%C4%9Fini-al%C4%B1yor" class="hash-link" aria-label="Transferler ayarlarınızın söylediğini alıyor doğrudan bağlantı" title="Transferler ayarlarınızın söylediğini alıyor doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Transfer kapora ayarı uygulanıyor.</strong> Ayarlar &gt; Transfer'de ne seçilmiş olursa olsun ("Ödeme türü" / "Kapora oranı (%)") transferlerde tutarın tamamı alınıyordu; sepet artık ayarladığınız kaporayı alıyor.</li>
+<li class=""><strong>Aracın kendi kapora oranı</strong>, kiralamada olduğu gibi transfer ayarının da önüne geçiyor — yukarıdaki kutuya bakın.</li>
+<li class=""><strong>Bayilerin eklediği araçlara</strong> artık sabit %20 kapora yazılmıyor; site geneli ayarı izliyorlar.</li>
+<li class="">Ayarlar &gt; Transfer'de kapora oranı alanı 1'den başlıyor (kapora istemiyorsanız "Tam ödeme gerekli"yi seçin) ve ekran, aracın kendi oranının önce geldiğini söylüyor.</li>
+<li class="">Transfer sekmesinde kaydedilen özel konum türleri artık uygulanıyor; eski kayıtlı bir değer onları gizlemiyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sunucuda-fiyatlanan-transfer-sepeti">Sunucuda fiyatlanan transfer sepeti<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#sunucuda-fiyatlanan-transfer-sepeti" class="hash-link" aria-label="Sunucuda fiyatlanan transfer sepeti doğrudan bağlantı" title="Sunucuda fiyatlanan transfer sepeti doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Her transfer sunucuda fiyatlanıyor.</strong> Tarayıcının gönderdiği fiyat yok sayılıyor.</li>
+<li class=""><strong>Transfer aramasının o rota için sunmadığı araç sepete eklenemiyor</strong> — transfer için sunulmuyor, dolu, rota atanmamış ya da kapasitesi yetmiyor.</li>
+<li class=""><strong>Bayi araç formu, formda görünmeyen bir kapora değerini artık kabul etmiyor.</strong> Bayi elle değer göndererek hem kaporayı hem komisyon tabanını düşürebiliyordu.</li>
+<li class=""><strong>Sepet ve sipariş satırları "VIP Transfer: A ➝ B" adını taşıyor</strong>: blok sepeti, mini sepet ve kaydedilen sipariş genel rezervasyon adını artık kullanmıyor. Her ek hizmet fiyatıyla bir kez listeleniyor, fazladan "Ek hizmetler toplamı" satırı kalktı, dönüş tarihi satırı her site dilinde gizleniyor ve siparişlerdeki "Süre" satırı sepetteki gibi "Tahmini süre" oldu.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="elementor-ve-editörler">Elementor ve editörler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#elementor-ve-edit%C3%B6rler" class="hash-link" aria-label="Elementor ve editörler doğrudan bağlantı" title="Elementor ve editörler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Transfer sonuçları (11 ayar) ve İletilerim (1 ayar)</strong> Elementor bileşenlerinde, bloklarıyla aynı ayarları taşıyan bir "Ek ayarlar" bölümü var. Varsayılanlar bugünkü çıktıya eşit; kayıtlı sayfalar aynı görünüyor.</li>
+<li class=""><strong>Güvenli önizleme.</strong> Elementor ve blok editöründe Transfer sonuçları, Bayi profili, İletilerim, Transfer arama, Popüler rotalar ve Bayi dizini Rentiva bileşenleriyle aynı önizleme çerçevesinde çiziliyor. Arama konumu ya da bayi seçilmedikçe notlu örnek transferler, örnek bayi ve örnek ileti dizileri gösteriyorlar; seçilen konumlar gerçek arama yapıyor, seçilen bayinin profili gösteriliyor. Kendi iletileriniz hiç görünmüyor ve formlar etkisiz. Bayi profili bayi bulunamadığında boş kutu yerine açıklama gösteriyor.</li>
+<li class=""><strong>Pro blokları çevrili</strong> ve Rentiva bloklarıyla birlikte "Rentiva" kategorisinde. Pro bileşen ve blok adlarından "MHM " öneki kaldırıldı. İngilizce blok başlıklarından ikisi değişti ("Messages" → "My Messages", "Popular Transfer Routes" → "Popular Routes"); Türkçe başlıklar aynı kaldı ("İletilerim", "Popüler rotalar").</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="e-postalar">E-postalar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#e-postalar" class="hash-link" aria-label="E-postalar doğrudan bağlantı" title="E-postalar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>E-posta önizlemesi 31 Pro şablonunun hepsini çevrilmiş adıyla listeliyor</strong> ("Vendor approved", "Payout approved" gibi İngilizce görünüyordu); her önizleme boşluklar yerine örnek bayi, ödeme, komisyon, rapor ve ileti verisiyle doluyor.</li>
+<li class=""><strong>Pro e-postaları site dilinde</strong>, profil dili farklı bir yönetici çalışırken bile, Rentiva e-postalarıyla birlikte.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class="">Kişisel veri dışa aktarımı müşterinin favori araçlarını yeniden içeriyor.</li>
+<li class="">İletilerim ekranındaki hata iletileri metinlerini gösteriyor; dördü boş çıkıyordu.</li>
+<li class="">Ayarlar aynı saniye içinde iki kez değiştiğinde Transfer sonuçları artık eski önbellek sonucunu sunmuyor; <code>columns</code> ayarının en küçük değeri 1, böylece 0 ya da sayı olmayan bir değer boş ızgara üretmiyor.</li>
+<li class="">Transfer süresi birimi ("dk") çevriliyor.</li>
+<li class=""><strong>Türkçe:</strong> "Deposit Rate (%)" artık "Kapora oranı" ("Mevduat Oranı" yerine), "Full Payment Required" artık "Tam ödeme gerekli"; e-posta dizelerinde "aktif" yerine "etkin" kullanılıyor; teslim alma/bırakma ifadeleri "Teslim alma / Dönüş" yönünde düzenlendi.</li>
+</ul>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Bilinen sınır (6.3.0'dan beri değişmedi)</div><div class="admonitionContent_BuS1"><p>6.3.0 güncellemesinden sonra IBAN'ı okunamayan bir bayi, IBAN yeniden girilene kadar ödeme talep edemiyor ve 6.4.0'da da IBAN'ı yeniden girmek için bir form yok. Yönetici uyarısı bu bayilerin her birini listeliyor.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="geliştiriciler-için">Geliştiriciler için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release#geli%C5%9Ftiriciler-i%C3%A7in" class="hash-link" aria-label="Geliştiriciler için doğrudan bağlantı" title="Geliştiriciler için doğrudan bağlantı" translate="no">​</a></h2>
+<p>MHM Rentiva 6.3.0 gerektiriyor (6.2.0'dan yükseltildi). Kaldırılanlar: hiçbir menünün ya da bağlantının ulaşmadığı eski bir Transfer ayar sayfası, kayıt işleyicisi ve <code>admin_post_mhmrentiva_save_transfer_settings</code> eylemi. Transfer sepeti yalnız Transfer sekmesinin <code>mhmrentiva_transfer_deposit_*</code> anahtarlarını okuyor, <code>rentiva_transfer_deposit_*</code> anahtarlarını artık okumuyor. Pro, Rentiva'nın <code>mhmrentiva_cart_item_name</code>, <code>mhmrentiva_email_template_labels</code>, <code>mhmrentiva_email_preview_context</code> ve <code>mhmrentiva_parity_labels</code> süzgeçlerine bağlanıyor. Bayi dizini, Bayi profili ve Popüler rotalar <code>_html</code> süzgeçleri erken boş çıktıları da normalleştirilmiş özniteliklerle alıyor.</p>
+<hr>
+<p><strong>Nereden alınır.</strong> Pro 6.4.0, GitHub'da <code>v6.4.0</code> olarak yayınlandı ve wpalemi.com üzerindeki Rentiva Pro indirmesiyle sunuluyor. Önce <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release">Rentiva'yı 6.3.0'a</a> güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="transfer" term="transfer"/>
+        <category label="payments" term="payments"/>
+        <category label="elementor" term="elementor"/>
+        <category label="security" term="security"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva 6.3.0 — Site geneli kiralama kaporası, güvenli editör önizlemeleri, uygulanan e-posta ayarları ve sunucunun denetlediği rezervasyon formu]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release</id>
@@ -75,7 +134,7 @@
 <li class=""><strong>Bildirimlerdeki çeviri belirteçleri</strong> artık WordPress.org çeviri aracının denetleyebildiği biçimde; Türkçe katalog da translate.wordpress.org'un kullandığı çoğul formülünü kullanıyor.</li>
 </ul>
 <hr>
-<p><strong>Nereden alınır.</strong> Rentiva <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. <strong>Rentiva Pro kullanıyor musunuz?</strong> Önce Rentiva'yı, ardından Pro'yu 6.4.0'a güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
+<p><strong>Nereden alınır.</strong> Rentiva <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. <strong>Rentiva Pro kullanıyor musunuz?</strong> Önce Rentiva'yı, ardından <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.4.0-release">Pro'yu 6.4.0'a</a> güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content>
         <author>
             <name>MaxHandMade</name>
             <uri>https://github.com/MaxHandMade</uri>
@@ -841,32 +900,5 @@
         <category label="pro" term="pro"/>
         <category label="security" term="security"/>
         <category label="minor" term="minor"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Dışa aktarma ekranı düzeltmeleri]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes"/>
-        <updated>2026-07-18T23:30:00.000Z</updated>
-        <summary type="html"><![CDATA[Dışa aktarma ekranını düzelten, birbirine bağlı bir yama sürümü. Paylaşılan paketi Lite taşır (v5.0.1); mantığı Pro taşır (v5.0.2). Ücretsiz eklentinin kendi davranışı değişmez — dışa aktarma ekranı bir Pro özelliğidir.]]></summary>
-        <content type="html"><![CDATA[<p>Dışa aktarma ekranını düzelten, birbirine bağlı bir yama sürümü. Paylaşılan paketi Lite taşır (<strong>v5.0.1</strong>); mantığı Pro taşır (<strong>v5.0.2</strong>). Ücretsiz eklentinin kendi davranışı değişmez — dışa aktarma ekranı bir Pro özelliğidir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="neler-düzeldi">Neler düzeldi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes#neler-d%C3%BCzeldi" class="hash-link" aria-label="Neler düzeldi doğrudan bağlantı" title="Neler düzeldi doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Dışa Aktar düğmesi artık çalışıyor.</strong> Güvenlik jetonunu yanlış alan adıyla gönderiyordu; bu yüzden CSV dahil her dışa aktarma "bağlantının süresi doldu" hatasıyla başarısız oluyordu.</li>
-<li class=""><strong>Tarih aralığı inen dosyaya uygulanıyor.</strong> Ekran aralığı bir alan adıyla gönderirken işleyici başka bir alanı okuyordu; bu yüzden filtreli önizleme ("23 kayıt") gösterirken dosyaya yine tüm kayıtlar iniyordu. İkisi artık uyumlu ve bunu sabitleyen bir regresyon testi eklendi.</li>
-<li class=""><strong>Geçmiş tablosu yeniden okunabilir.</strong> Tür, Kayıt ve Kullanıcı sütunları boştu; çünkü saklanan satırlar ile tablo farklı alan adları kullanıyordu. Artık okuma anında eşleniyor ve sayısal bir kullanıcı kimliği, hesabın görünen adına çözülüyor. Yeni bir Biçim sütunu, her girdinin hangi biçimde dışa aktarıldığını gösteriyor.</li>
-<li class=""><strong>JSON biçimine ulaşılabiliyor.</strong> JSON dışa aktarma sunucuda zaten çalışıyordu ama ekranda biçim seçici yoktu; artık bir seçici sunuyor ve işleyiciyle tek bir doğruluk kaynağını paylaşarak ikisinin birbirinden ayrılmasını engelliyor.</li>
-<li class=""><strong>Türkçe çeviri</strong> yeni metinler için güncellendi.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kalite-kapıları">Kalite kapıları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.1-export-fixes#kalite-kap%C4%B1lar%C4%B1" class="hash-link" aria-label="Kalite kapıları doğrudan bağlantı" title="Kalite kapıları doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Kapı</th><th>Lite v5.0.1</th><th>Pro v5.0.2</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 / 0</td><td>813 / 0</td></tr><tr><td>PHPCS</td><td>0</td><td>0</td></tr><tr><td>Plugin Check</td><td>0 hata</td><td>özel eklenti</td></tr></tbody></table>
-<p>İkisini birlikte kurun — düzeltme iki eklentiye yayılıyor (paket Lite'ta, mantık Pro'da).</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="pro" term="pro"/>
-        <category label="patch" term="patch"/>
     </entry>
 </feed>

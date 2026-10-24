@@ -2,11 +2,70 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-10-24T06:00:00.000Z</updated>
+    <updated>2026-10-24T06:30:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva Pro 6.4.0 — Transfers take the deposit you set, the transfer cart is priced on the server, and safe editor previews]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release"/>
+        <updated>2026-10-24T06:30:00.000Z</updated>
+        <summary type="html"><![CDATA[6.4.0 makes transfers charge what your settings say. The transfer cart now prices every transfer on the server and takes the deposit set under Settings > Transfer; before, it took the browser's price and always charged in full. Pro widgets show safe previews in the editors, and Pro e-mails get translated names and the site language. No database step runs on update. Update MHM Rentiva (Lite) to 6.3.0 first, then Pro. Beside Rentiva 6.2.1 or older, Pro 6.4.0 switches its features off until Rentiva is updated, so do the two updates back to back.]]></summary>
+        <content type="html"><![CDATA[<p>6.4.0 makes transfers charge what your settings say. The transfer cart now prices every transfer on the server and takes the deposit set under Settings &gt; Transfer; before, it took the browser's price and always charged in full. Pro widgets show safe previews in the editors, and Pro e-mails get translated names and the site language. No database step runs on update. <strong>Update MHM Rentiva (Lite) to 6.3.0 first, then Pro.</strong> Beside Rentiva 6.2.1 or older, Pro 6.4.0 switches its features off until Rentiva is updated, so do the two updates back to back.</p>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Check your transfer deposits</div><div class="admonitionContent_BuS1"><p>Transfers now take the deposit you set under <strong>Settings &gt; Transfer</strong> instead of the full amount. <strong>A vehicle's own deposit rate wins:</strong> a vehicle that stores its own rate (the old default wrote 10) takes that deposit on transfers too, even when the transfer setting is "Full payment required". Empty the vehicle's deposit field to make it follow the transfer setting. <strong>Vendor commission is computed on the amount charged online</strong>, so on such a transfer it is calculated on the deposit; a remainder collected offline creates no commission record.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="transfers-charge-what-your-settings-say">Transfers charge what your settings say<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#transfers-charge-what-your-settings-say" class="hash-link" aria-label="Direct link to Transfers charge what your settings say" title="Direct link to Transfers charge what your settings say" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The transfer deposit setting applies.</strong> Whatever was chosen under Settings &gt; Transfer ("Payment Type" / "Deposit Rate (%)"), transfers used to be charged in full. The cart now takes the deposit you set.</li>
+<li class=""><strong>A vehicle's own deposit rate overrides the transfer setting</strong>, as it does for rentals — see the box above.</li>
+<li class=""><strong>Vendor vehicles</strong> no longer get a fixed 20% deposit; they follow the site-wide setting.</li>
+<li class="">On Settings &gt; Transfer, the deposit rate field starts at 1 (choose "Full payment required" for no deposit), and the screen explains that a vehicle's own rate wins.</li>
+<li class="">Custom location types saved on the Transfer tab now take effect; an older stored value no longer hides them.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-transfer-cart-priced-on-the-server">A transfer cart priced on the server<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#a-transfer-cart-priced-on-the-server" class="hash-link" aria-label="Direct link to A transfer cart priced on the server" title="Direct link to A transfer cart priced on the server" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Every transfer is priced on the server.</strong> A price sent by the browser is ignored.</li>
+<li class=""><strong>A vehicle the transfer search does not offer for that route cannot be added</strong> — not offered for transfer, busy, route not assigned, or too small.</li>
+<li class=""><strong>The vendor vehicle form no longer accepts a deposit value it does not show.</strong> A vendor could send one by hand and lower both the deposit and the commission base.</li>
+<li class=""><strong>Cart and order lines read "VIP Transfer: A ➝ B"</strong> in the block cart, the mini cart and the saved order, instead of the generic booking name. Each add-on is listed once with its price, the extra "Add-ons total" row is gone, the return-date row is hidden in every site language, and the "Duration" row on orders is now "Estimated Duration", as in the cart.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="elementor-and-the-editors">Elementor and the editors<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#elementor-and-the-editors" class="hash-link" aria-label="Direct link to Elementor and the editors" title="Direct link to Elementor and the editors" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Transfer Results (11 settings) and My Messages (1 setting)</strong> Elementor widgets have an "Additional Settings" section with the same settings as their blocks. The defaults equal today's output, so saved pages look the same.</li>
+<li class=""><strong>Safe previews.</strong> In the Elementor and block editors, Transfer Results, Vendor Profile, My Messages, Transfer Search, Popular Routes and Vendor Directory render inside the same preview frame as Rentiva's widgets. Until you pick search locations or a vendor they show sample transfers, a sample vendor and sample message threads with a note; picked locations run a real search and a picked vendor shows that profile. Your own messages never appear and the forms are inert. Vendor Profile explains when no vendor is found instead of showing an empty box.</li>
+<li class=""><strong>Pro blocks are translated</strong> and sit in the "Rentiva" category together with the Rentiva blocks. The "MHM " prefix was removed from Pro widget and block names, and two block titles changed: "Messages" is now "My Messages" and "Popular Transfer Routes" is now "Popular Routes".</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="e-mails">E-mails<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#e-mails" class="hash-link" aria-label="Direct link to E-mails" title="Direct link to E-mails" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The e-mail preview lists all 31 Pro templates by translated name</strong> (they showed "Vendor approved", "Payout approved" and so on in English), each filled with sample vendor, payout, commission, report and message data instead of empty gaps.</li>
+<li class=""><strong>Pro e-mails use the site language</strong>, together with Rentiva's, even while an admin with another profile language is working.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">The personal-data export includes the customer's favourite vehicles again.</li>
+<li class="">Error messages on the My Messages screen show their text; four of them were empty.</li>
+<li class="">Transfer Results no longer serves a stale cached result when settings change twice within the same second, and its <code>columns</code> setting has a minimum of 1, so 0 or a non-number no longer produces an empty grid.</li>
+<li class="">The transfer duration unit ("min") is translated.</li>
+<li class=""><strong>Turkish:</strong> "Deposit Rate (%)" now reads "Kapora oranı", "Full Payment Required" reads "Tam ödeme gerekli", e-mail strings say "etkin", and pickup / drop-off wording moved toward "Teslim alma / Dönüş".</li>
+</ul>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Known limitation (unchanged from 6.3.0)</div><div class="admonitionContent_BuS1"><p>A vendor whose IBAN could not be read after the 6.3.0 update cannot request a payout until the IBAN is entered again, and 6.4.0 still has no form for entering it. The admin notice lists each such vendor.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="for-developers">For developers<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release#for-developers" class="hash-link" aria-label="Direct link to For developers" title="Direct link to For developers" translate="no">​</a></h2>
+<p>Requires MHM Rentiva 6.3.0 (raised from 6.2.0). Removed: an old Transfer settings page that no menu or link reached, its save handler and the <code>admin_post_mhmrentiva_save_transfer_settings</code> action. The transfer cart reads only the Transfer tab's <code>mhmrentiva_transfer_deposit_*</code> keys, no longer <code>rentiva_transfer_deposit_*</code>. Pro hooks Rentiva's <code>mhmrentiva_cart_item_name</code>, <code>mhmrentiva_email_template_labels</code>, <code>mhmrentiva_email_preview_context</code> and <code>mhmrentiva_parity_labels</code>. The <code>_html</code> filters of Vendor Directory, Vendor Profile and Popular Routes now also receive the early empty outputs, with normalised attributes.</p>
+<hr>
+<p><strong>Where to get it.</strong> Pro 6.4.0 is published on GitHub as <code>v6.4.0</code> and served through the Rentiva Pro download on wpalemi.com. Update <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release">Rentiva to 6.3.0</a> first. The full changelog ships with the plugin in both languages.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="pro" term="pro"/>
+        <category label="transfer" term="transfer"/>
+        <category label="payments" term="payments"/>
+        <category label="elementor" term="elementor"/>
+        <category label="security" term="security"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva 6.3.0 — A site-wide rental deposit, safe editor previews, e-mail settings that apply, and a booking form the server checks]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release</id>
@@ -75,7 +134,7 @@
 <li class=""><strong>Translation tokens in notices</strong> now use a format WordPress.org's translation tool can check, and the Turkish catalogue uses the plural formula translate.wordpress.org uses.</li>
 </ul>
 <hr>
-<p><strong>Where to get it.</strong> Rentiva is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. <strong>Using Rentiva Pro?</strong> Update Rentiva first, then Pro to 6.4.0. The full changelog in both languages ships with the plugin.</p>]]></content>
+<p><strong>Where to get it.</strong> Rentiva is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. <strong>Using Rentiva Pro?</strong> Update Rentiva first, then <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.4.0-release">Pro to 6.4.0</a>. The full changelog in both languages ships with the plugin.</p>]]></content>
         <author>
             <name>MaxHandMade</name>
             <uri>https://github.com/MaxHandMade</uri>
@@ -835,32 +894,5 @@
         <category label="pro" term="pro"/>
         <category label="security" term="security"/>
         <category label="minor" term="minor"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v5.0.1 / Pro v5.0.2 — Export screen fixes]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes"/>
-        <updated>2026-07-18T23:30:00.000Z</updated>
-        <summary type="html"><![CDATA[A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (v5.0.1); Pro ships the logic (v5.0.2). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.]]></summary>
-        <content type="html"><![CDATA[<p>A coupled patch release that fixes the data-export screen. Lite ships the shared bundle (<strong>v5.0.1</strong>); Pro ships the logic (<strong>v5.0.2</strong>). The free plugin's own behaviour is unchanged — the export screen is a Pro feature.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-fixed">What's fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#whats-fixed" class="hash-link" aria-label="Direct link to What's fixed" title="Direct link to What's fixed" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>The Export button now works.</strong> It was posting its security token under the wrong field name, so every export — CSV included — failed with a "the link you followed has expired" error.</li>
-<li class=""><strong>The date range is applied to the download.</strong> The screen posted the range under one set of field names while the handler read another, so a filtered preview ("23 records") still downloaded every record. The two now agree, and a regression test pins it in place.</li>
-<li class=""><strong>The history table is readable again.</strong> Its Type, Records and User columns were blank because the stored rows and the table used different field names; they are now mapped on read, and a numeric user id resolves to the account's display name. A new Format column shows how each entry was exported.</li>
-<li class=""><strong>The JSON format is reachable.</strong> JSON export has worked on the server for releases, but the screen shipped no format control; a picker now offers it, sharing one source of truth with the handler so the two can't drift apart.</li>
-<li class=""><strong>Turkish translation</strong> updated for the new strings.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.1-export-fixes#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
-<table><thead><tr><th>Gate</th><th>Lite v5.0.1</th><th>Pro v5.0.2</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 / 0</td><td>813 / 0</td></tr><tr><td>PHPCS</td><td>0</td><td>0</td></tr><tr><td>Plugin Check</td><td>0 errors</td><td>private add-on</td></tr></tbody></table>
-<p>Install both together — the fix spans the two (bundle in Lite, logic in Pro).</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="pro" term="pro"/>
-        <category label="patch" term="patch"/>
     </entry>
 </feed>
