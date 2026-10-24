@@ -2,11 +2,128 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</id>
     <title>MHM Rentiva Documentation Blog</title>
-    <updated>2026-10-11T06:30:00.000Z</updated>
+    <updated>2026-10-24T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog"/>
     <subtitle>MHM Rentiva Documentation Blog</subtitle>
     <icon>https://MaxHandMade.github.io/mhm-rentiva-docs/img/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.3.0 — A site-wide rental deposit, safe editor previews, e-mail settings that apply, and a booking form the server checks]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release"/>
+        <updated>2026-10-24T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[6.3.0 gathers the work since 6.2.1. Rentals get a site-wide deposit setting, a vehicle set to transfer only can no longer be rented, and Rentiva widgets show safe previews in the Elementor and block editors. E-mail settings that were saved but ignored now apply, and the booking form checks on the server what it used to take from the browser. No database step runs on update. 6.3.1 followed the same day with a fix for Elementor sites — see the end of this post. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. Using Rentiva Pro? Update Pro to 6.4.0 right after.]]></summary>
+        <content type="html"><![CDATA[<p>6.3.0 gathers the work since 6.2.1. Rentals get a site-wide deposit setting, a vehicle set to transfer only can no longer be rented, and Rentiva widgets show safe previews in the Elementor and block editors. E-mail settings that were saved but ignored now apply, and the booking form checks on the server what it used to take from the browser. No database step runs on update. 6.3.1 followed the same day with a fix for Elementor sites — see the end of this post. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. <strong>Using Rentiva Pro?</strong> Update Pro to 6.4.0 right after.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-site-wide-rental-deposit">A site-wide rental deposit<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#a-site-wide-rental-deposit" class="hash-link" aria-label="Direct link to A site-wide rental deposit" title="Direct link to A site-wide rental deposit" translate="no">​</a></h2>
+<p><strong>Settings &gt; Payment</strong> has two new fields: <strong>Rental Payment Type</strong> (full payment or percentage deposit, default percentage) and <strong>Deposit Rate (%)</strong> (1–100, default 10). The defaults keep today's behaviour. The Payment tab is now always shown; it used to appear only without WooCommerce. Every price screen reads the same rate.</p>
+<ul>
+<li class=""><strong>A vehicle's own deposit rate still wins</strong> over the site-wide setting.</li>
+<li class=""><strong>An empty deposit field now follows the site-wide setting.</strong> It no longer means a fixed 10%, and the booking form no longer charges in full because of it.</li>
+<li class="">The vehicle field accepts 1–100 (it was capped at 50), and the edit screen names the site-wide value it falls back to.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="transfer-only-vehicles-can-no-longer-be-rented">Transfer-only vehicles can no longer be rented<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#transfer-only-vehicles-can-no-longer-be-rented" class="hash-link" aria-label="Direct link to Transfer-only vehicles can no longer be rented" title="Direct link to Transfer-only vehicles can no longer be rented" translate="no">​</a></h2>
+<p>A vehicle whose service type is "transfer only" no longer appears in the vehicle grid and list, search results, featured vehicles, the booking form, alternatives, the calendar's vehicle switcher or the manual booking list, and its page has no booking button. The server refuses a rental booking, quote or payment for it. Transfer bookings for that vehicle are not affected, and a vehicle with no service type stays rentable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="safe-previews-in-elementor-and-the-block-editor">Safe previews in Elementor and the block editor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#safe-previews-in-elementor-and-the-block-editor" class="hash-link" aria-label="Direct link to Safe previews in Elementor and the block editor" title="Direct link to Safe previews in Elementor and the block editor" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rentiva widgets render inside a preview frame.</strong> Account widgets (My bookings, Favourites, Payment history, Vehicle comparison, User dashboard) always show sample rows with a "Preview: sample data" note — never your own account data. Vehicle details and the rating form show a sample vehicle when the page has none, and a clear note when the vehicle ID is wrong. Catalog widgets show your real public data. Forms in the editor are inert.</li>
+<li class=""><strong>One "Rentiva" category.</strong> All Rentiva blocks sit in a "Rentiva" category in the block inserter, and the Elementor widget category is renamed "Rentiva"; saved pages are not affected. The "MHM " prefix was removed from widget and block names.</li>
+<li class=""><strong>Elementor's "Parity Controls" section is now "Additional Settings"</strong>, with translatable labels and options. Saved widget settings are unchanged.</li>
+<li class=""><strong>Block settings panels are translated.</strong> If a WordPress.org language pack is installed, its newer translations win, and strings the pack does not have yet come from the plugin's own translations instead of showing in English.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="e-mail-settings-that-were-ignored-now-apply">E-mail settings that were ignored now apply<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#e-mail-settings-that-were-ignored-now-apply" class="hash-link" aria-label="Direct link to E-mail settings that were ignored now apply" title="Direct link to E-mail settings that were ignored now apply" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>A template is sent only while its "Enabled" box is ticked.</strong> A template that was never saved counts as enabled, as the screen shows it. Previews and test sends ignore the box. The global booking and welcome e-mail switches now match the templates they name; before, they matched none.</li>
+<li class=""><strong>One cancellation e-mail.</strong> When a booking is cancelled, the customer gets the "Booking Cancelled" template (or the automatic-cancellation template when that one applies) instead of the generic status e-mail plus a second cancellation e-mail. If that template is disabled, nothing is sent. It now follows "Enable Outgoing Emails" and test mode like every other e-mail. The admin copy and admin alerts still go out, in test mode to the test address.</li>
+<li class=""><strong>The "Admin Email" fields are used.</strong> Booking alerts go to the address under Booking Notifications, refund alerts to the one under Refund Emails. An empty or invalid field still falls back to the site admin e-mail. Admin alerts that were sent directly now also respect test mode.</li>
+<li class=""><strong>Customer e-mails use the site language</strong>, even when the admin who triggers them uses another profile language.</li>
+<li class="">The "Booking Cancelled" e-mail's enabled box, subject and body are now saved, and the e-mail preview lists every template by its translated name and fills it with sample data.</li>
+<li class="">Booking e-mails show one booking number in the subject and the body (the order number when there is one), and the cancellation e-mail's account button opens the booking.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bookings-the-server-checks">Bookings the server checks<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#bookings-the-server-checks" class="hash-link" aria-label="Direct link to Bookings the server checks" title="Direct link to Bookings the server checks" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The booking form checks on the server</strong> what the browser sends for the return time, required add-ons and the payment type. The return time is set to the pickup time on the server, so the priced period is the one blocked. Required add-ons are enforced and shown checked and locked. Only "deposit" or "full" is accepted as the payment type.</li>
+<li class=""><strong>Saving a booking in the admin uses the booking form's calculation.</strong> It no longer drops add-ons from the total, charges a fixed 20% deposit, ignores the weekend rate, or re-prices transfer bookings at the vehicle's daily rate.</li>
+<li class=""><strong>Editing a booking in the admin checks availability.</strong> Moving a booking onto taken dates, or re-confirming a cancelled booking whose dates were sold, is refused with a notice. A moved booking frees its old dates and holds its new ones.</li>
+<li class="">When the chosen vehicle is not free, the booking form shows the notice and suggested alternatives, and the booking button stays disabled until an available vehicle or dates are chosen.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-to-check-after-updating">What to check after updating<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#what-to-check-after-updating" class="hash-link" aria-label="Direct link to What to check after updating" title="Direct link to What to check after updating" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Vehicle deposit fields:</strong> a vehicle with an empty field now follows the site-wide rate under Settings &gt; Payment; one with its own rate keeps it.</li>
+<li class=""><strong>E-mail templates:</strong> a template whose "Enabled" box is unticked is no longer sent. Look over the boxes on the e-mail settings screen.</li>
+<li class=""><strong>"Admin Email" fields</strong> under Booking Notifications and Refund Emails: they are now used, so make sure they hold the right address.</li>
+<li class=""><strong>Drop-off location in the search form:</strong> it is hidden by default now; it only mirrored the pick-up location and nothing used it. Add <code>show_dropoff_location="true"</code> to the shortcode, block or Elementor widget to show it.</li>
+<li class=""><strong>Transfer-only vehicles</strong> disappear from rental listings and the booking form.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="smaller-things-you-will-notice">Smaller things you will notice<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#smaller-things-you-will-notice" class="hash-link" aria-label="Direct link to Smaller things you will notice" title="Direct link to Smaller things you will notice" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>The customer's booking page matches the booking.</strong> Pending, cancelled and completed bookings get their own heading; the deposit shows as paid only after the payment arrives; "Pay Remaining Amount" waits for the deposit; pickup instructions appear only for confirmed bookings. The booking number is the same in the list, the dashboard and the detail, and it can be searched.</li>
+<li class=""><strong>Cart and order:</strong> each booking shows as the vehicle's name plus "rental" with the vehicle's image, each add-on is listed once with its price, transfers have no return-date row, and order dates use the site's date format. Booking form prices follow the store's currency position and thousand separator.</li>
+<li class=""><strong>Vehicle pages:</strong> the rating summary shows a bar for every star value (1 and 2 stars were missing); "Similar vehicles" is hidden when empty and no longer lists the vehicle itself; visitors no longer see raw <code>[rentiva_login_form]</code> text under reviews, and Register appears only when the site allows registration.</li>
+<li class=""><strong>Vehicle comparison</strong> shows default rows until you choose your own, and your first selection is saved. "Reset to defaults" on the Display tab restores the default fields instead of hiding them.</li>
+<li class=""><strong>Availability calendar:</strong> picking the same day for pickup and return opens the booking form with the pickup date filled instead of an error. Two calendars on one page no longer drive each other, and the vehicle dropdown works again.</li>
+<li class=""><strong>Settings that now stick:</strong> the default rental location on the Vehicle tab is saved, search uses its minimum rental days, the contact form uses the support e-mail from the General tab, and the e-mail header image field is visible.</li>
+<li class=""><strong>Translations:</strong> the Turkish translation was reviewed end to end, Turkish sites write percentages as "%20", and admin screens no longer show recently added strings in English when a WordPress.org language pack is installed.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="security">Security<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security" translate="no">​</a></h2>
+<p>Besides the booking form checks above: a vehicle title with an apostrophe no longer breaks the calendar's "Choose another vehicle" button, vehicle data in the availability calendar and the booking edit screen is always handled as text, and the lazy loader no longer loads remote content or scripts from <code>data-lazy</code> attributes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="for-developers">For developers<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#for-developers" class="hash-link" aria-label="Direct link to For developers" title="Direct link to For developers" translate="no">​</a></h2>
+<p>New filters: <code>mhmrentiva_cart_item_name</code>, <code>mhmrentiva_email_template_labels</code>, <code>mhmrentiva_email_preview_context</code>, <code>mhmrentiva_parity_labels</code>, <code>mhmrentiva_translation_dirs</code>, <code>mhmrentiva_render_context</code> and <code>mhmrentiva_settings_programmatic_keys</code>. Add-ons can rely on <code>DepositCalculator::resolve_rate()</code>, <code>VehicleDataHelper::get_service_type()</code> / <code>allows_service()</code> / <code>service_meta_query()</code>, <code>RenderContext</code>, <code>BlockRegistry::register_block()</code> and <code>CurrencyHelper::format_percentage()</code> from 6.3.0. <code>Util::has_overlap_locked()</code> takes an optional booking to exclude. The <code>content</code> and <code>script</code> types of the <code>data-lazy</code> loader were removed, as was the unused <code>mhmrentiva_booking_validation</code> hook-up.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="631-follow-up">6.3.1 follow-up<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.3.0-release#631-follow-up" class="hash-link" aria-label="Direct link to 6.3.1 follow-up" title="Direct link to 6.3.1 follow-up" translate="no">​</a></h2>
+<p>6.3.1 followed on the same day with two fixes:</p>
+<ul>
+<li class=""><strong>Elementor-built pages are found.</strong> A Rentiva widget, or a <code>[rentiva_*]</code> shortcode inside an Elementor widget, lives in Elementor's data rather than the page content, so Rentiva's page finder missed it: "Book now" buttons and other links fell back to the home page, and Shortcode Pages listed the page as missing. A page with the shortcode or block in its content still wins. On Elementor sites whose vehicle-details page is now found, vehicle pages move under that page, with a 301 redirect from <code>/vehicle/...</code>, as on block and shortcode sites.</li>
+<li class=""><strong>Translation tokens in notices</strong> now use a format WordPress.org's translation tool can check, and the Turkish catalogue uses the plural formula translate.wordpress.org uses.</li>
+</ul>
+<hr>
+<p><strong>Where to get it.</strong> Rentiva is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. <strong>Using Rentiva Pro?</strong> Update Rentiva first, then Pro to 6.4.0. The full changelog in both languages ships with the plugin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="payments" term="payments"/>
+        <category label="elementor" term="elementor"/>
+        <category label="blocks" term="blocks"/>
+        <category label="email" term="email"/>
+        <category label="security" term="security"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Rentiva 6.2.1 — Elementor widgets no longer write the saving user's account data into a page's stored text]]></title>
+        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release</id>
+        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release"/>
+        <updated>2026-10-13T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[6.2.1 is a privacy fix for sites that build pages with Elementor. Rentiva's Elementor widgets could leave the account data of the person who saved a page inside that page's stored text, where the site search could find it. This release stops that and cleans up the pages already affected. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. If you use Elementor, update now and do the two steps under "After updating".]]></summary>
+        <content type="html"><![CDATA[<p>6.2.1 is a privacy fix for sites that build pages with Elementor. Rentiva's Elementor widgets could leave the account data of the person who saved a page inside that page's stored text, where the site search could find it. This release stops that and cleans up the pages already affected. It is published on WordPress.org, so WordPress offers it to you as an ordinary update. <strong>If you use Elementor, update now and do the two steps under "After updating".</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-was-wrong">What was wrong<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release#what-was-wrong" class="hash-link" aria-label="Direct link to What was wrong" title="Direct link to What was wrong" translate="no">​</a></h2>
+<p>When a page, post or template holding a Rentiva Elementor widget was saved, Elementor also stored a plain-text copy of it in the post content. The Rentiva widgets wrote into that copy what the person saving it saw: their bookings, payment history, favourites, e-mail address and security tokens. The site search reads that copy, so on a published page anyone could find this data.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-changes">What changes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release#what-changes" class="hash-link" aria-label="Direct link to What changes" title="Direct link to What changes" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rentiva widgets write nothing into the plain-text copy</strong> Elementor stores when a page is saved.</li>
+<li class=""><strong>They also leave Elementor's markdown copy empty</strong> and are never stored in Elementor's shared element cache, even when a widget's Cache Settings is set to Active.</li>
+<li class=""><strong>Visitors see no change.</strong> The page itself still shows each visitor their own data.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="affected-pages-are-cleaned-up-for-you">Affected pages are cleaned up for you<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release#affected-pages-are-cleaned-up-for-you" class="hash-link" aria-label="Direct link to Affected pages are cleaned up for you" title="Direct link to Affected pages are cleaned up for you" translate="no">​</a></h2>
+<p>After the update, a one-time background job rebuilds the stored plain text of every Elementor page, post and template that holds a Rentiva widget, drafts included, and drops its cached markdown copy. It runs through WP-Cron in batches of 50, retries pages that fail and waits longer between tries while it cannot make progress. It does not change a page's modified date or create a revision, so your pages keep their dates and history.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="after-updating">After updating<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.2.1-release#after-updating" class="hash-link" aria-label="Direct link to After updating" title="Direct link to After updating" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>Purge your page cache</strong>, so cached copies of an affected page are replaced.</li>
+<li class=""><strong>Using a search plugin?</strong> Rebuild its index, so it forgets the old text.</li>
+<li class="">Optionally, clear Elementor's own cache under <strong>Elementor &gt; Tools &gt; Clear Files &amp; Data</strong>.</li>
+</ol>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Older revisions</div><div class="admonitionContent_BuS1"><p>Older revisions of an affected page still contain the old text. Only users who can edit that page can see them.</p></div></div>
+<hr>
+<p><strong>Where to get it.</strong> 6.2.1 is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.2.1" target="_blank" rel="noopener noreferrer" class=""><code>v6.2.1</code></a>; both carry the same files. WordPress.org holds new versions for a few hours before sites are offered the update. The full changelog in both languages ships with the plugin.</p>]]></content>
+        <author>
+            <name>MaxHandMade</name>
+            <uri>https://github.com/MaxHandMade</uri>
+        </author>
+        <category label="release" term="release"/>
+        <category label="rentiva" term="rentiva"/>
+        <category label="elementor" term="elementor"/>
+        <category label="privacy" term="privacy"/>
+        <category label="security" term="security"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Rentiva Pro 6.3.0 — Vendor IBANs and documents encrypted at rest, messages rebuilt as conversations, and every vendor setting in one place]]></title>
         <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.3.0-release</id>
@@ -745,63 +862,5 @@
         <category label="rentiva" term="rentiva"/>
         <category label="pro" term="pro"/>
         <category label="patch" term="patch"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v5.0.0 — First Public Release]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release"/>
-        <updated>2026-07-18T14:00:00.000Z</updated>
-        <summary type="html"><![CDATA[MHM Rentiva's first public release, free to download: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.]]></summary>
-        <content type="html"><![CDATA[<p>MHM Rentiva's first public release, free to download: the complete rental core with no artificial limits, no third-party requests, and full WordPress.org coding-standards compliance.</p>
-<p>Every screen works exactly as before — this release changes <strong>how the plugin is packaged and loaded</strong>, not what it does.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-in-it">What's in it<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#whats-in-it" class="hash-link" aria-label="Direct link to What's in it" title="Direct link to What's in it" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>First public release, free to download.</strong> Fleet management, availability, bookings, customers, WooCommerce payments, email notifications and the customer account pages — with no vehicle, booking or listing caps, no feature timers and no locked screens.</li>
-<li class=""><strong>No third-party requests at all.</strong> The webfont is bundled and served from your own site; there are no geolocation, analytics or CDN calls.</li>
-<li class=""><strong>16 shortcodes, 16 Gutenberg blocks and 17 Elementor widgets</strong> share a single renderer (Render Parity), so all three produce identical output. Ships with a full Turkish translation.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="under-the-hood">Under the hood<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#under-the-hood" class="hash-link" aria-label="Direct link to Under the hood" title="Direct link to Under the hood" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Assets load through the WordPress asset system.</strong> Every admin and front-end script and style now goes through <code>wp_enqueue</code> / <code>wp_add_inline_*</code> instead of inline <code>&lt;script&gt;</code>/<code>&lt;style&gt;</code> blocks — with no change to how any screen looks or behaves. Self-contained documents (email templates, the downloadable test report, the meta-keys reference) keep their inline styles by design, since an external stylesheet would not be available when those are opened on their own.</li>
-<li class=""><strong>Licence gating hardened.</strong> Pro-only surfaces are now gated on a valid licence rather than only hidden, closing several paths where the separate paid add-on's features could run without one.</li>
-<li class=""><strong>WordPress 7.0 ready,</strong> including a contrast fix for dashicons inside primary buttons (WP 7.0 colours them with the admin theme colour, which made them invisible on a primary button's matching background).</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quality-gates">Quality gates<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#quality-gates" class="hash-link" aria-label="Direct link to Quality gates" title="Direct link to Quality gates" translate="no">​</a></h2>
-<table><thead><tr><th>Gate</th><th>Result</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 tests / 2,823 assertions, 0 failures</td></tr><tr><td>WordPress Coding Standards</td><td>0 errors</td></tr><tr><td>Plugin Check (distributed ZIP)</td><td><strong>0 errors</strong></td></tr><tr><td>Independent audits</td><td>Two architecture/security reviews, plus browser verification across every affected admin and front-end screen</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.0.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
-<p>First public release — if you are upgrading from a pre-release build, no action is required.</p>
-<p><strong>Requirements:</strong> WordPress 6.7+, PHP 8.1+. WooCommerce is required for frontend booking payments.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="wordpress-org" term="wordpress-org"/>
-        <category label="compliance" term="compliance"/>
-        <category label="major" term="major"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Rentiva v4.64.3 — Full Dark Mode Contrast Audit]]></title>
-        <id>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release</id>
-        <link href="https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release"/>
-        <updated>2026-07-12T20:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A full contrast audit across every Settings tab, fixing roughly 15 more dark-mode readability issues beyond the previous patch.]]></summary>
-        <content type="html"><![CDATA[<p>A full contrast audit across every Settings tab, fixing roughly 15 more dark-mode readability issues beyond the previous patch.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixed">Fixed<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v4.64.3-release#fixed" class="hash-link" aria-label="Direct link to Fixed" title="Direct link to Fixed" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Full dark-mode contrast audit.</strong> The v4.64.2 fix only addressed 3 isolated spots; this release fixes ~15 more across all 16 Settings tabs: the Lite-upgrade notice link, page-header buttons (Belgeler / Bu Sekmeyi Sıfırla / Konum Yönetimi / Rotaları Yönet), System Status cards, the "Issue New Credentials" and "Cleanup Dashboard" boxes, accordion sections and their labels, data tables (REST API reference, DB cleanup history), <code>&lt;code&gt;</code> tags, and an entire tab (Bildirim Şablonları) whose custom template wasn't covered by any prior dark-mode rule.</li>
-<li class=""><strong>Light-mode regression fix.</strong> Two Database Cleanup cards lost their card styling in light mode as a side effect of the dark-mode work above; restored.</li>
-</ul>
-<p>Verified with an automated WCAG contrast scanner across all 16 Settings tabs (0 remaining failures) plus two rounds of independent code review.</p>]]></content>
-        <author>
-            <name>MaxHandMade</name>
-            <uri>https://github.com/MaxHandMade</uri>
-        </author>
-        <category label="release" term="release"/>
-        <category label="rentiva" term="rentiva"/>
-        <category label="settings" term="settings"/>
-        <category label="bugfix" term="bugfix"/>
-        <category label="accessibility" term="accessibility"/>
     </entry>
 </feed>

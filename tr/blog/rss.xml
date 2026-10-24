@@ -4,10 +4,119 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Sun, 11 Oct 2026 06:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 24 Oct 2026 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>tr</language>
+        <item>
+            <title><![CDATA[Rentiva 6.3.0 — Site geneli kiralama kaporası, güvenli editör önizlemeleri, uygulanan e-posta ayarları ve sunucunun denetlediği rezervasyon formu]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release</guid>
+            <pubDate>Sat, 24 Oct 2026 06:00:00 GMT</pubDate>
+            <description><![CDATA[6.3.0, 6.2.1'den bu yana yapılan çalışmayı bir araya getiriyor. Kiralamalar site geneli bir kapora ayarı kazandı, yalnız transfer için ayarlanmış araç artık kiralanamıyor ve Rentiva bileşenleri Elementor ile blok editöründe güvenli önizleme gösteriyor. Kaydedilip yok sayılan e-posta ayarları artık uygulanıyor; rezervasyon formu da eskiden tarayıcıdan aldığı bilgileri sunucuda denetliyor. Güncellemede veritabanı adımı çalışmıyor. Aynı gün Elementor siteleri için bir düzeltmeyle 6.3.1 geldi — yazının sonuna bakın. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. Rentiva Pro kullanıyor musunuz? Hemen ardından Pro'yu 6.4.0'a güncelleyin.]]></description>
+            <content:encoded><![CDATA[<p>6.3.0, 6.2.1'den bu yana yapılan çalışmayı bir araya getiriyor. Kiralamalar site geneli bir kapora ayarı kazandı, yalnız transfer için ayarlanmış araç artık kiralanamıyor ve Rentiva bileşenleri Elementor ile blok editöründe güvenli önizleme gösteriyor. Kaydedilip yok sayılan e-posta ayarları artık uygulanıyor; rezervasyon formu da eskiden tarayıcıdan aldığı bilgileri sunucuda denetliyor. Güncellemede veritabanı adımı çalışmıyor. Aynı gün Elementor siteleri için bir düzeltmeyle 6.3.1 geldi — yazının sonuna bakın. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. <strong>Rentiva Pro kullanıyor musunuz?</strong> Hemen ardından Pro'yu 6.4.0'a güncelleyin.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="site-geneli-kiralama-kaporası">Site geneli kiralama kaporası<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#site-geneli-kiralama-kaporas%C4%B1" class="hash-link" aria-label="Site geneli kiralama kaporası doğrudan bağlantı" title="Site geneli kiralama kaporası doğrudan bağlantı" translate="no">​</a></h2>
+<p><strong>Ayarlar &gt; Ödeme</strong> sekmesine iki alan eklendi: <strong>Kiralama ödeme türü</strong> (tam ödeme ya da yüzde kapora, varsayılan yüzde) ve <strong>Kapora oranı (%)</strong> (1–100, varsayılan 10). Varsayılanlar bugünkü davranışı koruyor. Ödeme sekmesi artık her zaman görünüyor; eskiden yalnız WooCommerce yokken çıkıyordu. Her fiyat ekranı aynı oranı okuyor.</p>
+<ul>
+<li class=""><strong>Aracın kendi kapora oranı</strong> site geneli ayarın yine önüne geçiyor.</li>
+<li class=""><strong>Boş kapora alanı artık site geneli ayarı izliyor.</strong> Boş alan sabit %10 demek değil; rezervasyon formu da bu yüzden tam ödeme almıyor.</li>
+<li class="">Araç alanı 1–100 kabul ediyor (üst sınır 50'ydi) ve düzenleme ekranı dönülecek site geneli değeri gösteriyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yalnız-transfer-araçları-artık-kiralanamıyor">Yalnız transfer araçları artık kiralanamıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#yaln%C4%B1z-transfer-ara%C3%A7lar%C4%B1-art%C4%B1k-kiralanam%C4%B1yor" class="hash-link" aria-label="Yalnız transfer araçları artık kiralanamıyor doğrudan bağlantı" title="Yalnız transfer araçları artık kiralanamıyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Hizmet türü "yalnız transfer" olan araç artık araç ızgarasında ve listesinde, arama sonuçlarında, öne çıkan araçlarda, rezervasyon formunda, alternatiflerde, takvimin araç seçicisinde ve manuel rezervasyon listesinde görünmüyor; sayfasında rezervasyon düğmesi yok. Sunucu bu araç için kiralama rezervasyonunu, fiyat teklifini ve ödemesini reddediyor. Aracın transfer rezervasyonları etkilenmiyor; hizmet türü olmayan araç kiralanabilir kalıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="elementor-ve-blok-editöründe-güvenli-önizleme">Elementor ve blok editöründe güvenli önizleme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#elementor-ve-blok-edit%C3%B6r%C3%BCnde-g%C3%BCvenli-%C3%B6nizleme" class="hash-link" aria-label="Elementor ve blok editöründe güvenli önizleme doğrudan bağlantı" title="Elementor ve blok editöründe güvenli önizleme doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rentiva bileşenleri bir önizleme çerçevesinde çiziliyor.</strong> Hesap bileşenleri (Rezervasyonlarım, Favorilerim, Ödeme geçmişi, Araç karşılaştırma, Kullanıcı paneli) her zaman "Önizleme: örnek veri" notuyla örnek satırlar gösteriyor — sizin hesap verileriniz asla görünmüyor. Araç detayları ve puanlama formu, sayfada araç yoksa örnek araç, araç kimliği yanlışsa açık bir not gösteriyor. Katalog bileşenleri gerçek, herkese açık verinizi gösteriyor. Editördeki formlar etkisiz.</li>
+<li class=""><strong>Tek bir "Rentiva" kategorisi.</strong> Tüm Rentiva blokları blok ekleyicide "Rentiva" kategorisinde; Elementor bileşen kategorisinin adı da "Rentiva" oldu, kayıtlı sayfalar etkilenmiyor. Bileşen ve blok adlarından "MHM " öneki kaldırıldı.</li>
+<li class=""><strong>Elementor'daki "Parity Controls" bölümünün adı "Ek ayarlar" oldu</strong>; etiketleri ve seçenekleri çevrilebiliyor. Kayıtlı bileşen ayarları değişmiyor.</li>
+<li class=""><strong>Blok ayar panelleri çevrili.</strong> WordPress.org dil paketi kuruluysa paketin yeni çevirileri önce geliyor; paketin henüz içermediği dizeler İngilizce görünmek yerine eklentinin kendi çevirilerinden tamamlanıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yok-sayılan-e-posta-ayarları-artık-uygulanıyor">Yok sayılan e-posta ayarları artık uygulanıyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#yok-say%C4%B1lan-e-posta-ayarlar%C4%B1-art%C4%B1k-uygulan%C4%B1yor" class="hash-link" aria-label="Yok sayılan e-posta ayarları artık uygulanıyor doğrudan bağlantı" title="Yok sayılan e-posta ayarları artık uygulanıyor doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Şablon yalnız "Etkin" kutusu işaretliyken gönderiliyor.</strong> Hiç kaydedilmemiş şablon, ekranda göründüğü gibi etkin sayılıyor. Önizleme ve test gönderimi kutuya bakmıyor. Genel rezervasyon ve hoş geldin e-postası anahtarları artık adlarını taşıdıkları şablonları tutuyor; önceden hiçbirini tutmuyordu.</li>
+<li class=""><strong>Tek bir iptal e-postası.</strong> Rezervasyon iptal edildiğinde müşteriye genel durum e-postası ve ikinci bir iptal e-postası yerine "Rezervasyon iptal edildi" şablonu (uygunsa otomatik iptal şablonu) gidiyor. Şablon kapalıysa hiçbir şey gönderilmiyor. Bu e-posta artık diğer bütün e-postalar gibi "Giden e-postaları etkinleştir" ayarına ve test kipine uyuyor. Yöneticiye giden kopya ve yönetici uyarıları yine gönderiliyor; test kipinde test adresine.</li>
+<li class=""><strong>"Yönetici e-postası" alanları kullanılıyor.</strong> Rezervasyon uyarıları Rezervasyon bildirimleri altındaki adrese, iade uyarıları İade e-postaları altındaki adrese gidiyor. Boş ya da geçersiz alan yine site yöneticisinin e-postasına düşüyor. Doğrudan gönderilen yönetici uyarıları artık test kipine de uyuyor.</li>
+<li class=""><strong>Müşteri e-postaları site dilinde</strong>, gönderimi tetikleyen yöneticinin profil dili farklı olsa bile.</li>
+<li class="">"Rezervasyon iptal edildi" e-postasının etkin kutusu, konusu ve gövdesi artık kaydediliyor; e-posta önizlemesi her şablonu çevrilmiş adıyla listeliyor ve örnek veriyle dolduruyor.</li>
+<li class="">Rezervasyon e-postaları konuda ve gövdede aynı numarayı gösteriyor (sipariş varsa sipariş numarası); iptal e-postasındaki hesap düğmesi rezervasyonu açıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sunucunun-denetlediği-rezervasyonlar">Sunucunun denetlediği rezervasyonlar<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#sunucunun-denetledi%C4%9Fi-rezervasyonlar" class="hash-link" aria-label="Sunucunun denetlediği rezervasyonlar doğrudan bağlantı" title="Sunucunun denetlediği rezervasyonlar doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rezervasyon formu</strong> tarayıcının gönderdiği dönüş saatini, zorunlu ek hizmetleri ve ödeme türünü artık sunucuda denetliyor. Dönüş saati sunucuda teslim alma saatine eşitleniyor, böylece fiyatlanan süre ile tutulan süre aynı. Zorunlu ek hizmetler zorunlu tutuluyor ve formda işaretli, kilitli görünüyor. Ödeme türü olarak yalnız "deposit" ya da "full" kabul ediliyor.</li>
+<li class=""><strong>Yönetici panelinde rezervasyon kaydı, rezervasyon formuyla aynı hesabı kullanıyor.</strong> Artık ek hizmetleri toplamdan düşürmüyor, sabit %20 kapora uygulamıyor, hafta sonu fiyatını yok saymıyor ve transfer rezervasyonlarını aracın günlük fiyatından yeniden fiyatlamıyor.</li>
+<li class=""><strong>Yönetici panelinde rezervasyon düzenlemek müsaitliği denetliyor.</strong> Rezervasyonu dolu tarihlere taşımak ya da tarihleri satılmış iptal bir rezervasyonu yeniden onaylamak bir uyarıyla reddediliyor; taşınan rezervasyon eski tarihlerini boşaltıp yenilerini tutuyor.</li>
+<li class="">Seçilen araç müsait değilse rezervasyon formu uyarıyı ve önerilen alternatif araçları gösteriyor; müsait bir araç ya da tarih seçilene kadar rezervasyon düğmesi kapalı kalıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncellemeden-sonra-neye-bakmalı">Güncellemeden sonra neye bakmalı<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#g%C3%BCncellemeden-sonra-neye-bakmal%C4%B1" class="hash-link" aria-label="Güncellemeden sonra neye bakmalı doğrudan bağlantı" title="Güncellemeden sonra neye bakmalı doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Araçların kapora alanları:</strong> alanı boş olan araç artık Ayarlar &gt; Ödeme'deki site geneli oranı izliyor; kendi oranı olan araç onu koruyor.</li>
+<li class=""><strong>E-posta şablonları:</strong> "Etkin" kutusu işaretli olmayan şablon artık gönderilmiyor. E-posta ayarları ekranındaki kutuları gözden geçirin.</li>
+<li class="">Rezervasyon bildirimleri ve İade e-postaları altındaki <strong>"Yönetici e-postası" alanları</strong> artık kullanılıyor; doğru adresi taşıdıklarından emin olun.</li>
+<li class=""><strong>Arama formundaki dönüş konumu:</strong> artık varsayılan olarak gizli; alan yalnız teslim alma konumunu kopyalıyordu ve hiçbir yerde kullanılmıyordu. Göstermek için kısa koda, bloğa ya da Elementor bileşenine <code>show_dropoff_location="true"</code> ekleyin.</li>
+<li class=""><strong>Yalnız transfer araçları</strong> kiralama listelerinden ve rezervasyon formundan kalkıyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fark-edeceğiniz-küçük-şeyler">Fark edeceğiniz küçük şeyler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#fark-edece%C4%9Finiz-k%C3%BC%C3%A7%C3%BCk-%C5%9Feyler" class="hash-link" aria-label="Fark edeceğiniz küçük şeyler doğrudan bağlantı" title="Fark edeceğiniz küçük şeyler doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Müşterinin rezervasyon sayfası rezervasyonla tutarlı.</strong> Bekleyen, iptal edilen ve tamamlanan rezervasyonların kendi başlığı var; kapora yalnız ödeme ulaştığında ödendi görünüyor; "Kalan tutarı öde" kaporayı bekliyor; teslim alma talimatları yalnız onaylı rezervasyonlarda çıkıyor. Rezervasyon numarası liste, pano ve detayda aynı ve aranabiliyor.</li>
+<li class=""><strong>Sepet ve sipariş:</strong> her rezervasyon araç adı ve "kiralama" sözcüğüyle, aracın görseliyle görünüyor; her ek hizmet fiyatıyla bir kez listeleniyor; transferlerde dönüş tarihi satırı yok; sipariş tarihleri sitenin tarih biçiminde. Rezervasyon formundaki fiyatlar mağazanın para birimi konumunu ve binlik ayırıcısını izliyor.</li>
+<li class=""><strong>Araç sayfaları:</strong> puan özeti her yıldız değeri için bir çubuk gösteriyor (1 ve 2 yıldız eksikti); "Benzer araçlar" boşsa gizleniyor ve aracın kendisini listelemiyor; ziyaretçiler yorumların altında artık ham <code>[rentiva_login_form]</code> metni görmüyor, Kayıt da yalnız site kayda izin veriyorsa görünüyor.</li>
+<li class=""><strong>Araç karşılaştırma</strong> siz seçim yapana kadar varsayılan satırları gösteriyor ve ilk seçiminiz kaydediliyor. Görünüm sekmesindeki "Varsayılanlara dön" alanları gizlemek yerine varsayılana döndürüyor.</li>
+<li class=""><strong>Müsaitlik takvimi:</strong> teslim alma ve dönüş için aynı gün seçilince rezervasyon formu hata yerine teslim alma tarihiyle açılıyor. Aynı sayfadaki iki takvim birbirini artık sürüklemiyor, araç seçicisi yeniden çalışıyor.</li>
+<li class=""><strong>Artık kalıcı olan ayarlar:</strong> Araç sekmesindeki varsayılan kiralama konumu kaydediliyor, arama oradaki en az kiralama gününü kullanıyor, iletişim formu Genel sekmesindeki destek e-postasını kullanıyor, e-posta üst kısım görseli alanı görünüyor.</li>
+<li class=""><strong>Çeviri:</strong> Türkçe çeviri baştan sona gözden geçirildi ve teslim alma/bırakma ifadeleri "Teslim alma / Dönüş" olarak birleştirildi; Türkçe sitelerde yüzdeler "%20" biçiminde yazılıyor; WordPress.org dil paketi kuruluyken yönetim ekranları son eklenen dizeleri artık İngilizce göstermiyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güvenlik">Güvenlik<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#g%C3%BCvenlik" class="hash-link" aria-label="Güvenlik doğrudan bağlantı" title="Güvenlik doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yukarıdaki rezervasyon formu denetimlerine ek olarak: kesme işareti içeren araç adı artık takvimdeki "Başka araç seç" düğmesini bozmuyor, müsaitlik takviminin ve rezervasyon düzenleme ekranının gösterdiği araç verileri her zaman metin olarak işleniyor, gecikmeli yükleyici <code>data-lazy</code> özniteliklerinden artık uzak içerik ya da betik yüklemiyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="geliştiriciler-için">Geliştiriciler için<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#geli%C5%9Ftiriciler-i%C3%A7in" class="hash-link" aria-label="Geliştiriciler için doğrudan bağlantı" title="Geliştiriciler için doğrudan bağlantı" translate="no">​</a></h2>
+<p>Yeni süzgeçler: <code>mhmrentiva_cart_item_name</code>, <code>mhmrentiva_email_template_labels</code>, <code>mhmrentiva_email_preview_context</code>, <code>mhmrentiva_parity_labels</code>, <code>mhmrentiva_translation_dirs</code>, <code>mhmrentiva_render_context</code> ve <code>mhmrentiva_settings_programmatic_keys</code>. Eklentiler 6.3.0'dan itibaren <code>DepositCalculator::resolve_rate()</code>, <code>VehicleDataHelper::get_service_type()</code> / <code>allows_service()</code> / <code>service_meta_query()</code>, <code>RenderContext</code>, <code>BlockRegistry::register_block()</code> ve <code>CurrencyHelper::format_percentage()</code>'e dayanabilir. <code>Util::has_overlap_locked()</code> hariç tutulacak isteğe bağlı bir rezervasyon alıyor. <code>data-lazy</code> yükleyicisinin <code>content</code> ve <code>script</code> türleri ile kullanılmayan <code>mhmrentiva_booking_validation</code> bağlantısı kaldırıldı.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="631-takibi">6.3.1 takibi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.3.0-release#631-takibi" class="hash-link" aria-label="6.3.1 takibi doğrudan bağlantı" title="6.3.1 takibi doğrudan bağlantı" translate="no">​</a></h2>
+<p>6.3.1 aynı gün iki düzeltmeyle geldi:</p>
+<ul>
+<li class=""><strong>Elementor ile kurulmuş sayfalar bulunuyor.</strong> Rentiva bileşeni ya da bir Elementor bileşeninin içindeki <code>[rentiva_*]</code> kısa kodu sayfa içeriğinde değil Elementor verisinde durduğu için Rentiva'nın sayfa bulucusu onları göremiyordu: "Rezervasyon yap" düğmeleri ve başka bağlantılar ana sayfaya düşüyor, Kısa kod sayfaları ekranı sayfayı eksik gösteriyordu. İçeriğinde kısa kod ya da blok olan sayfa yine öncelikli. Araç detay sayfası artık bulunan Elementor sitelerinde araç sayfaları, blok ve kısa kod sitelerinde olduğu gibi o sayfanın altına taşınıyor; <code>/vehicle/...</code> adresinden 301 ile yönlendiriliyor.</li>
+<li class=""><strong>Bildirimlerdeki çeviri belirteçleri</strong> artık WordPress.org çeviri aracının denetleyebildiği biçimde; Türkçe katalog da translate.wordpress.org'un kullandığı çoğul formülünü kullanıyor.</li>
+</ul>
+<hr>
+<p><strong>Nereden alınır.</strong> Rentiva <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.3.0" target="_blank" rel="noopener noreferrer" class=""><code>v6.3.0</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. <strong>Rentiva Pro kullanıyor musunuz?</strong> Önce Rentiva'yı, ardından Pro'yu 6.4.0'a güncelleyin. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>payments</category>
+            <category>elementor</category>
+            <category>blocks</category>
+            <category>email</category>
+            <category>security</category>
+        </item>
+        <item>
+            <title><![CDATA[Rentiva 6.2.1 — Elementor bileşenleri sayfayı kaydeden kullanıcının hesap verisini artık sayfanın saklanan metnine yazmıyor]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release</guid>
+            <pubDate>Tue, 13 Oct 2026 06:00:00 GMT</pubDate>
+            <description><![CDATA[6.2.1, sayfalarını Elementor ile oluşturan siteler için bir gizlilik düzeltmesi. Rentiva'nın Elementor bileşenleri, bir sayfayı kaydeden kişinin hesap verisini o sayfanın saklanan metninde bırakabiliyordu; site araması da bu veriyi bulabiliyordu. Bu sürüm bunu durduruyor ve hâlihazırda etkilenmiş sayfaları temizliyor. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. Elementor kullanıyorsanız şimdi güncelleyin ve "Güncellemeden sonra" bölümündeki iki adımı yapın.]]></description>
+            <content:encoded><![CDATA[<p>6.2.1, sayfalarını Elementor ile oluşturan siteler için bir gizlilik düzeltmesi. Rentiva'nın Elementor bileşenleri, bir sayfayı kaydeden kişinin hesap verisini o sayfanın saklanan metninde bırakabiliyordu; site araması da bu veriyi bulabiliyordu. Bu sürüm bunu durduruyor ve hâlihazırda etkilenmiş sayfaları temizliyor. Sürüm WordPress.org'da yayında; WordPress size sıradan bir güncelleme olarak sunar. <strong>Elementor kullanıyorsanız şimdi güncelleyin ve "Güncellemeden sonra" bölümündeki iki adımı yapın.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sorun-neydi">Sorun neydi<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release#sorun-neydi" class="hash-link" aria-label="Sorun neydi doğrudan bağlantı" title="Sorun neydi doğrudan bağlantı" translate="no">​</a></h2>
+<p>Rentiva Elementor bileşeni içeren bir sayfa, yazı ya da şablon kaydedildiğinde Elementor yazı içeriğine sayfanın düz metin bir kopyasını da kaydediyordu. Rentiva bileşenleri bu kopyaya kaydeden kişinin gördüklerini yazıyordu: rezervasyonlarını, ödeme geçmişini, favorilerini, e-posta adresini ve güvenlik belirteçlerini. Site araması bu kopyayı okuduğu için yayımlanmış bir sayfada bu veriyi herkes bulabiliyordu.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ne-değişiyor">Ne değişiyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release#ne-de%C4%9Fi%C5%9Fiyor" class="hash-link" aria-label="Ne değişiyor doğrudan bağlantı" title="Ne değişiyor doğrudan bağlantı" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Rentiva bileşenleri, bir sayfa kaydedilirken Elementor'un sakladığı düz metin kopyaya hiçbir şey yazmıyor.</strong></li>
+<li class=""><strong>Elementor'un markdown kopyasını da boş bırakıyorlar</strong> ve bir bileşenin Önbellek Ayarları Etkin olsa bile Elementor'un ortak öğe önbelleğine hiç alınmıyorlar.</li>
+<li class=""><strong>Ziyaretçiler bir fark görmüyor.</strong> Sayfanın kendisi her ziyaretçiye yine kendi verisini gösteriyor.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="etkilenen-sayfalar-sizin-yerinize-temizleniyor">Etkilenen sayfalar sizin yerinize temizleniyor<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release#etkilenen-sayfalar-sizin-yerinize-temizleniyor" class="hash-link" aria-label="Etkilenen sayfalar sizin yerinize temizleniyor doğrudan bağlantı" title="Etkilenen sayfalar sizin yerinize temizleniyor doğrudan bağlantı" translate="no">​</a></h2>
+<p>Güncellemeden sonra tek seferlik bir arka plan işi, Rentiva bileşeni içeren her Elementor sayfasının, yazısının ve şablonunun (taslaklar dahil) saklanan düz metnini yeniden üretiyor ve önbelleğe alınmış markdown kopyasını siliyor. İş WP-Cron ile 50'şerlik partiler hâlinde çalışıyor, başarısız olan sayfaları yeniden deniyor ve ilerleyemediği sürece denemeler arasında giderek daha uzun bekliyor. Sayfanın değiştirilme tarihini değiştirmiyor ve revizyon oluşturmuyor; sayfalarınızın tarihleri ve geçmişi olduğu gibi kalıyor.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="güncellemeden-sonra">Güncellemeden sonra<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v6.2.1-release#g%C3%BCncellemeden-sonra" class="hash-link" aria-label="Güncellemeden sonra doğrudan bağlantı" title="Güncellemeden sonra doğrudan bağlantı" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>Sayfa önbelleğinizi temizleyin</strong>; etkilenen sayfaların önbellekteki kopyaları yenilensin.</li>
+<li class=""><strong>Bir arama eklentisi mi kullanıyorsunuz?</strong> Dizinini yeniden oluşturun; eski metni unutsun.</li>
+<li class="">İsterseniz Elementor'un kendi önbelleğini <strong>Elementor &gt; Araçlar &gt; Dosyaları ve verileri temizle</strong> altından temizleyin.</li>
+</ol>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Eski revizyonlar</div><div class="admonitionContent_BuS1"><p>Etkilenen bir sayfanın eski revizyonları eski metni hâlâ içeriyor. Bunları yalnız o sayfayı düzenleyebilen kullanıcılar görebiliyor.</p></div></div>
+<hr>
+<p><strong>Nereden alınır.</strong> 6.2.1 <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a>'da ve GitHub'da <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.2.1" target="_blank" rel="noopener noreferrer" class=""><code>v6.2.1</code></a> olarak yayında; ikisi de aynı dosyaları taşıyor. WordPress.org yeni sürümleri sitelere sunmadan önce birkaç saat bekletiyor. Tam sürüm notu eklentiyle birlikte iki dilde geliyor.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>elementor</category>
+            <category>privacy</category>
+            <category>security</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva Pro 6.3.0 — Bayi IBAN'ları ve belgeleri şifreli saklanıyor, mesajlar konuşma olarak yeniden kuruldu, bayi ayarları tek yerde]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-pro-v6.3.0-release</link>
@@ -680,56 +789,6 @@
             <category>rentiva</category>
             <category>pro</category>
             <category>patch</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v5.0.0 — İlk Genel Sürüm]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release</guid>
-            <pubDate>Sat, 18 Jul 2026 14:00:00 GMT</pubDate>
-            <description><![CDATA[MHM Rentiva'nın ücretsiz indirilebilen ilk genel sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.]]></description>
-            <content:encoded><![CDATA[<p>MHM Rentiva'nın ücretsiz indirilebilen ilk genel sürümü: yapay sınır içermeyen, hiçbir üçüncü taraf isteği yapmayan ve WordPress.org kodlama standartlarına tam uyumlu, eksiksiz kiralama çekirdeği.</p>
-<p>Her ekran önceki gibi çalışır — bu sürüm eklentinin <strong>ne yaptığını değil, nasıl paketlenip yüklendiğini</strong> değiştirir.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="i̇çeriği">İçeriği<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#i%CC%87%C3%A7eri%C4%9Fi" class="hash-link" aria-label="İçeriği doğrudan bağlantı" title="İçeriği doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>İlk genel sürüm, ücretsiz indirilebilir.</strong> Filo yönetimi, uygunluk, rezervasyonlar, müşteriler, WooCommerce ödemeleri, e-posta bildirimleri ve müşteri hesap sayfaları — araç, rezervasyon veya ilan sınırı, özellik sayacı ya da kilitli ekran olmadan.</li>
-<li class=""><strong>Hiçbir üçüncü taraf isteği yok.</strong> Web yazı tipi eklentiyle birlikte gelir ve kendi sitenizden sunulur; coğrafi konum, analitik veya CDN çağrısı yoktur.</li>
-<li class=""><strong>16 kısa kod, 16 Gutenberg bloğu ve 17 Elementor widget'ı</strong> tek bir işleyiciyi paylaşır (Render Parity), böylece üçü de aynı çıktıyı üretir. Tam Türkçe çeviriyle birlikte gelir.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kaputun-altında">Kaputun altında<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#kaputun-alt%C4%B1nda" class="hash-link" aria-label="Kaputun altında doğrudan bağlantı" title="Kaputun altında doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Varlıklar WordPress varlık sistemi üzerinden yükleniyor.</strong> Tüm yönetici ve ön yüz betikleri ile stilleri artık satır içi <code>&lt;script&gt;</code>/<code>&lt;style&gt;</code> blokları yerine <code>wp_enqueue</code> / <code>wp_add_inline_*</code> üzerinden geçiyor — hiçbir ekranın görünümü veya davranışı değişmeden. Kendi başına yeten belgeler (e-posta şablonları, indirilebilir test raporu, meta anahtar referansı) satır içi stillerini tasarım gereği korur; çünkü bunlar tek başına açıldığında harici bir stil dosyası erişilebilir olmaz.</li>
-<li class=""><strong>Lisans kapıları sıkılaştırıldı.</strong> Yalnızca Pro'ya özgü yüzeyler artık yalnızca gizlenmek yerine geçerli bir lisansa bağlanıyor; ayrı ücretli eklentinin özelliklerinin lisanssız çalışabildiği birkaç yol kapatıldı.</li>
-<li class=""><strong>WordPress 7.0 uyumlu</strong> — primary butonların içindeki dashicons için kontrast düzeltmesi dahil (WP 7.0 bu ikonları yönetici tema rengiyle boyuyor, bu da primary butonun aynı renkteki zemininde onları görünmez kılıyordu).</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kalite-kapıları">Kalite kapıları<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#kalite-kap%C4%B1lar%C4%B1" class="hash-link" aria-label="Kalite kapıları doğrudan bağlantı" title="Kalite kapıları doğrudan bağlantı" translate="no">​</a></h2>
-<table><thead><tr><th>Kapı</th><th>Sonuç</th></tr></thead><tbody><tr><td>PHPUnit</td><td>868 test / 2.823 doğrulama, 0 başarısız</td></tr><tr><td>WordPress Kodlama Standartları</td><td>0 hata</td></tr><tr><td>Plugin Check (dağıtılan ZIP)</td><td><strong>0 hata</strong></td></tr><tr><td>Bağımsız denetimler</td><td>İki mimari/güvenlik incelemesi ve etkilenen her yönetici/ön yüz ekranında tarayıcı doğrulaması</td></tr></tbody></table>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yükseltme">Yükseltme<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v5.0.0-release#y%C3%BCkseltme" class="hash-link" aria-label="Yükseltme doğrudan bağlantı" title="Yükseltme doğrudan bağlantı" translate="no">​</a></h2>
-<p>İlk genel sürüm — bir ön sürüm yapısından yükseltiyorsanız herhangi bir işlem gerekmez.</p>
-<p><strong>Gereksinimler:</strong> WordPress 6.7+, PHP 8.1+. Ön yüz rezervasyon ödemeleri için WooCommerce gereklidir.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>wordpress-org</category>
-            <category>compliance</category>
-            <category>major</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v4.64.3 — Tam Karanlık Mod Kontrast Denetimi]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release</guid>
-            <pubDate>Sun, 12 Jul 2026 20:00:00 GMT</pubDate>
-            <description><![CDATA[Tüm Ayarlar sekmelerinde yapılan kapsamlı bir kontrast denetimi, önceki yamanın ötesinde yaklaşık 15 karanlık-mod okunabilirlik sorunu daha düzeltti.]]></description>
-            <content:encoded><![CDATA[<p>Tüm Ayarlar sekmelerinde yapılan kapsamlı bir kontrast denetimi, önceki yamanın ötesinde yaklaşık 15 karanlık-mod okunabilirlik sorunu daha düzeltti.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="düzeltmeler">Düzeltmeler<a href="https://maxhandmade.github.io/mhm-rentiva-docs/tr/blog/rentiva-v4.64.3-release#d%C3%BCzeltmeler" class="hash-link" aria-label="Düzeltmeler doğrudan bağlantı" title="Düzeltmeler doğrudan bağlantı" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Tam karanlık mod kontrast denetimi.</strong> v4.64.2 düzeltmesi sadece 3 izole noktayı ele almıştı; bu sürüm tüm 16 Ayarlar sekmesinde yaklaşık 15 sorun daha düzeltiyor: Lite yükseltme bildirimi linki, üst menü butonları (Belgeler / Bu Sekmeyi Sıfırla / Konum Yönetimi / Rotaları Yönet), Sistem Durumu kartları, "Yeni Kimlik Bilgileri Düzenle" ve "Temizlik Paneli" kutuları, akordeon bölümleri ve etiketleri, veri tabloları (REST API referansı, veritabanı temizleme geçmişi), <code>&lt;code&gt;</code> etiketleri, ve önceki hiçbir karanlık-mod kuralının kapsamadığı bir şablon kullanan koca bir sekme (Bildirim Şablonları).</li>
-<li class=""><strong>Açık mod regresyon düzeltmesi.</strong> Veritabanı Temizleme sekmesindeki iki kart, yukarıdaki karanlık-mod çalışmasının bir yan etkisi olarak açık modda kart görünümünü kaybetmişti; geri getirildi.</li>
-</ul>
-<p>Tüm 16 Ayarlar sekmesinde otomatik bir WCAG kontrast tarayıcısı (0 kalan hata) ve iki tur bağımsız kod incelemesiyle doğrulandı.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>settings</category>
-            <category>bugfix</category>
-            <category>accessibility</category>
         </item>
     </channel>
 </rss>
