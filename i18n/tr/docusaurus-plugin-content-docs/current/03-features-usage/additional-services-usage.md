@@ -114,9 +114,9 @@ v4.36.0'a yükseltme sonrası ilk `init`'te her mevcut `vehicle_addon` kaydı ot
 
 Bu **idempotent**'tir — operatör manuel override (bağlamı `transfer`'a veya fiyatlandırmayı `per_day`'e değiştirme) sonraki boot'larda asla üzerine yazılmaz. Migration bir option flag ile kapatılır.
 
-### Lite limit
+### Ek hizmet sınırı yok
 
-Lite hâlâ toplam **4 published ek hizmetle** sınırlıdır (kiralama + transfer ortak). Bayi slot'ları nasıl bölüştüreceğine karar verir. Pro sınırsızdır.
+Lite'ta **ek hizmet sayısında sınır yoktur**. İstediğiniz kadar yayımlayabilirsiniz; Pro bunu değiştirmez.
 
 ---
 
@@ -129,5 +129,6 @@ Lite hâlâ toplam **4 published ek hizmetle** sınırlıdır (kiralama + transf
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Düzeltme: "Lite en çok 4 yayımlanmış ek hizmetle sınırlı" notu kaldırıldı. Lite'ta ek hizmet sınırı yok. |
 | 29.04.2026 | 4.36.0 | `mhmrentiva_addon_context` taxonomy (kiralama / transfer / her ikisi) ve `_mhmrentiva_addon_pricing_type` (rezervasyon başına / günlük / yolcu başına) eklendi. Canlı toplamlı transfer modal seçici. Idempotent veri-şeritli migration. |
 | 19.03.2026 | 4.21.2 | Ek Hizmetler (Addons) kullanım rehberi oluşturuldu. |

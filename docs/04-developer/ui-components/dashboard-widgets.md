@@ -71,15 +71,15 @@ The central table for financial operations, containing:
 
 ## 3. Lite / Pro Widget Access Control
 
-Some widgets are available only in the Pro version:
+No admin dashboard widget is held back for Pro:
 
 | Widget | Access | Guard |
 |---|---|---|
 | Statistics Widget | Lite + Pro | — |
 | Recent Bookings | Lite + Pro | — |
-| Messages | Lite + Pro | — |
-| **Revenue Chart** | **Pro only** | `Mode::canUseAdvancedReports()` |
-| **Upcoming Operations** | **Pro only** | `Mode::canUseAdvancedReports()` |
+| Revenue Chart | Lite + Pro | — |
+| Upcoming Operations | Lite + Pro | — |
+| Pro quick actions (Reports, Vendors, Messages, Export) | Pro | each on its own license feature, via the `mhmrentiva_dashboard_quick_actions` filter |
 
 ---
 
@@ -139,13 +139,14 @@ graph TD
 ## Section Summary
 - Frontend widgets are **Elementor**-based and use `TrendService`.
 - Admin widgets are managed by the `DashboardPage`, `Reports`, `Messages`, and `RevenueReport` classes.
-- Revenue Chart and Upcoming Operations are available **Pro only** (`Mode::canUseAdvancedReports()`).
+- Revenue Chart and Upcoming Operations work in Lite; Pro only adds quick-action shortcuts to its own screens.
 - All widgets use the WordPress timezone (`current_time`, `wp_date`).
 - Cache key prefix: `mhmrentiva_dashboard_stats`.
 
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 09.11.2026 | 6.3.1 | Correction: Revenue Chart and Upcoming Operations are not Pro-only; the unverifiable Messages widget row was removed and Pro's quick actions were added. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.23.0 | 12 dashboard widget fixes documented: timezone, status sync, calendar time, ID compatibility, WC email image, messages design, revenue chart, stats cache, Lite/Pro gating. |
 | 19.03.2026 | 4.21.2 | Page updated to reflect Elementor integration and TrendService KPI structure. |

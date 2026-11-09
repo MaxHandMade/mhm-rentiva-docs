@@ -71,15 +71,15 @@ Finansal operasyonlarin kalbi olan bu tablo sunlari icerir:
 
 ## 3. Lite / Pro Widget Erişim Kontrolu
 
-Bazi widget'lar yalnızca Pro sürümde kullanilabilir:
+Yönetim panosundaki hiçbir widget Pro'ya ayrılmamıştır:
 
 | Widget | Erişim | Guard |
 |---|---|---|
 | İstatistik Widget'i | Lite + Pro | — |
 | Son Rezervasyonlar | Lite + Pro | — |
-| Mesajlar | Lite + Pro | — |
-| **Gelir Grafigi** | **Yalnızca Pro** | `Mode::canUseAdvancedReports()` |
-| **Yaklasan Operasyonlar** | **Yalnızca Pro** | `Mode::canUseAdvancedReports()` |
+| Gelir Grafiği | Lite + Pro | — |
+| Yaklaşan Operasyonlar | Lite + Pro | — |
+| Pro hızlı işlemleri (Raporlar, Bayiler, Mesajlar, Dışa Aktarım) | Pro | her biri kendi lisans özelliğiyle, `mhmrentiva_dashboard_quick_actions` filtresi üzerinden |
 
 ---
 
@@ -139,13 +139,14 @@ graph TD
 ## Bölüm Sonu Özeti
 - Frontend widget'lari **Elementor** tabalidir ve `TrendService` kullanir.
 - Admin widget'lari `DashboardPage`, `Reports`, `Messages` ve `RevenueReport` siniflari tarafından yonetilir.
-- Gelir Grafigi ve Yaklasan Operasyonlar **yalnızca Pro** sürümde kullanilabilir (`Mode::canUseAdvancedReports()`).
+- Gelir Grafiği ve Yaklaşan Operasyonlar Lite'ta çalışır; Pro yalnızca kendi ekranlarına hızlı işlem kısayolları ekler.
 - Tum widget'lar WordPress timezone'unu kullanir (`current_time`, `wp_date`).
 - Cache key prefix: `mhmrentiva_dashboard_stats`.
 
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 09.11.2026 | 6.3.1 | Düzeltme: Gelir Grafiği ve Yaklaşan Operasyonlar Pro'ya özel değil; doğrulanamayan Mesajlar widget satırı çıkarıldı, Pro'nun hızlı işlemleri eklendi. |
 | 27.03.2026 | 4.23.0 | 12 dashboard widget düzeltmesi dokumante edildi: timezone, status sync, takvim saat, ID uyumu, WC email görseli, mesajlar tasarimi, gelir grafigi, stats cache, Lite/Pro gating. |
 | 19.03.2026 | 4.21.2 | Sayfa, Elementor entegrasyonu ve TrendService KPI yapısına gore güncellendi. |
 

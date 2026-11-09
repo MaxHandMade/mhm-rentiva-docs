@@ -113,7 +113,7 @@ All 16 attributes accept the canonical snake_case form (used by the shortcode) a
 
 | Attribute | Default | Type | Purpose |
 | :--- | :--- | :--- | :--- |
-| `limit` | `6` | int (1-50) | Maximum cards rendered. Capped to `Mode::maxTransferRoutes()` on Lite plans. |
+| `limit` | `6` | int (1-50) | Maximum cards rendered. |
 | `columns` | `3` | enum | Desktop grid columns: `2`, `3`, or `4`. Tablet always 2, mobile always 1. |
 | `order` | `featured` | enum | `featured` / `price_asc` / `price_desc` / `alphabetical` / `newest` |
 | `heading` | "Popular Routes" | string | Section title (translatable). |
@@ -235,12 +235,7 @@ The query result is transient-cached for 1 hour. Calling `TransferRouteProvider:
 
 ## Lite vs Pro behavior
 
-| Plan | Maximum cards rendered | Maximum routes admin can define |
-| :--- | :--- | :--- |
-| Lite | 3 | 3 (existing quota) |
-| Pro | `limit` attribute (default 6, max 50) | unlimited |
-
-The cap on rendered cards is enforced via `Mode::maxTransferRoutes()`. A Lite site that uses `limit="20"` quietly clamps to 3 — no error, no upsell modal, the section just renders three cards.
+VIP Transfer, and this shortcode with it, comes with Rentiva Pro and opens with any active Pro license. There is no route quota: the admin can define as many routes as needed, and the section renders as many cards as the `limit` attribute asks for (default 6, max 50). Without an active Pro license the tag renders nothing.
 
 ## Empty state
 

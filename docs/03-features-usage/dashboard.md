@@ -88,8 +88,9 @@ In v4.23.0, a comprehensive audit and improvement of Dashboard widgets was carri
 - **Messages widget:** Self-contained inline CSS, badge, avatar initials, and "time ago" display.
 - **Upcoming operations:** Time info, display ID, and clickable link support added.
 
-### Lite Restrictions
-- The **Revenue Chart** and **Upcoming Operations** widgets are now Pro-only (`Mode::canUseAdvancedReports()`).
+### Lite and Pro
+- Every dashboard widget, including the **Revenue Chart** and **Upcoming Operations**, works in Lite. No widget is held back for Pro.
+- Rentiva Pro adds quick-action shortcuts to its own screens (Reports, Vendors, Messages, Export); each one appears only when your license includes that feature.
 
 ---
 
@@ -115,6 +116,7 @@ In v4.23.0, a comprehensive audit and improvement of Dashboard widgets was carri
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Correction: the Revenue Chart and Upcoming Operations are not Pro-only; every dashboard widget works in Lite. Pro's quick-action shortcuts are noted. |
 | 12.05.2026 | 4.49.0 | Dashboard widget rows mobile responsive fix (782px breakpoint). |
 | 10.05.2026 | 4.36.0 | Full React SPA migration. Legacy PHP widgets removed. REST API endpoints added. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |

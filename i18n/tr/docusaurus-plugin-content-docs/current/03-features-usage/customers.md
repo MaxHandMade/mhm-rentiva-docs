@@ -19,8 +19,8 @@ Müşteri Yönetimi, sadık müşteri kitlesi oluşturmak ve rezervasyon geçmi�
 
 Sayfanin ust kisminda, müşteri tabaninizin buyumesini ve aktifligini gosteren 4 ana kart yer alir:
 
-:::info Lite Bildirim Konumu (v4.22.2)
-Lite sürümde gosterilen limit bildirimi artik KPI kartlarinin **altında**, liste baslamadan **once** konumlandirmistir. Bu standartlastirma `VehicleColumns`, `BookingColumns`, `CustomersPage` ve `TransferAdmin` için geçerlidir.
+:::info Müşteri sınırı yok
+Lite'ta müşteri sayısında sınır yoktur; bu yüzden bu ekranda sınır bildirimi de yoktur.
 :::
 
 - **Toplam Müşteri:** Sisteme kayıtlı tüm kullanıcıların sayısı.
@@ -115,6 +115,7 @@ Tüm uç noktalar `manage_options` yetkisi gerektirir.
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Düzeltme: "Lite sınır bildirimi" kutusu kaldırıldı. Lite'ta müşteri sınırı yok, sınır bildirimi de gösterilmez. |
 | 11.05.2026 | 4.39.0 | Tam React SPA geçişi. Canlı arama, sıralanabilir sütunlar, kayan panel, toplu silme, CSV dışa aktarma. Eski PHP liste tablosu + jQuery kaldırıldı. |
 | 27.03.2026 | 4.23.0 | Lite bildirim konumu (KPI kartlari altında) dokumante edildi. |
 | 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartlari ve kayıt formu gerçek arayuze gore güncellendi. |
