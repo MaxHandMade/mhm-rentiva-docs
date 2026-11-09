@@ -17,18 +17,21 @@ MHM Rentiva, sadece bir araç kiralama eklentisi değil; otomobil, bisiklet, tek
 
 ## 🛠️ Modüler Mimari (Lite vs Pro)
 
-Sistem mimarisi, `MHMRentiva\Admin\Licensing\Mode` sınıfı üzerinden yönetilen bir yetkilendirme katmanına sahiptir.
+Lite'ta lisans katmanı yoktur. Eski `MHMRentiva\Admin\Licensing\Mode` sınıfı 5.2.0'da Lite'tan kaldırıldı, onunla birlikte bütün kapasite sınırları da gitti: Lite'ta **araç, rezervasyon, müşteri, galeri ya da ek hizmet sınırı yoktur**.
 
-### 📊 Versiyon Kısıtlamaları ve Kapasite
-Aşağıdaki tablo, sistemin çekirdek kapasite limitlerini gösterir:
+Lisanslama yalnız Rentiva Pro eklentisinde yaşar. Pro, her modülünü kaydetmeden önce kendi kapısı `MHMRentiva\Pro\Edition` sınıfına sorar.
 
-| Özellik | Lite (Ücretsiz) | Pro (Premium) |
-| :--- | :--- | :--- |
-| **Maksimum Araç** | 3 Adet | Limitsiz |
-| **Aylık Rezervasyon** | 50 Adet | Limitsiz |
-| **Müşteri Kaydı** | 3 Adet | Limitsiz |
-| **Galeri Görseli** | 3 Adet / Araç | Limitsiz |
-| **VIP Transfer** | 3 Güzergah | Limitsiz |
+### 📊 Pro lisans özellikleri
+| Pro modülü | Kapı |
+| :--- | :--- |
+| Bayi pazaryeri, bayi ödemeleri, bayi raporları, ilan yaşam döngüsü | `Edition::canUseVendorMarketplace()` (lisans özelliği `vendor_marketplace`) |
+| Mesajlar | `Edition::canUseMessages()` (`messaging`) |
+| Raporlar | `Edition::canUseAdvancedReports()` (`advanced_reports`) |
+| Genişletilmiş Dışa Aktarım (CSV ve JSON) | `Edition::canUseExport()` (`export`) |
+| GDPR araçları | `Edition::canUseGdpr()` (`gdpr_tools`) |
+| VIP Transfer | `Edition::isPro()` (herhangi bir etkin lisans) |
+
+Lisans sunucusu `full_rest_api` ve `custom_emails` anahtarlarını da verir, ama kodda onları okuyan yer yoktur: hiçbir şeyin kilidini açmazlar.
 
 ---
 
@@ -68,4 +71,5 @@ Eklenti, **"Clean Slate" (Temiz Sayfa)** politikasını benimser. Bu sayede, iht
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 09.11.2026 | 6.3.1 | Düzeltme: Lite kapasite tablosu (3 araç, 50 rezervasyon…) kaldırıldı; bu sınırlar ve `Mode` sınıfı 5.2.0'da Lite'tan çıktı. Yerine Pro `Edition` kapıları ve lisans özellikleri yazıldı. |
 | 19.03.2026 | 4.21.2 | Sayfa, Lite/Pro limitleri ve güncel mimari detaylarıyla güncellendi. |

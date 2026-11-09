@@ -19,7 +19,7 @@ Raporlar sayfası v4.37.x sürümünde (Faz 1b) **Chart.js'li bir React SPA**'ya
 Raporlar, MHM Rentiva'nin tum operasyonel verilerini finansal ve istatistiksel çıktılara dönüşturen gelişmiş analiz merkezidir. **MHM Rentiva > Raporlar** menusu üzerinden işletmenizin buyume trendlerini ve verimliligini izleyebilirsiniz.
 
 :::caution Lite / Pro Farki
-**Gelir Grafigi** ve **Yaklasan Operasyonlar** widget'lari yalnızca Pro sürümde kullanilabilir. Lite sürümde bu widget'lar gorunmez. Guard: `Mode::canUseAdvancedReports()`.
+**Raporlar** ekranı Rentiva Pro ile gelir ve lisansınız gelişmiş raporlar özelliğini kapsıyorsa açılır (kapı: `Edition::canUseAdvancedReports()`). Lite'ta Raporlar ekranı yoktur; Lite panosunun kendi istatistik kartları, gelir grafiği ve yaklaşan operasyonları vardır.
 :::
 
 ---
@@ -106,6 +106,7 @@ Müşteri sadakatini ve harcama alışkanlıklarını takip eder.
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Düzeltme: Lite / Pro notu doğru hâline getirildi: Raporlar ekranı bir Pro modülüdür; panodaki gelir grafiği ve yaklaşan operasyonlar Lite'tadır. |
 | 12.05.2026 | 4.49.0 | Tarih filtresi dikey yığılma mobil düzeltmesi (782px breakpoint). |
 | 11.05.2026 | 4.48.0 | İstatistik grid'i 2 sütun mobil düzen. |
 | 06.05.2026 | 4.37.x | Chart.js ile tam React SPA geçişi. 9 eski PHP/JS dosyası kaldırıldı. ReportsRestController + 5 sekme bileşeni. |

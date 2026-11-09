@@ -19,7 +19,7 @@ The Reports page was migrated to a **React SPA with Chart.js** in v4.37.x (Faz 1
 Reports is the advanced analytics hub that converts all of MHM Rentiva's operational data into financial and statistical outputs. Monitor your business's growth trends and efficiency via **MHM Rentiva > Reports**.
 
 :::caution Lite / Pro Difference
-The **Revenue Chart** and **Upcoming Operations** widgets are available in the Pro edition only. These widgets are not visible in the Lite edition. Guard: `Mode::canUseAdvancedReports()`.
+The **Reports** screen comes with Rentiva Pro and opens when your license includes the advanced reports feature (gate: `Edition::canUseAdvancedReports()`). Lite has no Reports screen; the Lite dashboard has its own stat cards, revenue chart and upcoming operations.
 :::
 
 ---
@@ -106,6 +106,7 @@ Tracks customer loyalty and spending habits.
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Correction: the Lite / Pro note now says what is true: the Reports screen is a Pro module; the dashboard's revenue chart and upcoming operations are in Lite. |
 | 12.05.2026 | 4.49.0 | Date filter vertical stack mobile fix (782px breakpoint). |
 | 11.05.2026 | 4.48.0 | Stats grid 2-column mobile layout. |
 | 06.05.2026 | 4.37.x | Full React SPA migration with Chart.js. 9 legacy PHP/JS files removed. ReportsRestController + 5 tab components. |

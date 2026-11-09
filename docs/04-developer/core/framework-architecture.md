@@ -17,18 +17,21 @@ MHM Rentiva is not just a vehicle rental plugin; it is a flexible **Rental Frame
 
 ## 🛠️ Modular Architecture (Lite vs Pro)
 
-The system architecture has an authorization layer managed through the `MHMRentiva\Admin\Licensing\Mode` class.
+Lite has no licensing layer. The old `MHMRentiva\Admin\Licensing\Mode` class was removed from Lite in 5.2.0, and with it every capacity limit: Lite has **no vehicle, booking, customer, gallery or add-on caps**.
 
-### 📊 Version Restrictions and Capacity
-The following table shows the core capacity limits of the system:
+Licensing lives only in the Rentiva Pro add-on. Pro checks its own gate, `MHMRentiva\Pro\Edition`, before it registers each of its modules.
 
-| Feature | Lite (Free) | Pro (Premium) |
-| :--- | :--- | :--- |
-| **Maximum Vehicles** | 3 | Unlimited |
-| **Monthly Bookings** | 50 | Unlimited |
-| **Customer Records** | 3 | Unlimited |
-| **Gallery Images** | 3 per Vehicle | Unlimited |
-| **VIP Transfer** | 3 Routes | Unlimited |
+### 📊 Pro license features
+| Pro module | Gate |
+| :--- | :--- |
+| Vendor marketplace, payouts, vendor reports, listing lifecycle | `Edition::canUseVendorMarketplace()` (license feature `vendor_marketplace`) |
+| Messages | `Edition::canUseMessages()` (`messaging`) |
+| Reports | `Edition::canUseAdvancedReports()` (`advanced_reports`) |
+| Expanded Export (CSV and JSON) | `Edition::canUseExport()` (`export`) |
+| GDPR tools | `Edition::canUseGdpr()` (`gdpr_tools`) |
+| VIP Transfer | `Edition::isPro()` (any active license) |
+
+The license server also issues `full_rest_api` and `custom_emails`, but no code reads them: they do not unlock anything.
 
 ---
 
@@ -68,5 +71,6 @@ The plugin adopts a **"Clean Slate"** policy. This allows you to simplify the in
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 09.11.2026 | 6.3.1 | Correction: the Lite capacity table (3 vehicles, 50 bookings…) was removed; those limits and the `Mode` class left Lite in 5.2.0. The Pro `Edition` gates and their license features are listed instead. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Page updated with Lite/Pro limits and current architecture details. |

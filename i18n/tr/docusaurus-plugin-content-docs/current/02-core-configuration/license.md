@@ -8,7 +8,7 @@ slug: /core-configuration/license
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
-MHM Rentiva, tüm özelliklerin (VIP Transfer, Mesajlaşma, Gelişmiş Raporlar vb.) tam performansta çalışabilmesi için geçerli bir lisans anahtarı gerektirir. **MHM Rentiva > Lisans** menüsü üzerinden anahtarınızı yönetebilirsiniz.
+MHM Rentiva (Lite) ücretsizdir ve lisans anahtarı istemez. **Rentiva Pro** ayrı bir eklentidir; onun özellikleri (VIP Transfer, Mesajlaşma, Gelişmiş Raporlar, bayi pazaryeri ve diğerleri) geçerli bir lisans anahtarıyla açılır. Pro kuruluysa anahtarınızı **MHM Rentiva > Lisans** menüsünden yönetirsiniz.
 
 ---
 
@@ -27,7 +27,7 @@ Yerel ya da staging kopyada çalışmak için lisansınızı orada da normal şe
 Sayfanın yönetim paneli üç ana bloğa bölünmüştür:
 
 1. **Lisans Durumu:**
-   Mevcut lisansın geçerliliğini gösterir. Lisans geçerli olduğunda yeşil renkli tik ile **"Pro Lisans Etkin"** yazar ve altında kilidi açılan özelliklerin bir özeti bulunur: *(All Pro features active: Unlimited vehicles/bookings, export, advanced reports, Vendor & Payout)*.
+   Mevcut lisansın geçerliliğini gösterir. Lisans etkinse sayfada **"✅ Pro Lisans Etkin"** yazar; altındaki satır, lisansınızın gerçekten açtığı Pro özelliklerini sayar. Örneğin: *"Aktif Pro özellikler: Bayi ve Ödeme, Gelişmiş Raporlar, Mesajlar, Genişletilmiş Dışa Aktarım"*. Etkin lisans yoksa **"⚠️ Lite Sürüm Aktif"** yazar ve anahtarınızı ister.
 
 2. **Lisans Etkinleştirme:**
    Satın aldığınız lisans anahtarını `XXXX-XXXX-XXXX-XXXX` formatındaki kutuya yapıştırıp **"Lisansı Etkinleştir"** butonuna basmanız yeterlidir. API anında doğrulama yapar.
@@ -37,29 +37,27 @@ Sayfanın yönetim paneli üç ana bloğa bölünmüştür:
 
 ---
 
-## 💎 Lite ve Pro Karşılaştırması
+## 💎 Lite'ta neler var, Pro neler ekler
 
-Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) olduğu durumdaki kısıtlamalar ile lisanslı (Pro) durumun genişliğini kıyaslamanızı sağlar:
+Lite'ta **araç, rezervasyon, müşteri ya da ek hizmet sınırı yoktur; süreli özellik ya da kilitli ekran da yoktur**. Pro, Lite'taki hiçbir sınırı kaldırmaz, çünkü kaldırılacak sınır yoktur; kendi modüllerini ekler. Her Pro modülü yalnızca lisansınız onu kapsıyorsa açılır.
 
-| Özellik | Lite (Sınır) | Pro (Limitsiz) |
+| Alan | Lite'ta var | Pro ile eklenir |
 | :--- | :--- | :--- |
-| **Maksimum Araç Sayısı** | 5 Araç | Sınırsız |
-| **Rezervasyon Kapasitesi** | 50 Rezervasyon | Sınırsız |
-| **Müşteri Veritabanı** | 10 Müşteri | Sınırsız |
-| **Ek Hizmetler (Eklentiler)** | 4 Ek hizmet | Sınırsız |
-| **VIP Transfer Güzergahları**| 3 Güzergah | Sınırsız |
-| **Galeri Resimleri** | 5 Araç/Görseli | Sınırsız |
-| **Gelişmiş Raporlar** | 30 Gün (Maks 500 satır) | Sınırsız Tarih & Satır |
-| **Dışa Aktarım Biçimleri** | Sadece CSV | CSV, JSON |
-| **Mesajlaşma Sistemi** | Mevcut değil | Mevcut |
-| **Vendor & Payout** | Mevcut değil | Mevcut |
-| **REST API Erişimi** | Sınırlı | Tam REST API |
-| **GDPR Uyumluluk Araçları** | Mevcut değil | Mevcut |
-| **E-posta Bildirimleri** | Mevcut değil | Mevcut |
+| **Araç, rezervasyon, müşteri, ek hizmet** | İstediğiniz kadar, sınır yok | Ek bir şey yok (kaldırılacak sınır yok) |
+| **Araç galerisi** | Ayarlarda belirlenen görsel sayısına kadar (varsayılan araç başına 50) | Ek bir şey yok |
+| **Pano** | İstatistik kartları, gelir grafiği, son rezervasyonlar, yaklaşan operasyonlar, durum ve ödeme özetleri | Ek bir şey yok |
+| **Raporlar** | Yalnız pano metrikleri | **Raporlar** ekranı: gelir, rezervasyon ve müşteri raporları |
+| **Dışa aktarma** | Müşteri listesi CSV olarak | **Genişletilmiş Dışa Aktarım**: rezervasyonlar, araçlar ve günlükler CSV ya da JSON olarak, filtreli |
+| **E-posta** | Düzenlenebilir 14 şablon (rezervasyon, durum, iptal, hatırlatma, iade, hoş geldin, çevrimdışı dekont, kalan ödeme) | Pro'nun kendi modülleri için ek şablonlar (bayi, ilan, ödemeler, mesajlar) |
+| **Mesajlaşma** | İletişim formu ve İletişim Mesajları ekranı | **Mesajlar**: müşteri ile yönetici arasındaki yazışmalar, müşterinin Hesabım sayfasında da |
+| **Bayi pazaryeri ve ödemeler** | — | Bayi başvuruları, bayi paneli, komisyonlar, bayi ödemeleri ve bayi raporları |
+| **VIP Transfer** | — | Lokasyonlar, rotalar, transfer arama ve rezervasyon (herhangi bir etkin Pro lisansıyla açılır) |
+| **Gizlilik / GDPR** | Üçüncü taraf istek yok; kişisel veri dışa aktarıcı ya da silici yok | GDPR araçları: onay, veri dışa aktarma, anonimleştirme ve silme, saklama süresi temizliği |
 
 ---
 
 ### Bölüm Özeti
+- Lite lisanssız çalışır ve sınırı yoktur; lisans anahtarı yalnız Rentiva Pro'nun modüllerini açar.
 - Lisansınız **MHM Rentiva > Lisans** menüsünden tek tuşla aktifleştirilir veya iptal edilir.
 - Lisans her yerde gereklidir — yerel ve staging siteleri dahil; 5.0.0'dan itibaren Pro'yu lisanssız açan bir ortam yoktur.
 - Domain taşıma öncesi eski lisans mutlaka **Devre Dışı Bırak** butonuyla serbest bırakılmalıdır.
@@ -67,6 +65,7 @@ Sayfanın en altında bulunan şeffaflık tablosu, lisansın kapalı (Lite) oldu
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Düzeltme: Lite'ta 5.2.0'dan beri araç, rezervasyon, müşteri ya da ek hizmet sınırı yok. Eski "Lite (Sınır) / Pro (Limitsiz)" tablosunun yerine, eklenti koduna karşı denetlenmiş "Lite'ta var / Pro ile eklenir" tablosu kondu. "Tam REST API" ve "E-posta Bildirimleri" Pro'ya özel kalemler arasından çıkarıldı. |
 | 27.03.2026 | 4.23.0 | Lite limitleri güncellendi (araç: 3→5, müşteri: 3→10, galeri: 3→5). Pro-only özellikler ayrıştı: Vendor & Payout, GDPR, E-posta Bildirimleri. |
 | 19.03.2026 | 4.21.2 | Lisans yönetimi rehberi görseller ve teknik notlarla modernize edildi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

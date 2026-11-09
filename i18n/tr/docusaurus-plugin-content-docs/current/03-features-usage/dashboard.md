@@ -88,8 +88,9 @@ v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileşt
 - **Mesajlar widget'ı:** Self-contained inline CSS, badge, avatar initials ve "ne kadar önce" zaman gösterimi.
 - **Yaklaşan operasyonlar:** Saat bilgisi, display ID ve tıklanabilir link desteği.
 
-### Lite Kısıtlamaları
-- **Gelir Grafiği** ve **Yaklaşan Operasyonlar** widget'ları artık sadece Pro sürümde kullanılabilir (`Mode::canUseAdvancedReports()`).
+### Lite ve Pro
+- **Gelir Grafiği** ve **Yaklaşan Operasyonlar** dahil panonun bütün widget'ları Lite'ta çalışır. Hiçbir widget Pro'ya ayrılmamıştır.
+- Rentiva Pro, kendi ekranlarına hızlı işlem kısayolları ekler (Raporlar, Bayiler, Mesajlar, Dışa Aktarım); her biri yalnızca lisansınız o özelliği kapsıyorsa görünür.
 
 ---
 
@@ -115,6 +116,7 @@ v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileşt
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Düzeltme: Gelir Grafiği ve Yaklaşan Operasyonlar Pro'ya özel değil; panonun bütün widget'ları Lite'ta çalışır. Pro'nun hızlı işlem kısayolları eklendi. |
 | 12.05.2026 | 4.49.0 | Kontrol Paneli widget satırları mobil duyarlılık düzeltmesi (782px breakpoint). |
 | 10.05.2026 | 4.36.0 | Tam React SPA geçişi. Eski PHP widget'ları kaldırıldı. REST API uç noktaları eklendi. |
 | 26.03.2026 | 4.23.0 | 11 widget hata düzeltmesi, timezone tutarlılığı, cache fix, tasarım iyileştirmeleri ve Lite gating eklendi. |

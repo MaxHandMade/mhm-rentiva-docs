@@ -113,7 +113,7 @@ Blok `ServerSideRender` kullanır, bu yüzden editör önizlemesi canlı fronten
 
 | Attribute | Varsayılan | Tip | Amaç |
 | :--- | :--- | :--- | :--- |
-| `limit` | `6` | int (1-50) | Render edilen maksimum kart sayısı. Lite planlarda `Mode::maxTransferRoutes()` ile sınırlanır. |
+| `limit` | `6` | int (1-50) | Render edilen maksimum kart sayısı. |
 | `columns` | `3` | enum | Masaüstü grid sütun sayısı: `2`, `3` veya `4`. Tablet her zaman 2, mobil her zaman 1. |
 | `order` | `featured` | enum | `featured` / `price_asc` / `price_desc` / `alphabetical` / `newest` |
 | `heading` | "Popüler Rotalar" | string | Bölüm başlığı (çevrilebilir). |
@@ -235,12 +235,7 @@ Sorgu sonucu 1 saat boyunca transient-cache'lenir. `TransferRouteProvider::clear
 
 ## Lite ve Pro davranışı
 
-| Plan | Render edilen maksimum kart | Yöneticinin tanımlayabileceği maksimum rota |
-| :--- | :--- | :--- |
-| Lite | 3 | 3 (mevcut kota) |
-| Pro | `limit` attribute (varsayılan 6, maks 50) | sınırsız |
-
-Render edilen kart sayısının üst sınırı `Mode::maxTransferRoutes()` üzerinden enforce edilir. `limit="20"` kullanan bir Lite site sessizce 3'e iner — hata yok, upsell modal yok, bölüm sadece üç kart render eder.
+VIP Transfer ve onunla birlikte bu kısa kod Rentiva Pro ile gelir; herhangi bir etkin Pro lisansıyla açılır. Rota kotası yoktur: yönetici istediği kadar rota tanımlayabilir, bölüm de `limit` özniteliğinin istediği kadar kart gösterir (varsayılan 6, en çok 50). Etkin Pro lisansı yoksa etiket hiçbir şey göstermez.
 
 ## Boş durum
 

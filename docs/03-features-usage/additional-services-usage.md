@@ -114,9 +114,9 @@ On the first `init` after upgrading to v4.36.0, every legacy `vehicle_addon` rec
 
 This is **idempotent** — a manual operator override (changing context to `transfer` or pricing type to `per_day`) is never overwritten on subsequent boots. The migration is gated by an internal option flag.
 
-### Lite limit
+### No add-on cap
 
-Lite still caps at **4 published add-ons total** (combined rental + transfer). The vendor decides how to split the slots. Pro is unlimited.
+Lite has **no limit on the number of add-ons**. Publish as many as you need; Pro does not change this.
 
 ---
 
@@ -129,5 +129,6 @@ Lite still caps at **4 published add-ons total** (combined rental + transfer). T
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Correction: the "Lite caps at 4 published add-ons" note was removed. Lite has no add-on cap. |
 | 29.04.2026 | 4.36.0 | Added `mhmrentiva_addon_context` taxonomy (rental / transfer / both) and `_mhmrentiva_addon_pricing_type` (per_booking / per_day / per_passenger). Transfer modal picker with live total. Idempotent data-lane migration. |
 | 19.03.2026 | 4.21.2 | Add-ons usage guide created. |

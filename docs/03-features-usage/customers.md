@@ -19,8 +19,8 @@ Customer Management is the central section for building a loyal customer base an
 
 At the top of the page, four main cards display the growth and activity of your customer base:
 
-:::info Lite Notice Position (v4.22.2)
-In the Lite edition, the limit notice is now positioned **below** the KPI cards, **before** the list begins. This standardization applies to `VehicleColumns`, `BookingColumns`, `CustomersPage`, and `TransferAdmin`.
+:::info No customer cap
+Lite has no limit on the number of customers, so there is no limit notice on this screen.
 :::
 
 - **Total Customers:** The number of all users registered in the system.
@@ -115,6 +115,7 @@ All endpoints require `manage_options` capability.
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 09.11.2026 | 6.3.1 | Correction: the "Lite limit notice" box was removed. Lite has no customer cap and shows no limit notice. |
 | 11.05.2026 | 4.39.0 | Full React SPA migration. Live search, sortable columns, slide panel, bulk delete, CSV export. Legacy PHP list table + jQuery removed. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 27.03.2026 | 4.23.0 | Lite notice position (below KPI cards) documented. |
