@@ -63,6 +63,24 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Good to know
+
+### Rental agreement
+If you turn on **Require rental agreement** (see [Booking settings](../../02-core-configuration/booking-settings.md)), the form shows a **Rental agreement** section below the additional services: a scrollable text box and an **I have read and accept the rental agreement.** checkbox. A customer who does not tick it sees "To complete your booking, accept the rental agreement." and the booking is refused, in the browser and again on the server. The date and time of acceptance and the version of the text are saved with the booking.
+
+If you edit the text while a customer already has the page open (or a cached copy of it), their submission is refused with "The rental agreement has changed. Reload the page and review it before booking." and they review the new text. The agreement is not shown for transfer bookings.
+
+### Return and pickup dates
+- If the return is before (or the same as) the pickup, the form says "Return date must be after pickup date." and keeps **Make Booking** locked until the dates are fixed.
+- A pickup time that has already passed cannot be priced or booked by a customer: "The pickup time has already passed. Please choose a later date or time." An administrator can still enter a past booking manually.
+
+### When the vehicle is taken
+If the chosen vehicle is booked for those dates, the form says "Selected vehicle is not available, but we can suggest similar vehicles:" and lists free vehicles for the same dates, each with a **Select This Vehicle** button that keeps the dates.
+
+:::info Page cache after updating to 6.4.0
+Clear your page cache once after updating. See [Performance & Cache](../../06-faq/performance-cache.md).
+:::
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-booking-form-wrapper` class.
@@ -74,6 +92,7 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Rental agreement, date checks and similar-vehicle suggestions documented. |
 | 11.10.2026 | 6.2.0 | `min_days`, `max_days`, `show_payment_options` and `default_payment` removed: 6.2.0 no longer reads them; the global settings still apply. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

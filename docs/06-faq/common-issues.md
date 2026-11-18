@@ -64,6 +64,10 @@ The topics below are organized around the scenarios most frequently seen in supp
     1. Perform a "Cache Flush" from Rentiva settings.
     2. Try using the `cache="false"` parameter in shortcodes.
 
+### On a Polylang or WPML site, visitors see another language's names?
+- **Since 6.4.0:** the vehicle page's availability message and the search sidebar's fuel, transmission and category names appear in each visitor's own language. Rentiva's shared caches hold no text; category names are read from your translation plugin's terms.
+- **Fix if one language still shows wrong names:** translate the vehicle categories in your translation plugin, and clear your page cache.
+
 ### Map or Location services are not working?
 - **Reason:** Invalid Google Maps API key or restricted HTTP referer.
 - **Fix:** Test the key from Rentiva > Settings > API tab.
@@ -79,5 +83,6 @@ If the issue persists, follow these steps:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Multilingual (Polylang/WPML) note added. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Detailed troubleshooting items for bookings, payments, and vendors added. |

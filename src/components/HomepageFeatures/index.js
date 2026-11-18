@@ -10,13 +10,11 @@ const FeatureList = [
     image: 'img/rentiva-filo-yonetimi.webp',
     alt: translate({
       message:
-        'The Vehicles screen listing six vehicles with their daily price, features and weekly availability',
+        'The Vehicles screen listing vehicles with their daily price, features, weekly availability and status',
     }),
     description: (
       <Translate>
-        Every vehicle carries its daily price, feature chips and weekly
-        availability on one screen, filterable by category — fleet
-        management without switching tabs.
+        Every vehicle shows its daily price, feature chips, weekly availability and status on one screen, filterable by category — fleet management without switching tabs.
       </Translate>
     ),
   },
@@ -25,13 +23,11 @@ const FeatureList = [
     image: 'img/rentiva-rezervasyon-altyapisi.webp',
     alt: translate({
       message:
-        'The Rentiva dashboard showing total bookings, revenue, a seven-day chart and booking statuses',
+        'The Rentiva dashboard showing total bookings, booking value, a seven-day chart, booking statuses and payments',
     }),
     description: (
       <Translate>
-        The dashboard tracks bookings, revenue and payments together — a
-        seven-day chart, status breakdown and held deposits — powered by
-        flexible booking forms and Stripe/PayPal/PayTR integrations.
+        The dashboard tracks bookings, booking value and payments together — a seven-day chart, status breakdown, pending payments and held deposits — while checkout and payment run through WooCommerce.
       </Translate>
     ),
   },
@@ -40,13 +36,11 @@ const FeatureList = [
     image: 'img/rentiva-gelistirici-dostu.webp',
     alt: translate({
       message:
-        'The Settings screen with its fifteen tabs, including integration, system and cron monitoring',
+        'The Settings screen with its tab list, from General Settings to the Cron Job Monitor',
     }),
     description: (
       <Translate>
-        Fifteen tabs deep, Settings covers everything from integrations and
-        system performance to cron job monitoring — and for developers who
-        need more, a REST API and hook/filter system underneath.
+        Settings covers everything from payments and email to integrations, system performance and cron job monitoring — and for developers who need more, a REST API and hook/filter system underneath.
       </Translate>
     ),
   },

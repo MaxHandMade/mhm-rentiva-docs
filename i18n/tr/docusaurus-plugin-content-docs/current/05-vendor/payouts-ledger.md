@@ -39,6 +39,18 @@ Ledger, sistemdeki tek finansal gerçeklik kaynağıdır (`Single Source of Trut
 | `payout_debit` | `−` | Onaylanan ödeme talebi sonucu bakiye düşümü. |
 | `refund` | `−` | İptal edilen rezervasyonun geri iadesi. |
 
+### Kredi Kime Yazılır, İadeler Nasıl İşler
+
+- **Kredi aracın sahibine yazılır.** Komisyon kredisi, kiralanan aracın sahibi olan bayiye yazılır; rezervasyonu kimin açtığı (ödemede müşteri ya da elle giren yönetici) fark etmez. Bayi panelindeki **Beklemede (tahsilat sürecinde)** tutarı ve **Rezervasyonlar, son 30 gün** o bayinin araçlarının rezervasyonlarını sayar.
+- **Sitenin kendi filosu satır yazmaz.** Bayiye değil siteye ait bir araç defterde satır oluşturmaz.
+- **İade, izlediği krediyi ters çevirir.** İade, kredisini ters çevirdiği bayiden, o kredinin komisyon oranıyla düşülür; araç sonradan el değiştirmiş olsa bile.
+- **Kredi yoksa borç da yok.** Hiç ödenmemiş bir siparişe yapılan iade (örneğin işleniyorken iade edilen havale) bir şey yazmaz; bayiye borç kaydedilmez. Sipariş sonradan ödenirse kredi ve iade birlikte, kredinin komisyon oranıyla yazılır; havale siparişi ödenmeden tam iade edilirse bayinin hesabına hiçbir şey yazılmaz.
+- **Bayi profil rozeti,** kiralama tamamlandığında güncellenir.
+
+:::info Pro 6.5.0'da değişti
+6.5.0 öncesinde komisyon rezervasyonu açan müşteriye yazılabiliyor, sitenin kendi aracındaki iade müşteriye borç yazabiliyordu. Güncellemeden önce yazılmış satırlar düzeltilmez.
+:::
+
 ---
 
 ## ⚛️ 2. Atomik Ödeme Süreci (`AtomicPayoutService`)
@@ -101,4 +113,5 @@ $balance = Ledger::get_balance($vendor_id);
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Komisyonun aracın sahibine yazılması, iadelerin özgün krediye karşı işlenmesi ve sitenin kendi filosu için satır yazılmaması belgelendi. |
 | 19.03.2026 | 4.21.2 | Model B Engine, Atomic Transactions ve SaaS izolasyonu detayları eklendi. |

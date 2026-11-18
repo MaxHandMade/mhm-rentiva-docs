@@ -58,6 +58,10 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+### 📜 Vendor agreement
+
+When **Require vendor agreement** is on (**Settings → Vendor Marketplace → Vendor Agreement**), the form shows the agreement text and a required consent checkbox; the application cannot be submitted without it. If the text is empty, a built-in template is shown instead. It is a starting point, not legal advice: review it and adapt it to your business and local law. The text accepts `# Heading`, `**bold**`, `- list item` and `---`. See [Vendor onboarding](/docs/vendor/onboarding).
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-vendor-apply-wrapper` class.
@@ -69,5 +73,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Vendor agreement shown on the form, with the built-in template for an empty text, documented. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

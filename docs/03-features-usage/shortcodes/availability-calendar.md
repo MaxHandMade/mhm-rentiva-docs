@@ -61,6 +61,26 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Reading the calendar
+
+| Day | Meaning |
+| :--- | :--- |
+| Available | Free all day. |
+| Partly available | A booking ends or starts that day. A return day shows "11:00 →" (return time plus the buffer time, rounded up to the half hour); a pickup day shows "→ 09:00" (pickup time minus the buffer, rounded down). The cell is half painted; on a phone the short time is shown. |
+| Booked | Taken by a booking. |
+| Closed (struck through) | You closed the day by hand. It is no longer shown as "Booked". |
+
+The legend under the calendar lists Available, Partly available, Booked, Closed and Past.
+
+If a customer picks a return day as the start, the pickup time moves to that time, the panel says so ("On ... the vehicle is free from ...; the time was set to it.") and the booking link carries the time. A day marked "→ 09:00" can only be a return day; if the chosen return time is later than that, the calendar warns ("On ... the vehicle is free until ... Pick an earlier return day.").
+
+### "Vehicle not found."
+If the shortcode's `vehicle_id` points to a vehicle that no longer exists or cannot be rented, the calendar shows **Vehicle not found.** Check the ID in the shortcode.
+
+:::info Page cache after updating to 6.4.0
+After updating, clear your page cache (your host, LiteSpeed Cache, WP Rocket and so on). A page cached under 6.3.x keeps the old booking form and calendar markup, and the new scripts cannot run on it. Rentiva's own short cache refreshes by itself. See [Performance & Cache](../../06-faq/performance-cache.md).
+:::
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-availability-calendar-wrapper` class.
@@ -72,6 +92,7 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Partly available and Closed days, time hints, "Vehicle not found." and page cache note. |
 | 11.10.2026 | 6.2.0 | `show_seasonal_prices`, `show_discounts`, `start_date` and `integrate_pricing` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

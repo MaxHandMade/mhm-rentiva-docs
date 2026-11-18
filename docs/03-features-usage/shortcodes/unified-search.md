@@ -77,6 +77,10 @@ The `mhmrentiva_fields_required` value can be changed via **MHM Rentiva > Settin
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Dates that cannot be booked
+
+If a visitor picks a return date before the pickup, or a pickup time that has already passed, the results page explains the problem and offers **Change dates** instead of saying no vehicles are available.
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-unified-search-wrapper` class.
@@ -88,6 +92,7 @@ The `mhmrentiva_fields_required` value can be changed via **MHM Rentiva > Settin
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Note on unbookable dates added. |
 | 11.10.2026 | 6.2.0 | `filter_categories` and `layout` removed: 6.2.0 no longer reads them. Use `search_layout="vertical"` instead of `layout`. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.22.1 | `location_required` parameter added. Field requirement (fields_required) behavior documented: rental is conditional, transfer is always required. |

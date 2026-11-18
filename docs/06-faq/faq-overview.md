@@ -41,7 +41,7 @@ Browse the categorized guides below to find a solution. Most issues can be resol
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 Payment Errors</h3>
-      <p className="cardDescription">WooCommerce payment gateway conflicts and callback/webhook validation failures.</p>
+      <p className="cardDescription">WooCommerce payment gateway conflicts, callback/webhook validation failures, and questions about the cart, cash on delivery and guest bookings.</p>
       <Link className="button button--secondary button--block" to="/docs/faq/payment-troubleshooting">Payment Issues</Link>
     </div>
   </div>
@@ -63,5 +63,6 @@ Browse the categorized guides below to find a solution. Most issues can be resol
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Payment card now mentions cart, cash on delivery and guest questions. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Overview page with premium card design created for FAQ category. |

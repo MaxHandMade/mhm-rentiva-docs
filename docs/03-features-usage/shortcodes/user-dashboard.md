@@ -29,13 +29,14 @@ Since Rentiva 6.2.0 the shortcode, the **Master Account Dashboard** block and th
 | Who views the page | What they see |
 | :--- | :--- |
 | Logged-in customer | One line saying the account has moved, and a **Go to my account** link to the My Account page. |
-| Visitor (not logged in) | Nothing. |
+| Visitor (not logged in) | The same line and **Go to my account** link as a customer. |
 | Administrator | The same line and link, plus a notice that this dashboard is deprecated and should be removed from the page. Only administrators see the notice. |
 
 - The block and the Elementor widget are hidden from the editors, so they can no longer be added to new pages.
 - **MHM Rentiva > Shortcode Pages** no longer offers to create this page.
 - On a page with the slug `panel`, visitors and logged-in non-administrators are redirected to My Account; administrators can still open it.
 - The shortcode takes no parameters.
+- **Visitors who are not logged in** now see the same "Your account has moved" line and **Go to my account** link as customers (earlier they saw an empty page). Only the plugin's own `/panel/` page sends a visitor away: it redirects to the My Account page, where the login form is.
 
 ## Where customers go instead
 
@@ -54,6 +55,7 @@ Use the **My Account** page. Its sections are documented here:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Visitors now see the "account has moved" line instead of a blank page. |
 | 11.10.2026 | 6.2.0 | Page rewritten: the customer dashboard is retired; customers use My Account. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

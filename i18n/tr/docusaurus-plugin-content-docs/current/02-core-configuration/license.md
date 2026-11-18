@@ -52,7 +52,18 @@ Lite'ta **araç, rezervasyon, müşteri ya da ek hizmet sınırı yoktur; sürel
 | **Mesajlaşma** | İletişim formu ve İletişim Mesajları ekranı | **Mesajlar**: müşteri ile yönetici arasındaki yazışmalar, müşterinin Hesabım sayfasında da |
 | **Bayi pazaryeri ve ödemeler** | — | Bayi başvuruları, bayi paneli, komisyonlar, bayi ödemeleri ve bayi raporları |
 | **VIP Transfer** | — | Lokasyonlar, rotalar, transfer arama ve rezervasyon (herhangi bir etkin Pro lisansıyla açılır) |
-| **Gizlilik / GDPR** | Üçüncü taraf istek yok; kişisel veri dışa aktarıcı ya da silici yok | GDPR araçları: onay, veri dışa aktarma, anonimleştirme ve silme, saklama süresi temizliği |
+| **Gizlilik / KVKK** | WordPress gizlilik araçlarında kişisel veri dışa aktarma ve silme (rezervasyonlar, iletişim mesajları, e-posta günlüğü, hesap bilgileri, uygulama günlüğü) ve politika rehberi metni | Hesabım onay kartı ve veri talepleri, Pro'nun mesajları, bayi verileri ve onay kayıtları için dışa aktarma ve silme, saklama süresi temizliği (bkz. [Gizlilik ve Kişisel Veriler](../03-features-usage/privacy-personal-data.md)) |
+
+---
+
+## ⏰ Yenileme hatırlatması ve bağlantı sorunları (Pro)
+
+- **Yenileme hatırlatması:** Lisansın bitmesine son 14 günde, **bitiş tarihini** yazan ve Lisans sayfasını açan **Lisansı yönet** düğmeli bir bildirim görünür. Yalnız Rentiva ekranlarında, **Eklentiler**'de ve WordPress panosunda görünür; her yönetici sayfasında değil. **3 gün sonra hatırlat** bildirimi sizin için üç gün gizler; düğme yalnız bitişe en az dört gün varken sunulur ve son gün hatırlatma hep görünür.
+- **Lisans sunucusu sorunları:** Lisans sunucusuna ulaşılamazsa ya da sunucu geçici bir hata (HTTP 5xx) verirse Pro kapanmaz: son başarılı lisans denetiminden itibaren en fazla **yedi gün** çalışmaya devam eder ve **Bağlantı Uyarısı** bildirimi gösterir. Sunucunun gerçek bir reddi (geçersiz ya da süresi dolmuş lisans) Pro'yu yine kapatır.
+
+:::info Pro 6.5.0'da değişti
+Yenileme hatırlatması bitiş tarihini yazar, Lisans sayfasına bağlantı verir ve artık her yönetici sayfasında görünmez.
+:::
 
 ---
 
@@ -65,6 +76,7 @@ Lite'ta **araç, rezervasyon, müşteri ya da ek hizmet sınırı yoktur; sürel
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 / Pro 6.5.0 | Yenileme hatırlatması, lisans sunucusu sorunlarında yedi günlük ek süre ve Gizlilik / KVKK'nın Lite ile Pro arasındaki ayrımı belgelendi. |
 | 09.11.2026 | 6.3.1 | Düzeltme: Lite'ta 5.2.0'dan beri araç, rezervasyon, müşteri ya da ek hizmet sınırı yok. Eski "Lite (Sınır) / Pro (Limitsiz)" tablosunun yerine, eklenti koduna karşı denetlenmiş "Lite'ta var / Pro ile eklenir" tablosu kondu. "Tam REST API" ve "E-posta Bildirimleri" Pro'ya özel kalemler arasından çıkarıldı. |
 | 27.03.2026 | 4.23.0 | Lite limitleri güncellendi (araç: 3→5, müşteri: 3→10, galeri: 3→5). Pro-only özellikler ayrıştı: Vendor & Payout, GDPR, E-posta Bildirimleri. |
 | 19.03.2026 | 4.21.2 | Lisans yönetimi rehberi görseller ve teknik notlarla modernize edildi. |

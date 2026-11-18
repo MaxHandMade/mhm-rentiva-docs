@@ -17,22 +17,18 @@ Customer Management is the central section for building a loyal customer base an
 
 ## 📊 Customer Analytics (Top Metrics)
 
-At the top of the page, four main cards display the growth and activity of your customer base:
+At the top of the page, four cards display the growth and activity of your customer base:
 
 :::info No customer cap
 Lite has no limit on the number of customers, so there is no limit notice on this screen.
 :::
 
-- **Total Customers:** The number of all users registered in the system.
-- **Active Customers:** Users who have made a booking or logged in within the last 30 days.
-- **New This Month:** The number of new customers who registered in the current month.
-- **Monthly Average:** The change rate (%) in the monthly registration trend compared to the previous month.
+- **Total Customers:** The number of all customers in the system.
+- **New This Month:** The number of customers who registered in the last 30 days.
+- **Active Customers:** Customers with a booking in the last 90 days.
+- **Avg. Spend:** The average amount spent per customer.
 
 ---
-
-## 🗓️ Customer Activity Calendar
-
-The calendar on the Customers page visualizes daily customer interactions (new registrations or activity volume). This lets you see at a glance which days have the highest customer traffic.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
   <strong>📸 IMAGE: CUSTOMER LIST AND ANALYTICS PANEL</strong><br/>
@@ -45,16 +41,16 @@ The calendar on the Customers page visualizes daily customer interactions (new r
 
 The customer table lets you measure the value (LTV - Lifetime Value) each user brings to your business:
 
+The columns are **Customer** (name and email), **Phone**, **Bookings**, **Total Spent** and **Status** (VIP, New or Active). Use the **All / Active / New / VIP** filter above the table to narrow the list.
+
 - **Bookings:** Total number of rental/transfer transactions completed by the customer.
 - **Total Spent:** Total revenue generated from all of the customer's transactions (with currency symbol).
-- **Last Booking:** The date of their most recent transaction.
-- **Registration Date:** The date they first joined the system.
 
 ---
 
 ## ➕ Adding a New Customer
 
-The manual customer registration screen is streamlined for operational speed. Click **"Add New Customer"** to enter the following data:
+The manual customer registration screen is streamlined for operational speed. Click **"Add Customer"** to enter the following data:
 
 - **Customer Name:** (Required)
 - **Email:** (Required) — the unique identifier in the system.
@@ -80,7 +76,8 @@ Press **Escape** or click outside the panel to close it.
 ## 🔍 Live Search and Column Sorting (v4.39.0+)
 
 - **Live search:** 300 ms debounce — no page reload.
-- **Sortable columns:** Name, Email, Bookings, Total Spent, Last Booking, Registration Date. Click column header to toggle asc/desc.
+- **Sortable columns:** **Customer**, **Bookings** and **Total Spent**. Use the button in the column header: the first click sorts largest first (descending), a second click on the same column reverses it. The sorted column is announced to screen readers.
+- **Select all:** The select-all checkbox shows a dashed (mixed) mark when only some rows are selected, and selected rows are tinted light blue. Changing the sort clears the selection.
 - **Bulk delete:** Select rows via checkbox, click "Delete Selected". A browser confirm guard prevents accidental deletion.
 - **CSV Export:** Downloads all customers (paged) or only selected IDs. Action is processed server-side via admin-post.php.
 
@@ -115,6 +112,7 @@ All endpoints require `manage_options` capability.
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Customers table sorting from the column header with screen-reader announcement, mixed select-all mark and tinted selected rows documented; cards, columns and filter corrected to the current screen. |
 | 09.11.2026 | 6.3.1 | Correction: the "Lite limit notice" box was removed. Lite has no customer cap and shows no limit notice. |
 | 11.05.2026 | 4.39.0 | Full React SPA migration. Live search, sortable columns, slide panel, bulk delete, CSV export. Legacy PHP list table + jQuery removed. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |

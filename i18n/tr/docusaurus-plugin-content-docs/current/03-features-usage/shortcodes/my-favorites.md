@@ -64,6 +64,10 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Araç kartı ayrıntıları
+
+Favoriler, araç ızgarasıyla aynı araç kartını kullanır. Fiyat ve **Rezervasyon yap** düğmesi kartın genişliğine göre dizilir (dar kartta alt alta, geniş kartta yan yana); kilometre ve motor hacmi sayfanın diline göre yazılır (İngilizce "18,500 km", Türkçe "18.500 km").
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-my-favorites-wrapper` sınıfı ile başlar.
@@ -75,5 +79,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Kart düzeni ve sayı biçimi notu eklendi. |
 | 11.10.2026 | 6.2.0 | `show_badges`, `show_remove_button` ve `show_added_date` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

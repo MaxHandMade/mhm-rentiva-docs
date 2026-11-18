@@ -20,7 +20,7 @@ Bu doküman, MHM Rentiva'nın bir rezervasyona **hangi komisyon oranını** uygu
 
 # 💰 Komisyon Oranı Yapılandırması
 
-Tamamlanan her rezervasyon, bayi için bir komisyon kaydı (credit) oluşturur. Bu hesaplamada kullanılan **oran**, 4 katmanlı bir hiyerarşi üzerinden çözümlenir — en spesifik değeri olan katman kazanır; boş bırakılan herhangi bir katman basitçe bir alttaki katmana devredilir.
+Bir bayinin aracına yapılan ödenmiş her rezervasyon, rezervasyonu kimin açtığına bakılmaksızın, o aracın sahibi olan bayi için bir komisyon kaydı (credit) oluşturur. Bayiye değil siteye ait araçlar kayıt oluşturmaz. Bu hesaplamada kullanılan **oran**, 4 katmanlı bir hiyerarşi üzerinden çözümlenir — en spesifik değeri olan katman kazanır; boş bırakılan herhangi bir katman basitçe bir alttaki katmana devredilir.
 
 ---
 
@@ -111,4 +111,5 @@ Ne araçta ne de bayide geçersiz kılma olmasaydı ve bayinin 30 günlük onayl
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | Pro 6.5.0 | Kredi, rezerve edilen aracın sahibi olan bayiye yazılır; sitenin kendi araçları komisyon yazmaz. |
 | 07.07.2026 | Yayınlanmadı | İlk sürüm — Araç Geçersiz Kılma, Bayi Geçersiz Kılma ve Hacim İndirimi Kademesi admin ekranlarını belgeler. |

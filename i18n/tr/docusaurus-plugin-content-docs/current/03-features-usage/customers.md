@@ -15,24 +15,20 @@ Müşteri Yönetimi, sadık müşteri kitlesi oluşturmak ve rezervasyon geçmi�
 
 ---
 
-## 📊 Müşteri Analitigi (Top Metrics)
+## 📊 Müşteri Analitiği (Üst Metrikler)
 
-Sayfanin ust kisminda, müşteri tabaninizin buyumesini ve aktifligini gosteren 4 ana kart yer alir:
+Sayfanın üst kısmında, müşteri tabanınızın büyümesini ve aktifliğini gösteren dört kart yer alır:
 
 :::info Müşteri sınırı yok
 Lite'ta müşteri sayısında sınır yoktur; bu yüzden bu ekranda sınır bildirimi de yoktur.
 :::
 
-- **Toplam Müşteri:** Sisteme kayıtlı tüm kullanıcıların sayısı.
-- **Aktif Müşteriler:** Son 30 gün içinde rezervasyon yapmış veya sisteme giriş yapmış kullanıcılar.
-- **Bu Ayın Yenilikleri (Yeni):** İçinde bulunulan ay içerisinde sisteme kayıt olan yeni müşteri sayısı.
-- **Aylık Ortalama Müşteri Sayısı:** Aylık kayıt trendinin bir önceki aya göre değişim oranı (%).
+- **Toplam müşteri:** Sistemdeki tüm müşterilerin sayısı.
+- **Bu ay yeni:** Son 30 gün içinde kayıt olan müşteri sayısı.
+- **Aktif müşteriler:** Son 90 günde rezervasyonu olan müşteriler.
+- **Ort. harcama:** Müşteri başına ortalama harcama.
 
 ---
-
-## 🗓️ Müşteri Aktivite Takvimi
-
-Müşteriler sayfasında yer alan takvim, günlük bazda müşteri etkileşimlerini (yeni kayıtlar veya aktivite yoğunluğu) görselleştirir. Bu sayede hangi günlerde müşteri trafiğinin yoğunlaştığını tek bakışta görebilirsiniz.
 
 <div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
   <strong>📸 GÖRSEL: MÜŞTERİ LİSTESİ VE ANALİZ PANELİ</strong><br/>
@@ -45,16 +41,16 @@ Müşteriler sayfasında yer alan takvim, günlük bazda müşteri etkileşimler
 
 Müşteri tablosu, her bir kullanıcının işletmeniz için değerini (LTV - Lifetime Value) ölçmenizi sağlar:
 
+Sütunlar: **Müşteri** (ad ve e-posta), **Telefon**, **Rezervasyonlar**, **Toplam harcama** ve **Durum** (VIP, Yeni ya da Aktif). Listeyi daraltmak için tablonun üstündeki **Tümü / Aktif / Yeni / VIP** süzgecini kullanın.
+
 - **Rezervasyonlar:** Müşterinin toplamda kaç adet kiralama/transfer işlemi yaptığı.
-- **Toplam Harcama:** Müşterinin tüm işlemlerinden elde edilen toplam ciro (Para Birimi ile).
-- **Son Rezervasyon:** En son hangi tarihte işlem yaptığı.
-- **Kayıt Tarihi:** Sisteme ilk giriş yaptığı tarih.
+- **Toplam harcama:** Müşterinin tüm işlemlerinden elde edilen toplam ciro (para birimi ile).
 
 ---
 
 ## ➕ Yeni Müşteri Tanımlama
 
-Operasyonel hız için manuel müşteri kaydı açma ekranı basitleştirilmiştir. **"Yeni Müşteri Ekleyin"** butonu ile şu verileri girebilirsiniz:
+Operasyonel hız için manuel müşteri kaydı açma ekranı basitleştirilmiştir. **"Müşteri ekle"** butonu ile şu verileri girebilirsiniz:
 
 - **Müşteri Adı:** (Zorunlu)
 - **E-posta:** (Zorunlu) - Sistemdeki benzersiz kimliktir.
@@ -80,7 +76,8 @@ Paneli kapatmak için **Escape**'e basın veya panelin dışına tıklayın.
 ## 🔍 Canlı Arama ve Sütun Sıralama (v4.39.0+)
 
 - **Canlı arama:** 300 ms debounce — sayfa yenilemesi yok.
-- **Sıralanabilir sütunlar:** Ad, E-posta, Rezervasyonlar, Toplam Harcama, Son Rezervasyon, Kayıt Tarihi. Sıralamayı artan/azalan değiştirmek için sütun başlığına tıklayın.
+- **Sıralanabilir sütunlar:** **Müşteri**, **Rezervasyonlar** ve **Toplam harcama**. Sütun başlığındaki düğmeyi kullanın: ilk tıklama en büyükten başlar (azalan), aynı sütuna ikinci tıklama sırayı tersine çevirir. Sıralanan sütun ekran okuyucuya duyurulur.
+- **Tümünü seç:** Yalnız bazı satırlar seçiliyken tümünü seç kutusu çizgili (karışık) görünür, seçili satırlar açık mavi boyanır. Sıralamayı değiştirmek seçimi temizler.
 - **Toplu silme:** Onay kutusuyla satırları seçin, "Seçilenleri Sil"e tıklayın. Tarayıcı onay koruması yanlışlıkla silmeyi önler.
 - **CSV Dışa Aktar:** Tüm müşterileri (sayfalı) veya yalnızca seçili ID'leri indirir. İşlem admin-post.php üzerinden sunucu tarafında işlenir.
 
@@ -115,9 +112,10 @@ Tüm uç noktalar `manage_options` yetkisi gerektirir.
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Müşteriler tablosunda sütun başlığından sıralama ve ekran okuyucu duyurusu, karışık tümünü seç işareti ve boyalı seçili satırlar belgelendi; kartlar, sütunlar ve süzgeç güncel ekrana göre düzeltildi. |
 | 09.11.2026 | 6.3.1 | Düzeltme: "Lite sınır bildirimi" kutusu kaldırıldı. Lite'ta müşteri sınırı yok, sınır bildirimi de gösterilmez. |
 | 11.05.2026 | 4.39.0 | Tam React SPA geçişi. Canlı arama, sıralanabilir sütunlar, kayan panel, toplu silme, CSV dışa aktarma. Eski PHP liste tablosu + jQuery kaldırıldı. |
 | 27.03.2026 | 4.23.0 | Lite bildirim konumu (KPI kartlari altında) dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartlari ve kayıt formu gerçek arayuze gore güncellendi. |
+| 19.03.2026 | 4.21.2 | Müşteri listesi, analiz kartları ve kayıt formu gerçek arayüze göre güncellendi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

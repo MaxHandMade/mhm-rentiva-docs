@@ -26,9 +26,10 @@ For stable operation, your server and WordPress installation must meet the follo
 
 | Requirement | Minimum Version | Notes |
 | :-- | :-- | :-- |
-| **WordPress** | 6.7+ | The latest stable release is recommended. |
+| **WordPress** | 7.0+ | The latest stable release is recommended. |
 | **PHP** | 8.1+ | Required for security and performance. |
-| **WooCommerce** | 8.0+ | **Required** for all frontend payment flows. |
+| **WooCommerce** | Active, current release | **Required** for all frontend payment flows. The plugin will not activate without it. |
+| **Rentiva Pro** (optional) | MHM Rentiva 6.4.0+ | Pro 6.5.0 needs MHM Rentiva 6.4.0 or newer; with an older MHM Rentiva, Pro switches itself off and shows an admin notice. |
 | **SSL Certificate** | HTTPS | Required for payment gateways (Stripe, iyzico, etc.) to work. |
 | **Permalink Structure** | Post Name | `%postname%` is recommended for SEO and routing. |
 
@@ -88,9 +89,9 @@ When the plugin is activated, the following actions run automatically in the bac
 ## 4. Initial Setup Wizard
 
 The first time you activate the plugin, the system automatically redirects you to the **Setup Wizard**. This wizard:
-- Collects your basic company information.
-- Automatically creates the required pages (Search, Vehicle Detail, Checkout, etc.).
-- Verifies the WooCommerce integration.
+- Checks your server (PHP, WordPress, WooCommerce, HTTPS, WP-Cron, email delivery).
+- Automatically creates the required pages (Booking Form, Search, Search Results, Vehicle Details, Vehicles List, Contact Form).
+- Sets the sender details for emails and the basic display and rental-day defaults.
 
 :::info Manual Navigation
 If the wizard does not open automatically, you can start it manually via **MHM Rentiva > Setup Wizard** in the WordPress admin menu.
@@ -106,14 +107,25 @@ When `WP_DEBUG` is enabled during development, installation errors will surface 
 
 ---
 
+## Updating
+
+WordPress updates MHM Rentiva like any directory plugin. If you also use **Rentiva Pro**, update MHM Rentiva (Lite) first, then Pro.
+
+:::info Changed in 6.4.0
+MHM Rentiva now requires WordPress 7.0 or newer (it was 6.7). After updating, **clear your page cache** (your host, LiteSpeed Cache, WP Rocket and so on): a page cached by 6.3.x keeps the old booking form and calendar markup, and the new scripts will not run on it. Rentiva's own short-lived cache refreshes by itself.
+:::
+
+---
+
 ### Section Summary
-- **PHP 8.1+** and **WooCommerce** are required.
+- **WordPress 7.0+**, **PHP 8.1+** and **WooCommerce** are required.
 - The **Setup Wizard** must be completed after installation.
 - Database tables are created automatically on activation.
 
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Minimum WordPress raised to 7.0; Pro requirement and update notes (page cache) added; wizard description updated. |
 | 23.08.2026 | 6.0.7 | Installation now starts at the WordPress.org directory; post-activation identifiers updated for the 6.0.0 renames. |
 | 23.04.2026 | 4.27.2 | Documentation synchronized with the current plugin release. |
 | 18.03.2026 | 4.21.2 | Design revision and expanded content. |

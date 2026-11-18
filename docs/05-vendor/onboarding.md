@@ -61,9 +61,11 @@ Vendor applications are submitted through a form rendered by the `[rentiva_vendo
 
 You can require applicants to read and accept a **vendor agreement** before they can submit the application.
 
-- Enable it under **Settings → Vendor Marketplace → Vendor Agreement**, where you also write the agreement text shown to applicants.
+- Enable **Require vendor agreement** under **Settings → Vendor Marketplace → Vendor Agreement**. The **Agreement Text** field below it holds the text shown to applicants.
 - When enabled, the apply form displays the agreement and a **required consent checkbox** — the form cannot be submitted until it is ticked. The same requirement is enforced **server-side**, so the gate cannot be bypassed by tampering with the form.
 - The acceptance is stored as proof (with a **timestamp**) on the application and shown on the application detail, giving you a record of who accepted and when.
+- **Empty text:** if you switch the agreement on and leave the text empty, applicants see a built-in template with eight sections: your vehicles and listings, bookings, commission and payouts, cancellations, damage, insurance and liability, personal data, suspension and ending the agreement, and changes. The template is a starting point, not legal advice: review it and adapt it to your business and local law.
+- **Formatting:** the text accepts light formatting: `# Heading`, `**bold**`, `- list item` and `---` for a line. No other HTML is printed.
 
 ---
 
@@ -163,6 +165,7 @@ Vendor vehicles are marked with a vendor badge on vehicle cards.
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Built-in agreement template for an empty text and the light formatting documented. |
 | 29.06.2026 | 4.61.0 | Vendor agreement gate documented: required consent checkbox on the apply form, server-side enforcement, and timestamped acceptance proof on the application. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 01.04.2026 | 4.24.1 | Paid listing gate: vehicle submission → draft → WC payment → pending review flow added. |

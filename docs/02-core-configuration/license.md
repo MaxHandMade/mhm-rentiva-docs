@@ -52,7 +52,18 @@ Lite has **no vehicle, booking, customer or add-on caps, no feature timers and n
 | **Messaging** | Contact form and the Contact Messages screen | **Messages**: customer and admin conversations, also in the customer's My Account |
 | **Vendor marketplace & payouts** | — | Vendor applications, vendor panel, commissions, payouts and vendor reports |
 | **VIP Transfer** | — | Locations, routes, transfer search and booking (opens with any active Pro license) |
-| **Privacy / GDPR** | No third-party requests; no personal-data exporter or eraser | GDPR tools: consent, data export, anonymisation and deletion, data retention cleanup |
+| **Privacy / GDPR** | Personal data export and erasure in the WordPress privacy tools (bookings, contact messages, e-mail log, account details, application log) and the policy guide text | The My Account consent card and data requests, export and erasure of Pro's messages, vendor data and consent records, data retention cleanup (see [Privacy and Personal Data](../03-features-usage/privacy-personal-data.md)) |
+
+---
+
+## ⏰ Renewal reminder and connection problems (Pro)
+
+- **Renewal reminder:** In the last 14 days before the license expires, a notice names the **expiry date** and has a **Manage license** button that opens the License page. It shows only on the Rentiva screens, on **Plugins** and on the WordPress dashboard, not on every admin page. **Remind me in 3 days** hides it for you for three days; the button is offered only while at least four days remain, and on the last day the reminder always shows.
+- **License server problems:** If the license server cannot be reached, or answers with a temporary fault (HTTP 5xx), Pro does not switch off: it keeps working for up to **seven days** after the last successful license check and shows a **Connection Warning** notice. A real refusal from the server (an invalid or expired license) still deactivates Pro.
+
+:::info Changed in Pro 6.5.0
+The renewal reminder names the expiry date, links the License page and no longer appears on every admin page.
+:::
 
 ---
 
@@ -65,6 +76,7 @@ Lite has **no vehicle, booking, customer or add-on caps, no feature timers and n
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 / Pro 6.5.0 | Renewal reminder, seven-day allowance during license server problems and the Privacy / GDPR split between Lite and Pro documented. |
 | 09.11.2026 | 6.3.1 | Correction: Lite has had no vehicle, booking, customer or add-on caps since 5.2.0. The old "Lite (Limit) / Pro (Unlimited)" table was replaced with what Lite includes and what Pro adds, checked against the plugin code. "Full REST API" and "Email Notifications" were removed as Pro-only items. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.23.0 | Lite limits updated (vehicles: 3→5, customers: 3→10, gallery: 3→5). Pro-only features separated: Vendor & Payout, GDPR, Email Notifications. |

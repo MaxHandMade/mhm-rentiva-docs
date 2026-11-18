@@ -30,7 +30,7 @@ Bu sayfa `[rentiva_vendor_ledger]` kısa kodunu belgeler — bayi panelinde (`/p
 
 `[rentiva_vendor_ledger]` bayinin finansal işlem geçmişini render eder — rezervasyon başına kazanılan krediler, ters çevrilen iadeler ve dağıtılan ödemeler — merkezi `Ledger` servisi tarafından desteklenir. Her satır işlem türünü, ilgili rezervasyonu (varsa), tutarı (WooCommerce currency ayarlarıyla biçimlendirilmiş) ve zaman damgasını gösterir.
 
-Bu, bayinin dashboard'undaki kazanç rakamının arkasındaki **şeffaf kayıt**tır. Bir müşteri araç rezervasyonu yaptığında, otomatik olarak bir kredi girdisi buraya iner. Yönetici bir ödeme işlediğinde, karşılık gelen bir borç buraya iner. Bir rezervasyon iade edildiğinde, `PayoutService::create_refund_entry()` ters bir girdi yazar; defter asla dengeden çıkmaz.
+Bu, bayinin dashboard'undaki kazanç rakamının arkasındaki **şeffaf kayıt**tır. Bir müşteri bayinin bir aracını rezerve edip ödediğinde otomatik olarak bir kredi girdisi buraya iner; kredi her zaman aracın sahibi olan bayiye yazılır. Yönetici bir ödeme işlediğinde karşılık gelen bir borç buraya iner. Bir rezervasyon iade edildiğinde, kredisini ters çevirdiği bayi için ters bir girdi yazılır; defter asla dengeden çıkmaz. Hiç ödenmemiş bir siparişin iadesi, sipariş ödenene kadar bir şey yazmaz (ödenince kredi ve iade birlikte yazılır); sitenin kendi araçları satır yazmaz.
 
 ## Kimlik doğrulama ve rol kilidi
 
@@ -45,8 +45,8 @@ Pro kilidi **sayfadan miras alınır** — tipik yerleştirme `/panel/`'dir, ki 
 
 | Tür | Kaynak | Yön |
 | :--- | :--- | :--- |
-| Rezervasyon komisyonu | Rezervasyon ödendiğinde `OrderManager`, `Ledger::credit()` ile yazar | Kredi (+) |
-| İade | İptal/iade'de `PayoutService::create_refund_entry()` ters girdi yazar | Borç (−) |
+| Rezervasyon komisyonu | Rezervasyonun WooCommerce siparişi ödendiğinde ya da tamamlandığında, kiralanan aracın sahibine yazılır | Kredi (+) |
+| İade | Sipariş iade edildiğinde, ters çevirdiği krediye karşı yazılır | Borç (−) |
 | Ödeme | Yönetici ödeme dispatch'i `Ledger::debit()` ile yazar | Borç (−) |
 | Manuel düzeltme | Yönetici-tarafı manuel defter girdileri (nadir) | İkisi de |
 
@@ -95,8 +95,7 @@ Sunucu-tarafı. Varsayılan sayfa boyutu **15 girdi**'dir; `?paged=N` ilerletir.
 ## İlgili mimari
 
 - **`Ledger` servisi** (`MHMRentiva\Core\Financial\Ledger`) — bayi işlemleri için tek doğru kaynak. Tüm defter yazımları bu sınıf üzerinden geçer; running balance asla kaymaz.
-- **`PayoutService::create_refund_entry()`** — bir rezervasyon iade edildiğinde ters yön defter girdisini yazar, böylece audit izi çift yönlü kalır.
-- **`OrderManager`** — bir rezervasyon siparişi tamamlandığında defteri kredilendirir (lisans-tabanlı eklentiler için lisans anahtarı veren aynı hook, kira tarafında bayiyi de kredilendirir).
+- **`CommissionBridge`** — WooCommerce ödeme, tamamlanma ve iade olaylarını dinler; krediyi ve ters yön iade girdilerini yazar, böylece audit izi çift yönlü kalır.
 
 ## Ayrıca bakınız
 
@@ -104,3 +103,9 @@ Sunucu-tarafı. Varsayılan sayfa boyutu **15 girdi**'dir; `?paged=N` ilerletir.
 - [Müşteri ödeme geçmişi kısa kodu](./payment-history) — müşteri-tarafı eşdeğeri
 - [Bayi onboarding](/docs/vendor/onboarding) — operasyonel kılavuz
 - [Ödeme defteri belgeleri](/docs/vendor/payouts-ledger) — yönetici-tarafı ödeme akışı + muhasebe modeli
+
+
+## Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
+|---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Kredinin kiralanan aracın sahibine yazılması, iadelerin özgün krediyi izlemesi ve kaynaklar düzeltildi. |

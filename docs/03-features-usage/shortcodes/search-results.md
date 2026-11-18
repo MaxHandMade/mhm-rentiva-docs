@@ -76,6 +76,15 @@ As of v4.22.1, the location filter uses **checkboxes** instead of radio buttons.
 - Single selection: selecting one location lists only vehicles at that location.
 - Multi-selection: selecting multiple locations shows vehicles available at any of the selected locations.
 
+## Vehicle cards and date problems
+
+- **Required services in the total:** when the page is opened with dates (for example from a search), each card shows the total for the period. If you marked some additional services as required, a line under the total names them, for example "Required service included: Full insurance 25" (several services are listed with commas and one combined amount; a per-day service is multiplied by the number of days). A card without dates shows the daily price and no such line.
+- **Price and button layout:** the card's own width decides the layout. In a narrow card (for example featured vehicles on the home page, or a three-column vehicles page) the price sits above the **Make Booking** button; in a wide card (for example dated search results) they sit side by side. Cards in the same row always look the same.
+- **Number format:** mileage and engine size follow the page language: English "18,500 km" and "1.6 L", Turkish "18.500 km" and "1,6 L".
+
+- **Date problems:** if the dates cannot be booked (return before pickup, or a pickup time that has passed), the page says so in a notice above the list ("Return date must be after pickup date." or "The pickup time has already passed. Please choose a later date or time.") with a **Change dates** link. It does not say "no vehicles available"; for a past date the vehicles are listed without dates instead.
+- **Several languages:** on a Polylang or WPML site the filter sidebar shows fuel, transmission and category names in each visitor's own language. See [Common issues](../../06-faq/common-issues.md).
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-search-results-wrapper` class.
@@ -89,6 +98,7 @@ As of v4.22.1, the location filter uses **checkboxes** instead of radio buttons.
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Required service line, card layout, date problem notice and multilingual filter names. |
 | 11.10.2026 | 6.2.0 | `default_sort` values documented; it replaces `order` / `orderby`, which 6.2.0 no longer reads. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 27.03.2026 | 4.22.1 | Location filter changed from radio to checkbox (multi-select). Availability query protected against empty dates. QueryHelper information added to Developer Notes. |

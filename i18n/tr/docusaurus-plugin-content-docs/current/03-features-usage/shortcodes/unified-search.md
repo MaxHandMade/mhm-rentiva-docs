@@ -57,7 +57,7 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 
 ### Alan Zorunluluğu Davranışı
 
-Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik gösterir:
+Arama formundaki alanların zorunluluk davranışı sekmeye göre farklılık gösterir:
 
 - **Kiralama (Rental) sekmesi:** Alan zorunluluğu `mhmrentiva_fields_required` genel ayarina bağlı olarak koşullu çalışır. Varsayılan değer `0` (zorunlu değil).
 - **Transfer sekmesi:** Transfer alanları (`origin_id`, `destination_id`, `date`, `luggage_count`, `luggage_large`) her zaman zorunludur (hardcoded `required`). Transfer rota-bazli bir servis olduğu için bu alanlar bos birakilamaz.
@@ -77,6 +77,10 @@ Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik göst
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Rezerve edilemeyen tarihler
+
+Ziyaretçi teslimden önce bir dönüş tarihi ya da geçmişte kalmış bir teslim alma saati seçerse sonuç sayfası "müsait araç yok" demek yerine sorunu açıklar ve **Tarihleri değiştir** bağlantısı sunar.
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-unified-search-wrapper` sınıfı ile başlar.
@@ -88,6 +92,7 @@ Arama formundaki alanların zorunluluk davranışı sekmeye gore farklilik göst
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Rezerve edilemeyen tarihler notu eklendi. |
 | 11.10.2026 | 6.2.0 | `filter_categories` ve `layout` kaldırıldı: 6.2.0 bunları artık okumuyor. `layout` yerine `search_layout="vertical"` kullanın. |
 | 27.03.2026 | 4.22.1 | `location_required` parametresi eklendi. Alan zorunluluğu (fields_required) davranışı belgelendi: rental koşullu, transfer daima zorunlu. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

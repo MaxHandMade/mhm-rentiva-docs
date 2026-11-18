@@ -29,13 +29,14 @@ Rentiva 6.2.0'dan beri kısa kod, **Master account dashboard** bloğu ve Element
 | Sayfayı kim görüntülüyor | Ne görüyor |
 | :--- | :--- |
 | Giriş yapmış müşteri | Hesabın taşındığını söyleyen tek bir satır ve Hesabım sayfasına giden bir **Hesabıma git** bağlantısı. |
-| Ziyaretçi (giriş yapmamış) | Hiçbir şey. |
+| Ziyaretçi (giriş yapmamış) | Müşteriyle aynı "Hesabınız taşındı" satırı ve **Hesabıma git** bağlantısı. |
 | Yönetici | Aynı satır ve bağlantı, ayrıca bu panelin kullanımdan kalktığını ve sayfadan kaldırılması gerektiğini söyleyen bir uyarı. Uyarıyı yalnız yöneticiler görür. |
 
 - Blok ve Elementor bileşeni düzenleyicilerde gizlendi; yeni sayfalara artık eklenemez.
 - **MHM Rentiva > Kısa Kod Sayfaları** artık bu sayfayı oluşturmayı önermiyor.
 - Kısa adı `panel` olan bir sayfada ziyaretçiler ve giriş yapmış, yönetici olmayan kullanıcılar Hesabım'a yönlendirilir; yöneticiler sayfayı açmaya devam edebilir.
 - Kısa kod parametre almaz.
+- **Giriş yapmamış ziyaretçiler** artık müşterilerle aynı "Hesabınız taşındı" satırını ve **Hesabıma git** bağlantısını görür (önceden boş bir sayfa görüyorlardı). Ziyaretçiyi yalnız eklentinin kendi `/panel/` sayfası başka yere yollar: giriş formunun bulunduğu Hesabım sayfasına yönlendirir.
 
 ## Müşteriler bunun yerine nereye gidiyor
 
@@ -54,5 +55,6 @@ Rentiva 6.2.0'dan beri kısa kod, **Master account dashboard** bloğu ve Element
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Ziyaretçiler boş sayfa yerine "hesabınız taşındı" satırını görüyor. |
 | 11.10.2026 | 6.2.0 | Sayfa yeniden yazıldı: müşteri paneli emekliye ayrıldı; müşteriler Hesabım sayfasını kullanıyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

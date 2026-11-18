@@ -53,6 +53,11 @@ The system provides optimization across three main layers: Object Cache, Transie
 
 ---
 
+### After updating Rentiva (6.4.0)
+Clear your page cache once after the update (your host's cache, LiteSpeed Cache, WP Rocket and so on). A page cached under 6.3.x keeps the old booking form and calendar markup, and the new scripts cannot run on it. Rentiva's own short cache refreshes by itself. The same applies after you change the front-end accent color under **Settings > Frontend & Display > Colors**.
+
+---
+
 ## 📈 4. Monitoring & Measurement
 
 Monitor the following to track your site's performance:
@@ -69,5 +74,6 @@ Monitor the following to track your site's performance:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Page cache note for updates and color changes. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Object Cache, Transients, and Stale Data scenarios added. |

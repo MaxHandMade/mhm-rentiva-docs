@@ -26,9 +26,10 @@ Eklentinin stabil çalışması için sunucunuzun ve WordPress kurulumunuzun aş
 
 | Gereksinim | Minimum Versiyon | Notlar |
 | :-- | :-- | :-- |
-| **WordPress** | 6.7+ | En güncel kararlı sürüm önerilir. |
+| **WordPress** | 7.0+ | En güncel kararlı sürüm önerilir. |
 | **PHP** | 8.1+ | Güvenlik ve performans için zorunludur. |
-| **WooCommerce** | 8.0+ | Tüm frontend ödeme akışları için **Mecburidir**. |
+| **WooCommerce** | Aktif, güncel sürüm | Tüm frontend ödeme akışları için **zorunludur**. O olmadan eklenti etkinleşmez. |
+| **Rentiva Pro** (isteğe bağlı) | MHM Rentiva 6.4.0+ | Pro 6.5.0, MHM Rentiva 6.4.0 veya üstünü gerektirir; daha eski MHM Rentiva ile Pro kendini kapatır ve yönetici bildirimi gösterir. |
 | **SSL Sertifikası** | HTTPS | Ödeme ağ geçitlerinin (Stripe, iyzico vb.) çalışması için gereklidir. |
 | **Permalink Yapısı** | Yazı İsmi | `%postname%` yapısı SEO ve rotalar için önerilir. |
 
@@ -88,12 +89,12 @@ Eklenti etkinleştirildiğinde arka planda aşağıdaki işlemler otomatik olara
 ## 4. İlk Kurulum Sihirbazı
 
 Eklentiyi ilk kez etkinleştirdiğinizde sistem sizi otomatik olarak **Kurulum Sihirbazı**'na yönlendirecektir. Bu sihirbaz:
-- Temel şirket bilgilerinizi alır.
-- Gerekli sayfaları (Arama, Araç Detay, Ödeme vb.) otomatik oluşturur.
-- WooCommerce entegrasyonunu doğrular.
+- Sunucunuzu denetler (PHP, WordPress, WooCommerce, HTTPS, WP-Cron, e-posta teslimatı).
+- Gerekli sayfaları (Rezervasyon formu, Araç arama, Arama sonuçları, Araç ayrıntıları, Araç listesi, İletişim formu) otomatik oluşturur.
+- E-postalar için gönderen bilgilerini ve temel görünüm ile kiralama günü varsayılanlarını ayarlar.
 
 :::info Manuel Yönlendirme
-Eğer sihirbaz otomatik açılmazsa, WordPress admin menüsünden **MHM Rentiva > Setup Wizard** yolunu izleyerek manuel olarak başlatabilirsiniz.
+Eğer sihirbaz otomatik açılmazsa, WordPress admin menüsünden **MHM Rentiva > Kurulum sihirbazı** yolunu izleyerek manuel olarak başlatabilirsiniz.
 :::
 
 ---
@@ -106,14 +107,25 @@ Geliştirme aşamasında `WP_DEBUG` açıksa, kurulum hataları PHP loglarına v
 
 ---
 
+## Güncelleme
+
+WordPress, MHM Rentiva'yı dizindeki diğer eklentiler gibi günceller. **Rentiva Pro** da kullanıyorsanız önce MHM Rentiva'yı (Lite), sonra Pro'yu güncelleyin.
+
+:::info 6.4.0'da değişti
+MHM Rentiva artık WordPress 7.0 veya üstünü gerektirir (önceden 6.7). Güncellemeden sonra **sayfa önbelleğinizi temizleyin** (barındırma firmanız, LiteSpeed Cache, WP Rocket vb.): 6.3.x'in önbelleğe aldığı bir sayfa eski rezervasyon formu ve takvim işaretlemesini tutar, yeni betikler onun üzerinde çalışmaz. Rentiva'nın kendi kısa süreli önbelleği kendiliğinden yenilenir.
+:::
+
+---
+
 ### Bölüm Özeti
-- En az **PHP 8.1** ve **WooCommerce** gereklidir.
+- En az **WordPress 7.0**, **PHP 8.1** ve **WooCommerce** gereklidir.
 - Kurulum sonrası **Setup Wizard** takip edilmelidir.
 - Veritabanı tabloları aktivasyonda otomatik kurulur.
 
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | En düşük WordPress sürümü 7.0 oldu; Pro gereksinimi ve güncelleme notları (sayfa önbelleği) eklendi; sihirbaz açıklaması güncellendi. |
 | 23.08.2026 | 6.0.7 | Kurulum artık WordPress.org dizininden başlıyor; etkinleştirme sonrası tanımlayıcılar 6.0.0 yeniden adlandırmasına göre güncellendi. |
 | 18.03.2026 | 4.21.2 | Tasarım revizyonu yapıldı ve içerik zenginleştirildi. |
 | 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |

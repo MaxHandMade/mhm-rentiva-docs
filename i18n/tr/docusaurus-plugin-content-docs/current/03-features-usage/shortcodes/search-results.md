@@ -76,6 +76,15 @@ v4.22.1 itibariyla lokasyon filtresi **radio buton** yerine **checkbox** kullani
 - Tekli seçim: Bir lokasyon secildiginde sadece o lokasyondaki araclar listelenir.
 - Çoklu seçim: Birden fazla lokasyon isaretlendiginde, secilen lokasyonlarin herhangi birinde bulunan araclar gosterilir.
 
+## Araç kartları ve tarih sorunları
+
+- **Toplamda zorunlu hizmetler:** sayfa tarihlerle açıldığında (örneğin bir aramadan), her kart dönem toplamını gösterir. Bazı ek hizmetleri zorunlu işaretlediyseniz toplamın altındaki satır onları adıyla söyler; örneğin "Zorunlu hizmet dahil: Tam sigorta ₺25" (birden çok hizmet virgülle sıralanır ve tek bir toplam tutar yazılır; günlük ücretli hizmet gün sayısıyla çarpılır). Tarihsiz kartta günlük fiyat görünür, bu satır görünmez.
+- **Fiyat ve düğme düzeni:** düzeni kartın kendi genişliği belirler. Dar kartta (örneğin ana sayfadaki öne çıkan araçlar ya da üç sütunlu araçlar sayfası) fiyat, **Rezervasyon yap** düğmesinin üstünde durur; geniş kartta (örneğin tarihli arama sonuçları) yan yana durur. Aynı satırdaki kartlar her zaman aynı görünür.
+- **Sayı biçimi:** kilometre ve motor hacmi sayfanın diline göre yazılır: İngilizce "18,500 km" ve "1.6 L", Türkçe "18.500 km" ve "1,6 L".
+
+- **Tarih sorunları:** tarihler rezerve edilemiyorsa (dönüş teslimden önce ya da geçmişte kalmış bir teslim alma saati) sayfa bunu listenin üstündeki bildirimle söyler ("Dönüş tarihi teslim alma tarihinden sonra olmalıdır." ya da "Teslim alma zamanı geçti. Lütfen daha ileri bir tarih veya saat seçin.") ve **Tarihleri değiştir** bağlantısı sunar. "Müsait araç yok" denmez; geçmiş bir tarihte araçlar tarihsiz listelenir.
+- **Çok dilli siteler:** Polylang ya da WPML kullanan sitede filtre kenar çubuğundaki yakıt, vites ve kategori adları her ziyaretçiye kendi dilinde gösterilir. Bkz. [Yaygın sorunlar](../../06-faq/common-issues.md).
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-search-results-wrapper` sınıfı ile başlar.
@@ -89,6 +98,7 @@ v4.22.1 itibariyla lokasyon filtresi **radio buton** yerine **checkbox** kullani
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Zorunlu hizmet satırı, kart düzeni, tarih sorunu bildirimi ve çok dilli filtre adları. |
 | 11.10.2026 | 6.2.0 | `default_sort` değerleri belgelendi; 6.2.0'ın artık okumadığı `order` / `orderby` yerine kullanılır. |
 | 27.03.2026 | 4.22.1 | Lokasyon filtresi radio -> checkbox (çoklu seçim). Musaitlik sorgusu bos tarih koruması. Geliştirici notlarına QueryHelper bilgileri eklendi. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

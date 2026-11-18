@@ -34,25 +34,29 @@ The messaging system is available as part of the Premium package. Your license m
 The messaging system is configured under four main headings:
 
 ### 1. Notifications
-- **Admin Email:** The target address for staff alerts (if left blank, the global admin email is used).
-- **Sender Name:** The sender name displayed in message notification emails.
-- **Staff Alerts:** Sends staff an email alert when a new customer message arrives.
-- **Customer Reply Notification:** Sends the customer an email when staff replies to a message.
+- **Management Email:** The target address for staff alerts (if left blank, the global admin email is used).
+- **Outgoing Name:** The sender name displayed in message notification emails (if left blank, the site name is used).
+- **Alert staff on new client messages:** Sends staff an email alert when a new customer message arrives.
+- **Notify clients on staff replies:** Sends the customer an email when staff replies to a message.
 
 ### 2. System Rules
-- **Dashboard Visibility:** Enables the quick message widget on the WordPress Dashboard.
-- **Widget Capacity:** Defines how many recent messages are listed on the Dashboard (Default: 5).
-- **Auto-Responder:** When a customer sends their first message, the system instantly sends them a "Your message has been received" confirmation.
+- **Dashboard Visibility:** Enables the message widget on the WordPress Dashboard.
+- **Widget Capacity:** Defines how many recent messages are listed on the Dashboard (Default: 5, from 1 to 20).
+- **Auto-Responder:** Sends the customer an automatic acknowledgment email when they send a message (off by default).
 
 ### 3. Categories
 Allows messages to be classified by topic. Default categories are:
-- General, Booking, Payment, Technical Support, Complaints, Suggestions.
-- *You can add new categories or delete existing ones.*
+- General, Booking, Payment, Technical Support, Complaint, Suggestion.
+- *You can rename or delete categories and add new ones with **Add Category**.*
 
 ### 4. Workflow Statuses
 Used to track the lifecycle of messages:
-- Pending, Replied, Closed, Important.
-- *You can define new statuses to match your business needs.*
+- Pending, Answered, Closed.
+- *The three states are fixed; you can rename how each is displayed. Urgency is set with the message priority (Normal, High, Urgent), not with a status.*
+
+:::note Contact form messages
+Messages sent through the website's contact form are a separate list (**MHM Rentiva > Contact Messages**) with their own spam protection; see [Contact form](../03-features-usage/shortcodes/contact.md).
+:::
 
 ---
 
@@ -69,5 +73,6 @@ Used to track the lifecycle of messages:
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.5.0 | Field names, categories and the fixed workflow statuses corrected to match the screen; pointer to Contact Messages and spam protection added. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Message Settings documentation created with 4 sub-tabs and category management details. |

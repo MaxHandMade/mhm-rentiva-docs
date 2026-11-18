@@ -78,6 +78,12 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Araç kartı ayrıntıları
+
+- **Toplamda zorunlu hizmetler:** sayfa tarihlerle açıldığında (örneğin bir aramadan), her kart dönem toplamını gösterir. Bazı ek hizmetleri zorunlu işaretlediyseniz toplamın altındaki satır onları adıyla söyler; örneğin "Zorunlu hizmet dahil: Tam sigorta ₺25" (birden çok hizmet virgülle sıralanır ve tek bir toplam tutar yazılır; günlük ücretli hizmet gün sayısıyla çarpılır). Tarihsiz kartta günlük fiyat görünür, bu satır görünmez.
+- **Fiyat ve düğme düzeni:** düzeni kartın kendi genişliği belirler. Dar kartta (örneğin ana sayfadaki öne çıkan araçlar ya da üç sütunlu araçlar sayfası) fiyat, **Rezervasyon yap** düğmesinin üstünde durur; geniş kartta (örneğin tarihli arama sonuçları) yan yana durur. Aynı satırdaki kartlar her zaman aynı görünür.
+- **Sayı biçimi:** kilometre ve motor hacmi sayfanın diline göre yazılır: İngilizce "18,500 km" ve "1.6 L", Türkçe "18.500 km" ve "1,6 L".
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-vehicles-list-wrapper` sınıfı ile başlar.
@@ -89,5 +95,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Araç kartı ayrıntıları: zorunlu hizmet satırı, fiyat/düğme düzeni, sayı biçimi. |
 | 11.10.2026 | 6.2.0 | `show_badges`, `show_availability` ve `price_format` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |
