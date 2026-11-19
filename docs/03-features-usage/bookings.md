@@ -51,6 +51,8 @@ Click a painted cell to open a summary with the customer, vehicle, plate, pickup
 
 ![Bookings > Calendar view, monthly occupancy calendar](/img/docs/screens/bookings-calendar.webp)
 
+![Booking summary opened from a booked day: customer, vehicle, pickup and return with times, total and created date](/img/docs/screens/bookings-calendar-popup.webp)
+
 ---
 
 ## ➕ New Booking
