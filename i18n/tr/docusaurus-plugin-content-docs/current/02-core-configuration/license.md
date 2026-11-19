@@ -59,10 +59,16 @@ Lite'ta **araç, rezervasyon, müşteri ya da ek hizmet sınırı yoktur; sürel
 ## ⏰ Yenileme hatırlatması ve bağlantı sorunları (Pro)
 
 - **Yenileme hatırlatması:** Lisansın bitmesine son 14 günde, **bitiş tarihini** yazan ve Lisans sayfasını açan **Lisansı yönet** düğmeli bir bildirim görünür. Yalnız Rentiva ekranlarında, **Eklentiler**'de ve WordPress panosunda görünür; her yönetici sayfasında değil. **3 gün sonra hatırlat** bildirimi sizin için üç gün gizler; düğme yalnız bitişe en az dört gün varken sunulur ve son gün hatırlatma hep görünür.
-- **Lisans sunucusu sorunları:** Lisans sunucusuna ulaşılamazsa ya da sunucu geçici bir hata (HTTP 5xx) verirse Pro kapanmaz: son başarılı lisans denetiminden itibaren en fazla **yedi gün** çalışmaya devam eder ve **Bağlantı Uyarısı** bildirimi gösterir. Sunucunun gerçek bir reddi (geçersiz ya da süresi dolmuş lisans) Pro'yu yine kapatır.
+- **Lisans sunucusu sorunları:** Lisans sunucusuna ulaşılamazsa, sunucu geçici bir hata (HTTP 5xx) ya da istek sınırı (HTTP 429) yanıtı verirse veya gelen yanıt sunucunun kendi yanıtı değilse (örneğin bir ağ giriş sayfası) Pro kapanmaz: son başarılı lisans denetiminden itibaren en fazla **yedi gün** çalışmaya devam eder ve **Bağlantı Uyarısı** bildirimi gösterir.
+- **Yedi günden uzun sürerse:** Lisans yedi günün sonunda hâlâ doğrulanamıyorsa Pro özelliklerini **duraklatır** ve **Şimdi kontrol et** düğmeli bir bildirim gösterir. Etkinleştirme korunur: özellikler bir sonraki başarılı denetimde kendiliğinden geri gelir (zamanlanmış denetim altı saatte bir çalışır, Lisans sayfasını açmak da hemen denetler); lisansı yeniden etkinleştirmeniz gerekmez.
+- **Gerçek bir ret:** Lisans sunucusundan gelen her ret (örneğin geçersiz, iptal edilmiş ya da bilinmeyen lisans) Pro'yu yine kapatır.
 
 :::info Pro 6.5.0'da değişti
 Yenileme hatırlatması bitiş tarihini yazar, Lisans sayfasına bağlantı verir ve artık her yönetici sayfasında görünmez.
+:::
+
+:::info Pro 6.5.1'de değişti
+Lisans yedi günden uzun süre doğrulanamazsa Pro sitenin etkinleştirmesini silmek yerine duraklar ve bir sonraki başarılı denetimde kendiliğinden geri gelir.
 :::
 
 ---
@@ -76,6 +82,7 @@ Yenileme hatırlatması bitiş tarihini yazar, Lisans sayfasına bağlantı veri
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 19.11.2026 | Pro 6.5.1 | Lisans yedi günden uzun doğrulanamadığında duraklama ve yeniden etkinleştirmeden geri gelme belgelendi. |
 | 18.11.2026 | 6.4.0 / Pro 6.5.0 | Yenileme hatırlatması, lisans sunucusu sorunlarında yedi günlük ek süre ve Gizlilik / KVKK'nın Lite ile Pro arasındaki ayrımı belgelendi. |
 | 09.11.2026 | 6.3.1 | Düzeltme: Lite'ta 5.2.0'dan beri araç, rezervasyon, müşteri ya da ek hizmet sınırı yok. Eski "Lite (Sınır) / Pro (Limitsiz)" tablosunun yerine, eklenti koduna karşı denetlenmiş "Lite'ta var / Pro ile eklenir" tablosu kondu. "Tam REST API" ve "E-posta Bildirimleri" Pro'ya özel kalemler arasından çıkarıldı. |
 | 27.03.2026 | 4.23.0 | Lite limitleri güncellendi (araç: 3→5, müşteri: 3→10, galeri: 3→5). Pro-only özellikler ayrıştı: Vendor & Payout, GDPR, E-posta Bildirimleri. |
