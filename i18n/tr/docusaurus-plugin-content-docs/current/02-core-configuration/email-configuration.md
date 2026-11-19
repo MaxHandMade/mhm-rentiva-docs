@@ -22,9 +22,10 @@ E-postaların müşteriye nasıl görüneceğini buradan belirleyin:
 
 - **Gönderen Adı:** E-postanın "Kimden" kısmında görünecek isim (Örn: Rentiva Filo).
 - **Gönderen E-postası:** Mesajın hangi adresten çıkış yapacağı (Örn: info@site.com).
-- **Cevap Adresi:** Müşteri e-postayı yanıtladığında mesajın gideceği adres.
+- **Yanıt adresi:** Müşteri e-postayı yanıtladığında mesajın gideceği adres.
 - **Temel Renk:** E-posta şablonlarındaki buton, başlık ve vurgu renklerini belirler.
-- **Alt Bilgi Metni (Footer):** E-postaların en altında yer alacak telif ve iletişim notu.
+- **Üst kısım görseli (logo adresi):** E-postaların en üstünde görünen logo.
+- **Alt kısım metni:** E-postaların en altında yer alacak telif ve iletişim notu.
 
 ---
 
@@ -39,14 +40,15 @@ E-postaların müşteriye nasıl görüneceğini buradan belirleyin:
 ## ⚙️ Gelişmiş Teknik Ayarlar
 
 - **Şablon Geçersiz Kılma Yolu:** E-posta tasarımlarını temanız üzerinden özelleştirmek isterseniz kullanacağınız klasör yolu (Varsayılan: `mhm-rentiva/emails/`).
-- **Otomatik Arka Plan Gönderme:** Sayfa hızını etkilememek için e-postaları arka planda (asenkron) sıraya alır.
-- **İletişim Günlükleri:** Gönderilen tüm e-postaların bir kopyasını veritabanında saklar.
-- **Günlük Saklama Süresi:** Kayıtların kaç gün sonra otomatik silineceğini belirler (Örn: 30 Gün).
+- **Arka planda otomatik gönderim:** Sayfa hızını etkilememek için otomatik e-postaları arka planda gönderir.
+- **İletişim günlüklerini etkinleştir:** Gönderilen tüm e-postaların bir kopyasını veritabanında saklar.
+- **Günlük saklama süresi (gün):** Kayıtların kaç gün sonra otomatik silineceğini belirler (Örn: 30 Gün).
 
 ---
 
-### 🖼️ GÖRSEL: E-POSTA YAPILANDIRMA PANELİ
-*(Ayarlar > E-posta Yapılandırması sekmesi, gönderici ve günlük ayarları alanı)*
+![Ayarlar > E-posta Yapılandırması sekmesi](/img/docs/screens/settings-email.webp)
+
+*Ayarlar > E-posta Yapılandırması sekmesi, gönderici ve günlük ayarları alanı*
 
 ---
 

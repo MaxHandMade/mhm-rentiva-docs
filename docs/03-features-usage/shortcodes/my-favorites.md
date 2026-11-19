@@ -20,9 +20,7 @@ The Account Favorites module is designed to manage and present **account** favor
 
 ## Usage
 
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
+![Frontend view of this shortcode](/img/docs/screens/sc-my-favorites.webp)
 
 To add this module to any page or post, use the shortcode below:
 
@@ -64,6 +62,10 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Vehicle card details
+
+Favorites use the same vehicle card as the vehicles grid. The price and **Make Booking** button follow the card's width (stacked in a narrow card, side by side in a wide one), and mileage and engine size follow the page language ("18,500 km" in English, "18.500 km" in Turkish).
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-my-favorites-wrapper` class.
@@ -75,6 +77,7 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Card layout and number format noted. |
 | 11.10.2026 | 6.2.0 | `show_badges`, `show_remove_button` and `show_added_date` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

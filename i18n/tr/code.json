@@ -8,29 +8,11 @@
   "Fleet Management": {
     "message": "Filo Yönetimi"
   },
-  "Every vehicle carries its daily price, feature chips and weekly availability on one screen, filterable by category — fleet management without switching tabs.": {
-    "message": "Her araç; günlük fiyatını, özellik etiketlerini ve haftalık müsaitliğini tek ekranda taşır, kategoriye göre filtrelenebilir — sekme değiştirmeden filo yönetimi."
-  },
-  "The Vehicles screen listing six vehicles with their daily price, features and weekly availability": {
-    "message": "Araçlar ekranı: altı aracı günlük fiyatı, özellikleri ve haftalık müsaitlik durumuyla listeler"
-  },
   "Powerful Booking Infrastructure": {
     "message": "Güçlü Rezervasyon Altyapısı"
   },
-  "The dashboard tracks bookings, revenue and payments together — a seven-day chart, status breakdown and held deposits — powered by flexible booking forms and Stripe/PayPal/PayTR integrations.": {
-    "message": "Kontrol paneli rezervasyonları, geliri ve ödemeleri tek ekranda toplar — yedi günlük grafik, durum dağılımı ve bloke depozitolar — altyapısında esnek rezervasyon formları ve Stripe/PayPal/PayTR entegrasyonları var."
-  },
-  "The Rentiva dashboard showing total bookings, revenue, a seven-day chart and booking statuses": {
-    "message": "Rentiva kontrol paneli: toplam rezervasyon sayısını, geliri, yedi günlük grafiği ve rezervasyon durumlarını gösterir"
-  },
   "Developer Friendly": {
     "message": "Geliştirici Dostu"
-  },
-  "Fifteen tabs deep, Settings covers everything from integrations and system performance to cron job monitoring — and for developers who need more, a REST API and hook/filter system underneath.": {
-    "message": "Ayarlar tek başına on beş sekme derinliğinde: entegrasyonlardan sistem performansına, cron iş izlemesine kadar — daha fazlasını isteyen geliştiriciler için altyapıda REST API ve hook/filter sistemi de hazır."
-  },
-  "The Settings screen with its fifteen tabs, including integration, system and cron monitoring": {
-    "message": "On beş sekmeli Ayarlar ekranı; entegrasyon, sistem ve cron izleme sekmeleri de dahil"
   },
   "theme.ErrorPageContent.title": {
     "message": "Bu sayfa çöktü.",
@@ -399,5 +381,23 @@
   },
   "home.description": {
     "message": "WordPress araç kiralama ve transfer rezervasyon eklentisi — dokümantasyon"
+  },
+  "Every vehicle shows its daily price, feature chips, weekly availability and status on one screen, filterable by category — fleet management without switching tabs.": {
+    "message": "Her araç; günlük fiyatını, özellik etiketlerini, haftalık müsaitliğini ve durumunu tek ekranda gösterir, kategoriye göre filtrelenebilir — sekme değiştirmeden filo yönetimi."
+  },
+  "The Vehicles screen listing vehicles with their daily price, features, weekly availability and status": {
+    "message": "Araçlar ekranı: araçları günlük fiyatı, özellikleri, haftalık müsaitliği ve durumuyla listeler"
+  },
+  "The dashboard tracks bookings, booking value and payments together — a seven-day chart, status breakdown, pending payments and held deposits — while checkout and payment run through WooCommerce.": {
+    "message": "Kontrol paneli rezervasyonları, rezervasyon tutarını ve ödemeleri birlikte izler — yedi günlük grafik, durum dağılımı, bekleyen ödemeler ve bloke depozitolar — sepet ve ödeme ise WooCommerce üzerinden yürür."
+  },
+  "The Rentiva dashboard showing total bookings, booking value, a seven-day chart, booking statuses and payments": {
+    "message": "Rentiva kontrol paneli: toplam rezervasyonu, rezervasyon tutarını, yedi günlük grafiği, rezervasyon durumlarını ve ödemeleri gösterir"
+  },
+  "Settings covers everything from payments and email to integrations, system performance and cron job monitoring — and for developers who need more, a REST API and hook/filter system underneath.": {
+    "message": "Ayarlar ödemeden e-postaya, entegrasyonlardan sistem performansına ve cron iş izlemesine kadar her şeyi kapsar — daha fazlasını isteyen geliştiriciler için altyapıda REST API ve hook/filter sistemi de hazır."
+  },
+  "The Settings screen with its tab list, from General Settings to the Cron Job Monitor": {
+    "message": "Ayarlar ekranı ve sekme listesi: Genel ayarlar'dan Cron görev izleyicisi'ne"
   }
 }

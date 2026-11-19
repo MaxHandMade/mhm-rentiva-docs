@@ -61,14 +61,36 @@ An `idempotency` key is used in all API calls:
 - **Diagnose:** The same payment request being sent multiple times is prevented.
 - **Fix:** If you are receiving a callback error, search for the `transaction_id` value from the payment provider in `AdvancedLogger` and check whether there is a duplicate entry.
 
+## 🙋 5. Cart, Payment Page & Guests: Common Questions
+
+### Why does my cart or payment page look "classic" when I use the Cart/Checkout block?
+While a rental is in the cart, Rentiva shows WooCommerce's classic cart, and the classic payment page, so the booking steps, the deposit and the remaining amount appear. A cart with only shop products keeps the Cart block. To keep the Cart block, turn off **Classic cart page** in MHM Rentiva > Settings > Payment tab; see [Payment Settings](../02-core-configuration/payments.md).
+
+### Why is there no "Cash on delivery" for a rental?
+It is never offered for a booking: a deposit paid at the door is not a deposit, and the remaining amount is paid at pickup anyway. Shop-only orders keep it. If cash on delivery is your only enabled method, enable card or bank transfer in WooCommerce > Settings > Payments. If it is chosen anyway (for example in the Checkout block with the classic cart setting off), it is listed but refused when chosen, with "Cash on delivery is not available for a booking. Please choose another payment method."
+
+### Why are there two lines for the same vehicle in the cart, or why did one line change?
+Choosing the same vehicle again for overlapping dates (for example after the browser's Back button) replaces the earlier line, and the customer is told "Your cart already held ... It now holds your latest choice". The amount is not doubled. A different vehicle, or back-to-back dates, remain separate lines. If a cart still holds the same vehicle twice for overlapping dates, the payment page says "Your cart holds ... more than once for overlapping dates. Remove the extra line to continue." and the customer removes the extra line.
+
+### A customer says the vehicle became unavailable at payment.
+Another customer booked those dates first. The customer sees one message that the vehicle is no longer available for the dates, and on the cart page the line is removed with that reason. They can pick other dates or another vehicle.
+
+### A button reads "Got it, do not show this again". What does it do?
+It hides the notice about block-based cart or payment pages for you only; other administrators still see it. The notice appears only on Rentiva screens and the Plugins page.
+
+### The customer is a guest. How do they see their reservation?
+On the payment page, a guest sees WooCommerce's **Create an account?** box while a rental is in the cart. If they create an account, the booking appears in **My Account**. Without an account there is no My Account page for them; the thank-you page and the emails carry the booking details.
+
 ## Checklist
 1. API key validity (Test vs Live).
 2. Firewall (WAF) blocks.
 3. Webhook/Callback URL correctness.
 4. WooCommerce status synchronization.
+5. A payment method other than cash on delivery is enabled for rentals.
 
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Cart, payment page and guest questions added. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | API error codes, status mapping, and Ledger consistency details added. |

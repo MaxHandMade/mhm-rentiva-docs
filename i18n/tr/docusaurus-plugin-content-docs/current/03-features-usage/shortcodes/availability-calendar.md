@@ -20,9 +20,7 @@ Availability calendar modülü, Rentiva platformundaki **reservation** süreçle
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-availability-calendar.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 
@@ -61,6 +59,26 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Takvimi okumak
+
+| Gün | Anlamı |
+| :--- | :--- |
+| Müsait | Gün boyu boş. |
+| Kısmen müsait | O gün bir rezervasyon bitiyor ya da başlıyor. Dönüş günü "11:00 →" gösterir (dönüş saati artı ara süre, yarım saate yukarı yuvarlanır); alış günü "→ 09:00" gösterir (alış saati eksi ara süre, yarım saate aşağı yuvarlanır). Hücre yarım boyalıdır; telefonda kısa saat gösterilir. |
+| Rezerve | Bir rezervasyonla dolu. |
+| Kapalı (üstü çizili) | Günü elle kapattınız. Artık "Rezerve" diye görünmez. |
+
+Takvimin altındaki açıklama satırı Müsait, Kısmen müsait, Rezerve, Kapalı ve Geçmiş'i listeler.
+
+Müşteri dönüş gününü başlangıç olarak seçerse teslim alma saati o saate kayar, panel bunu söyler ("... günü araç saat ... ve sonrasında müsait; saat buna göre ayarlandı.") ve rezervasyon bağlantısı saati taşır. "→ 09:00" yazan gün yalnız dönüş günü olabilir; seçilen dönüş saati ondan geçse takvim uyarır ("... günü araç yalnız saat ... ve öncesinde müsait. Daha erken bir dönüş günü seçin.").
+
+### "Araç bulunamadı."
+Kısa koddaki `vehicle_id` artık var olmayan ya da kiralanamayan bir araca işaret ediyorsa takvim **Araç bulunamadı.** gösterir. Kısa koddaki kimliği kontrol edin.
+
+:::info 6.4.0 güncellemesinden sonra sayfa önbelleği
+Güncellemeden sonra sayfa önbelleğinizi (barındırmanız, LiteSpeed Cache, WP Rocket vb.) temizleyin. 6.3.x altında önbelleğe alınmış bir sayfa eski rezervasyon formu ve takvim işaretlemesini tutar; yeni betikler onu çalıştıramaz. Rentiva'nın kendi kısa önbelleği kendiliğinden yenilenir. Bkz. [Performans ve önbellek](../../06-faq/performance-cache.md).
+:::
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-availability-calendar-wrapper` sınıfı ile başlar.
@@ -72,5 +90,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Kısmen müsait ve Kapalı günler, saat ipuçları, "Araç bulunamadı." ve sayfa önbelleği notu. |
 | 11.10.2026 | 6.2.0 | `show_seasonal_prices`, `show_discounts`, `start_date` ve `integrate_pricing` kaldırıldı: 6.2.0 bunları artık okumuyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

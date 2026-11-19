@@ -39,6 +39,18 @@ The Ledger is the single source of truth for all financial data in the system.
 | `payout_debit` | `−` | Balance reduction from an approved payout request. |
 | `refund` | `−` | Refund from a cancelled booking. |
 
+### Who Is Credited, and How Refunds Work
+
+- **The vehicle's owner gets the credit.** The commission credit is written to the vendor who owns the rented vehicle, whoever opened the booking (a customer at checkout or an administrator entering it by hand). The vendor panel's **Pending (clearing)** amount and **Bookings, last 30 days** count the bookings of that vendor's vehicles.
+- **Your own fleet writes no row.** A vehicle that belongs to the site rather than to a vendor produces no ledger row.
+- **A refund reverses the credit it follows.** A refund is deducted from the vendor whose credit it reverses, at that credit's commission rate, even if the vehicle later changed hands.
+- **No credit, no debit.** A refund on an order that was never paid (for example a bank transfer refunded while it was still processing) writes nothing and the vendor is not debited. If the order is paid later, the credit and the refund are written together, at the credit's commission rate; a bank-transfer order refunded in full before it is paid leaves nothing on the vendor's account.
+- **The vendor profile badge** is updated when a rental is completed.
+
+:::info Changed in Pro 6.5.0
+Before 6.5.0 the commission could be credited to the customer who made the booking, and a refund on the site's own vehicle could debit the customer. Rows written before the update are not corrected.
+:::
+
 ---
 
 ## ⚛️ 2. Atomic Payout Process (`AtomicPayoutService`)
@@ -101,5 +113,6 @@ $balance = Ledger::get_balance($vendor_id);
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Commission credited to the vehicle's owner, refunds against the original credit, no row for the site's own fleet documented. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Model B Engine, Atomic Transactions, and SaaS isolation details added. |

@@ -20,9 +20,7 @@ Booking form modülü, Rentiva platformundaki **reservation** süreçlerini yön
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-booking-form.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 
@@ -63,6 +61,24 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Bilmekte fayda var
+
+### Kiralama sözleşmesi
+**Kiralama sözleşmesi zorunlu olsun** ayarını açarsanız (bkz. [Rezervasyon ayarları](../../02-core-configuration/booking-settings.md)) form, ek hizmetlerin altında **Kiralama sözleşmesi** bölümünü gösterir: kaydırılabilir bir metin kutusu ve **Kiralama sözleşmesini okudum ve kabul ediyorum.** işaret kutusu. İşareti koymayan müşteri "Rezervasyonunuzu tamamlamak için kiralama sözleşmesini kabul edin." mesajını görür ve rezervasyon reddedilir; bu denetim hem tarayıcıda hem sunucuda yapılır. Kabul tarihi ve saati ile metnin sürümü rezervasyonla birlikte kaydedilir.
+
+Müşterinin sayfası açıkken (ya da sayfanın önbellekteki bir kopyası varken) metni değiştirirseniz, gönderimi "Kiralama sözleşmesi değişti. Rezervasyon yapmadan önce sayfayı yenileyip sözleşmeyi inceleyin." mesajıyla reddedilir; müşteri yeni metni gözden geçirir. Sözleşme transfer rezervasyonlarında gösterilmez.
+
+### Dönüş ve teslim alma tarihleri
+- Dönüş, teslim almadan önce ya da aynı anda ise form "Dönüş tarihi teslim alma tarihinden sonra olmalıdır." der ve tarihler düzelene kadar **Rezervasyon yap** düğmesini kilitler.
+- Geçmişte kalmış bir teslim alma saati için müşteri fiyat alamaz, rezervasyon yapamaz: "Teslim alma zamanı geçti. Lütfen daha ileri bir tarih veya saat seçin." Yönetici geriye dönük bir kaydı yine elle girebilir.
+
+### Araç doluysa
+Seçilen araç o tarihlerde doluysa form "Seçilen araç müsait değil, ancak benzer araçlar önerebiliriz:" der ve aynı tarihlerde boş araçları listeler; her birinde tarihleri koruyan **Bu aracı seç** düğmesi bulunur.
+
+:::info 6.4.0 güncellemesinden sonra sayfa önbelleği
+Güncellemeden sonra sayfa önbelleğinizi bir kez temizleyin. Bkz. [Performans ve önbellek](../../06-faq/performance-cache.md).
+:::
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-booking-form-wrapper` sınıfı ile başlar.
@@ -74,5 +90,6 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Kiralama sözleşmesi, tarih denetimleri ve benzer araç önerileri eklendi. |
 | 11.10.2026 | 6.2.0 | `min_days`, `max_days`, `show_payment_options` ve `default_payment` kaldırıldı: 6.2.0 bunları artık okumuyor; genel ayarlar uygulanmaya devam ediyor. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

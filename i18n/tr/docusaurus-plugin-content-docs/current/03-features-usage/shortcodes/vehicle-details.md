@@ -20,9 +20,7 @@ Vehicle details modülü, Rentiva platformundaki **vehicle** süreçlerini yöne
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-vehicle-details.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 
@@ -62,6 +60,14 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+## Bilmekte fayda var
+
+- **Dolu tarihler:** sayfa, zaten rezerve edilmiş tarihlerle açılırsa (örneğin bir aramadan) rezervasyon kartı toplam ya da kapora yerine günlük fiyatı gösterir ve "Alternatif araçlar" başlığı altında o tarihlerde boş, en fazla iki benzer araç önerir. Her birinde, aynı tarihlerle o aracın sayfasını açan **Bu aracı seç** düğmesi vardır. Müşteri tarihleri değiştirince müsaitlik ve fiyat hemen yenilenir.
+- **Geçmiş ya da geçersiz tarihler:** geçmişte kalmış teslim alma saati ya da teslimden önceki dönüş fiyatlanmaz; kart nedenini söyler ("Teslim alma zamanı geçti. Lütfen daha ileri bir tarih veya saat seçin." / "Dönüş tarihi teslim alma tarihinden sonra olmalıdır.").
+- **Telefon:** müsaitlik açıklaması (Seçili, Kısmen müsait, Rezerve, Kapalı) taşmaz, ikinci satıra geçer.
+- **Sayı biçimi:** kilometre ve motor hacmi sayfanın diline göre yazılır (İngilizce "18,500 km" ve "1.6 L", Türkçe "18.500 km" ve "1,6 L").
+- **Çok dilli siteler:** Polylang ya da WPML kullanan sitede müsaitlik mesajı her ziyaretçiye kendi dilinde gösterilir.
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-vehicle-details-wrapper` sınıfı ile başlar.
@@ -73,4 +79,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Dolu tarih önerileri, tarih mesajları, sayı biçimi ve çok dilli müsaitlik mesajı. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

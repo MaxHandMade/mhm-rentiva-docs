@@ -58,6 +58,10 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 - **Akıllı Önbellek:** Veritabanı sorguları sistem tarafından optimize edilerek önbelleğe alınır.
 - **Koşullu Yükleme:** Statik dosyalar sadece modülün kullanıldığı sayfalarda yüklenir.
 
+### 📜 Bayi sözleşmesi
+
+**Bayi sözleşmesini zorunlu kıl** açıkken (**Ayarlar → Bayi Pazar Yeri → Bayi Sözleşmesi**) form, sözleşme metnini ve zorunlu bir onay kutusunu gösterir; kutu işaretlenmeden başvuru gönderilemez. Metin boşsa onun yerine hazır bir şablon gösterilir. Şablon bir başlangıç noktasıdır, hukuki görüş değildir: gözden geçirip işletmenize ve yerel mevzuata göre düzenleyin. Metin `# Başlık`, `**kalın**`, `- madde` ve `---` kabul eder. Bkz. [Bayi başvurusu ve onboarding](/docs/vendor/onboarding).
+
 ## Geliştirici Notları
 
 - **HTML Yapısı:** Tüm kapsayıcılar `.mhm-rentiva-vendor-apply-wrapper` sınıfı ile başlar.
@@ -69,4 +73,5 @@ Aşağıdaki parametreler kısa kod içerisinde kullanılabilir:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Formda gösterilen bayi sözleşmesi ve metin boşken hazır şablon belgelendi. |
 | 19.03.2026 | 4.21.0-docs | Sayfa alfabetik olarak sıralandı ve görsel yer tutucusu eklendi. |

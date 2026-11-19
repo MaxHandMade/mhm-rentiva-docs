@@ -20,9 +20,7 @@ The Vehicle Details module is designed to manage and present **vehicle** detail 
 
 ## Usage
 
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
+![Frontend view of this shortcode](/img/docs/screens/sc-vehicle-details.webp)
 
 To add this module to any page or post, use the shortcode below:
 
@@ -62,6 +60,14 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Good to know
+
+- **Taken dates:** if the page is opened with dates that are already booked (for example from a search), the booking card shows the daily price instead of a total or deposit, and under "Alternative Vehicles" it suggests up to two similar vehicles that are free on those dates. Each has a **Select This Vehicle** button that opens that vehicle's page with the same dates. When the customer changes the dates, availability and price refresh at once.
+- **Past or invalid dates:** a pickup time that has passed or a return before pickup is not priced; the card shows the reason ("The pickup time has already passed. Please choose a later date or time." / "Return date must be after pickup date.").
+- **Phone:** the availability legend (Selected, Partly available, Booked, Closed) wraps to a second line instead of overflowing.
+- **Number format:** mileage and engine size follow the page language ("18,500 km" and "1.6 L" in English, "18.500 km" and "1,6 L" in Turkish).
+- **Several languages:** on a Polylang or WPML site the availability message appears in each visitor's own language.
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-vehicle-details-wrapper` class.
@@ -73,5 +79,6 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Taken-date suggestions, date messages, number format and multilingual availability message. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

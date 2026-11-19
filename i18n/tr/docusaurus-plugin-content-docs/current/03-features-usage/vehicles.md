@@ -14,22 +14,24 @@ Araçlar, MHM Rentiva sisteminin temel yapı taşlarıdır. **MHM Rentiva > Ara�
 
 ## 🚘 Araç Listesi ve Hızlı İşlemler
 
-Araç listesi, filonuzun genel dökümünü sunar. **"Hızlı Düzenle"** seçeneği ile sayfayı yenilemeden plaka, fiyat ve müsaitlik durumunu güncelleyebilirsiniz.
+Araç listesi, filonuzun genel dökümünü sunar. Listenin üstünde dört kart yer alır: **Toplam araç sayısı** (bu ay kaç aracın rezerve edildiğiyle birlikte), **Bugün aktif** (şu anda müşteride olan araçlar), **Bu ayki doluluk** ve **Bu ay rezervasyon tutarı** (geçen ayla karşılaştırmalı). **Liste / Kartlar / Takvim** düğmeleri filonun görünümünü değiştirir.
 
-- **Liste Sütunları:** Başlık, Araç Kategorileri, Plaka, Günlük Fiyat, Koltuk Sayısı, Vites, Yakıt ve Müsaitlik (Aktif/Pasif).
-- **Ekleyen (v4.61.0):** Bir **"Ekleyen"** sütunu, her aracı kimin oluşturduğunu — bir **bayi** mi yoksa **operatör** mü — gösterir ve listeyi buna göre filtreleyebilirsiniz; böylece bayilerin eklediği ilanlar ile kendi filonuz kolayca ayırt edilir.
-- **Filtreleme:** Kategoriye, tarihe veya mevcut durumuna göre araçları süzebilirsiniz.
+- **Liste Sütunları:** Araç (fotoğraf, başlık; altında plaka, kategori ve ekleyenin adı), Konum (yalnız Konumlar özelliği etkinse), Özellikler (koltuk, vites ve yakıt), Fiyat/gün, Bu hafta (7 günlük müsaitlik şeridi), Müsait, Yaşam döngüsü ve Öne çıkarılmış.
+- **Hızlı Düzenleme:** Satırdaki **"Hızlı Düzenle"** ile sayfayı yenilemeden plaka, fiyat, müsaitlik ve diğer hızlı alanları güncelleyebilirsiniz.
+- **Filtreleme:** Araçları kategoriye, müsaitlik durumuna, konuma (etkinse) veya yaşam döngüsü durumuna (Aktif, Duraklatılmış, Süresi dolmuş, Geri çekilmiş ya da Arşiv) göre süzebilirsiniz.
+- **Rezervasyon tutarı:** "Bu ay rezervasyon tutarı" kartı, bu ayın onaylı, devam eden ve tamamlanan rezervasyonlarının fiyatını toplar. Bu, rezerve edilen tutardır; tahsilat değildir. İptal edilen ya da iade edilen rezervasyonlar sayılmaz.
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: ARAÇ LİSTESİ VE HIZLI DÜZENLEME</strong><br/>
-  <em>mhm-rentiva-vehicle-list-quick-edit</em>
-</div>
+![Özet kartları ve kategori çipleriyle araç listesi](/img/docs/screens/vehicles-list.webp)
 
 ---
 
 ## ➕ Araç Tanımlama ve Detaylar
 
-Yeni bir araç eklerken veya mevcut olanı düzenlerken **"Araç Detayları"** panelinde aşağıdaki verileri eksiksiz doldurmanız önerilir:
+Araç düzenleme ekranında sayfa başlığının altında **"← Araçlar"** bağlantısı ve araç adı bulunur. Ana sütunda yukarıdan aşağıya **Araç galerisi**, **Araç ayrıntıları** ve **Kapalı tarihler** kutuları yer alır. Yan sütunda **Yayımla**, **Öne çıkarılmış**, **Araç kategorileri** ve **Araç görseli** kutuları, ardından (Pro) kutuları olan **Yaşam Döngüsü Durumu**, **Araç Belgeleri** ve **Transfer Ayarları (VIP Modülü)** gelir. Kutuları sürükleyip kendi sıranızı verirseniz sıranız korunur.
+
+Yeni bir araç eklerken veya mevcut olanı düzenlerken **"Araç ayrıntıları"** kutusundaki verileri eksiksiz doldurmanız önerilir. Bu kutuda hangi alanların görüneceği **Araç Ayarları**'ndan belirlenir (bkz. [Araç Ayarları](./vehicle-settings.md)).
+
+Araç ayrıntılarını, özellikleri ve ekipmanları sürükleyerek istediğiniz sıraya dizebilirsiniz; sıra **Güncelle** ile, her araç için ayrı ayrı kaydedilir.
 
 ### 1. Temel Teknik Veriler
 - **Kullanılabilirlik:** Aracın sistemde aktif/pasif olma durumu.
@@ -37,7 +39,7 @@ Yeni bir araç eklerken veya mevcut olanı düzenlerken **"Araç Detayları"** p
 - **Fiyat ve Finans:** Günlük kiralama bedeli ve Depozito tutarı.
 - **Kimlik Bilgileri:** Plaka, Marka, Model ve Model Yılı.
 - **Kapasite:** Koltuk Sayısı ve Kapı Sayısı.
-- **Mekanik:** Vites Tipi (Otomatik/Manuel), Yakıt Tipi (Benzin/Dizel/Hibrit/Elektrik) ve Motor Hacmi.
+- **Mekanik:** Vites Tipi (Otomatik/Manuel), Yakıt Tipi (Benzin, Dizel, Hibrit, Elektrik, LPG, CNG ya da Hidrojen) ve Motor Hacmi.
 
 ---
 
@@ -53,9 +55,11 @@ Yedek Lastik, İlk Yardım Çantası, Yangın Söndürücü, Uyarı Üçgeni, Ar
 
 ---
 
-## ✈️ Transfer Ayarları (VIP Modülü)
+## ✈️ Transfer Ayarları (VIP Modülü) (Pro)
 
-MHM Rentiva, klasik kiralamanın dışında VIP Transfer operasyonlarını da destekler. Aracın en alt kısmındaki bu panelden şu ayarlar yapılır:
+> Transfer Ayarları kutusu **MHM Rentiva Pro**'nun parçasıdır.
+
+MHM Rentiva Pro, klasik kiralamanın dışında VIP Transfer operasyonlarını da destekler. Aracın yan sütunundaki **Transfer Ayarları (VIP Modülü)** kutusundan şu ayarlar yapılır:
 
 - **Hizmet Türü:** Sadece Kiralama, Sadece Transfer veya Her İkisi.
 - **Yolcu Kapasitesi:** Maksimum yolcu sayısı.
@@ -64,66 +68,78 @@ MHM Rentiva, klasik kiralamanın dışında VIP Transfer operasyonlarını da de
 
 ---
 
-## Galeri ve Gorsel Yonetimi
+## Galeri ve Görsel Yönetimi
 
-- **Arac Goruntusu:** Arama sonuclarinda gorunecek ana profil fotografi.
-- **Arac Galerisi:** Aracin ic ve dis detaylarini gosteren maksimum 10 adet fotograf.
-
----
-
-## Arac Belgeleri (v4.23.1)
-
-Arac ekleme formunda (`[rentiva_vehicle_submit]`) iki belge yukleme alani bulunur:
-
-### Arac Ruhsati (Vehicle Registration Document)
-Vendor, arac ruhsat belgesini form uzerinden yukler. Admin tarafindan dogrulama icin incelenir.
-
-### Arac Sigortasi (Vehicle Insurance Document)
-v4.23.1 ile eklenmistir. Arac ruhsatindan hemen sonra gelen bu bolum, aracin sigorta belgesinin yuklenmesini saglar.
-
-- **Meta key:** `_mhmrentiva_vehicle_insurance_doc`
-- **Islem:** VehicleSubmit.php AJAX handler tarafindan islenir ve WordPress Media Library'de saklanir.
-- **Gecmis:** Bu alan onceden vendor basvuru formunda bulunuyordu. v4.23.1 ile her araca ozel sigorta belgesi yuklenebilmesi icin arac ekleme formuna tasindi.
+- **Araç Görseli:** Arama sonuçlarında görünecek ana profil fotoğrafı.
+- **Araç Galerisi:** Aracın iç ve dış detaylarını gösteren maksimum 10 adet fotoğraf.
 
 ---
 
-## Bloklu Tarihler (Blocked Dates)
+## Araç Belgeleri (v4.23.1)
 
-Aracın belirli tarihlerde kiralanmasını engellemek için **Bloklu Tarihler** meta kutusu kullanılır. v4.23.0 ile "Tumune Uygula" (Apply to All) işlevi duzeltilmistir:
+Araç ekleme formunda (`[rentiva_vehicle_submit]`) iki belge yükleme alanı bulunur:
 
-- **Eski davranis:** JS yalnızca `vehicle_id` gonderiyordu, PHP tarafinda DB'den okuma yapiliyordu (henuz kaydedilmemis veriler için calismiyordu).
-- **Yeni davranis (v4.23.0):** JS artik `dates` + `notes` verilerini JSON payload olarak gonderir. PHP, oncelikle payload'tan okur; bulamazsa DB'ye duser (fallback).
-- **Ilgili dosyalar:** `BlockedDatesMetaBox.php`, `assets/js/admin/blocked-dates.js`
+### Araç Ruhsatı (Vehicle Registration Document)
+Bayi, araç ruhsat belgesini form üzerinden yükler. Yönetici tarafından doğrulama için incelenir.
 
-### Aylık Rezervasyon Takvimi'nden hızlı bloklama (v4.61.0)
+### Araç Sigortası (Vehicle Insurance Document)
+v4.23.1 ile eklenmiştir. Araç ruhsatından hemen sonra gelen bu bölüm, aracın sigorta belgesinin yüklenmesini sağlar. Belge WordPress Ortam Kitaplığı'nda saklanır.
 
-Tek bir günü, aracı düzenlemeye açmadan doğrudan **Aylık Rezervasyon Takvimi'nden** de bloklayabilir veya açabilirsiniz:
+Bu alan önceden bayi başvuru formunda bulunuyordu; her araca özel sigorta belgesi yüklenebilmesi için araç ekleme formuna taşındı.
+
+---
+
+## Kapalı Tarihler
+
+Aracı belirli tarihlerde kapatmak için **Kapalı tarihler** kutusunu kullanın. Takvimde günlere tıklayarak kapatın; kapalı günler kırmızı gösterilir ve bir rozet **"N gün kapalı"** der. Kapalı her gün **Kapalı günler** altında, isteğe bağlı bir notla (**"Not ekle... (isteğe bağlı)"**) listelenir; **Tümünü temizle** bu aracın tüm günlerini yeniden açar. Değişiklikler **Güncelle** ile kaydedilir.
+
+- **Tüm araçlara uygula:** Yayımlanmış diğer tüm araçların kapalı günlerini bu aracın kapalı günleriyle değiştirir.
+- **Tüm araçlardan kaldır:** Yalnız bu aracın kapalı günlerini yayımlanmış diğer araçlardan kaldırır; onların diğer kapalı günleri durur.
+
+(Pro) Bir bayinin iptal cezasının kapattığı günler bu düğmelerle ne kopyalanır ne kaldırılır; 30 gün sonra kendiliğinden kalkar. Elle kapattığınız tarihler korunur.
+
+İki düğme de tüm filoya yazdığı için yalnız başkalarının içeriğini düzenleyebilen kullanıcılara (yöneticilere) açıktır.
+
+Notlarda Türkçe karakterler ve tırnak işaretleri dahil her karakter kullanılabilir.
+
+### Aylık Rezervasyon Takvimi'nden hızlı kapatma (v4.61.0)
+
+Tek bir günü, aracı düzenlemeye açmadan doğrudan **Aylık Rezervasyon Takvimi'nden** de kapatabilir veya açabilirsiniz:
 
 - **Boş bir güne tıklayın** — yeni rezervasyonlara kapatır.
-- **Bloklu bir güne tıklayın** — yeniden açar.
+- **Kapalı bir güne tıklayın** — yeniden açar.
 
-Halihazırda rezervasyonu olan günler değişmez — popup'larını korur ve bu yolla bloklanamaz.
+Halihazırda rezervasyonu olan günler değişmez — açılır penceresini korur ve bu yolla kapatılamaz.
 
 ---
 
-## ⚡ AssetManager Admin Kapsami
+## Aracı Çöpe Atma ve Geri Yükleme
 
-v4.22.0 itibariyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva admin sayfalarında çalışır (`is_rentiva_admin_page()` guard). v4.22.1 ile `mhmrentiva_vehicle`, `mhmrentiva_booking` ve `mhmrentiva_addon` post type'lari da guard'a eklenmiştir. Bu sayede CSS degiskenleri (`css-variables.css`) dogru sekilde yüklenir ve KPI kartlari bozulmaz.
+Aracı satır eyleminden, toplu işlemden ya da düzenleme ekranından çöpe atabilirsiniz. Yaklaşan rezervasyonu olan bir araç reddedilmez: rezervasyonlar aracı korur, ancak müşteriler aracın sayfasını artık açamaz. Bu yüzden böyle bir aracı çöpe attığınızda Araçlar listesinde bir uyarı çıkar: yaklaşan rezervasyon sayısı, her rezervasyona bir bağlantı (ilk beşi, sonra "ve N tane daha") ve **Aracı geri yükle** düğmesi.
+
+**Aracı geri yükle** (ve Çöp kutusundaki **Geri yükle**) aracı çöpe atılmadan önceki durumunda geri getirir; yayımda olan araç yeniden yayımda olur ve sayfası yeniden açılır.
+
+---
+
+## ⚡ AssetManager Yönetici Kapsamı
+
+v4.22.0 itibarıyla `AssetManager::enqueue_admin_assets()` yalnızca Rentiva yönetici sayfalarında çalışır (`is_rentiva_admin_page()` koruması). v4.22.1 ile `mhmrentiva_vehicle`, `mhmrentiva_booking` ve `mhmrentiva_addon` yazı türleri de bu korumaya eklenmiştir. Bu sayede CSS değişkenleri (`css-variables.css`) doğru şekilde yüklenir ve KPI kartları bozulmaz.
 
 ---
 
 ### Bölüm Özeti
-- Araclar **CPT** (Custom Post Type) olarak saklanir ve her araç kendine ozel meta alanlara sahiptir.
-- **Hizli Düzenleme** ile operasyonel hiz kazanin.
-- **VIP Modulu** ile transfer kapasitelerini ve fiyat carpanlarini yonetin.
-- **Bloklu Tarihler** artik "Tumune Uygula" işlevinde JSON payload kullanir.
+- Araçlar **CPT** (Custom Post Type) olarak saklanır ve her araç kendine özel meta alanlara sahiptir.
+- **Hızlı Düzenleme** ile operasyonel hız kazanın.
+- **VIP Modülü** (Pro) ile transfer kapasitelerini ve fiyat çarpanlarını yönetin.
+- **Kapalı tarihler** kutusuyla aracı belirli günlerde kiralamaya kapatın; **Tüm araçlara uygula** ile tüm filoya yayın.
 
-### Degisiklik Gunlugu
-| Tarih | Surum | Not |
+### Değişiklik Günlüğü
+| Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 29.06.2026 | 4.61.0 | "Ekleyen" (bayi/operatör) araç-listesi sütunu ve Aylık Rezervasyon Takvimi'nden hızlı gün bloklama dokümante edildi. |
-| 28.03.2026 | 4.23.1 | Arac sigorta belgesi yukleme bolumu eklendi. Sehir secimi SelectWoo'ya donusturuldu. |
-| 27.03.2026 | 4.23.0 | Bloklu Tarihler "Tumune Uygula" fix, AssetManager admin guard dokumante edildi. |
-| 19.03.2026 | 4.21.2 | Arac detaylari, ozellikler, ekipmanlar ve VIP modulu gercek arayuze gore guncellendi. |
-| 26.02.2026 | 4.21.0 | Ilk surum olusturuldu. |
+| 18.11.2026 | 6.4.0 | Araç listesi kartları ve sütunları, yeni araç düzenleme ekranı, Kapalı tarihler kutusu ile çöp uyarısı ve Aracı geri yükle belgelendi. |
+| 29.06.2026 | 4.61.0 | "Ekleyen" (bayi/operatör) araç-listesi sütunu ve Aylık Rezervasyon Takvimi'nden hızlı gün kapatma belgelendi. |
+| 28.03.2026 | 4.23.1 | Araç sigorta belgesi yükleme bölümü eklendi. Şehir seçimi SelectWoo'ya dönüştürüldü. |
+| 27.03.2026 | 4.23.0 | Kapalı Tarihler "Tümüne Uygula" düzeltmesi, AssetManager yönetici koruması belgelendi. |
+| 19.03.2026 | 4.21.2 | Araç detayları, özellikler, ekipmanlar ve VIP modülü gerçek arayüze göre güncellendi. |
+| 26.02.2026 | 4.21.0 | İlk sürüm oluşturuldu. |
 

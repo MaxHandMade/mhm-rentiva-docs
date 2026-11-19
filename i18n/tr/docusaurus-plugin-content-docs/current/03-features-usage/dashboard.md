@@ -8,116 +8,60 @@ slug: /features-usage/dashboard
 
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-usage_guide-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
-:::info React SPA (v4.36.0'dan beri)
-Kontrol Paneli v4.36.0 sürümünde, özel bir REST API ile desteklenen tam bir **React SPA**'ya taşındı. Sayfa, PHP tam sayfa render'ı olmadan yüklenir — tüm veriler `/wp-json/mhm-rentiva/v1/dashboard/*` uç noktaları üzerinden asenkron çekilir. jQuery bağımlılığı yok. Eski PHP widget'ları kaldırıldı.
+Kontrol Paneli işletmenizi tek bakışta gösterir: rezervasyon rakamları, henüz tahsil edilmemiş tutarlar, önümüzdeki yedi gün ve hızlı kısayollar. **MHM Rentiva > Başlangıç ekranı** altından ulaşılır. Sayfa başlığı "Başlangıç ekranı", alt başlığı "MHM Rentiva · Genel bakış" olarak görünür.
+
+![MHM Rentiva Başlangıç ekranı](/img/docs/screens/dashboard.webp)
+
+---
+
+## 📊 Özet Kartları
+
+Üstte dört kart yer alır. Tüm zamanların rakamını, bu ayın rakamını ve geçen aya göre değişimi gösterir:
+
+- **Toplam rezervasyon:** iptal edilen ve iade edilenler hariç tüm rezervasyonlar; yanında bu ayın sayısı.
+- **Rezervasyon tutarı:** onaylı, devam eden ve tamamlanan rezervasyonların fiyatı. Bu, rezerve edilen tutardır; tahsilat değildir. Henüz ödenmemiş tutar **Ödemeler** kutusundadır.
+- **Aktif araçlar:** şu anda aktif olan araçlar, toplam araç sayınızdan.
+- **Bu ay kiralayan:** bu ay rezervasyon yapan farklı müşteri sayısı (iptal ve iade edilen rezervasyonlar sayılmaz).
+
+:::info 6.4.0'da değişti
+İptal edilen ve iade edilen rezervasyonlar artık **Toplam rezervasyon**, bu ayın sayısı ve **Bu ay kiralayan** içinde sayılmaz; **Rezervasyon durumları** kutusunda görünür. "Toplam gelir" kartı **Rezervasyon tutarı** oldu ve sağ üstteki çalışmayan "Son 30 gün" seçicisi kaldırıldı.
 :::
 
-Kontrol Paneli, MHM Rentiva'nın kalbidir. İşletmenizin anlık durumunu, finansal performansını ve bekleyen operasyonel görevleri tek bir ekranda görmenizi sağlar. **MHM Rentiva > Kontrol Paneli** menüsünden ulaşılır.
+---
 
-Eklenti yüklendiğinde sizi karşılayan bu ekran, veriye dayalı kararlar almanız için kritik metrikleri sunar.
+## 📈 Grafik ve Listeler
 
-<div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', backgroundColor: '#f9fafb', textAlign: 'center', margin: '20px 0' }}>
-  <p style={{ margin: 0, color: '#6b7280', fontWeight: 'bold' }}>🖼️ GÖRSEL: KONTROL PANELİ VE REZERVASYON TAKVİMİ</p>
-  <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#9ca3af' }}>mhm-rentiva-dashboard-calendar-view</p>
-</div>
+- **Yeni rezervasyon tutarı (son 7 gün):** son yedi günün günlük rezerve edilen tutarını gösteren çubuk grafik; toplamı **Bu hafta:** satırında. Günler kiralama tarihine göre değil, rezervasyonun oluşturulduğu tarihe göre sayılır.
+- **Son rezervasyonlar:** en yeni oluşturulan önce olmak üzere son rezervasyonlar; Araç, Müşteri, Tarih, Tutar ve Durum sütunları ile **← Önceki / Sonraki →** sayfalama.
+- **Yaklaşan işlemler:** önümüzdeki 7 gün içinde başlayacak kiralamalar (araç, plaka, alış → dönüş tarihleri, müşteri ve durum) ve transferler (Pro). Yoksa "Önümüzdeki 7 gün içinde yaklaşan işlem yok." yazar.
+- **Rezervasyon durumları:** her durumdaki rezervasyon sayısı; iptal edilen ve iade edilenler dahil.
+- **Ödemeler:** iki rakam.
+  - **Bekleyen ödeme:** rezervasyonların henüz borçlu olduğu tutar; rezervasyon listesinin **Ödeme** sütunuyla aynı okunur: kaporadan kalan bakiye, hiç ödenmemiş rezervasyonlar (çevrim dışı kayıtlar dahil) ve ödeme bekleyenler. İptal edilen, iade edilen ve tamamı ödenmiş rezervasyonlar borç sayılmaz.
+  - **Kapora (bloke):** kapora olarak alınmış, onaylı ve devam eden rezervasyonların kaporaları.
 
 ---
 
-## 📊 Özet İstatistik Kartları (Real-time Metrics)
+## ⚡ Hızlı İşlemler
 
-Panelin en üstünde, mevcut aya ait (veya seçilen periyottaki) performans verileri simgesel kartlarla gösterilir:
-
-- **Aylık Rezervasyonlu Araçlar:** Toplam rezervasyon alan araç sayısı ve bunların toplam rezervasyon adedi.
-- **Etkin Olmayan Araçlar:** Şu an kiralamaya kapalı veya pasif durumdaki araç sayısı.
-- **Bakım Altındaki Araçlar:** Teknik servis veya bakım modunda işaretlenmiş araçların sayısı.
-- **Ort. Aylık Gelir:** Seçilen ayın toplam cirosu ve bir önceki aya göre büyüme/küçülme oranı (%).
+**Yeni rezervasyon ekle**, **Tüm rezervasyonlar**, **Yeni araç ekle**, **Tüm araçlar**, **Ayarlar**, **Müşteriler** ve **Ek hizmetler** kısayolları. Rentiva Pro kendi ekranlarına (Raporlar, Bayiler, Mesajlar, Dışa aktarma) kısayol ekler; her biri yalnızca lisansınız o özelliği içeriyorsa görünür.
 
 ---
 
-## 📅 Aylık Rezervasyon Takvimi
+## Lite ve Pro
 
-Dashboard'un merkezinde yer alan interaktif takvim, tüm filonuzun doluluk oranını görselleştirir.
-
-- **Araç Bazlı Satırlar:** Sol sütunda araç listesi (Model ve Plaka) yer alır.
-- **Durum Renkleri (Legend):**
-  - <span style={{color: '#facc15'}}>●</span> **Beklemede:** Henüz onaylanmamış rezervasyonlar.
-  - <span style={{color: '#3b82f6'}}>●</span> **Onaylı:** Ödemesi alınmış veya admin tarafından onaylanmış işlemler.
-  - <span style={{color: '#f97316'}}>●</span> **Devam Etmekte:** Araç şu an müşteride olan işlemler.
-  - <span style={{color: '#22c55e'}}>●</span> **Tamamlandı:** Kiralama süreci başarıyla bitmiş rezervasyonlar.
-  - <span style={{color: '#ef4444'}}>●</span> **İptal Edildi:** İptal edilmiş kayıtlar.
-- **İnteraktif Navigasyon:** Ay butonları ile geçmiş ve gelecek dönemlere hızlı geçiş yapabilirsiniz.
-
----
-
-## 🔍 Rezervasyon Detayları Paneli
-
-Takvim üzerindeki herhangi bir rezervasyon kutucuğuna tıklandığında (veya üzerine gelindiğinde) detaylı bir pop-up açılır:
-
-- **Müşteri Bilgileri:** Ad, E-posta ve Telefon.
-- **Tarih ve Saat:** Teslim alma ve iade (Return) zamanları.
-- **Finansal Özet:** Toplam rezervasyon bedeli.
-- **Hızlı Erişim:** "Rezervasyonu Düzenle" butonu ile doğrudan işlem sayfasına gidebilirsiniz.
-
----
-
-## 🛠️ İnteraktif Özellikler
-
-Kontrol Paneli kullanıcı deneyimi için şu hızlı araçları sunar:
-
-- **Dışa Aktar:** İstatistikleri veya listeleri rapor formatında indirme.
-- **Widget Düzenleme:** Ekran ayarları (Screen Options) ile hangi kartların görüneceğini seçebilirsiniz.
-- **Önbellek (Cache) Yönetimi:** "Önbelleği Temizle" ile anlık veritabanı yansımasına ulaşın.
-
----
-
-## v4.23.0 Widget Denetimi ve İyileştirmeler
-
-v4.23.0 sürümünde Dashboard widget'larında kapsamlı bir denetim ve iyileştirme yapılmıştır:
-
-### Düzeltilen Hatalar
-- **Timezone tutarlılığı:** Geri sayım ve yaklaşan operasyon widget'larında `time()` yerine `current_time('timestamp')` kullanılarak WordPress timezone ayarına uyum sağlandı.
-- **Cache invalidation:** İstatistik widget'ı cache key prefix uyumsuzluğu düzeltildi (`mhmrentiva_dashboard_stats` → `mhmrentiva_dashboard_stats`).
-- **Status senkronizasyonu:** `updated_post_meta` + `added_post_meta` hook'ları eklenerek meta güncellemelerinde durum tutarlılığı sağlandı.
-- **WooCommerce email görselleri:** Rezervasyon onay e-postalarında araç görseli artık doğru şekilde gösteriliyor.
-- **Takvim popup saat bilgisi:** Rezervasyon detay popup'ında teslim alma/iade saatleri eklendi.
-- **ID uyumsuzluğu:** WooCommerce order ID ile rezervasyon ID eşleştirmesi düzeltildi.
-
-### Tasarım İyileştirmeleri
-- **İstatistik kartları:** 2x2 grid, ikonlar ve renk kodlaması ile yeniden tasarlandı.
-- **Gelir grafiği:** Tarih formatı yerelleştirildi, iptal edilen rezervasyonlar kırmızı kesikli dataset olarak eklendi.
-- **Mesajlar widget'ı:** Self-contained inline CSS, badge, avatar initials ve "ne kadar önce" zaman gösterimi.
-- **Yaklaşan operasyonlar:** Saat bilgisi, display ID ve tıklanabilir link desteği.
-
-### Lite ve Pro
-- **Gelir Grafiği** ve **Yaklaşan Operasyonlar** dahil panonun bütün widget'ları Lite'ta çalışır. Hiçbir widget Pro'ya ayrılmamıştır.
-- Rentiva Pro, kendi ekranlarına hızlı işlem kısayolları ekler (Raporlar, Bayiler, Mesajlar, Dışa Aktarım); her biri yalnızca lisansınız o özelliği kapsıyorsa görünür.
+Panodaki her kutu Lite'ta çalışır. Hiçbir kutu Pro'ya ayrılmamıştır.
 
 ---
 
 ### Bölüm Özeti
-- **Dashboard** ile filonuzun 30 günlük projeksiyonunu izleyin.
-- **Renk Kodları** ile hangi aracın hangi tarihte müsait olduğunu anında anlayın.
-- **Müşteri Kartları** ile rezervasyon detaylarına saniyeler içinde ulaşın.
-
-### React Bileşenleri (v4.36.0+)
-
-| Bileşen | Amaç |
-| :--- | :--- |
-| `DashboardPage` | Kök yerleşim — tüm veriyi çeker, yükleme durumunu yönetir |
-| `StatsCards` | Dört KPI gradyan kartı (toplam rezervasyon, gelir, aktif araçlar, müşteriler) |
-| `RecentBookings` | REST çekimli sayfalandırılmış son rezervasyonlar widget'ı |
-| `TransferWidget` | Yaklaşan transferlere genel bakış |
-| `QuickActions` | Sık kullanılan yönetici görevlerine hızlı bağlantı grid'i |
-
-**REST Ad Alanı:** `GET /wp-json/mhm-rentiva/v1/dashboard/stats`, `/dashboard/recent-bookings`, `/dashboard/recent-transfers`
-
-**Mobil duyarlı:** Kontrol Paneli widget satırları ≤782px'te (WP yönetici breakpoint) tek sütuna iner. Hızlı işlemler grid'i 3 sütuna düşer.
+- Kartlar ve kutular **rezerve edileni** sayar; **Bekleyen ödeme** henüz tahsil edilmemiş tutarı gösterir.
+- İptal ve iade edilen rezervasyonlar toplamlara girmez, **Rezervasyon durumları** altında görünür.
+- Eklentiyi kurduktan sonra ilk gördüğünüz ekran budur.
 
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
-| 09.11.2026 | 6.3.1 | Düzeltme: Gelir Grafiği ve Yaklaşan Operasyonlar Pro'ya özel değil; panonun bütün widget'ları Lite'ta çalışır. Pro'nun hızlı işlem kısayolları eklendi. |
-| 12.05.2026 | 4.49.0 | Kontrol Paneli widget satırları mobil duyarlılık düzeltmesi (782px breakpoint). |
-| 10.05.2026 | 4.36.0 | Tam React SPA geçişi. Eski PHP widget'ları kaldırıldı. REST API uç noktaları eklendi. |
-| 26.03.2026 | 4.23.0 | 11 widget hata düzeltmesi, timezone tutarlılığı, cache fix, tasarım iyileştirmeleri ve Lite gating eklendi. |
-| 19.03.2026 | 4.6.3 | Kontrol Paneli rehberi gerçek arayüz metrikleri ve takvim detaylarıyla güncellendi. |
+| 18.11.2026 | 6.4.0 | Başlangıç ekranı güncel hâline göre yeniden yazıldı: Rezervasyon tutarı kartı, iptallerin sayılmaması, kapora bakiyelerini ve ödenmemiş çevrim dışı kayıtları sayan Bekleyen ödeme, en yeni oluşturulan önce sıralama, "Son 30 gün" seçicisinin kalkması. |
+| 09.11.2026 | 6.3.1 | Düzeltme: Gelir Grafiği ve Yaklaşan İşlemler yalnız Pro değildir; tüm pano parçaları Lite'ta çalışır. Pro'nun hızlı kısayolları eklendi. |
+| 10.05.2026 | 4.36.0 | Tam React SPA geçişi. Eski PHP parçaları kaldırıldı. |
+| 19.03.2026 | 4.6.3 | Pano rehberi gerçek arayüz metrikleriyle güncellendi. |

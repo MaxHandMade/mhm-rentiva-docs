@@ -64,6 +64,10 @@ Aşağıdaki başlıklar, destek taleplerinde en sık karşılaşılan senaryola
     1. Rentiva ayarlarından "Cache Flush" yapın.
     2. Kısa kodlarda `cache="false"` parametresini kullanmayı deneyin.
 
+### Polylang ya da WPML kullanan sitede ziyaretçiler başka bir dilin adlarını görüyor?
+- **6.4.0'dan beri:** araç sayfasının müsaitlik mesajı ile arama kenar çubuğunun yakıt, vites ve kategori adları her ziyaretçiye kendi dilinde gösterilir. Rentiva'nın paylaşılan önbellekleri metin tutmaz; kategori adları çeviri eklentinizin terimlerinden okunur.
+- **Bir dilde hâlâ yanlış ad görünüyorsa:** araç kategorilerini çeviri eklentinizde çevirin ve sayfa önbelleğinizi temizleyin.
+
 ### Harita veya Konum servisleri çalışmıyor?
 - **Neden:** Geçersiz Google Maps API anahtarı veya kısıtlanmış HTTP referer.
 - **Çözüm:** Rentiva > Ayarlar > API sekmesinden anahtarı test edin.
@@ -79,4 +83,5 @@ Sorun devam ederse şu adımları izleyin:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Çok dilli (Polylang/WPML) notu eklendi. |
 | 19.03.2026 | 4.21.2 | Rezervasyon, ödeme ve tedarikçi bazlı detaylı sorun giderme maddeleri eklendi. |

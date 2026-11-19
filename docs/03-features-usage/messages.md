@@ -25,9 +25,13 @@ The Messaging System is a centralized support channel that lets you communicate 
 The inbox is organized by urgency and type of request. The list includes the following main columns:
 
 - **Subject & Labels:** New (NEW) messages are highlighted with an orange label.
-- **Priority:** Urgency level set to "Low", "Normal", or "High".
-- **Category:** The topic of the message (General, Support, Booking Issue, etc.).
-- **Status:** Status tracking as "Pending", "Replied", or "Closed".
+- **Priority:** Urgency level set to "Normal", "High", or "Urgent".
+- **Category:** The topic of the message (General, Booking, Payment, Technical Support, etc.; you manage the list in [Message Settings](../02-core-configuration/message-settings.md)).
+- **Status:** Status tracking as "Pending", "Answered", or "Closed".
+
+:::note Messages from the contact form
+Messages that visitors send through the website's [contact form](./shortcodes/contact.md) are a different list: **MHM Rentiva > Contact Messages**. There the selected booking is shown on the message, the type filter matches the types on the form, and the form's spam protection and **Spam** filter live.
+:::
 
 ---
 
@@ -50,7 +54,7 @@ Clicking a message opens a detail page that presents the dialogue with the custo
 
 The message editing screen has a critical feature for maintaining operational context: **Booking Association.**
 
-- **Category and Status Change:** The admin can manually update the message type and its status (e.g. from Pending to Replied).
+- **Category and Status Change:** The admin can manually update the message type and its status (e.g. from Pending to Answered).
 - **Booking Mapping:** You can link an incoming message to an existing booking number (such as #3037). This way, when you view the booking details, you can see all historical correspondence related to that transaction.
 
 ---

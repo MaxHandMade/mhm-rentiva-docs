@@ -30,7 +30,7 @@ This page documents the `[rentiva_vendor_ledger]` shortcode — the vendor-side 
 
 `[rentiva_vendor_ledger]` renders the vendor's financial transaction history — credits earned per booking, refunds reversed, and payouts disbursed — backed by the central `Ledger` service. Each row shows transaction type, related booking (when applicable), amount (formatted via WooCommerce currency settings), and timestamp.
 
-This is the **transparent record** behind the vendor's earnings number on the dashboard. When a customer books a vehicle, a credit entry lands here automatically. When admin processes a payout, a corresponding debit lands here. When a booking is refunded, `PayoutService::create_refund_entry()` writes a reverse entry so the ledger never goes out of balance.
+This is the **transparent record** behind the vendor's earnings number on the dashboard. When a customer books and pays for one of the vendor's vehicles, a credit entry lands here automatically; the credit always goes to the vendor who owns the vehicle. When admin processes a payout, a corresponding debit lands here. When a booking is refunded, a reverse entry is written against the vendor whose credit it reverses, so the ledger never goes out of balance. A refund of an order that was never paid writes nothing until the order is paid (then the credit and the refund are written together), and the site's own vehicles write no rows.
 
 ## Authentication & role gate
 
@@ -45,8 +45,8 @@ Pro gate is **inherited from the page** — typical placement is `/panel/`, whic
 
 | Kind | Source | Direction |
 | :--- | :--- | :--- |
-| Booking commission | `OrderManager` writes via `Ledger::credit()` when a booking is paid | Credit (+) |
-| Refund | `PayoutService::create_refund_entry()` writes a reverse entry on cancellation/refund | Debit (−) |
+| Booking commission | Written when the booking's WooCommerce order is paid or completed, to the owner of the rented vehicle | Credit (+) |
+| Refund | Written when the order is refunded, against the credit it reverses | Debit (−) |
 | Payout | Admin payout dispatch writes via `Ledger::debit()` | Debit (−) |
 | Manual adjustment | Admin-side manual ledger entries (rare) | Either |
 
@@ -95,8 +95,7 @@ The customer-side equivalent for transaction history is `[rentiva_payment_histor
 ## Related architecture
 
 - **`Ledger` service** (`MHMRentiva\Core\Financial\Ledger`) — the single source of truth for vendor transactions. All ledger writes go through this class so the running balance never drifts.
-- **`PayoutService::create_refund_entry()`** — writes the reverse-direction ledger entry when a booking is refunded so the audit trail stays bidirectional.
-- **`OrderManager`** — credits the ledger when a booking order completes (the same hook that issues a license key for license-based plugins also credits the vendor on the rental side).
+- **`CommissionBridge`** — listens to WooCommerce payment, completion and refund events and writes the credit and the reverse-direction refund entries, so the audit trail stays bidirectional.
 
 ## See also
 
@@ -104,3 +103,9 @@ The customer-side equivalent for transaction history is `[rentiva_payment_histor
 - [Customer payment history shortcode](./payment-history) — the customer-side counterpart
 - [Vendor onboarding](/docs/vendor/onboarding) — operational guide
 - [Payouts ledger documentation](/docs/vendor/payouts-ledger) — admin-side payout flow + accounting model
+
+
+## Changelog
+| Date | Version | Note |
+|---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Credit goes to the owner of the rented vehicle; refunds follow the original credit; sources corrected. |

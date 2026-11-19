@@ -20,9 +20,7 @@ The Vehicles Grid module is designed to manage and present **vehicle** listings 
 
 ## Usage
 
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
+![Frontend view of this shortcode](/img/docs/screens/sc-vehicles-grid.webp)
 
 To add this module to any page or post, use the shortcode below:
 
@@ -76,6 +74,12 @@ The following parameters are available inside the shortcode:
 - **Smart Caching:** Database queries are optimized and cached by the system.
 - **Conditional Loading:** Static assets are only enqueued on pages where the module is used.
 
+## Vehicle card details
+
+- **Required services in the total:** when the page is opened with dates (for example from a search), each card shows the total for the period. If you marked some additional services as required, a line under the total names them, for example "Required service included: Full insurance 25" (several services are listed with commas and one combined amount; a per-day service is multiplied by the number of days). A card without dates shows the daily price and no such line.
+- **Price and button layout:** the card's own width decides the layout. In a narrow card (for example featured vehicles on the home page, or a three-column vehicles page) the price sits above the **Make Booking** button; in a wide card (for example dated search results) they sit side by side. Cards in the same row always look the same.
+- **Number format:** mileage and engine size follow the page language: English "18,500 km" and "1.6 L", Turkish "18.500 km" and "1,6 L".
+
 ## Developer Notes
 
 - **HTML Structure:** All containers start with the `.mhm-rentiva-vehicles-grid-wrapper` class.
@@ -87,6 +91,7 @@ The following parameters are available inside the shortcode:
 ## Changelog
 | Date | Version | Note |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Vehicle card details: required service line, price/button layout, number format. |
 | 11.10.2026 | 6.2.0 | `show_badges`, `show_description` and `show_availability` removed: 6.2.0 no longer reads them. |
 | 23.04.2026 | 4.27.2-docs | English translation added. |
 | 19.03.2026 | 4.21.0-docs | Page alphabetized and image placeholder added. |

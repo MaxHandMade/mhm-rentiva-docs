@@ -25,9 +25,13 @@ Mesajlaşma Sistemi, kiralama öncesi veya sonrası müşterilerinizle doğrudan
 Gelen kutusu, taleplerin aciliyetine ve türüne göre organize edilmiştir. Liste şu ana kolonları içerir:
 
 - **Konu & Etiketler:** "Yeni" (YENİ) mesajlar turuncu etiketle vurgulanır.
-- **Öncelik:** "Düşük", "Normal" veya "Yüksek" olarak belirlenmiş aciliyet seviyesi.
-- **Kategori:** Mesajın konusu (Genel, Destek, Rezervasyon Sorunu vb.).
-- **Durum:** "Beklemede", "Yanıtlandı" veya "Kapatıldı" durum takibi.
+- **Öncelik:** "Normal", "Önemli" veya "Acil" olarak belirlenmiş aciliyet seviyesi.
+- **Kategori:** Mesajın konusu (Genel, Rezervasyon, Ödeme, Teknik Destek vb.; listeyi [Mesaj Ayarları](../02-core-configuration/message-settings.md) sayfasından yönetirsiniz).
+- **Durum:** "Beklemede", "Cevaplandı" veya "Kapalı" durum takibi.
+
+:::note İletişim formundan gelen mesajlar
+Ziyaretçilerin sitenizdeki [iletişim formu](./shortcodes/contact.md) üzerinden gönderdiği mesajlar ayrı bir listedir: **MHM Rentiva > İletişim iletileri**. Seçilen rezervasyon mesajda görünür, tür süzgeci formdaki türlerle aynıdır; formun spam koruması ve **Spam** süzgeci de orada bulunur.
+:::
 
 ---
 
@@ -50,7 +54,7 @@ Bir mesaj tıkladığınızda açılan detay sayfası, müşteriyle olan diyalo�
 
 Mesaj düzenleme ekranı, operasyonel bağlamı korumak için kritik bir özelliğe sahiptir: **Rezervasyon Derneği.**
 
-- **Kategori ve Durum Değişimi:** Mesajın türünü ve sürecini (Örn: Beklemede'den Yanıtlandı'ya) admin manuel olarak güncelleyebilir.
+- **Kategori ve Durum Değişimi:** Mesajın türünü ve sürecini (Örn: Beklemede'den Cevaplandı'ya) admin manuel olarak güncelleyebilir.
 - **Rezervasyonla İlişkilendirme (Booking Mapping):** Gelen mesajı mevcut bir rezervasyon numarasına (#3037 gibi) bağlayabilirsiniz. Bu sayede, rezervasyon detaylarına baktığınızda o işlemle ilgili tüm geçmiş yazışmaları görebilirsiniz.
 
 ---

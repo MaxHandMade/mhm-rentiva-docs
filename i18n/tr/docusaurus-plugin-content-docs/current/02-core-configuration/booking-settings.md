@@ -29,8 +29,9 @@ Rezervasyonların yaşam döngüsü ve operasyonel hazırlık süreleri buradan 
 
 ---
 
-### 🖼️ GÖRSEL: REZERVASYON ZAMAN YÖNETİMİ
-*(Ayarlar > Rezervasyon Yönetimi sekmesi, iptal ve ödeme süreleri alanı)*
+![Ayarlar > Rezervasyon Yönetimi sekmesi](/img/docs/screens/settings-booking.webp)
+
+*Ayarlar > Rezervasyon Yönetimi sekmesi, iptal ve ödeme süreleri alanı*
 
 ---
 
@@ -42,6 +43,23 @@ Süreçteki kritik adımlarda gönderilecek otomatik e-posta bildirimlerini kont
 - **Hatırlatma E-postaları Gönder:** Rezervasyon başlangıç saatinden önce müşteriye hatırlatma e-postası gönderilir.
 - **Yönetici Bildirimleri:** Yeni bir rezervasyon oluşturulduğunda site yöneticisine e-posta bildirimi gider.
 - **Otomatik İptal E-postası Gönder:** Ödeme zaman aşımı nedeniyle sistem tarafından iptal edilen kayıtlar için müşteriye bilgilendirme yapılır.
+
+---
+
+## 📜 Kiralama Sözleşmesi
+
+Müşterinin rezervasyondan önce rezervasyon formunda okuyup kabul ettiği sözleşme.
+
+- **Kiralama sözleşmesi zorunlu olsun:** Açıkken müşteriler rezervasyondan önce sözleşmeyi kabul etmek zorundadır. Kabul zamanı ve kabul edilen metnin sürümü rezervasyonla birlikte kaydedilir. Varsayılan olarak kapalıdır; böylece güncelleme yapan site rezervasyon formunu olduğu gibi korur.
+- **Sözleşme metni:** Hazır şablonu kullanmak için boş bırakın (yedi bölüm; Türkçe sitelerde çevirili). Şablon bir başlangıçtır, hukuki görüş değildir: işletmenize ve yerel mevzuata göre gözden geçirip düzenleyin. Biçim: `# Başlık`, `**kalın**`, `- madde`, `---` çizgi.
+
+Açıkken olanlar:
+
+- Rezervasyon formu, ek hizmetlerin altında kaydırılabilir bir **Kiralama sözleşmesi** kutusu ve "Kiralama sözleşmesini okudum ve kabul ediyorum." işaret kutusu gösterir. İşaretsiz rezervasyon, tarayıcıda ve sunucuda reddedilir. Bkz. [Rezervasyon formu](../03-features-usage/shortcodes/booking-form.md).
+- Metni değiştirirseniz, sayfası değişiklikten önce açık ya da önbellekte olan müşteriden sayfayı yenileyip yeni metni incelemesi istenir.
+- Rezervasyon düzenleme ekranında **Müşteri hesabı** kutusu, tarih ve sürümle birlikte "Kiralama sözleşmesi: Kabul edildi" gösterir. Elle girdiğiniz rezervasyonda "Kabul kaydı yok (yönetici rezervasyonu)" yazar.
+- Kabul kaydı kişisel veri dışa aktarımında da yer alır ("Kiralama sözleşmesi kabul edildi").
+- Sözleşme transfer rezervasyonlarında gösterilmez.
 
 ---
 
@@ -61,4 +79,5 @@ Süreçteki kritik adımlarda gönderilecek otomatik e-posta bildirimlerini kont
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Kiralama sözleşmesi bölümü eklendi. |
 | 19.03.2026 | 4.21.2 | Rezervasyon Yönetimi dökümanı panel ekran görüntüsü ve kod analizine göre güncellendi. |

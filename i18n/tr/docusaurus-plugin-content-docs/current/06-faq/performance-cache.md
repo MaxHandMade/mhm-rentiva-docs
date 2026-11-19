@@ -53,6 +53,11 @@ Sistem; Object Cache, Transients ve Page Cache olmak üzere üç ana katmanda op
 
 ---
 
+### Rentiva güncellemesinden sonra (6.4.0)
+Güncellemeden sonra sayfa önbelleğinizi bir kez temizleyin (barındırmanızın önbelleği, LiteSpeed Cache, WP Rocket vb.). 6.3.x altında önbelleğe alınmış bir sayfa eski rezervasyon formu ve takvim işaretlemesini tutar; yeni betikler onu çalıştıramaz. Rentiva'nın kendi kısa önbelleği kendiliğinden yenilenir. Aynısı, **Ayarlar > Ön yüz ve görünüm > Renkler** altında ön yüz ana rengini değiştirdiğinizde de geçerlidir.
+
+---
+
 ## 📈 4. İzleme ve Ölçüm (Monitoring)
 
 Sitenizin performansını takip etmek için şunları izleyin:
@@ -69,4 +74,5 @@ Sitenizin performansını takip etmek için şunları izleyin:
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Güncelleme ve renk değişikliği için sayfa önbelleği notu eklendi. |
 | 19.03.2026 | 4.21.2 | Object Cache, Transients ve Stale Data (Eskimiş Veri) senaryoları eklendi. |

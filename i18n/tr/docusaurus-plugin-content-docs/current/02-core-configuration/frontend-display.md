@@ -1,7 +1,7 @@
 ---
 id: frontend-display
 title: Ön Yüz ve Ekran Ayarları
-sidebar_label: Ön Üç ve Ekran
+sidebar_label: Ön Yüz ve Görünüm
 sidebar_position: 12
 slug: /core-configuration/frontend-display
 ---
@@ -9,6 +9,40 @@ slug: /core-configuration/frontend-display
 ![Version](https://img.shields.io/github/v/release/MaxHandMade/mhm-rentiva?style=flat-square&label=version&color=blue) ![Docs](https://img.shields.io/badge/docs-premium_standard-0f766e?style=flat-square) ![Updated](https://img.shields.io/github/release-date/MaxHandMade/mhm-rentiva?style=flat-square&label=last%20updated&color=orange)
 
 Ön Yüz ve Ekran sekmesi, eklentinin kullanıcı tarafındaki (frontend) görünümünü, buton metinlerini, uyarı mesajlarını ve sayfa bağlantılarını (URL) özelleştirdiğiniz kapsamlı bir yönetim alanıdır. **MHM Rentiva > Ayarlar > Ön Yüz ve Ekran** altından ulaşılır.
+
+---
+
+## 🎨 Renkler
+
+**Renkler** bölümü sekmenin en üstündedir. Eklentinin sitenizde kullandığı tek ana rengi belirler: birincil düğmeler, bağlantılar, seçili takvim günleri ve rezervasyon ekranlarının hafif tonlu sayfa zemini. Rentiva ön yüzü ayrıca Plus Jakarta Sans yazı tipini eklentinin kendi dosyalarından sunar (Google'a istek gitmez) ve kartlarda, düğmelerde, rezervasyon kutularında 4 px köşe kullanır.
+
+**Ana renk** altında bir kip seçersiniz:
+
+- **Otomatik — sitenin rengini kullan:** Rentiva rengi sitenizden okur. Kaynakları şu sırayla dener ve bulduğu ilk gerçek rengi kullanır:
+  1. **Tema ayarı:** desteklenen bir temanın ana rengi (Thembay temaları, Avanam, listeo, politic, upstudy ve Astra). Hiç değiştirmediyseniz temanın kendi varsayılanı kullanılır ve kaynak satırında "tema varsayılanı" yazar.
+  2. **Elementor global rengi:** **Vurgu** global rengi, sonra **Birincil**. Elementor'un fabrika renkleri yok sayılır; yalnız sizin belirlediğiniz renk sayılır.
+  3. **Tema renk paleti (theme.json):** blok temanın düğme rengi, sonra `primary` ve `accent` palet renkleri.
+  4. **Rentiva varsayılanı:** yukarıdakilerden renk çıkmazsa bir mavi (`#2271b1`).
+- **Özel renk:** renk seçiciyle kendi rengini seçersiniz. Otomatik sonucun yerine geçer.
+
+Seçicinin altında şunları görürsünüz:
+
+- **Kaynak:** geçerli rengin hangi kaynaktan geldiği, renk örneği ve hex koduyla; örneğin "Kaynak: tema ayarı (Astra)".
+- **Önizleme:** rengi değiştirdikçe yenilenen küçük bir örnek (düğme, bağlantı, üç takvim günü, "Onaylandı" etiketi).
+- **İki okunabilirlik uyarısı**, yalnız gerektiğinde çıkar:
+  - "Bu renk sayfadaki yazı için fazla açık..." Ana renk düğme dolgusu olarak kalır; ancak bağlantılar ve yazılar okunur kalsın diye daha koyu bir ton kullanır. Üzerine gelme (hover) tonu otomatik türetilir; çok koyu bir ana renkte daha koyu yerine daha açık açılır.
+  - "Bu açık renk beyaz zeminden zor ayırt edilir."
+
+:::tip Sayfa önbelleğinizi temizleyin
+Renkler sayfaya yazılır. Bir sayfa önbelleği eklentisi kullanıyorsanız ya da barındırmanız sayfaları önbelleğe alıyorsa, rengi değiştirdikten sonra o önbelleği temizleyin; bölümün kendisi de bunu hatırlatır.
+:::
+
+:::info 6.4.0'da değişti
+Renkler artık sitenizi otomatik izler. Önceki sürümlerde ön yüz her zaman sabit bir mavi kullanıyordu.
+:::
+
+### Geliştiriciler için
+Üç filtre bir temanın ya da özel eklentinin işe karışmasını sağlar. `mhmrentiva_accent_color` hex rengi ve kaynak kimliğini alır, nihai rengi döndürür (Özel kipte bile son söz onundur; o zaman kaynak satırında "geliştirici filtresi" yazar). `mhmrentiva_accent_sources` otomatik kaynakların sıralı listesini değiştirir, `mhmrentiva_theme_adapters` başka bir tema için destek ekler.
 
 ---
 
@@ -36,8 +70,9 @@ Eklentideki tüm buton ve form metinlerini dilinize veya marka dilinize göre sa
 
 ---
 
-### 🖼️ GÖRSEL: ÖN YÜZ YAPILANDIRMA PANELİ
-*(Ayarlar > Ön Yüz ve Ekran sekmesi, etiket grupları ve görüntüleme ayarları)*
+![Ayarlar > Ön Yüz ve Görünüm sekmesi](/img/docs/screens/settings-frontend.webp)
+
+*Ayarlar > Ön Yüz ve Ekran sekmesi, etiket grupları ve görüntüleme ayarları*
 
 ---
 
@@ -62,5 +97,6 @@ Eğer bu alanları boş bırakırsanız, sistem ilgili kısa kodun bulunduğu sa
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Renkler bölümü eklendi (otomatik site rengi, özel renk, uyarılar, filtreler). |
 | 27.03.2026 | 4.22.1 | Kullanilmayan görsel kontrol ayarlari (`show_images`, `show_features`, `show_availability`) kaldırıldı notu eklendi. |
 | 19.03.2026 | 4.21.2 | Ön Yüz ve Ekran dökümanı tüm etiket grupları ve URL yapılandırmasıyla oluşturuldu. |

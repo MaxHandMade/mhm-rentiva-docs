@@ -20,7 +20,7 @@ This document explains how MHM Rentiva decides **which commission rate** applies
 
 # 💰 Commission Rate Configuration
 
-Every completed booking generates a commission credit for the vendor. The **rate** used for that calculation is resolved through a 4-layer hierarchy — the most specific layer that has a value wins, and any layer left empty simply falls through to the next one.
+Every paid booking of a vendor's vehicle generates a commission credit for the vendor who owns that vehicle, whoever opened the booking. Vehicles that belong to the site itself, not to a vendor, generate none. The **rate** used for that calculation is resolved through a 4-layer hierarchy — the most specific layer that has a value wins, and any layer left empty simply falls through to the next one.
 
 ---
 
@@ -111,4 +111,5 @@ If neither the vehicle nor the vendor had an override, and the vendor's 30-day c
 ## Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | Pro 6.5.0 | Credit goes to the vendor who owns the booked vehicle; the site's own vehicles write no commission. |
 | 07.07.2026 | Unreleased | Initial version — documents the Vehicle Override, Vendor Override, and Volume Discount Tier admin screens. |

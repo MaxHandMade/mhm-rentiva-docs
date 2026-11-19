@@ -23,7 +23,8 @@ Define how emails appear to customers:
 - **Sender Name:** The name shown in the "From" field of emails (e.g., Rentiva Fleet).
 - **Sender Email:** The address emails are sent from (e.g., info@site.com).
 - **Reply-To Address:** The address where replies go when a customer responds to an email.
-- **Primary Color:** Sets the button, heading, and accent colors in email templates.
+- **Base Color:** Sets the button, heading, and accent colors in email templates.
+- **Header Image (Logo URL):** The logo shown at the top of emails.
 - **Footer Text:** The copyright and contact note that appears at the bottom of all emails.
 
 ---
@@ -39,14 +40,15 @@ Define how emails appear to customers:
 ## ⚙️ Advanced Technical Settings
 
 - **Template Override Path:** The folder path used when you want to customize email designs through your theme (Default: `mhm-rentiva/emails/`).
-- **Async Background Sending:** Queues emails in the background (asynchronously) to avoid affecting page load speed.
-- **Communication Logs:** Stores a copy of all sent emails in the database.
-- **Log Retention Period:** Defines how many days before records are automatically deleted (e.g., 30 Days).
+- **Automatic Background Sending:** Sends automatic emails in the background to avoid affecting page load speed.
+- **Enable Communication Logs:** Stores a copy of all sent emails in the database.
+- **Log Retention (Days):** Defines how many days before records are automatically deleted (e.g., 30 Days).
 
 ---
 
-### 🖼️ IMAGE: EMAIL CONFIGURATION PANEL
-*(Settings > Email Configuration tab, sender and log settings area)*
+![Settings > Email Configuration tab](/img/docs/screens/settings-email.webp)
+
+*Settings > Email Configuration tab, sender and log settings area*
 
 ---
 

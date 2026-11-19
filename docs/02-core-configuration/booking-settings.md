@@ -29,8 +29,9 @@ The lifecycle and operational lead times of bookings are managed here.
 
 ---
 
-### 🖼️ IMAGE: BOOKING TIME MANAGEMENT
-*(Settings > Booking Management tab, cancellation and payment deadline fields)*
+![Settings > Booking Management tab](/img/docs/screens/settings-booking.webp)
+
+*Settings > Booking Management tab, cancellation and payment deadline fields*
 
 ---
 
@@ -42,6 +43,23 @@ Controls the automatic email notifications sent at critical steps in the process
 - **Send Reminder Emails:** Sends the customer a reminder email before the booking start time.
 - **Admin Notifications:** Sends the site administrator an email notification when a new booking is created.
 - **Send Auto-Cancel Email:** Notifies the customer when a booking is cancelled automatically due to payment timeout.
+
+---
+
+## 📜 Rental Agreement
+
+An agreement the customer reads and accepts on the booking form before booking.
+
+- **Require rental agreement:** When on, customers must accept the agreement before booking. The time and the version of the text they accepted are saved with the booking. Off by default, so a site that updates keeps its booking form as it was.
+- **Agreement text:** Leave empty to use the built-in template (seven sections, translated for Turkish sites). The template is a starting point, not legal advice: review it and adapt it to your business and local law. Formatting: `# Heading`, `**bold**`, `- list item`, `---` line.
+
+What happens when it is on:
+
+- The booking form shows a scrollable **Rental agreement** box under the additional services, with an "I have read and accept the rental agreement." checkbox. A booking without the tick is refused, in the browser and on the server. See [Booking Form](../03-features-usage/shortcodes/booking-form.md).
+- If you change the text, a customer whose page was open or cached before the change is asked to reload the page and review the new text.
+- On the booking edit screen, the **Customer Account** box shows "Rental agreement: Accepted" with the date and the version. A booking you entered by hand shows "No acceptance (admin booking)".
+- The acceptance is included in the personal data export (as "Rental agreement accepted").
+- The agreement is not shown for transfer bookings.
 
 ---
 
@@ -61,5 +79,6 @@ The "Auto-Cancel" and "Reminder Emails" features require the WordPress Cron syst
 ### Changelog
 | Date | Version | Note |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.4.0 | Rental agreement section added. |
 | 23.04.2026 | 4.27.2 | English translation added. |
 | 19.03.2026 | 4.21.2 | Booking Management documentation updated based on panel screenshot and code analysis. |

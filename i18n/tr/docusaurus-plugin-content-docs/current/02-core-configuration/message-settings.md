@@ -35,24 +35,28 @@ Mesaj sistemi dört ana başlık altında yapılandırılır:
 
 ### 1. Bildirimler
 - **Yönetim E-postası:** Personel uyarıları için hedef adres (Boş bırakılırsa global admin e-postası kullanılır).
-- **Giden Adı:** Mesaj bildirim e-postalarında görünecek gönderici ismi.
-- **Personel Uyarıları:** Yeni bir müşteri mesajı geldiğinde personelin e-posta ile uyarılmasını sağlar.
-- **Müşteri Yanıt Bildirimi:** Personel bir mesaja yanıt verdiğinde müşteriye e-posta gönderir.
+- **Giden Adı:** Mesaj bildirim e-postalarında görünecek gönderici ismi (boş bırakılırsa site adı kullanılır).
+- **Yeni müşteri mesajları konusunda personeli uyarın:** Yeni bir müşteri mesajı geldiğinde personelin e-posta ile uyarılmasını sağlar.
+- **Müşterilere personel yanıtlarını bildir:** Personel bir mesaja yanıt verdiğinde müşteriye e-posta gönderir.
 
 ### 2. Sistem Kuralları
-- **Gösterge Paneli Görünürlüğü:** WordPress Kontrol Paneli (Dashboard) üzerinde hızlı mesaj widget'ını aktif eder.
-- **Widget Kapasitesi:** Dashboard üzerinde listelenecek son mesaj sayısını belirler (Varsayılan: 5).
-- **Otomatik Yanıtlayıcı:** Müşteri ilk mesajı gönderdiğinde sistemin ona anlık bir "Mesajınız alındı" teyidi göndermesini sağlar.
+- **Gösterge Paneli Görünürlüğü:** WordPress Kontrol Paneli (Dashboard) üzerinde mesaj widget'ını aktif eder.
+- **Widget Kapasitesi:** Dashboard üzerinde listelenecek son mesaj sayısını belirler (Varsayılan: 5, 1 ile 20 arası).
+- **Otomatik Yanıtlayıcı:** Müşteri mesaj gönderdiğinde ona otomatik bir teyit e-postası gönderir (varsayılan olarak kapalıdır).
 
 ### 3. Kategoriler
 Mesajların konusuna göre sınıflandırılmasını sağlar. Varsayılan kategoriler şunlardır:
-- Genel, Rezervasyon, Ödeme, Teknik Destek, Şikayetler, Öneriler.
-- *Yeni kategoriler ekleyebilir veya mevcutları silebilirsiniz.*
+- Genel, Rezervasyon, Ödeme, Teknik Destek, Şikâyet, Öneri.
+- *Kategorileri yeniden adlandırabilir veya silebilir, **Kategori Ekle** ile yenilerini ekleyebilirsiniz.*
 
 ### 4. İş Akışı Durumları
 Mesajların yaşam döngüsünü takip etmek için kullanılır:
-- Beklemede, Cevaplandı, Kapalı, Önemli.
-- *İşletmenizin ihtiyacına göre yeni durumlar tanımlayabilirsiniz.*
+- Beklemede, Cevaplandı, Kapalı.
+- *Üç durum sabittir; her birinin görünen adını değiştirebilirsiniz. Aciliyet durumla değil, mesaj önceliğiyle (Normal, Önemli, Acil) belirlenir.*
+
+:::note İletişim formu mesajları
+Sitenin iletişim formundan gelen mesajlar ayrı bir listede (**MHM Rentiva > İletişim iletileri**) ve kendi spam korumasıyla durur; bkz. [Contact form](../03-features-usage/shortcodes/contact.md).
+:::
 
 ---
 
@@ -69,4 +73,5 @@ Mesajların yaşam döngüsünü takip etmek için kullanılır:
 ### Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 | :--- | :--- | :--- |
+| 18.11.2026 | 6.5.0 | Alan adları, kategoriler ve sabit iş akışı durumları ekrana göre düzeltildi; İletişim iletileri ve spam korumasına yönlendirme eklendi. |
 | 19.03.2026 | 4.21.2 | Mesaj Ayarları dökümanı 4 alt sekme ve kategori yönetimi detaylarıyla oluşturuldu. |

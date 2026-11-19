@@ -35,24 +35,24 @@ Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen b
 ### Zorunlu Alanlar
 | Alan | Meta Anahtari | Tip | Sifreleme |
 |---|---|---|---|
-| Ad Soyad | `_vendor_full_name` | Metin | Hayir |
-| Telefon | `_vendor_phone` | Metin | Hayir |
-| Sehir / Bolge | `_vendor_city` | SelectWoo | Hayir |
+| Ad Soyad | `_vendor_full_name` | Metin | Hayır |
+| Telefon | `_vendor_phone` | Metin | Hayır |
+| Şehir / Bölge | `_vendor_city` | SelectWoo | Hayır |
 | **IBAN** | `_vendor_iban` | Metin | **Evet (AES-256)** |
-| **Hesap Sahibi** | `_vendor_account_holder` | Metin | Hayir |
-| Kimlik Belgesi | `_vendor_doc_id` | Dosya | Hayir |
-| Ehliyet | `_vendor_doc_license` | Dosya | Hayir |
-| Adres Belgesi | `_vendor_doc_address` | Dosya | Hayir |
+| **Hesap Sahibi** | `_vendor_account_holder` | Metin | Hayır |
+| Kimlik Belgesi | `_vendor_doc_id` | Dosya | Hayır |
+| Ehliyet | `_vendor_doc_license` | Dosya | Hayır |
+| Adres Belgesi | `_vendor_doc_address` | Dosya | Hayır |
 
 ### Opsiyonel Alanlar
 | Alan | Meta Anahtari | Tip | Not |
 |---|---|---|---|
 | Vergi Dairesi | `_vendor_tax_office` | Metin | v4.23.1 ile eklendi |
 
-:::info v4.23.1 Form Degisiklikleri
-- **Hizmet Alanlari (Service Areas):** Checkbox bolumu kaldirildi, yerine bilgi notu eklendi.
-- **Arac Sigortasi:** Basvuru formundan kaldirildi, arac ekleme formuna (`[rentiva_vehicle_submit]`) tasindi.
-- **Sehir Secimi:** Metin girisi (`<datalist>`) yerine `<select>` + WooCommerce SelectWoo bilesenine donusturuldu (`CityHelper::render_select()`).
+:::info v4.23.1 Form Değişiklikleri
+- **Hizmet Alanları (Service Areas):** Checkbox bölümü kaldırıldı, yerine bilgi notu eklendi.
+- **Araç Sigortası:** Başvuru formundan kaldırıldı, araç ekleme formuna (`[rentiva_vehicle_submit]`) taşındı.
+- **Şehir Seçimi:** Metin girişi (`<datalist>`) yerine `<select>` + WooCommerce SelectWoo bileşenine dönüştürüldü (`CityHelper::render_select()`).
 - **Hesap Sahibi:** Yeni zorunlu alan — banka hesap sahibi bilgisi.
 - **Vergi Dairesi:** Yeni opsiyonel alan.
 :::
@@ -61,9 +61,11 @@ Tedarikçi başvuruları `[rentiva_vendor_apply]` kısa kodu ile render edilen b
 
 Adayların, başvuruyu gönderebilmeden önce bir **bayi sözleşmesini** okuyup kabul etmesini zorunlu kılabilirsiniz.
 
-- **Ayarlar → Vendor Marketplace → Bayi Sözleşmesi** altından etkinleştirin; adaylara gösterilecek sözleşme metnini de burada yazarsınız.
+- **Ayarlar → Bayi Pazar Yeri → Bayi Sözleşmesi** altından **Bayi sözleşmesini zorunlu kıl** seçeneğini etkinleştirin. Altındaki **Sözleşme Metni** alanı adaylara gösterilecek metni tutar.
 - Etkinleştirildiğinde başvuru formu, sözleşmeyi ve **zorunlu bir onay kutusunu** gösterir — kutu işaretlenmeden form gönderilemez. Aynı zorunluluk **sunucu tarafında** da uygulanır; dolayısıyla form üzerinde oynanarak bu kapı atlatılamaz.
 - Kabul, başvuruda kanıt olarak (bir **zaman damgasıyla**) saklanır ve başvuru detayında gösterilir; böylece kimin ne zaman kabul ettiğine dair kaydınız olur.
+- **Metin boşsa:** sözleşmeyi açıp metni boş bırakırsanız adaylar sekiz bölümlük hazır bir şablon görür: araçlar ve ilanlar, rezervasyonlar, komisyon ve ödemeler, iptaller, hasar, sigorta ve sorumluluk, kişisel veriler, askıya alma ve sona erme, değişiklikler. Şablon bir başlangıç noktasıdır, hukuki görüş değildir: gözden geçirip işletmenize ve yerel mevzuata göre düzenleyin.
+- **Biçim:** metin basit biçimlendirme kabul eder: `# Başlık`, `**kalın**`, `- madde` ve çizgi için `---`. Başka HTML basılmaz.
 
 ---
 
@@ -95,12 +97,12 @@ return base64_encode($iv . $cipher);
 
 ## ⚙️ 4. Admin Onay ve Rol Atama
 
-### Onay Akisi (`Approve`)
-Admin panelinden "Approve" tiklandiginda `VendorOnboardingController::approve()` su islemleri sirasiyla yapar:
-1. **Rol Yukseltme:** Kullaniciya `rentiva_vendor` rolu atanir.
-2. **Meta Sync:** Basvuru postundaki veriler (`_vendor_*`) kullanici meta tablolarina (`_mhmrentiva_vendor_*`) kopyalanir. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanlari da senkronize edilir.
+### Onay Akışı (`Approve`)
+Admin panelinden "Approve" tıklandığında `VendorOnboardingController::approve()` şu işlemleri sırasıyla yapar:
+1. **Rol Yükseltme:** Kullanıcıya `rentiva_vendor` rolü atanır.
+2. **Meta Sync:** Başvuru postundaki veriler (`_vendor_*`) kullanıcı meta tablolarına (`_mhmrentiva_vendor_*`) kopyalanır. v4.23.1 ile `_vendor_account_holder` ve `_vendor_tax_office` alanları da senkronize edilir.
 3. **Loglama:** Onay tarihi ve onaylayan admin ID'si kaydedilir.
-4. **Bildirim:** `mhmrentiva_vendor_approved` kancasi tetiklenir.
+4. **Bildirim:** `mhmrentiva_vendor_approved` kancası tetiklenir.
 
 ### Red Akışı (`Reject`)
 Admin reddettiğinde:
@@ -123,21 +125,21 @@ Tedarikçi döngüsündeki tüm statü değişiklikleri `VendorNotifications` s�
 
 Vendor onaylandiktan sonra `[rentiva_vehicle_submit]` formu ile araç ekleyebilir. v4.23.0 ile eklenen özellikler:
 
-### Şehir Filtrelenms Lokasyon/Rota Seçimi
-Vendor'in `_vendor_city` meta değerine gore transfer lokasyonlari ve rotalari filtrelenir. `LocationProvider::get_by_city()` ile sehre gore sorgulama yapilir.
+### Şehir Filtrelenmiş Lokasyon/Rota Seçimi
+Vendor'in `_vendor_city` meta değerine göre transfer lokasyonları ve rotaları filtrelenir. `LocationProvider::get_by_city()` ile şehre göre sorgulama yapılır.
 
-### Rota Basi Fiyatlandırma
-Her rota için vendor kendi fiyatini belirleyebilir. Admin tarafından tanımlanan `min_price` / `max_price` araligi zorunludur. Meta key: `_mhmrentiva_transfer_route_prices` (JSON).
+### Rota Başı Fiyatlandırma
+Her rota için vendor kendi fiyatını belirleyebilir. Admin tarafından tanımlanan `min_price` / `max_price` aralığı zorunludur. Meta key: `_mhmrentiva_transfer_route_prices` (JSON).
 
 ### Kapasite Alanları
 - **Yolcu kapasitesi:** Maksimum yolcu sayısı.
-- **Bagaj limitleri:** Buyuk ve kucuk bagaj kapasiteleri.
+- **Bagaj limitleri:** Büyük ve küçük bagaj kapasiteleri.
 
-### Arac Belgesi (Ruhsat) Yukleme
-Vendor, arac ruhsat belgesini form uzerinden yukleyebilir. Bu belge admin tarafindan dogrulama icin incelenir.
+### Araç Belgesi (Ruhsat) Yükleme
+Vendor, araç ruhsat belgesini form üzerinden yükleyebilir. Bu belge admin tarafından doğrulama için incelenir.
 
-### Arac Sigorta Belgesi Yukleme (v4.23.1)
-Arac ruhsatindan sonra sigorta belgesi de yuklenebilir. Meta key: `_mhmrentiva_vehicle_insurance_doc`. Bu alan, basvuru formundan arac ekleme formuna tasindi — boylece her araca ozel sigorta belgesi yuklenebilir.
+### Araç Sigorta Belgesi Yükleme (v4.23.1)
+Araç ruhsatından sonra sigorta belgesi de yüklenebilir. Meta key: `_mhmrentiva_vehicle_insurance_doc`. Bu alan, başvuru formundan araç ekleme formuna taşındı — böylece her araca özel sigorta belgesi yüklenebilir.
 
 ### Ücretli İlan Kapısı (v4.24.1)
 
@@ -155,7 +157,7 @@ Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
 - Onboarding süreci tamamen AJAX tabanldir ve sayfa yenileme gerektirmez.
 - Hassas finansal veriler (IBAN) donanim/sunucu seviyesinde şifrelenir.
 - Rol ve meta senkronizasyonu atomik bir işlem olarak yurutulur.
-- Basvuru formu 3 farkli belge yuklemesini destekler (kimlik, ehliyet, adres). Sigorta belgesi v4.23.1 ile arac ekleme formuna tasindi.
+- Başvuru formu 3 farklı belge yüklemesini destekler (kimlik, ehliyet, adres). Sigorta belgesi v4.23.1 ile araç ekleme formuna taşındı.
 - Araç ekleme formu şehir-filtrelenmiş lokasyon/rota seçimi, rota başı fiyatlandırma ve sigorta belgesi yükleme içerir.
 - Şehir seçimi tüm formlarda SelectWoo bileşeni üzerinden yapılır (v4.23.1).
 - Ücretli ilan etkinse araç formu gönderildiğinde WC ödeme sayfasına yönlendirme yapılır (v4.24.1).
@@ -163,6 +165,7 @@ Vendor araçları, araç kartlarinda vendor badge'i ile işaretlenir.
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | Pro 6.5.0 | Metin boşken hazır sözleşme şablonu ve basit biçimlendirme belgelendi. |
 | 29.06.2026 | 4.61.0 | Bayi sözleşmesi onayı dokümante edildi: başvuru formunda zorunlu onay kutusu, sunucu tarafı uygulama ve başvuruda zaman damgalı kabul kanıtı. |
 | 01.04.2026 | 4.24.1 | Ücretli ilan kapısı: araç ekleme → taslak → WC ödeme → inceleme bekliyor akışı eklendi. |
 | 28.03.2026 | 4.23.1 | Başvuru formu: Hizmet Alanları ve Araç Sigortası kaldırıldı. Hesap Sahibi (zorunlu), Vergi Dairesi (opsiyonel) eklendi. Şehir seçimi SelectWoo'ya dönüştürüldü. Araç sigorta belgesi araç ekleme formuna taşındı. Meta senkronizasyonu güncellendi. |

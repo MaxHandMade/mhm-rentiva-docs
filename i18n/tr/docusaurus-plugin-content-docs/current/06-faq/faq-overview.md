@@ -41,7 +41,7 @@ Sorununuzun çözümü için aşağıdaki kategorize edilmiş rehberlere göz at
   <div className="col col--6 margin-bottom--lg">
     <div className="card padding--lg cardContainer shadow--md" style={{ height: '100%', borderTop: '4px solid #e5ad24' }}>
       <h3 className="cardTitle">💳 Ödeme Hataları</h3>
-      <p className="cardDescription">Ödeme geçidi (WooCommerce) çakışmaları ve callback/webhook doğrulama hataları.</p>
+      <p className="cardDescription">Ödeme geçidi (WooCommerce) çakışmaları, callback/webhook doğrulama hataları; sepet, kapıda ödeme ve misafir rezervasyon soruları.</p>
       <Link className="button button--secondary button--block" to="/docs/faq/payment-troubleshooting">Ödeme Sorunları</Link>
     </div>
   </div>
@@ -63,4 +63,5 @@ Sorununuzun çözümü için aşağıdaki kategorize edilmiş rehberlere göz at
 ## Değişiklik Günlüğü
 | Tarih | Sürüm | Not |
 |---|---|---|
+| 18.11.2026 | 6.4.0 | Ödeme kartı sepet, kapıda ödeme ve misafir sorularını da anıyor. |
 | 19.03.2026 | 4.21.2 | SSS kategorisi için premium kart tasarımlı Genel Bakış sayfası oluşturuldu. |
