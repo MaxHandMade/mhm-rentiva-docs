@@ -51,6 +51,8 @@ Boyalı bir hücreye tıkladığınızda müşteri, araç, plaka, teslim alma ve
 
 ![Rezervasyonlar > Takvim görünümü, aylık doluluk takvimi](/img/docs/screens/bookings-calendar.webp)
 
+![Dolu bir günden açılan rezervasyon özeti: müşteri, araç, saatleriyle alış ve dönüş, toplam ve oluşturma tarihi](/img/docs/screens/bookings-calendar-popup.webp)
+
 ---
 
 ## ➕ Yeni Rezervasyon
