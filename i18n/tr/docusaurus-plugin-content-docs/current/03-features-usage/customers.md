@@ -30,10 +30,7 @@ Lite'ta müşteri sayısında sınır yoktur; bu yüzden bu ekranda sınır bild
 
 ---
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: MÜŞTERİ LİSTESİ VE ANALİZ PANELİ</strong><br/>
-  <em>mhm-rentiva-customer-list-analytics</em>
-</div>
+![Özet kartlarıyla müşteri listesi](/img/docs/screens/customers.webp)
 
 ---
 

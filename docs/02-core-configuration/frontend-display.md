@@ -70,8 +70,9 @@ Change any button or form text in the plugin to match your language or brand voi
 
 ---
 
-### 🖼️ IMAGE: FRONTEND CONFIGURATION PANEL
-*(Settings > Frontend & Display tab, label groups and display settings)*
+![Settings > Frontend & Display tab](/img/docs/screens/settings-frontend.webp)
+
+*Settings > Frontend & Display tab, label groups and display settings*
 
 ---
 

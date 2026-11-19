@@ -21,10 +21,7 @@ Araç listesi, filonuzun genel dökümünü sunar. Listenin üstünde dört kart
 - **Filtreleme:** Araçları kategoriye, müsaitlik durumuna, konuma (etkinse) veya yaşam döngüsü durumuna (Aktif, Duraklatılmış, Süresi dolmuş, Geri çekilmiş ya da Arşiv) göre süzebilirsiniz.
 - **Rezervasyon tutarı:** "Bu ay rezervasyon tutarı" kartı, bu ayın onaylı, devam eden ve tamamlanan rezervasyonlarının fiyatını toplar. Bu, rezerve edilen tutardır; tahsilat değildir. İptal edilen ya da iade edilen rezervasyonlar sayılmaz.
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: ARAÇ LİSTESİ VE HIZLI DÜZENLEME</strong><br/>
-  <em>mhm-rentiva-vehicle-list-quick-edit</em>
-</div>
+![Özet kartları ve kategori çipleriyle araç listesi](/img/docs/screens/vehicles-list.webp)
 
 ---
 

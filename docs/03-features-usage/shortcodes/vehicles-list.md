@@ -20,9 +20,7 @@ The Vehicles List module is designed to manage and present **vehicle** listings 
 
 ## Usage
 
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
+![Frontend view of this shortcode](/img/docs/screens/sc-vehicles-list.webp)
 
 To add this module to any page or post, use the shortcode below:
 

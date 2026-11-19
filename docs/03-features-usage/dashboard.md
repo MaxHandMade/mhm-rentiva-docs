@@ -10,10 +10,7 @@ slug: /features-usage/dashboard
 
 The Dashboard shows your business at a glance: booking figures, what is still owed, the next seven days and quick shortcuts. Access it via **MHM Rentiva > Dashboard**. The page title reads "Dashboard" with the subtitle "MHM Rentiva · Overview".
 
-<div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', backgroundColor: '#f9fafb', textAlign: 'center', margin: '20px 0' }}>
-  <p style={{ margin: 0, color: '#6b7280', fontWeight: 'bold' }}>🖼️ IMAGE: DASHBOARD</p>
-  <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#9ca3af' }}>mhm-rentiva-dashboard-calendar-view</p>
-</div>
+![MHM Rentiva Dashboard](/img/docs/screens/dashboard.webp)
 
 ---
 

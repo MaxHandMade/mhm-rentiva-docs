@@ -22,9 +22,7 @@ The Contact Form lets visitors write to you from your site. Each message is stor
 
 ## Usage
 
-:::tip IMAGE COMING SOON
-A screenshot showing the frontend (visitor-facing) appearance of this module will be added here.
-:::
+![Frontend view of this shortcode](/img/docs/screens/sc-contact.webp)
 
 To add this module to any page or post, use the shortcode below:
 

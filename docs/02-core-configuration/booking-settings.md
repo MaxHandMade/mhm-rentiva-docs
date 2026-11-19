@@ -29,8 +29,9 @@ The lifecycle and operational lead times of bookings are managed here.
 
 ---
 
-### 🖼️ IMAGE: BOOKING TIME MANAGEMENT
-*(Settings > Booking Management tab, cancellation and payment deadline fields)*
+![Settings > Booking Management tab](/img/docs/screens/settings-booking.webp)
+
+*Settings > Booking Management tab, cancellation and payment deadline fields*
 
 ---
 

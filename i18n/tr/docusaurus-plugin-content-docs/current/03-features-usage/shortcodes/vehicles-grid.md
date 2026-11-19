@@ -20,9 +20,7 @@ Vehicles grid modülü, Rentiva platformundaki **vehicle** süreçlerini yönetm
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-vehicles-grid.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 

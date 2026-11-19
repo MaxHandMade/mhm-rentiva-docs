@@ -10,10 +10,7 @@ slug: /features-usage/dashboard
 
 Kontrol Paneli işletmenizi tek bakışta gösterir: rezervasyon rakamları, henüz tahsil edilmemiş tutarlar, önümüzdeki yedi gün ve hızlı kısayollar. **MHM Rentiva > Başlangıç ekranı** altından ulaşılır. Sayfa başlığı "Başlangıç ekranı", alt başlığı "MHM Rentiva · Genel bakış" olarak görünür.
 
-<div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', backgroundColor: '#f9fafb', textAlign: 'center', margin: '20px 0' }}>
-  <p style={{ margin: 0, color: '#6b7280', fontWeight: 'bold' }}>🖼️ GÖRSEL: BAŞLANGIÇ EKRANI</p>
-  <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#9ca3af' }}>mhm-rentiva-dashboard-calendar-view</p>
-</div>
+![MHM Rentiva Başlangıç ekranı](/img/docs/screens/dashboard.webp)
 
 ---
 

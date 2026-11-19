@@ -64,8 +64,9 @@ Always verify your template changes before publishing them live:
 
 ---
 
-### 🖼️ IMAGE: EMAIL TEMPLATE EDITOR
-*(MHM Rentiva > Settings > Notification Templates tab — template editor screen)*
+![Settings > Notification Templates tab, template editor](/img/docs/screens/settings-email-templates.webp)
+
+*MHM Rentiva > Settings > Notification Templates tab — template editor screen*
 
 ---
 

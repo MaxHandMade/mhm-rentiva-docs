@@ -82,8 +82,9 @@ On a booking's edit screen, the **Send Email to Customer** box lets you pick a t
 
 ---
 
-### 🖼️ IMAGE: NOTIFICATION TEMPLATES PANEL
-*(Settings > Notification Templates tab, template list and preview tool)*
+![Settings > Notification Templates tab](/img/docs/screens/settings-email-templates.webp)
+
+*Settings > Notification Templates tab, template list and preview tool*
 
 ---
 

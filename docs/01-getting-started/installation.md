@@ -48,8 +48,9 @@ From here on WordPress keeps the plugin up to date the same way it updates any o
 
 ---
 
-### 🖼️ IMAGE: PLUGIN SEARCH SCREEN
-*(Screenshot showing the Plugins > Add New search results with MHM Rentiva listed)*
+![Plugins > Add New search results with MHM Rentiva listed](/img/docs/screens/plugin-search.webp)
+
+*Screenshot showing the Plugins > Add New search results with MHM Rentiva listed*
 
 ---
 
@@ -62,8 +63,9 @@ Use this when you need a particular build — for example a version from the [Gi
 
 ---
 
-### 🖼️ IMAGE: PLUGIN ACTIVATION CONFIRMATION
-*(The screen showing the "Activate Plugin" button after a successful upload)*
+![Plugins screen after activating MHM Rentiva](/img/docs/screens/plugin-activated.webp)
+
+*The screen showing the "Activate Plugin" button after a successful upload*
 
 ---
 

@@ -11,8 +11,9 @@ slug: /getting-started/setup-wizard
 When you activate MHM Rentiva for the first time, an interactive **Setup Wizard** guides you through the essential configuration steps. The wizard lets you complete the critical settings needed for the plugin to work seamlessly with your site — all in a matter of minutes. Each step is a numbered card; the steps are listed across the top of the screen.
 
 ---
-### 🖼️ IMAGE: SETUP WIZARD WELCOME SCREEN
-*(A wide screenshot showing the numbered steps and the System Check card)*
+![Setup Wizard, System Check step](/img/docs/screens/setup-wizard.webp)
+
+*A wide screenshot showing the numbered steps and the System Check card*
 
 ---
 

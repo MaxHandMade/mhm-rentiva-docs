@@ -29,8 +29,9 @@ Rezervasyonların yaşam döngüsü ve operasyonel hazırlık süreleri buradan 
 
 ---
 
-### 🖼️ GÖRSEL: REZERVASYON ZAMAN YÖNETİMİ
-*(Ayarlar > Rezervasyon Yönetimi sekmesi, iptal ve ödeme süreleri alanı)*
+![Ayarlar > Rezervasyon Yönetimi sekmesi](/img/docs/screens/settings-booking.webp)
+
+*Ayarlar > Rezervasyon Yönetimi sekmesi, iptal ve ödeme süreleri alanı*
 
 ---
 

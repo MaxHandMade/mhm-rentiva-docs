@@ -20,9 +20,7 @@ Vehicle details modülü, Rentiva platformundaki **vehicle** süreçlerini yöne
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-vehicle-details.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 

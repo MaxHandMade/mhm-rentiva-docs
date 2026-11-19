@@ -88,8 +88,9 @@ All WooCommerce-compatible plugins work with Rentiva. The most commonly used:
 
 ---
 
-### 🖼️ IMAGE: PAYMENT SETTINGS SCREEN
-*(MHM Rentiva > Settings > Payment tab — deposit and other settings screen)*
+![Settings > Payment Settings tab](/img/docs/screens/settings-payment.webp)
+
+*MHM Rentiva > Settings > Payment tab — deposit and other settings screen*
 
 ---
 

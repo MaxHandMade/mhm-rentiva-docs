@@ -48,8 +48,9 @@ Bundan sonra WordPress eklentiyi, dizindeki diğer eklentileri güncellediği gi
 
 ---
 
-### 🖼️ GÖRSEL: EKLENTİ ARAMA EKRANI
-*(Eklentiler > Yeni Ekle arama sonuçlarında MHM Rentiva'yı gösteren ekran görüntüsü)*
+![Eklentiler > Yeni Ekle arama sonuçlarında MHM Rentiva](/img/docs/screens/plugin-search.webp)
+
+*Eklentiler > Yeni Ekle arama sonuçlarında MHM Rentiva'yı gösteren ekran görüntüsü*
 
 ---
 
@@ -62,8 +63,9 @@ Bunu, dizindeki güncel sürüm yerine belirli bir yapıya ihtiyacınız olduğu
 
 ---
 
-### 🖼️ GÖRSEL: EKLENTİ ETKİNLEŞTİRME ONAYI
-*(Eklenti başarıyla yüklendiğinde "Eklentiyi Etkinleştir" butonunun olduğu ekran)*
+![MHM Rentiva etkinleştirildikten sonra Eklentiler ekranı](/img/docs/screens/plugin-activated.webp)
+
+*Eklenti başarıyla yüklendiğinde "Eklentiyi Etkinleştir" butonunun olduğu ekran*
 
 ---
 

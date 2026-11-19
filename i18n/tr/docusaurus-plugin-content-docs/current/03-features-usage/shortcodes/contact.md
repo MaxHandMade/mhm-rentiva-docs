@@ -22,9 +22,7 @@ Bu sayfa, Contact form modülü konusunu teknik ve operasyonel açıdan standart
 
 ## Kullanım
 
-:::tip GÖRSEL GELECEK
-Buraya bu modülün frontend (kullanıcı tarafı) görünümünü temsil eden bir ekran görüntüsü eklenecektir.
-:::
+![Bu kısa kodun ön yüz görünümü](/img/docs/screens/sc-contact.webp)
 
 Bu modülü herhangi bir sayfaya veya yazıya eklemek için aşağıdaki kısa kodu (shortcode) kullanabilirsiniz:
 

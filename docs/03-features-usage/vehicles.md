@@ -21,10 +21,7 @@ The vehicle list provides a general overview of your fleet. Four cards sit above
 - **Filtering:** Filter vehicles by category, availability status, location (when active) or lifecycle state (Active, Paused, Expired, Withdrawn, or Archive).
 - **Bookings Value:** The "Bookings Value This Month" card adds up the price of this month's confirmed, in-progress and completed bookings. It is the booked amount, not money collected, and cancelled or refunded bookings are not counted.
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>IMAGE: VEHICLE LIST AND QUICK EDIT</strong><br/>
-  <em>mhm-rentiva-vehicle-list-quick-edit</em>
-</div>
+![Vehicles list with summary cards and category chips](/img/docs/screens/vehicles-list.webp)
 
 ---
 

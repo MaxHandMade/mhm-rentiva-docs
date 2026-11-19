@@ -49,10 +49,7 @@ Tablonun üstündeki **Liste** / **Takvim** anahtarı aynı rezervasyonları fil
 
 Boyalı bir hücreye tıkladığınızda müşteri, araç, plaka, teslim alma ve dönüş zamanı, toplam fiyat ve **Rezervasyonu düzenle** düğmesini içeren bir özet açılır. Aynı güne birden çok rezervasyon düşüyorsa hepsi listelenir.
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 GÖRSEL: REZERVASYON TAKVİMİ VE ÖZET POPUP</strong><br/>
-  <em>mhm-rentiva-booking-calendar-popup</em>
-</div>
+![Rezervasyonlar > Takvim görünümü, aylık doluluk takvimi](/img/docs/screens/bookings-calendar.webp)
 
 ---
 

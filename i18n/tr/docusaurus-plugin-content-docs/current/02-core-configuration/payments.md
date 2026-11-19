@@ -88,8 +88,9 @@ WooCommerce ile uyumlu tüm eklentiler Rentiva ile çalışır. En sık kullanı
 
 ---
 
-### 🖼️ GÖRSEL: ÖDEME AYARLARI EKRANI
-*(MHM Rentiva > Ayarlar > Ödeme sekmesindeki depozito ve diğer ayarları gösteren ekran)*
+![Ayarlar > Ödeme Ayarları sekmesi](/img/docs/screens/settings-payment.webp)
+
+*MHM Rentiva > Ayarlar > Ödeme sekmesindeki depozito ve diğer ayarları gösteren ekran*
 
 ---
 

@@ -46,8 +46,9 @@ E-postaların müşteriye nasıl görüneceğini buradan belirleyin:
 
 ---
 
-### 🖼️ GÖRSEL: E-POSTA YAPILANDIRMA PANELİ
-*(Ayarlar > E-posta Yapılandırması sekmesi, gönderici ve günlük ayarları alanı)*
+![Ayarlar > E-posta Yapılandırması sekmesi](/img/docs/screens/settings-email.webp)
+
+*Ayarlar > E-posta Yapılandırması sekmesi, gönderici ve günlük ayarları alanı*
 
 ---
 

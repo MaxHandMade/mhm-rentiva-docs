@@ -46,8 +46,9 @@ Define how emails appear to customers:
 
 ---
 
-### 🖼️ IMAGE: EMAIL CONFIGURATION PANEL
-*(Settings > Email Configuration tab, sender and log settings area)*
+![Settings > Email Configuration tab](/img/docs/screens/settings-email.webp)
+
+*Settings > Email Configuration tab, sender and log settings area*
 
 ---
 

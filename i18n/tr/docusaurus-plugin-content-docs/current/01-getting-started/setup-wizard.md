@@ -11,8 +11,9 @@ slug: /getting-started/setup-wizard
 MHM Rentiva'yı ilk kez etkinleştirdiğinizde, etkileşimli bir **Kurulum Sihirbazı** sizi temel yapılandırma adımlarında yönlendirir. Sihirbaz, eklentinin sitenizle sorunsuz çalışması için gereken kritik ayarları birkaç dakika içinde tamamlamanızı sağlar. Her adım numaralı bir karttır; adımlar ekranın üstünde sıralanır.
 
 ---
-### 🖼️ IMAGE: SETUP WIZARD WELCOME SCREEN
-*(Numaralı adımları ve Sistem kontrolü kartını gösteren geniş bir ekran görüntüsü)*
+![Kurulum sihirbazı, Sistem kontrolü adımı](/img/docs/screens/setup-wizard.webp)
+
+*Numaralı adımları ve Sistem kontrolü kartını gösteren geniş bir ekran görüntüsü*
 
 ---
 

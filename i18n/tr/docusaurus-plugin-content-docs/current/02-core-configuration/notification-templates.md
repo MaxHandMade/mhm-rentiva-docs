@@ -82,8 +82,9 @@ Bir rezervasyonun düzenleme ekranındaki **Müşteriye e-posta gönder** kutusu
 
 ---
 
-### 🖼️ GÖRSEL: BİLDİRİM ŞABLONLARI PANELİ
-*(Ayarlar > Bildirim şablonları sekmesi, şablon listesi ve önizleme aracı)*
+![Ayarlar > Bildirim Şablonları sekmesi](/img/docs/screens/settings-email-templates.webp)
+
+*Ayarlar > Bildirim şablonları sekmesi, şablon listesi ve önizleme aracı*
 
 ---
 

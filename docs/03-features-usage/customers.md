@@ -30,10 +30,7 @@ Lite has no limit on the number of customers, so there is no limit notice on thi
 
 ---
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 IMAGE: CUSTOMER LIST AND ANALYTICS PANEL</strong><br/>
-  <em>mhm-rentiva-customer-list-analytics</em>
-</div>
+![Customers list with summary cards](/img/docs/screens/customers.webp)
 
 ---
 

@@ -64,8 +64,9 @@ E-postalardaki tarih ve saatler sitenizin tarih biçimini, saat biçimini, saat 
 
 ---
 
-### 🖼️ GÖRSEL: E-POSTA ŞABLON DÜZENLEYİCİ
-*(MHM Rentiva > Ayarlar > Bildirim şablonları sekmesindeki şablon düzenleyici ekranı)*
+![Ayarlar > Bildirim Şablonları sekmesi, şablon düzenleyici](/img/docs/screens/settings-email-templates.webp)
+
+*MHM Rentiva > Ayarlar > Bildirim şablonları sekmesindeki şablon düzenleyici ekranı*
 
 ---
 

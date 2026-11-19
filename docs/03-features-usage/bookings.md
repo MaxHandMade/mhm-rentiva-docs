@@ -49,10 +49,7 @@ Cancelled and refunded bookings do not occupy a vehicle, so they are not painted
 
 Click a painted cell to open a summary with the customer, vehicle, plate, pickup and return times, total price and an **Edit Booking** button. When several bookings fall on the same day, all of them are listed.
 
-<div style={{ border: '1px solid #e5e7eb', padding: '20px', borderRadius: '8px', background: '#f9fafb', marginBottom: '20px' }}>
-  <strong>📸 IMAGE: BOOKING CALENDAR AND SUMMARY POPUP</strong><br/>
-  <em>mhm-rentiva-booking-calendar-popup</em>
-</div>
+![Bookings > Calendar view, monthly occupancy calendar](/img/docs/screens/bookings-calendar.webp)
 
 ---
 

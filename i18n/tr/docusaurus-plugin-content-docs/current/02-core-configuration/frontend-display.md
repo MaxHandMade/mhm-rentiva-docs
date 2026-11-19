@@ -70,8 +70,9 @@ Eklentideki tüm buton ve form metinlerini dilinize veya marka dilinize göre sa
 
 ---
 
-### 🖼️ GÖRSEL: ÖN YÜZ YAPILANDIRMA PANELİ
-*(Ayarlar > Ön Yüz ve Ekran sekmesi, etiket grupları ve görüntüleme ayarları)*
+![Ayarlar > Ön Yüz ve Görünüm sekmesi](/img/docs/screens/settings-frontend.webp)
+
+*Ayarlar > Ön Yüz ve Ekran sekmesi, etiket grupları ve görüntüleme ayarları*
 
 ---
 
