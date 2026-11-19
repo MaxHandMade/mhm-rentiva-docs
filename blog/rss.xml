@@ -4,10 +4,46 @@
         <title>MHM Rentiva Documentation Blog</title>
         <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog</link>
         <description>MHM Rentiva Documentation Blog</description>
-        <lastBuildDate>Wed, 18 Nov 2026 22:30:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 19 Nov 2026 18:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Rentiva 6.4.1 — One welcome e-mail for a new account, and the bookings calendar summary and dashboard dates shown properly]]></title>
+            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release</link>
+            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release</guid>
+            <pubDate>Thu, 19 Nov 2026 18:00:00 GMT</pubDate>
+            <description><![CDATA[6.4.1 is a small update that fixes what an admin reads on three screens and what a new customer receives. The bookings calendar summary now shows the pickup and return times, the total with your shop's currency and dates in your site's format. Upcoming Operations on the dashboard writes its dates in your admin language. A customer whose account WooCommerce creates gets one welcome e-mail instead of two. Nothing to configure, no database step. Using Rentiva Pro? Nothing to do: Pro 6.5.1 works with 6.4.1.]]></description>
+            <content:encoded><![CDATA[<p>6.4.1 is a small update that fixes what an admin reads on three screens and what a new customer receives. The bookings calendar summary now shows the pickup and return times, the total with your shop's currency and dates in your site's format. Upcoming Operations on the dashboard writes its dates in your admin language. A customer whose account WooCommerce creates gets one welcome e-mail instead of two. Nothing to configure, no database step. <strong>Using Rentiva Pro?</strong> Nothing to do: Pro 6.5.1 works with 6.4.1.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-welcome-e-mail-for-a-new-account">One welcome e-mail for a new account<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release#one-welcome-e-mail-for-a-new-account" class="hash-link" aria-label="Direct link to One welcome e-mail for a new account" title="Direct link to One welcome e-mail for a new account" translate="no">​</a></h2>
+<p>When WooCommerce created a customer's account, at checkout or in My Account, the customer received two welcomes: WooCommerce's own new-account e-mail and Rentiva's "Welcome to …" e-mail. Now Rentiva's welcome is skipped for these accounts, so the customer gets one.</p>
+<p>If you have switched WooCommerce's new-account e-mail off (<strong>WooCommerce &gt; Settings &gt; Emails</strong>), Rentiva's welcome is still sent, so nobody is left without one. Customers whose accounts were created before this update are not changed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-bookings-calendar-summary">The bookings calendar summary<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release#the-bookings-calendar-summary" class="hash-link" aria-label="Direct link to The bookings calendar summary" title="Direct link to The bookings calendar summary" translate="no">​</a></h2>
+<p>Click a booked day on <strong>Bookings &gt; Calendar</strong> to open the summary.</p>
+<ul>
+<li class=""><strong>Pickup and return times</strong> now appear under the dates. They were always stored with the booking, but the summary showed "—".</li>
+<li class=""><strong>The total</strong> carries your shop's currency and is formatted as in the bookings list (for example $237.60 instead of 237.6).</li>
+<li class=""><strong>Dates and the created time</strong> follow your site's date and time format (<strong>Settings &gt; General</strong>).</li>
+</ul>
+<p>On a day with several bookings, the list in the summary shows each booking's dates with their times.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dates-on-the-dashboard">Dates on the dashboard<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release#dates-on-the-dashboard" class="hash-link" aria-label="Direct link to Dates on the dashboard" title="Direct link to Dates on the dashboard" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Upcoming Operations</strong> writes its dates in your admin language. Before, it used the browser's language, so an English admin screen in a Turkish browser read "20 Kas".</li>
+<li class="">A booking no longer shows <strong>one day early</strong> when your browser is west of UTC (for example in the Americas).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="smaller-fixes">Smaller fixes<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.1-release#smaller-fixes" class="hash-link" aria-label="Direct link to Smaller fixes" title="Direct link to Smaller fixes" translate="no">​</a></h2>
+<ul>
+<li class="">The <strong>blocked-days list</strong> on the vehicle editor no longer stops working for an admin whose language is Portuguese (AO90).</li>
+<li class="">A <strong>fresh install</strong> no longer writes a "Table … doesn't exist" database error to the log.</li>
+</ul>
+<hr>
+<p><strong>Where to get it.</strong> Rentiva is on <a href="https://wordpress.org/plugins/mhm-rentiva/" target="_blank" rel="noopener noreferrer" class="">WordPress.org</a> and on GitHub as <a href="https://github.com/MaxHandMade/mhm-rentiva/releases/tag/v6.4.1" target="_blank" rel="noopener noreferrer" class=""><code>v6.4.1</code></a>. WordPress offers it as an ordinary update. The full list of changes is in the <a class="" href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v6.4.0-release">6.4.0 release notes</a> and the plugin's changelog.</p>]]></content:encoded>
+            <category>release</category>
+            <category>rentiva</category>
+            <category>bookings</category>
+            <category>email</category>
+            <category>woocommerce</category>
+        </item>
         <item>
             <title><![CDATA[Rentiva Pro 6.5.0 — Commission credited to the right vendor, privacy requests by e-mail, a working vendor agreement and reports in the site timezone]]></title>
             <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-pro-v6.5.0-release</link>
@@ -876,45 +912,6 @@
             <category>pro</category>
             <category>patch</category>
             <category>i18n</category>
-        </item>
-        <item>
-            <title><![CDATA[Rentiva v5.2.0 / Pro v5.2.0 — Seventeen security switches that did nothing, and the ones that now do]]></title>
-            <link>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release</link>
-            <guid>https://MaxHandMade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release</guid>
-            <pubDate>Sat, 25 Jul 2026 22:00:00 GMT</pubDate>
-            <description><![CDATA[The largest release in the 5.x line so far. Permission checks now test the specific record a request names instead of a general capability, the admin markup is filtered as it is printed, the Dashboard and Vehicle Settings screens are redesigned — and a long list of controls that claimed to do something, but were connected to nothing, has been removed.]]></description>
-            <content:encoded><![CDATA[<p>The largest release in the 5.x line so far. Permission checks now test the specific record a request names instead of a general capability, the admin markup is filtered as it is printed, the Dashboard and Vehicle Settings screens are redesigned — and a long list of controls that claimed to do something, but were connected to nothing, has been removed.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-uncomfortable-part-first">The uncomfortable part first<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#the-uncomfortable-part-first" class="hash-link" aria-label="Direct link to The uncomfortable part first" title="Direct link to The uncomfortable part first" translate="no">​</a></h2>
-<p>Settings → Security had <strong>seventeen</strong> controls: "Brute Force Protection", "SQL Injection Protection", "XSS Protection", "CSRF Protection", "Enable Rate Limiting", IP allow and block lists. None of them were wired to anything. Switching one on changed no behaviour whatsoever.</p>
-<p>They are gone. So is the "Secure API Access Tokens" section, which issued keys labelled READ, WRITE and ADMIN that no part of the plugin ever checked — a key created there opened nothing. So are the Integration settings for token duration, token refresh, API caching, debug output and "Allow Global CORS". So is a "Scheduled Notifications" background job that ran every hour against a queue nothing ever added to, while the Cron Monitor cheerfully reported it as healthy. And so is the "Add Vehicle" button in the vehicle comparison: no handler, unregistered endpoints, and an Elementor switch to toggle a thing that did not exist.</p>
-<p>A control that says a protection is active while nothing enforces it is <strong>worse than no control at all</strong>, because it gets relied on. Saved values for the removed settings are cleaned up automatically when you update.</p>
-<p>Rate limiting, which does work, stays. The REST API is unchanged and still authenticates normally.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="permissions-now-check-the-record-not-just-the-role">Permissions now check the record, not just the role<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#permissions-now-check-the-record-not-just-the-role" class="hash-link" aria-label="Direct link to Permissions now check the record, not just the role" title="Direct link to Permissions now check the record, not just the role" translate="no">​</a></h2>
-<p>Booking, deposit, vehicle-gallery and blocked-date handlers used to check a general "can edit content" capability. They now check the caller against <strong>the specific record the request names</strong>. On multi-author sites this closes paths where one contributor could act on another contributor's bookings, galleries or availability.</p>
-<p>Saving a booking from the editor now always requires a valid security token; the presence of a form field is no longer accepted in its place. The database backup screen exports, restores and deletes only backup tables this plugin created — other tables can no longer be named in those requests. And markup the plugin generates is filtered through an explicit allowlist <strong>as it is printed</strong>, replacing places that trusted the output to have been escaped earlier.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes-worth-naming">Fixes worth naming<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#fixes-worth-naming" class="hash-link" aria-label="Direct link to Fixes worth naming" title="Direct link to Fixes worth naming" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Uninstall used to stop partway through.</strong> With "delete all data on uninstall" switched on, removing the plugin still left tables, scheduled jobs and taxonomy terms behind.</li>
-<li class=""><strong>The backups screen could go blank.</strong> Any <code>.sql</code> file in the backup folder without a matching database record caused a fatal error while the list was being built. Backups are now written under your uploads folder instead of directly into <code>wp-content</code>; backups taken by earlier versions stay listed, restorable and deletable — nothing is moved or lost.</li>
-<li class=""><strong>Vehicle quick edit accepted values the full editor rejects.</strong> A daily price could be saved as a negative number, which then multiplied into rental totals; the seat count could be zero or above the configured maximum.</li>
-<li class=""><strong>Log retention settings were ignored.</strong> "Auto Cleanup Logs" and "Log Retention (Days)" had no effect: the daily purge always deleted entries older than thirty days, permanently, even with cleanup switched off or retention set higher.</li>
-<li class=""><strong>Saving the Vehicle settings tab silently reset two Frontend fields</strong> — "Vehicles per page" and "Default sort order" — that the Vehicle tab does not even display.</li>
-<li class=""><strong>The dashboard's recent-bookings panel could sit up to twelve hours out of date</strong>, because its cache was cleared under a name the cache no longer used. The customers screen re-ran its full query set on every load for the mirror-image reason: it requested a cache type that had never been registered, so nothing was stored or read.</li>
-<li class=""><strong>Search could be asked to render the whole fleet.</strong> Vehicle search accepted any page size; search and testimonials now cap it at the limit their own settings advertise.</li>
-<li class="">The translation catalogue now compiles without errors — strings containing placeholders like <code>%days%</code> were being mis-flagged as printf formats.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-redesigned-dashboard-and-vehicle-settings">New: redesigned Dashboard and Vehicle Settings<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#new-redesigned-dashboard-and-vehicle-settings" class="hash-link" aria-label="Direct link to New: redesigned Dashboard and Vehicle Settings" title="Direct link to New: redesigned Dashboard and Vehicle Settings" translate="no">​</a></h2>
-<p>Both screens have been rebuilt. Vehicle Settings opens in the new layout by default; adding <code>?ui=legacy</code> to the page URL brings back the previous one for this release.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="internal">Internal<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#internal" class="hash-link" aria-label="Direct link to Internal" title="Direct link to Internal" translate="no">​</a></h2>
-<p>Temporary cache entries, the last-login record, background job names and the JavaScript objects the admin screens read now all carry the plugin's own prefix, so they cannot collide with another plugin storing something under the same name. Every script and stylesheet is registered under its full prefix too — WordPress keeps whichever was registered first under a shared short name and discards the other without warning.</p>
-<p>Around <strong>2,000 lines</strong> of code that nothing referenced were removed, including a file registering database-maintenance commands and one that would have exposed protected vehicle and booking fields over the REST API had it ever been switched on.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="upgrading">Upgrading<a href="https://maxhandmade.github.io/mhm-rentiva-docs/blog/rentiva-v5.2.0-release#upgrading" class="hash-link" aria-label="Direct link to Upgrading" title="Direct link to Upgrading" translate="no">​</a></h2>
-<p>No action required. Administrators are unaffected by the permission changes; on sites with editor or author roles, those users can now only act on records they are entitled to. Settings belonging to the removed controls are cleaned up for you.</p>]]></content:encoded>
-            <category>release</category>
-            <category>rentiva</category>
-            <category>pro</category>
-            <category>security</category>
-            <category>minor</category>
         </item>
     </channel>
 </rss>
