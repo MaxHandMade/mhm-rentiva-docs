@@ -1,0 +1,14 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720' viewBox='0 0 1280 720'>
+  <defs>
+    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#eef2ff'/>
+      <stop offset='100%' stop-color='#e2e8f0'/>
+    </linearGradient>
+  </defs>
+  <rect width='1280' height='720' fill='url(#g)'/>
+  <rect x='90' y='80' width='1100' height='560' rx='14' fill='#fff' stroke='#94a3b8' stroke-width='2'/>
+  <text x='640' y='170' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='44' fill='#0f172a'>Developer Reading Map</text>
+  <text x='640' y='245' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='28' fill='#334155'>Core -> Transfer/API -> Financial -> Operations -> Testing</text>
+  <text x='640' y='320' text-anchor='middle' font-family='Consolas, monospace' font-size='24' fill='#475569'>/img/docs/placeholders/developer-reading-map.svg</text>
+  <text x='640' y='390' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='22' fill='#64748b'>Placeholder - son görsel sürümüyle değiştirilecek</text>
+</svg>
