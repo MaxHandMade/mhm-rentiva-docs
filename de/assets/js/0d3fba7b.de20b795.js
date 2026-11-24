@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwebsite=globalThis.webpackChunkwebsite||[]).push([[57508],{1644(e){e.exports=JSON.parse('{"metadata":{"permalink":"/mhm-rentiva-docs/de/blog","page":1,"postsPerPage":10,"totalPages":11,"totalCount":107,"nextPage":"/mhm-rentiva-docs/de/blog/page/2","blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

@@ -1,0 +1,28 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <style>
+    .t{font:700 24px Arial;fill:#111827}.s{font:500 15px Arial;fill:#1f2937}.b{fill:#fef9c3;stroke:#a16207;stroke-width:2}.a{stroke:#a16207;stroke-width:2;marker-end:url(#m)}
+  </style>
+  <defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#a16207"/></marker></defs>
+  <text x="40" y="50" class="t">Komisyon Çözümleme Karar Ağacı</text>
+
+  <rect x="420" y="100" width="360" height="80" class="b"/><text x="470" y="145" class="s">Başlangıç: Policy global rate</text>
+  <rect x="120" y="240" width="300" height="90" class="b"/><text x="150" y="295" class="s">Araç override var mı?</text>
+  <rect x="450" y="240" width="300" height="90" class="b"/><text x="480" y="295" class="s">Vendor override var mı?</text>
+  <rect x="780" y="240" width="300" height="90" class="b"/><text x="815" y="295" class="s">Tier eligible mi?</text>
+
+  <rect x="120" y="430" width="300" height="90" class="b"/><text x="175" y="485" class="s">Rate = Vehicle</text>
+  <rect x="450" y="430" width="300" height="90" class="b"/><text x="505" y="485" class="s">Rate = Vendor</text>
+  <rect x="780" y="430" width="300" height="90" class="b"/><text x="830" y="485" class="s">Rate = Policy - Tier</text>
+
+  <rect x="420" y="590" width="360" height="80" class="b"/><text x="470" y="635" class="s">CommissionResult + policy trace</text>
+
+  <line x1="600" y1="180" x2="270" y2="240" class="a"/>
+  <line x1="600" y1="180" x2="600" y2="240" class="a"/>
+  <line x1="600" y1="180" x2="930" y2="240" class="a"/>
+  <line x1="270" y1="330" x2="270" y2="430" class="a"/>
+  <line x1="600" y1="330" x2="600" y2="430" class="a"/>
+  <line x1="930" y1="330" x2="930" y2="430" class="a"/>
+  <line x1="270" y1="520" x2="520" y2="590" class="a"/>
+  <line x1="600" y1="520" x2="600" y2="590" class="a"/>
+  <line x1="930" y1="520" x2="680" y2="590" class="a"/>
+</svg>
