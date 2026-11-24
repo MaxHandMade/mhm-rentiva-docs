@@ -114,7 +114,7 @@ En la pantalla de edición del vehículo (`VehicleTransferMetaBox`) se muestran 
 
 ---
 
-## 🔄 Gestión del ciclo de vida de los vehículos (v4.24.0)
+## 🔄 Gestión del ciclo de vida de los vehículos (v4.24.0) {#-vehicle-lifecycle-management-v4240}
 
 En la v4.24.0 se implementó un sistema completo de ciclo de vida de los vehículos:
 
@@ -142,7 +142,7 @@ Cada tarjeta de vehículo del panel del vendedor muestra el tiempo de publicaci�
 
 ---
 
-## 💰 Sistema de publicación de pago (v4.24.1)
+## 💰 Sistema de publicación de pago (v4.24.1) {#-paid-listing-system-v4241}
 
 Puede exigirse a los vendedores que paguen a través de WooCommerce para publicar un anuncio de vehículo. El administrador puede activar o desactivar esta función.
 

@@ -107,7 +107,7 @@ Si el vehículo de la reserva se ha movido a la papelera o ya no está publicado
 
 La fecha y hora de devolución deben ser posteriores a la recogida. Si no lo son, el navegador impide guardar y, si aun así llega al servidor un intervalo incorrecto, no se guarda y las fechas no cambian. Si el vehículo tiene días cerrados en ese periodo, la reserva se guarda y un aviso los indica.
 
-### Comprobante del cliente
+### Comprobante del cliente {#customer-receipt}
 
 Cuando el cliente ha subido un comprobante de transferencia bancaria, el cuadro **Recibo de pago** muestra el archivo (**Ver / Descargar**), su estado (Enviado, Aprobado o Rechazado), una **Nota del administrador** y los botones **Aprobar recibo** y **Rechazar recibo**.
 

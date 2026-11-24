@@ -114,7 +114,7 @@ Auf dem Bearbeitungsbildschirm des Fahrzeugs (`VehicleTransferMetaBox`) werden d
 
 ---
 
-## 🔄 Verwaltung des Fahrzeug-Lebenszyklus (v4.24.0)
+## 🔄 Verwaltung des Fahrzeug-Lebenszyklus (v4.24.0) {#-vehicle-lifecycle-management-v4240}
 
 In v4.24.0 wurde ein umfassendes System für den Fahrzeug-Lebenszyklus eingeführt:
 
@@ -142,7 +142,7 @@ Jede Fahrzeugkarte im Anbieter-Dashboard zeigt die verbleibende Inseratsdauer an
 
 ---
 
-## 💰 System für kostenpflichtige Inserate (v4.24.1)
+## 💰 System für kostenpflichtige Inserate (v4.24.1) {#-paid-listing-system-v4241}
 
 Anbieter können verpflichtet werden, über WooCommerce zu bezahlen, um ein Fahrzeuginserat zu veröffentlichen. Diese Funktion kann vom Administrator ein- und ausgeschaltet werden.
 

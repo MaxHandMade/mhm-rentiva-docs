@@ -107,7 +107,7 @@ Wurde das Fahrzeug der Buchung in den Papierkorb verschoben oder ist es nicht me
 
 Datum und Uhrzeit der Rückgabe müssen nach der Abholung liegen. Ist das nicht der Fall, verhindert der Browser das Speichern; gelangt ein ungültiger Zeitraum dennoch zum Server, wird er nicht gespeichert und die Termine bleiben unverändert. Hat das Fahrzeug im Zeitraum gesperrte Tage, wird die Buchung gespeichert und ein Hinweis nennt diese Tage.
 
-### Kundenbeleg
+### Kundenbeleg {#customer-receipt}
 
 Hat der Kunde einen Beleg für eine Banküberweisung hochgeladen, zeigt die Box **Zahlungsbeleg** die Datei (**Anzeigen/Herunterladen**), ihren Status (Eingereicht, Freigegeben oder Abgelehnt), eine **Admin-Notiz** sowie die Schaltflächen **Beleg freigeben** und **Beleg ablehnen**.
 
