@@ -1,0 +1,94 @@
+{
+  "version.label": {
+    "message": "Nächste",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "Erste Schritte",
+    "description": "The label for category 'Getting Started' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core Configuration": {
+    "message": "Grundkonfiguration",
+    "description": "The label for category 'Core Configuration' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Features & Usage": {
+    "message": "Funktionen & Nutzung",
+    "description": "The label for category 'Features & Usage' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Shortcodes": {
+    "message": "Shortcodes",
+    "description": "The label for category 'Shortcodes' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Shortcodes.link.generated-index.description": {
+    "message": "Alle Shortcodes und Komponenten-Anleitungen, die in der MHM Rentiva-Plattform verfügbar sind.",
+    "description": "The generated-index page description for category 'Shortcodes' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Developer Guide": {
+    "message": "Entwicklerhandbuch",
+    "description": "The label for category 'Developer Guide' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core": {
+    "message": "Kern",
+    "description": "The label for category 'Core' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Core.link.generated-index.description": {
+    "message": "Architekturkern, Framework und Datenschicht.",
+    "description": "The generated-index page description for category 'Core' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Financial": {
+    "message": "Finanzen",
+    "description": "The label for category 'Financial' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Financial.link.generated-index.description": {
+    "message": "Provision, Hauptbuch, Governance und Finanzglossar.",
+    "description": "The generated-index page description for category 'Financial' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.UI Components": {
+    "message": "UI-Komponenten",
+    "description": "The label for category 'UI Components' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.UI Components.link.generated-index.description": {
+    "message": "Technische Dokumentation für UI-orientierte Komponenten.",
+    "description": "The generated-index page description for category 'UI Components' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Testing": {
+    "message": "Tests",
+    "description": "The label for category 'Testing' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Testing.link.generated-index.description": {
+    "message": "Teststrategie, Testsuite und Checklisten.",
+    "description": "The generated-index page description for category 'Testing' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Operations": {
+    "message": "Betrieb",
+    "description": "The label for category 'Operations' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Operations.link.generated-index.description": {
+    "message": "Betriebshandbücher und Anleitungen zur Fehlerbehebung.",
+    "description": "The generated-index page description for category 'Operations' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Vendor Ecosystem": {
+    "message": "Anbieter-Ökosystem",
+    "description": "The label for category 'Vendor Ecosystem' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category 'FAQ' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Theme Guide": {
+    "message": "Theme-Handbuch",
+    "description": "The label for category 'Theme Guide' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.REST API & Nervous System": {
+    "message": "REST-API & Nervensystem",
+    "description": "The label for category 'REST API & Nervous System' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.v1 Endpoints (Current)": {
+    "message": "v1-Endpunkte (aktuell)",
+    "description": "The label for category 'v1 Endpoints (Current)' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.v1 Endpoints (Current).link.generated-index.description": {
+    "message": "Aktuelle v1-REST-API-Endpunkte und asynchrone Vorgänge.",
+    "description": "The generated-index page description for category 'v1 Endpoints (Current)' in sidebar 'tutorialSidebar'"
+  }
+}
